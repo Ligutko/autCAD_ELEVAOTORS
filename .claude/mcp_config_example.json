@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "autocad-industrial-professional": {
+      "command": "python",
+      "args": [
+        "d:/autocad project/autocad-mcp/server_industrial_professional.py"
+      ],
+      "description": "Професійний MCP сервер для малювання промислового обладнання в AutoCAD: силоси МСВУ, транспортери, норії, технологічні схеми",
+      "enabled": true
+    },
+    "autocad-lisp-fast": {
+      "command": "python",
+      "args": [
+        "d:/autocad project/autocad-mcp/server_lisp_fast.py"
+      ],
+      "description": "Швидкий AutoCAD LISP сервер (базова версія)",
+      "enabled": false
+    }
+  },
+  "settings": {
+    "autocad": {
+      "default_server": "autocad-industrial-professional",
+      "auto_load_lisp": true,
+      "window_focus_cache_duration": 2.0
+    }
+  }
+}

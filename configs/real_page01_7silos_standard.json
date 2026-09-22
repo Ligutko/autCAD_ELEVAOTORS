@@ -1,0 +1,14 @@
+{
+  "project": {
+    "name": "Page 01 - 7 Silos Standard",
+    "mode": "AUTO"
+  },
+  "silos": {
+    "count": 7,
+    "type": "REAL_FROM_PAGE01",
+    "diameter": 112000,
+    "height": 148000,
+    "spacing": 150
+  },
+  "throughput": 100
+}

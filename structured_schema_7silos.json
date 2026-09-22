@@ -1,0 +1,248 @@
+{
+  "schema_info": {
+    "name": "Grain Storage Schema - 7 Silos (Extended)",
+    "source": "Generated from 6-silo base + 7th silo extension",
+    "extraction_date": "2025-12-24",
+    "layout_type": "2-5 (2 top, 5 bottom)",
+    "total_silos": 7
+  },
+
+  "layout": {
+    "rows": [
+      {
+        "row_number": 1,
+        "y_position": 182.48,
+        "silos_count": 2,
+        "silo_ids": [1, 2]
+      },
+      {
+        "row_number": 2,
+        "y_position": 63.54,
+        "silos_count": 5,
+        "silo_ids": [3, 4, 5, 6, 7]
+      }
+    ],
+    "spacing": {
+      "horizontal_between_silos": 47.73,
+      "vertical_between_rows": 118.94,
+      "description": "Spacing from original 6-silo schema"
+    }
+  },
+
+  "silos": [
+    {
+      "id": 1,
+      "type": "МСВУ_D20",
+      "position": {
+        "row": 1,
+        "column": 1,
+        "label": "top_left"
+      },
+      "center": {
+        "x": 121.79,
+        "y": 182.48
+      },
+      "dimensions": {
+        "width": 41.06,
+        "height": 38.14,
+        "area": 1566.25,
+        "diameter_estimated": 20000,
+        "height_real_estimated": 21000
+      },
+      "bounds": {
+        "min_x": 101.26,
+        "max_x": 142.33,
+        "min_y": 163.41,
+        "max_y": 201.55
+      }
+    },
+    {
+      "id": 2,
+      "type": "МСВУ_D20",
+      "position": {
+        "row": 1,
+        "column": 2,
+        "label": "top_right"
+      },
+      "center": {
+        "x": 169.52,
+        "y": 182.48
+      },
+      "dimensions": {
+        "width": 41.02,
+        "height": 38.14,
+        "area": 1564.64,
+        "diameter_estimated": 20000,
+        "height_real_estimated": 21000
+      },
+      "bounds": {
+        "min_x": 149.01,
+        "max_x": 190.03,
+        "min_y": 163.41,
+        "max_y": 201.55
+      }
+    },
+    {
+      "id": 3,
+      "type": "МСВУ_D22",
+      "position": {
+        "row": 2,
+        "column": 1,
+        "label": "bottom_far_left"
+      },
+      "center": {
+        "x": 134.03,
+        "y": 63.54
+      },
+      "dimensions": {
+        "width": 41.06,
+        "height": 38.18,
+        "area": 1567.99,
+        "diameter_estimated": 22000,
+        "height_real_estimated": 22000
+      },
+      "bounds": {
+        "min_x": 113.5,
+        "max_x": 154.56,
+        "min_y": 44.45,
+        "max_y": 82.63
+      }
+    },
+    {
+      "id": 4,
+      "type": "МСВУ_D22",
+      "position": {
+        "row": 2,
+        "column": 2,
+        "label": "bottom_left"
+      },
+      "center": {
+        "x": 181.76,
+        "y": 63.54
+      },
+      "dimensions": {
+        "width": 41.02,
+        "height": 38.18,
+        "area": 1566.37,
+        "diameter_estimated": 22000,
+        "height_real_estimated": 22000
+      },
+      "bounds": {
+        "min_x": 161.25,
+        "max_x": 202.27,
+        "min_y": 44.45,
+        "max_y": 82.63
+      }
+    },
+    {
+      "id": 5,
+      "type": "МСВУ_D22",
+      "position": {
+        "row": 2,
+        "column": 3,
+        "label": "bottom_center"
+      },
+      "center": {
+        "x": 270.07,
+        "y": 63.54
+      },
+      "dimensions": {
+        "width": 41.02,
+        "height": 38.18,
+        "area": 1566.37,
+        "diameter_estimated": 22000,
+        "height_real_estimated": 22000
+      },
+      "bounds": {
+        "min_x": 249.56,
+        "max_x": 290.58,
+        "min_y": 44.45,
+        "max_y": 82.63
+      }
+    },
+    {
+      "id": 6,
+      "type": "МСВУ_D22",
+      "position": {
+        "row": 2,
+        "column": 4,
+        "label": "bottom_right"
+      },
+      "center": {
+        "x": 317.82,
+        "y": 63.54
+      },
+      "dimensions": {
+        "width": 41.02,
+        "height": 38.18,
+        "area": 1566.37,
+        "diameter_estimated": 22000,
+        "height_real_estimated": 22000
+      },
+      "bounds": {
+        "min_x": 297.31,
+        "max_x": 338.33,
+        "min_y": 44.45,
+        "max_y": 82.63
+      }
+    },
+    {
+      "id": 7,
+      "type": "МСВУ_D22",
+      "position": {
+        "row": 2,
+        "column": 5,
+        "label": "bottom_far_right"
+      },
+      "center": {
+        "x": 365.55,
+        "y": 63.54
+      },
+      "dimensions": {
+        "width": 41.02,
+        "height": 38.18,
+        "area": 1566.37,
+        "diameter_estimated": 22000,
+        "height_real_estimated": 22000
+      },
+      "bounds": {
+        "min_x": 345.04,
+        "max_x": 386.06,
+        "min_y": 44.45,
+        "max_y": 82.63
+      }
+    }
+  ],
+
+  "drawing_parameters": {
+    "scale": "1:100",
+    "units": "mm",
+    "coordinate_system": "AutoCAD_model_space",
+    "layers": {
+      "silos_blue": "C00-00-FF",
+      "conveyors_red": "CFF-00-00",
+      "background": "C00-00-00"
+    }
+  },
+
+  "generator_rules": {
+    "silo_placement": {
+      "method": "grid_based",
+      "row_alignment": "horizontal_center",
+      "spacing_calculation": "max(diameter1, diameter2) + 2000"
+    }
+  },
+
+  "metadata": {
+    "extraction_method": "automatic_COM_API + manual_extension",
+    "base_schema": "structured_schema.json (6 silos)",
+    "7th_silo_calculation": "x = silos[5].center.x + 47.73 (average spacing)",
+    "confidence": "high",
+    "notes": [
+      "Extended from 6-silo reference schema",
+      "7th silo added to bottom row using calculated spacing",
+      "Layout: 2 silos (D20) in top row, 5 silos (D22) in bottom row",
+      "Ready for generation"
+    ]
+  }
+}

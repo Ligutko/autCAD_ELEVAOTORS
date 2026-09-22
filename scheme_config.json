@@ -1,0 +1,40 @@
+{
+  "Name": "TEST v2 - 5 Silos with Different Sizes",
+  "Silos": [
+    {
+      "X": 0,
+      "Y": 0,
+      "Diameter": 28000,
+      "Height": 30000,
+      "Tag": "BIG-1"
+    },
+    {
+      "X": 35000,
+      "Y": 0,
+      "Diameter": 22000,
+      "Height": 24000,
+      "Tag": "SMALL-2"
+    },
+    {
+      "X": 65000,
+      "Y": 0,
+      "Diameter": 22000,
+      "Height": 24000,
+      "Tag": "SMALL-3"
+    },
+    {
+      "X": 95000,
+      "Y": 0,
+      "Diameter": 28000,
+      "Height": 30000,
+      "Tag": "BIG-4"
+    },
+    {
+      "X": 130000,
+      "Y": 0,
+      "Diameter": 22000,
+      "Height": 24000,
+      "Tag": "SMALL-5"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "project": {
+    "name": "Test Bigger Silos 3 and 4",
+    "description": "Силоси #3 та #4 БІЛЬШІ - траси адаптуються автоматично",
+    "mode": "AUTO"
+  },
+
+  "silos": {
+    "count": 7,
+    "type": "МСВУ-220.13.B12",
+    "diameter": 22000,
+    "height": 35000,
+    "spacing": 150,
+    "aeration_fans": 4,
+    "roof_fans": 2,
+
+    "custom_sizes": [
+      {"number": 3, "diameter": 28000, "height": 45000},
+      {"number": 4, "diameter": 28000, "height": 45000}
+    ]
+  },
+
+  "throughput": 100,
+
+  "elevators": {
+    "type": "У13-УН"
+  },
+
+  "gates": {
+    "type": "У13-ТЭА",
+    "size": "350x350"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "project": {
+    "name": "Page 01 - Real Template - 7 Silos with Custom 3&4",
+    "description": "Використовую РЕАЛЬНІ шаблони з page_01.dxf",
+    "mode": "AUTO"
+  },
+
+  "silos": {
+    "count": 7,
+    "type": "REAL_FROM_PAGE01",
+    "diameter": 112000,
+    "height": 148000,
+    "spacing": 150,
+
+    "custom_sizes": [
+      {"number": 3, "diameter": 140000, "height": 185000},
+      {"number": 4, "diameter": 140000, "height": 185000}
+    ]
+  },
+
+  "throughput": 100,
+
+  "elevators": {
+    "type": "У13-УН"
+  }
+}

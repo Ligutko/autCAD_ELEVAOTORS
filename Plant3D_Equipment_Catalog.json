@@ -1,0 +1,105 @@
+{
+  "project_name": "Grain Elevator System",
+  "date": "2024-06-06",
+  "equipment": {
+    "silos": [
+      {
+        "tag": "МСВУ 220.13.В12",
+        "description": "Силос для зберігання зерна",
+        "diameter": 22000,
+        "height": 21422,
+        "volume": 6381,
+        "material": "Металоконструкція",
+        "quantity": 2,
+        "notes": "Один силос в комплекті"
+      }
+    ],
+    "conveyors": [
+      {
+        "tag": "Конвеєр радіально-поворотний",
+        "description": "Конвеєр радіально-поворотний з тягачем для силосу Ø22.0 м",
+        "power": 19.6,
+        "quantity": 1,
+        "notes": "18,5+1,1(?) кВт"
+      },
+      {
+        "tag": "Т7 (У13-ТЦС-320)",
+        "description": "Транспортер ланцюговий, 100 т/год",
+        "capacity": 100,
+        "length": 30500,
+        "power": 11.0,
+        "width": 320,
+        "quantity": 1
+      }
+    ],
+    "elevators": [
+      {
+        "tag": "Норія Н-100",
+        "description": "Норія, 100т/год",
+        "capacity": 100,
+        "height": 33000,
+        "power": 22.0,
+        "quantity": 1
+      }
+    ],
+    "ventilation": [
+      {
+        "tag": "Вентилятор системи аерації",
+        "power": 11.0,
+        "quantity": 4
+      },
+      {
+        "tag": "Даховий вентилятор",
+        "power": 0.25,
+        "quantity": 2
+      }
+    ],
+    "valves": [
+      {
+        "tag": "У13-ТЭА-400",
+        "description": "Засувка з електричним приводом",
+        "size": "400x400",
+        "power": 0.18,
+        "quantity": 1
+      },
+      {
+        "tag": "У13-ТЭР-400",
+        "description": "Засувка з ручним приводом",
+        "size": "400x400",
+        "quantity": 1
+      },
+      {
+        "tag": "У13-ТЭА-350",
+        "description": "Засувка з електричним приводом",
+        "size": "350x350",
+        "power": 0.18,
+        "quantity": 6
+      },
+      {
+        "tag": "У13-ТЭР-350",
+        "description": "Засувка з ручним приводом",
+        "size": "350x350",
+        "quantity": 6
+      },
+      {
+        "tag": "У13-УН175",
+        "description": "Норія, 100т/год, розміщення приводу праве",
+        "power": 22.0,
+        "quantity": 1
+      }
+    ],
+    "structures": [
+      {
+        "tag": "Естакада надсилосна",
+        "description": "Естакада надсилосна",
+        "length": 24000,
+        "quantity": 1
+      }
+    ]
+  },
+  "totals": {
+    "total_storage_capacity_m3": 12762,
+    "total_silos": 2,
+    "total_power_kW": 88.73
+  }
+}

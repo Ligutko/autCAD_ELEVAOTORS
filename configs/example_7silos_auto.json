@@ -1,0 +1,28 @@
+{
+  "project": {
+    "name": "Elevator 7 Silos - Auto Generation",
+    "description": "Приклад автоматичної генерації з мінімальними параметрами",
+    "mode": "AUTO"
+  },
+
+  "silos": {
+    "count": 7,
+    "type": "МСВУ-220.13.B12",
+    "diameter": 22000,
+    "height": 35000,
+    "spacing": 150,
+    "aeration_fans": 4,
+    "roof_fans": 2
+  },
+
+  "throughput": 100,
+
+  "elevators": {
+    "type": "У13-УН"
+  },
+
+  "gates": {
+    "type": "У13-ТЭА",
+    "size": "350x350"
+  }
+}

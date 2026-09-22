@@ -1,0 +1,38 @@
+{
+  "project_name": "Grain Elevator System - 7 Силосів МСВУ 220.13.В12",
+  "description": "Параметрична схема з 7 силосами",
+  "silos_count": 7,
+  "equipment": {
+    "silos": [
+      {"x": 0, "y": 0, "diameter": 22000, "height": 21422, "tag": "МСВУ-220.13.В12-1", "material": "carbon_steel", "capacity": 6381},
+      {"x": 28000, "y": 0, "diameter": 22000, "height": 21422, "tag": "МСВУ-220.13.В12-2", "material": "carbon_steel", "capacity": 6381},
+      {"x": 56000, "y": 0, "diameter": 22000, "height": 21422, "tag": "МСВУ-220.13.В12-3", "material": "carbon_steel", "capacity": 6381},
+      {"x": 84000, "y": 0, "diameter": 22000, "height": 21422, "tag": "МСВУ-220.13.В12-4", "material": "carbon_steel", "capacity": 6381},
+      {"x": 112000, "y": 0, "diameter": 22000, "height": 21422, "tag": "МСВУ-220.13.В12-5", "material": "carbon_steel", "capacity": 6381},
+      {"x": 140000, "y": 0, "diameter": 22000, "height": 21422, "tag": "МСВУ-220.13.В12-6", "material": "carbon_steel", "capacity": 6381},
+      {"x": 168000, "y": 0, "diameter": 22000, "height": 21422, "tag": "МСВУ-220.13.В12-7", "material": "carbon_steel", "capacity": 6381}
+    ],
+    "elevators": [
+      {"x": -10000, "y": 0, "bucket_diameter": 600, "lift_height": 33000, "tag": "H5-Норія-Н100-1", "capacity": 100},
+      {"x": 84000, "y": 0, "bucket_diameter": 600, "lift_height": 33000, "tag": "H6-Норія-Н100-2", "capacity": 100}
+    ],
+    "conveyors": [
+      {"start_x": -10000, "start_y": 33000, "end_x": 84000, "end_y": 33000, "width": 320, "tag": "T7-Головний", "capacity": 100},
+      {"start_x": 84000, "start_y": 33000, "end_x": 178000, "end_y": 33000, "width": 320, "tag": "T8-Розподільчий", "capacity": 100}
+    ],
+    "pipes": [
+      {"from_x": 0, "from_y": 21422, "to_x": 0, "to_y": 33000, "diameter": 400, "tag": "P1"},
+      {"from_x": 28000, "from_y": 21422, "to_x": 28000, "to_y": 33000, "diameter": 400, "tag": "P2"},
+      {"from_x": 56000, "from_y": 21422, "to_x": 56000, "to_y": 33000, "diameter": 400, "tag": "P3"},
+      {"from_x": 84000, "from_y": 21422, "to_x": 84000, "to_y": 33000, "diameter": 400, "tag": "P4"},
+      {"from_x": 112000, "from_y": 21422, "to_x": 112000, "to_y": 33000, "diameter": 400, "tag": "P5"},
+      {"from_x": 140000, "from_y": 21422, "to_x": 140000, "to_y": 33000, "diameter": 400, "tag": "P6"},
+      {"from_x": 168000, "from_y": 21422, "to_x": 168000, "to_y": 33000, "diameter": 400, "tag": "P7"}
+    ]
+  },
+  "totals": {
+    "total_storage_capacity_m3": 44667,
+    "total_silos": 7,
+    "total_power_kW": 310.55
+  }
+}

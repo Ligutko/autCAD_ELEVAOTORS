@@ -1,0 +1,13 @@
+{
+  "source_file": "page_01.dxf",
+  "total_silos": 0,
+  "silos": [],
+  "template_silo": null,
+  "red_lines": {
+    "total": 476,
+    "horizontal": 207,
+    "vertical": 269,
+    "avg_elevator_height": 19.22,
+    "conveyor_y": 367.39
+  }
+}

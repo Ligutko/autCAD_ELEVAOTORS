@@ -1,0 +1,15 @@
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\GrainElevatorPlugin.csproj.AssemblyReference.cache
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\GrainElevatorPlugin.GeneratedMSBuildEditorConfig.editorconfig
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\GrainElevatorPlugin.AssemblyInfoInputs.cache
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\GrainElevatorPlugin.AssemblyInfo.cs
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\GrainElevatorPlugin.csproj.CoreCompileInputs.cache
+D:\autocad project\Plant3D_Plugin\bin\Release\net8.0\GrainElevatorPlugin.deps.json
+D:\autocad project\Plant3D_Plugin\bin\Release\net8.0\GrainElevatorPlugin.dll
+D:\autocad project\Plant3D_Plugin\bin\Release\net8.0\GrainElevatorPlugin.pdb
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\GrainElevatorPlugin.dll
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\refint\GrainElevatorPlugin.dll
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\GrainElevatorPlugin.pdb
+D:\autocad project\Plant3D_Plugin\obj\Release\net8.0\ref\GrainElevatorPlugin.dll
+D:\autocad project\Plant3D_Plugin\bin\Release_v2\GrainElevatorPlugin.deps.json
+D:\autocad project\Plant3D_Plugin\bin\Release_v2\GrainElevatorPlugin.dll
+D:\autocad project\Plant3D_Plugin\bin\Release_v2\GrainElevatorPlugin.pdb

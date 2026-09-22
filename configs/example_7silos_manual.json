@@ -1,0 +1,104 @@
+{
+  "project": {
+    "name": "Elevator 7 Silos - Manual (Professional TZ)",
+    "description": "Приклад з ПРОФЕСІЙНИМ ТЗ де ВСІ параметри задані вручну",
+    "mode": "MANUAL"
+  },
+
+  "silos": {
+    "count": 7,
+    "type": "МСВУ-220.13.B12",
+    "diameter": 22000,
+    "height": 35000,
+    "spacing": 150,
+    "capacity_each_m3": 5000,
+    "positions": [
+      {"x": 0, "y": 0},
+      {"x": 22150, "y": 0},
+      {"x": 44300, "y": 0},
+      {"x": 66450, "y": 0},
+      {"x": 88600, "y": 0},
+      {"x": 110750, "y": 0},
+      {"x": 132900, "y": 0}
+    ]
+  },
+
+  "elevators": [
+    {
+      "id": "H1",
+      "type": "У13-УН",
+      "height": 39500,
+      "power_kw": 15,
+      "capacity_tph": 50,
+      "position": {"x": -50000, "y": 20000}
+    },
+    {
+      "id": "H2",
+      "type": "У13-УН",
+      "height": 39500,
+      "power_kw": 15,
+      "capacity_tph": 50,
+      "position": {"x": 44300, "y": 20000}
+    },
+    {
+      "id": "H3",
+      "type": "У13-УН",
+      "height": 33000,
+      "power_kw": 15,
+      "capacity_tph": 50,
+      "position": {"x": 88600, "y": 20000}
+    },
+    {
+      "id": "H4",
+      "type": "У13-УН",
+      "height": 30500,
+      "power_kw": 11,
+      "capacity_tph": 30,
+      "position": {"x": 132900, "y": 20000}
+    }
+  ],
+
+  "conveyors": [
+    {
+      "id": "T9",
+      "type": "ТЦС-320",
+      "length": 154900,
+      "capacity_tph": 100,
+      "level": "top",
+      "y_position": 45000
+    },
+    {
+      "id": "T13",
+      "type": "ТЛ-50K",
+      "length": 132900,
+      "capacity_tph": 50,
+      "level": "bottom",
+      "y_position": -5000
+    }
+  ],
+
+  "gates": {
+    "count": 84,
+    "type": "У13-ТЭА",
+    "size": "350x350",
+    "per_silo": 12
+  },
+
+  "structure": {
+    "estacade_length": 154900,
+    "supports_count": 7,
+    "support_spacing": 24000,
+    "gallery_length": 132900
+  },
+
+  "fans": {
+    "aeration_11kw_count": 28,
+    "roof_025kw_count": 14
+  },
+
+  "bom": {
+    "total_capacity_m3": 35000,
+    "total_capacity_tons": 26250,
+    "throughput_tph": 100
+  }
+}

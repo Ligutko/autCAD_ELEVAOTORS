@@ -1,0 +1,26 @@
+{
+  "Name": "TEST - 3 Silos Configuration",
+  "Silos": [
+    {
+      "X": 0,
+      "Y": 0,
+      "Diameter": 22000,
+      "Height": 24000,
+      "Tag": "SILO-1"
+    },
+    {
+      "X": 30000,
+      "Y": 0,
+      "Diameter": 22000,
+      "Height": 24000,
+      "Tag": "SILO-2"
+    },
+    {
+      "X": 60000,
+      "Y": 0,
+      "Diameter": 28000,
+      "Height": 30000,
+      "Tag": "SILO-3-BIG"
+    }
+  ]
+}

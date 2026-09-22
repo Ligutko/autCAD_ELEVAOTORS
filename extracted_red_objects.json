@@ -1,0 +1,911 @@
+{
+  "source_file": "web_temp_adde8b6cfc43a61f00a8d5a90c2e670a_32945ae7236018cb9c5201d70b32a84c_o.dxf",
+  "total_red_objects": 222,
+  "classification": {
+    "horizontal_conveyors": 27,
+    "vertical_elevators": 182,
+    "square_objects": 13
+  },
+  "red_objects": [
+    {
+      "index": 3,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 270.51,
+        "y": 101.9
+      },
+      "bounds": {
+        "min_x": 270.09,
+        "max_x": 270.93,
+        "min_y": 98.26,
+        "max_y": 105.54,
+        "width": 0.85,
+        "height": 7.28
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 4,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 269.66,
+        "y": 99.34
+      },
+      "bounds": {
+        "min_x": 269.24,
+        "max_x": 270.09,
+        "min_y": 98.26,
+        "max_y": 100.41,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 9,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 240.03,
+        "y": 26.42
+      },
+      "bounds": {
+        "min_x": 239.61,
+        "max_x": 240.45,
+        "min_y": 23.66,
+        "max_y": 29.17,
+        "width": 0.85,
+        "height": 5.5
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 10,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 239.2,
+        "y": 24.74
+      },
+      "bounds": {
+        "min_x": 238.8,
+        "max_x": 239.61,
+        "min_y": 23.66,
+        "max_y": 25.82,
+        "width": 0.8,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 14,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 318.24,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 317.84,
+        "max_x": 318.64,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.8,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 15,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 317.42,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 316.99,
+        "max_x": 317.84,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 16,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 312.17,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 311.74,
+        "max_x": 312.59,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 17,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 311.32,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 310.9,
+        "max_x": 311.74,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 20,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 318.24,
+        "y": 101.9
+      },
+      "bounds": {
+        "min_x": 317.84,
+        "max_x": 318.64,
+        "min_y": 98.26,
+        "max_y": 105.54,
+        "width": 0.8,
+        "height": 7.28
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 21,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 317.42,
+        "y": 99.34
+      },
+      "bounds": {
+        "min_x": 316.99,
+        "max_x": 317.84,
+        "min_y": 98.26,
+        "max_y": 100.41,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 22,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 270.51,
+        "y": 101.9
+      },
+      "bounds": {
+        "min_x": 270.09,
+        "max_x": 270.93,
+        "min_y": 98.26,
+        "max_y": 105.54,
+        "width": 0.85,
+        "height": 7.28
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 23,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 269.66,
+        "y": 99.34
+      },
+      "bounds": {
+        "min_x": 269.24,
+        "max_x": 270.09,
+        "min_y": 98.26,
+        "max_y": 100.41,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 34,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 306.07,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 305.65,
+        "max_x": 306.49,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 35,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 305.22,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 304.8,
+        "max_x": 305.65,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 38,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 300.0,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 299.59,
+        "max_x": 300.4,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.8,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 39,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 299.17,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 298.75,
+        "max_x": 299.59,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 42,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 330.41,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 329.99,
+        "max_x": 330.84,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 43,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 329.57,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 329.14,
+        "max_x": 329.99,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 46,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 324.32,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 323.89,
+        "max_x": 324.74,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 47,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 323.49,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 323.09,
+        "max_x": 323.89,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.8,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 50,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 336.49,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 336.08,
+        "max_x": 336.89,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.8,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 51,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 335.66,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 335.24,
+        "max_x": 336.08,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 54,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 270.51,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 270.09,
+        "max_x": 270.93,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 55,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 269.66,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 269.24,
+        "max_x": 270.09,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 56,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 264.41,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 263.99,
+        "max_x": 264.84,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 57,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 263.57,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 263.14,
+        "max_x": 263.99,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 63,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 258.34,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 257.94,
+        "max_x": 258.74,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.8,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 64,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 257.51,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 257.09,
+        "max_x": 257.94,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 67,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 252.26,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 251.84,
+        "max_x": 252.69,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 68,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 251.42,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 250.99,
+        "max_x": 251.84,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 71,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 282.66,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 282.24,
+        "max_x": 283.08,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 72,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 281.83,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 281.43,
+        "max_x": 282.24,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.8,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 75,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 276.59,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 276.18,
+        "max_x": 276.99,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.8,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 76,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 275.76,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 275.34,
+        "max_x": 276.18,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 79,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 288.76,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 288.33,
+        "max_x": 289.18,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 80,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 287.91,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 287.49,
+        "max_x": 288.33,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 86,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 181.36,
+        "y": 101.28
+      },
+      "bounds": {
+        "min_x": 180.93,
+        "max_x": 181.78,
+        "min_y": 98.26,
+        "max_y": 104.31,
+        "width": 0.85,
+        "height": 6.05
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 87,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 182.18,
+        "y": 99.34
+      },
+      "bounds": {
+        "min_x": 181.78,
+        "max_x": 182.58,
+        "min_y": 98.26,
+        "max_y": 100.41,
+        "width": 0.8,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 92,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 211.79,
+        "y": 26.42
+      },
+      "bounds": {
+        "min_x": 211.37,
+        "max_x": 212.22,
+        "min_y": 23.66,
+        "max_y": 29.17,
+        "width": 0.85,
+        "height": 5.5
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 93,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 212.64,
+        "y": 24.74
+      },
+      "bounds": {
+        "min_x": 212.22,
+        "max_x": 213.06,
+        "min_y": 23.66,
+        "max_y": 25.82,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 97,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 133.6,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 133.18,
+        "max_x": 134.03,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 98,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 134.45,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 134.03,
+        "max_x": 134.87,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 99,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 139.7,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 139.28,
+        "max_x": 140.12,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.85,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 100,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 140.53,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 140.12,
+        "max_x": 140.93,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.8,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 103,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 133.6,
+        "y": 101.35
+      },
+      "bounds": {
+        "min_x": 133.18,
+        "max_x": 134.03,
+        "min_y": 98.26,
+        "max_y": 104.44,
+        "width": 0.85,
+        "height": 6.18
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 104,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 134.45,
+        "y": 99.34
+      },
+      "bounds": {
+        "min_x": 134.03,
+        "max_x": 134.87,
+        "min_y": 98.26,
+        "max_y": 100.41,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 105,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 181.36,
+        "y": 101.9
+      },
+      "bounds": {
+        "min_x": 180.93,
+        "max_x": 181.78,
+        "min_y": 98.26,
+        "max_y": 105.54,
+        "width": 0.85,
+        "height": 7.28
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 106,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 182.18,
+        "y": 99.34
+      },
+      "bounds": {
+        "min_x": 181.78,
+        "max_x": 182.58,
+        "min_y": 98.26,
+        "max_y": 100.41,
+        "width": 0.8,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 117,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 145.78,
+        "y": 38.73
+      },
+      "bounds": {
+        "min_x": 145.37,
+        "max_x": 146.18,
+        "min_y": 33.02,
+        "max_y": 44.45,
+        "width": 0.8,
+        "height": 11.43
+      },
+      "orientation": "vertical"
+    },
+    {
+      "index": 118,
+      "type": "AcDbPolyline",
+      "layer": "CFF-00-00",
+      "center": {
+        "x": 146.6,
+        "y": 34.1
+      },
+      "bounds": {
+        "min_x": 146.18,
+        "max_x": 147.02,
+        "min_y": 33.02,
+        "max_y": 35.18,
+        "width": 0.85,
+        "height": 2.16
+      },
+      "orientation": "vertical"
+    }
+  ]
+}

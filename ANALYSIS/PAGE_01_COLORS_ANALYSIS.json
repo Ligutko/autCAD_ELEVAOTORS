@@ -1,0 +1,12 @@
+{
+  "blue_silos": {
+    "total": 686,
+    "bottom": 216,
+    "top": 459
+  },
+  "red_transport": {
+    "total": 476,
+    "elevators": 269,
+    "conveyors": 207
+  }
+}

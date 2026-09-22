@@ -1,0 +1,79 @@
+{
+  "project_name": "Grain Elevator System - МСВУ 220.13.В12",
+  "description": "Повна технологічна схема елеватора з 2 силосами",
+  "equipment": {
+    "silos": [
+      {
+        "x": 0,
+        "y": 0,
+        "diameter": 22000,
+        "height": 21422,
+        "tag": "МСВУ-220.13.В12-1",
+        "material": "carbon_steel",
+        "capacity": 6381
+      },
+      {
+        "x": 30000,
+        "y": 0,
+        "diameter": 22000,
+        "height": 21422,
+        "tag": "МСВУ-220.13.В12-2",
+        "material": "carbon_steel",
+        "capacity": 6381
+      }
+    ],
+    "elevators": [
+      {
+        "x": -10000,
+        "y": 0,
+        "bucket_diameter": 600,
+        "lift_height": 33000,
+        "tag": "H5-Норія-Н100",
+        "capacity": 100
+      }
+    ],
+    "conveyors": [
+      {
+        "start_x": -10000,
+        "start_y": 33000,
+        "end_x": 0,
+        "end_y": 33000,
+        "width": 320,
+        "tag": "T7-У13-ТЦС-320",
+        "capacity": 100
+      },
+      {
+        "start_x": 0,
+        "start_y": 33000,
+        "end_x": 30000,
+        "end_y": 33000,
+        "width": 320,
+        "tag": "T8-Розподільчий",
+        "capacity": 100
+      }
+    ],
+    "pipes": [
+      {
+        "from_x": 0,
+        "from_y": 21422,
+        "to_x": 0,
+        "to_y": 33000,
+        "diameter": 400,
+        "tag": "Pipe-1"
+      },
+      {
+        "from_x": 30000,
+        "from_y": 21422,
+        "to_x": 30000,
+        "to_y": 33000,
+        "diameter": 400,
+        "tag": "Pipe-2"
+      }
+    ]
+  },
+  "totals": {
+    "total_storage_capacity_m3": 12762,
+    "total_silos": 2,
+    "total_power_kW": 88.73
+  }
+}

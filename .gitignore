@@ -1,0 +1,37 @@
+# Heavy generated/backup DXF directories - not source of truth, exclude from indexing
+FINAL_DXF_CORRECT/
+FINAL_DXF_CORRECTED/
+FINAL_DXF_FLIP_Y/
+FINAL_DXF_OUTPUT/
+FINAL_DXF_PERFECT/
+FINAL_DXF_PERFECT_V7/
+FINAL_DXF_WITH_COLORS/
+OPTIMIZED_DXF/
+ORIGINALS/
+OUTPUT/
+RESULTS/
+WORKING/
+ANALYSIS_RESULTS/
+VAULT/
+
+# Large individual DXF/DWG files anywhere in the tree
+*.dxf
+*.dwg
+
+# Python envs and caches
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+nul
+
+# Nested git repos (tracked separately, avoid embedding)
+/autocad-mcp/
+/multiCAD-mcp/

@@ -1,0 +1,107 @@
+{
+  "source": "web_temp...dxf",
+  "scale": "measured_in_autocad",
+  "silos": [
+    {
+      "number": 1,
+      "position": "upper_left",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 0,
+      "height": 0,
+      "type": "МСВУ_D20_21m"
+    },
+    {
+      "number": 2,
+      "position": "upper_right",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 0,
+      "height": 0,
+      "type": "МСВУ_D20_21m"
+    },
+    {
+      "number": 3,
+      "position": "middle_left",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 0,
+      "height": 0,
+      "type": "МСВУ_D22_22m"
+    },
+    {
+      "number": 4,
+      "position": "middle_right",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 0,
+      "height": 0,
+      "type": "МСВУ_D22_22m"
+    },
+    {
+      "number": 5,
+      "position": "lower_left",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 0,
+      "height": 0,
+      "type": "МСВУ_D22_22m"
+    },
+    {
+      "number": 6,
+      "position": "lower_right",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 0,
+      "height": 0,
+      "type": "МСВУ_D22_22m"
+    }
+  ],
+  "noria": [
+    {
+      "tag": "H1",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "height": 0
+    },
+    {
+      "tag": "H3",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "height": 0
+    },
+    {
+      "tag": "H4",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "height": 0
+    },
+    {
+      "tag": "H5",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "height": 0
+    }
+  ],
+  "conveyors": []
+}

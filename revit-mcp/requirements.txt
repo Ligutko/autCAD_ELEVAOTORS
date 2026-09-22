@@ -1,0 +1,9 @@
+# Revit MCP Server Dependencies
+# Встановити: pip install -r requirements.txt
+
+# MCP Framework (Model Context Protocol)
+mcp>=0.1.0
+fastmcp>=0.1.0
+
+# Додаткові утиліти (опціонально)
+pathlib

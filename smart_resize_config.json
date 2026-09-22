@@ -1,0 +1,68 @@
+{
+  "resize_plan": {
+    "description": "План масштабування та перепозиціонування силосів",
+    "base_spacing": 47.75,
+    "min_spacing": 5.0,
+
+    "silos": [
+      {
+        "id": 1,
+        "action": "keep",
+        "scale": 1.0,
+        "note": "Верхній ряд - залишити як є"
+      },
+      {
+        "id": 2,
+        "action": "keep",
+        "scale": 1.0,
+        "note": "Верхній ряд - залишити як є"
+      },
+      {
+        "id": 3,
+        "action": "resize",
+        "scale": 1.2,
+        "note": "Нижній ряд - збільшити на 20%"
+      },
+      {
+        "id": 4,
+        "action": "resize",
+        "scale": 1.2,
+        "note": "Нижній ряд - збільшити на 20%"
+      },
+      {
+        "id": 5,
+        "action": "resize",
+        "scale": 0.8,
+        "note": "Нижній ряд - зменшити на 20%"
+      },
+      {
+        "id": 6,
+        "action": "resize",
+        "scale": 0.8,
+        "note": "Нижній ряд - зменшити на 20%"
+      }
+    ]
+  },
+
+  "repositioning": {
+    "mode": "auto",
+    "method": "equal_spacing",
+    "preserve_rows": true,
+    "notes": [
+      "auto - автоматичний перерахунок позицій",
+      "equal_spacing - рівні відстані між центрами",
+      "preserve_rows - зберігати Y координати рядів"
+    ]
+  },
+
+  "advanced": {
+    "recalculate_conveyors": true,
+    "adjust_elevators": true,
+    "preserve_hatches": true,
+    "notes": [
+      "recalculate_conveyors - перемалювати конвеєри",
+      "adjust_elevators - підігнати норії",
+      "preserve_hatches - зберегти заливки"
+    ]
+  }
+}
