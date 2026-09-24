@@ -44,3 +44,6 @@ nul
 # Vendored OCR tool install (binaries, not source)
 inbox/.tools/
 *.blend1
+
+# world: scenes are rebuilt from scripts
+world/out/**/*.blend

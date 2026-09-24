@@ -1,0 +1,15 @@
+{
+  "build_seconds": 5.1,
+  "silos": 6,
+  "towers": [
+    "H5",
+    "H6"
+  ],
+  "galleries": [
+    "T8",
+    "T12",
+    "T15",
+    "G_H5_H6"
+  ],
+  "silo_vertices": 2808072
+}
