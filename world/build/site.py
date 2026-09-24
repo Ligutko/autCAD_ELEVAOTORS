@@ -49,9 +49,8 @@ def add_parts(prefix, parts, m, collection):
         c.mesh_from_arrays(f"{prefix}_{key.upper()}", v, f, m[mat], smooth=smooth, collection=collection)
 
 
-def main():
-    quick = "--quick" in sys.argv
-    OUT.mkdir(parents=True, exist_ok=True)
+def assemble(quick=False):
+    """Build the whole site into a fresh scene. Returns (scene, site, build_seconds, silo_measure)."""
     site = json.loads((ROOT / "site" / "SITE.json").read_text(encoding="utf-8"))
     scene = c.reset_scene()
     c.setup_render(scene, samples=24 if quick else 128, res=(960, 540) if quick else (1920, 1080))
@@ -102,6 +101,14 @@ def main():
     v, f = c.box((-2000, -2000, -0.2), (2000, 2000, 0.0))
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
     build_s = round(time.time() - t0, 1)
+
+    return scene, site, build_s, silo_measure
+
+
+def main():
+    quick = "--quick" in sys.argv
+    OUT.mkdir(parents=True, exist_ok=True)
+    scene, site, build_s, silo_measure = assemble(quick)
 
     cams = {
         "site_drone.png": c.camera("CAM_DRONE", (70, -70, 55), (-8, 12, 10), lens=28),

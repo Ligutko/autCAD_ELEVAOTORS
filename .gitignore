@@ -47,3 +47,4 @@ inbox/.tools/
 
 # world: scenes are rebuilt from scripts
 world/out/**/*.blend
+world/out/reels/*/frames/
