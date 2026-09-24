@@ -67,7 +67,7 @@ def main():
         bpy.context.view_layer.update()
         c.face_labels(labels, cam)
         t = time.time()
-        c.render(scene, cam, OUT / name)
+        c.render_with_labels(scene, cam, OUT / name, labels)
         print("rendered", name, round(time.time() - t, 1), "s", flush=True)
         if lamp_obj:
             bpy.data.objects.remove(lamp_obj)

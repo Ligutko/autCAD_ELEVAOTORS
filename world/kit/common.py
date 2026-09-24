@@ -539,10 +539,20 @@ def face_labels(label_objs, cam, max_dist=7.0, lift=0.38):
                 pos -= right * half_w * 0.25
             else:
                 break
-        for q in placed:                              # push apart labels that would overlap on screen
-            if (pos - q).length < 0.22 * scale:
-                pos += up * 0.2 * scale
-        placed.append(pos)
+        half_h = 0.06 * 1.6 / 2 * scale
+
+        def rect(p):
+            a = world_to_camera_view(scene, cam, p - right * half_w - up * half_h)
+            b = world_to_camera_view(scene, cam, p + right * half_w + up * half_h)
+            return min(a.x, b.x), max(a.x, b.x), min(a.y, b.y), max(a.y, b.y)
+
+        for _ in range(20):                           # step up on screen until it clears placed labels
+            r = rect(pos)
+            hit = any(r[0] < q[1] and q[0] < r[1] and r[2] < q[3] + 0.006 and q[2] - 0.006 < r[3] for q in placed)
+            if not hit:
+                break
+            pos += up * half_h * 2.4
+        placed.append(rect(pos))
         o.location = root.matrix_world.inverted() @ pos
         o.scale = (scale, scale, scale)
         o.rotation_euler = (cam_m.translation - pos).to_track_quat("Z", "Y").to_euler()
@@ -564,3 +574,38 @@ def face_labels(label_objs, cam, max_dist=7.0, lift=0.38):
         for i, vtx in enumerate(lead.data.vertices[:12]):
             vtx.co = verts[i]
         lead.data.update()
+
+
+def render_with_labels(scene, cam, path, label_objs):
+    """Render the scene without labels, then only the labels on a transparent film,
+    and lay the labels over the frame so geometry never hides them."""
+    import os
+
+    from PIL import Image
+
+    path = str(path)
+    tmp_main, tmp_lbl = path + ".main.png", path + ".labels.png"
+    label_set = {o.name for o in label_objs}
+    label_parts = [o for o in label_objs if o.type != "EMPTY"]
+    shown = [o for o in label_parts if not o.hide_render]
+    for o in label_parts:
+        o.hide_render = True
+    render(scene, cam, tmp_main)
+    others = [o for o in scene.objects if o.name not in label_set and o.type != "CAMERA" and not o.hide_render]
+    for o in others:
+        o.hide_render = True
+    for o in shown:
+        o.hide_render = False
+    old = (scene.render.film_transparent, scene.cycles.samples, scene.render.image_settings.color_mode)
+    scene.render.film_transparent = True
+    scene.cycles.samples = 16
+    scene.render.image_settings.color_mode = "RGBA"
+    render(scene, cam, tmp_lbl)
+    scene.render.film_transparent, scene.cycles.samples, scene.render.image_settings.color_mode = old
+    for o in others:
+        o.hide_render = False
+    base = Image.open(tmp_main).convert("RGBA")
+    top = Image.open(tmp_lbl).convert("RGBA")
+    Image.alpha_composite(base, top).convert("RGB").save(path)
+    os.remove(tmp_main)
+    os.remove(tmp_lbl)

@@ -31,7 +31,6 @@ BELT_R = PULLEY_R + LAGGING + BELT_T / 2          # belt centreline radius on th
 BUCKET_PITCH = 0.18
 BUCKET_W = 0.300
 BUCKET_T = 0.004
-BUCKET_PROFILE = np.array([(0.0, 0.19), (0.0, 0.03), (0.03, 0.0), (0.12, 0.0), (0.165, 0.05), (0.175, 0.17)])
 LEG_CLEAR_X = 0.256                               # across bucket projection
 LEG_CLEAR_Y = 0.376                               # across belt width
 LEG_SHEET = 0.002
@@ -110,27 +109,55 @@ def build_belt(path):
     return v, np.array(faces)
 
 
+def _bucket_profile(n_arc=8):
+    """Outer profile (u outward from the belt, v along travel) of a CC-style bucket:
+    straight back on the belt, radiused bottom, sloped front ending in a rolled lip."""
+    pts = [(0.0, 0.19), (0.0, 0.05)]
+    for a in np.linspace(math.pi, 1.5 * math.pi, n_arc)[1:]:                  # bottom radius 50 mm
+        pts.append((0.05 + 0.05 * math.cos(a), 0.05 + 0.05 * math.sin(a)))
+    p0, p1, p2 = np.array([0.10, 0.0]), np.array([0.172, 0.0]), np.array([0.172, 0.165])
+    for t in np.linspace(0, 1, n_arc)[1:]:                                     # sloped front
+        pts.append(tuple((1 - t) ** 2 * p0 + 2 * (1 - t) * t * p1 + t ** 2 * p2))
+    pts.append((0.180, 0.182))                                                  # rolled lip
+    return np.array(pts)
+
+
+def _offset_inward(prof, d):
+    """Offset an open polyline by d towards the inside of the bucket (left of travel)."""
+    out = []
+    for i in range(len(prof)):
+        a = prof[max(i - 1, 0)]
+        b = prof[min(i + 1, len(prof) - 1)]
+        t = (b - a) / np.linalg.norm(b - a)
+        n = np.array([t[1], -t[0]])                                            # right normal
+        out.append(prof[i] - n * d)
+    return np.array(out)
+
+
 def _bucket_local():
-    """Bucket shell in local (u outward, v along travel, w across), open at the top."""
-    prof = BUCKET_PROFILE
-    inner = prof + np.array([BUCKET_T, BUCKET_T])
-    inner[0, 1] = prof[0, 1]
-    inner[-1] = prof[-1] - np.array([BUCKET_T, 0.0])
+    """Bucket shell (4 mm) with end plates and two fang bolts on the back, open at the top."""
+    prof = _bucket_profile()
+    inner = _offset_inward(prof, BUCKET_T)
+    inner[0] = prof[0] + [BUCKET_T, 0.0]
     loop = np.concatenate([prof, inner[::-1]])
     k = len(loop)
     hw = BUCKET_W / 2
     verts = [(u, v, w) for w in (-hw, hw) for u, v in loop]
     faces = [c.grid_faces(2, k, wrap_cols=True)]
-    # end plates: full outer profile at both ends, BUCKET_T thick
     base = len(verts)
-    for w in (-hw, hw - BUCKET_T, hw, -hw + BUCKET_T):
-        verts += [(u, v, w) for u, v in prof]
     m = len(prof)
+    for w in (-hw, -hw + BUCKET_T, hw - BUCKET_T, hw):
+        verts += [(u, v, w) for u, v in prof]
     faces.append(np.arange(base, base + m)[None, :])
-    faces.append(np.arange(base + m, base + 2 * m)[None, :])
-    faces.append(np.arange(base + 2 * m, base + 3 * m)[::-1][None, :])
+    faces.append(np.arange(base + m, base + 2 * m)[::-1][None, :])
+    faces.append(np.arange(base + 2 * m, base + 3 * m)[None, :])
     faces.append(np.arange(base + 3 * m, base + 4 * m)[::-1][None, :])
-    return np.array(verts), faces
+    parts = [(np.array(verts), faces)]
+    for w in (-0.075, 0.075):                                                  # M8 fang bolt heads
+        parts.append(st.member((BUCKET_T, 0.13, w), (BUCKET_T + 0.005, 0.13, w),
+                               np.column_stack([0.008 * np.cos(np.arange(8) * math.pi / 4),
+                                                0.008 * np.sin(np.arange(8) * math.pi / 4)]), up=(0, 1, 0)))
+    return c.merge_parts(parts)
 
 
 def _grain_local():
@@ -235,32 +262,73 @@ def _housing(x0, x1, z0, z1, y_half, arc_top=None):
     return c.merge_parts(back), c.merge_parts(front), c.merge_parts(rim)
 
 
+SHAFT_R = 0.045                     # Ø90: 22 kW at 76 rpm is ~2.8 kN*m, EST
+HUB_R = 0.095
+
+
+def _hub(y, z, sign):
+    """Hub with a taper-lock bushing and 6 bolts, on the outside of an end disc."""
+    parts = [st.rod((CX, y, z), (CX, y + sign * 0.07, z), HUB_R, 32),
+             st.rod((CX, y + sign * 0.07, z), (CX, y + sign * 0.085, z), 0.07, 24)]
+    for k in range(6):
+        a = k * math.pi / 3
+        px, pz = CX + 0.055 * math.cos(a), z + 0.055 * math.sin(a)
+        parts.append(st.rod((px, y + sign * 0.085, pz), (px, y + sign * 0.095, pz), 0.008, 6))
+    return parts
+
+
 def _pulley(z, wing=False):
-    """Crowned drum with rubber lagging, or a self-cleaning wing pulley for the boot."""
+    """Head drum (crowned shell, end discs, hubs, lagging) or self-cleaning wing tail pulley."""
     lag, drum, shaft = [], [], []
-    y0, y1 = BELT_Y - BELT_W / 2 - 0.02, BELT_Y + BELT_W / 2 + 0.02
+    width = BELT_W + 0.05
+    y0, y1 = BELT_Y - width / 2, BELT_Y + width / 2
     if wing:
         for k in range(10):                                   # 10 radial wings, "squirrel cage"
             a = k * math.pi / 5
-            mid = np.array([CX + 0.75 * PULLEY_R * math.cos(a), z + 0.75 * PULLEY_R * math.sin(a)])
-            plate = np.array([(-0.004, -PULLEY_R * 0.25), (0.004, -PULLEY_R * 0.25),
-                              (0.004, PULLEY_R * 0.25), (-0.004, PULLEY_R * 0.25)])
+            mid = np.array([CX + 0.67 * PULLEY_R * math.cos(a), z + 0.67 * PULLEY_R * math.sin(a)])
+            plate = np.array([(-0.005, -PULLEY_R * 0.33), (0.005, -PULLEY_R * 0.33),
+                              (0.005, PULLEY_R * 0.33), (-0.005, PULLEY_R * 0.33)])
             drum.append(st.member(_to3(mid, y0), _to3(mid, y1), plate, up=(math.cos(a), 0.0, math.sin(a))))
-        for yy in (y0, y1):
-            drum.append(st.rod((CX, yy - 0.006, z), (CX, yy + 0.006, z), PULLEY_R, 32))
+        for yy in (y0, BELT_Y, y1):                           # spider plates: ends and middle
+            drum.append(st.rod((CX, yy - 0.006, z), (CX, yy + 0.006, z), 0.45 * PULLEY_R, 24))
     else:
-        drum.append(st.rod((CX, y0, z), (CX, y1, z), PULLEY_R, 48))
-        lag.append(st.rod((CX, y0 + 0.01, z), (CX, y1 - 0.01, z), PULLEY_R + LAGGING, 48))
-    shaft.append(st.rod((CX, BELT_Y - 0.62, z), (CX, BELT_Y + 0.62, z), 0.045, 20))
+        drum.append(st.rod((CX, y0, z), (CX, y1, z), PULLEY_R, 64))
+        lag.append(st.rod((CX, y0 + 0.012, z), (CX, y1 - 0.012, z), PULLEY_R + LAGGING, 64))
+        for yy in (y0, y1):
+            drum.append(st.rod((CX, yy - 0.012, z), (CX, yy + 0.012, z), PULLEY_R + 0.004, 64))
+    drum += _hub(y0, z, -1) + _hub(y1, z, 1)
+    shaft.append(st.rod((CX, BELT_Y - 0.62, z), (CX, BELT_Y + 0.62, z), SHAFT_R, 24))
     return c.merge_parts(drum), (c.merge_parts(lag) if lag else None), c.merge_parts(shaft)
 
 
 def _bearing(y, z):
-    """Pillow block with a temperature sensor on top."""
-    body = [c.box((CX - 0.17, y - 0.05, z - 0.09), (CX + 0.17, y + 0.05, z - 0.05)),
-            st.rod((CX, y - 0.05, z), (CX, y + 0.05, z), 0.085, 24)]
-    sensor = [st.rod((CX, y, z + 0.085), (CX, y, z + 0.13), 0.012, 10)]
+    """Split plummer block (SN-type) for a Ø90 shaft: base with feet and bolts, cap with
+    split bolts, seals, grease nipple, and a bearing temperature sensor on top. Sizes EST."""
+    h = 0.112                                                  # shaft centre above the base
+    body = [c.box((CX - 0.16, y - 0.05, z - h), (CX + 0.16, y + 0.05, z - h + 0.035)),         # base
+            c.box((CX - 0.105, y - 0.045, z - h + 0.035), (CX + 0.105, y + 0.045, z)),          # lower half
+            st.rod((CX, y - 0.045, z), (CX, y + 0.045, z), 0.105, 40),                          # cap
+            c.box((CX - 0.13, y - 0.045, z - 0.012), (CX + 0.13, y + 0.045, z + 0.012))]        # split lugs
+    for yy in (y - 0.05, y + 0.045):
+        body.append(st.rod((CX, yy, z), (CX, yy + 0.005, z), 0.065, 32))                         # seals
+    for x in (CX - 0.13, CX + 0.13):
+        body.append(st.rod((x, y, z - h + 0.035), (x, y, z - h + 0.052), 0.012, 6))            # foot bolts
+        body.append(st.rod((x, y, z + 0.012), (x, y, z + 0.030), 0.011, 6))                    # cap bolts
+    body.append(st.rod((CX + 0.03, y, z + 0.1), (CX + 0.03, y, z + 0.125), 0.005, 6))          # grease nipple
+    sensor = [st.rod((CX - 0.03, y, z + 0.1), (CX - 0.03, y, z + 0.15), 0.011, 10),
+              st.rod((CX - 0.03, y, z + 0.15), (CX - 0.03, y + 0.12, z + 0.2), 0.004, 6)]       # cable
     return body, sensor
+
+
+def _rim_bolts(x0, x1, z0, z1, y, step=0.10):
+    """M10 hex heads around a bolted cover flange (heads facing +Y)."""
+    pts = []
+    for x in np.arange(x0, x1 + 1e-6, step):
+        pts += [(x, z0), (x, z1)]
+    for zz in np.arange(z0 + step, z1 - step / 2, step):
+        pts += [(x0, zz), (x1, zz)]
+    hexp = np.column_stack([0.0092 * np.cos(np.arange(6) * math.pi / 3), 0.0092 * np.sin(np.arange(6) * math.pi / 3)])
+    return [st.member((px, y, pz), (px, y + 0.0064, pz), hexp, up=(0, 0, 1)) for px, pz in pts]
 
 
 def build(top_z, pit_z, phase=0.0):
@@ -293,7 +361,8 @@ def build(top_z, pit_z, phase=0.0):
     labels.append(("Вибухорозрядник голови", ((hx0 + hx1) / 2, BELT_Y, z_head + hood_r + 0.05)))
     parts["head"] = c.merge_parts([head_back] + throat)
     parts["head_cover"] = head_front
-    parts["head_rim"] = head_rim
+    parts["head_rim"] = c.merge_parts([head_rim] + _rim_bolts(hx0 - 0.015, hx1 + 0.015, leg_z1 - 0.015, z_head + 0.015,
+                                                              BELT_Y + 0.30 + 0.006))
     parts["head_spout"] = c.merge_parts(spout)
     parts["vent"] = c.merge_parts(vent)
     parts["pulley_drum"] = drum
@@ -347,7 +416,8 @@ def build(top_z, pit_z, phase=0.0):
                 c.box((bx1 - 0.45, BELT_Y + 0.30, pit_z + 0.3), (bx1 - 0.1, BELT_Y + 0.312, pit_z + 0.6))]
     parts["boot"] = c.merge_parts([boot_back] + inlet)
     parts["boot_cover"] = boot_front
-    parts["boot_rim"] = c.merge_parts([boot_rim] + cleanout)
+    parts["boot_rim"] = c.merge_parts([boot_rim] + cleanout + _rim_bolts(bx0 - 0.015, bx1 + 0.015, pit_z + 0.235,
+                                                                         leg_z0 + 0.015, BELT_Y + 0.30 + 0.006))
     parts["boot_pulley"] = wdrum
     parts["shafts"] = c.merge_parts([parts["shafts"], wshaft])
     parts["takeup"] = c.merge_parts(takeup)

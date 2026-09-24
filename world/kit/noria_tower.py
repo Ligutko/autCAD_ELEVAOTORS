@@ -174,7 +174,7 @@ def build(spec, collection=None, materials=None):
     sensor = m.get("sensor") or c.mat_painted("SENSOR_YELLOW", (0.9, 0.7, 0.05), 0.4, grime=0.1)
     parts, labels, noria_measure, anchors = nn.build(top_z, pit_z)
     look = {
-        "belt": (rubber, False), "buckets": (bucket, False), "grain": (grain, False),
+        "belt": (rubber, False), "buckets": (bucket, "quads"), "grain": (grain, False),
         "legs": (galv, False), "leg_flanges": (galv_old, False), "leg_bolts": (galv_old, "quads"),
         "leg_doors": (galv_old, False), "head": (galv, False), "head_cover": (galv, False),
         "head_rim": (galv_old, False), "head_spout": (galv, "quads"), "vent": (dark, False),
