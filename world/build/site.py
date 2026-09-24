@@ -96,6 +96,9 @@ def main():
         p1 = (b["to"][0], b["to"][1] - y_dir * 2.2)
         add_parts(b["id"], gal.tower_bridge(p0, p1, b["z"], b["z"]), m, col)
 
+    for col in bpy.data.collections:          # labels are for explainer shots only
+        if col.name.startswith("LABELS_"):
+            col.hide_render = True
     v, f = c.box((-2000, -2000, -0.2), (2000, 2000, 0.0))
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
     build_s = round(time.time() - t0, 1)

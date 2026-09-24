@@ -10,6 +10,7 @@ import math
 import numpy as np
 
 from . import common as c
+from . import noria_n100 as nn
 from . import steel as st
 
 HALF = 2.2                      # PDF p.3, p.6: 4400 x 4400 column grid
@@ -19,13 +20,10 @@ STAIR_Y = (-1.25, 1.35)         # EST: flight zone, landings beyond it
 STAIR_STEP_Z = 2.35             # EST: storey height of the switchback stair
 
 # ------------------------------------------------------------------ elevator Н-100
-LEG_X = (0.45, 1.45)            # EST: up leg / down leg centres, 1.0 m apart for a Ø0.9 m head pulley
-LEG_Y = 0.35
-LEG_W, LEG_D = 0.32, 0.52       # EST: casing 320 x 520 for 100 t/h
-LEG_FLANGE_STEP = 2.0           # EST: casing sections
-HEAD_PULLEY_R = 0.45            # EST: Ø900 at ~3 m/s for 100 t/h
-BOOT_H = 1.7                    # EST
-MOTOR_KW = 22                   # catalogue: Н-100, 22 kW
+LEG_X = nn.LEG_CENTRES_X        # detailed elevator, see noria_n100.py
+LEG_Y = nn.BELT_Y
+LEG_W, LEG_D = nn.LEG_SIZE_X, nn.LEG_SIZE_Y
+MOTOR_KW = nn.MOTOR_KW
 
 
 def _col(x, y, z0, z1, prof):
@@ -116,57 +114,14 @@ def build_guards(zs):
     return c.merge_parts(tubes), c.merge_parts(toes)
 
 
-def build_elevator(top_z, pit_z):
-    casing, flanges, dark, motor, round_ = [], [], [], [], []
-    boot_z0 = pit_z + 0.25
-    boot_z1 = boot_z0 + BOOT_H
-    head_z0 = top_z + 0.15
-    pulley_z = head_z0 + 0.95
-    # legs with bolted section flanges
-    for x in LEG_X:
-        casing.append(c.box((x - LEG_W / 2, LEG_Y - LEG_D / 2, boot_z1), (x + LEG_W / 2, LEG_Y + LEG_D / 2, head_z0)))
-        for z in np.arange(boot_z1 + LEG_FLANGE_STEP, head_z0 - 0.2, LEG_FLANGE_STEP):
-            flanges.append(c.box((x - LEG_W / 2 - 0.035, LEG_Y - LEG_D / 2 - 0.035, z - 0.02),
-                                 (x + LEG_W / 2 + 0.035, LEG_Y + LEG_D / 2 + 0.035, z + 0.02)))
-        # inspection door on the up leg, 1.2 m above each main platform, EST
-    # head: box plus half-cylinder hood around the pulley (axis along Y)
-    hx0, hx1 = LEG_X[0] - LEG_W / 2 - 0.05, LEG_X[1] + LEG_W / 2 + 0.05
-    hy0, hy1 = LEG_Y - 0.36, LEG_Y + 0.36
-    casing.append(c.box((hx0, hy0, head_z0), (hx1, hy1, pulley_z)))
-    cxm = (hx0 + hx1) / 2
-    rr = (hx1 - hx0) / 2
-    a = np.linspace(0, math.pi, 24)
-    arc = np.column_stack([cxm + rr * np.cos(a), np.zeros(24), pulley_z + rr * 0.85 * np.sin(a)])
-    v = np.concatenate([arc + [0, hy0, 0], arc + [0, hy1, 0]])
-    f = [c.grid_faces(2, 24), np.arange(24)[None, :], np.arange(24, 48)[::-1][None, :]]
-    round_.append((v, f))
-    # discharge throat and spout at 45 deg down towards -X (to the distributor)
-    casing.append(c.box((hx0 - 0.35, hy0 + 0.1, pulley_z - 0.55), (hx0, hy1 - 0.1, pulley_z - 0.05)))
-    spout_a = np.array([hx0 - 0.35, LEG_Y, pulley_z - 0.35])
-    dist = np.array([hx0 - 1.45, LEG_Y, top_z - 1.0])
-    round_.append(st.rod(spout_a, dist + [0, 0, 0.35], 0.16, 16))
-    # 2-way distributor (flap valve) and outlet stubs to -X (silo row) and -Y (gallery)
-    casing.append(c.box(tuple(dist - [0.3, 0.3, 0.35]), tuple(dist + [0.3, 0.3, 0.35])))
-    dark.append(c.box(tuple(dist + [0.3, -0.12, -0.1]), tuple(dist + [0.55, 0.12, 0.2])))  # actuator
-    round_.append(st.rod(dist - [0.3, 0, 0.2], dist - [1.2, 0, 1.1], 0.14, 16))
-    round_.append(st.rod(dist - [0, 0.3, 0.2], dist - [0, 1.2, 1.1], 0.14, 16))
-    # drive: shaft-mounted reducer + 22 kW motor + backstop on the +Y side of the head
-    gx = cxm
-    dark.append(c.box((gx - 0.22, hy1, pulley_z - 0.30), (gx + 0.22, hy1 + 0.45, pulley_z + 0.28)))
-    v, f = st.rod((gx + 0.22, hy1 + 0.22, pulley_z - 0.05), (gx + 0.95, hy1 + 0.22, pulley_z - 0.05), 0.19, 24)
-    motor.append((v, f))
-    v, f = st.rod((gx + 0.95, hy1 + 0.22, pulley_z - 0.05), (gx + 1.08, hy1 + 0.22, pulley_z - 0.05), 0.14, 24)
-    dark.append((v, f))
-    dark.append(st.rod((gx, hy0 - 0.12, pulley_z), (gx, hy0, pulley_z), 0.12, 16))   # backstop
-    # boot with take-up screws and inlet hopper on the down-leg side
-    bx0, bx1 = LEG_X[0] - LEG_W / 2 - 0.10, LEG_X[1] + LEG_W / 2 + 0.10
-    casing.append(c.box((bx0, LEG_Y - 0.36, boot_z0), (bx1, LEG_Y + 0.36, boot_z1)))
-    for x in (bx0 + 0.15, bx1 - 0.15):
-        dark.append(st.rod((x, LEG_Y + 0.36, boot_z1 - 0.1), (x, LEG_Y + 0.36, boot_z1 + 0.45), 0.018, 8))
-    hop_top = boot_z1 + 0.9
-    casing.append(st.member((bx1 + 0.55, LEG_Y, hop_top), (bx1, LEG_Y, boot_z1 - 0.4), st.shs(0.40)))
-    return (c.merge_parts(casing), c.merge_parts(round_), c.merge_parts(flanges),
-            c.merge_parts(dark), c.merge_parts(motor), pulley_z)
+def build_distributor(spout_end, top_z):
+    """2-way flap distributor under the head spout; outlets to -X (silo gallery) and -Y (bridge)."""
+    d = np.asarray(spout_end, float) - [0, 0, 0.35]
+    body = [c.box(tuple(d - [0.3, 0.3, 0.35]), tuple(d + [0.3, 0.3, 0.35]))]
+    actuator = [c.box(tuple(d + [0.3, -0.12, -0.1]), tuple(d + [0.55, 0.12, 0.2]))]
+    outlets = [st.rod(d - [0.3, 0, 0.2], d - [1.3, 0, 1.2], 0.14, 16),
+               st.rod(d - [0, 0.3, 0.2], d - [0, 1.3, 1.2], 0.14, 16)]
+    return c.merge_parts(body), c.merge_parts(actuator), c.merge_parts(outlets)
 
 
 def build_pit(pit_z):
@@ -213,12 +168,31 @@ def build(spec, collection=None, materials=None):
     tubes, toes = build_guards(zs)
     add("guard_rails", tubes, yellow, smooth="quads")
     add("toe_boards", toes, yellow)
-    casing, rounds, flanges, drive, mot, pulley_z = build_elevator(top_z, pit_z)
-    add("elevator_casing", casing, galv)
-    add("elevator_spouts", rounds, galv, smooth="quads")
-    add("elevator_flanges", flanges, galv_old)
-    add("elevator_drive", drive, dark, smooth="quads")
-    add("elevator_motor", mot, motor, smooth="quads")
+    rubber = m.get("rubber") or c.mat_rubber("BELT_RUBBER")
+    bucket = m.get("bucket") or c.mat_painted("BUCKET_POLY", (0.85, 0.32, 0.04), 0.45, grime=0.3)
+    grain = m.get("grain") or c.mat_painted("GRAIN_WHEAT", (0.62, 0.44, 0.20), 0.8, grime=0.2)
+    sensor = m.get("sensor") or c.mat_painted("SENSOR_YELLOW", (0.9, 0.7, 0.05), 0.4, grime=0.1)
+    parts, labels, noria_measure, anchors = nn.build(top_z, pit_z)
+    look = {
+        "belt": (rubber, False), "buckets": (bucket, False), "grain": (grain, False),
+        "legs": (galv, False), "leg_flanges": (galv_old, False), "leg_bolts": (galv_old, "quads"),
+        "leg_doors": (galv_old, False), "head": (galv, False), "head_cover": (galv, False),
+        "head_rim": (galv_old, False), "head_spout": (galv, "quads"), "vent": (dark, False),
+        "pulley_drum": (dark, "quads"), "pulley_lagging": (rubber, "quads"), "shafts": (dark, "quads"),
+        "drive": (dark, "quads"), "motor": (motor, "quads"), "boot": (galv, False),
+        "boot_cover": (galv, False), "boot_rim": (galv_old, False), "boot_pulley": (dark, "quads"),
+        "takeup": (dark, "quads"), "sensors": (sensor, "quads"),
+    }
+    for key, data in parts.items():
+        if data is None:
+            continue
+        mat, smooth = look[key]
+        add("noria_" + key, data, mat, smooth)
+    body, act, outlets = build_distributor(anchors["spout_end"], top_z)
+    add("distributor", body, galv)
+    add("distributor_actuator", act, dark)
+    add("distributor_outlets", outlets, galv, smooth="quads")
+    label_objs = c.labels(labels, tag, collection)
     add("pit", build_pit(pit_z), concrete)
     measure = {
         "id": tag,
@@ -230,7 +204,9 @@ def build(spec, collection=None, materials=None):
         "stair_riser_m": st.RISER,
         "stair_tread_m": st.TREAD,
         "rail_height_m": st.RAIL_TOP,
-        "head_pulley_z_m": round(pulley_z, 3),
         "motor_kw": MOTOR_KW,
+        "noria": noria_measure,
     }
+    objs["labels_root"] = label_objs[0]
+    measure["labels"] = [t for t, _ in labels]
     return objs, measure

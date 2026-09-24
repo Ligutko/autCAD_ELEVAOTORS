@@ -399,3 +399,168 @@ def render(scene, cam, path):
     scene.camera = cam
     scene.render.filepath = str(path)
     bpy.ops.render.render(write_still=True)
+
+
+# ---------------------------------------------------------------- labels
+
+LABEL_OFFSETS = [(0.0, -0.9, 0.55), (0.0, -0.9, -0.45), (-0.8, -0.7, 0.3), (0.8, -0.7, 0.45),
+                 (-0.8, -0.7, -0.35), (0.8, -0.7, -0.4), (0.0, -1.1, 0.95), (0.0, -1.1, -0.9)]
+
+
+def _label_materials():
+    text = bpy.data.materials.get("LABEL_TEXT")
+    if text is None:
+        text = bpy.data.materials.new("LABEL_TEXT")
+        text.use_nodes = True
+        nodes, links = text.node_tree.nodes, text.node_tree.links
+        emit = nodes.new("ShaderNodeEmission")
+        emit.inputs["Color"].default_value = (1.0, 0.97, 0.9, 1.0)
+        emit.inputs["Strength"].default_value = 2.0
+        out = next(n for n in nodes if n.type == "OUTPUT_MATERIAL")
+        links.new(emit.outputs[0], out.inputs["Surface"])
+        plate = bpy.data.materials.new("LABEL_PLATE")
+        plate.use_nodes = True
+        b = next(n for n in plate.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+        b.inputs["Base Color"].default_value = (0.01, 0.012, 0.015, 1.0)
+        b.inputs["Roughness"].default_value = 0.6
+        lead = bpy.data.materials.new("LABEL_LEADER")
+        lead.use_nodes = True
+        b = next(n for n in lead.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+        b.inputs["Base Color"].default_value = (0.95, 0.75, 0.1, 1.0)
+        b.inputs["Emission Color"].default_value = (0.95, 0.75, 0.1, 1.0)
+        b.inputs["Emission Strength"].default_value = 1.0
+    return bpy.data.materials["LABEL_TEXT"], bpy.data.materials["LABEL_PLATE"], bpy.data.materials["LABEL_LEADER"]
+
+
+def labels(items, tag, collection=None, size=0.06):
+    """Annotation labels: (text, anchor xyz) -> billboard text on a dark plate + leader line.
+
+    Labels live in their own collection LABELS_<tag> so they can be switched off.
+    Location of the owning objects is applied by the caller through `parent`.
+    """
+    mat_text, mat_plate, mat_lead = _label_materials()
+    col = bpy.data.collections.new(f"LABELS_{tag}")
+    (collection or bpy.context.scene.collection).children.link(col)
+    root = bpy.data.objects.new(f"LABELS_{tag}_ROOT", None)
+    col.objects.link(root)
+    out = [root]
+    for i, (text, anchor) in enumerate(items):
+        anchor = np.asarray(anchor, float)
+        pos = anchor + np.asarray(LABEL_OFFSETS[i % len(LABEL_OFFSETS)])
+        pivot = bpy.data.objects.new(f"LBL_{tag}_{i:02d}", None)
+        pivot.empty_display_size = 0.05
+        pivot.location = Vector(pos)
+        col.objects.link(pivot)
+        pivot.parent = root
+        pivot["anchor"] = [float(x) for x in anchor]
+        pivot["plate_w"] = size * 0.56 * len(text) + 0.08
+        curve = bpy.data.curves.new(f"LBL_{tag}_{i:02d}_TXT", type="FONT")
+        curve.body = text
+        curve.size = size
+        curve.align_x = "CENTER"
+        curve.align_y = "CENTER"
+        curve.extrude = 0.001
+        txt = bpy.data.objects.new(f"LBL_{tag}_{i:02d}_TXT", curve)
+        txt.data.materials.append(mat_text)
+        col.objects.link(txt)
+        txt.parent = pivot
+        txt.location = (0.0, 0.0, 0.004)
+        w = size * 0.56 * len(text) + 0.08
+        h = size * 1.6
+        v = np.array([(-w / 2, -h / 2, 0), (w / 2, -h / 2, 0), (w / 2, h / 2, 0), (-w / 2, h / 2, 0)])
+        plate = mesh_from_arrays(f"LBL_{tag}_{i:02d}_PLATE", v, np.array([(0, 1, 2, 3)]), mat_plate, collection=col)
+        plate.parent = pivot
+        a = anchor
+        b = pos - np.array([0, 0, h / 2]) if pos[2] > a[2] else pos + np.array([0, 0, h / 2])
+        d = b - a
+        length = float(np.linalg.norm(d))
+        lead = bpy.data.meshes.new(f"LBL_{tag}_{i:02d}_LEAD_MESH")
+        lead_obj = bpy.data.objects.new(f"LBL_{tag}_{i:02d}_LEAD", lead)
+        col.objects.link(lead_obj)
+        steps = 6
+        ang = np.linspace(0, 2 * math.pi, steps, endpoint=False)
+        dn = d / length
+        side = np.cross(dn, [0, 0, 1.0]) if abs(dn[2]) < 0.99 else np.array([1.0, 0, 0])
+        side /= np.linalg.norm(side)
+        up = np.cross(side, dn)
+        ring = 0.004 * (np.cos(ang)[:, None] * side + np.sin(ang)[:, None] * up)
+        verts = np.concatenate([a + ring, b + ring, [a]])
+        faces = [tuple(int(x) for x in q) for q in grid_faces(2, steps, wrap_cols=True)]
+        lead.from_pydata([tuple(p) for p in verts], [], faces)
+        lead.materials.append(mat_lead)
+        lead_obj.parent = root
+        # anchor dot
+        dot = bpy.data.meshes.new(f"LBL_{tag}_{i:02d}_DOT_MESH")
+        bm_verts, bm_faces = cylinder(0.018, -0.01, 0.01, steps=12)
+        dot_obj = mesh_from_arrays(f"LBL_{tag}_{i:02d}_DOT", bm_verts + a, bm_faces, mat_lead, collection=col)
+        bpy.data.meshes.remove(dot)
+        dot_obj.parent = root
+        pivot["parts"] = [txt.name, plate.name, lead_obj.name, dot_obj.name]
+        out += [pivot, txt, plate, lead_obj, dot_obj]
+    return out
+
+
+def face_labels(label_objs, cam, max_dist=7.0, lift=0.38):
+    """Place labels for this camera: beside the anchor on screen, facing the camera.
+
+    Labels whose anchor is out of frame, behind the camera or farther than max_dist are hidden.
+    Leaders are rebuilt from the anchor to the new label position.
+    """
+    from bpy_extras.object_utils import world_to_camera_view
+
+    scene = bpy.context.scene
+    cam_m = cam.matrix_world
+    right = cam_m.to_3x3() @ Vector((1, 0, 0))
+    up = cam_m.to_3x3() @ Vector((0, 1, 0))
+    placed = []
+    pivots = [o for o in label_objs if o.type == "EMPTY" and "anchor" in o.keys()]
+    for o in pivots:
+        root = o.parent
+        anchor = root.matrix_world @ Vector(o["anchor"])
+        view = world_to_camera_view(scene, cam, anchor)
+        dist = (anchor - cam_m.translation).length
+        visible = 0.03 < view.x < 0.97 and 0.03 < view.y < 0.97 and view.z > 0 and dist < max_dist
+        parts = [bpy.data.objects[n] for n in o["parts"]]
+        for p in parts:
+            p.hide_render = not visible
+            p.hide_viewport = not visible
+        if not visible:
+            continue
+        scale = max(0.5, dist / 4.0)
+        side = -1.0 if view.x < 0.5 else 1.0
+        half_w = o["plate_w"] / 2 * scale
+        pos = anchor + up * lift * scale + right * side * (0.12 * scale + half_w)
+        for _ in range(12):                           # keep the whole plate inside the frame
+            left = world_to_camera_view(scene, cam, pos - right * half_w).x
+            rgt = world_to_camera_view(scene, cam, pos + right * half_w).x
+            if left < 0.02:
+                pos += right * half_w * 0.25
+            elif rgt > 0.98:
+                pos -= right * half_w * 0.25
+            else:
+                break
+        for q in placed:                              # push apart labels that would overlap on screen
+            if (pos - q).length < 0.22 * scale:
+                pos += up * 0.2 * scale
+        placed.append(pos)
+        o.location = root.matrix_world.inverted() @ pos
+        o.scale = (scale, scale, scale)
+        o.rotation_euler = (cam_m.translation - pos).to_track_quat("Z", "Y").to_euler()
+        lead = parts[2]
+        a = root.matrix_world.inverted() @ anchor
+        b = root.matrix_world.inverted() @ pos
+        d = b - a
+        if d.length < 1e-6:
+            continue
+        dn = d.normalized()
+        side_v = dn.cross(Vector((0, 0, 1))) if abs(dn.z) < 0.99 else Vector((1, 0, 0))
+        side_v.normalize()
+        up_v = side_v.cross(dn)
+        verts = []
+        for end in (a, b):
+            for k in range(6):
+                ang = 2 * math.pi * k / 6
+                verts.append(end + 0.004 * (math.cos(ang) * side_v + math.sin(ang) * up_v))
+        for i, vtx in enumerate(lead.data.vertices[:12]):
+            vtx.co = verts[i]
+        lead.data.update()

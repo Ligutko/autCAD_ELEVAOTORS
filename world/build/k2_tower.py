@@ -9,7 +9,7 @@ import sys
 import time
 from pathlib import Path
 
-import bpy  # noqa: F401,I001  bpy first: the pip module registers bmesh and mathutils
+import bpy  # noqa: I001  bpy first: the pip module registers bmesh and mathutils
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -43,6 +43,9 @@ def main():
     place(s_objs, (s2["x"], s2["y"], s2["z"]))
     measure["build_seconds"] = round(time.time() - t0, 1)
 
+    for col in bpy.data.collections:          # labels are for explainer shots only
+        if col.name.startswith("LABELS_"):
+            col.hide_render = True
     v, f = c.box((-1500, -1500, -0.2), (1500, 1500, 0.0))
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
 
