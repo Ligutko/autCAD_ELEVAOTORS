@@ -1,0 +1,10 @@
+- generic [ref=f26e3]:
+  - generic [ref=f26e36]:
+    - article [ref=f26e38]:
+      - region "Дивитися в повноекранному режимі" [ref=f26e40] [cursor=pointer]:
+        - 'img "ВІД ПРОЄКТУ – ДО РЕЗУЛЬТАТУ ПРОЄКТУЄМО ЕЛЕВАТОР Системний підхід — надійний результат. Створюємо 3D‑моделі, продумуємо кожну деталь, забезпечуємо досконалий проєкт. #проект #елеваторнеобладнання #зерносушарка #сушіннязерна" [ref=f26e45]'
+    - complementary
+  - generic [ref=f26e72]:
+    - button [ref=f26e75] [cursor=pointer]
+    - button [ref=f26e82] [cursor=pointer]
+    - button "Увійти" [ref=f26e89] [cursor=pointer]

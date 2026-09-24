@@ -1,0 +1,21 @@
+{
+  "id": "rec_e7117e76",
+  "subject": "У13-УН175",
+  "kind": "node",
+  "claim": {
+    "node_type": "bucket_elevator",
+    "present": true
+  },
+  "source": {
+    "origin": "local",
+    "path": "Plant3D_Equipment_Catalog.json",
+    "page": null,
+    "quote": "\"tag\": \"У13-УН175\"",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "каталог, зібраний раніше зі специфікації PDF",
+  "seen_in": []
+}

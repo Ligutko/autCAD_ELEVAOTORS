@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-09-23",
+  "continues": ["inbox/reports/pdf_thickness.json", "inbox/reports/noria_dims.md"],
+  "new_records": [
+    "rec_9a41c7e2",
+    "rec_b58f3d16",
+    "rec_c027e9a4",
+    "rec_d194a6b8",
+    "rec_e83bd251",
+    "rec_f42c0a97"
+  ],
+  "records_edited": false,
+  "facts_json_created": false,
+  "blender_opened": false,
+  "fields": [
+    {
+      "field": "sheet_thickness",
+      "subject": "МСВУ 220.13.В12",
+      "verdict": "not_found",
+      "sources_checked": [
+        "https://lubnymash.com/novosti/yak-obraty-sylos/",
+        "https://bessarabiainform.com/2026/03/profesijne-budivnytstvo-metalevyh-sylosiv-shho-varto-znaty/"
+      ]
+    },
+    {
+      "field": "corrugation_pitch",
+      "subject": "МСВУ 220.13.В12",
+      "verdict": "not_found",
+      "candidate_document_unread": "https://dreamdim.ua/wp-content/uploads/2022/08/DBN-V_2_6-221-2021.pdf",
+      "why_unread": "PDF text not extractable by available tools; no local poppler/pdftoppm to render pages"
+    },
+    {
+      "field": "bolt_pattern",
+      "subject": "МСВУ 220.13.В12",
+      "verdict": "not_found",
+      "sources_checked": []
+    },
+    {
+      "field": "roof_slope",
+      "subject": "МСВУ 220.13.В12",
+      "verdict": "not_found",
+      "context_card": "rec_f42c0a97",
+      "context_value_deg": 30,
+      "context_note": "generic industry article, not Lubnymash, not model-specific"
+    },
+    {
+      "field": "head",
+      "subject": "Н-100 / У13-УН175",
+      "verdict": "not_found",
+      "note": "real factory passport with drawing exists (rec_c027e9a4 source) but for a different manufacturer and different duplex model"
+    },
+    {
+      "field": "boot",
+      "subject": "Н-100 / У13-УН175",
+      "verdict": "not_found"
+    },
+    {
+      "field": "bucket_pitch",
+      "subject": "Н-100 / У13-УН175",
+      "verdict": "not_found_for_our_tag",
+      "comparative_cards": ["rec_9a41c7e2", "rec_e83bd251"],
+      "comparative_values_mm": [180, 185],
+      "existing_card": "rec_cdfc5232"
+    },
+    {
+      "field": "drum_diameter",
+      "subject": "Н-100 / У13-УН175",
+      "verdict": "not_found_for_our_tag",
+      "comparative_cards": ["rec_b58f3d16", "rec_d194a6b8"],
+      "comparative_values_mm": [630, 720],
+      "note": "values disagree across manufacturers, confirms this is not a cross-brand-stable number"
+    }
+  ],
+  "found_count_for_our_tags": 0,
+  "new_comparative_cards_count": 6
+}

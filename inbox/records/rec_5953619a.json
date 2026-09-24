@@ -1,0 +1,21 @@
+{
+  "id": "rec_5953619a",
+  "subject": "Креслення",
+  "kind": "gap",
+  "claim": {
+    "field": "scale",
+    "why_needed": "Окремої картки масштабу немає. Довжини з листа без одиниці лишаються в sheet_mm, координати DXF у метри об'єкта не переводяться."
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Окремої картки масштабу немає. Довжини з листа без одиниці лишаються в sheet_mm, координати DXF у метри об'єкта не переводяться.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "масштабу листа в картках немає",
+  "seen_in": []
+}

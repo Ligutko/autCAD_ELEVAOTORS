@@ -1,0 +1,28 @@
+{
+  "id": "rec_f2c63408",
+  "subject": "У13-ТЭА",
+  "kind": "power",
+  "claim": {
+    "name": "power",
+    "value": 0.18,
+    "unit": "kW",
+    "qualifier": "потужність"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 9,
+    "quote": "Засувка рейкова з електричним приводом 0,18 кВт,",
+    "bbox": [
+      538,
+      2468,
+      1884,
+      2521
+    ],
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "число з OCR у рядку з відомим тегом",
+  "seen_in": []
+}

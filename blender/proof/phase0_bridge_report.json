@@ -1,0 +1,19 @@
+{
+  "execute": {
+    "status": "success",
+    "result": {
+      "executed": true,
+      "result": "4.000000 1.500000 2.200000\n"
+    }
+  },
+  "screenshot": {
+    "status": "success",
+    "result": {
+      "success": true,
+      "width": 1280,
+      "height": 715,
+      "filepath": "d:\\autocad project\\blender\\proof\\phase0_bridge_viewport.png",
+      "method": "offscreen"
+    }
+  }
+}

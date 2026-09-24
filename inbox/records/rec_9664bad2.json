@@ -1,0 +1,21 @@
+{
+  "id": "rec_9664bad2",
+  "subject": "Вентилятор системи аерації",
+  "kind": "gap",
+  "claim": {
+    "field": "mount_point",
+    "why_needed": "Точка посадки вентилятора аерації не названа у картках."
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Точка посадки вентилятора аерації не названа у картках.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "дірка словника: картки з цим полем немає",
+  "seen_in": []
+}

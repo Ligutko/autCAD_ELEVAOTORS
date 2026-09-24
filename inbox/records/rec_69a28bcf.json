@@ -1,0 +1,23 @@
+{
+  "id": "rec_69a28bcf",
+  "subject": "Н-100",
+  "kind": "dimension",
+  "claim": {
+    "name": "height",
+    "value": 33,
+    "unit": "m",
+    "qualifier": "висота норії"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Plant3D_Equipment_Catalog.json",
+    "page": null,
+    "quote": "\"height\": 33000",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "каталог, зібраний раніше зі специфікації PDF У файлі значення 33000 записане в міліметрах; у картці метри, як у розділі 6 PRD.",
+  "seen_in": []
+}

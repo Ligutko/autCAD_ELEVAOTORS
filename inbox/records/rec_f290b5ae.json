@@ -1,0 +1,23 @@
+{
+  "id": "rec_f290b5ae",
+  "subject": "У13-ТЭА-350",
+  "kind": "count",
+  "claim": {
+    "name": "quantity",
+    "value": 6,
+    "unit": "pcs",
+    "qualifier": "кількість"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Plant3D_Equipment_Catalog.json",
+    "page": null,
+    "quote": "\"quantity\": 6",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "каталог, зібраний раніше зі специфікації PDF",
+  "seen_in": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "rec_cdfc5232",
+  "subject": "Н-100",
+  "kind": "dimension",
+  "claim": {
+    "name": "bucket_pitch",
+    "value": 180,
+    "unit": "mm",
+    "qualifier": "крок ковшів колонки УН-100 у таблиці У13-УН"
+  },
+  "source": {
+    "origin": "web",
+    "path": "inbox/raw/web/rec_cdfc5232/source.html",
+    "page": null,
+    "quote": "Шаг ковшей мм 210 260 260 160 180 210. Колонки: УН-5, УН-10, УН-20, УН-50, УН-100, УН-175. Для УН-100 крок 180 мм. Поруч: встановлена потужність не більше 22 кВт, продуктивність 100 т/год.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23",
+    "url": "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Той самий HTML, що й картка перерізу шахти. Рядок УН-100: 100 т/год і не більше 22 кВт. Висоти 33 м у цій таблиці немає. Заводська сторінка дає УН-100 висоту 8–50 м, куди 33 м входить, але кроку ковшів там немає.",
+  "seen_in": []
+}

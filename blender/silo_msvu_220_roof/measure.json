@@ -1,0 +1,22 @@
+{
+  "pass": true,
+  "ring_count": 14,
+  "bolt_count": 56,
+  "flange": true,
+  "roof_sectors": 8,
+  "roof_slope_from_passport": false,
+  "wall_z_min_m": 0.0,
+  "wall_z_max_m": 21.422001,
+  "outer_diameter_m": 22.0,
+  "roof_z_m": 21.422001,
+  "display_roof_gap_m": 0.04,
+  "display_roof_hole_radius_m": 0.4,
+  "display_roof_skirt_height_m": 0.9,
+  "display_roof_skirt_radius_m": 11.22,
+  "display_flange_width_m": 0.35,
+  "display_bolt_head_diameter_m": 0.12,
+  "display_lap_m": 0.08,
+  "from_passport": false,
+  "corrugation_wave": false,
+  "rejected_height_m": 22.096
+}

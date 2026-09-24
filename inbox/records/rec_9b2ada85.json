@@ -1,0 +1,21 @@
+{
+  "id": "rec_9b2ada85",
+  "subject": "Вентилятор системи аерації",
+  "kind": "gap",
+  "claim": {
+    "field": "ducts",
+    "why_needed": "Канали аерації не названі у картках."
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Канали аерації не названі у картках.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "дірка словника: картки з цим полем немає",
+  "seen_in": []
+}

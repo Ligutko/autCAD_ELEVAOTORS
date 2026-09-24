@@ -1,0 +1,1238 @@
+{
+  "generated_at": "2026-09-23",
+  "pdf": {
+    "path": "Технологія 06.06.24.pdf",
+    "sha256": "7ba41e67917e6828019cbe74b781d408f195504e0c3320cade4ce7a7a70f0c99",
+    "page_count": 12
+  },
+  "render": {
+    "dpi": 300,
+    "skipped_existing": true
+  },
+  "ocr": {
+    "engine": "tesseract",
+    "version": "tesseract v5.5.3.20260724",
+    "langs": [
+      "eng",
+      "osd",
+      "rus",
+      "ukr"
+    ],
+    "oem": 1,
+    "psm_policy": "11, fallback 6 if no tag or fewer than 12 letter-words",
+    "tessdata": "tessdata_fast 4.1.0",
+    "executable": "D:\\autocad project\\inbox\\.tools\\Tesseract-OCR\\tesseract.exe"
+  },
+  "binding_rule": "Число з одиницею прив’язується до тега, якщо воно в тому самому рядку, у рядку безпосередньо над тегом (так зібрана специфікація) або в кількох наступних рядках до початку іншого обладнання. На сторінці з кількома тегами число без свого тега лишається в unbound_numbers.",
+  "pages": [
+    {
+      "page": 1,
+      "png": "inbox/raw/pdf_pages/page_01.png",
+      "tsv": "inbox/raw/ocr/page_01.tsv",
+      "words": 237,
+      "alpha_words": 142,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 2,
+      "png": "inbox/raw/pdf_pages/page_02.png",
+      "tsv": "inbox/raw/ocr/page_02.tsv",
+      "words": 295,
+      "alpha_words": 133,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 3,
+      "png": "inbox/raw/pdf_pages/page_03.png",
+      "tsv": "inbox/raw/ocr/page_03.tsv",
+      "words": 146,
+      "alpha_words": 75,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 4,
+      "png": "inbox/raw/pdf_pages/page_04.png",
+      "tsv": "inbox/raw/ocr/page_04.tsv",
+      "words": 244,
+      "alpha_words": 139,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 5,
+      "png": "inbox/raw/pdf_pages/page_05.png",
+      "tsv": "inbox/raw/ocr/page_05.tsv",
+      "words": 217,
+      "alpha_words": 126,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 6,
+      "png": "inbox/raw/pdf_pages/page_06.png",
+      "tsv": "inbox/raw/ocr/page_06.tsv",
+      "words": 321,
+      "alpha_words": 243,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 7,
+      "png": "inbox/raw/pdf_pages/page_07.png",
+      "tsv": "inbox/raw/ocr/page_07.tsv",
+      "words": 280,
+      "alpha_words": 253,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 8,
+      "png": "inbox/raw/pdf_pages/page_08.png",
+      "tsv": "inbox/raw/ocr/page_08.tsv",
+      "words": 331,
+      "alpha_words": 297,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 9,
+      "png": "inbox/raw/pdf_pages/page_09.png",
+      "tsv": "inbox/raw/ocr/page_09.tsv",
+      "words": 251,
+      "alpha_words": 219,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 10,
+      "png": "inbox/raw/pdf_pages/page_10.png",
+      "tsv": "inbox/raw/ocr/page_10.tsv",
+      "words": 267,
+      "alpha_words": 246,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 11,
+      "png": "inbox/raw/pdf_pages/page_11.png",
+      "tsv": "inbox/raw/ocr/page_11.tsv",
+      "words": 206,
+      "alpha_words": 174,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    },
+    {
+      "page": 12,
+      "png": "inbox/raw/pdf_pages/page_12.png",
+      "tsv": "inbox/raw/ocr/page_12.tsv",
+      "words": 278,
+      "alpha_words": 246,
+      "psm": null,
+      "ocr_skipped": true,
+      "errors": []
+    }
+  ],
+  "tag_hits": [
+    {
+      "page": 1,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.B12",
+      "bbox": [
+        1296,
+        1219,
+        1588,
+        1262
+      ]
+    },
+    {
+      "page": 1,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.B12",
+      "bbox": [
+        1849,
+        1223,
+        2141,
+        1249
+      ]
+    },
+    {
+      "page": 1,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.B12",
+      "bbox": [
+        1430,
+        2627,
+        1722,
+        2654
+      ]
+    },
+    {
+      "page": 1,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.B12",
+      "bbox": [
+        1994,
+        2627,
+        2286,
+        2654
+      ]
+    },
+    {
+      "page": 1,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.B12",
+      "bbox": [
+        3037,
+        2627,
+        3329,
+        2654
+      ]
+    },
+    {
+      "page": 1,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.B12",
+      "bbox": [
+        3601,
+        2627,
+        3893,
+        2654
+      ]
+    },
+    {
+      "page": 8,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.В12",
+      "bbox": [
+        2135,
+        988,
+        2595,
+        1029
+      ]
+    },
+    {
+      "page": 8,
+      "subject": "У13-ТЭА-400",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЗА-400",
+      "bbox": [
+        2198,
+        1635,
+        2539,
+        1677
+      ]
+    },
+    {
+      "page": 8,
+      "subject": "У13-ТЭР-400",
+      "node_type": "gate_manual",
+      "quote": "У13-ТЗР-400",
+      "bbox": [
+        2202,
+        1728,
+        2536,
+        1769
+      ]
+    },
+    {
+      "page": 8,
+      "subject": "У13-ТЭА-350",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЗА-350",
+      "bbox": [
+        2198,
+        1820,
+        2539,
+        1862
+      ]
+    },
+    {
+      "page": 8,
+      "subject": "У13-ТЭР-350",
+      "node_type": "gate_manual",
+      "quote": "У13-ТЗР-350",
+      "bbox": [
+        2202,
+        1913,
+        2536,
+        1954
+      ]
+    },
+    {
+      "page": 8,
+      "subject": "У13-УН175",
+      "node_type": "bucket_elevator",
+      "quote": "У13-УН175",
+      "bbox": [
+        2223,
+        2005,
+        2508,
+        2046
+      ]
+    },
+    {
+      "page": 8,
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "quote": "У13-ТЦС-320",
+      "bbox": [
+        2193,
+        2370,
+        2538,
+        2422
+      ]
+    },
+    {
+      "page": 9,
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "quote": "У13-ТЦС-320",
+      "bbox": [
+        2193,
+        798,
+        2538,
+        850
+      ]
+    },
+    {
+      "page": 9,
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "quote": "У13-ТЦС-320",
+      "bbox": [
+        2193,
+        2000,
+        2538,
+        2052
+      ]
+    },
+    {
+      "page": 9,
+      "subject": "У13-ТЭА",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЗА-300",
+      "bbox": [
+        2198,
+        2468,
+        2539,
+        2509
+      ]
+    },
+    {
+      "page": 9,
+      "subject": "У13-ТЭА-400",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЗА-400",
+      "bbox": [
+        2198,
+        2745,
+        2539,
+        2787
+      ]
+    },
+    {
+      "page": 10,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.В12",
+      "bbox": [
+        2135,
+        710,
+        2595,
+        752
+      ]
+    },
+    {
+      "page": 10,
+      "subject": "У13-ТЭА-400",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЗА-400",
+      "bbox": [
+        2198,
+        1358,
+        2539,
+        1399
+      ]
+    },
+    {
+      "page": 10,
+      "subject": "У13-ТЭР-400",
+      "node_type": "gate_manual",
+      "quote": "У13-ТЗР-400",
+      "bbox": [
+        2202,
+        1450,
+        2536,
+        1492
+      ]
+    },
+    {
+      "page": 10,
+      "subject": "У13-ТЭА-350",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЭА-350",
+      "bbox": [
+        2198,
+        1543,
+        2539,
+        1584
+      ]
+    },
+    {
+      "page": 10,
+      "subject": "У13-ТЭР-350",
+      "node_type": "gate_manual",
+      "quote": "У13-ТЗР-350",
+      "bbox": [
+        2202,
+        1635,
+        2536,
+        1677
+      ]
+    },
+    {
+      "page": 10,
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "quote": "У13-ТЦС-320",
+      "bbox": [
+        2193,
+        2092,
+        2538,
+        2144
+      ]
+    },
+    {
+      "page": 10,
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "quote": "У13-ТЦС-320",
+      "bbox": [
+        2193,
+        2370,
+        2538,
+        2422
+      ]
+    },
+    {
+      "page": 11,
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "quote": "У13-ТЦС-320",
+      "bbox": [
+        2193,
+        1352,
+        2538,
+        1404
+      ]
+    },
+    {
+      "page": 11,
+      "subject": "У13-ТЭА",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЗА-300",
+      "bbox": [
+        2198,
+        1913,
+        2539,
+        1954
+      ]
+    },
+    {
+      "page": 11,
+      "subject": "У13-ТЭА-400",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЭА-400",
+      "bbox": [
+        2198,
+        2098,
+        2539,
+        2139
+      ]
+    },
+    {
+      "page": 12,
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "quote": "МСВУ 220.13.В12",
+      "bbox": [
+        2135,
+        710,
+        2595,
+        752
+      ]
+    },
+    {
+      "page": 12,
+      "subject": "У13-ТЭА-400",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЭА-400",
+      "bbox": [
+        2198,
+        1358,
+        2539,
+        1399
+      ]
+    },
+    {
+      "page": 12,
+      "subject": "У13-ТЭР-400",
+      "node_type": "gate_manual",
+      "quote": "У13-ТЗР-400",
+      "bbox": [
+        2202,
+        1450,
+        2536,
+        1492
+      ]
+    },
+    {
+      "page": 12,
+      "subject": "У13-ТЭА-350",
+      "node_type": "gate_electric",
+      "quote": "У13-ТЭА-350",
+      "bbox": [
+        2198,
+        1543,
+        2539,
+        1584
+      ]
+    },
+    {
+      "page": 12,
+      "subject": "У13-ТЭР-350",
+      "node_type": "gate_manual",
+      "quote": "У13-ТЗР-350",
+      "bbox": [
+        2202,
+        1635,
+        2536,
+        1677
+      ]
+    },
+    {
+      "page": 12,
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "quote": "У13-ТЦС-320",
+      "bbox": [
+        2193,
+        1722,
+        2538,
+        1774
+      ]
+    }
+  ],
+  "unbound_numbers": [
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 1,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "100 т/год"
+    },
+    {
+      "page": 2,
+      "text": "0,000",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "План розміщення технологічного обладнання на відм . +0,000 м"
+    },
+    {
+      "page": 3,
+      "text": "24,400",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "План на відм. +24,400 м, +25,600 м"
+    },
+    {
+      "page": 3,
+      "text": "25,600",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "План на відм. +24,400 м, +25,600 м"
+    },
+    {
+      "page": 3,
+      "text": "25,600",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "План на відм. +25,600 м, +26,800 м"
+    },
+    {
+      "page": 3,
+      "text": "26,800",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "План на відм. +25,600 м, +26,800 м"
+    },
+    {
+      "page": 6,
+      "text": "23,200",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "о С о План на відм. +23,200 м"
+    },
+    {
+      "page": 6,
+      "text": "2",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "Й 2 м \\ Й 2 SN \\ 950 900 ,950"
+    },
+    {
+      "page": 6,
+      "text": "30,000",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "g i и ty an и и и и и ty an ЩІ и и План на відм. +30,000 м"
+    },
+    {
+      "page": 8,
+      "text": "222,0",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "222,0 м, 18,5+1,1 (?) кВт"
+    },
+    {
+      "page": 8,
+      "text": "18,5",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "222,0 м, 18,5+1,1 (?) кВт"
+    },
+    {
+      "page": 8,
+      "text": "1,1",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "222,0 м, 18,5+1,1 (?) кВт"
+    },
+    {
+      "page": 8,
+      "text": "11,0",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "Вентилятор системи aepauil, 11,0 кВт"
+    },
+    {
+      "page": 8,
+      "text": "0,25",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "Даховий вентилятор, 0,25 кВт"
+    },
+    {
+      "page": 8,
+      "text": "24,0",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "Естакада надсилосна І заг 24,0 м"
+    },
+    {
+      "page": 8,
+      "text": "0,18",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "електричних засувки по 0,18 кВт (одна проміжна +одна"
+    },
+    {
+      "page": 9,
+      "text": "2",
+      "unit": "deg",
+      "reason": "no_subject",
+      "line": "три точки завантаження, встановлений під кутом 2°"
+    },
+    {
+      "page": 9,
+      "text": "0,18",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "електричних засувки по 0,18 кВт (одна проміжна +одна"
+    },
+    {
+      "page": 9,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=49,5 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 9,
+      "text": "49,5",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=49,5 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 9,
+      "text": "5,5",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=49,5 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 9,
+      "text": "400",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "завантажувальних патрубкув (квадрат 400 мм - 2 шт,"
+    },
+    {
+      "page": 9,
+      "text": "2",
+      "unit": "pcs",
+      "reason": "no_subject",
+      "line": "завантажувальних патрубкув (квадрат 400 мм - 2 шт,"
+    },
+    {
+      "page": 9,
+      "text": "350",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "квадрат 350 мм - 12 шт), розміщення приводу ліве, в"
+    },
+    {
+      "page": 9,
+      "text": "350",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "системи аспірації квадрат 350 мм - 15 шт (біля кожного"
+    },
+    {
+      "page": 9,
+      "text": "15",
+      "unit": "pcs",
+      "reason": "no_subject",
+      "line": "системи аспірації квадрат 350 мм - 15 шт (біля кожного"
+    },
+    {
+      "page": 9,
+      "text": "0,18",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "електричних засувки по 0,18 кВт (одна проміжна +одна"
+    },
+    {
+      "page": 9,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "300x300 мм"
+    },
+    {
+      "page": 9,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "300x300 мм"
+    },
+    {
+      "page": 9,
+      "text": "45",
+      "unit": "deg",
+      "reason": "no_subject",
+      "line": "Ввід одинарний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 9,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Ввід одинарний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 9,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Ввід одинарний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 9,
+      "text": "400",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "400x400 mm"
+    },
+    {
+      "page": 9,
+      "text": "400",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "400x400 mm"
+    },
+    {
+      "page": 9,
+      "text": "45",
+      "unit": "deg",
+      "reason": "no_subject",
+      "line": "Ввід тройний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 9,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Ввід тройний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 9,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Ввід тройний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 10,
+      "text": "222,0",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "222,0 м, 18,5+1,1 (?) кВт"
+    },
+    {
+      "page": 10,
+      "text": "18,5",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "222,0 м, 18,5+1,1 (?) кВт"
+    },
+    {
+      "page": 10,
+      "text": "1,1",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "222,0 м, 18,5+1,1 (?) кВт"
+    },
+    {
+      "page": 10,
+      "text": "11,0",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "Вентилятор системи aepauil, 11,0 кВт"
+    },
+    {
+      "page": 10,
+      "text": "0,25",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "Даховий вентилятор, 0,25 кВт"
+    },
+    {
+      "page": 10,
+      "text": "24,0",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "Естакада надсилосна І заг 24,0 м"
+    },
+    {
+      "page": 10,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "Норія, 100 т/год, Нтруб-32500 мм, 22,0 кВт, розміщення"
+    },
+    {
+      "page": 10,
+      "text": "32500",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Норія, 100 т/год, Нтруб-32500 мм, 22,0 кВт, розміщення"
+    },
+    {
+      "page": 10,
+      "text": "22,0",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "Норія, 100 т/год, Нтруб-32500 мм, 22,0 кВт, розміщення"
+    },
+    {
+      "page": 10,
+      "text": "0,18",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "електричних засувки по 0,18 кВт (одна проміжна +одна"
+    },
+    {
+      "page": 11,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=48,7 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 11,
+      "text": "48,7",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=48,7 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 11,
+      "text": "5,5",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=48,7 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 11,
+      "text": "400",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "завантажувальних патрубкув (квадрат 400 мм - 2 шт,"
+    },
+    {
+      "page": 11,
+      "text": "2",
+      "unit": "pcs",
+      "reason": "no_subject",
+      "line": "завантажувальних патрубкув (квадрат 400 мм - 2 шт,"
+    },
+    {
+      "page": 11,
+      "text": "350",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "квадрат 350 мм - 12 шт), розміщення приводу ліве, в"
+    },
+    {
+      "page": 11,
+      "text": "350",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "системи аспірації квадрат 350 мм - 15 шт (біля кожного"
+    },
+    {
+      "page": 11,
+      "text": "15",
+      "unit": "pcs",
+      "reason": "no_subject",
+      "line": "системи аспірації квадрат 350 мм - 15 шт (біля кожного"
+    },
+    {
+      "page": 11,
+      "text": "0,18",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "електричних засувки по 0,18 кВт (одна проміжна +одна"
+    },
+    {
+      "page": 11,
+      "text": "2",
+      "unit": "deg",
+      "reason": "no_subject",
+      "line": "під кутом 2°"
+    },
+    {
+      "page": 11,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "300х300 мм"
+    },
+    {
+      "page": 11,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "300х300 мм"
+    },
+    {
+      "page": 11,
+      "text": "400",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "400х400 мм"
+    },
+    {
+      "page": 11,
+      "text": "400",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "400х400 мм"
+    },
+    {
+      "page": 11,
+      "text": "45",
+      "unit": "deg",
+      "reason": "no_subject",
+      "line": "Ввід двойний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 11,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Ввід двойний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 11,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Ввід двойний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 11,
+      "text": "45",
+      "unit": "deg",
+      "reason": "no_subject",
+      "line": "Ввід тройний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 11,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Ввід тройний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 11,
+      "text": "300",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "Ввід тройний 45°, квадрат 300х300 мм"
+    },
+    {
+      "page": 12,
+      "text": "222,0",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "222,0 м, 18,5+1,1 (2) кВт"
+    },
+    {
+      "page": 12,
+      "text": "2",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "222,0 м, 18,5+1,1 (2) кВт"
+    },
+    {
+      "page": 12,
+      "text": "11,0",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "Вентилятор системи aepauil, 11,0 кВт"
+    },
+    {
+      "page": 12,
+      "text": "0,25",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "Даховий вентилятор, 0,25 кВт"
+    },
+    {
+      "page": 12,
+      "text": "24,0",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "Естакада надсилосна І заг 24,0 м"
+    },
+    {
+      "page": 12,
+      "text": "0,18",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "електричних засувки по 0,18 кВт (одна проміжна +одна"
+    },
+    {
+      "page": 12,
+      "text": "100",
+      "unit": "t/h",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=48,7 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 12,
+      "text": "48,7",
+      "unit": "m",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=48,7 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 12,
+      "text": "5,5",
+      "unit": "kW",
+      "reason": "no_subject",
+      "line": "закритий, Q=100 т/год, L=48,7 м, 5,5 кВт, 14"
+    },
+    {
+      "page": 12,
+      "text": "400",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "завантажувальних патрубкув (квадрат 400 мм - 2 шт,"
+    },
+    {
+      "page": 12,
+      "text": "2",
+      "unit": "pcs",
+      "reason": "no_subject",
+      "line": "завантажувальних патрубкув (квадрат 400 мм - 2 шт,"
+    },
+    {
+      "page": 12,
+      "text": "350",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "квадрат 350 мм - 12 шт), розміщення приводу праве, в"
+    },
+    {
+      "page": 12,
+      "text": "350",
+      "unit": "mm",
+      "reason": "no_subject",
+      "line": "системи аспірації квадрат 350 мм - 15 шт (біля кожного"
+    },
+    {
+      "page": 12,
+      "text": "15",
+      "unit": "pcs",
+      "reason": "no_subject",
+      "line": "системи аспірації квадрат 350 мм - 15 шт (біля кожного"
+    }
+  ],
+  "unbound_no_unit_count": 429,
+  "rejected_tokens": [
+    {
+      "page": 9,
+      "text": "0",
+      "reason": "not_a_number",
+      "line": "Засувка рейкова з електричним приводом 0, 18 кВт,"
+    }
+  ],
+  "scale_mentions": [],
+  "lubnymash_pages": [
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "unused_sources": [
+    "Технологія 06.06.24_Images\\ — нарізки BMP не є входом SLICE-1"
+  ],
+  "errors": [],
+  "catalog_cards": 52,
+  "ocr_cards": 92,
+  "gap_cards": 43
+}

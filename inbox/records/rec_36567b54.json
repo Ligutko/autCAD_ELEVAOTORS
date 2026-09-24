@@ -1,0 +1,21 @@
+{
+  "id": "rec_36567b54",
+  "subject": "У13-УН175",
+  "kind": "gap",
+  "claim": {
+    "field": "bucket_pitch",
+    "why_needed": "Крок ковшів не названий у картках."
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Крок ковшів не названий у картках.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "дірка словника: картки з цим полем немає",
+  "seen_in": []
+}

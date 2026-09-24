@@ -1,0 +1,21 @@
+{
+  "id": "rec_f744203c",
+  "subject": "Естакада надсилосна",
+  "kind": "gap",
+  "claim": {
+    "field": "underside_elevation",
+    "why_needed": "Відмітка низу естакади не названа у картках."
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Відмітка низу естакади не названа у картках.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "дірка словника: картки з цим полем немає",
+  "seen_in": []
+}

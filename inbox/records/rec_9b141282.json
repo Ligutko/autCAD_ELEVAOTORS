@@ -1,0 +1,28 @@
+{
+  "id": "rec_9b141282",
+  "subject": "У13-ТЭА-400",
+  "kind": "power",
+  "claim": {
+    "name": "power",
+    "value": 0.18,
+    "unit": "kW",
+    "qualifier": "потужність"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 11,
+    "quote": "Засувка рейкова з електричним приводом 0,18 кВт,",
+    "bbox": [
+      538,
+      2098,
+      1884,
+      2151
+    ],
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "число з OCR у рядку з відомим тегом",
+  "seen_in": []
+}

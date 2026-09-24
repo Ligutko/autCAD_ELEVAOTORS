@@ -1,0 +1,21 @@
+{
+  "id": "rec_a19e24bd",
+  "subject": "Конвеєр радіально-поворотний",
+  "kind": "gap",
+  "claim": {
+    "field": "service_radius",
+    "why_needed": "Радіус обслуговування радіального конвеєра не названий у картках."
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Радіус обслуговування радіального конвеєра не названий у картках.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "дірка словника: картки з цим полем немає",
+  "seen_in": []
+}

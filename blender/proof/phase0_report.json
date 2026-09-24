@@ -1,0 +1,26 @@
+{
+  "pass": true,
+  "name": "PHASE0_CUBE",
+  "target_m": {
+    "x": 3.5,
+    "y": 2.0,
+    "z": 1.25
+  },
+  "measured_m": {
+    "x": 3.5,
+    "y": 2.0,
+    "z": 1.25
+  },
+  "tolerance_m": 0.0001,
+  "location_m": [
+    0.0,
+    0.0,
+    0.625
+  ],
+  "unit_system": "METRIC",
+  "length_unit": "METERS",
+  "scale_length": 1.0,
+  "render_engine": "BLENDER_EEVEE_NEXT",
+  "image": "d:\\autocad project\\blender\\proof\\phase0_cube.png",
+  "blend": "d:\\autocad project\\blender\\proof\\phase0_cube.blend"
+}

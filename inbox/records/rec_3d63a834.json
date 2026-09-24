@@ -1,0 +1,24 @@
+{
+  "id": "rec_3d63a834",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "count",
+  "claim": {
+    "name": "belt_count",
+    "value": 13,
+    "unit": "pcs",
+    "qualifier": "число ярусів корпусу марки МСВУ 220.13.В12"
+  },
+  "source": {
+    "origin": "web",
+    "path": "inbox/raw/web/rec_3d63a834/source.html",
+    "page": null,
+    "quote": "Число ярусов корпуса. МСВУ 220.13.В12 13 22096 6381 5105.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23",
+    "url": "https://ua.bizorg.su/zernokhranilischa-iz-ventiliruemykh-silosov-r/p15993236-silosy-tipa-msvu-prednaznacheny-dlya-khraneniya-zernovykh-kultur"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Об’єм 6381 м³ у цьому рядку збігається з карткою каталогу. Сторінка — оголошення з брендом «ЛУБНЫМАШ», не PDF заводу. На сторінці заводу для МСВУ.220.хх.В12 яруси дані лише діапазоном 8–22.",
+  "seen_in": []
+}

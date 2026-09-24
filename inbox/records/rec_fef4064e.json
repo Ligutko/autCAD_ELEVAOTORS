@@ -1,0 +1,24 @@
+{
+  "id": "rec_fef4064e",
+  "subject": "Н-100",
+  "kind": "dimension",
+  "claim": {
+    "name": "shaft_section",
+    "value": 376,
+    "unit": "mm",
+    "qualifier": "просвіт норійних труб 376×256 мм, колонка УН-100"
+  },
+  "source": {
+    "origin": "web",
+    "path": "inbox/raw/web/rec_fef4064e/source.html",
+    "page": null,
+    "quote": "Размеры поперечного сечения норийных труб в свету мм 174х154 197х197 232х232 275х275 376х256 376х256. П’яте значення, колонка УН-100: 376×256 мм.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23",
+    "url": "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Той самий документ, що й крок ковшів. Друга сторона 256 мм стоїть у цитаті; у value записана більша сторона, щоб не плодити друге поле з тим самим name.",
+  "seen_in": []
+}

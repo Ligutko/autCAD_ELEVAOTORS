@@ -1,0 +1,23 @@
+{
+  "id": "rec_9c954e0a",
+  "subject": "Естакада надсилосна",
+  "kind": "dimension",
+  "claim": {
+    "name": "length",
+    "value": 24,
+    "unit": "m",
+    "qualifier": "довжина естакади"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Plant3D_Equipment_Catalog.json",
+    "page": null,
+    "quote": "\"length\": 24000",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "каталог, зібраний раніше зі специфікації PDF У файлі значення 24000 записане в міліметрах; у картці метри, як у розділі 6 PRD.",
+  "seen_in": []
+}

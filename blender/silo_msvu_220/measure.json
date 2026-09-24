@@ -1,0 +1,45 @@
+{
+  "pass": true,
+  "unit_system": "METRIC",
+  "length_unit": "METERS",
+  "scale_length": 1.0,
+  "tolerance_m": 0.0001,
+  "wall": {
+    "name": "SILO_WALL",
+    "vertex_count": 128,
+    "target_diameter_m": 22.0,
+    "target_height_m": 21.422,
+    "measured_diameter_m": 22.0,
+    "measured_height_m": 21.422001,
+    "z_min_m": 0.0,
+    "z_max_m": 21.422001
+  },
+  "floor": {
+    "name": "SILO_FLOOR",
+    "measured_diameter_m": 22.0,
+    "z_m": 0.0
+  },
+  "roof": {
+    "name": "SILO_ROOF",
+    "measured_diameter_m": 22.0,
+    "z_m": 21.422001,
+    "is_separate_object": true
+  },
+  "catalog_volume_m3": 6381,
+  "shell_cylinder_volume_m3": 8143.2,
+  "volume_note": "6381 is rated capacity, not the volume of this shell",
+  "not_modeled": [
+    "corrugation_pitch",
+    "sheet_thickness",
+    "bolt_pattern",
+    "roof_slope",
+    "cone",
+    "noria"
+  ],
+  "rejected_numbers": [
+    {
+      "value_m": 22.096,
+      "why": "bizorg row height, disagrees with drawing 21.422 m"
+    }
+  ]
+}

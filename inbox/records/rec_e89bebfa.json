@@ -1,0 +1,22 @@
+{
+  "id": "rec_e89bebfa",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "node",
+  "claim": {
+    "node_type": "silo_flat_or_hopper",
+    "present": true
+  },
+  "source": {
+    "origin": "web",
+    "path": "inbox/raw/web/rec_e89bebfa/source.html",
+    "page": null,
+    "quote": "Завод “ЛУБНИМАШ” пропонує різноманітні варіанти силосів для зберігання зерна. ... є силос МСВУ з плоским дном.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23",
+    "url": "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Виробник за титулом каталожної сторінки заводу. Слід «ЛУБНИМАШ» з OCR листів 8–12 збігається з цим титулом, окремим фактом до цієї сторінки не був.",
+  "seen_in": []
+}

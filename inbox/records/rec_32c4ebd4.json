@@ -1,0 +1,22 @@
+{
+  "id": "rec_32c4ebd4",
+  "subject": "Драбина і майданчик",
+  "kind": "gap",
+  "claim": {
+    "field": "passport_or_visible_node",
+    "why_needed": "Потрібен паспорт або видимий вузол на листі. Зараз картки немає.",
+    "node_type": "ladder_platform"
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Потрібен паспорт або видимий вузол на листі. Зараз картки немає.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "вузла немає в каталозі; геометрію не вигадувати",
+  "seen_in": []
+}

@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "tube_height_m": 33.0,
+  "tube_z_min_m": 0.0,
+  "tube_z_max_m": 33.0,
+  "bucket_pitch_m": 0.18,
+  "bucket_pitch_from_passport": false,
+  "shaft_clear_x_m": 0.376,
+  "shaft_clear_y_m": 0.256,
+  "shaft_from_passport": false,
+  "head_boot_from_passport": false,
+  "silo_moved": false,
+  "axis_x_m": 18.0,
+  "capacity_tph": 100,
+  "power_kw": 22
+}

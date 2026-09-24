@@ -1,0 +1,28 @@
+{
+  "id": "rec_73be1c82",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "capacity",
+  "claim": {
+    "name": "volume",
+    "value": 6381,
+    "unit": "m3",
+    "qualifier": "об'єм зберігання"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 12,
+    "quote": "Силос для зберігання зерна D=22,0 м, \\/=6381 мз,",
+    "bbox": [
+      533,
+      711,
+      1835,
+      763
+    ],
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "число з OCR у рядку з відомим тегом",
+  "seen_in": []
+}

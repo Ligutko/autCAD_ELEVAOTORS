@@ -1,0 +1,23 @@
+{
+  "id": "rec_cb45e7e7",
+  "subject": "Зерновий комплекс",
+  "kind": "power",
+  "claim": {
+    "name": "total_power",
+    "value": 88.73,
+    "unit": "kW",
+    "qualifier": "сумарна потужність за файлом каталогу"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Plant3D_Equipment_Catalog.json",
+    "page": null,
+    "quote": "\"total_power_kW\": 88.73",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "каталог, зібраний раніше зі специфікації PDF",
+  "seen_in": []
+}

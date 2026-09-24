@@ -1,0 +1,141 @@
+{
+  "generated_at": "2026-09-23",
+  "subject": "МСВУ 220.13.В12",
+  "source_pdf": "Технологія 06.06.24.pdf",
+  "ocr_dir": "inbox/raw/ocr",
+  "png_dir": "inbox/raw/pdf_pages",
+  "pages_reviewed": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  "found_count": 0,
+  "field_count": 3,
+  "model_fact": false,
+  "records_edited": false,
+  "facts_json_created": false,
+  "fields": [
+    {
+      "field": "sheet_thickness",
+      "label": "Товщина листа стіни, мм",
+      "verdict": "not_found",
+      "pages_reviewed": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      "png_checked": [
+        "inbox/raw/pdf_pages/page_07.png",
+        "inbox/raw/pdf_pages/page_08.png",
+        "inbox/raw/pdf_pages/page_10.png",
+        "inbox/raw/pdf_pages/page_12.png"
+      ],
+      "silo_quote": "Силос для зберігання зерна D=22,0 м, V=6381 м³, МСВУ 220.13.В12. Н=21,422 м, у тому числі в комплекті на один силос:",
+      "silo_quote_pages": [8, 10, 12],
+      "rejected": [
+        {
+          "page": 8,
+          "quote": "опитувального листа",
+          "why": "шапка специфікації, бланк опитування, не товщина металу"
+        },
+        {
+          "page": 9,
+          "quote": "300x300 мм",
+          "why": "отвір засувки У13-ТЗА-300, не лист стіни"
+        },
+        {
+          "page": 8,
+          "quote": "400х400 мм",
+          "why": "отвір засувки, не лист стіни"
+        },
+        {
+          "page": 7,
+          "quote": "21404",
+          "why": "вертикальний розмір стіни на фасаді, не товщина листа"
+        },
+        {
+          "page": 7,
+          "quote": "Ø22000",
+          "why": "діаметр, не товщина листа"
+        }
+      ]
+    },
+    {
+      "field": "corrugation_pitch",
+      "label": "Крок або висота хвилі гофри, мм",
+      "verdict": "not_found",
+      "pages_reviewed": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      "png_checked": [
+        "inbox/raw/pdf_pages/page_01.png",
+        "inbox/raw/pdf_pages/page_07.png",
+        "inbox/raw/pdf_pages/page_11.png",
+        "inbox/raw/pdf_pages/page_12.png"
+      ],
+      "rejected": [
+        {
+          "page": 1,
+          "quote": "114",
+          "why": "на PNG це позиція Т14 транспортера, 100 т/год, не крок гофри"
+        },
+        {
+          "page": 11,
+          "quote": "114",
+          "why": "колонка позиції транспортера, не 114 мм"
+        },
+        {
+          "page": 12,
+          "quote": "116",
+          "why": "колонка позиції транспортера Т16, не крок гофри"
+        },
+        {
+          "page": 7,
+          "quote": "горизонтальні лінії стіни без розміру",
+          "why": "хвиля намальована, кроку і висоти хвилі в мм немає; з картинки не вимірювалось"
+        }
+      ]
+    },
+    {
+      "field": "roof_slope",
+      "label": "Кут або ухил даху",
+      "verdict": "not_found",
+      "pages_reviewed": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      "png_checked": [
+        "inbox/raw/pdf_pages/page_04.png",
+        "inbox/raw/pdf_pages/page_05.png",
+        "inbox/raw/pdf_pages/page_07.png",
+        "inbox/raw/pdf_pages/page_09.png",
+        "inbox/raw/pdf_pages/page_10.png",
+        "inbox/raw/pdf_pages/page_11.png"
+      ],
+      "rejected": [
+        {
+          "page": 9,
+          "quote": "три точки завантаження, встановлений під кутом 2°",
+          "why": "ланцюговий транспортер перед позицією Т8, не дах силоса"
+        },
+        {
+          "page": 10,
+          "quote": "Транспортер ланцюговий, 100 т/год, Lвал=26,0 м … встановлений під кутом 2°",
+          "why": "позиція Т11, У13-ТЦС-320"
+        },
+        {
+          "page": 11,
+          "quote": "ковшиками, одна точка завантаження, встановлений під кутом 2°",
+          "why": "транспортер позиції Т14, не дах"
+        },
+        {
+          "page": 9,
+          "quote": "Ввід одинарний 45°, квадрат 300х300 мм",
+          "why": "самопливний ввід, не ухил даху"
+        },
+        {
+          "page": 11,
+          "quote": "Ввід двойний 45°, квадрат 300х300 мм",
+          "why": "самопливний ввід, не ухил даху"
+        },
+        {
+          "page": 8,
+          "quote": "Даховий вентилятор, 0,25 кВт",
+          "why": "вентилятор у комплекті силоса, не кут даху"
+        },
+        {
+          "page": 7,
+          "quote": "1130",
+          "why": "вертикальний розмір біля галереї над карнизом; градуса і слова ухил немає, кут з картинки не обчислювався"
+        }
+      ]
+    }
+  ]
+}

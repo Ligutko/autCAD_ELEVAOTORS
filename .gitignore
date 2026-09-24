@@ -35,3 +35,11 @@ nul
 # Nested git repos (tracked separately, avoid embedding)
 /autocad-mcp/
 /multiCAD-mcp/
+
+# Local secrets. Never commit.
+.env
+.env.*
+!.env.example
+
+# Vendored OCR tool install (binaries, not source)
+inbox/.tools/

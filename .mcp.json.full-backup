@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "autocad-industrial": {
+      "command": "D:/autocad project/autocad-mcp/venv/Scripts/python.exe",
+      "args": [
+        "D:/autocad project/autocad-mcp/server_com_api.py"
+      ],
+      "description": "Професійний MCP сервер для малювання промислового обладнання в AutoCAD через COM API: силоси МСВУ, транспортери, норії, технологічні схеми"
+    },
+    "revit-automation": {
+      "command": "python",
+      "args": [
+        "D:/autocad project/revit-mcp/revit_mcp_server.py"
+      ],
+      "description": "MCP сервер для Autodesk Revit - BIM автоматизація: імпорт DXF, параметричні Families, генерація sheets, експорт PDF. Професійна система для створення 12-сторінкової технології елеваторів"
+    },
+    "revit-computer-vision": {
+      "command": "D:/autocad project/revit-mcp/venv_cv/Scripts/python.exe",
+      "args": [
+        "D:/autocad project/revit-mcp/server_computer_vision.py"
+      ],
+      "description": "Computer Vision MCP для Revit - дозволяє Claude бачити UI Revit через screenshots, керувати мишкою та клавіатурою. Аналог Playwright для desktop."
+    }
+  }
+}

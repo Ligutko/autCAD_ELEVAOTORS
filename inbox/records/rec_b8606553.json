@@ -1,0 +1,22 @@
+{
+  "id": "rec_b8606553",
+  "subject": "Сушарка",
+  "kind": "gap",
+  "claim": {
+    "field": "presence",
+    "why_needed": "У каталозі вузла немає. Не вигадувати сушарку, доки OCR цього PDF не покаже вузол.",
+    "node_type": "dryer"
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "У каталозі вузла немає. Не вигадувати сушарку, доки OCR цього PDF не покаже вузол.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "вузла немає в каталозі; геометрію не вигадувати",
+  "seen_in": []
+}

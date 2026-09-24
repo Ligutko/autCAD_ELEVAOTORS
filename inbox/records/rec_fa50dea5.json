@@ -1,0 +1,28 @@
+{
+  "id": "rec_fa50dea5",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "dimension",
+  "claim": {
+    "name": "diameter",
+    "value": 22,
+    "unit": "m",
+    "qualifier": "зовнішній діаметр корпусу"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 12,
+    "quote": "Силос для зберігання зерна D=22,0 м, \\/=6381 мз,",
+    "bbox": [
+      533,
+      711,
+      1835,
+      763
+    ],
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "число з OCR у рядку з відомим тегом",
+  "seen_in": []
+}

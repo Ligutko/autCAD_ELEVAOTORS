@@ -1,0 +1,21 @@
+{
+  "id": "rec_1d9df4f2",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "gap",
+  "claim": {
+    "field": "belt_count",
+    "why_needed": "Кількість поясів не названа у картках."
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Кількість поясів не названа у картках.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "дірка словника: картки з цим полем немає",
+  "seen_in": []
+}

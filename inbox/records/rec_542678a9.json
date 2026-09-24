@@ -1,0 +1,21 @@
+{
+  "id": "rec_542678a9",
+  "subject": "У13-ТЭР-400",
+  "kind": "node",
+  "claim": {
+    "node_type": "gate_manual",
+    "present": true
+  },
+  "source": {
+    "origin": "local",
+    "path": "Plant3D_Equipment_Catalog.json",
+    "page": null,
+    "quote": "\"tag\": \"У13-ТЭР-400\"",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "каталог, зібраний раніше зі специфікації PDF",
+  "seen_in": []
+}

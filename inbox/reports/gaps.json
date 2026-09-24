@@ -1,0 +1,351 @@
+{
+  "generated_at": "2026-09-23",
+  "pdf_sha256": "7ba41e67917e6828019cbe74b781d408f195504e0c3320cade4ce7a7a70f0c99",
+  "rule": "Дірка лишається, доки немає картки з тим самим subject і claim.name, що дорівнює field.",
+  "gaps": [
+    {
+      "id": "rec_9b2ada85",
+      "subject": "Вентилятор системи аерації",
+      "node_type": "aeration_fan",
+      "field": "ducts",
+      "why_needed": "Канали аерації не названі у картках.",
+      "record": "inbox/records/rec_9b2ada85.json"
+    },
+    {
+      "id": "rec_e7c5370a",
+      "subject": "Вентилятор системи аерації",
+      "node_type": "aeration_fan",
+      "field": "grate",
+      "why_needed": "Решітка аерації не названа у картках.",
+      "record": "inbox/records/rec_e7c5370a.json"
+    },
+    {
+      "id": "rec_9664bad2",
+      "subject": "Вентилятор системи аерації",
+      "node_type": "aeration_fan",
+      "field": "mount_point",
+      "why_needed": "Точка посадки вентилятора аерації не названа у картках.",
+      "record": "inbox/records/rec_9664bad2.json"
+    },
+    {
+      "id": "rec_e95267f7",
+      "subject": "Вибухорозрядна панель",
+      "node_type": "explosion_panel",
+      "field": "passport_or_norm_size",
+      "why_needed": "Потрібен паспорт або пункт норми з розміром. Зараз картки немає.",
+      "record": "inbox/records/rec_e95267f7.json"
+    },
+    {
+      "id": "rec_4966411b",
+      "subject": "Даховий вентилятор",
+      "node_type": "roof_fan",
+      "field": "diameter",
+      "why_needed": "Діаметр дахового вентилятора не названий у картках.",
+      "record": "inbox/records/rec_4966411b.json"
+    },
+    {
+      "id": "rec_997de20f",
+      "subject": "Даховий вентилятор",
+      "node_type": "roof_fan",
+      "field": "roof_location",
+      "why_needed": "Місце дахового вентилятора на даху не назване у картках.",
+      "record": "inbox/records/rec_997de20f.json"
+    },
+    {
+      "id": "rec_32c4ebd4",
+      "subject": "Драбина і майданчик",
+      "node_type": "ladder_platform",
+      "field": "passport_or_visible_node",
+      "why_needed": "Потрібен паспорт або видимий вузол на листі. Зараз картки немає.",
+      "record": "inbox/records/rec_32c4ebd4.json"
+    },
+    {
+      "id": "rec_0ed53ee9",
+      "subject": "Естакада надсилосна",
+      "node_type": "gallery",
+      "field": "section",
+      "why_needed": "Переріз естакади не названий у картках.",
+      "record": "inbox/records/rec_0ed53ee9.json"
+    },
+    {
+      "id": "rec_f744203c",
+      "subject": "Естакада надсилосна",
+      "node_type": "gallery",
+      "field": "underside_elevation",
+      "why_needed": "Відмітка низу естакади не названа у картках.",
+      "record": "inbox/records/rec_f744203c.json"
+    },
+    {
+      "id": "rec_26cba8b0",
+      "subject": "Конвеєр радіально-поворотний",
+      "node_type": "radial_conveyor",
+      "field": "boom_length",
+      "why_needed": "Довжина стріли радіального конвеєра не названа у картках.",
+      "record": "inbox/records/rec_26cba8b0.json"
+    },
+    {
+      "id": "rec_a19e24bd",
+      "subject": "Конвеєр радіально-поворотний",
+      "node_type": "radial_conveyor",
+      "field": "service_radius",
+      "why_needed": "Радіус обслуговування радіального конвеєра не названий у картках.",
+      "record": "inbox/records/rec_a19e24bd.json"
+    },
+    {
+      "id": "rec_5953619a",
+      "subject": "Креслення",
+      "node_type": null,
+      "field": "scale",
+      "why_needed": "Окремої картки масштабу немає. Довжини з листа без одиниці лишаються в sheet_mm, координати DXF у метри об'єкта не переводяться.",
+      "record": "inbox/records/rec_5953619a.json"
+    },
+    {
+      "id": "rec_1d9df4f2",
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "field": "belt_count",
+      "why_needed": "Кількість поясів не названа у картках.",
+      "record": "inbox/records/rec_1d9df4f2.json"
+    },
+    {
+      "id": "rec_b1f88412",
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "field": "bolt_pattern",
+      "why_needed": "Болтове поле не назване у картках.",
+      "record": "inbox/records/rec_b1f88412.json"
+    },
+    {
+      "id": "rec_a882ea2a",
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "field": "bottom_type",
+      "why_needed": "Тип днища (плоске чи конус) не названий у картках.",
+      "record": "inbox/records/rec_a882ea2a.json"
+    },
+    {
+      "id": "rec_4abaad63",
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "field": "cone_angle",
+      "why_needed": "Кут конуса, якщо днище конічне, не названий у картках.",
+      "record": "inbox/records/rec_4abaad63.json"
+    },
+    {
+      "id": "rec_57694969",
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "field": "corrugation_pitch",
+      "why_needed": "Крок гофри не названий у картках.",
+      "record": "inbox/records/rec_57694969.json"
+    },
+    {
+      "id": "rec_7f9c532c",
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "field": "roof_slope",
+      "why_needed": "Ухил даху не названий у картках.",
+      "record": "inbox/records/rec_7f9c532c.json"
+    },
+    {
+      "id": "rec_bb987f81",
+      "subject": "МСВУ 220.13.В12",
+      "node_type": "silo_flat_or_hopper",
+      "field": "sheet_thickness",
+      "why_needed": "Товщина листа не названа у картках.",
+      "record": "inbox/records/rec_bb987f81.json"
+    },
+    {
+      "id": "rec_b600c6e3",
+      "subject": "Н-100",
+      "node_type": "bucket_elevator",
+      "field": "boot",
+      "why_needed": "Башмак норії без розміру в картках.",
+      "record": "inbox/records/rec_b600c6e3.json"
+    },
+    {
+      "id": "rec_25658a74",
+      "subject": "Н-100",
+      "node_type": "bucket_elevator",
+      "field": "bucket_pitch",
+      "why_needed": "Крок ковшів не названий у картках.",
+      "record": "inbox/records/rec_25658a74.json"
+    },
+    {
+      "id": "rec_169209d2",
+      "subject": "Н-100",
+      "node_type": "bucket_elevator",
+      "field": "head",
+      "why_needed": "Голова норії без розміру в картках.",
+      "record": "inbox/records/rec_169209d2.json"
+    },
+    {
+      "id": "rec_e87c5af0",
+      "subject": "Н-100",
+      "node_type": "bucket_elevator",
+      "field": "shaft_section",
+      "why_needed": "Переріз шахти норії не названий у картках.",
+      "record": "inbox/records/rec_e87c5af0.json"
+    },
+    {
+      "id": "rec_79a6d725",
+      "subject": "Приймальна яма",
+      "node_type": "receiving_pit",
+      "field": "presence",
+      "why_needed": "У каталозі вузла немає. Не вигадувати яму, доки OCR цього PDF не покаже вузол.",
+      "record": "inbox/records/rec_79a6d725.json"
+    },
+    {
+      "id": "rec_9dd483f3",
+      "subject": "Підлога аерації",
+      "node_type": "aeration_floor",
+      "field": "channel_layout",
+      "why_needed": "Розкладки каналів немає. У каталозі є лише вентилятори. Не вигадувати підлогу.",
+      "record": "inbox/records/rec_9dd483f3.json"
+    },
+    {
+      "id": "rec_f95c9bfa",
+      "subject": "Сепаратор",
+      "node_type": "separator",
+      "field": "presence",
+      "why_needed": "У каталозі вузла немає. Не вигадувати сепаратор, доки OCR цього PDF не покаже вузол.",
+      "record": "inbox/records/rec_f95c9bfa.json"
+    },
+    {
+      "id": "rec_89ca4ab8",
+      "subject": "Стрічковий конвеєр",
+      "node_type": "belt_conveyor",
+      "field": "presence",
+      "why_needed": "Окремого тега немає. Не вигадувати стрічковий конвеєр, доки OCR цього PDF не покаже вузол.",
+      "record": "inbox/records/rec_89ca4ab8.json"
+    },
+    {
+      "id": "rec_b8606553",
+      "subject": "Сушарка",
+      "node_type": "dryer",
+      "field": "presence",
+      "why_needed": "У каталозі вузла немає. Не вигадувати сушарку, доки OCR цього PDF не покаже вузол.",
+      "record": "inbox/records/rec_b8606553.json"
+    },
+    {
+      "id": "rec_98b1d52e",
+      "subject": "Термометрія",
+      "node_type": "thermometry",
+      "field": "passport_or_visible_node",
+      "why_needed": "Потрібен паспорт або видимий вузол на листі. Зараз картки немає.",
+      "record": "inbox/records/rec_98b1d52e.json"
+    },
+    {
+      "id": "rec_df1e7212",
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "field": "box_height",
+      "why_needed": "Висота короба транспортера не названа у картках.",
+      "record": "inbox/records/rec_df1e7212.json"
+    },
+    {
+      "id": "rec_393de49d",
+      "subject": "У13-ТЦС-320",
+      "node_type": "chain_conveyor",
+      "field": "gallery_position",
+      "why_needed": "Місце транспортера на естакаді не назване у картках.",
+      "record": "inbox/records/rec_393de49d.json"
+    },
+    {
+      "id": "rec_b52fe2f3",
+      "subject": "У13-ТЭА-350",
+      "node_type": "gate_electric",
+      "field": "body",
+      "why_needed": "Корпус засувки з електроприводом не названий у картках.",
+      "record": "inbox/records/rec_b52fe2f3.json"
+    },
+    {
+      "id": "rec_696e1936",
+      "subject": "У13-ТЭА-350",
+      "node_type": "gate_electric",
+      "field": "route_fit",
+      "why_needed": "Як засувка сідає на трасу, не названо у картках.",
+      "record": "inbox/records/rec_696e1936.json"
+    },
+    {
+      "id": "rec_6d1ffd3e",
+      "subject": "У13-ТЭА-400",
+      "node_type": "gate_electric",
+      "field": "body",
+      "why_needed": "Корпус засувки з електроприводом не названий у картках.",
+      "record": "inbox/records/rec_6d1ffd3e.json"
+    },
+    {
+      "id": "rec_d170ccc9",
+      "subject": "У13-ТЭА-400",
+      "node_type": "gate_electric",
+      "field": "route_fit",
+      "why_needed": "Як засувка сідає на трасу, не названо у картках.",
+      "record": "inbox/records/rec_d170ccc9.json"
+    },
+    {
+      "id": "rec_c3c2a642",
+      "subject": "У13-ТЭР-350",
+      "node_type": "gate_manual",
+      "field": "body",
+      "why_needed": "Корпус ручної засувки не названий у картках.",
+      "record": "inbox/records/rec_c3c2a642.json"
+    },
+    {
+      "id": "rec_c5b4cfec",
+      "subject": "У13-ТЭР-350",
+      "node_type": "gate_manual",
+      "field": "route_fit",
+      "why_needed": "Як ручна засувка сідає на трасу, не названо у картках.",
+      "record": "inbox/records/rec_c5b4cfec.json"
+    },
+    {
+      "id": "rec_2ce51dbd",
+      "subject": "У13-ТЭР-400",
+      "node_type": "gate_manual",
+      "field": "body",
+      "why_needed": "Корпус ручної засувки не названий у картках.",
+      "record": "inbox/records/rec_2ce51dbd.json"
+    },
+    {
+      "id": "rec_d7c5c85c",
+      "subject": "У13-ТЭР-400",
+      "node_type": "gate_manual",
+      "field": "route_fit",
+      "why_needed": "Як ручна засувка сідає на трасу, не названо у картках.",
+      "record": "inbox/records/rec_d7c5c85c.json"
+    },
+    {
+      "id": "rec_59e5121a",
+      "subject": "У13-УН175",
+      "node_type": "bucket_elevator",
+      "field": "boot",
+      "why_needed": "Башмак норії без розміру в картках.",
+      "record": "inbox/records/rec_59e5121a.json"
+    },
+    {
+      "id": "rec_36567b54",
+      "subject": "У13-УН175",
+      "node_type": "bucket_elevator",
+      "field": "bucket_pitch",
+      "why_needed": "Крок ковшів не названий у картках.",
+      "record": "inbox/records/rec_36567b54.json"
+    },
+    {
+      "id": "rec_07534992",
+      "subject": "У13-УН175",
+      "node_type": "bucket_elevator",
+      "field": "head",
+      "why_needed": "Голова норії без розміру в картках.",
+      "record": "inbox/records/rec_07534992.json"
+    },
+    {
+      "id": "rec_d30d6957",
+      "subject": "У13-УН175",
+      "node_type": "bucket_elevator",
+      "field": "shaft_section",
+      "why_needed": "Переріз шахти норії не названий у картках.",
+      "record": "inbox/records/rec_d30d6957.json"
+    }
+  ]
+}

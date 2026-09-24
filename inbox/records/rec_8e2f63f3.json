@@ -1,0 +1,26 @@
+{
+  "id": "rec_8e2f63f3",
+  "subject": "У13-ТЦС-320",
+  "kind": "node",
+  "claim": {
+    "node_type": "chain_conveyor",
+    "present": true
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 11,
+    "quote": "У13-ТЦС-320",
+    "bbox": [
+      2193,
+      1352,
+      2538,
+      1404
+    ],
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "тег знайдено OCR на цій сторінці",
+  "seen_in": []
+}

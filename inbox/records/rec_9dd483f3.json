@@ -1,0 +1,22 @@
+{
+  "id": "rec_9dd483f3",
+  "subject": "Підлога аерації",
+  "kind": "gap",
+  "claim": {
+    "field": "channel_layout",
+    "why_needed": "Розкладки каналів немає. У каталозі є лише вентилятори. Не вигадувати підлогу.",
+    "node_type": "aeration_floor"
+  },
+  "source": {
+    "origin": "local",
+    "path": "PRD_3D_PIPELINE.md",
+    "page": null,
+    "quote": "Розкладки каналів немає. У каталозі є лише вентилятори. Не вигадувати підлогу.",
+    "bbox": null,
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "вузла немає в каталозі; геометрію не вигадувати",
+  "seen_in": []
+}

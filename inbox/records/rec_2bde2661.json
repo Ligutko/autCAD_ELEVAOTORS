@@ -1,0 +1,36 @@
+{
+  "id": "rec_2bde2661",
+  "subject": "У13-ТЦС-320",
+  "kind": "power",
+  "claim": {
+    "name": "power",
+    "value": 15,
+    "unit": "kW",
+    "qualifier": "потужність"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 9,
+    "quote": "15,0 кВт, розміщення приводу праве, в комплекті дві",
+    "bbox": [
+      539,
+      894,
+      1910,
+      946
+    ],
+    "retrieved_at": "2026-09-23"
+  },
+  "status": "unverified",
+  "conflict_with": [
+    "rec_39458d0b",
+    "rec_6372222e",
+    "rec_ad88c045",
+    "rec_b1eac8a3",
+    "rec_cb62b6c1",
+    "rec_cb87d967",
+    "rec_f0983c3d"
+  ],
+  "notes": "число з OCR у рядку з відомим тегом",
+  "seen_in": []
+}

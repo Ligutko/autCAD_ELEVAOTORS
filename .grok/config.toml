@@ -1,0 +1,10 @@
+# Blender bridge for phase 0 of the 3D elevator pipeline.
+# The MCP process talks to a Blender GUI session on localhost:9876.
+# Headless `blender --background` cannot host that socket.
+
+[mcp_servers.blender]
+command = "C:/Users/Адмін/AppData/Local/hermes/bin/uvx.exe"
+args = ["--python", "3.11", "mcp-for-blender"]
+env = { UV_PYTHON_PREFERENCE = "only-managed" }
+enabled = true
+startup_timeout_sec = 180

@@ -1,0 +1,24 @@
+{
+  "id": "rec_f42c0a97",
+  "subject": "силоси з гофрованою стінкою, галузева стаття (не Лубнимаш, не наш виробник)",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_slope",
+    "value": 30,
+    "unit": "deg",
+    "qualifier": "типовий кут нахилу даху за галузевою статтею про будівництво металевих силосів"
+  },
+  "source": {
+    "origin": "web",
+    "path": "inbox/raw/web/rec_f42c0a97/source.html",
+    "page": null,
+    "quote": "Кут нахилу даху (зазвичай 30°)",
+    "bbox": null,
+    "retrieved_at": "2026-09-23",
+    "url": "https://bessarabiainform.com/2026/03/profesijne-budivnytstvo-metalevyh-sylosiv-shho-varto-znaty/"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Стаття не називає ні МСВУ, ні Лубнимаш — це загальна галузева норма 'зазвичай', не паспорт нашого силоса. Записано окремим subject, щоб не переплутати з фактом МСВУ 220.13.В12. Збігається з припущенням 30°, яке вже стоїть у blender/silo_msvu_220_wave/measure.json як 'не з каталогу' — ця картка не перетворює те припущення на факт, лише показує, що воно узгоджується з галузевою практикою.",
+  "seen_in": []
+}

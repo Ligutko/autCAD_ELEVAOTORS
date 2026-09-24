@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-09-23",
+  "closed_by_document": 4,
+  "not_found": 10,
+  "not_applicable": 1,
+  "strongest_silo_url": "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/",
+  "strongest_noria_url": "https://lubnymash.com/katalog/transportuvannya/u13-un/",
+  "fields": [
+    {
+      "subject": "МСВУ 220.13.В12",
+      "field": "bottom_type",
+      "verdict": "card",
+      "record_id": "rec_7f7031e0",
+      "url": "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/"
+    },
+    {
+      "subject": "МСВУ 220.13.В12",
+      "field": "cone_angle",
+      "verdict": "not_applicable",
+      "note": "не застосовується, днище плоске",
+      "queries": ["МСВУ 220 конусне днище кут", "У13-МСВУ.КД"],
+      "opened": ["https://lubnymash.com/u13-msvu-kd-2", "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf"],
+      "rejected_because": "кути 45° і 60° належать серії КД, не марці 220.13.В12"
+    },
+    {
+      "subject": "МСВУ 220.13.В12",
+      "field": "corrugation_pitch",
+      "verdict": "not_found",
+      "queries": ["МСВУ гофра крок хвилі мм", "МСВУ 220 гофрований лист", "ДБН В.2.6-221 крок гофри"],
+      "opened": [
+        "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/",
+        "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+        "https://lubnymash.com/wp-content/uploads/msvu_ua.pdf",
+        "https://www.agrobase.ru/catalog/machinery/machinery_15f720fd-ffc1-436a-80fa-ceca628dfbc4",
+        "https://e-construction.gov.ua/laws_detail/3075031566888470234?doc_type=2"
+      ],
+      "rejected_because": "кроку гофри в мм для цієї марки немає; 2880х1152 мм — розмір панелі, не крок"
+    },
+    {
+      "subject": "МСВУ 220.13.В12",
+      "field": "sheet_thickness",
+      "verdict": "not_found",
+      "queries": ["МСВУ товщина листа мм", "S350GD товщина стінки силосу 220"],
+      "opened": [
+        "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/",
+        "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf"
+      ],
+      "rejected_because": "є лише цинк 350 і 450 г/м², не товщина листа"
+    },
+    {
+      "subject": "МСВУ 220.13.В12",
+      "field": "bolt_pattern",
+      "verdict": "not_found",
+      "queries": ["МСВУ болтове поле крок болтів", "фланцеві болти М12 силос"],
+      "opened": [
+        "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+        "https://lubnymash.com/wp-content/uploads/msvu_ua.pdf"
+      ],
+      "rejected_because": "є клас 8.8, 10.9 і опція М12, схеми болтового поля немає"
+    },
+    {
+      "subject": "МСВУ 220.13.В12",
+      "field": "roof_slope",
+      "verdict": "not_found",
+      "queries": ["МСВУ ухил даху градуси", "дах силосу ЛУБНИМАШ кут"],
+      "opened": ["https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/"],
+      "rejected_because": "є снігове навантаження 180 кг/м², кута ухилу немає"
+    },
+    {
+      "subject": "МСВУ 220.13.В12",
+      "field": "belt_count",
+      "verdict": "card",
+      "record_id": "rec_3d63a834",
+      "url": "https://ua.bizorg.su/zernokhranilischa-iz-ventiliruemykh-silosov-r/p15993236-silosy-tipa-msvu-prednaznacheny-dlya-khraneniya-zernovykh-kultur"
+    },
+    {
+      "subject": "Н-100",
+      "field": "head",
+      "verdict": "not_found",
+      "queries": ["У13-УН-100 головка габарит мм", "норія УН-100 висота головки башмак"],
+      "opened": [
+        "https://lubnymash.com/katalog/transportuvannya/u13-un/",
+        "https://lubnymash.com/wp-content/uploads/un_ua.pdf",
+        "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+        "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-",
+        "https://www.melmash.ru/catalog/item/1-norii-lentochnye-universalnye-tipa-un/",
+        "https://elevatormash.net/produktsiya/elevatory-norii/norii-lentochnye"
+      ],
+      "rejected_because": "діаметр барабана 750 мм і довжина 300 мм — це барабан, не габарит голови; melmash і elevatormash — інші заводи"
+    },
+    {
+      "subject": "Н-100",
+      "field": "boot",
+      "verdict": "not_found",
+      "queries": ["УН-100 башмак габарит мм"],
+      "opened": [
+        "https://lubnymash.com/katalog/transportuvannya/u13-un/",
+        "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-"
+      ],
+      "rejected_because": "башмак названий, розміру немає"
+    },
+    {
+      "subject": "Н-100",
+      "field": "shaft_section",
+      "verdict": "card",
+      "record_id": "rec_fef4064e",
+      "url": "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-"
+    },
+    {
+      "subject": "Н-100",
+      "field": "bucket_pitch",
+      "verdict": "card",
+      "record_id": "rec_cdfc5232",
+      "url": "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-"
+    },
+    {
+      "subject": "У13-УН175",
+      "field": "head",
+      "verdict": "not_found",
+      "queries": ["У13-УН175 паспорт 100 т/год 33 м"],
+      "opened": [
+        "https://lubnymash.com/katalog/transportuvannya/u13-un/",
+        "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-"
+      ],
+      "rejected_because": "колонка УН-175 має 175 т/год, не 100 т/год"
+    },
+    {
+      "subject": "У13-УН175",
+      "field": "boot",
+      "verdict": "not_found",
+      "queries": ["У13-УН175 башмак"],
+      "opened": ["https://lubnymash.com/katalog/transportuvannya/u13-un/"],
+      "rejected_because": "розміру башмака для УН-175 у паспортній таблиці немає, а 175 т/год — інша машина"
+    },
+    {
+      "subject": "У13-УН175",
+      "field": "shaft_section",
+      "verdict": "not_found",
+      "queries": ["УН-175 переріз шахти"],
+      "opened": ["https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-"],
+      "rejected_because": "376×256 мм стоїть і в колонці УН-175, але та колонка має 175 т/год"
+    },
+    {
+      "subject": "У13-УН175",
+      "field": "bucket_pitch",
+      "verdict": "not_found",
+      "queries": ["УН-175 шаг ковшей"],
+      "opened": ["https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-"],
+      "rejected_because": "210 мм належить колонці 175 т/год, не рядку 100 т/год"
+    }
+  ]
+}
