@@ -41,9 +41,11 @@
     "bucket_volume_l_calc": 3.56,
     "bucket_mm": [
       300,
-      175,
-      190
+      180,
+      160
     ],
+    "bucket_wall_mm": 6.5,
+    "bucket_bolts": "4 x M8 DIN 15237, 88 mm pitch",
     "bucket_pitch_m": 0.18,
     "buckets": 400,
     "belt_loop_m": 72.02,
