@@ -1,0 +1,185 @@
+{
+  "pdf": "Технологія 06.06.24.pdf",
+  "page": 2,
+  "method": "PyMuPDF get_drawings, rotation_matrix, least-squares circle fit",
+  "pymupdf": "1.28.2",
+  "scale": {
+    "sheet_unit": "pt",
+    "world_unit": "mm",
+    "factor_mm_per_pt": 79.9245,
+    "from": "mean fitted radius of 6 silo wall circles = 11000 mm",
+    "mean_radius_pt": 137.63
+  },
+  "frame": "X along silo rows to the right, Y from lower row to upper row, origin = axis of silo 3, metres",
+  "silos": [
+    {
+      "number": 1,
+      "center_m": [
+        0.0,
+        25.5
+      ],
+      "radius_m": 10.9995,
+      "halves": 2,
+      "vertices": 198,
+      "max_residual_mm": 5.7
+    },
+    {
+      "number": 2,
+      "center_m": [
+        23.999,
+        25.5
+      ],
+      "radius_m": 11.0,
+      "halves": 2,
+      "vertices": 198,
+      "max_residual_mm": 5.4
+    },
+    {
+      "number": 3,
+      "center_m": [
+        0.0,
+        0.0
+      ],
+      "radius_m": 10.9998,
+      "halves": 2,
+      "vertices": 198,
+      "max_residual_mm": 6.2
+    },
+    {
+      "number": 4,
+      "center_m": [
+        23.999,
+        0.0
+      ],
+      "radius_m": 11.0004,
+      "halves": 2,
+      "vertices": 198,
+      "max_residual_mm": 5.7
+    },
+    {
+      "number": 5,
+      "center_m": [
+        53.0,
+        0.0
+      ],
+      "radius_m": 10.9999,
+      "halves": 2,
+      "vertices": 198,
+      "max_residual_mm": 6.1
+    },
+    {
+      "number": 6,
+      "center_m": [
+        76.999,
+        0.0
+      ],
+      "radius_m": 11.0004,
+      "halves": 2,
+      "vertices": 198,
+      "max_residual_mm": 5.9
+    }
+  ],
+  "tower_outlines": [
+    {
+      "center_m": [
+        38.397,
+        26.397
+      ],
+      "outline_w_m": 4.997,
+      "outline_d_m": 5.4
+    },
+    {
+      "center_m": [
+        38.498,
+        1.0
+      ],
+      "outline_w_m": 5.198,
+      "outline_d_m": 5.208
+    }
+  ],
+  "checks": [
+    {
+      "what": "вісь 3 - вісь 4, нижній ряд",
+      "annotated_mm": 24000.0,
+      "measured_mm": 23998.9,
+      "rel_error": 5e-05,
+      "ocr_bbox": [
+        2118,
+        4643,
+        2217,
+        4670
+      ],
+      "ocr_hits": 3,
+      "ok": true
+    },
+    {
+      "what": "вісь 5 - вісь 6, нижній ряд",
+      "annotated_mm": 24000.0,
+      "measured_mm": 23999.6,
+      "rel_error": 2e-05,
+      "ocr_bbox": [
+        4881,
+        4643,
+        4980,
+        4670
+      ],
+      "ocr_hits": 3,
+      "ok": true
+    },
+    {
+      "what": "вісь 1 - вісь 2, верхній ряд",
+      "annotated_mm": 24000.0,
+      "measured_mm": 23998.9,
+      "rel_error": 5e-05,
+      "ocr_bbox": [
+        2118,
+        3314,
+        2217,
+        3341
+      ],
+      "ocr_hits": 3,
+      "ok": true
+    },
+    {
+      "what": "вісь 4 - вісь 5, через вежу",
+      "annotated_mm": 29000.0,
+      "measured_mm": 29000.8,
+      "rel_error": 3e-05,
+      "ocr_bbox": [
+        3499,
+        4723,
+        3598,
+        4750
+      ],
+      "ocr_hits": 1,
+      "ok": true
+    },
+    {
+      "what": "вісь 3 - вісь 1, між рядами",
+      "annotated_mm": 25500.0,
+      "measured_mm": 25500.5,
+      "rel_error": 2e-05,
+      "ocr_bbox": null,
+      "ocr_hits": 0,
+      "ok": true
+    }
+  ],
+  "pass": true,
+  "status": "unverified",
+  "not_extracted": [
+    "elevation of silo base (+0,600 on sheets 4, 5, 7) is not a plan dimension",
+    "aeration duct pattern inside circles",
+    "aeration fan symbols around each silo",
+    "tunnel bands through silo axes",
+    "receiving area at the top of the sheet"
+  ],
+  "cards": [
+    "rec_5e8d7132",
+    "rec_89a9ca0c",
+    "rec_cbe92666",
+    "rec_f38aab81",
+    "rec_5e780dee",
+    "rec_8e6fb34c",
+    "rec_10b62b9a"
+  ]
+}

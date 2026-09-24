@@ -1949,6 +1949,11 @@ def write_records(cards: list) -> None:
             previous = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             continue
+        # Видаляємо лише власні застарілі картки парсера. Веб-картки SLICE-2A
+        # і картки інших екстракторів (source.extractor) належать не йому.
+        source = previous.get("source") or {}
+        if source.get("origin") != "local" or source.get("extractor"):
+            continue
         if previous.get("status") == "unverified":
             path.unlink()
 

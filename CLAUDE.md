@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Current main track: 3D pipeline (Blender)
+
+Since 2026-09 the active work is the 3D pipeline, not 2D AutoCAD. Start with `3D_STATUS.md`, then `PRD_3D_PIPELINE.md` (rules and prohibitions, section 3) and `CANON_DETAIL.md`.
+- Facts layer: `inbox/records/` cards, all `unverified`; never set `cited` yourself, never create `FACTS.json` without human decisions.
+- Kit: `blender/kit/`; world: `blender/site/SITE_*.json` assembled by `blender/assemble_site.py`; QA tests: `blender/site/run_qa_tests.py`.
+- Accepted slice folders `blender/silo_msvu_220*/`, `blender/noria_01/`, `blender/proof/` are evidence: do not overwrite.
+
 ## Project Overview
 
 This is an **AutoCAD automation project** for generating parametric grain elevator schematics. The system enables:

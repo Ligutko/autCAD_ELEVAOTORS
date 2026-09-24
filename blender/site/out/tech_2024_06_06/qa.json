@@ -1,0 +1,211 @@
+{
+  "site_id": "tech_2024_06_06",
+  "site_file": "blender/site/SITE_tech_2024_06_06.json",
+  "pass": true,
+  "stage": "scene",
+  "problems": [],
+  "pending_count": 8,
+  "build_s": 0.2,
+  "measured": {
+    "S1": {
+      "type": "silo_msvu_220",
+      "center_m": [
+        0.0,
+        25.5
+      ],
+      "outer_diameter_m": 22.000001,
+      "wall_z_min_m": 0.0,
+      "wall_z_max_m": 14.976,
+      "roof_peak_z_m": 21.326853,
+      "roof_slope_deg": 29.999999,
+      "z_min_m": 0.0,
+      "z_max_m": 21.466999,
+      "footprint_radius_m": 11.211444
+    },
+    "S2": {
+      "type": "silo_msvu_220",
+      "center_m": [
+        24.0,
+        25.5
+      ],
+      "outer_diameter_m": 22.000001,
+      "wall_z_min_m": 0.0,
+      "wall_z_max_m": 14.976,
+      "roof_peak_z_m": 21.326853,
+      "roof_slope_deg": 29.999999,
+      "z_min_m": 0.0,
+      "z_max_m": 21.466999,
+      "footprint_radius_m": 11.211444
+    },
+    "S3": {
+      "type": "silo_msvu_220",
+      "center_m": [
+        0.0,
+        0.0
+      ],
+      "outer_diameter_m": 22.000001,
+      "wall_z_min_m": 0.0,
+      "wall_z_max_m": 14.976,
+      "roof_peak_z_m": 21.326853,
+      "roof_slope_deg": 29.999999,
+      "z_min_m": 0.0,
+      "z_max_m": 21.466999,
+      "footprint_radius_m": 11.211444
+    },
+    "S4": {
+      "type": "silo_msvu_220",
+      "center_m": [
+        24.0,
+        0.0
+      ],
+      "outer_diameter_m": 22.000001,
+      "wall_z_min_m": 0.0,
+      "wall_z_max_m": 14.976,
+      "roof_peak_z_m": 21.326853,
+      "roof_slope_deg": 29.999999,
+      "z_min_m": 0.0,
+      "z_max_m": 21.466999,
+      "footprint_radius_m": 11.211444
+    },
+    "S5": {
+      "type": "silo_msvu_220",
+      "center_m": [
+        53.0,
+        0.0
+      ],
+      "outer_diameter_m": 22.000001,
+      "wall_z_min_m": 0.0,
+      "wall_z_max_m": 14.976,
+      "roof_peak_z_m": 21.326853,
+      "roof_slope_deg": 29.999999,
+      "z_min_m": 0.0,
+      "z_max_m": 21.466999,
+      "footprint_radius_m": 11.211444
+    },
+    "S6": {
+      "type": "silo_msvu_220",
+      "center_m": [
+        77.0,
+        0.0
+      ],
+      "outer_diameter_m": 22.000001,
+      "wall_z_min_m": 0.0,
+      "wall_z_max_m": 14.976,
+      "roof_peak_z_m": 21.326853,
+      "roof_slope_deg": 29.999999,
+      "z_min_m": 0.0,
+      "z_max_m": 21.466999,
+      "footprint_radius_m": 11.211444
+    },
+    "H6": {
+      "type": "noria_n100",
+      "center_m": [
+        38.498001,
+        1.0
+      ],
+      "tube_z_min_m": -5.1,
+      "tube_z_max_m": 27.9,
+      "tube_height_m": 33.0,
+      "z_min_m": -5.1,
+      "z_max_m": 28.179999,
+      "bbox_xy_m": [
+        38.220001,
+        0.58,
+        39.648001,
+        1.42
+      ]
+    }
+  },
+  "kit": {
+    "silo_msvu_220": {
+      "objects": 128,
+      "rings": 13,
+      "bolt_heads": 52,
+      "roof_sectors": 8,
+      "tube_courses": 0
+    },
+    "noria_n100": {
+      "objects": 804,
+      "rings": 0,
+      "bolt_heads": 0,
+      "roof_sectors": 0,
+      "tube_courses": 33
+    }
+  },
+  "kit_provenance": {
+    "noria_n100": {
+      "tube_height_m": {
+        "value": 33.0,
+        "from": "каталог + OCR арк. 8 «Нтруб=33000 мм»"
+      },
+      "capacity_tph": {
+        "value": 100,
+        "from": "каталог + OCR арк. 8"
+      },
+      "power_kw": {
+        "value": 22,
+        "from": "каталог + OCR арк. 8"
+      },
+      "bucket_pitch_m": {
+        "value": 0.18,
+        "from": "оголошення bizorg 2017, не паспорт (rec_cdfc5232)"
+      },
+      "shaft_clear_m": {
+        "value": [
+          0.376,
+          0.256
+        ],
+        "from": "оголошення bizorg 2017, не паспорт (rec_fef4064e)"
+      },
+      "head_boot_ladder": {
+        "value": "показ",
+        "from": "не з паспорта"
+      }
+    },
+    "silo_msvu_220": {
+      "diameter_m": {
+        "value": 22.0,
+        "from": "каталог + OCR арк. 8/10/12, rec_020dce78"
+      },
+      "spout_z_m": {
+        "value": 21.422,
+        "from": "каталог + OCR «Н=21,422 м»"
+      },
+      "tiers": {
+        "value": 13,
+        "from": "розрахунок з таблиці Лубнимаша, inbox/reports/lubnymash_220_tiers.md"
+      },
+      "tier_height_m": {
+        "value": 1.152,
+        "from": "каталог Лубнимаша EN, inbox/reports/lubnymash_sheet_roof.md"
+      },
+      "wave_pitch_m": {
+        "value": 0.064,
+        "from": "каталоги Лубнимаша"
+      },
+      "roof_slope_deg": {
+        "value": 30.0,
+        "from": "каталоги Лубнимаша"
+      },
+      "bottom": {
+        "value": "flat",
+        "from": "rec_7f7031e0"
+      },
+      "wave_height_m": {
+        "value": 0.012,
+        "from": "показ, не з каталогу"
+      },
+      "flange_bolts": {
+        "value": "52 болти, фланець 0.35 м",
+        "from": "показ, не з паспорта"
+      }
+    }
+  },
+  "renders": [
+    "render_overview.png",
+    "render_ground.png",
+    "render_plan.png"
+  ],
+  "render_engine": "BLENDER_EEVEE_NEXT",
+  "blend": "tech_2024_06_06.blend"
+}

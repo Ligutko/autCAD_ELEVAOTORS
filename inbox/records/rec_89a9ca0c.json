@@ -1,0 +1,23 @@
+{
+  "id": "rec_89a9ca0c",
+  "subject": "Зерновий комплекс",
+  "kind": "count",
+  "claim": {
+    "name": "silos_on_plan",
+    "value": 6,
+    "unit": "pcs"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "quote": "R11000",
+    "bbox": null,
+    "retrieved_at": "2026-09-24",
+    "extractor": "extract_plan_p2.py"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Шість кіл стіни силоса на плані аркуша 2 (2 у верхньому ряду, 4 у нижньому). Каталог має quantity 2 для силоса, це інше поле. Рядок R11000 OCR не прочитав, рамки немає.",
+  "seen_in": []
+}

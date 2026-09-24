@@ -1,0 +1,29 @@
+{
+  "id": "rec_cbe92666",
+  "subject": "Зерновий комплекс",
+  "kind": "dimension",
+  "claim": {
+    "name": "axis_spacing_row_3_4",
+    "value": 24000.0,
+    "unit": "mm",
+    "qualifier": "вісь 3 - вісь 4, нижній ряд; виміряно з вектора 23999 мм"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "quote": "24000",
+    "bbox": [
+      2118,
+      4643,
+      2217,
+      4670
+    ],
+    "retrieved_at": "2026-09-24",
+    "extractor": "extract_plan_p2.py"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Підписаний розмір плану аркуша 2, звірений з вектором.",
+  "seen_in": []
+}

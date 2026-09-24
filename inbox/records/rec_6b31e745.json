@@ -1,0 +1,29 @@
+{
+  "id": "rec_6b31e745",
+  "subject": "H6 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "tower_frame_top_elevation",
+    "value": 29.0,
+    "unit": "m",
+    "qualifier": "верх каркаса вежі H6 на фасаді силосів 3–6"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 7,
+    "quote": "+29,000",
+    "bbox": [
+      3228,
+      1483,
+      3333,
+      1508
+    ],
+    "retrieved_at": "2026-09-24",
+    "extractor": "add_sheet_marks.py"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Висотна відмітка з OCR аркуша 7, впевненість 92. Прив'язка до вузла — за положенням на розрізі, перевірити очима.",
+  "seen_in": []
+}
