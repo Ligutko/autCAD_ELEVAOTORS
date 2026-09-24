@@ -43,3 +43,4 @@ nul
 
 # Vendored OCR tool install (binaries, not source)
 inbox/.tools/
+*.blend1
