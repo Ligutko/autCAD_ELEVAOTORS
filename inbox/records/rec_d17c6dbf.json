@@ -1,0 +1,25 @@
+{
+  "id": "rec_d17c6dbf",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "leg_section_inner",
+    "value": "376x256",
+    "unit": "mm",
+    "qualifier": "переріз норійної труби у світлі, однаковий у колонках УН-100 і УН-175"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-",
+    "path": "inbox/raw/web/ua.bizorg.su/bizorg_un175_lubnymash.html",
+    "page": null,
+    "quote": "Размеры поперечного сечения норийных труб в свету мм 174х154 197х197 232х232 275х275 376х256 376х256",
+    "retrieved_at": "2026-09-23",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Оголошення продавця «ЛУБНЫМАШ, ЧП» на bizorg (таблиця У13-УН, колонки УН-5…УН-175). Це матеріал самого заводу, але старий і не з поточного каталогу; поточний каталог 2025.1 таких рядків не має. Обидві колонки дають 376×256, тож число не залежить від вибору УН-100/УН-175. Але стрічка УН-175 400 мм ширша за 376 мм — для УН-175 рядок, ймовірно, помилковий.",
+  "seen_in": []
+}

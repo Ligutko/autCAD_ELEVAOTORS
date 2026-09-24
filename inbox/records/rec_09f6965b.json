@@ -1,0 +1,25 @@
+{
+  "id": "rec_09f6965b",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "attribute",
+  "claim": {
+    "name": "chain_type",
+    "value": "М-112-2-100-1 ГОСТ 588",
+    "unit": "",
+    "qualifier": "ланцюг роликовий, крок 100 мм, розривне зусилля 11 200 кг"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/transportuvannya/u13-tczs/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-tczs.html",
+    "page": null,
+    "quote": "Ланцюг роликовий М-112-2-100-1 ГОСТ588 крок 100мм, має мінімальне розривне зусилля 11200 кг;",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_f4ff44f0",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "scraper_pitch",
+    "value": "200/400",
+    "unit": "mm",
+    "qualifier": "крок скребків (кожна 2-га або 4-та ланка)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 18,
+    "quote": "Крок скребків мм 200 / 400",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Поточна назва моделі 100 т/год у каталозі — ТЦС-100L; «ТЦС-320» — стара назва (див. картки legacy).",
+  "seen_in": []
+}

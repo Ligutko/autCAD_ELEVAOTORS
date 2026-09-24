@@ -1,0 +1,27 @@
+{
+  "id": "rec_c5c9757f",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "box_height",
+    "value": 440,
+    "unit": "mm",
+    "qualifier": "висота короба ТЦС-320, «не більше» (стара серія)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://agrovektor.com/ua/physical_product/12907-transportery-cepnye-skrebkovye-u13-tcs-200-320-400-500.html",
+    "path": "inbox/raw/web/agrovektor.com/u13-tcs-200-320-400-500.html",
+    "page": null,
+    "quote": "Розмір поперечного перерізу короба, не більше ширина висота мм 200 320 320 440 400 500 500 600",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_ec22a5d3"
+  ],
+  "notes": "Старе оголошення Лубнимаша на agrovektor (продавець — завод «ЛУБНИМАШ»), таблиця ТЦС-200/320/400/500. Тут модель прямо названа ТЦС-320, як на кресленні. Розміри короба подано як «не більше»; порядок у таблиці: ширина, висота для кожної моделі (200×320, 320×440, 400×500, 500×600). ",
+  "seen_in": []
+}

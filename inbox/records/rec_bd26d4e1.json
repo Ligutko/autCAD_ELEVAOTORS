@@ -1,0 +1,25 @@
+{
+  "id": "rec_bd26d4e1",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "leg_section_length",
+    "value": 2500,
+    "unit": "mm",
+    "qualifier": "довжина стандартної секції труби (є ще 1250 мм і ремонтна)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://asm31.ru/wp-content/uploads/2024/09/rukovodstvo-po-ekspluataczii-noriya-m3-aprel-2022-asm31.pdf",
+    "path": "inbox/raw/web/asm31.ru/rukovodstvo-noriya-m3-2022.pdf",
+    "page": 12,
+    "quote": "4 - секция (длина 2,5 м);",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: ТОВ «АСМ31» (Росія), Н-100-М3, 100 т/год, стрічка 300 мм. Легший клас за нашу норію: ківш 1,53 дм³, крок 120. Для башмака це єдине знайдене креслення з габаритами; для барабана 750 мм реальний башмак буде більшим. ",
+  "seen_in": []
+}

@@ -33,32 +33,36 @@
   "rail_height_m": 1.1,
   "motor_kw": 22,
   "noria": {
-    "belt_speed_m_s": 2.5,
-    "pulley_diameter_m": 0.63,
-    "pulley_rpm": 75.8,
-    "pole_distance_m": 0.156,
+    "belt_speed_m_s": 2.87,
+    "pulley_diameter_m": 0.75,
+    "pulley_rpm": 73.1,
+    "pole_distance_m": 0.168,
     "discharge": "centrifugal",
-    "bucket_volume_l_calc": 3.56,
+    "bucket_volume_l_required_100th": 3.61,
+    "bucket_volume_l_required_back_leg_feed": 5.16,
+    "bucket_volume_l_model": 7.75,
     "bucket_mm": [
-      300,
+      280,
       180,
-      160
+      190
     ],
+    "belt_width_mm": 300,
+    "leg_length_m": 33.46,
     "bucket_wall_mm": 6.5,
-    "bucket_bolts": "4 x M8 DIN 15237, 88 mm pitch",
-    "bucket_pitch_m": 0.18,
-    "buckets": 400,
-    "belt_loop_m": 72.02,
+    "bucket_bolts": "4 x M8 DIN 15237, 74 mm pitch",
+    "bucket_pitch_m": 0.21,
+    "buckets": 344,
+    "belt_loop_m": 72.28,
     "leg_clear_mm": [
       376,
       256
     ],
     "leg_centres_x_m": [
-      0.55,
-      1.35
+      0.49,
+      1.41
     ],
     "head_pulley_z_m": 31.2,
-    "boot_pulley_z_m": -3.768,
+    "boot_pulley_z_m": -3.708,
     "motor_kw": 22
   },
   "labels": [
@@ -69,11 +73,11 @@
     "Натяжний пристрій (гвинтовий)",
     "Завантажувальний патрубок башмака",
     "Датчик сходу стрічки",
-    "Барабан голови Ø630, футерований",
-    "Ківш 3,6 л, крок 180 мм",
+    "Барабан голови Ø750, футерований",
+    "Ківш 7,8 л, крок 210 мм",
     "Барабан башмака самоочисний (крильчастий)",
     "Датчик швидкості (контроль руху стрічки)",
     "Датчик підпору самопливу"
   ],
-  "build_seconds": 0.3
+  "build_seconds": 0.1
 }

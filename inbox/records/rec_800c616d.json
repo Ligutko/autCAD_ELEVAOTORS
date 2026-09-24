@@ -1,0 +1,25 @@
+{
+  "id": "rec_800c616d",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "attribute",
+  "claim": {
+    "name": "idler_type",
+    "value": "жолобчаста",
+    "unit": "",
+    "qualifier": "тип роликоопори у заповненому прикладі опитувального листа У13-ТЛК"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/tlk_ua.pdf",
+    "path": "inbox/raw/web/lubnymash.com/tlk_ua.pdf",
+    "page": 1,
+    "quote": "Жолобчаста",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Приклад значення в бланку, не паспорт нашого конвеєра. У бланку є поле «Наявність опор конвеєра: висота, мм» — висоту опор задає замовник.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_230d1a47",
+  "subject": "У13-ТЗА-350/400 (засувка з електроприводом; у каталозі серія ТЕА.М)",
+  "kind": "dimension",
+  "claim": {
+    "name": "plate_thickness",
+    "value": 3,
+    "unit": "mm",
+    "qualifier": "товщина засувки (листа), усі ТЗР і ТЕА"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/samoplynne-obladnannya/u13-tzr-t%d1%8da/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-tzr-tea.html",
+    "page": null,
+    "quote": "Товщина засувки [мм] 3",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

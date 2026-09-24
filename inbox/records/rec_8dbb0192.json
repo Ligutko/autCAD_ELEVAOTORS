@@ -1,0 +1,25 @@
+{
+  "id": "rec_8dbb0192",
+  "subject": "У13-ТЗА-350/400 (засувка з електроприводом; у каталозі серія ТЕА.М)",
+  "kind": "dimension",
+  "claim": {
+    "name": "body_height",
+    "value": 250,
+    "unit": "mm",
+    "qualifier": "висота корпусу засувки ТЕА.М (□200–□600)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 27,
+    "quote": "ТЕА.М □ 200 - □ 600 □ 248 - □ 650 0,18 3 250",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Позначення в специфікації проєкту ТЗА = ТЕА в каталозі (засувка з електроприводом 0,18 кВт); ТЕА-04М — □350, ТЕА-05М — □400 (таблиця сайту).",
+  "seen_in": []
+}

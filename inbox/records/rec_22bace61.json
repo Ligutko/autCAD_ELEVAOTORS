@@ -1,0 +1,25 @@
+{
+  "id": "rec_22bace61",
+  "subject": "Вводи 45° □300×300 (одинарний, двійний, трійний)",
+  "kind": "dimension",
+  "claim": {
+    "name": "valve_height_KD4",
+    "value": 460,
+    "unit": "mm",
+    "qualifier": "перекидний клапан двоходовий КД-4 □300 (рейсмус □350, бічний патрубок 45°) — висота"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 26,
+    "quote": "КД-4 □ 300 □ 350 0,18 2 - 4 460 45",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Той самий завод, але інший виріб (клапан, а не пасивний ввід). Дає масштаб трійника □300 з відводом 45°.",
+  "seen_in": []
+}

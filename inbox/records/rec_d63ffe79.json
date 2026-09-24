@@ -1,0 +1,25 @@
+{
+  "id": "rec_d63ffe79",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "spec",
+  "claim": {
+    "name": "aeration_fan_airflow",
+    "value": 13160,
+    "unit": "m3/h",
+    "qualifier": "продуктивність ВЦ-5И при тиску 2,02 кПа"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 33,
+    "quote": "ВЦ-5И 3,65 (13 160) 2,02 11 1580 x 870 x 1120",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Лубнимаш У13-ВЦ, «Для вентиляції силосів». Що саме ВЦ-5И стоїть на наших силосах — висновок за потужністю 11 кВт зі специфікації (judgment). 4 вентилятори × 13 160 = 52 640 м³/год на силос (derived) — вище за мінімум ≈ 48 000 м³/год з PARTS_DIMENSIONS B9.",
+  "seen_in": []
+}

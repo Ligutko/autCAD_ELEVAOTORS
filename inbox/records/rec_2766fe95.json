@@ -1,0 +1,25 @@
+{
+  "id": "rec_2766fe95",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "spec",
+  "claim": {
+    "name": "capacity_range",
+    "value": "30-130",
+    "unit": "t/h",
+    "qualifier": "продуктивність ТЦС-320 при γ=0,8"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://agrovektor.com/ua/physical_product/12907-transportery-cepnye-skrebkovye-u13-tcs-200-320-400-500.html",
+    "path": "inbox/raw/web/agrovektor.com/u13-tcs-200-320-400-500.html",
+    "page": null,
+    "quote": "Продуктивність при Y = 0.8 т / м3. (Мах.) т/ч. 11….51 30…130 45…205 90…250",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Старе оголошення Лубнимаша на agrovektor (продавець — завод «ЛУБНИМАШ»), таблиця ТЦС-200/320/400/500. Тут модель прямо названа ТЦС-320, як на кресленні. Розміри короба подано як «не більше»; порядок у таблиці: ширина, висота для кожної моделі (200×320, 320×440, 400×500, 500×600). ",
+  "seen_in": []
+}

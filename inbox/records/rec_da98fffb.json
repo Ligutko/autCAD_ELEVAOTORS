@@ -1,0 +1,25 @@
+{
+  "id": "rec_da98fffb",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "belt_speed",
+    "value": 2.4,
+    "unit": "m/s",
+    "qualifier": "швидкість стрічки ТЛ-50"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 20,
+    "quote": "Швидкість стрічки м/с 2,4 2,6 2,8 3,0 3,2 3,2",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro.",
+  "seen_in": []
+}

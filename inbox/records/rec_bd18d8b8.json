@@ -1,0 +1,27 @@
+{
+  "id": "rec_bd18d8b8",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "dimension",
+  "claim": {
+    "name": "sweep_screw_diameter",
+    "value": 315,
+    "unit": "mm",
+    "qualifier": "зачисний конвеєр УРПК-315: діаметр/крок гвинта, силоси 16,5–33 м, тягач до 2,2 кВт"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 23,
+    "quote": "Діаметр / крок гвинта мм 250 315 400",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_969eee56"
+  ],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Проєкт: «конвеєр радіально-поворотний з тягачем 18,5 + 1,1 кВт». Під 18,5 кВт і тягач підходять УРПК-315 (7,5–18,5, тягач до 2,2) і УРПК-400.М2 (11–18,5); модель у специфікації не названа.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_2fb145ce",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "attribute",
+  "claim": {
+    "name": "hatch_set",
+    "value": "обслуговування, ревізійні, технологічні",
+    "unit": "",
+    "qualifier": "стандартна комплектація: люки обслуговування, ревізійні, технологічні (для термопідвісок); маршова драбина на даху; вітрові кільця"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 4,
+    "quote": "Люки обслуговування, ревізійні, технологічні (обслуговування термопідвісів).",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Розмірів люків Лубнимаш не публікує.",
+  "seen_in": []
+}

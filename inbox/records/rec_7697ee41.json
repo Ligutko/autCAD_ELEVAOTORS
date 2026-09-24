@@ -1,0 +1,25 @@
+{
+  "id": "rec_7697ee41",
+  "subject": "Вводи 45° □300×300 (одинарний, двійний, трійний)",
+  "kind": "dimension",
+  "claim": {
+    "name": "valve_height_KT4",
+    "value": 668,
+    "unit": "mm",
+    "qualifier": "перекидний клапан триходовий КТ-4 □300 (2 × 45°) — висота"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 26,
+    "quote": "КТ-4 □ 300 □ 350 2 x 0,18 4 668 2 x 45",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Масштаб для трійного вводу.",
+  "seen_in": []
+}

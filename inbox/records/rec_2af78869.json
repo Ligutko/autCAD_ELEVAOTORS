@@ -1,0 +1,25 @@
+{
+  "id": "rec_2af78869",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "boot_inlet_width",
+    "value": 430,
+    "unit": "mm",
+    "qualifier": "ширина завантажувального вікна башмака (вгорі вікна 390 мм)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://asm31.ru/wp-content/uploads/2024/09/rukovodstvo-po-ekspluataczii-noriya-m3-aprel-2022-asm31.pdf",
+    "path": "inbox/raw/web/asm31.ru/rukovodstvo-noriya-m3-2022.pdf",
+    "page": 17,
+    "quote": "Рис.14 Размеры загрузочного окна станции натяжной",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: ТОВ «АСМ31» (Росія), Н-100-М3, 100 т/год, стрічка 300 мм. Легший клас за нашу норію: ківш 1,53 дм³, крок 120. Для башмака це єдине знайдене креслення з габаритами; для барабана 750 мм реальний башмак буде більшим. Числа 390 і 430 — на кресленні Рис.14в; висоти на тому ж кресленні 639 і 461 мм.",
+  "seen_in": []
+}

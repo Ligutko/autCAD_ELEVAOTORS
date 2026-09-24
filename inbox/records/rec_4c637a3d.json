@@ -1,0 +1,25 @@
+{
+  "id": "rec_4c637a3d",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "drive_section_length",
+    "value": 1500,
+    "unit": "mm",
+    "qualifier": "оцінка довжини приводної секції з вихідним патрубком"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 18,
+    "quote": "Зручний доступ до всіх вузлів приводних та натяжних станцій",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Числа в джерелах немає. На рендері каталогу с. 18 приводна секція ≈ 3,5–4 висоти короба завдовжки, мотор-редуктор насадний збоку, під секцією пірамідальний вихідний патрубок. При висоті короба 410–440 мм це 1400–1800 мм. Натяжна секція подібної довжини (1000–1500 мм), з гвинтовою натяжкою.",
+  "seen_in": []
+}

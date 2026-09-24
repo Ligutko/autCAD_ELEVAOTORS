@@ -1,0 +1,25 @@
+{
+  "id": "rec_45aa13d5",
+  "subject": "У13-ТЗР-350/400 (засувка ручна; у каталозі серія ТЗР.М)",
+  "kind": "dimension",
+  "claim": {
+    "name": "flange_bolt_square",
+    "value": 402,
+    "unit": "mm",
+    "qualifier": "рейсмус кріплення ТЗР.М-02 (□350)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/samoplynne-obladnannya/u13-tzr-t%d1%8da/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-tzr-tea.html",
+    "page": null,
+    "quote": "Реймус кріплення [мм] 248 350 402 450 505 550 650 350",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Таблиця ТЗР на сайті: М-00(200) 248, М-01(300) 350, М-02(350) 402, М-03(400) 450.",
+  "seen_in": []
+}

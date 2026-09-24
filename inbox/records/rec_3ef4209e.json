@@ -1,0 +1,25 @@
+{
+  "id": "rec_3ef4209e",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "attribute",
+  "claim": {
+    "name": "bucket_type",
+    "value": "УКЗ-100, крок 180",
+    "unit": "",
+    "qualifier": "аналог УН-100: ківш УКЗ-100, крок 180 мм, стрічка 300 мм"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://elevatormash.net/produktsiya/elevatory-norii/norii-lentochnye",
+    "path": "inbox/raw/web/elevatormash.net/norii-lentochnye.html",
+    "page": null,
+    "quote": "Шаг ковшей, мм 100 260 150 180 180 205 180 180 185 265",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: elevatormash.net, серія УН, колонка УН-100 (п'ята): тип ковшів УКЗ-100, крок 180, стрічка 300. Підтверджує крок 180 з картки Лубнимаша. Розміри УКЗ-100 — у research/PARTS_DIMENSIONS.md (A1).",
+  "seen_in": []
+}

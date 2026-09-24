@@ -1,0 +1,25 @@
+{
+  "id": "rec_54371c80",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "casing_height_inside",
+    "value": 537,
+    "unit": "mm",
+    "qualifier": "внутрішня висота короба проміжної секції"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://asia.chiefind.ph/wp-content/uploads/2024/06/CSEB-BROCHURE.pdf",
+    "path": "inbox/raw/web/asia.chiefind.ph/CSEB-BROCHURE.pdf",
+    "page": 3,
+    "quote": "Mid Section Height (Inside)",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Chief CSEB-18 (закритий стрічковий конвеєр, стрічка 18 in = 457 мм, 125 т/год, 2,29 м/с). Найближчий знайдений клас до ТЛ-50К (500 мм, 100 т/год, 2,4 м/с). Для стрічки 500 мм додати ≈ +40 мм до ширини. Числа — з таблиці на с. 3 брошури (у текстовому шарі порядок колонок перемішаний, звірено з рендером). ",
+  "seen_in": []
+}

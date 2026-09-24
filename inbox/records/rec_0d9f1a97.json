@@ -1,0 +1,25 @@
+{
+  "id": "rec_0d9f1a97",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "dimension",
+  "claim": {
+    "name": "aeration_channel_total_length",
+    "value": 97,
+    "unit": "m",
+    "qualifier": "оцінка сумарної довжини каналів на силос Ø22 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 81,
+    "quote": "Channels width is 705 mm.",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Формула: 0,18 × π × 11² / 0,705 = 0,18 × 380,1 / 0,705 ≈ 97 м. Наприклад, 4 гілки H по ~24 м. Реальна розкладка — з вектора аркуша 2 проєкту.",
+  "seen_in": []
+}

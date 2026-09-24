@@ -1,0 +1,25 @@
+{
+  "id": "rec_92c188ba",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "scraper_width",
+    "value": 300,
+    "unit": "mm",
+    "qualifier": "аналог ТЦС-320 Кіровограделеватормаш: ширина ланцюга зі скребками 300 мм, 60–100 т/год"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kirelmash.com.ua/transportery-tls/transporter-konveyer-lantsyugovyj-skrebkovyj-tls/",
+    "path": "inbox/raw/web/kirelmash.com.ua/tls.html",
+    "page": null,
+    "quote": "Ширина ланцюга зі скребками мм 180 300 380 480",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: ТОВ «Кіровограделеватормаш», ТЦС-320, 60–100 т/год. Збігається зі старою таблицею Лубнимаша (300 мм).",
+  "seen_in": []
+}

@@ -1,0 +1,27 @@
+{
+  "id": "rec_e1c9c39b",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "leg_centre_distance",
+    "value": 705,
+    "unit": "mm",
+    "qualifier": "міжцентрова відстань двох норійних труб (дві труби в одній рамці фланця 1034×530)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://asm31.ru/wp-content/uploads/2024/09/rukovodstvo-po-ekspluataczii-noriya-m3-aprel-2022-asm31.pdf",
+    "path": "inbox/raw/web/asm31.ru/rukovodstvo-noriya-m3-2022.pdf",
+    "page": 21,
+    "quote": "Рис.19 Фланец присоединительный нории Н-100",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_74357180"
+  ],
+  "notes": "Аналог: ТОВ «АСМ31» (Росія), Н-100-М3, 100 т/год, стрічка 300 мм. Легший клас за нашу норію: ківш 1,53 дм³, крок 120. Для башмака це єдине знайдене креслення з габаритами; для барабана 750 мм реальний башмак буде більшим. На кресленні Рис.19: 305 + 400 = 705 мм між осями отворів; також 32+265/2 від краю з кожного боку при ширині 1034. Отвори труб 265 мм, проміжок 350 мм. Для барабана 750 мм див. картку derived.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_8b2f4e37",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "attribute",
+  "claim": {
+    "name": "head_bearing_type",
+    "value": "виносні корпуси на лапах",
+    "unit": "",
+    "qualifier": "підшипники голови: самоцентрувальні, у виносних корпусах на лапах"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 16,
+    "quote": "Самоцентрувальні підшипники, встановлені у виносні корпуси на лапах",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro.",
+  "seen_in": []
+}

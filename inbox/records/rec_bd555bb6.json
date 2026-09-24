@@ -1,0 +1,25 @@
+{
+  "id": "rec_bd555bb6",
+  "subject": "У13-ТЗА-350/400 (засувка з електроприводом; у каталозі серія ТЕА.М)",
+  "kind": "dimension",
+  "claim": {
+    "name": "flange_bolt_square",
+    "value": 402,
+    "unit": "mm",
+    "qualifier": "рейсмус кріплення (квадрат по отворах) для прохідного перерізу □350, ТЕА-04М"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/samoplynne-obladnannya/u13-tzr-t%d1%8da/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-tzr-tea.html",
+    "page": null,
+    "quote": "Реймус кріплення [мм] 350 505 248 402 450 550 650 350",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Таблиця ТЕА на сайті: колонки 01М(300), 02М(450), 03М(200), 04М(350), 05М(400)… Перерізу 350 відповідає 402, 400 — 450. Каталог с. 27 дає той самий ряд □248–□650.",
+  "seen_in": []
+}

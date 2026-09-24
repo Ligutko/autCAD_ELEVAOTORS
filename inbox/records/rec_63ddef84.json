@@ -1,0 +1,25 @@
+{
+  "id": "rec_63ddef84",
+  "subject": "Вводи 45° □300×300 (одинарний, двійний, трійний)",
+  "kind": "dimension",
+  "claim": {
+    "name": "square_pipe_length",
+    "value": 2030,
+    "unit": "mm",
+    "qualifier": "довжина секції СТ.6 □300×300"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 28,
+    "quote": "Довжина мм 2 030 2 030 2 030 2 030 2 030 2 030",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro.",
+  "seen_in": []
+}

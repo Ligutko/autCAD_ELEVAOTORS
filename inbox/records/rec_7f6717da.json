@@ -1,0 +1,27 @@
+{
+  "id": "rec_7f6717da",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "boot_width",
+    "value": 1350,
+    "unit": "mm",
+    "qualifier": "оцінка поперечного габариту башмака для барабана Ø750"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-",
+    "path": "inbox/raw/web/ua.bizorg.su/bizorg_un175_lubnymash.html",
+    "page": null,
+    "quote": "Диаметр барабана мм 300 400 500 630 750 750",
+    "retrieved_at": "2026-09-23",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_13ca2948"
+  ],
+  "notes": "Міжцентрова 926 (derived) + глибина труби 256 + 2 × ~80 мм стінки й ребра корпусу ≈ 1340 мм. Реалістичний діапазон 1250–1450 мм. Висота башмака 1500–1800 мм (барабан 750 + хід натяжки ~150–200 + приймальна частина). Жодного креслення башмака Лубнимаша не знайдено.",
+  "seen_in": []
+}

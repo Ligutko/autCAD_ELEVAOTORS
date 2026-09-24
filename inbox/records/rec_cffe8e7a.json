@@ -1,0 +1,25 @@
+{
+  "id": "rec_cffe8e7a",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "attribute",
+  "claim": {
+    "name": "boot_tensioner_type",
+    "value": "гвинтовий",
+    "unit": "",
+    "qualifier": "натяжний пристрій башмака: гвинтовий, вал у рухомих щоках"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://smart.mehzavod.com.ua/catalog/norii-zernovye-kovshovye-elevatory/n/",
+    "path": "inbox/raw/web/smart.mehzavod.com.ua/norii_n.html",
+    "page": null,
+    "quote": "Вал с барабаном установлен в корпуса подшипников, выполненные в виде подвижных щёк винтового натяжного устройства.",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: ХМЗ (Харківський механічний завод), норія Н-100, 100 т/год. Підходить, бо той самий клас і та сама радянська база Н-100: барабан 750×320, стрічка 300, труба 260×376 — майже як у Лубнимаша (750, 376×256). Таку саму таблицю має simo.com.ua (inbox/raw/web/simo.com.ua/norii_n100.html). Хід натяжки в джерелі не вказано.",
+  "seen_in": []
+}

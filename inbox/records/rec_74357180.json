@@ -1,0 +1,27 @@
+{
+  "id": "rec_74357180",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "leg_centre_distance",
+    "value": 926,
+    "unit": "mm",
+    "qualifier": "оцінка міжцентрової відстані труб для барабана Ø750 і труби 376×256"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-",
+    "path": "inbox/raw/web/ua.bizorg.su/bizorg_un175_lubnymash.html",
+    "page": null,
+    "quote": "Размеры поперечного сечения норийных труб в свету мм 174х154 197х197 232х232 275х275 376х256 376х256",
+    "retrieved_at": "2026-09-23",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_e1c9c39b"
+  ],
+  "notes": "Формула: D_барабана + 2 × (256/2 − 40) = 750 + 2 × 88 = 926 мм. 40 мм — припущений зазор між стрічкою і задньою стінкою труби (judgment, реально 30–60). Діапазон 900–960 мм. Число 256 — глибина труби (sourced), 750 — барабан (sourced).",
+  "seen_in": []
+}

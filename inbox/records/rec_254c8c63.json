@@ -1,0 +1,25 @@
+{
+  "id": "rec_254c8c63",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "attribute",
+  "claim": {
+    "name": "boot_drum_type",
+    "value": "гратчастий",
+    "unit": "",
+    "qualifier": "натяжний барабан башмака гратчастий (типу «біляче колесо»)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 16,
+    "quote": "Посилений, гратчастий натяжний барабан, надійно утримує стрічку від сходження",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_2f18a2f5",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "dimension",
+  "claim": {
+    "name": "ladder_rest_platform",
+    "value": "1100x800",
+    "unit": "mm",
+    "qualifier": "майданчик відпочинку на вертикальній драбині"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 65,
+    "quote": "Dimensions: 1100x800 mm",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Symaga (Іспанія), металеві силоси з плоским дном, той самий тип (гофра, болти). Лубнимаш розмірів люків і каналів не публікує. ",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_6527e7b3",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "scraper_thickness",
+    "value": 6,
+    "unit": "mm",
+    "qualifier": "скребок металевий гнутий 6 мм + накладка з поліуретану 8 мм"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/transportuvannya/u13-tczs/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-tczs.html",
+    "page": null,
+    "quote": "Скребки металеві гнуті, товщина δ-6мм; На кожен скребок встановлена накладка з поліуретану товщиною 8 мм",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

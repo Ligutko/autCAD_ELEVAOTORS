@@ -1,0 +1,25 @@
+{
+  "id": "rec_61db46fd",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "section_length",
+    "value": "300-2500",
+    "unit": "mm",
+    "qualifier": "довжина проміжних секцій (модуль)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 19,
+    "quote": "ПРОМІЖНІ СЕКЦІЇ від 300 до 2500 мм",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Для моделі: основна секція 2500 мм, добірні коротші.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_aabb9470",
+  "subject": "У13-ТЗА-300 (рейкова засувка; у каталозі ТЕА-300)",
+  "kind": "dimension",
+  "claim": {
+    "name": "overall_length",
+    "value": 950,
+    "unit": "mm",
+    "qualifier": "оцінка довжини ТЕА-300 з приводом"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 27,
+    "quote": "Серія ТЕА-300",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "На рендері каталогу с. 27 корпус ТЕА-300 ≈ 2,5–3 ширини отвору завдовжки, привод виступає вбік ≈ 300 мм. Для □300: 850–1050 × 400 (+300 привод) × 150 мм.",
+  "seen_in": []
+}

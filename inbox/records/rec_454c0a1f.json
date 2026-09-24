@@ -1,0 +1,25 @@
+{
+  "id": "rec_454c0a1f",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_access_door",
+    "value": "610x700",
+    "unit": "mm",
+    "qualifier": "люк-двері на даху (вхід у силос)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 40,
+    "quote": "Door to go into the silo. Dimensions 610 x 700mm",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Symaga (Іспанія), металеві силоси з плоским дном, той самий тип (гофра, болти). Лубнимаш розмірів люків і каналів не публікує. ",
+  "seen_in": []
+}

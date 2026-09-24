@@ -1,0 +1,25 @@
+{
+  "id": "rec_8f10a599",
+  "subject": "Вводи 45° □300×300 (одинарний, двійний, трійний)",
+  "kind": "dimension",
+  "claim": {
+    "name": "square_pipe_section",
+    "value": "300x300",
+    "unit": "mm",
+    "qualifier": "самопливна труба квадратна У13-СТ6 □300×300, стінка 2–4 мм"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/samoplynne-obladnannya/u13-ts/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ts.html",
+    "page": null,
+    "quote": "Переріз [ мм ] 200 х 200 300 х 300 350 х 350 400 х 400 450 х 450 500 х 500 Товщина [ мм ] 2 – 4",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Базовий елемент, з якого складаються вводи □300. Окремих вводів 45° у каталозі з розмірами немає (с. 28 — лише фото «Ввід СВС, СВД, СВО, ГСВ»).",
+  "seen_in": []
+}

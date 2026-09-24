@@ -1,0 +1,25 @@
+{
+  "id": "rec_a4ff545c",
+  "subject": "Вводи 45° □300×300 (одинарний, двійний, трійний)",
+  "kind": "dimension",
+  "claim": {
+    "name": "inlet45_length",
+    "value": 650,
+    "unit": "mm",
+    "qualifier": "оцінка довжини одинарного вводу 45° □300 по основній трубі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/samoplynne-obladnannya/u13-ts/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ts.html",
+    "page": null,
+    "quote": "300 х 300",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Ввід — відрізок труби □300 з врізаним під 45° патрубком □300. Мінімальна довжина врізки = 300/sin45° ≈ 425 мм + 2 × ~100 мм до фланців ≈ 625–700 мм. Двійний — два патрубки з протилежних боків або послідовно (≈ 650 або ≈ 1100 мм), трійний — ≈ 1100–1500 мм. Фланці з рейсмусом 350 мм (як у засувок/клапанів □300).",
+  "seen_in": []
+}

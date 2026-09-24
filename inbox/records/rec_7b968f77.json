@@ -1,0 +1,25 @@
+{
+  "id": "rec_7b968f77",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "belt_width",
+    "value": 500,
+    "unit": "mm",
+    "qualifier": "ширина стрічки ТЛ-50 (100 т/год)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 20,
+    "quote": "Ширина стрічки мм 500 650 800 1 000 1 200 1 400",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Індекс «50» у назві = стрічка 500 мм. Та сама ширина в таблиці ТЛ-50КЗ на сайті.",
+  "seen_in": []
+}

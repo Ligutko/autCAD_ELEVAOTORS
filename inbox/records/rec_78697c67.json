@@ -1,0 +1,25 @@
+{
+  "id": "rec_78697c67",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_inspection_door",
+    "value": 400,
+    "unit": "mm",
+    "qualifier": "круглий оглядовий люк на даху Ø400 (отвір у секторі Ø420)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 17,
+    "quote": "Circular door (Ø 400) to watch the grain onto the silo.",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Symaga (Іспанія), металеві силоси з плоским дном, той самий тип (гофра, болти). Лубнимаш розмірів люків і каналів не публікує. ",
+  "seen_in": []
+}

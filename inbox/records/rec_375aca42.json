@@ -1,0 +1,25 @@
+{
+  "id": "rec_375aca42",
+  "subject": "У13-ТЗА-300 (рейкова засувка; у каталозі ТЕА-300)",
+  "kind": "dimension",
+  "claim": {
+    "name": "flange_bolt_square",
+    "value": 350,
+    "unit": "mm",
+    "qualifier": "рейсмус кріплення ТЕА-300 (□300)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 27,
+    "quote": "ТЕА-300 □ 300 □ 350 0,18 3 150",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro.",
+  "seen_in": []
+}

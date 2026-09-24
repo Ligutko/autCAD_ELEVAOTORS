@@ -1,0 +1,25 @@
+{
+  "id": "rec_4b6a75b6",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "section_length",
+    "value": 3048,
+    "unit": "mm",
+    "qualifier": "довжина стандартної проміжної секції 10 ft (3 м)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.brockgrain.com/wp-content/uploads/2022/02/BR-2312-202201-Brock-Solid-Belt-Conveyor-Brochure-EM.pdf",
+    "path": "inbox/raw/web/brockgrain.com/BR-2312-202201-Brock-Solid-Belt-Conveyor-Brochure-EM.pdf",
+    "page": 2,
+    "quote": "standard intermediate 10-foot (3-meter) sections",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Brock Enclosed Roller-Belt Conveyor (зерно, закритий, стрічки 650–1350 мм). Крок роликів — конструктивне правило, мало залежить від ширини стрічки. ",
+  "seen_in": []
+}

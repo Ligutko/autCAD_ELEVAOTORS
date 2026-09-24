@@ -1,0 +1,27 @@
+{
+  "id": "rec_e2f99da1",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "scraper_width",
+    "value": 290,
+    "unit": "mm",
+    "qualifier": "ширина скребків, ТЦС-100L"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 18,
+    "quote": "Ширина скребків мм 190 290 340 390 390 440 490 2x290 2x345",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_a252cb9a"
+  ],
+  "notes": "Каталог — PDF без текстового шару (скановані сторінки). Цитату прочитано з рендера сторінки 200 dpi і звірено з транскрипцією Gemini 2.5 Pro. Поточна назва моделі 100 т/год у каталозі — ТЦС-100L; «ТЦС-320» — стара назва (див. картки legacy).",
+  "seen_in": []
+}

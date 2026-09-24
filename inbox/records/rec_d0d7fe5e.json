@@ -1,0 +1,25 @@
+{
+  "id": "rec_d0d7fe5e",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "dimension",
+  "claim": {
+    "name": "aeration_area_share",
+    "value": 18,
+    "unit": "%",
+    "qualifier": "частка площі аераційних каналів від площі дна (система HA)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 81,
+    "quote": "Silo 14,51-32m.18%12% of the aeration surface on the total bottom silo surface.",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Symaga (Іспанія), металеві силоси з плоским дном, той самий тип (гофра, болти). Лубнимаш розмірів люків і каналів не публікує. У тексті джерела «18%12%» — друкарська помилка; у сусідньому реченні для HA прямо «18%».",
+  "seen_in": []
+}

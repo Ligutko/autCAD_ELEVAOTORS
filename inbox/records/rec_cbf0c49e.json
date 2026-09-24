@@ -1,0 +1,25 @@
+{
+  "id": "rec_cbf0c49e",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "carrying_idler_spacing",
+    "value": 1524,
+    "unit": "mm",
+    "qualifier": "крок роликоопор робочої гілки в проміжних секціях 3 м (10 ft) — через 5 ft"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.brockgrain.com/wp-content/uploads/2022/02/BR-2312-202201-Brock-Solid-Belt-Conveyor-Brochure-EM.pdf",
+    "path": "inbox/raw/web/brockgrain.com/BR-2312-202201-Brock-Solid-Belt-Conveyor-Brochure-EM.pdf",
+    "page": 2,
+    "quote": "standard intermediate 10-foot (3-meter) sections are mounted on 5-foot (1.5-meter) centers",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Brock Enclosed Roller-Belt Conveyor (зерно, закритий, стрічки 650–1350 мм). Крок роликів — конструктивне правило, мало залежить від ширини стрічки. ",
+  "seen_in": []
+}

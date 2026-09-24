@@ -1,0 +1,25 @@
+{
+  "id": "rec_67dcadbb",
+  "subject": "МСВУ 220.13.В12",
+  "kind": "dimension",
+  "claim": {
+    "name": "aeration_channel_width",
+    "value": 705,
+    "unit": "mm",
+    "qualifier": "ширина аераційного каналу системи HA (силоси 14,51–32 м, H-канали на 2 або 4 вентилятори)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 81,
+    "quote": "Channels width is 705 mm.",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Symaga (Іспанія), металеві силоси з плоским дном, той самий тип (гофра, болти). Лубнимаш розмірів люків і каналів не публікує. У нас 4 вентилятори на силос — відповідає схемі H на 4 вентилятори.",
+  "seen_in": []
+}

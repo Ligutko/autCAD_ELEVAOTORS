@@ -1,0 +1,27 @@
+{
+  "id": "rec_62f1485a",
+  "subject": "У13-УН175 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "mass",
+    "value": 4500,
+    "unit": "kg",
+    "qualifier": "маса норії, колонка УН-175 (висота в оголошенні не вказана)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://ua.bizorg.su/norii-lentochnye-kovshovye-r/p15993192-norii-lentochnye-kovshovye-u13un-primenyayutsya-v-kachestve-podemnotransportnogo-oborudovaniya-dlya-",
+    "path": "inbox/raw/web/ua.bizorg.su/bizorg_un175_lubnymash.html",
+    "page": null,
+    "quote": "Масса кг 1200 1400 2535 3600 4200 4500",
+    "retrieved_at": "2026-09-23",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_28badd8e"
+  ],
+  "notes": "Оголошення продавця «ЛУБНЫМАШ, ЧП» на bizorg (таблиця У13-УН, колонки УН-5…УН-175). Це матеріал самого заводу, але старий і не з поточного каталогу; поточний каталог 2025.1 таких рядків не має. На кресленні норія має код У13-УН175, але продуктивність 100 т/год і 22 кВт. У таблиці заводу 22 кВт мають обидві колонки, УН-100 і УН-175, тому яка колонка наша — не визначено. Записано обидві з conflict_with; вибір за людиною.",
+  "seen_in": []
+}

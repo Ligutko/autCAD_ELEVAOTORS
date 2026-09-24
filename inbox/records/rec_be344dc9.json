@@ -1,0 +1,25 @@
+{
+  "id": "rec_be344dc9",
+  "subject": "У13-ТЦС-320 (транспортер ланцюговий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "conveyor_width",
+    "value": 320,
+    "unit": "mm",
+    "qualifier": "аналог АА-ТЦС-320: ширина транспортера 320 мм при 100 т/год, секції 250–3000 мм"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://avers-agro.com.ua/en/transporter_cepnoj_aa-tcs-320",
+    "path": "inbox/raw/web/avers-agro.com.ua/aa-tcs-320.html",
+    "page": null,
+    "quote": "Продуктивність, т/год 100 Лінійна швидкість, м/с до 0,8 Потужність приводу, кВт от 0,75 Ширина транспортера, мм 320",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: Avers-Agro, АА-ТЦС-320, той самий індекс і клас 100 т/год. Підтверджує, що «320» у назві — ширина транспортера (короба), а не довжина чи потужність.",
+  "seen_in": []
+}

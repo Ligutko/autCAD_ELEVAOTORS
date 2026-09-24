@@ -1,0 +1,25 @@
+{
+  "id": "rec_7d02a65b",
+  "subject": "У13-ТЗА-350/400 (засувка з електроприводом; у каталозі серія ТЕА.М)",
+  "kind": "dimension",
+  "claim": {
+    "name": "overall_footprint",
+    "value": "700x600",
+    "unit": "mm",
+    "qualifier": "оцінка габариту в плані ТЕА.М □400 з мотор-редуктором збоку"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 27,
+    "quote": "Серія TEA.M",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Розмірів у плані в джерелах немає. На фото (сайт, u13-tzr_tea.png) ТЕА.М — коробчастий корпус висотою 250 мм з фланцями, черв'ячний мотор-редуктор з двигуном збоку на торці. Корпус ≈ рейсмус + 2×40 мм (≈530 мм для □400), мотор-редуктор виступає на 250–350 мм. Діапазон: 450–550 × 750–900 мм. Для □350 на 50 мм менше.",
+  "seen_in": []
+}

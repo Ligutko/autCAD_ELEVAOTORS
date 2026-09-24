@@ -1,0 +1,25 @@
+{
+  "id": "rec_95d7e612",
+  "subject": "У13-ТЗР-350/400 (засувка ручна; у каталозі серія ТЗР.М)",
+  "kind": "dimension",
+  "claim": {
+    "name": "overall_length",
+    "value": 1000,
+    "unit": "mm",
+    "qualifier": "оцінка довжини ТЗР.М □400 з рейкою і штурвалом"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 27,
+    "quote": "Серія ТЗР.М",
+    "retrieved_at": "2026-09-24",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Розмірів немає. На фото (u13-tzr.png) — плаский корпус 90 мм і рамка-напрямна для висунутого шибера такої ж довжини, як отвір; штурвал на валу-шестерні з боку рамки. Довжина ≈ корпус (≈530) + рамка (≈450) ≈ 1000 мм; діапазон 900–1150. Штурвал Ø250–300 мм.",
+  "seen_in": []
+}

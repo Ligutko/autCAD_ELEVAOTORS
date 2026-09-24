@@ -1,18 +1,20 @@
-"""Bucket elevator Н-100 (100 t/h, 22 kW), detailed: belt loop with buckets, pulleys,
-head and boot with removable front covers (cutaway), drive, sensors, explosion vent.
+"""Bucket elevator У13-УН175 (spec PDF p.8: 100 t/h real, 22 kW, fed on the back leg), detailed:
+belt loop with buckets, pulleys, head and boot with removable front covers (cutaway), drive,
+sensors, explosion vent.
 
 Local frame: the tower frame of noria_tower.py. Belt runs in the XZ plane at y = BELT_Y,
 up leg on -X, down leg on +X. Z = 0 at grade.
 
-Sizing (sources in brackets; see FIELD_CASES / inbox/reports/noria_dims.md):
-  Q = 100 t/h, 22 kW                                    [catalogue, PDF p.8]
-  belt speed 2.2-2.7 m/s -> 2.5                         [LUB UN-100]
-  bucket volume: Q = 3.6 v (i/a) rho phi, rho 0.75, phi 0.75, a 0.18 -> i = 3.6 l   [calc]
-  bucket 300 x 175 x 190 mm for ~3.6 l                  [EST, calc]
-  pitch 180 mm, leg clear 376 x 256 mm                  [ad 2017; bucket fits: calc]
-  head/tail pulley Ø630: n = 76 rpm, pole distance 895/n^2 = 0.156 m < r = 0.315 m,
-  so the discharge is centrifugal                       [STD pulley series, calc]
-  leg sheet >= 2 mm, head and boot >= 3 mm              [LUB news]
+Sizing (cards in inbox/records, report research/lubnymash_equipment.md):
+  model УН-175 chosen by the owner 2026-09-25
+  pulleys Ø750 x 320, leg clear 376 x 256, belt 2.87 m/s   [LUB table, rec_b9ba35ae, rec_71bd802e,
+                                                              rec_d17c6dbf, rec_33e54ad0]
+  belt 300 mm, not the 400 in the same LUB column: a 400 belt fits neither the 320 drum
+  nor the 376 leg of that column                             [derived]
+  pitch 210 mm (LUB УН-175); bucket is the largest that clears the 256 leg:
+  280 wide, 180 projection, 190 deep; volume is computed from the mesh profile  [derived]
+  Ø750 at 2.87 m/s: n = 73 rpm, pole distance 0.168 m < r, centrifugal discharge  [calc]
+  leg sheet >= 2 mm, head and boot >= 3 mm                   [LUB news]
 """
 
 import math
@@ -22,14 +24,15 @@ import numpy as np
 from . import common as c
 from . import steel as st
 
-BELT_SPEED = 2.5
-PULLEY_R = 0.315
+BELT_SPEED = 2.87
+PULLEY_R = 0.375
 LAGGING = 0.012
-BELT_W = 0.325
+BELT_W = 0.300
 BELT_T = 0.010
 BELT_R = PULLEY_R + LAGGING + BELT_T / 2          # belt centreline radius on the pulleys
-BUCKET_PITCH = 0.18
-BUCKET_W = 0.300
+BUCKET_PITCH = 0.21
+BUCKET_W = 0.280
+BUCKET_DEPTH = 0.19                                # along travel, < pitch
 BUCKET_T = 0.0065                  # research: Tapco CC-HD 12x6 wall 6.4 mm
 LEG_CLEAR_X = 0.256                               # across bucket projection
 LEG_CLEAR_Y = 0.376                               # across belt width
@@ -120,7 +123,17 @@ def _bucket_profile(n_arc=8):
     for t in np.linspace(0, 1, n_arc)[1:]:                                     # sloped front
         pts.append(tuple((1 - t) ** 2 * p0 + 2 * (1 - t) * t * p1 + t ** 2 * p2))
     pts.append((0.180, 0.152))                                                  # rolled lip
-    return np.array(pts)
+    pts = np.array(pts)
+    pts[:, 1] *= BUCKET_DEPTH / 0.16
+    return pts
+
+
+def bucket_volume_l():
+    """Gross volume to the lip, from the same profile the mesh is built from."""
+    p = _bucket_profile()
+    x, y = p[:, 0], p[:, 1]
+    area = 0.5 * abs(np.dot(x, np.roll(y, -1)) - np.dot(y, np.roll(x, -1)))
+    return area * (BUCKET_W - 2 * BUCKET_T) * 1000
 
 
 def _offset_inward(prof, d):
@@ -155,8 +168,8 @@ def _bucket_local():
     faces.append(np.arange(base + 3 * m, base + 4 * m)[::-1][None, :])
     parts = [(np.array(verts), faces)]
     # 4 x M8 DIN 15237 fang bolts, Ø28 head, 88 mm pitch, 57 mm below the top edge (research)
-    for w in (-0.132, -0.044, 0.044, 0.132):
-        parts.append(st.member((BUCKET_T, 0.16 - 0.057, w), (BUCKET_T + 0.004, 0.16 - 0.057, w),
+    for w in (-0.11, -0.037, 0.037, 0.11):
+        parts.append(st.member((BUCKET_T, BUCKET_DEPTH - 0.057, w), (BUCKET_T + 0.004, BUCKET_DEPTH - 0.057, w),
                                np.column_stack([0.014 * np.cos(np.arange(12) * math.pi / 6),
                                                 0.014 * np.sin(np.arange(12) * math.pi / 6)]), up=(0, 1, 0)))
     return c.merge_parts(parts)
@@ -164,8 +177,9 @@ def _bucket_local():
 
 def _grain_local():
     """Grain in a loaded bucket: a low mound filling ~75 %."""
-    v = np.array([(0.01, 0.01, -0.14), (0.16, 0.01, -0.14), (0.165, 0.12, -0.14), (0.01, 0.145, -0.14),
-                  (0.01, 0.01, 0.14), (0.16, 0.01, 0.14), (0.165, 0.12, 0.14), (0.01, 0.145, 0.14)])
+    k, hw = BUCKET_DEPTH / 0.16, BUCKET_W / 2 - 0.01
+    v = np.array([(0.01, 0.01, -hw), (0.16, 0.01, -hw), (0.165, 0.12 * k, -hw), (0.01, 0.145 * k, -hw),
+                  (0.01, 0.01, hw), (0.16, 0.01, hw), (0.165, 0.12 * k, hw), (0.01, 0.145 * k, hw)])
     f = np.array([(0, 1, 2, 3), (4, 7, 6, 5), (0, 4, 5, 1), (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)])
     return v, f
 
@@ -438,8 +452,9 @@ def build(top_z, pit_z, phase=0.0):
             sensors.append(c.box((xx - 0.035, BELT_Y + 0.30 + 0.006, zz - 0.05),
                                  (xx + 0.035, BELT_Y + 0.30 + 0.09, zz + 0.05)))
     labels.append(("Датчик сходу стрічки", (LEG_CENTRES_X[0], BELT_Y + 0.39, z_head - 0.2)))
-    labels.append(("Барабан голови Ø630, футерований", (CX, BELT_Y + 0.16, z_head + PULLEY_R)))
-    labels.append(("Ківш 3,6 л, крок 180 мм", (CX - BELT_R - 0.1, BELT_Y, z_head - 0.5)))
+    labels.append((f"Барабан голови Ø{round(2000 * PULLEY_R)}, футерований", (CX, BELT_Y + 0.16, z_head + PULLEY_R)))
+    labels.append((f"Ківш {bucket_volume_l():.1f} л, крок {round(1000 * BUCKET_PITCH)} мм".replace(".", ","),
+                   (CX - BELT_R - 0.1, BELT_Y, z_head - 0.5)))
     labels.append(("Барабан башмака самоочисний (крильчастий)", (CX, BELT_Y + 0.16, z_boot + PULLEY_R)))
     sensors.append(st.rod((CX, BELT_Y + 0.62, z_boot), (CX, BELT_Y + 0.72, z_boot), 0.03, 12))
     labels.append(("Датчик швидкості (контроль руху стрічки)", (CX, BELT_Y + 0.72, z_boot)))
@@ -454,10 +469,14 @@ def build(top_z, pit_z, phase=0.0):
         "pulley_rpm": round(60 * BELT_SPEED / (math.pi * 2 * PULLEY_R), 1),
         "pole_distance_m": round(895 / (60 * BELT_SPEED / (math.pi * 2 * PULLEY_R)) ** 2, 3),
         "discharge": "centrifugal" if 895 / (60 * BELT_SPEED / (math.pi * 2 * PULLEY_R)) ** 2 < PULLEY_R else "gravity",
-        "bucket_volume_l_calc": round(100 / (3.6 * BELT_SPEED * 0.75 * 0.75) * BUCKET_PITCH, 2),
-        "bucket_mm": [300, 180, 160],
+        "bucket_volume_l_required_100th": round(100 / (3.6 * BELT_SPEED * 0.75 * 0.75) * BUCKET_PITCH, 2),
+        "bucket_volume_l_required_back_leg_feed": round(100 / 0.7 / (3.6 * BELT_SPEED * 0.75 * 0.75) * BUCKET_PITCH, 2),
+        "bucket_volume_l_model": round(bucket_volume_l(), 2),
+        "bucket_mm": [round(1000 * BUCKET_W), 180, round(1000 * BUCKET_DEPTH)],
+        "belt_width_mm": round(1000 * BELT_W),
+        "leg_length_m": round((z_head - 0.75) - (z_boot + 0.70), 2),
         "bucket_wall_mm": 6.5,
-        "bucket_bolts": "4 x M8 DIN 15237, 88 mm pitch",
+        "bucket_bolts": "4 x M8 DIN 15237, 74 mm pitch",
         "bucket_pitch_m": BUCKET_PITCH,
         "buckets": n_buckets,
         "belt_loop_m": round(path.length, 2),
