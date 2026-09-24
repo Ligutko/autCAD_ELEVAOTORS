@@ -206,9 +206,9 @@ def build_roof():
 def build_eave_and_collar(peak_z):
     parts = []
     # eave angle ring where roof sits on wall
-    parts.append(c.cylinder(R + 0.5 * WAVE_DEPTH + 0.06, WALL_TOP - 0.10, WALL_TOP, steps=AROUND // 2))
+    parts.append(c.cylinder(R + 0.5 * WAVE_DEPTH + 0.06, WALL_TOP - 0.10, WALL_TOP, steps=AROUND // 2, capped=False))
     # top collar ring and spout (Ø400) up to +21.422
-    parts.append(c.cylinder(COLLAR_R + 0.04, peak_z - 0.05, peak_z + 0.25, steps=64))
+    parts.append(c.cylinder(COLLAR_R + 0.04, peak_z - 0.05, peak_z + 0.25, steps=64, capped=False))
     parts.append(c.cylinder(SPOUT_R, peak_z + 0.25, SPOUT_TOP, steps=32))
     parts.append(c.cylinder(SPOUT_R + 0.05, SPOUT_TOP - 0.02, SPOUT_TOP, steps=32))
     return c.merge_parts(parts)
@@ -418,7 +418,7 @@ def build_roof_vents():
 
 # ================================================================== assembly
 
-def build(collection=None, materials=None):
+def build(collection=None, materials=None, cut=None):
     """Build the silo into `collection`. Returns (objects, measure)."""
     m = materials or {
         "galv": c.mat_galvanized("SILO_GALV", age=0.30),
@@ -430,34 +430,42 @@ def build(collection=None, materials=None):
         "fan_paint": c.mat_painted("FAN_HOUSING", (0.42, 0.45, 0.46), 0.35, grime=0.35),
     }
     objs = {}
+
+    def mk(name, v, f, *args, **kw):
+        if cut is not None:
+            v, f = c.cut_mesh(v, f, cut)
+            if not f:
+                return None
+        return c.mesh_from_arrays(name, v, f, *args, **kw)
+
     v, f = build_wall()
-    objs["wall"] = c.mesh_from_arrays("SILO_WALL", v, f, m["galv"], smooth=True, collection=collection)
+    objs["wall"] = mk("SILO_WALL", v, f, m["galv"], smooth=True, collection=collection)
     v, f = build_stiffeners()
-    objs["stiffeners"] = c.mesh_from_arrays("SILO_STIFFENERS", v, f, m["galv"], collection=collection)
+    objs["stiffeners"] = mk("SILO_STIFFENERS", v, f, m["galv"], collection=collection)
     th, zz, rr = bolt_positions()
     v, f = hex_heads(th, zz, rr)
-    objs["bolts"] = c.mesh_from_arrays("SILO_BOLTS", v, f, m["galv_old"], collection=collection)
+    objs["bolts"] = mk("SILO_BOLTS", v, f, m["galv_old"], collection=collection)
     (v, f), peak_z = build_roof()
-    objs["roof"] = c.mesh_from_arrays("SILO_ROOF", v, f, m["galv_old"], smooth=True, collection=collection)
+    objs["roof"] = mk("SILO_ROOF", v, f, m["galv_old"], smooth=True, collection=collection)
     v, f = build_eave_and_collar(peak_z)
-    objs["collar"] = c.mesh_from_arrays("SILO_EAVE_COLLAR", v, f, m["galv"], smooth="quads", collection=collection)
+    objs["collar"] = mk("SILO_EAVE_COLLAR", v, f, m["galv"], smooth="quads", collection=collection)
     v, f = build_foundation()
-    objs["foundation"] = c.mesh_from_arrays("SILO_FOUNDATION", v, f, m["concrete"], collection=collection)
+    objs["foundation"] = mk("SILO_FOUNDATION", v, f, m["concrete"], collection=collection)
     v, f = build_anchors()
-    objs["anchors"] = c.mesh_from_arrays("SILO_ANCHORS", v, f, m["galv_old"], collection=collection)
+    objs["anchors"] = mk("SILO_ANCHORS", v, f, m["galv_old"], collection=collection)
     (vf, ff), (vp, fp) = build_door()
-    objs["door_frame"] = c.mesh_from_arrays("SILO_DOOR_FRAME", vf, ff, m["galv"], collection=collection)
-    objs["door"] = c.mesh_from_arrays("SILO_DOOR", vp, fp, m["galv_old"], collection=collection)
+    objs["door_frame"] = mk("SILO_DOOR_FRAME", vf, ff, m["galv"], collection=collection)
+    objs["door"] = mk("SILO_DOOR", vp, fp, m["galv_old"], collection=collection)
     v, f = build_ladder()
-    objs["ladder"] = c.mesh_from_arrays("SILO_LADDER", v, f, m["galv_old"], smooth="quads", collection=collection)
+    objs["ladder"] = mk("SILO_LADDER", v, f, m["galv_old"], smooth="quads", collection=collection)
     (vh, fh), (vm, fm), (vd, fd), (vpad, fpad), (vk, fk) = build_fans()
-    objs["fan_dark"] = c.mesh_from_arrays("SILO_FAN_FRAME", vk, fk, m["dark"], smooth="quads", collection=collection)
-    objs["fan_housing"] = c.mesh_from_arrays("SILO_FAN_HOUSING", vh, fh, m["fan_paint"], smooth="quads", collection=collection)
-    objs["fan_motor"] = c.mesh_from_arrays("SILO_FAN_MOTOR", vm, fm, m["paint_motor"], smooth="quads", collection=collection)
-    objs["fan_duct"] = c.mesh_from_arrays("SILO_FAN_DUCT", vd, fd, m["galv"], collection=collection)
-    objs["fan_pad"] = c.mesh_from_arrays("SILO_FAN_PAD", vpad, fpad, m["concrete"], collection=collection)
+    objs["fan_dark"] = mk("SILO_FAN_FRAME", vk, fk, m["dark"], smooth="quads", collection=collection)
+    objs["fan_housing"] = mk("SILO_FAN_HOUSING", vh, fh, m["fan_paint"], smooth="quads", collection=collection)
+    objs["fan_motor"] = mk("SILO_FAN_MOTOR", vm, fm, m["paint_motor"], smooth="quads", collection=collection)
+    objs["fan_duct"] = mk("SILO_FAN_DUCT", vd, fd, m["galv"], collection=collection)
+    objs["fan_pad"] = mk("SILO_FAN_PAD", vpad, fpad, m["concrete"], collection=collection)
     v, f = build_roof_vents()
-    objs["vents"] = c.mesh_from_arrays("SILO_ROOF_VENTS", v, f, m["galv"], collection=collection)
+    objs["vents"] = mk("SILO_ROOF_VENTS", v, f, m["galv"], collection=collection)
 
     measure = {
         "outer_radius_m": R,
@@ -474,6 +482,6 @@ def build(collection=None, materials=None):
         "spout_top_z_m": SPOUT_TOP,
         "bolts": int(len(th)),
         "aeration_fans": AERATION_FANS,
-        "vertices_total": int(sum(len(o.data.vertices) for o in objs.values())),
+        "vertices_total": int(sum(len(o.data.vertices) for o in objs.values() if o is not None)),
     }
     return objs, measure

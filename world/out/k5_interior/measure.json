@@ -1,0 +1,14 @@
+{
+  "channels": 24,
+  "channel_width_m": 0.505,
+  "gates": 7,
+  "cables": 13,
+  "sensor_step_m": 2.0,
+  "sweep_length_m": 10.4,
+  "rafters": 40,
+  "fill": 0.0,
+  "grain_repose_deg": 27.0,
+  "grain_mass_t_full": 4786,
+  "aeration_required_m3h": 47860,
+  "build_seconds": 10.2
+}

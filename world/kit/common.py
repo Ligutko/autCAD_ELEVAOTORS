@@ -520,6 +520,22 @@ def face_labels(label_objs, cam, max_dist=7.0, lift=0.38):
         view = world_to_camera_view(scene, cam, anchor)
         dist = (anchor - cam_m.translation).length
         visible = 0.03 < view.x < 0.97 and 0.03 < view.y < 0.97 and view.z > 0 and dist < max_dist
+        if visible:                                   # hidden behind geometry (grain, walls)?
+            dg = bpy.context.evaluated_depsgraph_get()
+            origin = cam_m.translation.copy()
+            direction = (anchor - origin).normalized()
+            travelled = 0.0
+            for _ in range(8):
+                hit, loc, _, _, obj, _ = scene.ray_cast(dg, origin, direction, distance=dist - travelled - 0.25)
+                if not hit:
+                    break
+                if obj.name.startswith("LBL_") or "VOLUME" in obj.name or obj.hide_render:
+                    step = (loc - origin).length + 0.01
+                    origin = loc + direction * 0.01
+                    travelled += step
+                    continue
+                visible = False
+                break
         parts = [bpy.data.objects[n] for n in o["parts"]]
         for p in parts:
             p.hide_render = not visible
@@ -609,3 +625,51 @@ def render_with_labels(scene, cam, path, label_objs):
     Image.alpha_composite(base, top).convert("RGB").save(path)
     os.remove(tmp_main)
     os.remove(tmp_lbl)
+
+
+def cut_mesh(verts, faces, normal):
+    """Remove the half facing the camera for cutaways: plane through the origin with the given
+    plan normal. Quads and triangles are kept or dropped by their centre; larger polygons
+    (caps, plates) are clipped exactly against the plane so solids keep their top faces."""
+    n = np.array([normal[0], normal[1], 0.0], float)
+    n /= np.linalg.norm(n)
+    verts = np.asarray(verts, float)
+    blocks = faces if isinstance(faces, list) else [faces]
+    kept, extra_v, ngons = [], [], []
+    base = len(verts)
+    for b in blocks:
+        b = np.asarray(b)
+        if not len(b):
+            continue
+        dv = verts[b] @ n
+        straddle = (dv.min(axis=1) < 0) & (dv.max(axis=1) > 0)
+        span = np.ptp(verts[b], axis=1).max(axis=1)
+        exact = straddle & (span > 0.3) if b.shape[1] <= 4 else np.ones(len(b), bool)
+        if b.shape[1] <= 4:
+            centre = verts[b].mean(axis=1)
+            kept.append(b[~exact & ((centre @ n) < 0.0)])
+        b = b[exact]
+        for poly in b:
+            pts = verts[poly]
+            d = pts @ n
+            out = []
+            for i in range(len(pts)):
+                p, q = pts[i], pts[(i + 1) % len(pts)]
+                dp, dq = d[i], d[(i + 1) % len(pts)]
+                if dp < 0:
+                    out.append(p)
+                if (dp < 0) != (dq < 0):
+                    out.append(p + (q - p) * (dp / (dp - dq)))
+            if len(out) >= 3:
+                idx = np.arange(base, base + len(out))
+                extra_v += out
+                base += len(out)
+                ngons.append(idx)
+    if extra_v:
+        verts = np.concatenate([verts, np.array(extra_v)])
+    kept = [k for k in kept if len(k)]
+    by_len = {}
+    for g in ngons:
+        by_len.setdefault(len(g), []).append(g)
+    kept += [np.array(v) for v in by_len.values()]
+    return verts, kept
