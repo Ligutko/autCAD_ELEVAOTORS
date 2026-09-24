@@ -2,6 +2,8 @@
 
 Run:
     python world/build/site.py [--quick]
+    blender --python world/build/site.py -- --no-render     # opens the built scene in Blender to fly around
+    (--no-render builds the scene, saves world/out/site/site.blend and skips the test frames)
 """
 
 import json
@@ -104,6 +106,12 @@ def main():
         "site_gallery_walk.png": c.camera("CAM_WALK", (-3.5, 0.4, 24.9), (-30, 0.2, 23.6), lens=20),
         "site_bridge.png": c.camera("CAM_BRIDGE", (9, 12.7, 17), (0, 12.7, 24.5), lens=24),
     }
+    scene.camera = cams["site_drone.png"]
+    if "--no-render" in sys.argv:
+        path = OUT / "site.blend"
+        bpy.ops.wm.save_as_mainfile(filepath=str(path), compress=True)
+        print("saved", path, "build", build_s, "s", flush=True)
+        return
     for name, cam in cams.items():
         t = time.time()
         c.render(scene, cam, OUT / name)
