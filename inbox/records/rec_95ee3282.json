@@ -1,0 +1,31 @@
+{
+  "id": "rec_95ee3282",
+  "subject": "Тунель під рядом силосів (T9 / T13 / T16)",
+  "kind": "dimension",
+  "claim": {
+    "name": "exit_stair_treads",
+    "value": "11 x 250",
+    "unit": "mm",
+    "qualifier": "11 ліній проступів з кроком 250 мм, стрілка «вгору» на північ"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      207.48,
+      597.48,
+      217.44,
+      628.8
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p02_row1_west_end.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "T13/T16: проступи від Y +1.446 до +3.949; T9: від +1.247 до +3.750 (перший за 0.25 м від стіни тунелю, далі майданчик ≈0.95 м). Висоти підйому на кресленні немає. Масштаб аркуша 2: 79.92 мм/pt (rec_5e8d7132). Y від осі ряду силосів на північ, X від осі вежі норії на схід. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

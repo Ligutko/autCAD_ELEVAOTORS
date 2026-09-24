@@ -1,0 +1,31 @@
+{
+  "id": "rec_d1bb23f1",
+  "subject": "Тунель під рядом силосів (T9 / T13 / T16)",
+  "kind": "dimension",
+  "claim": {
+    "name": "T16_east_inner_end_x",
+    "value": 51.5,
+    "unit": "m",
+    "qualifier": "T16: внутрішня грань східного торця від осі вежі H6; західний кінець — стіна приямку H6 (X +2.0)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 7,
+    "bbox": [
+      1598.28,
+      783.0,
+      1604.16,
+      825.12
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p07_T16_tunnel_dims.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аркуш 7: x 1598.28 -> +51.50 м; план: +51.50 м. Масштаб аркуша 7: 68.86 мм/pt (картка масштабу аркуша 7). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

@@ -1,0 +1,33 @@
+{
+  "id": "rec_e629b634",
+  "subject": "Тунель під рядом силосів (T9 / T13 / T16)",
+  "kind": "elevation",
+  "claim": {
+    "name": "plan_mark_in_tunnel",
+    "value": -3.0,
+    "unit": "m",
+    "qualifier": "відмітка в рамці всередині смуги тунелю на плані ±0.000"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      255,
+      935,
+      300,
+      950
+    ],
+    "quote": "-3,000",
+    "crop": "inbox/raw/pdf_crops/p02_row2_west_end.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_88c595d8"
+  ],
+  "notes": "Прочитано очима з кропу; по дві такі мітки в кожному ряду. Усі чотири розрізи (арк. 4, 5, 6, 7) дають підлогу -1,900. Можливо, це залишок старої версії або низ фундаменту — не з'ясовано. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

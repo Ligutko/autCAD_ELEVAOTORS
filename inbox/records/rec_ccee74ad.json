@@ -1,0 +1,31 @@
+{
+  "id": "rec_ccee74ad",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "casing_width_section",
+    "value": 660,
+    "unit": "mm",
+    "qualifier": "ширина кожуха в поперечному розрізі біля приводу; контур на плані 854 мм разом з опорами"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 4,
+    "bbox": [
+      337.56,
+      869.28,
+      352.8,
+      885.24
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p04_H6_pit.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аркуш 4: синій короб ±329 мм від осі (658), барабанна частина ±316 (632); рама опор ±417 … ±464. План: смуга 10.68 pt = 854 мм. Аналог CSEB-18: 635 мм зовні (rec_69073a1f). Масштаб аркуша 4: 56.02 мм/pt (картка масштабу аркуша 4). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

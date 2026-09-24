@@ -1,0 +1,31 @@
+{
+  "id": "rec_91090ef1",
+  "subject": "H5 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "pit_inner_extent",
+    "value": "X -2.0 … +1.8; Y -1.2 … +3.0",
+    "unit": "m",
+    "qualifier": "від осі вежі H5 (X = силос 2 + 14500) і осі ряду 1–2 (Y)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      826.8,
+      606.84,
+      874.32,
+      659.4
+    ],
+    "quote": "3800",
+    "crop": "inbox/raw/pdf_crops/p02_H5_pit_plan.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "План: x 826.8 / 874.32 -> -2.00 / +1.80; y 606.84 / 659.4 -> +3.00 / -1.20. Аркуш 6: -2.00 / +1.80. Південна грань = південна грань тунелю T9 (-1.2). Масштаб аркуша 2: 79.92 мм/pt (rec_5e8d7132). Y від осі ряду силосів на північ, X від осі вежі норії на схід. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

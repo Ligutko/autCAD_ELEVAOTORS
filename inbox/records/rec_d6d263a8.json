@@ -1,0 +1,33 @@
+{
+  "id": "rec_d6d263a8",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "T13_T16_pulley_axes_x",
+    "value": "±49.70 / ±1.00",
+    "unit": "m",
+    "qualifier": "T13 (захід) і T16 (схід): натяжний / приводний барабан від осі вежі H6, за розрізом"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 7,
+    "bbox": [
+      128.64,
+      835.2,
+      1572.12,
+      845.28
+    ],
+    "quote": "48700",
+    "crop": "inbox/raw/pdf_crops/p07_T13_tunnel_dims.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_53f162e6"
+  ],
+  "notes": "Аркуш 7: обидва розміри 48700 від x 128.64 / 1572.12 до 835.92 / 864.84 -> X -49.70 … -0.99 і +1.00 … +49.70. Збігається зі специфікацією L=48,7 м (арк. 11, 12). Масштаб аркуша 7: 68.86 мм/pt (картка масштабу аркуша 7). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

@@ -1,0 +1,33 @@
+{
+  "id": "rec_ec26666e",
+  "subject": "Тунель під рядом силосів (T9 / T13 / T16)",
+  "kind": "dimension",
+  "claim": {
+    "name": "end_wall_thickness",
+    "value": 300,
+    "unit": "mm",
+    "qualifier": "торцева стіна тунелю, за планом"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      203.64,
+      902.16,
+      207.48,
+      979.68
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p02_row2_west_end.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_ed72bfcc"
+  ],
+  "notes": "План: 3.84 pt = 307 мм на всіх трьох торцях. Масштаб аркуша 2: 79.92 мм/pt (rec_5e8d7132). Y від осі ряду силосів на північ, X від осі вежі норії на схід. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

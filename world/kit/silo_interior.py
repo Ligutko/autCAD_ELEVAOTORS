@@ -24,8 +24,10 @@ AXIS_CLEAR = 0.45                  # PDF p.2: channels stop at the vertical cent
 BRANCH_T = [2.2, 4.0, 5.8, 7.6, 9.4]   # PDF p.2: 5 branches per quadrant; spacing EST 1.8 m
 FAN_ANGLES = silo.FAN_ANGLES       # collectors run from the four fans at 45 deg
 
-# ------------------------------------------------------------------ gates (PDF p.6, p.7; research B10)
-GATE_OFFSETS = [-9.75, -6.5, -3.25, 0.0, 2.75, 5.5, 8.25]
+# ------------------------------------------------------------------ gates (PDF p.2, p.6, p.7; research/tunnel_k4.md)
+# openings are symmetric at 3250 on all three sheets; the "2750" chain on p.6 misses the openings
+GATE_STEP = 3.25
+GATE_OFFSETS = [k * GATE_STEP for k in range(-3, 4)]
 GATE_SIZES = [0.35, 0.35, 0.35, 0.40, 0.35, 0.35, 0.35]
 
 # ------------------------------------------------------------------ temperature cables (research B8)

@@ -1,0 +1,31 @@
+{
+  "id": "rec_26f1f1e6",
+  "subject": "H6 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "noria_axis_offset",
+    "value": "X 0.0; Y +1.30",
+    "unit": "m",
+    "qualifier": "вісь норії H6 від осі вежі (X) і осі ряду силосів 3–6 (Y)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 4,
+    "bbox": [
+      327.24,
+      961.3,
+      398.64,
+      966.84
+    ],
+    "quote": "1000 1300",
+    "crop": "inbox/raw/pdf_crops/p04_H6_pit.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аркуш 4: вісь норії за 1000+1300 = 2300 від південної стіни приямку (Y -1.0) -> +1.30. План: центр між трубами норії y 947.16 -> +1.30; X 851.76 = середина між силосами 4 і 5. У SITE.json норія H6 стоїть на y 0 — розбіжність 1.3 м. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

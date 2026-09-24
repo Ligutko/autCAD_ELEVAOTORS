@@ -1,0 +1,31 @@
+{
+  "id": "rec_0179d2ef",
+  "subject": "H5 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "tower_frame_center_offset",
+    "value": "X -0.10; Y +0.70; осі колон 4.4 × 4.4",
+    "unit": "m",
+    "qualifier": "центр каркаса вежі H5 від середини між силосами 2 і осі ряду 1–2"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      821.76,
+      606.84,
+      879.36,
+      664.44
+    ],
+    "quote": "4400",
+    "crop": "inbox/raw/pdf_crops/p02_H5_pit_plan.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "План: квадрати колон x 823.02 / 878.1, y 608.1 / 663.18 -> X -2.30 / +2.10, Y +2.90 / -1.50. Аркуш 4: осі колон Y -1.50 / +2.90. Аркуш 6: X -2.30 / +2.10. SITE.json ставить вежу на 0 / 0. Масштаб аркуша 2: 79.92 мм/pt (rec_5e8d7132). Y від осі ряду силосів на північ, X від осі вежі норії на схід. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

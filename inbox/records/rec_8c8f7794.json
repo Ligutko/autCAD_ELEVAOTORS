@@ -1,0 +1,31 @@
+{
+  "id": "rec_8c8f7794",
+  "subject": "H6 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "pit_wall_bottom_thickness",
+    "value": "стіни 600, днище 500",
+    "unit": "mm",
+    "qualifier": "стіни і днище приямку H6 (дно -5.100, низ днища -5.600)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 4,
+    "bbox": [
+      316.56,
+      845.76,
+      409.44,
+      956.4
+    ],
+    "quote": "-5,100",
+    "crop": "inbox/raw/pdf_crops/p04_H6_pit.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аркуш 4: стіни 10.68 pt = 598 мм, днище 9.0 pt = 504 мм. Аркуш 7: стіни 595 / 603, днище 504. План: 600. Масштаб аркуша 4: 56.02 мм/pt (картка масштабу аркуша 4). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

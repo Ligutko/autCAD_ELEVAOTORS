@@ -1,0 +1,31 @@
+{
+  "id": "rec_8a121dce",
+  "subject": "H5 (норія 100 т/год)",
+  "kind": "elevation",
+  "claim": {
+    "name": "pit_bottom_elevation",
+    "value": -4.7,
+    "unit": "m",
+    "qualifier": "дно приямку башмака норії H5"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 6,
+    "bbox": [
+      915.48,
+      692.96,
+      954.12,
+      700.88
+    ],
+    "quote": "-4,700",
+    "crop": "inbox/raw/pdf_crops/p06_H5_pit_long.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Відмітка -4,700 на аркушах 4, 5, 6; лінія дна приямку y 700.88 (арк. 6) і 940.32 (арк. 4, -4.703). Днище 500 мм (низ -5.2). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

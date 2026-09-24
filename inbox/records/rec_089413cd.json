@@ -1,0 +1,31 @@
+{
+  "id": "rec_089413cd",
+  "subject": "Тунель під рядом силосів (T9 / T13 / T16)",
+  "kind": "dimension",
+  "claim": {
+    "name": "clear_width",
+    "value": 2200,
+    "unit": "mm",
+    "qualifier": "ширина тунелю у світлі = 1000 + 1200 від осі ряду силосів"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      505,
+      900,
+      540,
+      1000
+    ],
+    "quote": "1200 … 1000",
+    "crop": "inbox/raw/pdf_crops/p02_row2_tunnel_width_labels.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "На плані ±0.000 біля кожного ряду підписано 1000 і 1200 від осі ряду до внутрішніх граней стін. Вектор: 27.48 pt = 2196 мм (ряд 3–6), 2197 мм (ряд 1–2). Аркуш 4: контур отвору тунелю в стіні приямку 39.36 pt = 2205 мм (H6) і 39.24 pt = 2198 мм (H5). Масштаб аркуша 2: 79.92 мм/pt (rec_5e8d7132). Y від осі ряду силосів на північ, X від осі вежі норії на схід. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

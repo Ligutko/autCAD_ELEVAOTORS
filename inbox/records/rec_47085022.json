@@ -1,0 +1,31 @@
+{
+  "id": "rec_47085022",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "elevation",
+  "claim": {
+    "name": "casing_bottom_top_elevation",
+    "value": "-1.60 / -0.91",
+    "unit": "m",
+    "qualifier": "низ / верх кожуха по всій довжині (висота кожуха ≈0.69 м)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 6,
+    "bbox": [
+      71.8,
+      640.76,
+      879.8,
+      651.68
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p06_gate_S1_center_1200dpi.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аркуш 6: сині лінії y 651.68 -> -1.597, y 643.04 -> -1.052, y 640.76 -> -0.908 на всій довжині від X -50.59 до +0.35. Аркуш 7: -1.594/-1.603, -1.049, -0.900 — те саме. Аналог Chief CSEB-18 (rec_18cbb2b0) має висоту 624 мм — близько. Масштаб аркуша 6: 63.05 мм/pt по горизонталі, 63.1 по вертикалі (картка масштабу аркуша 6). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

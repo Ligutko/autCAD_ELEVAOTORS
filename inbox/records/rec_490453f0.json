@@ -1,0 +1,25 @@
+{
+  "id": "rec_490453f0",
+  "subject": "Зерновий комплекс",
+  "kind": "fact",
+  "claim": {
+    "name": "pit_access_ladder",
+    "value": "вертикальна драбина від перекриття -1.900 до дна приямку через люк",
+    "unit": null,
+    "qualifier": "доступ у нижню частину приямків H5/H6"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 4,
+    "bbox": null,
+    "quote": "",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "На аркушах 2, 4, 6, 7 драбини і люка в приямку не видно. Обслуговування башмака вимагає доступу, тому ставимо сталеву драбину з дугами (ISO 14122-4) і люк ≈0.8 × 0.8 у перекритті біля стіни, яку не займає тунель. Висота: H5 2.8 м, H6 3.2 м. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

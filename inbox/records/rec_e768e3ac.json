@@ -1,0 +1,31 @@
+{
+  "id": "rec_e768e3ac",
+  "subject": "Зерновий комплекс",
+  "kind": "scale",
+  "claim": {
+    "sheet": 4,
+    "sheet_unit": "pt",
+    "world_unit": "mm",
+    "factor": 56.02
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 4,
+    "bbox": [
+      327.24,
+      947.4,
+      398.64,
+      966.84
+    ],
+    "quote": "1000 1300 1700",
+    "crop": "inbox/raw/pdf_crops/p04_H6_pit.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Масштаб розрізу аркуша 4 (приямок H6). Ланцюг 1000+1300+1700 = 4000 мм = 71.40 pt (внутрішні грані стін x 327.24–398.64) -> 56.02 мм/pt. Перевірка: відмітки -1,900 (y 890.28) і -5,100 (y 947.40) = 57.12 pt -> 3200 мм (0.0 %); приямок H5 на тому ж аркуші 75.0 pt -> 4202 мм проти 4200 на плані (0.05 %). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

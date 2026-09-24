@@ -1,0 +1,31 @@
+{
+  "id": "rec_e3c7ac60",
+  "subject": "Зерновий комплекс",
+  "kind": "scale",
+  "claim": {
+    "sheet": 7,
+    "sheet_unit": "pt",
+    "world_unit": "mm",
+    "factor": 68.86
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 7,
+    "bbox": [
+      128.64,
+      835.2,
+      835.92,
+      845.28
+    ],
+    "quote": "48700",
+    "crop": "inbox/raw/pdf_crops/p07_T13_tunnel_dims.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Масштаб розрізу аркуша 7 (ряд силосів 3–6, T13/T16). Обидва розміри 48700 = 707.28 pt -> 68.86 мм/pt. Перевірка: стіна силоса 6 (x 1249.8–1569.24) = 21997 мм проти 22000; 3200 (дно приямку -5,100 від -1,900) = 46.44 pt -> 3198 мм; +0,600 -> -1,900 = 36.36 pt -> 2504 мм. Похибка < 0.2 %. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

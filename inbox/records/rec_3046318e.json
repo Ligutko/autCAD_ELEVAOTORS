@@ -1,0 +1,31 @@
+{
+  "id": "rec_3046318e",
+  "subject": "Зерновий комплекс",
+  "kind": "elevation",
+  "claim": {
+    "name": "ground_line_near_silos",
+    "value": -0.45,
+    "unit": "m",
+    "qualifier": "лінія землі зі штриховкою на розрізі через вежі"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 4,
+    "bbox": [
+      78.96,
+      864.48,
+      768.12,
+      864.48
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p04_H6_pit.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Підпису немає. y 864.48 -> -0.455 від відмітки -1,900. Верх фундаменту силоса +0.600, тобто цоколь ≈1.05 м над цією лінією. Масштаб аркуша 4: 56.02 мм/pt (картка масштабу аркуша 4). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

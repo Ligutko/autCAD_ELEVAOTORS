@@ -1,0 +1,31 @@
+{
+  "id": "rec_f25ef051",
+  "subject": "Тунель під рядом силосів (T9 / T13 / T16)",
+  "kind": "dimension",
+  "claim": {
+    "name": "side_wall_thickness",
+    "value": 300,
+    "unit": "mm",
+    "qualifier": "товщина бічних стін тунелю"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      203.64,
+      944.64,
+      1499.88,
+      979.68
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p02_row2_west_end.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Підпису немає. Подвійні червоні лінії стін на плані: 3.84 pt = 307 мм (північ, ряд 3–6), 3.72 pt = 297 мм (південь); ряд 1–2 так само 307/297. Масштаб аркуша 2: 79.92 мм/pt (rec_5e8d7132). Y від осі ряду силосів на північ, X від осі вежі норії на схід. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

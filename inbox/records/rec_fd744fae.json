@@ -1,0 +1,31 @@
+{
+  "id": "rec_fd744fae",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "lateral_offset_from_row_axis",
+    "value": 0,
+    "unit": "mm",
+    "qualifier": "вісь конвеєра = вісь ряду силосів (тунель зміщений на 100 мм у бік ширшого проходу)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      222.48,
+      958.08,
+      1481.04,
+      968.76
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p02_row2_tunnel_width_labels.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "План: контур кожуха y 958.08 / 968.76 -> +0.430 / -0.424, центр -0.003 м. Ряд 1–2: +0.432 / -0.432. Аркуш 4: осьова лінія конвеєра за 1000 від південної стіни приямку = вісь ряду. Масштаб аркуша 2: 79.92 мм/pt (rec_5e8d7132). Y від осі ряду силосів на північ, X від осі вежі норії на схід. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

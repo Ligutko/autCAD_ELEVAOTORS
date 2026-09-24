@@ -1,0 +1,31 @@
+{
+  "id": "rec_2a24e12b",
+  "subject": "H5 (норія 100 т/год)",
+  "kind": "dimension",
+  "claim": {
+    "name": "noria_axis_offset",
+    "value": "X +0.60; Y +1.40",
+    "unit": "m",
+    "qualifier": "вісь норії H5 від осі вежі (X) і осі ряду силосів 1–2 (Y)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      855.96,
+      606.84,
+      874.32,
+      632.04
+    ],
+    "quote": "1200 … 1600",
+    "crop": "inbox/raw/pdf_crops/p02_H5_pit_plan.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "План: вісь норії за 1200 від східної і 1600 від північної внутрішньої грані приямку -> X +0.60, Y +1.40. Вектор: центр труб x 859.26, y 626.88 -> +0.598 / +1.400. Аркуш 4: вісь за 2602 мм від південної стіни -> +1.40. Аркуш 6: центр башмака +0.60. У SITE.json — 0 / 0. bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}

@@ -1,0 +1,31 @@
+{
+  "id": "rec_d1c214f0",
+  "subject": "У13-ТЛ-50К (конвеєр стрічковий закритий 100 т/год)",
+  "kind": "fact",
+  "claim": {
+    "name": "tilt",
+    "value": 0,
+    "unit": "deg",
+    "qualifier": "конвеєр горизонтальний"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 6,
+    "bbox": [
+      71.8,
+      640.76,
+      879.8,
+      651.68
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p06_dims_bottom.png",
+    "retrieved_at": "2026-09-25",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Лінії кожуха на аркушах 6 і 7 мають однакову y на всій довжині (різниця < 0.01 pt = < 1 мм на 50 м). bbox — координати поверненої сторінки PyMuPDF (page.rect з урахуванням rotation 270), pt.",
+  "seen_in": []
+}
