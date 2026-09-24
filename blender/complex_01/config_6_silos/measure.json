@@ -1,0 +1,93 @@
+{
+  "pass": true,
+  "config": "config_6_silos.json",
+  "source_blend": "blender/noria_01/noria_01.blend",
+  "linked_not_redrawn": true,
+  "silo_count": 6,
+  "silo_centres_x_m": [
+    0.0,
+    28.0,
+    56.0,
+    84.0,
+    112.0,
+    140.0
+  ],
+  "silo_pitch_mm": [
+    28000,
+    28000,
+    28000,
+    28000,
+    28000
+  ],
+  "silo_clear_gap_m": [
+    6.0,
+    6.0,
+    6.0,
+    6.0,
+    6.0
+  ],
+  "noria_count": 2,
+  "noria_axes_m": [
+    [
+      -10.0,
+      -14.0
+    ],
+    [
+      70.0,
+      -14.0
+    ]
+  ],
+  "noria_z_max_m_with_head": [
+    33.279999,
+    33.279999
+  ],
+  "noria_y_from_config": false,
+  "conveyor_lengths_m": [
+    80.0,
+    80.0
+  ],
+  "conveyor_z_m": [
+    33.0,
+    33.0
+  ],
+  "conveyor_casing_height_from_catalog": false,
+  "pipe_count": 6,
+  "pipe_z_m": [
+    [
+      21.422,
+      33.0
+    ],
+    [
+      21.422,
+      33.0
+    ],
+    [
+      21.422,
+      33.0
+    ],
+    [
+      21.422,
+      33.0
+    ],
+    [
+      21.422,
+      33.0
+    ],
+    [
+      21.422,
+      33.0
+    ]
+  ],
+  "cross_duct_from_config": false,
+  "supports_modelled": false,
+  "total_capacity_m3": 38286,
+  "checks": {
+    "silo_count_matches": true,
+    "silo_centres_match_config": true,
+    "silo_diameter_22m": true,
+    "silos_do_not_touch": true,
+    "noria_tube_top_matches_config": true,
+    "capacity_matches_totals": true,
+    "capacity_per_silo_is_catalog": true
+  }
+}

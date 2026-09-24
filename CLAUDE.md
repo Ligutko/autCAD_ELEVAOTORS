@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+> **3D-світ елеватора (поточна робота, з 2026-09-24).** Почни з `obsidian_handoff/wiki/projects/Elevator 3D World/00 Handoff.md` (копія для Obsidian-сховища `VAULT/`): стан, як запускати, правила, наступний крок. Код — `world/`, план — `BUILD_SPEC.md`. Розділи нижче про AutoCAD описують попередній 2D-етап; його `config_*.json` для 3D не використовувати.
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Current main track: 3D pipeline (Blender)

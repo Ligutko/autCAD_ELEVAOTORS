@@ -1,0 +1,22 @@
+{
+  "name": "reel_01_site",
+  "format": "9:16",
+  "fps": 24,
+  "samples": 96,
+  "hook": "Елеватор 1:1 з креслення",
+  "hook_seconds": 2.5,
+  "shots": [
+    {"scene": "site", "state": "clay", "move": "orbit", "seconds": 3, "lens": 24,
+     "args": {"target": [0, 12, 10], "radius": 85, "height": 50, "start_deg": -70, "sweep_deg": 12},
+     "caption": "Сірі форми", "sub": "6 силосів МСВУ 220, дві норійні вежі"},
+    {"scene": "site", "state": "wire", "move": "orbit", "seconds": 2, "lens": 24,
+     "args": {"target": [0, 12, 10], "radius": 85, "height": 50, "start_deg": -58, "sweep_deg": 8},
+     "caption": "Сітка", "sub": "кожен болт і лист — окрема деталь"},
+    {"scene": "site", "state": "final", "move": "orbit", "seconds": 4, "lens": 24,
+     "args": {"target": [0, 12, 10], "radius": 85, "height": 50, "start_deg": -50, "sweep_deg": 20},
+     "caption": "Фінал", "sub": "Blender, Cycles, фізичне небо"},
+    {"scene": "site", "state": "final", "move": "dolly", "seconds": 5, "lens": 20,
+     "args": {"from": [-3.2, 0.35, 24.9], "to": [-26, 0.35, 24.9], "look_from": [-30, 0.2, 23.8], "look_to": [-60, 0.2, 23.0]},
+     "caption": "Естакада +23.2", "sub": "ланцюговий конвеєр ТЦС-320 над силосами"}
+  ]
+}

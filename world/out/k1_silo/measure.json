@@ -1,0 +1,32 @@
+{
+  "outer_radius_m": 11.0,
+  "rings": 13,
+  "ring_height_m": 1.152,
+  "wall_top_z_m": 14.976,
+  "waves_per_ring": 18,
+  "wave_pitch_m": 0.064,
+  "wave_depth_m_EST": 0.013,
+  "sheet_thickness_mm": [
+    3.0,
+    2.83,
+    2.67,
+    2.5,
+    2.33,
+    2.17,
+    2.0,
+    1.83,
+    1.67,
+    1.5,
+    1.33,
+    1.17,
+    1.0
+  ],
+  "stiffeners": 80,
+  "roof_slope_deg": 30.0,
+  "roof_peak_z_m": 20.9516,
+  "spout_top_z_m": 21.422,
+  "bolts": 26860,
+  "aeration_fans": 4,
+  "vertices_total": 2808072,
+  "build_seconds": 3.6
+}
