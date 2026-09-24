@@ -172,7 +172,7 @@ def build(spec, collection=None, materials=None):
     bucket = m.get("bucket") or c.mat_painted("BUCKET_POLY", (0.85, 0.32, 0.04), 0.45, grime=0.3)
     grain = m.get("grain") or c.mat_painted("GRAIN_WHEAT", (0.62, 0.44, 0.20), 0.8, grime=0.2)
     sensor = m.get("sensor") or c.mat_painted("SENSOR_YELLOW", (0.9, 0.7, 0.05), 0.4, grime=0.1)
-    parts, labels, noria_measure, anchors = nn.build(top_z, pit_z)
+    parts, labels, noria_measure, anchors = nn.build(top_z, pit_z, spec["tube_mm"] / 1000)
     look = {
         "belt": (rubber, False), "buckets": (bucket, "quads"), "grain": (grain, False),
         "legs": (galv, False), "leg_flanges": (galv_old, False), "leg_bolts": (galv_old, "quads"),

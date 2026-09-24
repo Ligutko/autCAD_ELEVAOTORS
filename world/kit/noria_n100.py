@@ -354,18 +354,35 @@ def _rim_bolts(x0, x1, z0, z1, y, step=0.10):
     return [st.member((px, y, pz), (px, y + 0.0064, pz), hexp, up=(0, 0, 1)) for px, pz in pts]
 
 
-def build(top_z, pit_z, phase=0.0):
-    """Returns dict of parts (verts, faces) keyed by role, plus label anchors and measure."""
+BOOT_ABOVE_AXIS = 0.70              # boot housing top above the tail pulley axis, EST
+HEAD_BELOW_AXIS = 0.75              # head housing base below the head pulley axis, EST
+# head base vs top platform: the head stands on its support beams (<= 0.3 m, EST) on the platform;
+# the tower has nothing to carry it between the platform and the +1.2 frame
+HEAD_BASE_TOLERANCE = (-0.05, 0.30)
+
+
+def build(top_z, pit_z, tube_len, phase=0.0):
+    """Stack the elevator bottom-up: pit (drawing) -> boot -> legs of tube_len (spec "Нтруб",
+    PDF p.8 note 1: noria heights are given by the tubes) -> head.
+
+    top_z (tower top platform, drawing) is not used to place anything: it is the independent
+    check. Raises ValueError when the head base misses the top platform.
+    Returns dict of parts (verts, faces) keyed by role, plus label anchors and measure.
+    """
     z_boot = pit_z + 0.25 + 0.35 + BELT_R          # boot floor + clearance under the tail pulley
-    z_head = top_z + 1.20
+    leg_z0 = z_boot + BOOT_ABOVE_AXIS
+    leg_z1 = leg_z0 + tube_len
+    z_head = leg_z1 + HEAD_BELOW_AXIS
+    head_base = leg_z1 - top_z
+    if not HEAD_BASE_TOLERANCE[0] <= head_base <= HEAD_BASE_TOLERANCE[1]:
+        raise ValueError(f"noria head base {head_base:+.3f} m from the top platform +{top_z}: "
+                         f"tube {tube_len} m and pit {pit_z} m do not fit this tower")
     path = BeltPath(z_boot, z_head)
     parts, labels = {}, []
 
     parts["belt"] = build_belt(path)
     parts["buckets"], parts["grain"], n_buckets = build_buckets(path, phase)
 
-    leg_z0 = z_boot + 0.70
-    leg_z1 = z_head - 0.75
     parts["legs"], parts["leg_flanges"], parts["leg_bolts"], parts["leg_doors"] = build_legs(leg_z0, leg_z1)
 
     # ---- head: housing with hood, front cover, pulley, discharge throat and spout
@@ -474,7 +491,8 @@ def build(top_z, pit_z, phase=0.0):
         "bucket_volume_l_model": round(bucket_volume_l(), 2),
         "bucket_mm": [round(1000 * BUCKET_W), 180, round(1000 * BUCKET_DEPTH)],
         "belt_width_mm": round(1000 * BELT_W),
-        "leg_length_m": round((z_head - 0.75) - (z_boot + 0.70), 2),
+        "leg_length_m": round(leg_z1 - leg_z0, 3),
+        "head_base_above_top_platform_m": round(head_base, 3),
         "bucket_wall_mm": 6.5,
         "bucket_bolts": "4 x M8 DIN 15237, 74 mm pitch",
         "bucket_pitch_m": BUCKET_PITCH,
