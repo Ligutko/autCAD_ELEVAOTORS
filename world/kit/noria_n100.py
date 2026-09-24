@@ -30,7 +30,7 @@ BELT_T = 0.010
 BELT_R = PULLEY_R + LAGGING + BELT_T / 2          # belt centreline radius on the pulleys
 BUCKET_PITCH = 0.18
 BUCKET_W = 0.300
-BUCKET_T = 0.004
+BUCKET_T = 0.0065                  # research: Tapco CC-HD 12x6 wall 6.4 mm
 LEG_CLEAR_X = 0.256                               # across bucket projection
 LEG_CLEAR_Y = 0.376                               # across belt width
 LEG_SHEET = 0.002
@@ -112,13 +112,14 @@ def build_belt(path):
 def _bucket_profile(n_arc=8):
     """Outer profile (u outward from the belt, v along travel) of a CC-style bucket:
     straight back on the belt, radiused bottom, sloped front ending in a rolled lip."""
-    pts = [(0.0, 0.19), (0.0, 0.05)]
-    for a in np.linspace(math.pi, 1.5 * math.pi, n_arc)[1:]:                  # bottom radius 50 mm
-        pts.append((0.05 + 0.05 * math.cos(a), 0.05 + 0.05 * math.sin(a)))
-    p0, p1, p2 = np.array([0.10, 0.0]), np.array([0.172, 0.0]), np.array([0.172, 0.165])
+    # depth 160 mm < pitch 180 mm; CC-HD depth is 0.9-1.0 x projection (research/PARTS_DIMENSIONS.md)
+    pts = [(0.0, 0.16), (0.0, 0.045)]
+    for a in np.linspace(math.pi, 1.5 * math.pi, n_arc)[1:]:                  # bottom radius 45 mm
+        pts.append((0.045 + 0.045 * math.cos(a), 0.045 + 0.045 * math.sin(a)))
+    p0, p1, p2 = np.array([0.09, 0.0]), np.array([0.172, 0.0]), np.array([0.172, 0.138])
     for t in np.linspace(0, 1, n_arc)[1:]:                                     # sloped front
         pts.append(tuple((1 - t) ** 2 * p0 + 2 * (1 - t) * t * p1 + t ** 2 * p2))
-    pts.append((0.180, 0.182))                                                  # rolled lip
+    pts.append((0.180, 0.152))                                                  # rolled lip
     return np.array(pts)
 
 
@@ -153,17 +154,18 @@ def _bucket_local():
     faces.append(np.arange(base + 2 * m, base + 3 * m)[None, :])
     faces.append(np.arange(base + 3 * m, base + 4 * m)[::-1][None, :])
     parts = [(np.array(verts), faces)]
-    for w in (-0.075, 0.075):                                                  # M8 fang bolt heads
-        parts.append(st.member((BUCKET_T, 0.13, w), (BUCKET_T + 0.005, 0.13, w),
-                               np.column_stack([0.008 * np.cos(np.arange(8) * math.pi / 4),
-                                                0.008 * np.sin(np.arange(8) * math.pi / 4)]), up=(0, 1, 0)))
+    # 4 x M8 DIN 15237 fang bolts, Ø28 head, 88 mm pitch, 57 mm below the top edge (research)
+    for w in (-0.132, -0.044, 0.044, 0.132):
+        parts.append(st.member((BUCKET_T, 0.16 - 0.057, w), (BUCKET_T + 0.004, 0.16 - 0.057, w),
+                               np.column_stack([0.014 * np.cos(np.arange(12) * math.pi / 6),
+                                                0.014 * np.sin(np.arange(12) * math.pi / 6)]), up=(0, 1, 0)))
     return c.merge_parts(parts)
 
 
 def _grain_local():
     """Grain in a loaded bucket: a low mound filling ~75 %."""
-    v = np.array([(0.01, 0.01, -0.14), (0.16, 0.01, -0.14), (0.165, 0.14, -0.14), (0.01, 0.17, -0.14),
-                  (0.01, 0.01, 0.14), (0.16, 0.01, 0.14), (0.165, 0.14, 0.14), (0.01, 0.17, 0.14)])
+    v = np.array([(0.01, 0.01, -0.14), (0.16, 0.01, -0.14), (0.165, 0.12, -0.14), (0.01, 0.145, -0.14),
+                  (0.01, 0.01, 0.14), (0.16, 0.01, 0.14), (0.165, 0.12, 0.14), (0.01, 0.145, 0.14)])
     f = np.array([(0, 1, 2, 3), (4, 7, 6, 5), (0, 4, 5, 1), (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)])
     return v, f
 
@@ -212,6 +214,11 @@ def build_legs(z0, z1):
             for yy in np.linspace(BELT_Y - LEG_SIZE_Y / 2 - 0.02, BELT_Y + LEG_SIZE_Y / 2 + 0.02, 5):
                 for xx in (xc - LEG_SIZE_X / 2 - 0.02, xc + LEG_SIZE_X / 2 + 0.02):
                     bolts.append(st.rod((xx, yy, z + 0.004), (xx, yy, z + 0.012), 0.0075, 6))
+    # explosion vents: leg over 32 m, NFPA 61 spacing <= 6.1 m, each >= 0.064 m2 (research)
+    for xc, sign in ((LEG_CENTRES_X[0], -1), (LEG_CENTRES_X[1], 1)):
+        xf = xc + sign * LEG_SIZE_X / 2
+        for z in np.arange(z0 + 3.0, z1 - 1.0, 6.1):
+            doors.append(c.box((min(xf, xf + sign * 0.025), BELT_Y - 0.16, z), (max(xf, xf + sign * 0.025), BELT_Y + 0.16, z + 0.30)))
     # inspection doors on the up leg: above the boot and under the head (EST 300 x 400)
     xc = LEG_CENTRES_X[0]
     for zd in (z0 + 0.8, z1 - 1.4):
@@ -302,21 +309,23 @@ def _pulley(z, wing=False):
 
 
 def _bearing(y, z):
-    """Split plummer block (SN-type) for a Ø90 shaft: base with feet and bolts, cap with
-    split bolts, seals, grease nipple, and a bearing temperature sensor on top. Sizes EST."""
-    h = 0.112                                                  # shaft centre above the base
-    body = [c.box((CX - 0.16, y - 0.05, z - h), (CX + 0.16, y + 0.05, z - h + 0.035)),         # base
-            c.box((CX - 0.105, y - 0.045, z - h + 0.035), (CX + 0.105, y + 0.045, z)),          # lower half
-            st.rod((CX, y - 0.045, z), (CX, y + 0.045, z), 0.105, 40),                          # cap
-            c.box((CX - 0.13, y - 0.045, z - 0.012), (CX + 0.13, y + 0.045, z + 0.012))]        # split lugs
-    for yy in (y - 0.05, y + 0.045):
-        body.append(st.rod((CX, yy, z), (CX, yy + 0.005, z), 0.065, 32))                         # seals
-    for x in (CX - 0.13, CX + 0.13):
-        body.append(st.rod((x, y, z - h + 0.035), (x, y, z - h + 0.052), 0.012, 6))            # foot bolts
-        body.append(st.rod((x, y, z + 0.012), (x, y, z + 0.030), 0.011, 6))                    # cap bolts
-    body.append(st.rod((CX + 0.03, y, z + 0.1), (CX + 0.03, y, z + 0.125), 0.005, 6))          # grease nipple
-    sensor = [st.rod((CX - 0.03, y, z + 0.1), (CX - 0.03, y, z + 0.15), 0.011, 10),
-              st.rod((CX - 0.03, y, z + 0.15), (CX - 0.03, y + 0.12, z + 0.2), 0.004, 6)]       # cable
+    """Split plummer block SKF SNL 520-617 for the Ø90 shaft (research: SKF catalogue p.1043):
+    axis height 112, overall height 218, base 380 x 160 x 40, 2 x M24 at 320, cap width 110."""
+    h, hb, bl, bw = 0.112, 0.040, 0.380, 0.160
+    r_cap = 0.218 - h
+    body = [c.box((CX - bl / 2, y - bw / 2, z - h), (CX + bl / 2, y + bw / 2, z - h + hb)),           # base
+            c.box((CX - 0.12, y - 0.055, z - h + hb), (CX + 0.12, y + 0.055, z)),                     # lower half
+            st.rod((CX, y - 0.055, z), (CX, y + 0.055, z), r_cap, 48),                                # cap
+            c.box((CX - 0.15, y - 0.055, z - 0.014), (CX + 0.15, y + 0.055, z + 0.014))]              # split lugs
+    for yy in (y - 0.062, y + 0.055):
+        body.append(st.rod((CX, yy, z), (CX, yy + 0.007, z), 0.07, 32))                               # seals
+    for x in (CX - 0.16, CX + 0.16):
+        body.append(st.rod((x, y, z - h + hb), (x, y, z - h + hb + 0.022), 0.019, 6))               # M24 foot bolts
+    for x in (CX - 0.135, CX + 0.135):
+        body.append(st.rod((x, y, z + 0.014), (x, y, z + 0.032), 0.013, 6))                         # cap bolts
+    body.append(st.rod((CX + 0.03, y, z + r_cap - 0.005), (CX + 0.03, y, z + r_cap + 0.02), 0.005, 6))
+    sensor = [st.rod((CX - 0.03, y, z + r_cap - 0.01), (CX - 0.03, y, z + r_cap + 0.04), 0.011, 10),
+              st.rod((CX - 0.03, y, z + r_cap + 0.04), (CX - 0.03, y + 0.12, z + r_cap + 0.09), 0.004, 6)]
     return body, sensor
 
 
@@ -446,7 +455,9 @@ def build(top_z, pit_z, phase=0.0):
         "pole_distance_m": round(895 / (60 * BELT_SPEED / (math.pi * 2 * PULLEY_R)) ** 2, 3),
         "discharge": "centrifugal" if 895 / (60 * BELT_SPEED / (math.pi * 2 * PULLEY_R)) ** 2 < PULLEY_R else "gravity",
         "bucket_volume_l_calc": round(100 / (3.6 * BELT_SPEED * 0.75 * 0.75) * BUCKET_PITCH, 2),
-        "bucket_mm": [300, 175, 190],
+        "bucket_mm": [300, 180, 160],
+        "bucket_wall_mm": 6.5,
+        "bucket_bolts": "4 x M8 DIN 15237, 88 mm pitch",
         "bucket_pitch_m": BUCKET_PITCH,
         "buckets": n_buckets,
         "belt_loop_m": round(path.length, 2),
