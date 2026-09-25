@@ -10,7 +10,6 @@ import math
 import numpy as np
 
 from . import common as c
-from . import noria_n100 as nn
 from . import noria_tower as tower
 from . import steel as st
 
@@ -55,7 +54,7 @@ def inner_box(site, t):
 def boot_inlet(site, t):
     """Mouth of the noria boot inlet this conveyor discharges into (site frame)."""
     spec = next(s for s in site["noria_towers"] if s["id"] == t["tower"])
-    _, _, _, anchors = nn.build(spec["top_z"], spec["pit_z"], spec["tube_mm"] / 1000)
+    _, _, _, anchors = tower.build_noria(spec)
     p = tower.noria_frame(spec)(anchors["inlet_mouth"])
     return np.array([p[0] + spec["x"], p[1] + spec["y"], p[2]])
 

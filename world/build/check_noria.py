@@ -21,7 +21,7 @@ from kit import noria_n100 as nn  # noqa: E402
 
 def run(tower, tube_mm, expect_ok):
     try:
-        _, _, m, _ = nn.build(tower["top_z"], tower["pit_z"], tube_mm / 1000)
+        _, _, m, _ = nn.build(tower["top_z"], tower["pit_z"], tube_mm / 1000, tower["noria_model"], tower["feed"])
         ok = True
         info = (f"tube {m['leg_length_m']} m, head axis +{m['head_pulley_z_m']}, "
                 f"head base {m['head_base_above_top_platform_m']:+.3f} m vs top +{tower['top_z']}")

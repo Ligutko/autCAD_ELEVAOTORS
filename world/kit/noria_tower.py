@@ -21,36 +21,51 @@ MOTOR_KW = nn.MOTOR_KW
 HOLE_MARGIN = 0.08              # gap between a leg and the grating / slab edge
 
 
+def build_noria(spec, phase=0.0):
+    """noria_n100.build with this tower's data (SITE.json)."""
+    return nn.build(spec["top_z"], spec["pit_z"], spec["tube_mm"] / 1000, spec["noria_model"], spec["feed"], phase)
+
+
 def noria_frame(spec):
     """Map points from the noria_n100 frame into this tower frame.
 
-    legs_along "Y": rotate -90 deg so the return (down, local +X) leg faces -Y, towards the silo
-    row axis and the tunnel; the noria axis (midpoint between the legs) lands on `noria_axis`.
+    Legs run along Y (the only layout drawn). The rotation turns the fed leg (local +X for a
+    return-leg feed, -X for a working-leg feed) towards `boot_inlet_towards`; a mirror across the
+    belt plane puts the drive (local -Y) on the `drive_towards` side. The noria axis (midpoint between
+    the legs) lands on `noria_axis`. f.mirrored tells callers to flip face winding.
     """
+    if spec["legs_along"] != "Y":
+        raise ValueError(f"{spec['id']}: only legs_along 'Y' is drawn, got {spec['legs_along']!r}")
     ax = spec["noria_axis"][0] - spec["x"]
     ay = spec["noria_axis"][1] - spec["y"]
-    along = spec["legs_along"]
-    if along not in ("X", "Y"):
-        raise ValueError(f"{spec['id']}: legs_along must be X or Y, got {along!r}")
+    fed = 1 if spec["feed"] == "return" else -1
+    inlet = 1 if spec["boot_inlet_towards"] == "+Y" else -1
+    rot = -1 if -fed == inlet else 1          # -1: local +X -> -Y;  +1: local +X -> +Y
+    drive_if_plain = -1 if rot == -1 else 1   # where local -Y (the drive) lands in X without a mirror
+    mirror = drive_if_plain != (1 if spec["drive_towards"] == "+X" else -1)
 
     def f(p):
         p = np.array(p, dtype=float)
         dx, dy = p[..., 0] - nn.CX, p[..., 1] - nn.BELT_Y
-        if along == "Y":
+        if mirror:
+            dy = -dy
+        if rot == -1:
             p[..., 0], p[..., 1] = ax + dy, ay - dx
         else:
-            p[..., 0], p[..., 1] = ax + dx, ay + dy
+            p[..., 0], p[..., 1] = ax - dy, ay + dx
         return p
+    f.mirrored = mirror
+    f.discharge_towards = "-Y" if rot == -1 else "+Y"   # throat is on the down leg, local +X
     return f
 
 
 def leg_footprints(spec):
     """Plan rectangles (x0, y0, x1, y1) of both leg casings in the tower frame."""
     f = noria_frame(spec)
+    sx, sy = nn.leg_size(nn.MODELS[spec["noria_model"]])
     rects = []
     for xc in nn.LEG_CENTRES_X:
-        corners = f([(xc - nn.LEG_SIZE_X / 2, nn.BELT_Y - nn.LEG_SIZE_Y / 2, 0.0),
-                     (xc + nn.LEG_SIZE_X / 2, nn.BELT_Y + nn.LEG_SIZE_Y / 2, 0.0)])
+        corners = f([(xc - sx / 2, nn.BELT_Y - sy / 2, 0.0), (xc + sx / 2, nn.BELT_Y + sy / 2, 0.0)])
         rects.append((corners[:, 0].min(), corners[:, 1].min(), corners[:, 0].max(), corners[:, 1].max()))
     return rects
 
@@ -230,7 +245,7 @@ def build(spec, collection=None, materials=None, openings=()):
     bucket = m.get("bucket") or c.mat_painted("BUCKET_POLY", (0.85, 0.32, 0.04), 0.45, grime=0.3)
     grain = m.get("grain") or c.mat_painted("GRAIN_WHEAT", (0.62, 0.44, 0.20), 0.8, grime=0.2)
     sensor = m.get("sensor") or c.mat_painted("SENSOR_YELLOW", (0.9, 0.7, 0.05), 0.4, grime=0.1)
-    parts, labels, noria_measure, anchors = nn.build(top_z, pit_z, spec["tube_mm"] / 1000)
+    parts, labels, noria_measure, anchors = build_noria(spec)
     look = {
         "belt": (rubber, False), "buckets": (bucket, "quads"), "grain": (grain, False),
         "legs": (galv, False), "leg_flanges": (galv_old, False), "leg_bolts": (galv_old, "quads"),
@@ -246,6 +261,8 @@ def build(spec, collection=None, materials=None, openings=()):
             continue
         mat, smooth = look[key]
         v, f = data
+        if frame.mirrored:                   # a mirror flips handedness: keep normals pointing out
+            f = [np.asarray(b)[:, ::-1] for b in (f if isinstance(f, list) else [f])]
         add("noria_" + key, (frame(v), f), mat, smooth)
     body, act, outlets = build_distributor(frame(anchors["spout_end"]))
     add("distributor", body, galv)
@@ -273,6 +290,10 @@ def build(spec, collection=None, materials=None, openings=()):
         "motor_kw": MOTOR_KW,
         "noria_axis_site_m": list(spec["noria_axis"]),
         "legs_along": spec["legs_along"],
+        "noria_model": spec["noria_model"],
+        "feed": spec["feed"],
+        "noria_mirrored": frame.mirrored,
+        "head_discharge_towards": frame.discharge_towards,
         "noria": noria_measure,
     }
     objs["labels_root"] = label_objs[0]

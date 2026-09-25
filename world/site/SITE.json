@@ -20,16 +20,20 @@
   "noria_towers": [
     {"id": "H5", "x": -0.098, "y": 26.2, "size": [4.402, 4.402], "top_z": 30.0, "pit_z": -4.7,
      "levels_z": [23.2, 25.6, 27.8, 30.0], "noria": "У13-УН175, 100 т/год", "tube_mm": 33000,
+     "noria_model": "У13-УН175", "feed": "return", "drive_towards": "-X", "boot_inlet_towards": "-Y",
+     "head_discharge_towards": "-Y",
      "pit": {"inner_center": [-0.098, 26.402], "inner_size": [3.797, 4.201], "wall_t": 0.6, "bottom_t": 0.5,
              "deck_top_z": -1.9, "deck_t": 0.2, "cover_top_z": 0.6},
      "noria_axis": [0.6, 26.9], "legs_along": "Y",
-     "src": "x, y = centre of the column grid; PDF p.2, p.4, p.6 (rec_d6a1f557, rec_4dfd6707, rec_39d563df); tube_mm PDF p.8 (1 черга)"},
+     "src": "x, y = centre of the column grid; PDF p.2, p.4, p.6 (rec_d6a1f557, rec_4dfd6707, rec_39d563df); tube_mm, model, feed PDF p.8 (1 черга); drive, inlet, discharge sides PDF p.6 and the +30.000 plan"},
     {"id": "H6", "x": 0.0, "y": 0.9, "size": [4.599, 4.402], "top_z": 29.0, "pit_z": -5.1,
-     "levels_z": [23.2, 25.6, 29.0], "noria": "У13-УН175, 100 т/год", "tube_mm": 32500,
+     "levels_z": [23.2, 25.6, 29.0], "noria": "У13-УН100, 100 т/год", "tube_mm": 32500,
+     "noria_model": "У13-УН100", "feed": "working", "drive_towards": "-X", "boot_inlet_towards": "-Y",
+     "head_discharge_towards": "+Y",
      "pit": {"inner_center": [0.003, 1.0], "inner_size": [3.999, 3.999], "wall_t": 0.6, "bottom_t": 0.5,
              "deck_top_z": -1.9, "deck_t": 0.2, "cover_top_z": 0.6},
      "noria_axis": [0.0, 1.302], "legs_along": "Y",
-     "src": "x, y = centre of the column grid; PDF p.2, p.4, p.7 (rec_03040457, rec_9f873011, rec_d8085b5c); tube_mm PDF p.10 (2 черга)"}
+     "src": "x, y = centre of the column grid; PDF p.2, p.4, p.7 (rec_03040457, rec_9f873011, rec_d8085b5c); tube_mm, model, feed PDF p.10 (2 черга); drive, inlet, discharge sides PDF p.7"}
   ],
   "silo_top_conveyors": [
     {"id": "T8",  "from": [0.0, 25.5], "to": [-49.5, 25.5], "deck_z": 23.2, "type": "У13-ТЦС-320", "src": "PDF p.3, p.6: 39500 від осі S1 до вежі + вихід"},

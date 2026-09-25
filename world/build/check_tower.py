@@ -28,7 +28,7 @@ COLUMN_HALF = 0.10    # SHS 200 column
 def checks(spec, row_y):
     f = tower.noria_frame(spec)
     ox, oy = spec["x"], spec["y"]
-    _, _, m, anchors = nn.build(spec["top_z"], spec["pit_z"], spec["tube_mm"] / 1000)
+    _, _, m, anchors = tower.build_noria(spec)
     legs = [f((xc, nn.BELT_Y, 0.0)) for xc in nn.LEG_CENTRES_X]
     axis = (legs[0] + legs[1]) / 2 + (ox, oy, 0)
     feet = tower.leg_footprints(spec)
@@ -39,6 +39,7 @@ def checks(spec, row_y):
     boot_top = boot[:, 2].max()
     deck_bottom = spec["pit"]["deck_top_z"] - spec["pit"]["deck_t"]
     inlet = f(anchors["inlet_mouth"]) + (ox, oy, 0)
+    drive = f((nn.CX, nn.BELT_Y - 0.62, 0.0))
     stair_x1 = tower.STAIR_X[1] + tower.STAIR_W / 2
     hx, hy = spec["size"][0] / 2, spec["size"][1] / 2
     t = spec["pit"]["wall_t"]
@@ -62,6 +63,14 @@ def checks(spec, row_y):
         ("pit cover spans the tower", min(-hx - (px0 - t), (px1 + t) - hx, -hy - (py0 - t), (py1 + t) - hy) >= 0,
          f"pit outer x {px0 - t:.2f}..{px1 + t:.2f}, y {py0 - t:.2f}..{py1 + t:.2f}; grid ±{hx:.2f}, ±{hy:.2f}"),
         ("head on the top platform", True, f"head base {m['head_base_above_top_platform_m']:+.3f} m"),
+        ("head discharges as drawn", f.discharge_towards == spec["head_discharge_towards"],
+         f"model {f.discharge_towards}, drawing {spec['head_discharge_towards']}"),
+        ("drive on the drawn side", (drive[0] - axis[0] + ox > 0) == (spec["drive_towards"] == "+X"),
+         f"drive x {drive[0] + ox:+.3f}, axis x {axis[0]:+.3f}, drawing {spec['drive_towards']}"),
+        ("capacity >= 95 t/h (spec 100 real)", m["capacity_t_h_model"] >= 95,
+         f"{m['capacity_t_h_model']} t/h, {m['model']}, feed {m['feed']}"),
+        ("bucket volume within 10 % of the table", abs(m["bucket_volume_l_model"] / m["bucket_volume_l_table"] - 1) <= 0.10,
+         f"{m['bucket_volume_l_model']} l vs table {m['bucket_volume_l_table']} l"),
     ]
 
 
