@@ -36,8 +36,12 @@ def main():
     quick = "--quick" in sys.argv
     OUT.mkdir(parents=True, exist_ok=True)
     site = json.loads((ROOT / "site" / "SITE.json").read_text(encoding="utf-8"))
-    spec = dict(next(t for t in site["noria_towers"] if t["id"] == "H5"))
-    spec.update(x=0.0, y=0.0)
+    spec = next(t for t in site["noria_towers"] if t["id"] == "H5")
+    nf = tower.noria_frame(spec)           # cameras are set in the noria frame, scene is the tower frame
+
+    def p(xyz):
+        return tuple(nf(xyz))
+
     scene = c.reset_scene()
     c.setup_render(scene, samples=32 if quick else 160, res=(810, 1080) if quick else (1080, 1440))
     c.setup_sky(scene, sun_elevation_deg=38.0, sun_rotation_deg=150.0)
@@ -53,10 +57,11 @@ def main():
     zb = measure["noria"]["boot_pulley_z_m"]
     cover = [o for o in bpy.data.objects if o.name.endswith(("NORIA_HEAD_COVER", "NORIA_BOOT_COVER"))]
     shots = [
-        ("noria_head_cutaway.png", c.camera("CAM_HEAD_CUT", (1.2, 2.05, zh + 0.25), (1.0, 0.3, zh - 0.15), lens=17), True, None),
-        ("noria_head_closed.png", c.camera("CAM_HEAD", (2.05, -1.7, zt + 1.75), (0.8, 0.1, zh - 0.15), lens=18), False, None),
-        ("noria_boot_cutaway.png", c.camera("CAM_BOOT", (1.1, 2.0, zb + 0.9), (0.95, 0.3, zb + 0.05), lens=16), True,
-         (1.3, 1.6, zb + 1.6)),
+        ("noria_head_cutaway.png", c.camera("CAM_HEAD_CUT", p((1.2, 2.05, zh + 0.25)), p((1.0, 0.3, zh - 0.15)), lens=17), True, None),
+        ("noria_head_closed.png", c.camera("CAM_HEAD", p((2.05, -1.7, zt + 1.75)), p((0.8, 0.1, zh - 0.15)), lens=18), False, None),
+        # the boot stands in the pit now: its front cover is ~0.9 m from the pit wall
+        ("noria_boot_cutaway.png", c.camera("CAM_BOOT", p((1.1, 1.4, zb + 0.9)), p((0.95, 0.3, zb + 0.05)), lens=14), True,
+         p((1.3, 1.3, zb + 1.4))),
     ]
     (OUT / "measure.json").write_text(json.dumps(measure, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(measure["noria"], ensure_ascii=False))

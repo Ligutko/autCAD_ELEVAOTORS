@@ -450,8 +450,9 @@ def build(top_z, pit_z, tube_len, phase=0.0):
         takeup.append(c.box((CX - 0.2, y - 0.06, z_boot - 0.2), (CX - 0.17, y + 0.06, z_boot + 0.5)))  # slide
         takeup.append(c.box((CX + 0.17, y - 0.06, z_boot - 0.2), (CX + 0.2, y + 0.06, z_boot + 0.5)))
     labels.append(("Натяжний пристрій (гвинтовий)", (CX, BELT_Y + 0.42, leg_z0 + 0.35)))
-    inlet = [st.member((bx0 - 0.75, BELT_Y, leg_z0 + 0.65), (bx0 + 0.02, BELT_Y, leg_z0 - 0.15), st.shs(0.30))]
-    labels.append(("Завантажувальний патрубок башмака", (bx0 - 0.6, BELT_Y, leg_z0 + 0.6)))
+    # spec PDF p.8: fed on the return (down, +X) leg
+    inlet = [st.member((bx1 + 0.75, BELT_Y, leg_z0 + 0.65), (bx1 - 0.02, BELT_Y, leg_z0 - 0.15), st.shs(0.30))]
+    labels.append(("Завантажувальний патрубок башмака (на холосту гілку)", (bx1 + 0.6, BELT_Y, leg_z0 + 0.6)))
     cleanout = [c.box((bx0 + 0.1, BELT_Y + 0.30, pit_z + 0.3), (bx0 + 0.45, BELT_Y + 0.312, pit_z + 0.6)),
                 c.box((bx1 - 0.45, BELT_Y + 0.30, pit_z + 0.3), (bx1 - 0.1, BELT_Y + 0.312, pit_z + 0.6))]
     parts["boot"] = c.merge_parts([boot_back] + inlet)
@@ -504,5 +505,7 @@ def build(top_z, pit_z, tube_len, phase=0.0):
         "boot_pulley_z_m": round(z_boot, 3),
         "motor_kw": MOTOR_KW,
     }
-    anchors = {"spout_end": tuple(spout_end), "z_head": z_head, "z_boot": z_boot}
+    anchors = {"spout_end": tuple(spout_end), "z_head": z_head, "z_boot": z_boot,
+               "inlet_mouth": (bx1 + 0.75, BELT_Y, leg_z0 + 0.65),
+               "boot_box": ((bx0, BELT_Y - 0.30, pit_z + 0.25), (bx1, BELT_Y + 0.30, leg_z0))}
     return parts, labels, measure, anchors

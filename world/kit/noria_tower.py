@@ -1,11 +1,11 @@
-"""K2. Noria tower 4.4 x 4.4 m with bucket elevator Н-100.
+"""K2. Noria tower with bucket elevator У13-УН175 and its pit.
 
-Local frame: tower centre at (0, 0), Z = 0 at grade (site ±0.000).
-Plan (EST, consistent with PDF p.6 tower plans): stair in the west half, elevator legs in the east half.
-Source tags as in silo_msvu220.py.
+Local frame: centre of the tower column grid at (0, 0), Z = 0 at grade (site ±0.000).
+All positions come from SITE.json (`x`, `y` = grid centre, `size`, `pit`, `noria_axis`,
+`legs_along`), measured on PDF p.2, p.4, p.6, p.7 (research/tunnel_k4.md).
+The elevator is built by noria_n100.py in its own frame and placed here with `noria_frame`.
+Stair zone in the west half is EST.
 """
-
-import math
 
 import numpy as np
 
@@ -13,27 +13,61 @@ from . import common as c
 from . import noria_n100 as nn
 from . import steel as st
 
-HALF = 2.2                      # PDF p.3, p.6: 4400 x 4400 column grid
 STAIR_X = (-1.65, -0.75)        # EST: two flights side by side, 0.8 m each
 STAIR_W = 0.80
 STAIR_Y = (-1.25, 1.35)         # EST: flight zone, landings beyond it
 STAIR_STEP_Z = 2.35             # EST: storey height of the switchback stair
-
-# ------------------------------------------------------------------ elevator Н-100
-LEG_X = nn.LEG_CENTRES_X        # detailed elevator, see noria_n100.py
-LEG_Y = nn.BELT_Y
-LEG_W, LEG_D = nn.LEG_SIZE_X, nn.LEG_SIZE_Y
 MOTOR_KW = nn.MOTOR_KW
+HOLE_MARGIN = 0.08              # gap between a leg and the grating / slab edge
+
+
+def noria_frame(spec):
+    """Map points from the noria_n100 frame into this tower frame.
+
+    legs_along "Y": rotate -90 deg so the return (down, local +X) leg faces -Y, towards the silo
+    row axis and the tunnel; the noria axis (midpoint between the legs) lands on `noria_axis`.
+    """
+    ax = spec["noria_axis"][0] - spec["x"]
+    ay = spec["noria_axis"][1] - spec["y"]
+    along = spec["legs_along"]
+    if along not in ("X", "Y"):
+        raise ValueError(f"{spec['id']}: legs_along must be X or Y, got {along!r}")
+
+    def f(p):
+        p = np.array(p, dtype=float)
+        dx, dy = p[..., 0] - nn.CX, p[..., 1] - nn.BELT_Y
+        if along == "Y":
+            p[..., 0], p[..., 1] = ax + dy, ay - dx
+        else:
+            p[..., 0], p[..., 1] = ax + dx, ay + dy
+        return p
+    return f
+
+
+def leg_footprints(spec):
+    """Plan rectangles (x0, y0, x1, y1) of both leg casings in the tower frame."""
+    f = noria_frame(spec)
+    rects = []
+    for xc in nn.LEG_CENTRES_X:
+        corners = f([(xc - nn.LEG_SIZE_X / 2, nn.BELT_Y - nn.LEG_SIZE_Y / 2, 0.0),
+                     (xc + nn.LEG_SIZE_X / 2, nn.BELT_Y + nn.LEG_SIZE_Y / 2, 0.0)])
+        rects.append((corners[:, 0].min(), corners[:, 1].min(), corners[:, 0].max(), corners[:, 1].max()))
+    return rects
+
+
+def _bbox(rects, margin=0.0):
+    return (min(r[0] for r in rects) - margin, min(r[1] for r in rects) - margin,
+            max(r[2] for r in rects) + margin, max(r[3] for r in rects) + margin)
 
 
 def _col(x, y, z0, z1, prof):
     return st.member((x, y, z0), (x, y, z1), prof, up=(1, 0, 0))
 
 
-def build_frame(top_z, levels):
+def build_frame(top_z, levels, hx, hy, hoist_x):
     """Columns, girts at every level, X bracing on each face between levels."""
     parts_heavy, parts_light = [], []
-    corners = [(-HALF, -HALF), (HALF, -HALF), (HALF, HALF), (-HALF, HALF)]
+    corners = [(-hx, -hy), (hx, -hy), (hx, hy), (-hx, hy)]
     for x, y in corners:
         parts_heavy.append(_col(x, y, 0.0, top_z + 1.2, st.SHS_200))
     zs = sorted(set([0.3] + list(levels) + [top_z]))
@@ -46,28 +80,24 @@ def build_frame(top_z, levels):
         for (x0, y0), (x1, y1) in zip(corners, corners[1:] + corners[:1]):
             parts_light.append(st.member((x0, y0, za + 0.08), (x1, y1, zb - 0.08), st.L75))
             parts_light.append(st.member((x1, y1, za + 0.08), (x0, y0, zb - 0.08), st.L75))
-    # roof frame over the head
+    # roof frame over the head and a hoist beam along the head, over the noria axis (EST)
     for (x0, y0), (x1, y1) in zip(corners, corners[1:] + corners[:1]):
         parts_heavy.append(st.member((x0, y0, top_z + 1.2), (x1, y1, top_z + 1.2), st.SHS_100))
-    parts_heavy.append(st.member((LEG_X[0] - 0.8, -HALF, top_z + 3.1), (LEG_X[0] - 0.8, HALF, top_z + 3.1),
-                                 st.IPE160))   # hoist beam over the head, EST
-    for x, y in ((LEG_X[0] - 0.8, -HALF), (LEG_X[0] - 0.8, HALF)):
-        parts_heavy.append(_col(x, y, top_z + 1.2, top_z + 3.2, st.SHS_100))
+    parts_heavy.append(st.member((hoist_x, -hy, top_z + 3.1), (hoist_x, hy, top_z + 3.1), st.IPE160))
+    for y in (-hy, hy):
+        parts_heavy.append(_col(hoist_x, y, top_z + 1.2, top_z + 3.2, st.SHS_100))
     return c.merge_parts(parts_heavy), c.merge_parts(parts_light)
 
 
-GRADE_FLOOR = 0.3               # EST: grating over the pit, level with the pit walls
-
-
-def stair_levels(first_platform):
-    rise = first_platform - GRADE_FLOOR
+def stair_levels(first_platform, grade):
+    rise = first_platform - grade
     n = max(1, int(round(rise / STAIR_STEP_Z)))
-    return [GRADE_FLOOR + rise * k / n for k in range(n + 1)]
+    return [grade + rise * k / n for k in range(n + 1)]
 
 
-def build_stairs(levels, top_z):
+def build_stairs(levels, top_z, hx, hy, grade):
     """Switchback stair: each storey is one flight, landings alternate north / south."""
-    zs = stair_levels(levels[0]) + [z for z in levels[1:] if z <= top_z]
+    zs = stair_levels(levels[0], grade) + [z for z in levels[1:] if z <= top_z]
     stringers, treads, rails, landings = [], [], [], []
     for i, (za, zb) in enumerate(zip(zs, zs[1:])):
         up_north = i % 2 == 0
@@ -78,35 +108,33 @@ def build_stairs(levels, top_z):
         treads.append(t)
         rails.append(r)
         if up_north:
-            landings.append(st.grating_panel(-HALF + 0.1, y_end, -0.3, HALF - 0.1, zb))
+            landings.append(st.grating_panel(-hx + 0.1, y_end, -0.3, hy - 0.1, zb))
         else:
-            landings.append(st.grating_panel(-HALF + 0.1, -HALF + 0.1, -0.3, y_end, zb))
+            landings.append(st.grating_panel(-hx + 0.1, -hy + 0.1, -0.3, y_end, zb))
     return (c.merge_parts(stringers), c.merge_parts(treads), c.merge_parts(rails),
             c.merge_parts(landings), zs)
 
 
-def build_platforms(levels, top_z):
-    """Full grating at the main levels around the elevator legs (legs pass through holes)."""
+def _around_hole(x0, y0, x1, y1, hole, z, panel):
+    hx0, hy0, hx1, hy1 = hole
+    return [panel(x0, y0, x1, hy0, z), panel(x0, hy1, x1, y1, z),
+            panel(x0, hy0, hx0, hy1, z), panel(hx1, hy0, x1, hy1, z)]
+
+
+def build_platforms(levels, top_z, hx, hy, hole):
+    """Grating at the main levels around the elevator legs (legs pass through the hole)."""
     parts = []
-    hole_x0, hole_x1 = LEG_X[0] - LEG_W / 2 - 0.08, LEG_X[1] + LEG_W / 2 + 0.08
-    hole_y0, hole_y1 = LEG_Y - LEG_D / 2 - 0.08, LEG_Y + LEG_D / 2 + 0.08
-    for z in [GRADE_FLOOR] + list(levels):
+    for z in levels:
         if z > top_z + 1e-6:
             continue
-        x0 = -HALF + 0.1 if z == GRADE_FLOOR else -0.3
-        x1, y0, y1 = HALF - 0.1, -HALF + 0.1, HALF - 0.1
-        parts.append(st.grating_panel(x0, y0, x1, hole_y0, z))
-        parts.append(st.grating_panel(x0, hole_y1, x1, y1, z))
-        parts.append(st.grating_panel(x0, hole_y0, hole_x0, hole_y1, z))
-        parts.append(st.grating_panel(hole_x1, hole_y0, x1, hole_y1, z))
+        parts += _around_hole(-0.3, -hy + 0.1, hx - 0.1, hy - 0.1, hole, z, st.grating_panel)
     return c.merge_parts(parts)
 
 
-def build_guards(zs):
+def build_guards(zs, hx, hy):
     """Perimeter guard rail at every walking level (stair landings and platforms)."""
     tubes, toes = [], []
-    ring = [(-HALF + 0.12, -HALF + 0.12), (HALF - 0.12, -HALF + 0.12), (HALF - 0.12, HALF - 0.12),
-            (-HALF + 0.12, HALF - 0.12)]
+    ring = [(-hx + 0.12, -hy + 0.12), (hx - 0.12, -hy + 0.12), (hx - 0.12, hy - 0.12), (-hx + 0.12, hy - 0.12)]
     for z in zs[1:]:
         t, o = st.guard_rail(ring, z, closed=True)
         tubes.append(t)
@@ -114,8 +142,8 @@ def build_guards(zs):
     return c.merge_parts(tubes), c.merge_parts(toes)
 
 
-def build_distributor(spout_end, top_z):
-    """2-way flap distributor under the head spout; outlets to -X (silo gallery) and -Y (bridge)."""
+def build_distributor(spout_end):
+    """2-way flap distributor under the head spout."""
     d = np.asarray(spout_end, float) - [0, 0, 0.35]
     body = [c.box(tuple(d - [0.3, 0.3, 0.35]), tuple(d + [0.3, 0.3, 0.35]))]
     actuator = [c.box(tuple(d + [0.3, -0.12, -0.1]), tuple(d + [0.55, 0.12, 0.2]))]
@@ -124,21 +152,37 @@ def build_distributor(spout_end, top_z):
     return c.merge_parts(body), c.merge_parts(actuator), c.merge_parts(outlets)
 
 
-def build_pit(pit_z):
-    """Concrete pit under the tower, 300 mm walls and slab; grating cover at grade."""
-    t = 0.3
-    x0, x1, y0, y1 = -HALF - t, HALF + t, -HALF - t, HALF + t
-    walls = [c.box((x0, y0, pit_z - t), (x1, y1, pit_z)),
-             c.box((x0, y0, pit_z), (x0 + t, y1, 0.3)),
-             c.box((x1 - t, y0, pit_z), (x1, y1, 0.3)),
-             c.box((x0, y0, pit_z), (x1, y0 + t, 0.3)),
-             c.box((x0, y1 - t, pit_z), (x1, y1, 0.3))]
-    return c.merge_parts(walls)
+def pit_inner(spec):
+    """Inner plan rectangle (x0, y0, x1, y1) of the pit in the tower frame."""
+    p = spec["pit"]
+    cx, cy = p["inner_center"][0] - spec["x"], p["inner_center"][1] - spec["y"]
+    sx, sy = p["inner_size"]
+    return cx - sx / 2, cy - sy / 2, cx + sx / 2, cy + sy / 2
+
+
+def build_pit(spec, hole):
+    """Concrete pit (PDF p.2, p.4): walls and bottom slab, deck at the tunnel floor, cover slab
+    at grade; both slabs have the leg hole. Tunnel openings in the walls come with K4."""
+    p = spec["pit"]
+    x0, y0, x1, y1 = pit_inner(spec)
+    t, tb = p["wall_t"], p["bottom_t"]
+    z_bot, z_top = spec["pit_z"], p["cover_top_z"]
+    walls = [c.box((x0 - t, y0 - t, z_bot - tb), (x1 + t, y1 + t, z_bot)),
+             c.box((x0 - t, y0 - t, z_bot), (x0, y1 + t, z_top)),
+             c.box((x1, y0 - t, z_bot), (x1 + t, y1 + t, z_top)),
+             c.box((x0, y0 - t, z_bot), (x1, y0, z_top)),
+             c.box((x0, y1, z_bot), (x1, y1 + t, z_top))]
+    slab = lambda a, b, a1, b1, z: c.box((a, b, z - p["deck_t"]), (a1, b1, z))  # noqa: E731
+    deck = _around_hole(x0, y0, x1, y1, hole, p["deck_top_z"], slab)
+    cover = _around_hole(x0 - t, y0 - t, x1 + t, y1 + t, hole, z_top, slab)
+    return c.merge_parts(walls), c.merge_parts(deck + cover)
 
 
 def build(spec, collection=None, materials=None):
     top_z = spec["top_z"]
     pit_z = spec["pit_z"]
+    grade = spec["pit"]["cover_top_z"]
+    hx, hy = spec["size"][0] / 2, spec["size"][1] / 2
     levels = sorted(spec["levels_z"])
     m = materials or {}
     galv = m.get("galv") or c.mat_galvanized("TOWER_GALV", age=0.4, spangle_scale=60.0)
@@ -151,21 +195,24 @@ def build(spec, collection=None, materials=None):
 
     tag = spec["id"]
     objs = {}
+    frame = noria_frame(spec)
+    hole = _bbox(leg_footprints(spec), HOLE_MARGIN)
+    hoist_x = spec["noria_axis"][0] - spec["x"]
 
     def add(key, data, mat, smooth=False):
         v, f = data
         objs[key] = c.mesh_from_arrays(f"{tag}_{key.upper()}", v, f, mat, smooth=smooth, collection=collection)
 
-    heavy, light = build_frame(top_z, levels)
+    heavy, light = build_frame(top_z, levels, hx, hy, hoist_x)
     add("frame", heavy, galv)
     add("bracing", light, galv_old)
-    s, t, r, landings, zs = build_stairs(levels, top_z)
+    s, t, r, landings, zs = build_stairs(levels, top_z, hx, hy, grade)
     add("stair_stringers", s, galv)
     add("stair_treads", t, grating)
     add("stair_rails", r, yellow, smooth="quads")
     add("landings", landings, grating)
-    add("platforms", build_platforms(levels, top_z), grating)
-    tubes, toes = build_guards(zs)
+    add("platforms", build_platforms(levels, top_z, hx, hy, hole), grating)
+    tubes, toes = build_guards(zs, hx, hy)
     add("guard_rails", tubes, yellow, smooth="quads")
     add("toe_boards", toes, yellow)
     rubber = m.get("rubber") or c.mat_rubber("BELT_RUBBER")
@@ -187,24 +234,30 @@ def build(spec, collection=None, materials=None):
         if data is None:
             continue
         mat, smooth = look[key]
-        add("noria_" + key, data, mat, smooth)
-    body, act, outlets = build_distributor(anchors["spout_end"], top_z)
+        v, f = data
+        add("noria_" + key, (frame(v), f), mat, smooth)
+    body, act, outlets = build_distributor(frame(anchors["spout_end"]))
     add("distributor", body, galv)
     add("distributor_actuator", act, dark)
     add("distributor_outlets", outlets, galv, smooth="quads")
-    label_objs = c.labels(labels, tag, collection)
-    add("pit", build_pit(pit_z), concrete)
+    label_objs = c.labels([(text, tuple(frame(p))) for text, p in labels], tag, collection)
+    pit_walls, pit_slabs = build_pit(spec, hole)
+    add("pit", pit_walls, concrete)
+    add("pit_slabs", pit_slabs, concrete)
     measure = {
         "id": tag,
-        "column_grid_m": [2 * HALF, 2 * HALF],
+        "column_grid_m": list(spec["size"]),
         "top_z_m": top_z,
         "pit_z_m": pit_z,
+        "grade_z_m": grade,
         "levels_z_m": levels,
         "stair_levels_z_m": [round(z, 3) for z in zs],
         "stair_riser_m": st.RISER,
         "stair_tread_m": st.TREAD,
         "rail_height_m": st.RAIL_TOP,
         "motor_kw": MOTOR_KW,
+        "noria_axis_site_m": list(spec["noria_axis"]),
+        "legs_along": spec["legs_along"],
         "noria": noria_measure,
     }
     objs["labels_root"] = label_objs[0]

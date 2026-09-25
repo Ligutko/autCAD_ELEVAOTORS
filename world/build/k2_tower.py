@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from kit import common as c  # noqa: E402
+from kit import noria_n100 as nn  # noqa: E402
 from kit import noria_tower as tower  # noqa: E402
 from kit import silo_msvu220 as silo  # noqa: E402
 
@@ -50,10 +51,12 @@ def main():
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
 
     x, y = spec["x"], spec["y"]
+    zh = measure["noria"]["head_pulley_z_m"]
+    hx, hy = tower.noria_frame(spec)((nn.CX, nn.BELT_Y, zh))[:2] + (x, y)
     cams = {
         "k2_hero.png": c.camera("CAM_HERO", (x + 26, y - 30, 1.7), (x - 4, y, 14.0), lens=24),
         "k2_stair.png": c.camera("CAM_STAIR", (x - 1.6, y - 1.9, 1.9), (x - 0.6, y + 1.8, 4.2), lens=16),
-        "k2_head.png": c.camera("CAM_HEAD", (x - 1.8, y - 1.6, spec["top_z"] + 1.7), (x + 0.9, y + 0.4, spec["top_z"] + 0.9), lens=18),
+        "k2_head.png": c.camera("CAM_HEAD", (hx - 2.7, hy - 2.0, spec["top_z"] + 1.7), (hx, hy, zh - 0.1), lens=18),
         "k2_top_view.png": c.camera("CAM_DRONE", (x + 14, y - 16, 36.0), (x - 6, y, 22.0), lens=28),
     }
     (OUT / "measure.json").write_text(json.dumps(measure, ensure_ascii=False, indent=2), encoding="utf-8")
