@@ -54,12 +54,12 @@
     ],
     "belt_width_mm": 300,
     "leg_length_m": 33.0,
-    "head_base_above_top_platform_m": -0.008,
+    "head_base_above_top_platform_m": 0.26,
     "bucket_wall_mm": 6.5,
     "bucket_bolts": "4 x M8 DIN 15237, 74 mm pitch",
     "bucket_pitch_m": 0.21,
-    "buckets": 339,
-    "belt_loop_m": 71.36,
+    "buckets": 344,
+    "belt_loop_m": 72.24,
     "leg_clear_mm": [
       376,
       256
@@ -68,8 +68,8 @@
       0.49,
       1.41
     ],
-    "head_pulley_z_m": 30.742,
-    "boot_pulley_z_m": -3.708,
+    "head_pulley_z_m": 31.285,
+    "boot_pulley_z_m": -3.605,
     "motor_kw": 22
   },
   "labels": [
@@ -86,5 +86,5 @@
     "Датчик швидкості (контроль руху стрічки)",
     "Датчик підпору самопливу"
   ],
-  "build_seconds": 1.4
+  "build_seconds": 1.3
 }

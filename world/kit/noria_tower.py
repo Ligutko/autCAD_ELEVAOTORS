@@ -160,25 +160,36 @@ def pit_inner(spec):
     return cx - sx / 2, cy - sy / 2, cx + sx / 2, cy + sy / 2
 
 
-def build_pit(spec, hole):
+def _x_wall(xa, xb, ya, yb, z0, z1, opening):
+    """Wall across X (west or east pit wall) with an optional tunnel opening (y0, y1, z0, z1)."""
+    if opening is None:
+        return [c.box((xa, ya, z0), (xb, yb, z1))]
+    oy0, oy1, oz0, oz1 = opening
+    return [c.box((xa, ya, z0), (xb, yb, oz0)), c.box((xa, ya, oz1), (xb, yb, z1)),
+            c.box((xa, ya, oz0), (xb, oy0, oz1)), c.box((xa, oy1, oz0), (xb, yb, oz1))]
+
+
+def build_pit(spec, hole, openings=(), deck_hole=None):
     """Concrete pit (PDF p.2, p.4): walls and bottom slab, deck at the tunnel floor, cover slab
-    at grade; both slabs have the leg hole. Tunnel openings in the walls come with K4."""
+    at grade; both slabs have the leg hole. openings: tunnel openings ("W"|"E", y0, y1, z0, z1)
+    in the tower frame (tunnel.pit_opening)."""
     p = spec["pit"]
     x0, y0, x1, y1 = pit_inner(spec)
     t, tb = p["wall_t"], p["bottom_t"]
     z_bot, z_top = spec["pit_z"], p["cover_top_z"]
+    side = {o[0]: o[1:] for o in openings}
     walls = [c.box((x0 - t, y0 - t, z_bot - tb), (x1 + t, y1 + t, z_bot)),
-             c.box((x0 - t, y0 - t, z_bot), (x0, y1 + t, z_top)),
-             c.box((x1, y0 - t, z_bot), (x1 + t, y1 + t, z_top)),
              c.box((x0, y0 - t, z_bot), (x1, y0, z_top)),
              c.box((x0, y1, z_bot), (x1, y1 + t, z_top))]
+    walls += _x_wall(x0 - t, x0, y0 - t, y1 + t, z_bot, z_top, side.get("W"))
+    walls += _x_wall(x1, x1 + t, y0 - t, y1 + t, z_bot, z_top, side.get("E"))
     slab = lambda a, b, a1, b1, z: c.box((a, b, z - p["deck_t"]), (a1, b1, z))  # noqa: E731
-    deck = _around_hole(x0, y0, x1, y1, hole, p["deck_top_z"], slab)
+    deck = _around_hole(x0, y0, x1, y1, deck_hole or hole, p["deck_top_z"], slab)
     cover = _around_hole(x0 - t, y0 - t, x1 + t, y1 + t, hole, z_top, slab)
     return c.merge_parts(walls), c.merge_parts(deck + cover)
 
 
-def build(spec, collection=None, materials=None):
+def build(spec, collection=None, materials=None, openings=()):
     top_z = spec["top_z"]
     pit_z = spec["pit_z"]
     grade = spec["pit"]["cover_top_z"]
@@ -241,7 +252,11 @@ def build(spec, collection=None, materials=None):
     add("distributor_actuator", act, dark)
     add("distributor_outlets", outlets, galv, smooth="quads")
     label_objs = c.labels([(text, tuple(frame(p))) for text, p in labels], tag, collection)
-    pit_walls, pit_slabs = build_pit(spec, hole)
+    # the deck also lets the tunnel conveyor spouts down to the boot inlet
+    inlet = frame(anchors["inlet_mouth"])
+    deck_hole = (min(hole[0], inlet[0] - 0.3), min(hole[1], inlet[1] - 0.3),
+                 max(hole[2], inlet[0] + 0.3), max(hole[3], inlet[1] + 0.3))
+    pit_walls, pit_slabs = build_pit(spec, hole, openings, deck_hole)
     add("pit", pit_walls, concrete)
     add("pit_slabs", pit_slabs, concrete)
     measure = {

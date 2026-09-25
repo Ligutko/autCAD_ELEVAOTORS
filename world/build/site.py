@@ -21,6 +21,7 @@ from kit import gallery as gal  # noqa: E402
 from kit import noria_tower as tower  # noqa: E402
 from kit import silo_msvu220 as silo  # noqa: E402
 from kit import steel as st  # noqa: E402
+from kit import tunnel as tun  # noqa: E402
 
 OUT = ROOT / "out" / "site"
 
@@ -68,10 +69,12 @@ def assemble(quick=False):
         inst.location = (s["x"], s["y"], s["z"])
         scene.collection.objects.link(inst)
 
+    tunnels = site.get("tunnels", [])
     for spec in site["noria_towers"]:
         col = bpy.data.collections.new(spec["id"])
         scene.collection.children.link(col)
-        objs, _ = tower.build(spec, collection=col, materials=m)
+        openings = [tun.pit_opening(site, t) for t in tunnels if t["tower"] == spec["id"]]
+        objs, _ = tower.build(spec, collection=col, materials=m, openings=openings)
         for o in objs.values():
             o.location = (spec["x"], spec["y"], 0.0)
 
@@ -95,10 +98,21 @@ def assemble(quick=False):
         p1 = (b["to"][0], b["to"][1] - y_dir * 2.2)
         add_parts(b["id"], gal.tower_bridge(p0, p1, b["z"], b["z"]), m, col)
 
+    holes = []
+    for t in tunnels:
+        col = bpy.data.collections.new("TUNNEL_" + t["id"])
+        scene.collection.children.link(col)
+        tun.build(site, t, collection=col, materials=m)
+        holes += tun.footprint(site, t)
+    for spec in site["noria_towers"]:
+        x0, y0, x1, y1 = tower.pit_inner(spec)
+        w = spec["pit"]["wall_t"]
+        holes.append((spec["x"] + x0 - w, spec["y"] + y0 - w, spec["x"] + x1 + w, spec["y"] + y1 + w))
+
     for col in bpy.data.collections:          # labels are for explainer shots only
         if col.name.startswith("LABELS_"):
             col.hide_render = True
-    v, f = c.box((-2000, -2000, -0.2), (2000, 2000, 0.0))
+    v, f = tun.ground_cells(2000, holes)
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
     build_s = round(time.time() - t0, 1)
 

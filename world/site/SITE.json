@@ -41,13 +41,30 @@
     {"id": "G_H14_H5", "conveyors": ["T7", "T10"], "from": [1.1, 54.8], "to": [0.0, 25.5], "z_from": 26.8, "z_to": 25.6, "width": 2.8, "src": "PDF p.3, p.4; кінець біля H1-H4 EST"}
   ],
   "tunnels": [
-    {"id": "T9",  "from": [-50.0, 25.5], "to": [0.0, 25.5], "floor_z": -1.9, "src": "PDF p.6: 49500"},
-    {"id": "T13", "from": [-48.7, 0.0],  "to": [0.0, 0.0],  "floor_z": -1.9, "src": "PDF p.7: 48700"},
-    {"id": "T16", "from": [0.0, 0.0],    "to": [48.7, 0.0], "floor_z": -1.9, "src": "PDF p.7: 48700"}
+    {"id": "T9", "row_y": 25.5, "tower": "H5", "end_x": -51.598, "inner_y_rel_row": [-1.2, 1.0],
+     "floor_z": -1.9, "ceiling_z": 0.2, "roof_top_z": 0.6, "wall_t": 0.3, "end_wall_t": 0.3, "floor_slab_t": 0.4,
+     "exit_stair": {"x_inner": [-51.598, -50.798], "y_rel_row": [1.0, 4.7], "treads": 11},
+     "conveyor": {"id": "T9", "type": "У13-ТЛ-50К", "tail_x": -49.898, "drive_x": -0.398, "casing_x": [-50.688, 0.252],
+                  "casing_z": [-1.6, -0.91], "width": 0.66, "spec_length_m": 49.5, "outlet_xz": [0.15, -1.87], "drive_side": "+Y", "silos": ["S1", "S2"]},
+     "src": "PDF p.2, p.6, p.9 (research/tunnel_k4.md); x from the H5 tower axis + (-0.098)"},
+    {"id": "T13", "row_y": 0.0, "tower": "H6", "end_x": -51.5, "inner_y_rel_row": [-1.0, 1.2],
+     "floor_z": -1.9, "ceiling_z": 0.2, "roof_top_z": 0.6, "wall_t": 0.3, "end_wall_t": 0.3, "floor_slab_t": 0.4,
+     "exit_stair": {"x_inner": [-51.5, -50.7], "y_rel_row": [1.2, 4.9], "treads": 11},
+     "conveyor": {"id": "T13", "type": "У13-ТЛ-50К", "tail_x": -49.7, "drive_x": -1.0, "casing_x": [-50.49, -0.3],
+                  "casing_z": [-1.6, -0.91], "width": 0.66, "spec_length_m": 48.7, "outlet_xz": [-0.55, -1.83], "drive_side": "+Y", "silos": ["S3", "S4"]},
+     "src": "PDF p.2, p.7, p.11 (research/tunnel_k4.md)"},
+    {"id": "T16", "row_y": 0.0, "tower": "H6", "end_x": 51.5, "inner_y_rel_row": [-1.0, 1.2],
+     "floor_z": -1.9, "ceiling_z": 0.2, "roof_top_z": 0.6, "wall_t": 0.3, "end_wall_t": 0.3, "floor_slab_t": 0.4,
+     "exit_stair": {"x_inner": [50.7, 51.5], "y_rel_row": [1.2, 4.9], "treads": 11},
+     "conveyor": {"id": "T16", "type": "У13-ТЛ-50К", "tail_x": 49.7, "drive_x": 1.0, "casing_x": [0.3, 50.49],
+                  "casing_z": [-1.6, -0.91], "width": 0.66, "spec_length_m": 48.7, "outlet_xz": [0.55, -1.83], "drive_side": "+Y", "silos": ["S5", "S6"]},
+     "src": "PDF p.2, p.7, p.12 (research/tunnel_k4.md)"}
   ],
   "silo_gates": {
     "offsets_along_row": [-9.75, -6.5, -3.25, 0.0, 3.25, 6.5, 9.75],
     "sizes_mm": [350, 350, 350, 400, 350, 350, 350],
+    "stack_z": {"sleeve": [0.6, -0.2], "tza": [-0.2, -0.45], "tzr": [-0.45, -0.54], "spout_bottom": -0.91,
+                "src": "PDF p.6 stack 1.11 m measured; split by catalogue body heights 250 / 90 mm is a judgment (research/tunnel_k4.md)"},
     "src": "PDF p.2, p.6, p.7: отвори симетрично з кроком 3250; ланцюг «2750» на арк. 6 не влучає в отвори (rec_be615fd3, research/tunnel_k4.md)"
   },
   "receiving": {

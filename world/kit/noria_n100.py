@@ -354,11 +354,14 @@ def _rim_bolts(x0, x1, z0, z1, y, step=0.10):
     return [st.member((px, y, pz), (px, y + 0.0064, pz), hexp, up=(0, 0, 1)) for px, pz in pts]
 
 
-BOOT_ABOVE_AXIS = 0.70              # boot housing top above the tail pulley axis, EST
-HEAD_BELOW_AXIS = 0.75              # head housing base below the head pulley axis, EST
-# head base vs top platform: the head stands on its support beams (<= 0.3 m, EST) on the platform;
-# the tower has nothing to carry it between the platform and the +1.2 frame
-HEAD_BASE_TOLERANCE = (-0.05, 0.30)
+# vertical geometry measured on sections p.4, p.6, p.7, same for H5 and H6 within 1 cm
+# (research/tunnel_k4.md «Норія по вертикалі»)
+BOOT_FLOOR_ABOVE_PIT = 0.23         # boot casing bottom above the pit floor
+BOOT_AXIS_ABOVE_PIT = 1.095         # tail pulley axis above the pit floor (1.09 / 1.10)
+BOOT_TOP_ABOVE_PIT = 1.96           # boot casing top = where the tubes start
+HEAD_BELOW_AXIS = 1.025             # head pulley axis above the head casing base (1.03 / 1.02)
+# head base vs top platform: the drawing shows the head on a support frame +0.25 (H5) / +0.36 (H6)
+HEAD_BASE_TOLERANCE = (-0.05, 0.45)
 
 
 def build(top_z, pit_z, tube_len, phase=0.0):
@@ -369,8 +372,8 @@ def build(top_z, pit_z, tube_len, phase=0.0):
     check. Raises ValueError when the head base misses the top platform.
     Returns dict of parts (verts, faces) keyed by role, plus label anchors and measure.
     """
-    z_boot = pit_z + 0.25 + 0.35 + BELT_R          # boot floor + clearance under the tail pulley
-    leg_z0 = z_boot + BOOT_ABOVE_AXIS
+    z_boot = pit_z + BOOT_AXIS_ABOVE_PIT
+    leg_z0 = pit_z + BOOT_TOP_ABOVE_PIT
     leg_z1 = leg_z0 + tube_len
     z_head = leg_z1 + HEAD_BELOW_AXIS
     head_base = leg_z1 - top_z
@@ -439,7 +442,7 @@ def build(top_z, pit_z, tube_len, phase=0.0):
     # ---- boot: housing, wing pulley, take-up screws, inlet, clean-out doors
     bx0 = LEG_CENTRES_X[0] - LEG_SIZE_X / 2 - 0.10
     bx1 = LEG_CENTRES_X[1] + LEG_SIZE_X / 2 + 0.10
-    boot_back, boot_front, boot_rim = _housing(bx0, bx1, pit_z + 0.25, leg_z0, 0.30)
+    boot_back, boot_front, boot_rim = _housing(bx0, bx1, pit_z + BOOT_FLOOR_ABOVE_PIT, leg_z0, 0.30)
     wdrum, _, wshaft = _pulley(z_boot, wing=True)
     takeup = []
     for y in (BELT_Y - 0.42, BELT_Y + 0.42):
@@ -451,13 +454,15 @@ def build(top_z, pit_z, tube_len, phase=0.0):
         takeup.append(c.box((CX + 0.17, y - 0.06, z_boot - 0.2), (CX + 0.2, y + 0.06, z_boot + 0.5)))
     labels.append(("Натяжний пристрій (гвинтовий)", (CX, BELT_Y + 0.42, leg_z0 + 0.35)))
     # spec PDF p.8: fed on the return (down, +X) leg
-    inlet = [st.member((bx1 + 0.75, BELT_Y, leg_z0 + 0.65), (bx1 - 0.02, BELT_Y, leg_z0 - 0.15), st.shs(0.30))]
-    labels.append(("Завантажувальний патрубок башмака (на холосту гілку)", (bx1 + 0.6, BELT_Y, leg_z0 + 0.6)))
-    cleanout = [c.box((bx0 + 0.1, BELT_Y + 0.30, pit_z + 0.3), (bx0 + 0.45, BELT_Y + 0.312, pit_z + 0.6)),
-                c.box((bx1 - 0.45, BELT_Y + 0.30, pit_z + 0.3), (bx1 - 0.1, BELT_Y + 0.312, pit_z + 0.6))]
+    # drawing: a short nozzle on the return-leg face, mouth level with the boot top, ~0.45 m out
+    inlet = [st.member((bx1 + 0.45, BELT_Y, leg_z0), (bx1 - 0.02, BELT_Y, leg_z0 - 0.12), st.shs(0.30))]
+    labels.append(("Завантажувальний патрубок башмака (на холосту гілку)", (bx1 + 0.4, BELT_Y, leg_z0 + 0.1)))
+    zc = pit_z + BOOT_FLOOR_ABOVE_PIT
+    cleanout = [c.box((bx0 + 0.1, BELT_Y + 0.30, zc + 0.05), (bx0 + 0.45, BELT_Y + 0.312, zc + 0.35)),
+                c.box((bx1 - 0.45, BELT_Y + 0.30, zc + 0.05), (bx1 - 0.1, BELT_Y + 0.312, zc + 0.35))]
     parts["boot"] = c.merge_parts([boot_back] + inlet)
     parts["boot_cover"] = boot_front
-    parts["boot_rim"] = c.merge_parts([boot_rim] + cleanout + _rim_bolts(bx0 - 0.015, bx1 + 0.015, pit_z + 0.235,
+    parts["boot_rim"] = c.merge_parts([boot_rim] + cleanout + _rim_bolts(bx0 - 0.015, bx1 + 0.015, pit_z + BOOT_FLOOR_ABOVE_PIT - 0.015,
                                                                          leg_z0 + 0.015, BELT_Y + 0.30 + 0.006))
     parts["boot_pulley"] = wdrum
     parts["shafts"] = c.merge_parts([parts["shafts"], wshaft])
@@ -506,6 +511,6 @@ def build(top_z, pit_z, tube_len, phase=0.0):
         "motor_kw": MOTOR_KW,
     }
     anchors = {"spout_end": tuple(spout_end), "z_head": z_head, "z_boot": z_boot,
-               "inlet_mouth": (bx1 + 0.75, BELT_Y, leg_z0 + 0.65),
-               "boot_box": ((bx0, BELT_Y - 0.30, pit_z + 0.25), (bx1, BELT_Y + 0.30, leg_z0))}
+               "inlet_mouth": (bx1 + 0.45, BELT_Y, leg_z0),
+               "boot_box": ((bx0, BELT_Y - 0.30, pit_z + BOOT_FLOOR_ABOVE_PIT), (bx1, BELT_Y + 0.30, leg_z0))}
     return parts, labels, measure, anchors
