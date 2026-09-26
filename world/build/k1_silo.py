@@ -41,6 +41,7 @@ def main():
         "k1_wall_close.png": c.camera("CAM_WALL", (-13.2, -4.2, 1.9), (-11.0, -1.2, 3.2), lens=35),
         "k1_base.png": c.camera("CAM_BASE", (-3.5, -17.5, 1.6), (-6.8, -9.0, 0.6), lens=28),
         "k1_roof.png": c.camera("CAM_ROOF", (-24.0, 16.0, 27.0), (0.0, 0.0, 16.0), lens=35),
+        "k1_doors.png": c.camera("CAM_DOORS", (-15.0, -15.5, 1.8), (-6.0, -6.5, 0.9), lens=22),
     }
     del base
     (OUT / "measure.json").write_text(json.dumps(measure, ensure_ascii=False, indent=2), encoding="utf-8")

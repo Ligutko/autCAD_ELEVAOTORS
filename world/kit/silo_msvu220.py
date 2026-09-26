@@ -17,16 +17,29 @@ SITE_JSON = Path(__file__).resolve().parents[1] / "site" / "SITE.json"
 
 
 @functools.lru_cache(maxsize=1)
+def _site():
+    return json.loads(SITE_JSON.read_text(encoding="utf-8"))
+
+
 def aeration():
     """SITE.json `silo_aeration`: fans and floor channels measured on PDF p.2 (extract_aeration_p2.py)."""
-    return json.loads(SITE_JSON.read_text(encoding="utf-8"))["silo_aeration"]
+    return _site()["silo_aeration"]
 
 
-@functools.lru_cache(maxsize=1)
 def equipment():
     """SITE.json `silo_equipment`: thermometry, level sensor, sweep auger, aeration norms
     (research/silo_equipment.md, phase 2)."""
-    return json.loads(SITE_JSON.read_text(encoding="utf-8"))["silo_equipment"]
+    return _site()["silo_equipment"]
+
+
+def roof_spec():
+    """SITE.json `silo_roof`: vents and roof fans (research/silo_equipment.md §4)."""
+    return _site()["silo_roof"]
+
+
+def hatch_spec():
+    """SITE.json `silo_hatches`: roof hatches, thermometry service holes, wall doors (§5)."""
+    return _site()["silo_hatches"]
 
 
 # ------------------------------------------------------------------ wall
@@ -57,6 +70,8 @@ STIFF_BOLT_STEP = 0.288       # EST: stiffener flange to wall
 ROOF_SLOPE = math.radians(30.0)  # LUB: all roofs 30 deg
 EAVE_OVERHANG = 0.22             # EST
 ROOF_RIBS = 80                   # PDF p.6: roof lines match stiffeners
+ROOF_RIB_PHASE = 0.5             # PDF p.6: ribs on the stiffener angles, half a sector off the X axis
+ROOF_RIB_FRAC = 1.0 / 14         # EST: the rib takes 1/14 of a sector on each side of its line
 ROOF_RIB_H = 0.045               # EST standing rib
 ROOF_T = 0.0015                  # EST
 COLLAR_R = 0.65                  # EST: top ring
@@ -69,8 +84,9 @@ FOUND_H = 0.6                    # PDF p.4, p.6: silo base at +0.600
 AERATION_FANS = 4                # PDF p.2: four fan symbols per silo at 45 deg
 FAN_ANGLES = aeration()["fan_angles_deg"]   # PDF p.2 vectors: 47.5 / 132.5 / 227.5 / 312.5, not the diagonals
 FAN_R = aeration()["fan_r"]                 # PDF p.2 vectors: fan symbol centre 12.25 m from the silo axis
-DOOR_ANGLE = 180.0 + 9.0         # EST: between stiffeners, towards the tunnel side
-LADDER_ANGLE = 270.0 - 6.75      # EST: west side, between stiffeners
+DOOR_ANGLE = hatch_spec()["wall_doors"][0]["angle_deg"]   # SITE: ring 1 door, judgment between stiffeners
+LADDER_ANGLE = 270.0 - 6.75      # EST: south side, on a stiffener line, ladder stands off the stiffener
+ROOF_LADDER_HALF = 0.22 + 0.021  # roof ladder stiles / handrail half width (build_ladder)
 
 
 def sheet_thickness(ring):
@@ -80,6 +96,134 @@ def sheet_thickness(ring):
 
 def corrugation(z):
     return 0.5 * WAVE_DEPTH * np.cos(2 * math.pi * z / WAVE_PITCH)
+
+
+# ================================================================== roof layout (phase 2B)
+
+def roof_z(r):
+    """Top of the roof sheet at plan radius r (between ribs)."""
+    return WALL_TOP + (R - r) * math.tan(ROOF_SLOPE)
+
+
+def rib_angles(phase=None):
+    ph = ROOF_RIB_PHASE if phase is None else phase
+    return (np.arange(ROOF_RIBS) + ph) * 360.0 / ROOF_RIBS
+
+
+def sector_centre(deg, phase=None):
+    """Nearest angle half-way between two roof ribs."""
+    step = 360.0 / ROOF_RIBS
+    c0 = ((ROOF_RIB_PHASE if phase is None else phase) + 0.5) * step
+    return (c0 + step * round((deg - c0) / step)) % 360.0
+
+
+def rib_clearance(r, deg, w, l, phase=None):
+    """Tangential clearance (m) between an opening (w across the slope, l along it, centred on the
+    ray `deg` at radius r) and the nearest roof rib band; negative when the opening cuts a rib."""
+    ph = ROOF_RIB_PHASE if phase is None else phase
+    x = (deg * ROOF_RIBS / 360.0 - ph) % 1.0
+    s = math.sin(math.radians(min(x, 1.0 - x) * 360.0 / ROOF_RIBS))
+    band = 2 * math.pi / ROOF_RIBS * ROOF_RIB_FRAC
+    return min(rr * (s - band) for rr in (r - l / 2, r + l / 2)) - w / 2
+
+
+def roof_ladder_span():
+    return COLLAR_R + 0.5, R + EAVE_OVERHANG
+
+
+def ring_positions(rings):
+    """(x, y, r, deg) for rings of items evenly spaced from `a0_deg` ({n, r, a0_deg})."""
+    out = []
+    for ring in rings:
+        n, r, a0 = ring["n"], ring["r"], ring["a0_deg"]
+        for k in range(max(n, 1)):
+            deg = (a0 + 360.0 * k / max(n, 1)) % 360.0
+            out.append((r * math.cos(math.radians(deg)), r * math.sin(math.radians(deg)), r, deg))
+    return out
+
+
+def roof_openings(rs=None, hs=None, eq=None):
+    """Every hole through the roof sheet, silo frame: dicts with kind, id, r, deg, x, y, w (across the
+    slope), l (along it), round. Vents on sector centres (SITE `vents.snap`), roof fans in the vents
+    of their ring nearest to `near_deg`, a service hole on the sector centre next to each cable head,
+    roof access hatch, inspection hatch, level sensor housing."""
+    rs, hs, eq = rs or roof_spec(), hs or hatch_spec(), eq or equipment()
+    v, f = rs["vents"], rs["fans"]
+    snap = v.get("snap") == "sector_centre"
+    vents = []
+    for i, ring in enumerate(v["rings"]):
+        for k in range(ring["n"]):
+            deg = ring["a0_deg"] + 360.0 * k / ring["n"]
+            vents.append(dict(kind="vent", id=f"V{i}.{k}", ring=i, r=ring["r"], deg=sector_centre(deg) if snap else deg % 360.0,
+                              w=v["hole_d_m"], l=v["hole_d_m"], round=True))
+    for d in f["near_deg"][:f["n"]]:
+        cand = [o for o in vents if o["ring"] == f["ring"] and o["kind"] == "vent"]
+        best = min(cand, key=lambda o: abs((o["deg"] - d + 180) % 360 - 180))
+        best["kind"], best["id"] = "fan_vent", "F" + best["id"][1:]
+    out = vents
+    th = hs["thermo_service_holes"]
+    for j, (_, _, r, deg) in enumerate(ring_positions(eq["thermo"]["rings"])):
+        dh = sector_centre(deg)
+        off = 2 * r * math.sin(math.radians(abs((dh - deg + 180) % 360 - 180)) / 2)
+        out.append(dict(kind="service_hole", id=f"S{j}", r=r, deg=dh, w=th["d_m"], l=th["d_m"], round=True, offset=off))
+    a, i_ = hs["roof_access"], hs["roof_inspection"]
+    out.append(dict(kind="roof_access", id="HATCH", r=a["r"], deg=a["angle_deg"], w=a["w_m"], l=a["h_m"], round=False))
+    out.append(dict(kind="inspection", id="INSP", r=i_["r"], deg=i_["angle_deg"], w=i_["d_m"], l=i_["d_m"], round=True))
+    for k, s in enumerate(eq["level_sensors"]):
+        out.append(dict(kind="level_sensor", id=f"L{k}", r=s["r"], deg=s["angle_deg"], w=s["housing_d_m"], l=s["housing_d_m"], round=True))
+    for o in out:
+        o["x"], o["y"] = o["r"] * math.cos(math.radians(o["deg"])), o["r"] * math.sin(math.radians(o["deg"]))
+    return out
+
+
+def _roof_box(o, dw, dl, h0, h1):
+    """Box over an opening footprint (w + 2 dw across, l + 2 dl along the slope), each corner at
+    h0..h1 above the sloped roof sheet under it."""
+    u = np.array([math.cos(math.radians(o["deg"])), math.sin(math.radians(o["deg"])), 0.0])
+    t = np.array([-u[1], u[0], 0.0])
+    corners = []
+    for h in (h0, h1):
+        for s, q in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+            p = u * (o["r"] + q * (o["l"] / 2 + dl)) + t * s * (o["w"] / 2 + dw)
+            corners.append(p + [0, 0, roof_z(math.hypot(p[0], p[1])) + h])
+    v = np.array(corners)
+    f = np.array([(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)])
+    return v, f
+
+
+def _cone(r0, r1, z0, z1, center, steps=32):
+    a = np.linspace(0, 2 * math.pi, steps, endpoint=False)
+    cx, cy = center
+    v = np.concatenate([np.column_stack([cx + r0 * np.cos(a), cy + r0 * np.sin(a), np.full(steps, z0)]),
+                        np.column_stack([cx + r1 * np.cos(a), cy + r1 * np.sin(a), np.full(steps, z1)])])
+    return v, [c.grid_faces(2, steps, wrap_cols=True), np.arange(steps, 2 * steps)[None, :]]
+
+
+def door_zones(d, clear):
+    """Door leaf swing box, free strip in front and the outside steps (None without steps),
+    silo frame, as meshes for clash tests."""
+    ang = d["angle_deg"]
+    rw = R + 0.5 * WAVE_DEPTH + SHEET_T_BOTTOM
+    half = d["w_m"] / 2
+    z0, z1 = d["sill_z_m"], d["sill_z_m"] + d["h_m"]
+    steps_depth = _steps_depth(d) if d.get("outside_steps") else 0.0
+
+    def zone(r0, r1, h, za, zb):
+        v, f = c.box((r0, -h, za), (r1, h, zb))
+        return c.transform(v, rot_z=math.radians(ang)), f
+
+    leaf = zone(rw + 0.05, rw + d["w_m"], half, z0, z1)
+    front = zone(rw + 0.05 + steps_depth, rw + steps_depth + clear, half + 0.2, 0.05, z1)
+    steps = zone(rw + 0.05, rw + steps_depth, 0.45, -FOUND_H + 0.05, z0) if steps_depth else None
+    return leaf, front, steps
+
+
+STEP_RISE, STEP_GOING, LANDING = 0.25, 0.16, 0.6    # judgment: ship ladder ~57 deg, landing at the sill (ISO 14122-3)
+
+
+def _steps_depth(d):
+    n = math.ceil((d["sill_z_m"] + FOUND_H) / STEP_RISE)
+    return LANDING + n * STEP_GOING
 
 
 # ================================================================== geometry
@@ -204,8 +348,9 @@ def build_roof():
     radii = np.linspace(r0, COLLAR_R, n_r)
     zs = z0 + (r0 - radii) * math.tan(ROOF_SLOPE)
     # rib bump: raised trapezoid across ~1/6 of each panel near the rib line
-    phase = (a * ROOF_RIBS / (2 * math.pi)) % 1.0
-    bump = np.clip(1.0 - np.abs(phase - 0.0) * 14, 0, 1) + np.clip(1.0 - np.abs(phase - 1.0) * 14, 0, 1)
+    phase = (a * ROOF_RIBS / (2 * math.pi) - ROOF_RIB_PHASE) % 1.0
+    bump = (np.clip(1.0 - np.abs(phase - 0.0) / ROOF_RIB_FRAC, 0, 1)
+            + np.clip(1.0 - np.abs(phase - 1.0) / ROOF_RIB_FRAC, 0, 1))
     rib = ROOF_RIB_H * np.clip(bump * 1.6, 0, 1)
     top = np.stack([radii[:, None] * np.cos(a)[None, :], radii[:, None] * np.sin(a)[None, :],
                     zs[:, None] + rib[None, :] / math.cos(ROOF_SLOPE)], axis=-1).reshape(-1, 3)
@@ -255,25 +400,48 @@ def build_anchors():
     return c.merge_parts(parts)
 
 
-def build_door():
-    """Ground-level access door 700 x 1100 with bolted frame (EST)."""
-    ang = math.radians(DOOR_ANGLE)
+def build_doors(doors=None):
+    """Wall doors from SITE `silo_hatches.wall_doors`: bolted frame, panel with handles, and a ship
+    ladder with a landing at the sill for doors above the first tier (judgment, no inside ladder).
+    Returns (frames, panels, steps)."""
     r = R + 0.5 * WAVE_DEPTH + SHEET_T_BOTTOM
-    frame = []
-    w, h, z0 = 0.70, 1.10, 0.35
-    for p0, p1 in (((0, -w / 2 - 0.06, z0 - 0.06), (0.04, w / 2 + 0.06, z0)),
-                   ((0, -w / 2 - 0.06, z0 + h), (0.04, w / 2 + 0.06, z0 + h + 0.06)),
-                   ((0, -w / 2 - 0.06, z0), (0.04, -w / 2, z0 + h)),
-                   ((0, w / 2, z0), (0.04, w / 2 + 0.06, z0 + h))):
+    frame, panel, steps = [], [], []
+
+    def put(parts, p0, p1, ang):
         v, f = c.box(p0, p1)
-        frame.append((c.transform(v + np.array([r, 0, 0]), rot_z=ang), f))
-    v, f = c.box((0.005, -w / 2, z0), (0.025, w / 2, z0 + h))
-    panel = (c.transform(v + np.array([r, 0, 0]), rot_z=ang), f)
-    handles = []
-    for dz in (0.35, 0.75):
-        v, f = c.box((0.025, w / 2 - 0.12, z0 + dz), (0.07, w / 2 - 0.08, z0 + dz + 0.03))
-        handles.append((c.transform(v + np.array([r, 0, 0]), rot_z=ang), f))
-    return c.merge_parts(frame), c.merge_parts([panel] + handles)
+        parts.append((c.transform(v + np.array([r, 0, 0]), rot_z=ang), f))
+
+    for d in doors or hatch_spec()["wall_doors"]:
+        ang = math.radians(d["angle_deg"])
+        w, h, z0, fw = d["w_m"], d["h_m"], d["sill_z_m"], d["frame_w_m"]
+        for p0, p1 in (((0, -w / 2 - fw, z0 - fw), (0.04, w / 2 + fw, z0)),
+                       ((0, -w / 2 - fw, z0 + h), (0.04, w / 2 + fw, z0 + h + fw)),
+                       ((0, -w / 2 - fw, z0), (0.04, -w / 2, z0 + h)),
+                       ((0, w / 2, z0), (0.04, w / 2 + fw, z0 + h))):
+            put(frame, p0, p1, ang)
+        put(panel, (0.005, -w / 2, z0), (0.025, w / 2, z0 + h), ang)
+        for dz in (0.2, 0.5):
+            put(panel, (0.025, w / 2 - 0.12, z0 + dz), (0.07, w / 2 - 0.08, z0 + dz + 0.03), ang)
+        if not d.get("outside_steps"):
+            continue
+        depth = _steps_depth(d)
+        n = math.ceil((z0 + FOUND_H) / STEP_RISE)
+        put(steps, (0.05, -0.45, z0 - 0.05), (0.05 + LANDING, 0.45, z0), ang)                       # landing
+        for s in (-0.45, 0.43):
+            put(steps, (0.05 + LANDING - 0.02, s, -FOUND_H), (0.05 + LANDING, s + 0.02, z0), ang)    # landing posts
+            put(steps, (0.05, s, z0 + 1.0), (0.05 + LANDING, s + 0.02, z0 + 1.04), ang)                # handrail
+            put(steps, (0.05 + LANDING - 0.02, s, z0), (0.05 + LANDING, s + 0.02, z0 + 1.04), ang)
+        for k in range(1, n):                                                                       # treads down to grade
+            zt = z0 - k * STEP_RISE
+            x0 = 0.05 + LANDING + (k - 1) * STEP_GOING
+            put(steps, (x0, -0.4, zt - 0.03), (x0 + STEP_GOING + 0.03, 0.4, zt), ang)
+        for s in (-0.45, 0.43):                                                                     # stringers
+            v = np.array([[0.05 + LANDING, s, z0], [0.05 + LANDING, s + 0.02, z0],
+                          [depth, s + 0.02, -FOUND_H], [depth, s, -FOUND_H]], float)
+            v = np.concatenate([v, v + [0, 0, -0.15]]) + [r, 0, 0]
+            f = np.array([(0, 1, 2, 3), (7, 6, 5, 4), (0, 4, 5, 1), (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)])
+            steps.append((c.transform(v, rot_z=ang), f))
+    return c.merge_parts(frame), c.merge_parts(panel), (c.merge_parts(steps) if steps else None)
 
 
 def _tube_between(p0, p1, radius, steps=8):
@@ -424,18 +592,52 @@ def build_fans(fan_r=None, angles=None):
             c.merge_parts(pads), c.merge_parts(dark))
 
 
-def build_roof_vents():
-    """Two gravity vents with hoods half-way up the roof (EST)."""
-    parts = []
-    for deg in (0.0, 180.0):
-        ang = math.radians(deg)
-        rr = 5.5
-        zb = WALL_TOP + (R - rr) * math.tan(ROOF_SLOPE)
-        v, f = c.box((-0.35, -0.30, zb - 0.1), (0.35, 0.30, zb + 0.45))
-        parts.append((c.transform(v + [rr, 0, 0], rot_z=ang), f))
-        v, f = c.box((-0.45, -0.40, zb + 0.45), (0.45, 0.40, zb + 0.52))
-        parts.append((c.transform(v + [rr, 0, 0], rot_z=ang), f))
-    return c.merge_parts(parts)
+def build_roof_vents(openings=None):
+    """Vents with hoods (SITE `silo_roof.vents`): neck through the sheet, open skirt, cone cap.
+    Fan vents: taller housing with a guard ring (axial fan inside, motor under the roof).
+    Returns (vents, fan housings)."""
+    v_ = roof_spec()["vents"]
+    f_ = roof_spec()["fans"]
+    vents, fans = [], []
+    rn, rh = v_["hole_d_m"] / 2, v_["hood_d_m"] / 2
+    drop = rn * math.tan(ROOF_SLOPE) + 0.03                  # the neck reaches below the sloped sheet
+    for o in openings or roof_openings():
+        if o["kind"] not in ("vent", "fan_vent"):
+            continue
+        zc = roof_z(o["r"])
+        xy = (o["x"], o["y"])
+        if o["kind"] == "vent":
+            top = zc + v_["hood_h_m"]
+            vents.append(c.cylinder(rn, zc - drop, zc + v_["neck_h_m"] + 0.06, steps=32, center=xy, capped=False))
+            vents.append(c.cylinder(rh, top - 0.16, top - 0.06, steps=40, center=xy, capped=False))
+            vents.append(_cone(rh, 0.04, top - 0.06, top, xy, steps=40))
+        else:
+            top = zc + f_["housing_h_m"] + 0.12
+            fans.append(c.cylinder(rn + 0.02, zc - drop, zc + f_["housing_h_m"], steps=40, center=xy))
+            fans.append(c.cylinder(rn + 0.05, zc + f_["housing_h_m"] - 0.03, zc + f_["housing_h_m"], steps=40, center=xy))
+            vents.append(c.cylinder(rh, top - 0.16, top - 0.06, steps=40, center=xy, capped=False))
+            vents.append(_cone(rh, 0.04, top - 0.06, top, xy, steps=40))
+    return c.merge_parts(vents), c.merge_parts(fans)
+
+
+def build_roof_hatches(openings=None):
+    """Roof access hatch 610 x 700 (curb + lid on the slope), round inspection hatch, small caps over
+    the thermometry service holes (SITE `silo_hatches`). Returns (curbs, lids)."""
+    curbs, lids = [], []
+    for o in openings or roof_openings():
+        zc = roof_z(o["r"])
+        xy = (o["x"], o["y"])
+        if o["kind"] == "roof_access":
+            curbs.append(_roof_box(o, 0.04, 0.04, -0.05, 0.10))
+            lids.append(_roof_box(o, 0.06, 0.06, 0.10, 0.12))
+        elif o["kind"] == "inspection":
+            drop = o["w"] / 2 * math.tan(ROOF_SLOPE) + 0.02
+            curbs.append(c.cylinder(o["w"] / 2 + 0.03, zc - drop, zc + 0.10, steps=32, center=xy))
+            lids.append(c.cylinder(o["w"] / 2 + 0.05, zc + 0.10, zc + 0.12, steps=32, center=xy))
+        elif o["kind"] == "service_hole":
+            drop = o["w"] / 2 * math.tan(ROOF_SLOPE) + 0.02
+            curbs.append(c.cylinder(o["w"] / 2 + 0.02, zc - drop, zc + 0.06, steps=16, center=xy))
+    return c.merge_parts(curbs), c.merge_parts(lids)
 
 
 # ================================================================== assembly
@@ -475,9 +677,11 @@ def build(collection=None, materials=None, cut=None):
     objs["foundation"] = mk("SILO_FOUNDATION", v, f, m["concrete"], collection=collection)
     v, f = build_anchors()
     objs["anchors"] = mk("SILO_ANCHORS", v, f, m["galv_old"], collection=collection)
-    (vf, ff), (vp, fp) = build_door()
+    (vf, ff), (vp, fp), steps = build_doors()
     objs["door_frame"] = mk("SILO_DOOR_FRAME", vf, ff, m["galv"], collection=collection)
     objs["door"] = mk("SILO_DOOR", vp, fp, m["galv_old"], collection=collection)
+    if steps is not None:
+        objs["door_steps"] = mk("SILO_DOOR_STEPS", *steps, m["galv_old"], collection=collection)
     v, f = build_ladder()
     objs["ladder"] = mk("SILO_LADDER", v, f, m["galv_old"], smooth="quads", collection=collection)
     (vh, fh), (vm, fm), (vd, fd), (vpad, fpad), (vk, fk) = build_fans()
@@ -486,8 +690,13 @@ def build(collection=None, materials=None, cut=None):
     objs["fan_motor"] = mk("SILO_FAN_MOTOR", vm, fm, m["paint_motor"], smooth="quads", collection=collection)
     objs["fan_duct"] = mk("SILO_FAN_DUCT", vd, fd, m["galv"], collection=collection)
     objs["fan_pad"] = mk("SILO_FAN_PAD", vpad, fpad, m["concrete"], collection=collection)
-    v, f = build_roof_vents()
-    objs["vents"] = mk("SILO_ROOF_VENTS", v, f, m["galv"], collection=collection)
+    ops = roof_openings()
+    (v, f), (vfan, ffan) = build_roof_vents(ops)
+    objs["vents"] = mk("SILO_ROOF_VENTS", v, f, m["galv"], smooth="quads", collection=collection)
+    objs["roof_fans"] = mk("SILO_ROOF_FANS", vfan, ffan, m["fan_paint"], smooth="quads", collection=collection)
+    (vc, fc), (vl, fl) = build_roof_hatches(ops)
+    objs["roof_hatch_curbs"] = mk("SILO_ROOF_HATCH_CURBS", vc, fc, m["galv"], collection=collection)
+    objs["roof_hatch_lids"] = mk("SILO_ROOF_HATCH_LIDS", vl, fl, m["galv_old"], collection=collection)
 
     measure = {
         "outer_radius_m": R,
@@ -504,6 +713,10 @@ def build(collection=None, materials=None, cut=None):
         "spout_top_z_m": SPOUT_TOP,
         "bolts": int(len(th)),
         "aeration_fans": AERATION_FANS,
+        "roof_vents": sum(o["kind"] in ("vent", "fan_vent") for o in ops),
+        "roof_fans": sum(o["kind"] == "fan_vent" for o in ops),
+        "roof_vent_area_m2": round(sum(math.pi * (o["w"] / 2) ** 2 for o in ops if o["kind"] in ("vent", "fan_vent")), 2),
+        "wall_doors": len(hatch_spec()["wall_doors"]),
         "vertices_total": int(sum(len(o.data.vertices) for o in objs.values() if o is not None)),
     }
     return objs, measure

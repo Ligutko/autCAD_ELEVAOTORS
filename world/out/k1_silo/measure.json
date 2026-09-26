@@ -27,6 +27,10 @@
   "spout_top_z_m": 21.422,
   "bolts": 26860,
   "aeration_fans": 4,
-  "vertices_total": 2808072,
+  "roof_vents": 21,
+  "roof_fans": 2,
+  "roof_vent_area_m2": 2.91,
+  "wall_doors": 2,
+  "vertices_total": 2813680,
   "build_seconds": 1.2
 }

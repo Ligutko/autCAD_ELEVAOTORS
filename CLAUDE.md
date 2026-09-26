@@ -5,7 +5,7 @@
 > - `08 Expertise 2026-09-24..26.md` у тій самій папці — метод і факти, заміряні з креслення;
 > - `OBJECT_SCOPE.md` — повний склад об'єкта і що бракує.
 >
-> Код — `world/`, дані з креслення — `world/site/SITE.json`, заміри — `research/tunnel_k4.md`. Перед комітом мають пройти всі `world/build/check_*.py`.
+> Код — `world/`, дані з креслення — `world/site/SITE.json`, заміри — `research/tunnel_k4.md`. Перед комітом мають пройти всі `world/build/check_*.py`: `python world/build/check_all.py`.
 >
 > Розділи нижче про AutoCAD описують попередній 2D-етап; його `config_*.json` для 3D не використовувати.
 

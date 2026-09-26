@@ -43,6 +43,7 @@ SWEEP_LEN = SWEEP["length_m"]           # judgment: centre to wall clearance
 
 # ------------------------------------------------------------------ roof structure (EST)
 RAFTERS = 40                       # every second roof rib carries a rafter
+RAFTER_HALF = 0.03                 # channel 160 x 60: half the flange width
 PURLIN_R = [3.0, 6.0, 9.0]
 REPOSE = math.radians(27.0)        # STD: wheat angle of repose 25-28 deg
 
@@ -199,10 +200,15 @@ def build_sweep():
 
 # ================================================================== roof structure, cables, sensors
 
+def rafter_angles():
+    """Rafters under every second roof rib (degrees)."""
+    return silo.rib_angles()[::silo.ROOF_RIBS // RAFTERS]
+
+
 def build_roof_structure():
     rafters, rings = [], []
-    for k in range(RAFTERS):
-        a = 2 * math.pi * k / RAFTERS + math.pi / silo.ROOF_RIBS
+    for deg in rafter_angles():
+        a = math.radians(deg)
         u = np.array([math.cos(a), math.sin(a), 0.0])
         r0, r1 = R_IN - 0.05, silo.COLLAR_R + 0.05
         p0 = u * r0 + [0, 0, roof_underside_z(r0) - 0.08]
@@ -223,16 +229,7 @@ def build_roof_structure():
 def cable_positions(rings=None):
     """Thermometry cable rack positions (x, y, r): rings evenly spaced from `a0_deg`
     (SITE.json silo_equipment.thermo.rings, analog OPI 72 ft table)."""
-    out = []
-    for ring in (rings if rings is not None else EQ["thermo"]["rings"]):
-        n, r, a0 = ring["n"], ring["r"], ring["a0_deg"]
-        if n <= 1:
-            out.append((r * math.cos(math.radians(a0)), r * math.sin(math.radians(a0)), r))
-            continue
-        for k in range(n):
-            a = math.radians(a0 + 360.0 * k / n)
-            out.append((r * math.cos(a), r * math.sin(a), r))
-    return out
+    return [(x, y, r) for x, y, r, _ in silo.ring_positions(rings if rings is not None else EQ["thermo"]["rings"])]
 
 
 def cable_ends(r):
@@ -297,9 +294,13 @@ def build_hatch_and_ladder():
     a = math.radians(silo.LADDER_ANGLE)
     u = np.array([math.cos(a), math.sin(a), 0.0])
     t = np.array([-u[1], u[0], 0.0])
-    r_h = silo.R - 1.4
+    h = silo.hatch_spec()["roof_access"]
+    uh = np.array([math.cos(math.radians(h["angle_deg"])), math.sin(math.radians(h["angle_deg"])), 0.0])
+    th_ = np.array([-uh[1], uh[0], 0.0])
+    r_h = h["r"]
     zh = roof_underside_z(r_h)
-    frame = [c.box(tuple(u * r_h - t * 0.35 + [0, 0, zh - 0.05]), tuple(u * r_h + t * 0.35 + [0, 0, zh + 0.12]))]
+    frame = [c.box(tuple(uh * r_h - th_ * (h["w_m"] / 2 + 0.04) + [0, 0, zh - 0.05]),
+                   tuple(uh * r_h + th_ * (h["w_m"] / 2 + 0.04) + [0, 0, zh + 0.12]))]
     ladder = []
     if EQ["inside_ladder"]:
         r_l = R_IN - 0.25
@@ -310,8 +311,34 @@ def build_hatch_and_ladder():
             ladder.append(st.rod(u * r_l - t * 0.22 + [0, 0, z], u * r_l + t * 0.22 + [0, 0, z], 0.011, 6))
         for z in np.arange(1.0, silo.WALL_TOP, 3.0):                                         # wall brackets
             ladder.append(st.member(u * r_l + [0, 0, z], u * (R_IN - 0.01) + [0, 0, z], st.flat(0.05, 0.008)))
-    hatch_pos = u * r_h + [0, 0, zh]
+    hatch_pos = uh * r_h + [0, 0, zh]
     return c.merge_parts(frame), (c.merge_parts(ladder) if ladder else None), hatch_pos
+
+
+def build_roof_openings_inside():
+    """From inside: dark discs where the vents, hatches and service holes pierce the sheet, and the
+    roof fan motors hanging under their vents (SITE `silo_roof.fans.motor_below_roof`).
+    Returns (holes, motors)."""
+    holes, motors = [], []
+    mot = silo.roof_spec()["fans"]["motor_below_roof"]
+    for o in silo.roof_openings():
+        if o["kind"] == "level_sensor":
+            continue
+        z = roof_underside_z(o["r"]) - 0.004
+        if o["round"]:
+            holes.append(c.cylinder(o["w"] / 2, z - 0.002, z, steps=24, center=(o["x"], o["y"])))
+        else:
+            u = np.array([math.cos(math.radians(o["deg"])), math.sin(math.radians(o["deg"]))])
+            t = np.array([-u[1], u[0]])
+            p = np.array([o["x"], o["y"]])
+            v = np.array([[*(p + s * o["w"] / 2 * t + q * o["l"] / 2 * u), roof_underside_z(o["r"] + q * o["l"] / 2) - 0.004]
+                          for s, q in ((-1, -1), (1, -1), (1, 1), (-1, 1))])
+            holes.append((v, np.array([(0, 1, 2, 3)])))
+        if o["kind"] == "fan_vent":
+            zt = roof_underside_z(o["r"]) - 0.05
+            motors.append(c.cylinder(mot["d_m"] / 2, zt - mot["l_m"], zt, steps=20, center=(o["x"], o["y"])))
+            motors.append(c.cylinder(o["w"] / 2 + 0.01, zt - 0.02, zt + 0.05, steps=32, center=(o["x"], o["y"]), capped=False))
+    return c.merge_parts(holes), c.merge_parts(motors)
 
 
 # ================================================================== grain
@@ -477,7 +504,12 @@ def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, 
     hframe, ladder, hatch = build_hatch_and_ladder()
     add("hatch_frame", hframe, "galv")
     add("inside_ladder", ladder, "galv", "quads")
-    labels.append(("Люк даху", tuple(hatch)))
+    labels.append(("Люк даху 610×700", tuple(hatch)))
+    r_holes, r_motors = build_roof_openings_inside()
+    add("roof_holes", r_holes, "dark")
+    add("roof_fan_motors", r_motors, "motor", "quads")
+    fan = next(o for o in silo.roof_openings() if o["kind"] == "fan_vent")
+    labels.append(("Даховий вентилятор 0.25 кВт у провітрювачі", (fan["x"], fan["y"], roof_underside_z(fan["r"]) - 0.4)))
     add("grain", build_grain(fill, draw), "grain", True)
     measure = {
         "channels": len(segs),

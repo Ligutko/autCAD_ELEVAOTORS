@@ -131,8 +131,8 @@
                       "src": "analog Neuero NL 22/24: 7 зондів × 5 датчиків (rec_c98ddf27); радіус 7.0 — judgment"}
     },
     "level_sensors": [
-      {"role": "upper", "type": "rotary", "r": 9.0, "angle_deg": 60, "paddle_below_roof_m": 0.6, "housing_d_m": 0.12, "housing_h_m": 0.20,
-       "src": "sourced: 1 датчик верхнього рівня, роторний (rec_c8b8b530, rec_66e4de0e); r, кут, корпус — judgment"}
+      {"role": "upper", "type": "rotary", "r": 9.0, "angle_deg": 58.5, "paddle_below_roof_m": 0.6, "housing_d_m": 0.12, "housing_h_m": 0.20,
+       "src": "sourced: 1 датчик верхнього рівня, роторний (rec_c8b8b530, rec_66e4de0e); r, кут, корпус — judgment; кут у середині сектора даху (фаза 2B)"}
     ],
     "sweep": {
       "screw_d_m": 0.315, "floor_gap_m": 0.01, "length_m": 10.6, "park_angle_deg": 200,
@@ -146,6 +146,36 @@
       "fan_flow_m3h": 13160, "bulk_density_t_m3": 0.75, "specific_min_m3h_t": 10, "air_path_ratio_max": 1.5,
       "src": "подача ВЦ-5И при 2.02 кПа — analog (rec_d63ffe79); норма ≥10 м³/(год·т) — analog ВНІІЗ (rec_e5bab282); шлях повітря ≤ 1.5 — analog OMAFRA, K-State (rec_1516b708)"
     }
+  },
+  "silo_roof": {
+    "src": "research/silo_equipment.md §4 (фаза 2B)",
+    "vents": {
+      "hood_d_m": 0.565, "hood_h_m": 0.33, "hole_d_m": 0.42, "neck_h_m": 0.12,
+      "rings": [{"r": 9.3, "n": 12, "a0_deg": 15}, {"r": 7.0, "n": 9, "a0_deg": 10}],
+      "snap": "sector_centre",
+      "area_required_m2": 2.9, "area_min_m2": 2.5,
+      "src": "ковпак Ø565 × 330 — sourced Лубнимаш (rec_bc03e784, rec_ba5a9f4a); отвір Ø420 — analog Symaga (rec_adae99ea); два кола в шаховому порядку — judgment з рендера Лубнимаш (rec_e22bc814), r 9.3 — analog OMAFRA (rec_b49418c9); n — derived з площі 2.9 м² (rec_11555857), мінімум 2.5 м² — MedCrave; кути прив'язано до середини сектора між ребрами даху (analog Westeel, rec_7ffa884e), тому крок не рівно 30°/40°"
+    },
+    "fans": {
+      "n": 2, "kw": 0.25, "impeller_d_m": 0.40, "flow_max_m3h": 4415, "ring": 0, "near_deg": [105, 285],
+      "housing_h_m": 0.45, "motor_below_roof": {"d_m": 0.14, "l_m": 0.20},
+      "src": "2 шт. по 0.25 кВт — sourced (rec_d26b642f, rec_3d1a15f7); осьовий у горловині провітрювача, мотор під дахом, подача — analog Symaga HCDF-40 (rec_98965c19, rec_d73e19c7); у провітрювачах нижнього кола, діаметрально протилежно, поза смугою естакади — judgment (rec_0c499493)"
+    }
+  },
+  "silo_hatches": {
+    "src": "research/silo_equipment.md §5 (фаза 2B)",
+    "roof_access": {"w_m": 0.61, "h_m": 0.70, "r": 9.6, "angle_deg": 270.0,
+                    "src": "610 × 700 — analog Symaga (rec_454c0a1f); люк вхідний «Так» — sourced Лубнимаш (rec_993174af); r 9.6 поряд із драбиною даху — judgment (rec_705fa02d); кут — перший сектор, де люк не заходить на драбину (драбина на 263.25)"},
+    "roof_inspection": {"d_m": 0.40, "r": 6.5, "angle_deg": 270.0,
+                        "src": "Ø400 — analog Symaga (rec_78697c67); люк інспекційний «Так» — sourced Лубнимаш (rec_993174af); місце — judgment: найменший r, де Ø400 вміщується між ребрами, поряд із драбиною"},
+    "thermo_service_holes": {"d_m": 0.15, "max_offset_m": 0.4,
+                             "src": "Ø150 біля голови кожного кабелю — analog OPI (rec_42abc865); у середині найближчого сектора даху — judgment"},
+    "wall_doors": [
+      {"ring": 1, "w_m": 0.63, "h_m": 0.70, "sill_z_m": 0.25, "angle_deg": 189.0, "frame_w_m": 0.03},
+      {"ring": 2, "w_m": 0.63, "h_m": 0.70, "sill_z_m": 1.25, "angle_deg": 270.0, "frame_w_m": 0.03, "outside_steps": true}
+    ],
+    "src_doors": "630 × 700 — analog Symaga (rec_29a1610a); двері в 1-му і 2-му ярусах — analog KMZ (rec_1c0c2f1d), AGI (rec_cc73c920); пороги 0.25 / 1.25 — derived (rec_34e15cf8); кути — judgment: посередині між ребрами жорсткості, 1-й ярус на місці старих дверей, 2-й поряд із зовнішньою драбиною; сходинки до дверей 2-го ярусу — judgment (внутрішньої драбини нема)",
+    "door_front_clear_m": 1.0, "src_front_clear": "judgment: вільна смуга перед дверима для проходу"
   },
   "silo_gates": {
     "offsets_along_row": [-9.75, -6.5, -3.25, 0.0, 3.25, 6.5, 9.75],
