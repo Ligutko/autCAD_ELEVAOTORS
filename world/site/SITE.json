@@ -25,6 +25,8 @@
      "pit": {"inner_center": [-0.098, 26.402], "inner_size": [3.797, 4.201], "wall_t": 0.6, "bottom_t": 0.5,
              "deck_top_z": -1.9, "deck_t": 0.2, "cover_top_z": 0.6},
      "noria_axis": [0.6, 26.9], "legs_along": "Y",
+     "access": {"type": "caged_ladder", "x": -1.775, "y": 26.95, "free_strip_y": [24.05, 28.35],
+                "src": "judgment: tower stairs are not in the process drawing; ladder in the strip free of equipment and spouts (research/tunnel_k4.md «Сходи веж і T10»), ISO 14122-4"},
      "src": "x, y = centre of the column grid; PDF p.2, p.4, p.6 (rec_d6a1f557, rec_4dfd6707, rec_39d563df); tube_mm, model, feed PDF p.8 (1 черга); drive, inlet, discharge sides PDF p.6 and the +30.000 plan"},
     {"id": "H6", "x": 0.0, "y": 0.9, "size": [4.599, 4.402], "top_z": 29.0, "pit_z": -5.1,
      "levels_z": [23.2, 25.6, 29.0], "noria": "У13-УН100, 100 т/год", "tube_mm": 32500,
@@ -33,16 +35,36 @@
      "pit": {"inner_center": [0.003, 1.0], "inner_size": [3.999, 3.999], "wall_t": 0.6, "bottom_t": 0.5,
              "deck_top_z": -1.9, "deck_t": 0.2, "cover_top_z": 0.6},
      "noria_axis": [0.0, 1.302], "legs_along": "Y",
+     "access": {"type": "caged_ladder", "x": 1.725, "y": 1.5, "free_strip_y": [-1.25, 3.05],
+                "src": "judgment: tower stairs are not in the process drawing; ladder in the strip free of equipment and spouts (research/tunnel_k4.md «Сходи веж і T10»), ISO 14122-4"},
      "src": "x, y = centre of the column grid; PDF p.2, p.4, p.7 (rec_03040457, rec_9f873011, rec_d8085b5c); tube_mm, model, feed PDF p.10 (2 черга); drive, inlet, discharge sides PDF p.7"}
   ],
-  "silo_top_conveyors": [
-    {"id": "T8",  "from": [0.0, 25.5], "to": [-49.5, 25.5], "deck_z": 23.2, "type": "У13-ТЦС-320", "src": "PDF p.3, p.6: 39500 від осі S1 до вежі + вихід"},
-    {"id": "T12", "from": [0.0, 0.0],  "to": [-49.5, 0.0],  "deck_z": 23.2, "type": "У13-ТЦС-320", "src": "PDF p.3, p.7"},
-    {"id": "T15", "from": [0.0, 0.0],  "to": [49.5, 0.0],   "deck_z": 23.2, "type": "У13-ТЦС-320", "src": "PDF p.3, p.7"}
-  ],
-  "galleries": [
-    {"id": "G_H5_H6", "conveyors": ["T11", "T14"], "from": [0.0, 25.5], "to": [0.0, 0.0], "z": 25.6, "width": 2.8, "src": "PDF p.3: 950+900+950"},
-    {"id": "G_H14_H5", "conveyors": ["T7", "T10"], "from": [1.1, 54.8], "to": [0.0, 25.5], "z_from": 26.8, "z_to": 25.6, "width": 2.8, "src": "PDF p.3, p.4; кінець біля H1-H4 EST"}
+  "silo_top_galleries": {
+    "width": 1.255, "y_rel_row": [-0.28, 0.98], "walkway_side": "+Y", "walkway_w": 0.78,
+    "beam_z": [22.74, 23.14], "deck_z": 23.2, "rail_top_z": 24.34,
+    "platforms_at_silo_centre": {"y_to": 1.47, "len": 2.2},
+    "supports": {"posts_x": [-49.78, -27.23, -25.77, -3.22, 3.22, 25.77, 27.23, 49.78], "post_z": [14.57, 22.78], "knee_brace_deg": 45},
+    "conveyor": {"type": "У13-ТЦС-320", "y_rel_row": 0.0, "casing_w": 0.39, "casing_z": [23.43, 23.94]},
+    "roof_spout_z": 22.0,
+    "lines": [
+      {"id": "T8",  "row_y": 25.5, "x_ends": [-50.50, -2.50], "tail_x": 0.95,   "head_x": -38.55, "drops_x": [-14.5, -38.5]},
+      {"id": "T12", "row_y": 0.0,  "x_ends": [-50.50, -2.50], "tail_x": -1.58,  "head_x": -38.58, "drops_x": [-14.5, -38.5]},
+      {"id": "T15", "row_y": 0.0,  "x_ends": [2.50, 50.50],   "tail_x": -0.415, "head_x": 38.585, "drops_x": [14.5, 38.5]}],
+    "src": "PDF p.3, p.6, p.7 vectors (research/tunnel_k4.md «Естакади і мости (K3)»); «1130» is the height over the silo roof peak, not a truss"
+  },
+  "bridges": [
+    {"id": "G_H5_H6", "x": [-2.00, 0.80], "y": [3.20, 23.90], "deck_top_z": 25.60, "deck_bot_z": 25.40,
+     "truss_bottom_z": 23.90, "rails_z": [26.20, 26.80],
+     "conveyors": [
+       {"id": "T11", "x": -1.055, "tail": [25.94, 26.15], "head": [0.00, 26.88], "casing_w": 0.40, "casing_h": 0.55},
+       {"id": "T14", "x": -0.155, "tail": [2.50, 25.93], "head": [26.0, 26.57], "casing_w": 0.40, "casing_h": 0.50}],
+     "src": "PDF p.3, p.4, p.5 (950+900+950); tail/head = [Y, axis z]"},
+    {"id": "G_H14_H5", "x": [-2.00, 0.80], "y": [28.40, 51.40], "deck_top_z": 25.60, "deck_bot_z": 25.40,
+     "truss_bottom_z": 23.90, "rails_z": [26.20, 26.80],
+     "conveyors": [
+       {"id": "T7",  "x": -1.055, "tail": [54.97, 25.97], "head": [24.47, 26.8]},
+       {"id": "T10", "x": -0.155, "tail": [24.94, 26.02], "head": [53.93, 26.02]}],
+     "src": "PDF p.3, p.4; the receiving tower H1-H4 at the north end is not modelled yet"}
   ],
   "tunnels": [
     {"id": "T9", "row_y": 25.5, "tower": "H5", "end_x": -51.598, "inner_y_rel_row": [-1.2, 1.0],

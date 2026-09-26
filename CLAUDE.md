@@ -1,15 +1,24 @@
 # CLAUDE.md
 
-> **3D-світ елеватора (поточна робота, з 2026-09-24).** Почни з `obsidian_handoff/wiki/projects/Elevator 3D World/00 Handoff.md` (копія для Obsidian-сховища `VAULT/`): стан, як запускати, правила, наступний крок. Код — `world/`, план — `BUILD_SPEC.md`. Розділи нижче про AutoCAD описують попередній 2D-етап; його `config_*.json` для 3D не використовувати.
+> **3D-світ елеватора (поточна робота, з 2026-09-24).**
+> Почни з `obsidian_handoff/wiki/projects/Elevator 3D World/00 Handoff.md`: там стан, як запускати, правила і наступний крок. Далі читай:
+> - `08 Expertise 2026-09-24..26.md` у тій самій папці — метод і факти, заміряні з креслення;
+> - `OBJECT_SCOPE.md` — повний склад об'єкта і що бракує.
+>
+> Код — `world/`, дані з креслення — `world/site/SITE.json`, заміри — `research/tunnel_k4.md`. Перед комітом мають пройти всі `world/build/check_*.py`.
+>
+> Розділи нижче про AutoCAD описують попередній 2D-етап; його `config_*.json` для 3D не використовувати.
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Current main track: 3D pipeline (Blender)
 
-Since 2026-09 the active work is the 3D pipeline, not 2D AutoCAD. Start with `3D_STATUS.md`, then `PRD_3D_PIPELINE.md` (rules and prohibitions, section 3) and `CANON_DETAIL.md`.
-- Facts layer: `inbox/records/` cards, all `unverified`; never set `cited` yourself, never create `FACTS.json` without human decisions.
-- Kit: `blender/kit/`; world: `blender/site/SITE_*.json` assembled by `blender/assemble_site.py`; QA tests: `blender/site/run_qa_tests.py`.
+Since 2026-09 the active work is the 3D pipeline, not 2D AutoCAD.
+- **Main kit (user decision, 2026-09-24):** `world/kit/`, with scenes and checks in `world/build/` and data in `world/site/SITE.json`.
+- The older track (`blender/kit/`, `blender/site/SITE_*.json`, `blender/assemble_site.py`, QA `blender/site/run_qa_tests.py`, `3D_STATUS.md`) is an archive. Its assembler and QA gates are still to be moved into `world/`.
+- Rules from `PRD_3D_PIPELINE.md` §3 still apply to the facts layer: `inbox/records/` cards are all `unverified`; never set `cited` yourself, never create `FACTS.json` without human decisions.
 - Accepted slice folders `blender/silo_msvu_220*/`, `blender/noria_01/`, `blender/proof/` are evidence: do not overwrite.
+- Research is done by the project agent `.claude/agents/elevator-researcher.md`. Brief it with the exact items to find, the tools to use and where the keys are (`.env`; never print the values).
 
 ## Project Overview
 

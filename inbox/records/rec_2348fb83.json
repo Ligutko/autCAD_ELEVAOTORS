@@ -1,0 +1,24 @@
+{
+  "id": "rec_2348fb83",
+  "subject": "Аспірація: аналог Metallum (Україна)",
+  "kind": "fact",
+  "claim": {
+    "name": "noria_unit_analog",
+    "value": "норія 100 т/год: 1940 м³/год, вентилятор 3.0 кВт, циклон 4БЦШ-275 (ЦОЛ-1,5); 175 т/год: 2800 м³/год, 4.0 кВт, 4БЦШ-350 (ЦОЛ-3)",
+    "unit": null,
+    "qualifier": "установка з виводом повітря на циклони, норії до 20 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.metallum.com.ua/blog/rekomendaczii-po-raschetu-aspiraczionnyix-ustanovok/aspiracziya-norij-na-elevatorax",
+    "path": "inbox/raw/web/metallum.com.ua/aspiracziya-norij-na-elevatorax.html",
+    "quote": "100 | 1940 | 3,0 | 4БЦШ-275 (ЦОЛ-1,5) … 175 | 2800 | 4,0 | 4БЦШ-350 (ЦОЛ-3)",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Таблиця 2 НПФ «Металлум» (Одеса). Розраховано для норій до 20 м, у нас 32.5–33 м. Порядок величин збігається з нормою Указаній для башмака.",
+  "seen_in": []
+}

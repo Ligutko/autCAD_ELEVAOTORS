@@ -1,7 +1,7 @@
 ---
 type: moc
 domain: 3d-elevator
-updated: 2026-09-24
+updated: 2026-09-26
 tags: [moc, elevator, blender, agents]
 ---
 # Elevator 3D World MOC
@@ -10,6 +10,7 @@ tags: [moc, elevator, blender, agents]
 
 ## Почати тут
 - [[00 Handoff]] — стан, як запускати, що робити далі (для нового агента)
+- `OBJECT_SCOPE.md` у корені — повний склад об'єкта з позначками ✅ ◐ ✗
 
 ## Проєкт «Elevator 3D World»
 - [[01 Goal and Vision]] — мета, якість, правило джерел
@@ -18,7 +19,8 @@ tags: [moc, elevator, blender, agents]
 - [[04 Decisions Log]] — що вирішено і коли
 - [[05 Lessons and Pitfalls]] — помилки, які вже ловили
 - [[06 Open Questions]] — питання до проєктанта і користувача
-- [[07 Environment]] — хмарне середовище, мережа, рендер
+- [[07 Environment]] — хмара і ПК користувача, мережа, рендер, ключі
+- [[08 Expertise 2026-09-24..26]] — експертиза сесії: метод звірення з кресленням, факти, перевірки, аспірація
 
 ## Знання
 - [[Canon Detail]] — рівень деталізації (Панас, Inventor)
@@ -28,4 +30,4 @@ tags: [moc, elevator, blender, agents]
 - [[Real Object]] — об'єкт з `Технологія 06.06.24.pdf`
 
 ## Вузли кіта
-- [[K1 Silo MSVU220]] · [[K2 Noria Tower]] · [[K2b Noria N100]] · [[K3 Galleries]] · [[K5 Silo Interior]] · [[D1 D3 Cameras and Reels]]
+- [[K1 Silo MSVU220]] · [[K2 Noria Tower]] · [[K2b Noria N100]] · [[Distribution]] · [[K3 Galleries]] · [[K4 Tunnels]] · [[E Aspiration]] (WIP) · [[K5 Silo Interior]] · [[D1 D3 Cameras and Reels]]

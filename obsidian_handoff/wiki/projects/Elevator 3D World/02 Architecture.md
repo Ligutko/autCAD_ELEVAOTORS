@@ -1,6 +1,6 @@
 ---
 type: architecture
-updated: 2026-09-24
+updated: 2026-09-26
 tags: [code, blender]
 ---
 # 02 Architecture
@@ -17,9 +17,13 @@ world/
     noria_tower.py    K2 вежа                  → [[K2 Noria Tower]]
     noria_n100.py     K2b норія детально       → [[K2b Noria N100]]
     gallery.py        K3 естакади, міст, конвеєр → [[K3 Galleries]]
+    distribution.py   розподіл під головою норії → [[Distribution]]
+    tunnel.py         K4 тунелі, ТЛ-50К, засувки → [[K4 Tunnels]]
+    aspiration.py     E бункери пилу, установки, повітроводи (WIP) → [[E Aspiration]]
     silo_interior.py  K5 нутро силоса          → [[K5 Silo Interior]]
     cameras.py        D1 рухи камери           → [[D1 D3 Cameras and Reels]]
-  build/              сцени: k1_silo, k2_tower, k2b_noria, k5_interior, site (assemble()), reel
+  build/              сцени: k1_silo, k2_tower, k2b_noria, k4_tunnel, k5_interior, site (assemble()), reel
+                      перевірки: check_noria, check_tower, check_tunnel, check_distribution, check_gallery, check_aspiration
   reels/*.json        специфікації роликів
   out/<вузол>/        кадри, README (параметр — значення — джерело), measure.json
 ```
@@ -31,3 +35,4 @@ world/
 - Розріз: `cut=(nx, ny)` у `silo.build` / `silo_interior.build` прибирає половину до камери, великі грані й n-кутники ріжуться точно.
 - Підписи: `common.labels()` → колекція `LABELS_<id>`; `face_labels(cam)` ставить їх на екрані без перетинів і ховає закриті; `render_with_labels` рендерить їх другим проходом поверх кадру.
 - Рендер: Cycles, AgX, небо Nishita + сонце; `--quick` для чернеток.
+- Перевірки `check_*.py`: геометрія з кіту порівнюється з кресленням і специфікацією; у кожній є навмисно зламаний варіант, який мусить впасти. Усі мають пройти до коміту.

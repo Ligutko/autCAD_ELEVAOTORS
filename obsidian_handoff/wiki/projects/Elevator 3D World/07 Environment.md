@@ -1,6 +1,6 @@
 ---
 type: environment
-updated: 2026-09-24
+updated: 2026-09-26
 tags: [cloud, network, render]
 ---
 # 07 Environment
@@ -15,3 +15,10 @@ tags: [cloud, network, render]
 - Відео від користувача приходять файлами-вкладеннями; розбір — ffmpeg по 2 кадри/с, контактні аркуші, перегляд кадрів.
 - Рендер: чернетка 960 px 24–32 семпли ~20–90 с; фінал 1920 px 128–160 семплів 5–28 хв на кадр.
 - Гілка `claude/nice-noether-0p9c8r`, репо `ligutko/autcad_elevaotors`.
+
+## ПК користувача (Windows 11, з 2026-09-24 основне середовище)
+- Blender 4.5.2: `C:\Program Files\Blender Foundation\Blender 4.5\blender.exe`. Запуск: `blender --background --python world/build/<сцена>.py`. Без `--factory-startup`, бо Pillow стоїть у `%APPDATA%\Blender Foundation\Blender\4.5\scripts\modules`.
+- Фінальний кадр 1.5–3 хв (CPU); повний перерендер 4 сцен ≈40+ хв — у фоні.
+- Гілка — `master` у `origin` (ligutko/autcad_elevaotors).
+- Ключі в `.env` (не виводити): `APIFY_TOKEN`, `YOUTUBE_API_KEY`, `VERTEX_PROJECT_ID`, `VERTEX_LOCATION`, `VERTEX_LOCATION_MEDIA`. Vertex `gemini-2.5-pro` працює, `gemini-3-*` дає 404.
+- Відкриваються: lubnymash.com, go4b.com, symaga.com, skf.com, kmzindustries.ua. grabcad і traceparts дають 403 (обходити через Apify).

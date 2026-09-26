@@ -1,0 +1,24 @@
+{
+  "id": "rec_c6ac3e0d",
+  "subject": "Аспірація: запаси до витрати",
+  "kind": "fact",
+  "claim": {
+    "name": "margins",
+    "value": "пиловловлювач = сума точок + 5 %; +100 м³/год на кожну точку, що перекривається клапаном; підсос у циклонах ЦОЛ, 4БЦШ — 150 м³/год; у фільтрах 15 %",
+    "unit": null,
+    "qualifier": "правила сумування витрат"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://asp-hpz.narod.ru/index/raschjot_aspiracii/0-2",
+    "path": "inbox/raw/web/asp-hpz.narod.ru/raschjot_aspiracii.html",
+    "quote": "Пропускную производительность пылеотделителя определить сложив расходы всех аспирируемых точек и прибавив 5%. Если в сети есть точки временно отключаемые (перекрытые) клапанами, на каждую добавить ещё по 100 м³/час",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Методичний сайт з розрахунку аспірації ХПП.",
+  "seen_in": []
+}

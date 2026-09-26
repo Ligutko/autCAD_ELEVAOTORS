@@ -1,6 +1,7 @@
-"""K3. Silo-top gallery with chain conveyor, and truss bridges between towers.
+"""K3. Silo-top galleries with chain conveyors У13-ТЦС-320, and the bridges between the towers.
 
-Works in site coordinates (metres). Source tags as in silo_msvu220.py.
+Site coordinates (metres). Every position comes from SITE.json `silo_top_galleries` and `bridges`,
+measured by vectors on PDF p.3-p.7 (research/tunnel_k4.md «Естакади і мости (K3)»). EST where noted.
 """
 
 import math
@@ -10,23 +11,10 @@ import numpy as np
 from . import common as c
 from . import steel as st
 
-# ------------------------------------------------------------------ silo-top gallery (PDF p.3, p.6, p.7)
-GAL_WIDTH = 1.30            # PDF p.3: strip ~1.3 m on plan
-GAL_TRUSS_H = 1.13          # PDF p.6, p.7: 1130
-GAL_PANEL = 1.5             # EST: truss panel length
-SUPPORT_OFFSET = 11.35      # PDF p.6: posts just outside the eave, ±11.3 m from the silo axis
-KICKER_OFFSET = 8.8         # PDF p.6: diagonal strut meets the gallery at ±8.8 m
-
-# ------------------------------------------------------------------ chain conveyor У13-ТЦС-320
-CONV_W = 0.42               # EST: casing outside, 320 mm trough (catalogue) + walls and flanges
-CONV_H = 0.46               # EST
 CONV_SECTION = 2.0          # EST: bolted casing sections
-CONV_Y = -0.25              # EST: conveyor off-centre, walkway on the +Y side
-CONV_KW = 11.0              # catalogue / PDF p.8
-
-# ------------------------------------------------------------------ tower bridge (PDF p.3, p.4)
-BRIDGE_W = 2.80             # PDF p.3: 950 + 900 + 950
-BRIDGE_H = 2.40             # PDF p.4: truss between +23.2 and +25.6
+CONV_END = 0.30             # EST: casing beyond the pulley axis at head and tail
+CROSS_BEAM_STEP = 1.5       # EST: cross beams under the gallery deck
+BRIDGE_PANEL = 2.4          # EST: bridge truss panel (not dimensioned on the drawing)
 
 
 def _frame(p0, p1):
@@ -40,155 +28,119 @@ def _frame(p0, p1):
     return p0, d, s, length
 
 
-def conveyor(p0, p1, drive_at_end=True, y_off=0.0):
-    """Chain conveyor casing along p0 -> p1 at casing bottom height. Returns parts dict."""
-    o, d, s, length = _frame(p0, p1)
-    o = o + s * y_off
+def conveyor(tail, head, width, height, drive_side=1.0):
+    """Chain conveyor casing between the tail and head pulley axes (x, y, z of the axis).
+
+    The casing runs CONV_END beyond each axis; drive (reducer + motor) sits at the head on the
+    `drive_side` of the run. Returns parts dict.
+    """
+    tail, head = np.asarray(tail, float), np.asarray(head, float)
+    o, d, s, length = _frame(tail, head)
     casing, flanges, drive, motor = [], [], [], []
-    hw = CONV_W / 2
-
-    def at(t, side, up):
-        return o + d * t + s * side + np.array([0, 0, up])
-
-    casing.append(st.member(at(0, 0, CONV_H / 2), at(length, 0, CONV_H / 2),
-                            np.array([(-hw, -CONV_H / 2), (hw, -CONV_H / 2), (hw, CONV_H / 2), (-hw, CONV_H / 2)]),
-                            up=(0, 0, 1)))
-    for t in np.arange(0.0, length + 1e-6, CONV_SECTION):
-        flanges.append(st.member(at(t - 0.012, 0, CONV_H / 2), at(t + 0.012, 0, CONV_H / 2),
-                                 np.array([(-hw - 0.04, -CONV_H / 2 - 0.04), (hw + 0.04, -CONV_H / 2 - 0.04),
-                                           (hw + 0.04, CONV_H / 2 + 0.03), (-hw - 0.04, CONV_H / 2 + 0.03)])))
-    # head (drive) and tail boxes
-    t_head = length if drive_at_end else 0.0
-    sign = 1.0 if drive_at_end else -1.0
-    casing.append(st.member(at(t_head - sign * 0.2, 0, 0.35), at(t_head + sign * 0.6, 0, 0.35),
-                            np.array([(-hw - 0.05, -0.37), (hw + 0.05, -0.37), (hw + 0.05, 0.40),
-                                      (-hw - 0.05, 0.40)])))
-    t_tail = 0.0 if drive_at_end else length
-    casing.append(st.member(at(t_tail + sign * 0.2, 0, 0.3), at(t_tail - sign * 0.5, 0, 0.3),
-                            np.array([(-hw - 0.04, -0.32), (hw + 0.04, -0.32), (hw + 0.04, 0.33),
-                                      (-hw - 0.04, 0.33)])))
-    # shaft-mounted reducer + 11 kW motor on the walkway side of the head
-    gb = at(t_head + sign * 0.25, hw + 0.05, 0.40)
-    drive.append(c.box(tuple(gb - [0.2, 0.2, 0.25]), tuple(gb + [0.2, 0.2, 0.25])))
-    drive[-1] = (drive[-1][0] + s * 0.18, drive[-1][1])
-    motor.append(st.rod(gb + s * 0.35 + d * 0.0, gb + s * 0.35 - d * sign * 0.62, 0.17, 20))
+    hw, hh = width / 2, height / 2
+    prof = np.array([(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)])
+    casing.append(st.member(o - d * CONV_END, o + d * (length + CONV_END), prof, up=(0, 0, 1)))
+    for t in np.arange(-CONV_END, length + CONV_END + 1e-6, CONV_SECTION):
+        flanges.append(st.member(o + d * (t - 0.012), o + d * (t + 0.012),
+                                 np.array([(-hw - 0.04, -hh - 0.04), (hw + 0.04, -hh - 0.04),
+                                           (hw + 0.04, hh + 0.03), (-hw - 0.04, hh + 0.03)]), up=(0, 0, 1)))
+    for at, grow in ((o + d * length, 0.06), (o, 0.04)):           # head and tail boxes
+        casing.append(st.member(at - d * 0.25, at + d * 0.25, prof * (1 + grow / hw), up=(0, 0, 1)))
+    gb = o + d * length + s * drive_side * (hw + 0.25)
+    drive.append(c.box(tuple(gb - [0.18, 0.18, 0.22]), tuple(gb + [0.18, 0.18, 0.22])))
+    motor.append(st.rod(gb + [0, 0, 0.3], gb + [0, 0, 0.3] - d * 0.6, 0.15, 20))
     return {"casing": c.merge_parts(casing), "flanges": c.merge_parts(flanges),
             "drive": c.merge_parts(drive), "motor": c.merge_parts(motor)}
 
 
-def silo_row_gallery(p0, p1, deck_z, silo_positions, silo_eave_z=14.976 + 0.6, silo_spout_z=21.422 + 0.6):
-    """Open truss gallery on posts carried by the silo walls, with conveyor and silo spouts.
-
-    p0, p1: (x, y) plan end points. silo_positions: (x, y) of the silos under it.
-    """
-    a = np.array([p0[0], p0[1], deck_z])
-    b = np.array([p1[0], p1[1], deck_z])
-    o, d, s, length = _frame(a, b)
-    hw = GAL_WIDTH / 2
-    heavy, light, deck, rails, spouts, gates, posts = [], [], [], [], [], [], []
-
-    def at(t, side, up=0.0):
-        return o + d * t + s * side + np.array([0, 0, up])
-
-    # two side trusses: bottom chord UPN160, top chord doubles as handrail, verticals + diagonals L50
-    n = max(1, int(round(length / GAL_PANEL)))
-    for side in (-hw, hw):
-        heavy.append(st.member(at(0, side), at(length, side), st.UPN160, roll=0.0))
-        rails.append(st.rod(at(0, side, GAL_TRUSS_H), at(length, side, GAL_TRUSS_H), 0.030, 10))
-        rails.append(st.rod(at(0, side, 0.55), at(length, side, 0.55), st.RAIL_R, 8))
-        for k in range(n + 1):
-            t = length * k / n
-            light.append(st.member(at(t, side, 0.08), at(t, side, GAL_TRUSS_H), st.L50))
-            if k < n:
-                t2 = length * (k + 1) / n
-                if k % 2 == 0:
-                    light.append(st.member(at(t, side, 0.08), at(t2, side, GAL_TRUSS_H - 0.03), st.L50))
-                else:
-                    light.append(st.member(at(t, side, GAL_TRUSS_H - 0.03), at(t2, side, 0.08), st.L50))
-    for k in range(n + 1):
-        t = length * k / n
-        heavy.append(st.member(at(t, -hw, -0.04), at(t, hw, -0.04), st.L75))       # floor beams
-    # deck grating on the walkway side and under the conveyor
-    deck.append(_deck_panel(o, d, s, length, -hw, hw, deck_z))
-    # conveyor on the deck
-    conv = conveyor(at(0, CONV_Y, 0.03), at(length, CONV_Y, 0.03), drive_at_end=True)
-    # supports on every silo: posts on wall brackets at ±SUPPORT_OFFSET, kickers to ±KICKER_OFFSET
-    for sx, sy in silo_positions:
-        t_c = np.dot(np.array([sx, sy, deck_z]) - o, d)
-        for sign in (-1, 1):
-            t_post = t_c + sign * SUPPORT_OFFSET
-            if not (-0.5 <= t_post <= length + 0.5):
-                continue
-            base_z = silo_eave_z - 1.5
-            for side in (-hw, hw):
-                posts.append(st.member(at(t_post, side, base_z - deck_z), at(t_post, side, -0.1), st.SHS_100))
-                light.append(st.member(at(t_post, side, base_z - deck_z + 1.2),
-                                       at(t_c + sign * KICKER_OFFSET, side, -0.12), st.L75))
-            heavy.append(st.member(at(t_post, -hw - 0.1, -0.12), at(t_post, hw + 0.1, -0.12), st.HEA200))
-            heavy.append(st.member(at(t_post, -hw, base_z - deck_z + 0.2), at(t_post, hw, base_z - deck_z + 0.2),
-                                   st.SHS_100))
-            # wall bracket: plate on the silo stiffeners
-            bracket = at(t_post, 0, base_z - deck_z)
-            posts.append(c.box(tuple(bracket - [0.25, hw + 0.15, 0.3]), tuple(bracket + [0.25, hw + 0.15, 0.05])))
-        # discharge gate and spout down to the silo loading spout
-        gate = at(t_c, CONV_Y, 0.0)
-        gates.append(c.box(tuple(gate - [0.3, 0.3, 0.35]), tuple(gate + [0.3, 0.3, -0.02])))
-        gates.append(c.box(tuple(gate + [0.3, -0.08, -0.3]), tuple(gate + [0.75, 0.08, -0.12])))   # actuator
-        spouts.append(st.rod(gate - [0, 0, 0.35], (sx, sy, silo_spout_z), 0.2, 20))
-    return {
-        "heavy": c.merge_parts(heavy), "light": c.merge_parts(light), "deck": c.merge_parts(deck),
-        "rails": c.merge_parts(rails), "posts": c.merge_parts(posts), "spouts": c.merge_parts(spouts),
-        "gates": c.merge_parts(gates), **{"conv_" + k: v for k, v in conv.items()},
-    }
+def silo_row_gallery(g, line):
+    """Gallery over one silo row: box beams on posts carried by the silo walls, grating deck,
+    platforms over the silo centres, handrails, the ТЦС conveyor on the row axis and its drops."""
+    y = line["row_y"]
+    x0, x1 = sorted(line["x_ends"])
+    ya, yb = (y + v for v in g["y_rel_row"])
+    bz0, bz1 = g["beam_z"]
+    dz = g["deck_z"]
+    heavy, light, deck, rails, toes, posts, gates, spouts = [], [], [], [], [], [], [], []
+    for yy in (ya, yb):                                             # two edge box beams
+        heavy.append(c.box((x0, yy - 0.08, bz0), (x1, yy + 0.08, bz1)))
+    for x in np.arange(x0, x1 + 1e-6, CROSS_BEAM_STEP):
+        heavy.append(c.box((x - 0.04, ya, bz1 - 0.12), (x + 0.04, yb, bz1)))
+    deck.append(st.grating_panel(x0, ya, x1, yb, dz))
+    pf = g["platforms_at_silo_centre"]
+    for dx in line["drops_x"]:
+        deck.append(st.grating_panel(dx - pf["len"] / 2, yb, dx + pf["len"] / 2, y + pf["y_to"], dz))
+        heavy.append(c.box((dx - pf["len"] / 2, yb, bz0), (dx - pf["len"] / 2 + 0.16, y + pf["y_to"], bz1)))
+        heavy.append(c.box((dx + pf["len"] / 2 - 0.16, yb, bz0), (dx + pf["len"] / 2, y + pf["y_to"], bz1)))
+    for yy in (ya + 0.05, yb - 0.05):
+        t, o = st.guard_rail([(x0, yy), (x1, yy)], dz)
+        rails.append(t)
+        toes.append(o)
+    sp = g["supports"]
+    pz0, pz1 = sp["post_z"]
+    for px in sp["posts_x"]:
+        if not x0 - 0.5 <= px <= x1 + 0.5:
+            continue
+        for yy in (ya, yb):
+            posts.append(st.member((px, yy, pz0), (px, yy, pz1), st.SHS_100))
+            reach = 1.0                                             # 45 deg knee braces
+            for dxb in (-reach, reach):
+                if x0 <= px + dxb <= x1:
+                    light.append(st.member((px, yy, pz1 - reach), (px + dxb, yy, bz0), st.L75))
+        posts.append(c.box((px - 0.2, ya - 0.15, pz0 - 0.25), (px + 0.2, yb + 0.15, pz0)))       # wall bracket
+        heavy.append(st.member((px, ya, pz1 - 0.1), (px, yb, pz1 - 0.1), st.HEA200))
+    cz0, cz1 = g["conveyor"]["casing_z"]
+    axis_z = (cz0 + cz1) / 2
+    w, h = g["conveyor"]["casing_w"], cz1 - cz0
+    conv = conveyor((line["tail_x"], y, axis_z), (line["head_x"], y, axis_z), w, h, drive_side=1.0)
+    for dx in line["drops_x"]:                                      # drop gate on the casing and spout to the roof spout
+        gates.append(c.box((dx - 0.25, y - w / 2 - 0.06, cz0 - 0.18), (dx + 0.25, y + w / 2 + 0.06, cz0)))
+        gates.append(c.box((dx + 0.25, y - 0.07, cz0 - 0.15), (dx + 0.6, y + 0.07, cz0 - 0.03)))
+        spouts.append(st.member((dx, y, cz0 - 0.18), (dx, y, g["roof_spout_z"]), st.shs(0.30)))
+    return {"heavy": c.merge_parts(heavy), "light": c.merge_parts(light), "deck": c.merge_parts(deck),
+            "rails": c.merge_parts(rails), "toes": c.merge_parts(toes), "posts": c.merge_parts(posts),
+            "spouts": c.merge_parts(spouts), "gates": c.merge_parts(gates),
+            **{"conv_" + k: v for k, v in conv.items()}}
 
 
-def _deck_panel(o, d, s, length, s0, s1, z):
-    corners = [o + d * 0 + s * s0, o + d * length + s * s0, o + d * length + s * s1, o + d * 0 + s * s1]
-    top = np.array([[p[0], p[1], z] for p in corners])
-    bottom = top - [0, 0, 0.03]
-    v = np.concatenate([bottom, top])
-    f = np.array([(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)])
-    return v, f
-
-
-def tower_bridge(p0, p1, z0, z1, conveyors=2):
-    """Warren truss bridge, deck on the top chords (conveyors ride on top, PDF p.4)."""
-    a = np.array([p0[0], p0[1], z0])
-    b = np.array([p1[0], p1[1], z1])
-    o, d, s, length = _frame(a, b)
-    hw = BRIDGE_W / 2
+def bridge(b):
+    """Truss bridge between towers along Y: horizontal deck, two side trusses below it, rails,
+    and its conveyors side by side, each with its own measured tail and head (sloped ~1.5 deg)."""
+    xa, xb = b["x"]
+    ya, yb = b["y"]
+    top, bot, tb = b["deck_top_z"], b["deck_bot_z"], b["truss_bottom_z"]
     heavy, light, deck, rails, toes = [], [], [], [], []
-    rise = z1 - z0
-
-    def at(t, side, up=0.0):
-        return o + d * t + s * side + np.array([0, 0, up + rise * t / length - (d[2] * t)])
-
-    n = max(2, int(round(length / 2.4)))
-    for side in (-hw, hw):
-        heavy.append(st.member(at(0, side), at(length, side), st.HEA200))
-        heavy.append(st.member(at(0, side, -BRIDGE_H), at(length, side, -BRIDGE_H), st.HEA200))
+    n = max(2, int(round((yb - ya) / BRIDGE_PANEL)))
+    for x in (xa, xb):
+        heavy.append(st.member((x, ya, bot - 0.1), (x, yb, bot - 0.1), st.HEA200))
+        heavy.append(st.member((x, ya, tb + 0.1), (x, yb, tb + 0.1), st.HEA200))
         for k in range(n):
-            t0, t1 = length * k / n, length * (k + 1) / n
-            tm = (t0 + t1) / 2
-            light.append(st.member(at(t0, side, -BRIDGE_H), at(tm, side, -0.1), st.shs(0.12)))
-            light.append(st.member(at(tm, side, -0.1), at(t1, side, -BRIDGE_H), st.shs(0.12)))
+            y0, y1 = ya + (yb - ya) * k / n, ya + (yb - ya) * (k + 1) / n
+            ym = (y0 + y1) / 2
+            light.append(st.member((x, y0, tb + 0.1), (x, ym, bot - 0.1), st.shs(0.12)))
+            light.append(st.member((x, ym, bot - 0.1), (x, y1, tb + 0.1), st.shs(0.12)))
     for k in range(n + 1):
-        t = length * k / n
-        heavy.append(st.member(at(t, -hw, -0.1), at(t, hw, -0.1), st.IPE160))
-        heavy.append(st.member(at(t, -hw, -BRIDGE_H), at(t, hw, -BRIDGE_H), st.L90))
+        yk = ya + (yb - ya) * k / n
+        heavy.append(st.member((xa, yk, bot - 0.1), (xb, yk, bot - 0.1), st.IPE160))
+        heavy.append(st.member((xa, yk, tb + 0.1), (xb, yk, tb + 0.1), st.L90))
         if k < n:
-            t1 = length * (k + 1) / n
-            light.append(st.member(at(t, -hw, -BRIDGE_H), at(t1, hw, -BRIDGE_H), st.L75))   # plan bracing
-    deck.append(_deck_panel(o, d, s, length, -hw, hw, 0.0) if abs(rise) < 1e-6 else _sloped_deck(at, length, hw))
-    for side in (-hw + 0.05, hw - 0.05):
-        pts = [at(t, side, 0.0) for t in np.linspace(0, length, 2)]
-        tubes, toe = _rail_line(pts)
-        rails.append(tubes)
-        toes.append(toe)
+            light.append(st.member((xa, yk, tb + 0.1), (xb, ya + (yb - ya) * (k + 1) / n, tb + 0.1), st.L75))
+    deck.append(c.box((xa, ya, bot), (xb, yb, top)))
+    for x in (xa + 0.05, xb - 0.05):
+        t, o = st.guard_rail([(x, ya), (x, yb)], top)
+        rails.append(t)
+        toes.append(o)
     convs = []
-    for k in range(conveyors):
-        off = -hw + 0.95 * 0.5 + k * (0.95 + 0.9)
-        convs.append(conveyor(at(0, off, 0.05), at(length, off, 0.05), drive_at_end=(k == 0)))
+    for cv in b["conveyors"]:
+        w, h = cv.get("casing_w", 0.40), cv.get("casing_h", 0.50)
+        if "tail" in cv:
+            tail = (cv["x"], cv["tail"][0], cv["tail"][1])
+            head = (cv["x"], cv["head"][0], cv["head"][1])
+        else:
+            tail = (cv["x"], cv["y"][1], cv["axis_z"])
+            head = (cv["x"], cv["y"][0], cv["axis_z"])
+        side = 1.0 if cv["x"] > (xa + xb) / 2 else -1.0
+        convs.append(conveyor(tail, head, w, h, drive_side=side))
     merged = {"heavy": c.merge_parts(heavy), "light": c.merge_parts(light), "deck": c.merge_parts(deck),
               "rails": c.merge_parts(rails), "toes": c.merge_parts(toes)}
     for key in ("casing", "flanges", "drive", "motor"):
@@ -196,24 +148,28 @@ def tower_bridge(p0, p1, z0, z1, conveyors=2):
     return merged
 
 
-def _sloped_deck(at, length, hw):
-    p = [at(0, -hw), at(length, -hw), at(length, hw), at(0, hw)]
-    top = np.array(p)
-    v = np.concatenate([top - [0, 0, 0.03], top])
-    f = np.array([(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)])
-    return v, f
+def conveyor_axis(site, cid):
+    """(tail, head) axis points and (width, height) of a named ТЦС conveyor, for checks."""
+    g = site["silo_top_galleries"]
+    for line in g["lines"]:
+        if line["id"] == cid:
+            cz0, cz1 = g["conveyor"]["casing_z"]
+            z = (cz0 + cz1) / 2
+            return (np.array([line["tail_x"], line["row_y"], z]), np.array([line["head_x"], line["row_y"], z]),
+                    g["conveyor"]["casing_w"], cz1 - cz0)
+    for b in site["bridges"]:
+        for cv in b["conveyors"]:
+            if cv["id"] == cid:
+                if "tail" in cv:
+                    t = np.array([cv["x"], cv["tail"][0], cv["tail"][1]])
+                    h = np.array([cv["x"], cv["head"][0], cv["head"][1]])
+                else:
+                    t = np.array([cv["x"], cv["y"][1], cv["axis_z"]])
+                    h = np.array([cv["x"], cv["y"][0], cv["axis_z"]])
+                return t, h, cv.get("casing_w", 0.40), cv.get("casing_h", 0.50)
+    raise KeyError(cid)
 
 
-def _rail_line(pts):
-    """Guard rail along a possibly sloped straight line."""
-    a, b = np.asarray(pts[0]), np.asarray(pts[-1])
-    length = np.linalg.norm(b - a)
-    n = max(1, int(math.ceil(length / st.POST_STEP)))
-    tubes, toes = [], []
-    for k in range(n + 1):
-        p = a + (b - a) * k / n
-        tubes.append(st.rod(p, p + [0, 0, st.RAIL_TOP], 0.024, 8))
-    for h in (st.RAIL_TOP, st.RAIL_KNEE):
-        tubes.append(st.rod(a + [0, 0, h], b + [0, 0, h], st.RAIL_R, 10))
-    toes.append(st.member(a + [0, 0, st.TOE_H / 2], b + [0, 0, st.TOE_H / 2], st.flat(st.TOE_H, 0.004)))
-    return c.merge_parts(tubes), c.merge_parts(toes)
+def slope_deg(tail, head):
+    run = np.linalg.norm((head - tail)[:2])
+    return math.degrees(math.atan2(head[2] - tail[2], run))

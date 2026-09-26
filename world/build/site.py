@@ -79,25 +79,16 @@ def assemble(quick=False):
         for o in objs.values():
             o.location = (spec["x"], spec["y"], 0.0)
 
-    silo_xy = [(s["x"], s["y"]) for s in site["silos"]]
-    for g in site["silo_top_conveyors"]:
-        col = bpy.data.collections.new(g["id"])
+    g = site["silo_top_galleries"]
+    for line in g["lines"]:
+        col = bpy.data.collections.new("GALLERY_" + line["id"])
         scene.collection.children.link(col)
-        row = [p for p in silo_xy if abs(p[1] - g["from"][1]) < 0.1
-               and min(g["from"][0], g["to"][0]) - 1 <= p[0] <= max(g["from"][0], g["to"][0]) + 1]
-        start = (g["from"][0] + (2.2 if g["to"][0] > g["from"][0] else -2.2), g["from"][1])
-        parts = gal.silo_row_gallery(start, g["to"], g["deck_z"], row)
-        add_parts(g["id"], parts, m, col)
+        add_parts(line["id"], gal.silo_row_gallery(g, line), m, col)
 
-    for b in site["galleries"]:
-        if b["id"] != "G_H5_H6":
-            continue   # the bridge to the receiving tower comes with K6
+    for b in site["bridges"]:
         col = bpy.data.collections.new(b["id"])
         scene.collection.children.link(col)
-        y_dir = 1 if b["to"][1] > b["from"][1] else -1
-        p0 = (b["from"][0], b["from"][1] + y_dir * 2.2)
-        p1 = (b["to"][0], b["to"][1] - y_dir * 2.2)
-        add_parts(b["id"], gal.tower_bridge(p0, p1, b["z"], b["z"]), m, col)
+        add_parts(b["id"], gal.bridge(b), m, col)
 
     holes = []
     for t in tunnels:
@@ -143,7 +134,7 @@ def main():
         print("rendered", name, round(time.time() - t, 1), "s", flush=True)
     measure = {"build_seconds": build_s, "silos": len(site["silos"]),
                "towers": [t["id"] for t in site["noria_towers"]],
-               "galleries": [g["id"] for g in site["silo_top_conveyors"]] + ["G_H5_H6"],
+               "galleries": [ln["id"] for ln in site["silo_top_galleries"]["lines"]] + [b["id"] for b in site["bridges"]],
                "silo_vertices": silo_measure["vertices_total"]}
     (OUT / "measure.json").write_text(json.dumps(measure, ensure_ascii=False, indent=2), encoding="utf-8")
 

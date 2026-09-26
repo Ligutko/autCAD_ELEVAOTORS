@@ -54,10 +54,11 @@ def main():
     x, y = spec["x"], spec["y"]
     zh = measure["noria"]["head_pulley_z_m"]
     sx, sy, sz = dist["splitters"][0]["at"]              # site frame
+    lx, ly = spec["access"]["x"], spec["access"]["y"]
     hx, hy = tower.noria_frame(spec)((nn.CX, nn.BELT_Y, zh))[:2] + (x, y)
     cams = {
         "k2_hero.png": c.camera("CAM_HERO", (x + 26, y - 30, 1.7), (x - 4, y, 14.0), lens=24),
-        "k2_stair.png": c.camera("CAM_STAIR", (x - 1.6, y - 1.9, 1.9), (x - 0.6, y + 1.8, 4.2), lens=16),
+        "k2_ladder.png": c.camera("CAM_LADDER", (lx - 1.2, ly + 4.6, 2.0), (lx, ly, 6.0), lens=20),   # the S2 wall is 1.2 m west of the tower
         "k2_head.png": c.camera("CAM_HEAD", (hx - 2.7, hy - 2.0, spec["top_z"] + 1.7), (hx, hy, zh - 0.1), lens=18),
         "k2_top_view.png": c.camera("CAM_DRONE", (x + 14, y - 16, 36.0), (x - 6, y, 22.0), lens=28),
         "k2_distribution.png": c.camera("CAM_DIST", (sx + 4.2, sy - 3.6, sz + 0.2), (sx - 0.2, sy - 0.2, sz - 0.9), lens=30),

@@ -1,0 +1,24 @@
+{
+  "id": "rec_9bfcf5c3",
+  "subject": "Аспірація: розміщення обладнання",
+  "kind": "fact",
+  "claim": {
+    "name": "unit_placement",
+    "value": "на елеваторах вентилятори і циклони дозволено ставити поза будівлею (на дахах, стінах); циклони — переважно на всмоктувальній стороні; пуск вентилятора за 15 с до обладнання, зупинка через 30 с після",
+    "unit": null,
+    "qualifier": "рекомендації з компонування"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.metallum.com.ua/blog/rekomendaczii-po-raschetu-aspiraczionnyix-ustanovok/rekomendaczii-po-komponovke-i-raschetam-aspiraczionnyix-ustanovok",
+    "path": "inbox/raw/web/metallum.com.ua/rekomendaczii-po-komponovke-i-raschetam-aspiraczionnyix-ustanovok.html",
+    "quote": "На элеваторах допускается устанавливать вентиляторы и циклоны вне здания (на крышах, стенах).",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "НПФ «Металлум», рекомендації з компонування аспіраційних установок.",
+  "seen_in": []
+}

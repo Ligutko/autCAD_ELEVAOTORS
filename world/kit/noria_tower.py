@@ -4,8 +4,11 @@ Local frame: centre of the tower column grid at (0, 0), Z = 0 at grade (site ±0
 All positions come from SITE.json (`x`, `y` = grid centre, `size`, `pit`, `noria_axis`,
 `legs_along`), measured on PDF p.2, p.4, p.6, p.7 (research/tunnel_k4.md).
 The elevator is built by noria_n100.py in its own frame and placed here with `noria_frame`.
-Stair zone in the west half is EST.
+Access: the process drawing has no tower stairs, so each tower gets a caged ladder in the strip
+the drawing leaves free of equipment and spouts (SITE.json `access`, a judgment), ISO 14122-4.
 """
+
+import math
 
 import numpy as np
 
@@ -14,10 +17,14 @@ from . import distribution as dist
 from . import noria_n100 as nn
 from . import steel as st
 
-STAIR_X = (-1.65, -0.75)        # EST: two flights side by side, 0.8 m each
-STAIR_W = 0.80
-STAIR_Y = (-1.25, 1.35)         # EST: flight zone, landings beyond it
-STAIR_STEP_Z = 2.35             # EST: storey height of the switchback stair
+LADDER_W = 0.50                 # ISO 14122-4: clear width 0.4-0.6 m
+RUNG_STEP = 0.30                # ISO 14122-4: 0.25-0.30 m
+MAX_FLIGHT = 6.0                # ISO 14122-4: rest platform at least every 6 m
+CAGE_FROM = 2.2                 # ISO 14122-4: cage starts 2.2-3.0 m above the standing level
+HOOP_STEP = 0.9                 # EST, ISO 14122-4 allows up to 1.5 m
+FLIGHT_SHIFT = 0.35             # flights alternate +-0.35 m along Y so each starts from a rest platform
+REST = (0.8, 1.6)               # rest platform plan size (x, y); the free strip is 0.95-1.05 m wide
+CAGE_REACH = FLIGHT_SHIFT + 0.70  # ladder with its cage occupies y +- this around the ladder centre
 MOTOR_KW = nn.MOTOR_KW
 HOLE_MARGIN = 0.08              # gap between a leg and the grating / slab edge
 
@@ -105,30 +112,64 @@ def build_frame(top_z, levels, hx, hy, hoist_x):
     return c.merge_parts(parts_heavy), c.merge_parts(parts_light)
 
 
-def stair_levels(first_platform, grade):
-    rise = first_platform - grade
-    n = max(1, int(round(rise / STAIR_STEP_Z)))
-    return [grade + rise * k / n for k in range(n + 1)]
+def access_rect(spec):
+    """Plan rectangle (x0, y0, x1, y1) taken by the ladder flights, cages and rest platforms, tower frame."""
+    a = spec["access"]
+    lx, ly = a["x"] - spec["x"], a["y"] - spec["y"]
+    return lx - REST[0] / 2, ly - CAGE_REACH, lx + REST[0] / 2, ly + CAGE_REACH
 
 
-def build_stairs(levels, top_z, hx, hy, grade):
-    """Switchback stair: each storey is one flight, landings alternate north / south."""
-    zs = stair_levels(levels[0], grade) + [z for z in levels[1:] if z <= top_z]
-    stringers, treads, rails, landings = [], [], [], []
-    for i, (za, zb) in enumerate(zip(zs, zs[1:])):
-        up_north = i % 2 == 0
-        x = STAIR_X[i % 2]
-        y0 = STAIR_Y[0] if up_north else STAIR_Y[1]
-        s, t, r, y_end = st.stair_flight(x, y0, za, zb, STAIR_W, 1 if up_north else -1)
-        stringers.append(s)
-        treads.append(t)
-        rails.append(r)
-        if up_north:
-            landings.append(st.grating_panel(-hx + 0.1, y_end, -0.3, hy - 0.1, zb))
-        else:
-            landings.append(st.grating_panel(-hx + 0.1, -hy + 0.1, -0.3, y_end, zb))
-    return (c.merge_parts(stringers), c.merge_parts(treads), c.merge_parts(rails),
-            c.merge_parts(landings), zs)
+def ladder_flights(levels, top_z, grade):
+    """(z0, z1) of every ladder flight: served levels split into flights <= MAX_FLIGHT."""
+    served = [grade] + [z for z in levels if z <= top_z + 1e-6]
+    flights = []
+    for za, zb in zip(served, served[1:]):
+        k = max(1, math.ceil((zb - za) / MAX_FLIGHT - 1e-9))
+        flights += [(za + (zb - za) * i / k, za + (zb - za) * (i + 1) / k) for i in range(k)]
+    return flights, served
+
+
+def build_access(spec, levels, top_z, grade):
+    """Caged ladder flights with rest platforms between the served levels."""
+    x0, y0, x1, y1 = access_rect(spec)
+    lx, ly = (x0 + x1) / 2, (y0 + y1) / 2
+    flights, served = ladder_flights(levels, top_z, grade)
+    stiles, rungs, cage, rest, rails, toes = [], [], [], [], [], []
+    for i, (za, zb) in enumerate(flights):
+        y = ly + (FLIGHT_SHIFT if i % 2 else -FLIGHT_SHIFT)
+        for sx in (lx - LADDER_W / 2, lx + LADDER_W / 2):
+            stiles.append(st.member((sx, y, za), (sx, y, zb + 1.1), st.flat(0.06, 0.012)))
+        for z in np.arange(za + RUNG_STEP, zb + 1e-6, RUNG_STEP):
+            rungs.append(st.rod((lx - LADDER_W / 2, y, z), (lx + LADDER_W / 2, y, z), 0.012, 8))
+        side = -1 if y < ly else 1                          # cage on the open side, away from the platform centre
+        for z in np.arange(za + CAGE_FROM, zb + 1.0, HOOP_STEP):
+            ring = [(lx - 0.35, y), (lx - 0.35, y + side * 0.7), (lx + 0.35, y + side * 0.7), (lx + 0.35, y)]
+            for (ax, ay), (bx, by) in zip(ring, ring[1:]):
+                cage.append(st.member((ax, ay, z), (bx, by, z), st.flat(0.05, 0.006)))
+        for cx in (lx - 0.35, lx, lx + 0.35):
+            cage.append(st.member((cx, y + side * 0.7, za + CAGE_FROM), (cx, y + side * 0.7, zb + 1.0), st.flat(0.05, 0.006)))
+        if zb not in served:                                # rest platform with guard rail
+            ry0, ry1 = ly - REST[1] / 2, ly + REST[1] / 2
+            rest.append(st.grating_panel(x0, ry0, x1, ry1, zb))
+            tube, toe = st.guard_rail([(x0 + 0.05, ry0 + 0.05), (x1 - 0.05, ry0 + 0.05), (x1 - 0.05, ry1 - 0.05),
+                                       (x0 + 0.05, ry1 - 0.05)], zb, closed=True)
+            rails.append(tube)
+            toes.append(toe)
+    return (c.merge_parts(stiles), c.merge_parts(rungs), c.merge_parts(cage), c.merge_parts(rest),
+            c.merge_parts(rails), c.merge_parts(toes), served, flights)
+
+
+def _cells(x0, y0, x1, y1, holes, z, panel):
+    """Panels covering a rectangle minus rectangular holes (split along every hole edge)."""
+    xs = sorted({x0, x1} | {min(max(h[0], x0), x1) for h in holes} | {min(max(h[2], x0), x1) for h in holes})
+    ys = sorted({y0, y1} | {min(max(h[1], y0), y1) for h in holes} | {min(max(h[3], y0), y1) for h in holes})
+    out = []
+    for xa, xb in zip(xs, xs[1:]):
+        for ya, yb in zip(ys, ys[1:]):
+            mx, my = (xa + xb) / 2, (ya + yb) / 2
+            if xb - xa > 1e-6 and yb - ya > 1e-6 and not any(h[0] <= mx <= h[2] and h[1] <= my <= h[3] for h in holes):
+                out.append(panel(xa, ya, xb, yb, z))
+    return out
 
 
 def _around_hole(x0, y0, x1, y1, hole, z, panel):
@@ -137,13 +178,13 @@ def _around_hole(x0, y0, x1, y1, hole, z, panel):
             panel(x0, hy0, hx0, hy1, z), panel(hx1, hy0, x1, hy1, z)]
 
 
-def build_platforms(levels, top_z, hx, hy, hole):
-    """Grating at the main levels around the elevator legs (legs pass through the hole)."""
+def build_platforms(levels, top_z, hx, hy, holes):
+    """Grating at the main levels, with holes for the elevator legs and the ladder."""
     parts = []
     for z in levels:
         if z > top_z + 1e-6:
             continue
-        parts += _around_hole(-0.3, -hy + 0.1, hx - 0.1, hy - 0.1, hole, z, st.grating_panel)
+        parts += _cells(-hx + 0.1, -hy + 0.1, hx - 0.1, hy - 0.1, holes, z, st.grating_panel)
     return c.merge_parts(parts)
 
 
@@ -223,12 +264,16 @@ def build(spec, collection=None, materials=None, openings=(), distribution=None)
     heavy, light = build_frame(top_z, levels, hx, hy, hoist_x)
     add("frame", heavy, galv)
     add("bracing", light, galv_old)
-    s, t, r, landings, zs = build_stairs(levels, top_z, hx, hy, grade)
-    add("stair_stringers", s, galv)
-    add("stair_treads", t, grating)
-    add("stair_rails", r, yellow, smooth="quads")
-    add("landings", landings, grating)
-    add("platforms", build_platforms(levels, top_z, hx, hy, hole), grating)
+    stiles, rungs, cage, rest, rrails, rtoes, zs, flights = build_access(spec, levels, top_z, grade)
+    add("ladder_stiles", stiles, galv)
+    add("ladder_rungs", rungs, galv, smooth="quads")
+    add("ladder_cage", cage, galv)
+    add("rest_platforms", rest, grating)
+    add("rest_rails", rrails, yellow, smooth="quads")
+    add("rest_toes", rtoes, yellow)
+    lx0, ly0, lx1, ly1 = access_rect(spec)
+    ladder_hole = (lx0 + 0.2, ly0 + 0.1, lx1 - 0.2, ly1 - 0.1)
+    add("platforms", build_platforms(levels, top_z, hx, hy, [hole, ladder_hole]), grating)
     tubes, toes = build_guards(zs, hx, hy)
     add("guard_rails", tubes, yellow, smooth="quads")
     add("toe_boards", toes, yellow)
@@ -276,9 +321,9 @@ def build(spec, collection=None, materials=None, openings=(), distribution=None)
         "pit_z_m": pit_z,
         "grade_z_m": grade,
         "levels_z_m": levels,
-        "stair_levels_z_m": [round(z, 3) for z in zs],
-        "stair_riser_m": st.RISER,
-        "stair_tread_m": st.TREAD,
+        "access": spec["access"]["type"],
+        "served_levels_z_m": [round(z, 3) for z in zs],
+        "ladder_flights_m": [round(b - a, 2) for a, b in flights],
         "rail_height_m": st.RAIL_TOP,
         "motor_kw": MOTOR_KW,
         "noria_axis_site_m": list(spec["noria_axis"]),
