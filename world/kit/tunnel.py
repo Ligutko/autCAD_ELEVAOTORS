@@ -78,8 +78,9 @@ def _wall_with_gap(x0, x1, y0, y1, z0, z1, gap):
     return [c.box((x0, y0, z0), (gap[0], y1, z1)), c.box((gap[1], y0, z0), (x1, y1, z1))]
 
 
-def build_civil(site, t):
-    """Concrete: floor slab, side walls, far end wall, roof slab with sleeve holes, exit stair well."""
+def build_civil(site, t, extra_holes=()):
+    """Concrete: floor slab, side walls, far end wall, roof slab with sleeve holes, exit stair well.
+    extra_holes: more roof holes (x, half_size, y), e.g. an aspiration riser (aspiration.riser_holes)."""
     x0, y0, x1, y1, fz, cz = inner_box(site, t)
     w, ew, fs, rz = t["wall_t"], t["end_wall_t"], t["floor_slab_t"], t["roof_top_z"]
     far_west = t["end_x"] < 0
@@ -91,7 +92,7 @@ def build_civil(site, t):
     parts += _wall_with_gap(xa, xb, y0 - w, y0, fz, rz, None)                        # south wall
     parts += _wall_with_gap(xa, xb, y1, y1 + w, fz, rz, (sx0, sx1))                  # north wall, stair opening
     parts.append(c.box((x0 - ew, y0, fz), (x0, y1, rz)) if far_west else c.box((x1, y0, fz), (x1 + ew, y1, rz)))
-    holes = [(x, s / 2 + 0.01, t["row_y"]) for x, s in _gate_positions(site, t)]
+    holes = [(x, s / 2 + 0.01, t["row_y"]) for x, s in _gate_positions(site, t)] + list(extra_holes)
     parts += _roof_with_holes(xa, xb, y0, y1, cz, rz, holes)
     # exit stair well north of the far end (PDF p.2); open at grade, EST
     parts += [c.box((sx0 - w, y1, fz - fs), (sx1 + w, sy1 + w, fz)),
@@ -291,7 +292,8 @@ def pit_opening(site, t):
     return ("W" if t["end_x"] < spec["x"] else "E", y0 - spec["y"], y1 - spec["y"], fz, cz)
 
 
-def build(site, t, collection=None, materials=None):
+def build(site, t, collection=None, materials=None, roof_holes=()):
+    """Whole tunnel. roof_holes: extra roof holes (x, half_size, y) for aspiration risers."""
     m = materials or {}
     concrete = m.get("concrete") or c.mat_concrete("TUNNEL_CONCRETE")
     galv = m.get("galv") or c.mat_galvanized("TUNNEL_GALV", age=0.5, spangle_scale=60.0)
@@ -308,7 +310,7 @@ def build(site, t, collection=None, materials=None):
         v, f = data
         objs[key] = c.mesh_from_arrays(f"{tag}_{key.upper()}", v, f, mat, smooth=smooth, collection=collection)
 
-    add("civil", build_civil(site, t), concrete)
+    add("civil", build_civil(site, t, roof_holes), concrete)
     s, tr, r = build_exit_stair(t)
     add("exit_stringers", s, galv)
     add("exit_treads", tr, grating)

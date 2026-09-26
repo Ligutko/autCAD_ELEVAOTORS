@@ -1,4 +1,5 @@
-"""Whole site from SITE.json: silos (instanced), noria towers, silo-top galleries, tower bridge.
+"""Whole site from SITE.json: silos (instanced), noria towers, silo-top galleries, bridges, tunnels,
+aspiration (dust bins, units, ducts).
 
 Run:
     python world/build/site.py [--quick]
@@ -16,6 +17,7 @@ import bpy  # noqa: I001  bpy first: the pip module registers bmesh and mathutil
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from kit import aspiration as asp  # noqa: E402
 from kit import common as c  # noqa: E402
 from kit import gallery as gal  # noqa: E402
 from kit import noria_tower as tower  # noqa: E402
@@ -35,6 +37,7 @@ def materials():
         "dark": c.mat_painted("SITE_DRIVE_GREY", (0.20, 0.23, 0.24), 0.4),
         "motor": c.mat_painted("SITE_MOTOR_BLUE", (0.05, 0.16, 0.35), 0.35),
         "concrete": c.mat_concrete("SITE_CONCRETE"),
+        "red": c.mat_painted("SITE_GATE_RED", (0.55, 0.06, 0.04), 0.45, grime=0.3),
     }
 
 
@@ -70,12 +73,14 @@ def assemble(quick=False):
         scene.collection.objects.link(inst)
 
     tunnels = site.get("tunnels", [])
+    roof_holes, cover_holes = asp.riser_holes(site, tun)     # aspiration risers through the tunnel roof / pit cover
     for spec in site["noria_towers"]:
         col = bpy.data.collections.new(spec["id"])
         scene.collection.children.link(col)
         openings = [tun.pit_opening(site, t) for t in tunnels if t["tower"] == spec["id"]]
         dist = next((d for d in site.get("distribution", []) if d["tower"] == spec["id"]), None)
-        objs, _ = tower.build(spec, collection=col, materials=m, openings=openings, distribution=dist)
+        holes = [(x0 - spec["x"], y0 - spec["y"], x1 - spec["x"], y1 - spec["y"]) for x0, y0, x1, y1 in cover_holes.get(spec["id"], ())]
+        objs, _ = tower.build(spec, collection=col, materials=m, openings=openings, distribution=dist, cover_holes=holes)
         for o in objs.values():
             o.location = (spec["x"], spec["y"], 0.0)
 
@@ -94,12 +99,18 @@ def assemble(quick=False):
     for t in tunnels:
         col = bpy.data.collections.new("TUNNEL_" + t["id"])
         scene.collection.children.link(col)
-        tun.build(site, t, collection=col, materials=m)
+        tun.build(site, t, collection=col, materials=m, roof_holes=roof_holes.get(t["id"], ()))
         holes += tun.footprint(site, t)
     for spec in site["noria_towers"]:
         x0, y0, x1, y1 = tower.pit_inner(spec)
         w = spec["pit"]["wall_t"]
         holes.append((spec["x"] + x0 - w, spec["y"] + y0 - w, spec["x"] + x1 + w, spec["y"] + y1 + w))
+
+    asp_measure = {}
+    if "aspiration" in site:
+        col = bpy.data.collections.new("ASPIRATION")
+        scene.collection.children.link(col)
+        _, asp_measure = asp.build(site, tower, tun, collection=col, materials=m)
 
     for col in bpy.data.collections:          # labels are for explainer shots only
         if col.name.startswith("LABELS_"):
@@ -108,19 +119,21 @@ def assemble(quick=False):
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
     build_s = round(time.time() - t0, 1)
 
-    return scene, site, build_s, silo_measure
+    return scene, site, build_s, silo_measure, asp_measure
 
 
 def main():
     quick = "--quick" in sys.argv
     OUT.mkdir(parents=True, exist_ok=True)
-    scene, site, build_s, silo_measure = assemble(quick)
+    scene, site, build_s, silo_measure, asp_measure = assemble(quick)
 
     cams = {
         "site_drone.png": c.camera("CAM_DRONE", (70, -70, 55), (-8, 12, 10), lens=28),
         "site_ground.png": c.camera("CAM_GROUND", (28, -16, 1.7), (-2, 8, 16), lens=20),
         "site_gallery_walk.png": c.camera("CAM_WALK", (-3.5, 0.4, 24.9), (-30, 0.2, 23.6), lens=20),
         "site_bridge.png": c.camera("CAM_BRIDGE", (9, 12.7, 17), (0, 12.7, 24.5), lens=24),
+        "site_aspiration_81.png": c.camera("CAM_ASP_81", (-15.5, 50.5, 4.5), (-26.5, 36.8, 7.5), lens=22),
+        "site_aspiration_82.png": c.camera("CAM_ASP_82", (8.5, -21.0, 3.5), (-0.3, -6.0, 7.0), lens=22),
     }
     scene.camera = cams["site_drone.png"]
     if "--no-render" in sys.argv:
@@ -135,7 +148,7 @@ def main():
     measure = {"build_seconds": build_s, "silos": len(site["silos"]),
                "towers": [t["id"] for t in site["noria_towers"]],
                "galleries": [ln["id"] for ln in site["silo_top_galleries"]["lines"]] + [b["id"] for b in site["bridges"]],
-               "silo_vertices": silo_measure["vertices_total"]}
+               "silo_vertices": silo_measure["vertices_total"], "aspiration": asp_measure}
     (OUT / "measure.json").write_text(json.dumps(measure, ensure_ascii=False, indent=2), encoding="utf-8")
 
 

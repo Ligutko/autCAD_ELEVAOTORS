@@ -24,24 +24,25 @@ tags: [handoff, start-here]
 | K3 естакади T8/T12/T15, міст T11/T14, галерея T7/T10 | ✅ | `gallery.py` | `check_gallery.py` |
 | K4 тунелі T9/T13/T16, ТЛ-50К, 42 стійки засувок | ✅ | `tunnel.py` | `check_tunnel.py` |
 | K5 нутро силоса з розрізами | ✅ | `silo_interior.py` | — |
-| E аспірація: бункери 8.1/8.2 за кресленням, установка й повітроводи (judgment) | ◐ WIP | `aspiration.py` (не підключено) | `check_aspiration.py` (написано) |
+| E аспірація: бункери 8.1/8.2 за кресленням, установки й повітроводи (judgment), дві знахідки | ✅ | `aspiration.py` | `check_aspiration.py` (з перетинами на сітках) |
 | F приймальна частина H1–H4 | ✗ | — | — |
 | W1 оточення | ✗ (після об'єкта) | — | — |
 
 Повний склад з позначками ✅ ◐ ✗ — `OBJECT_SCOPE.md` у корені.
 
-## Наступний крок — завершити блок E (аспірація)
-1. Застосувати блок `aspiration` у `world/site/SITE.json`: готовий JSON є в [[08 Expertise 2026-09-24..26]], розділ «Аспірація». Видалити `receiving.dust_bins`, бо там хибні координати EST.
-2. Прорізати отвір у даху тунелю T9 під стояк A (x −26.5, y 26.25) і в кришці приямка H6 під стояк B (через `_cells` у `noria_tower`).
-3. Підключити `aspiration.build_bin`, `build_unit` і `build_system_ducts(routes(...))` у `world/build/site.py`.
-4. Прогнати `check_aspiration.py` і всі п'ять інших перевірок, подивитися кадри, закомітити.
+## Наступний крок — аркуш 2 векторно (K5 і знахідка E-2)
+1. Доручити агенту-досліднику заміряти на аркуші 2 розкладку каналів аерації в підлозі силосів і положення символів вентиляторів аерації: кут, відстань від стіни, габарит подушки.
+2. Внести заміри в SITE.json (зараз у `silo_msvu220.py` `FAN_ANGLES` і відстань `wall + 2.2` — EST).
+3. Перевірка: `check_aspiration.py` сама покаже новий зазор бункер 8.1 ↔ вентилятор S2 (зараз 0.16 м). Для каналів аерації треба нова `check_aeration.py`: кількість каналів і їхні кінці проти креслення плюс зламаний варіант.
 
-Далі за чергою: канали аерації з вектора аркуша 2 → заміна `EST` на джерела → приймальна частина H1–H4 (спершу дослідження) → перенесення QA-воріт з `blender/` у `world/` → зведення двох вікі (`VAULT/` і `obsidian_handoff/`).
+Далі за чергою: заміна `EST` на джерела → приймальна частина H1–H4 (спершу дослідження) → перенесення QA-воріт з `blender/` у `world/` → зведення двох вікі (`VAULT/` і `obsidian_handoff/`).
+
+**Як працювати (прохання користувача 2026-09-26): валідація між етапами.** Кожен вузол ділити на етапи (дані → геометрія/отвори → сцена → кадри). Після кожного етапу — його перевірка плюс усі наявні `check_*.py`. Зламане на етапі виправляти до переходу далі.
 
 ## Як запустити (ПК користувача, Windows)
 ```
 B="/c/Program Files/Blender Foundation/Blender 4.5/blender.exe"
-"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery (+aspiration)
+"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration
 "$B" --background --python world/build/site.py             # фінальні кадри → world/out/site/
 "$B" --python world/build/site.py -- --no-render           # відкрити сцену в GUI і літати
 ```

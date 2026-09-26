@@ -1,5 +1,5 @@
 {
-  "build_seconds": 1.8,
+  "build_seconds": 1.9,
   "silos": 6,
   "towers": [
     "H5",
@@ -12,5 +12,66 @@
     "G_H5_H6",
     "G_H14_H5"
   ],
-  "silo_vertices": 2808072
+  "silo_vertices": 2808072,
+  "aspiration": {
+    "A": {
+      "serves": [
+        "H5 boot",
+        "T9"
+      ],
+      "unit_at": "8.1",
+      "air_m3h": 5640,
+      "flanges": 15,
+      "operating_states": 12,
+      "main_mm": 315,
+      "branch_mm": 110,
+      "boot_mm": 225,
+      "collector_mm": [
+        110,
+        160,
+        180,
+        200,
+        225,
+        250,
+        280
+      ],
+      "main_speed_ms": 20.1,
+      "riser_xy": [
+        -26.5,
+        26.25
+      ],
+      "riser_in_pit": false,
+      "bin_top_z": 8.3,
+      "status": "judgment (see SITE.json aspiration.status)"
+    },
+    "B": {
+      "serves": [
+        "H6 boot",
+        "T13",
+        "T16"
+      ],
+      "unit_at": "8.2",
+      "air_m3h": 6660,
+      "flanges": 30,
+      "operating_states": 24,
+      "main_mm": 355,
+      "branch_mm": 110,
+      "boot_mm": 180,
+      "collector_mm": [
+        110,
+        160,
+        180,
+        200,
+        225
+      ],
+      "main_speed_ms": 18.7,
+      "riser_xy": [
+        0.0,
+        -0.75
+      ],
+      "riser_in_pit": true,
+      "bin_top_z": 8.3,
+      "status": "judgment (see SITE.json aspiration.status)"
+    }
+  }
 }

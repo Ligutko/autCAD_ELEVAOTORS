@@ -216,10 +216,21 @@ def _x_wall(xa, xb, ya, yb, z0, z1, opening):
             c.box((xa, ya, oz0), (xb, oy0, oz1)), c.box((xa, oy1, oz0), (xb, yb, oz1))]
 
 
-def build_pit(spec, hole, openings=(), deck_hole=None):
+def pit_holes(spec, anchors):
+    """(leg hole, deck hole) in the tower frame: legs pass both slabs, the deck also lets the tunnel
+    conveyor spouts down to the boot inlet. anchors: from build_noria."""
+    hole = _bbox(leg_footprints(spec), HOLE_MARGIN)
+    inlet = noria_frame(spec)(anchors["inlet_mouth"])
+    deck_hole = (min(hole[0], inlet[0] - 0.3), min(hole[1], inlet[1] - 0.3),
+                 max(hole[2], inlet[0] + 0.3), max(hole[3], inlet[1] + 0.3))
+    return hole, deck_hole
+
+
+def build_pit(spec, hole, openings=(), deck_hole=None, cover_holes=()):
     """Concrete pit (PDF p.2, p.4): walls and bottom slab, deck at the tunnel floor, cover slab
     at grade; both slabs have the leg hole. openings: tunnel openings ("W"|"E", y0, y1, z0, z1)
-    in the tower frame (tunnel.pit_opening)."""
+    in the tower frame (tunnel.pit_opening). cover_holes: more cover holes (x0, y0, x1, y1), tower frame,
+    e.g. an aspiration riser."""
     p = spec["pit"]
     x0, y0, x1, y1 = pit_inner(spec)
     t, tb = p["wall_t"], p["bottom_t"]
@@ -232,11 +243,11 @@ def build_pit(spec, hole, openings=(), deck_hole=None):
     walls += _x_wall(x1, x1 + t, y0 - t, y1 + t, z_bot, z_top, side.get("E"))
     slab = lambda a, b, a1, b1, z: c.box((a, b, z - p["deck_t"]), (a1, b1, z))  # noqa: E731
     deck = _around_hole(x0, y0, x1, y1, deck_hole or hole, p["deck_top_z"], slab)
-    cover = _around_hole(x0 - t, y0 - t, x1 + t, y1 + t, hole, z_top, slab)
+    cover = _cells(x0 - t, y0 - t, x1 + t, y1 + t, [hole] + list(cover_holes), z_top, slab)
     return c.merge_parts(walls), c.merge_parts(deck + cover)
 
 
-def build(spec, collection=None, materials=None, openings=(), distribution=None):
+def build(spec, collection=None, materials=None, openings=(), distribution=None, cover_holes=()):
     top_z = spec["top_z"]
     pit_z = spec["pit_z"]
     grade = spec["pit"]["cover_top_z"]
@@ -307,11 +318,8 @@ def build(spec, collection=None, materials=None, openings=(), distribution=None)
         for key, data in dparts.items():
             add("dist_" + key, data, *look_d[key])
     label_objs = c.labels([(text, tuple(frame(p))) for text, p in labels], tag, collection)
-    # the deck also lets the tunnel conveyor spouts down to the boot inlet
-    inlet = frame(anchors["inlet_mouth"])
-    deck_hole = (min(hole[0], inlet[0] - 0.3), min(hole[1], inlet[1] - 0.3),
-                 max(hole[2], inlet[0] + 0.3), max(hole[3], inlet[1] + 0.3))
-    pit_walls, pit_slabs = build_pit(spec, hole, openings, deck_hole)
+    leg_hole, deck_hole = pit_holes(spec, anchors)
+    pit_walls, pit_slabs = build_pit(spec, leg_hole, openings, deck_hole, cover_holes)
     add("pit", pit_walls, concrete)
     add("pit_slabs", pit_slabs, concrete)
     measure = {

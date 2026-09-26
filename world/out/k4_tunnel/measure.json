@@ -1,5 +1,5 @@
 {
-  "build_seconds": 0.3,
+  "build_seconds": 0.5,
   "tunnels": {
     "T13": {
       "id": "T13",
@@ -132,6 +132,37 @@
         0.67,
         0.87
       ]
+    }
+  },
+  "aspiration": {
+    "B": {
+      "serves": [
+        "H6 boot",
+        "T13",
+        "T16"
+      ],
+      "unit_at": "8.2",
+      "air_m3h": 6660,
+      "flanges": 30,
+      "operating_states": 24,
+      "main_mm": 355,
+      "branch_mm": 110,
+      "boot_mm": 180,
+      "collector_mm": [
+        110,
+        160,
+        180,
+        200,
+        225
+      ],
+      "main_speed_ms": 18.7,
+      "riser_xy": [
+        0.0,
+        -0.75
+      ],
+      "riser_in_pit": true,
+      "bin_top_z": 8.3,
+      "status": "judgment (see SITE.json aspiration.status)"
     }
   }
 }

@@ -14,6 +14,7 @@ import bpy  # noqa: I001  bpy first: the pip module registers bmesh and mathutil
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from kit import aspiration as asp  # noqa: E402
 from kit import common as c  # noqa: E402
 from kit import noria_tower as tower  # noqa: E402
 from kit import tunnel as tun  # noqa: E402
@@ -43,16 +44,20 @@ def main():
     c.setup_sky(scene, sun_elevation_deg=34.0, sun_rotation_deg=130.0)
     t0 = time.time()
     openings = [tun.pit_opening(site, t) for t in tunnels]
-    objs, _ = tower.build(spec, openings=openings)
+    roof_holes, cover_holes = asp.riser_holes(site, tun)
+    holes = [(x0 - spec["x"], y0 - spec["y"], x1 - spec["x"], y1 - spec["y"]) for x0, y0, x1, y1 in cover_holes.get("H6", ())]
+    objs, _ = tower.build(spec, openings=openings, cover_holes=holes)
     for o in objs.values():
         o.location = (spec["x"], spec["y"], 0.0)
     measures, holes = {}, []
     for t in tunnels:
-        _, m, anchors = tun.build(site, t)
+        _, m, anchors = tun.build(site, t, roof_holes=roof_holes.get(t["id"], ()))
         measures[t["id"]] = m
         holes += tun.footprint(site, t)
         for k, p in enumerate(anchors["lamps"]):
             point_light(f"{t['id']}_LAMP_{k}", p, 120.0)
+    systems = [s["id"] for s in site.get("aspiration", {}).get("systems", []) if s["tower"] == "H6"]
+    _, asp_measure = asp.build(site, tower, tun, systems=systems) if systems else ({}, {})
     x0, y0, x1, y1 = tower.pit_inner(spec)
     w = spec["pit"]["wall_t"]
     holes.append((spec["x"] + x0 - w, spec["y"] + y0 - w, spec["x"] + x1 + w, spec["y"] + y1 + w))
@@ -70,8 +75,9 @@ def main():
         "k4_tunnel_walk.png": c.camera("CAM_WALK", (-27.0, row + 0.78, -0.2), (-45.0, row + 0.1, -1.2), lens=18),
         "k4_gate_stack.png": c.camera("CAM_GATE", (-13.3, row + 0.95, -0.35), (-14.5, row, -0.55), lens=16),
         "k4_boot_inlet.png": c.camera("CAM_BOOT", (1.55, row + 2.75, -2.75), tuple(inlet), lens=14),
+        "k4_aspiration_pit.png": c.camera("CAM_ASP_PIT", (3.6, row + 0.9, -0.3), (-0.3, row - 0.75, 0.0), lens=16),
     }
-    (OUT / "measure.json").write_text(json.dumps({"build_seconds": build_s, "tunnels": measures},
+    (OUT / "measure.json").write_text(json.dumps({"build_seconds": build_s, "tunnels": measures, "aspiration": asp_measure},
                                                  ensure_ascii=False, indent=2), encoding="utf-8")
     for name, cam in cams.items():
         t = time.time()
