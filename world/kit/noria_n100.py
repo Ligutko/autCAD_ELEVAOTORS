@@ -379,6 +379,11 @@ BOOT_TOP_ABOVE_PIT = 1.96           # boot casing top = where the tubes start
 HEAD_BELOW_AXIS = 1.025             # head pulley axis above the head casing base (1.03 / 1.02)
 # head base vs top platform: the drawing shows the head on a support frame +0.25 (H5) / +0.36 (H6)
 HEAD_BASE_TOLERANCE = (-0.05, 0.45)
+# head discharge outlet, drawing p.4-p.7 (both towers): on the return-leg side, 1.19 m from the
+# noria axis, 1.205 (H5) / 1.235 (H6) below the head pulley axis; a vertical □300 drop from there
+OUTLET_OFFSET = 1.19
+OUTLET_BELOW_AXIS = 1.22
+OUTLET_SIZE = 0.30
 
 
 def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
@@ -409,7 +414,7 @@ def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
 
     parts["legs"], parts["leg_flanges"], parts["leg_bolts"], parts["leg_doors"] = build_legs(leg_z0, leg_z1, mdl)
 
-    # ---- head: housing with hood, front cover, pulley, discharge throat and spout
+    # ---- head: housing with hood, front cover, pulley, discharge throat down to the outlet
     sx, _ = leg_size(mdl)
     hy = mdl["housing_half_y"]                              # head and boot housing half width across the belt
     hx0 = LEG_CENTRES_X[0] - sx / 2 - 0.02
@@ -418,9 +423,11 @@ def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
     head_back, head_front, head_rim = _housing(hx0, hx1, leg_z1, z_head, hy,
                                                arc_top=((hx0 + hx1) / 2, z_head, hood_r))
     drum, lag, shaft = _pulley(z_head, mdl)
-    throat = [c.box((hx1 - 0.02, BELT_Y - 0.2, z_head - 0.75), (hx1 + 0.25, BELT_Y + 0.2, z_head - 0.25))]
-    spout_end = np.array([hx1 + 0.25, BELT_Y - 1.0, z_head - 1.75])
-    spout = [st.rod((hx1 + 0.12, BELT_Y, z_head - 0.7), tuple(spout_end), 0.15, 20)]
+    outlet = np.array([CX + OUTLET_OFFSET, BELT_Y, z_head - OUTLET_BELOW_AXIS])
+    h = OUTLET_SIZE / 2
+    throat = [c.box((hx1 - 0.02, BELT_Y - 0.2, z_head - 0.75), (outlet[0] + h, BELT_Y + 0.2, z_head - 0.25)),
+              c.box((outlet[0] - h, BELT_Y - h, outlet[2]), (outlet[0] + h, BELT_Y + h, z_head - 0.74)),
+              c.box((outlet[0] - h - 0.04, BELT_Y - h - 0.04, outlet[2]), (outlet[0] + h + 0.04, BELT_Y + h + 0.04, outlet[2] + 0.02))]
     # explosion vent on the hood crown (framed rupture panel)
     vent = [c.box(((hx0 + hx1) / 2 - 0.25, BELT_Y - 0.22, z_head + hood_r - 0.02),
                   ((hx0 + hx1) / 2 + 0.25, BELT_Y + 0.22, z_head + hood_r + 0.05))]
@@ -429,7 +436,6 @@ def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
     parts["head_cover"] = head_front
     parts["head_rim"] = c.merge_parts([head_rim] + _rim_bolts(hx0 - 0.015, hx1 + 0.015, leg_z1 - 0.015, z_head + 0.015,
                                                               BELT_Y + hy + 0.006))
-    parts["head_spout"] = c.merge_parts(spout)
     parts["vent"] = c.merge_parts(vent)
     parts["pulley_drum"] = drum
     parts["pulley_lagging"] = lag
@@ -508,9 +514,9 @@ def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
     labels.append(("Барабан башмака самоочисний (крильчастий)", (CX, BELT_Y + 0.16, z_boot + PULLEY_R)))
     sensors.append(st.rod((CX, BELT_Y + 0.62, z_boot), (CX, BELT_Y + 0.72, z_boot), 0.03, 12))
     labels.append(("Датчик швидкості (контроль руху стрічки)", (CX, BELT_Y + 0.72, z_boot)))
-    ps = (np.array([hx1 + 0.12, BELT_Y, z_head - 0.7]) + spout_end) / 2
-    sensors.append(st.rod(tuple(ps + [0.14, 0, 0]), tuple(ps + [0.26, 0, 0]), 0.025, 12))
-    labels.append(("Датчик підпору самопливу", tuple(ps + [0.26, 0, 0])))
+    ps = outlet + [h, 0, 0.25]
+    sensors.append(st.rod(tuple(ps), tuple(ps + [0.12, 0, 0]), 0.025, 12))
+    labels.append(("Датчик підпору (вихід голови)", tuple(ps + [0.12, 0, 0])))
     parts["sensors"] = c.merge_parts(sensors)
 
     measure = {
@@ -540,7 +546,7 @@ def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
         "boot_pulley_z_m": round(z_boot, 3),
         "motor_kw": MOTOR_KW,
     }
-    anchors = {"spout_end": tuple(spout_end), "z_head": z_head, "z_boot": z_boot,
+    anchors = {"outlet": tuple(outlet), "z_head": z_head, "z_boot": z_boot,
                "inlet_mouth": mouth,
                "boot_box": ((bx0, BELT_Y - hy, pit_z + BOOT_FLOOR_ABOVE_PIT), (bx1, BELT_Y + hy, leg_z0))}
     return parts, labels, measure, anchors

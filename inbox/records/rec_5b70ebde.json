@@ -1,0 +1,31 @@
+{
+  "id": "rec_5b70ebde",
+  "subject": "Естакади надсилосні (T8, T12, T15)",
+  "kind": "dimension",
+  "claim": {
+    "name": "service_platforms",
+    "value": "над центром кожного силоса розширення з півночі до Y +1.47 довжиною 2.2 м (X центр ± 1.1)",
+    "unit": "m",
+    "qualifier": "майданчики обслуговування"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 3,
+    "bbox": [
+      270,
+      540,
+      310,
+      560
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p03_T12_silo3_centre.png",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Арк. 3: пурпурові вертикалі X -39.085 і -36.887 (силос 3), Y +0.970 … +1.474. Такі самі виступи видно на оглядовому рендері над усіма шістьма силосами. Координати SITE: X на схід від осі веж H5/H6, Y на північ від осі ряду 3–6 (ряд 1–2 на 25.5), z — відмітки. bbox — повернена сторінка, pt.",
+  "seen_in": []
+}

@@ -74,7 +74,8 @@ def assemble(quick=False):
         col = bpy.data.collections.new(spec["id"])
         scene.collection.children.link(col)
         openings = [tun.pit_opening(site, t) for t in tunnels if t["tower"] == spec["id"]]
-        objs, _ = tower.build(spec, collection=col, materials=m, openings=openings)
+        dist = next((d for d in site.get("distribution", []) if d["tower"] == spec["id"]), None)
+        objs, _ = tower.build(spec, collection=col, materials=m, openings=openings, distribution=dist)
         for o in objs.values():
             o.location = (spec["x"], spec["y"], 0.0)
 

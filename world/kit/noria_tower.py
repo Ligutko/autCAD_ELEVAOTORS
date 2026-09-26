@@ -10,6 +10,7 @@ Stair zone in the west half is EST.
 import numpy as np
 
 from . import common as c
+from . import distribution as dist
 from . import noria_n100 as nn
 from . import steel as st
 
@@ -157,16 +158,6 @@ def build_guards(zs, hx, hy):
     return c.merge_parts(tubes), c.merge_parts(toes)
 
 
-def build_distributor(spout_end):
-    """2-way flap distributor under the head spout."""
-    d = np.asarray(spout_end, float) - [0, 0, 0.35]
-    body = [c.box(tuple(d - [0.3, 0.3, 0.35]), tuple(d + [0.3, 0.3, 0.35]))]
-    actuator = [c.box(tuple(d + [0.3, -0.12, -0.1]), tuple(d + [0.55, 0.12, 0.2]))]
-    outlets = [st.rod(d - [0.3, 0, 0.2], d - [1.3, 0, 1.2], 0.14, 16),
-               st.rod(d - [0, 0.3, 0.2], d - [0, 1.3, 1.2], 0.14, 16)]
-    return c.merge_parts(body), c.merge_parts(actuator), c.merge_parts(outlets)
-
-
 def pit_inner(spec):
     """Inner plan rectangle (x0, y0, x1, y1) of the pit in the tower frame."""
     p = spec["pit"]
@@ -204,7 +195,7 @@ def build_pit(spec, hole, openings=(), deck_hole=None):
     return c.merge_parts(walls), c.merge_parts(deck + cover)
 
 
-def build(spec, collection=None, materials=None, openings=()):
+def build(spec, collection=None, materials=None, openings=(), distribution=None):
     top_z = spec["top_z"]
     pit_z = spec["pit_z"]
     grade = spec["pit"]["cover_top_z"]
@@ -250,7 +241,7 @@ def build(spec, collection=None, materials=None, openings=()):
         "belt": (rubber, False), "buckets": (bucket, "quads"), "grain": (grain, False),
         "legs": (galv, False), "leg_flanges": (galv_old, False), "leg_bolts": (galv_old, "quads"),
         "leg_doors": (galv_old, False), "head": (galv, False), "head_cover": (galv, False),
-        "head_rim": (galv_old, False), "head_spout": (galv, "quads"), "vent": (dark, False),
+        "head_rim": (galv_old, False), "vent": (dark, False),
         "pulley_drum": (dark, "quads"), "pulley_lagging": (rubber, "quads"), "shafts": (dark, "quads"),
         "drive": (dark, "quads"), "motor": (motor, "quads"), "boot": (galv, False),
         "boot_cover": (galv, False), "boot_rim": (galv_old, False), "boot_pulley": (dark, "quads"),
@@ -264,10 +255,12 @@ def build(spec, collection=None, materials=None, openings=()):
         if frame.mirrored:                   # a mirror flips handedness: keep normals pointing out
             f = [np.asarray(b)[:, ::-1] for b in (f if isinstance(f, list) else [f])]
         add("noria_" + key, (frame(v), f), mat, smooth)
-    body, act, outlets = build_distributor(frame(anchors["spout_end"]))
-    add("distributor", body, galv)
-    add("distributor_actuator", act, dark)
-    add("distributor_outlets", outlets, galv, smooth="quads")
+    if distribution is not None:            # site data, see distribution.py
+        red = m.get("red") or c.mat_painted("GATE_RED", (0.55, 0.06, 0.04), 0.45, grime=0.3)
+        dparts = dist.build(distribution, spec["x"], spec["y"], frame(anchors["outlet"]))
+        look_d = {"splitters": (galv, False), "gates": (red, False), "gate_motors": (motor, "quads"), "spouts": (galv, False)}
+        for key, data in dparts.items():
+            add("dist_" + key, data, *look_d[key])
     label_objs = c.labels([(text, tuple(frame(p))) for text, p in labels], tag, collection)
     # the deck also lets the tunnel conveyor spouts down to the boot inlet
     inlet = frame(anchors["inlet_mouth"])
