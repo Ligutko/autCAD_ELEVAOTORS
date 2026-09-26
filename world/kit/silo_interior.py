@@ -28,16 +28,18 @@ GATE_STEP = 3.25
 GATE_OFFSETS = [k * GATE_STEP for k in range(-3, 4)]
 GATE_SIZES = [0.35, 0.35, 0.35, 0.40, 0.35, 0.35, 0.35]
 
-# ------------------------------------------------------------------ temperature cables (research B8)
-CABLES = [(0.0, 0.0)] + [(4.5, a) for a in (45, 135, 225, 315)] + [(8.5, a) for a in range(0, 360, 45)]
-CABLE_R = 0.006                    # research: Ø10.8-13 mm
-SENSOR_STEP = 2.0                  # research: Lubnymash, sensors every 2 m
-FLOOR_TIE = 0.4                    # research: bottom end tied to the floor in large silos
+# ------------------------------------------------------------------ silo equipment (SITE.json silo_equipment, phase 2)
+EQ = silo.equipment()
+SWEEP = EQ["sweep"]
 
-# ------------------------------------------------------------------ sweep auger (research B10)
-SWEEP_ANGLE = 200.0                # EST: parked position
-SWEEP_R = 0.15                     # research: Ø250-600; EST Ø300
-SWEEP_LEN = 10.4                   # centre to wall clearance
+# ------------------------------------------------------------------ temperature cables (research/silo_equipment.md)
+CABLE_R = 0.006                    # research: Ø10.8-13 mm
+SENSOR_STEP = EQ["thermo"]["sensor_step_m"]   # sourced Лубнимаш: sensors every 2 m
+
+# ------------------------------------------------------------------ sweep auger (research/silo_equipment.md)
+SWEEP_ANGLE = SWEEP["park_angle_deg"]   # judgment: parked position
+SWEEP_R = SWEEP["screw_d_m"] / 2        # LUB fork УРПК-315 / 400.М2: Ø315
+SWEEP_LEN = SWEEP["length_m"]           # judgment: centre to wall clearance
 
 # ------------------------------------------------------------------ roof structure (EST)
 RAFTERS = 40                       # every second roof rib carries a rafter
@@ -127,13 +129,27 @@ def build_gates():
 
 # ================================================================== sweep auger
 
+def sweep_height_at(r):
+    """Top of the sweep envelope at radius r from the axis: it turns through every angle, so
+    thermometry cables must clear this height everywhere on their ring. Centre drive housing over
+    the gate (SITE `sweep.drive`), tractor with its own motor near `tractor.at_frac` of the arm
+    (SITE render, sourced), tube + flight + back shield along the rest (SITE `sweep.shield_h_m`)."""
+    drive, tractor = SWEEP["drive"], SWEEP["tractor"]
+    if r <= drive["w_m"] / 2:
+        return drive["h_m"]
+    t_at = tractor["at_frac"] * SWEEP_LEN
+    if abs(r - t_at) <= 0.5:
+        return max(SWEEP["shield_h_m"], tractor["wheel_d_m"]) + 0.30    # judgment: motor sits above the wheel
+    return SWEEP["shield_h_m"] + 0.02
+
+
 def build_sweep():
-    """Sweep auger parked on the floor: tube, helical flight, back shield, centre pivot,
-    intermediate support wheel and a tractor drive wheel at the wall end."""
+    """Sweep auger parked on the floor: tube, helical flight, back shield, centre drive housing
+    over the gate, intermediate support and a tractor drive wheel near the wall (SITE `sweep`)."""
     ang = math.radians(SWEEP_ANGLE)
     d = np.array([math.cos(ang), math.sin(ang), 0.0])
     n = np.array([-d[1], d[0], 0.0])
-    z = SWEEP_R + 0.02
+    z = SWEEP_R + SWEEP["floor_gap_m"]
     steel_parts, flight, rubber = [], [], []
     steel_parts.append(st.rod(d * 0.5 + [0, 0, z], d * SWEEP_LEN + [0, 0, z], 0.06, 20))           # core tube
     # helical flight: pitch = diameter, thickness 6 mm
@@ -153,20 +169,31 @@ def build_sweep():
         for a0, a1 in ((0, m), (2 * m, 3 * m), (0, 2 * m), (m, 3 * m)):
             faces.append((a0 + i, a0 + i + 1, a1 + i + 1, a1 + i))
     flight.append((v, np.array(faces)))
-    # back shield (angle plate behind the flight)
+    # back shield (angle plate behind the flight, SITE shield_h_m)
+    shield_h = SWEEP["shield_h_m"]
     steel_parts.append(st.member(d * 0.6 - n * (SWEEP_R + 0.03) + [0, 0, 0.02],
                                  d * SWEEP_LEN - n * (SWEEP_R + 0.03) + [0, 0, 0.02],
-                                 np.array([(-0.003, 0.0), (0.003, 0.0), (0.003, 0.38), (-0.003, 0.38)])))
-    # centre pivot and gearbox over the central gate
-    steel_parts.append(st.rod((0, 0, 0.0), (0, 0, 0.55), 0.28, 32))
-    steel_parts.append(c.box((-0.2, -0.2, 0.55), (0.2, 0.2, 0.85)))
-    # intermediate support and drive wheel at the wall
-    for sw, rr in ((SWEEP_LEN * 0.5, 0.18), (SWEEP_LEN + 0.15, 0.28)):
-        p = d * sw
-        rubber.append(st.rod(p - n * 0.07 + [0, 0, rr], p + n * 0.07 + [0, 0, rr], rr, 32))
-        steel_parts.append(c.box(tuple(p - n * 0.12 + [-0.05, 0, rr]), tuple(p + n * 0.12 + [0.05, 0, rr + 0.25])))
-    p = d * (SWEEP_LEN + 0.15)
-    steel_parts.append(st.rod(p + n * 0.15 + [0, 0, 0.45], p + n * 0.75 + [0, 0, 0.45], 0.13, 24))   # drive motor
+                                 np.array([(-0.003, 0.0), (0.003, 0.0), (0.003, shield_h), (-0.003, shield_h)])))
+    # centre drive housing over the gate (SITE sweep.drive: w x h, 18.5 kW)
+    drive = SWEEP["drive"]
+    hw = drive["w_m"] / 2
+    steel_parts.append(c.box((-hw, -hw, 0.0), (hw, hw, drive["h_m"])))
+    # intermediate support wheel (EST: spacing judgment, no separate motor)
+    p_mid = d * (SWEEP_LEN * 0.4)
+    rr_mid = 0.18
+    rubber.append(st.rod(p_mid - n * 0.07 + [0, 0, rr_mid], p_mid + n * 0.07 + [0, 0, rr_mid], rr_mid, 32))
+    steel_parts.append(c.box(tuple(p_mid - n * 0.12 + [-0.05, 0, rr_mid]), tuple(p_mid + n * 0.12 + [0.05, 0, rr_mid + 0.20])))
+    # tractor at SITE tractor.at_frac of the length: own motor, drive wheel, counterweights
+    tractor = SWEEP["tractor"]
+    p = d * (tractor["at_frac"] * SWEEP_LEN)
+    rw = tractor["wheel_d_m"] / 2
+    rubber.append(st.rod(p - n * 0.07 + [0, 0, rw], p + n * 0.07 + [0, 0, rw], rw, 32))
+    steel_parts.append(c.box(tuple(p - n * 0.12 + [-0.05, 0, rw]), tuple(p + n * 0.12 + [0.05, 0, rw + 0.25])))
+    steel_parts.append(st.rod(p + n * 0.15 + [0, 0, rw + 0.30], p + n * 0.75 + [0, 0, rw + 0.30], 0.13, 24))  # tractor motor
+    for k in range(tractor["counterweights"]):
+        off = (k - (tractor["counterweights"] - 1) / 2) * 0.25
+        steel_parts.append(c.box(tuple(p - n * 0.20 + d * off + [-0.06, -0.06, -0.02]),
+                                 tuple(p - n * 0.20 + d * off + [0.06, 0.06, 0.20])))
     return c.merge_parts(steel_parts), c.merge_parts(flight), c.merge_parts(rubber)
 
 
@@ -193,42 +220,80 @@ def build_roof_structure():
     return c.merge_parts(rafters), c.merge_parts(rings)
 
 
-def cable_positions():
-    return [(r * math.cos(math.radians(a)), r * math.sin(math.radians(a)), r) for r, a in CABLES]
+def cable_positions(rings=None):
+    """Thermometry cable rack positions (x, y, r): rings evenly spaced from `a0_deg`
+    (SITE.json silo_equipment.thermo.rings, analog OPI 72 ft table)."""
+    out = []
+    for ring in (rings if rings is not None else EQ["thermo"]["rings"]):
+        n, r, a0 = ring["n"], ring["r"], ring["a0_deg"]
+        if n <= 1:
+            out.append((r * math.cos(math.radians(a0)), r * math.sin(math.radians(a0)), r))
+            continue
+        for k in range(n):
+            a = math.radians(a0 + 360.0 * k / n)
+            out.append((r * math.cos(a), r * math.sin(a), r))
+    return out
 
 
-def build_cables(positions=None, sensor_step=SENSOR_STEP):
-    """Temperature cables hung from the rafters: cable, sensor capsules, top shackle, floor tie."""
+def cable_ends(r):
+    """Cable bottom hangs free above the sweep envelope at that radius (no floor tie: the sweep
+    turns round the whole floor); top is shackled to the roof frame (SITE `thermo.bottom_above_sweep_m`)."""
+    bottom = sweep_height_at(r) + EQ["thermo"]["bottom_above_sweep_m"]
+    top = roof_underside_z(max(r, silo.COLLAR_R + 0.3)) - 0.25
+    return bottom, top
+
+
+def sensor_z(bottom, top, step=None):
+    """Sensor capsule heights along one cable, spaced `step` apart down from just below the shackle."""
+    step = SENSOR_STEP if step is None else step
+    zs = []
+    z = top - 1.0
+    while z > bottom + 0.3:
+        zs.append(z)
+        z -= step
+    return zs
+
+
+def level_sensor_positions():
+    """Level sensor positions (x, y, r) from SITE.json silo_equipment.level_sensors (Lubnymash
+    standard: one upper rotary sensor)."""
+    out = []
+    for s in EQ["level_sensors"]:
+        a = math.radians(s["angle_deg"])
+        out.append((s["r"] * math.cos(a), s["r"] * math.sin(a), s["r"]))
+    return out
+
+
+def build_cables(positions=None, sensor_step=None):
+    """Temperature cables hung from the rafters: cable, sensor capsules, top shackle (SITE `thermo`)."""
+    sensor_step = SENSOR_STEP if sensor_step is None else sensor_step
     cables, sensors, hardware = [], [], []
     for x, y, r in positions or cable_positions():
-        top = roof_underside_z(max(r, silo.COLLAR_R + 0.3)) - 0.25
-        bottom = FLOOR_TIE
+        bottom, top = cable_ends(r)
         cables.append(st.rod((x, y, bottom), (x, y, top), CABLE_R, 8))
-        z = top - 1.0
-        while z > bottom + 0.3:
+        for z in sensor_z(bottom, top, sensor_step):
             sensors.append(st.rod((x, y, z - 0.05), (x, y, z + 0.05), 0.016, 12))
-            z -= sensor_step
         hardware.append(c.box((x - 0.05, y - 0.02, top), (x + 0.05, y + 0.02, top + 0.2)))        # shackle plate
-        hardware.append(st.rod((x, y, 0.0), (x, y, bottom), 0.002, 6))                           # tie cord
-        hardware.append(c.box((x - 0.04, y - 0.04, 0.0), (x + 0.04, y + 0.04, 0.02)))            # floor eye
     return c.merge_parts(cables), c.merge_parts(sensors), c.merge_parts(hardware)
 
 
 def build_level_sensors():
-    """Rotary paddle level switches through the roof (research B10: E+H FTE20, paddles 75-300 mm)."""
+    """Rotary paddle level switches through the roof (SITE `level_sensors`; Lubnymash standard:
+    one upper sensor, was 3 in the old kit)."""
     parts = []
-    for deg, r in ((30.0, 9.6), (150.0, 9.6), (270.0, 5.0)):
-        a = math.radians(deg)
-        x, y = r * math.cos(a), r * math.sin(a)
-        zr = roof_underside_z(r)
-        parts.append(st.rod((x, y, zr - 0.6), (x, y, zr + 0.25), 0.012, 8))                     # shaft
-        parts.append(c.box((x - 0.1, y - 0.004, zr - 0.75), (x + 0.1, y + 0.004, zr - 0.6)))    # paddle
-        parts.append(st.rod((x, y, zr + 0.05), (x, y, zr + 0.25), 0.06, 16))                    # housing
+    for x, y, r in level_sensor_positions():
+        s = next(s for s in EQ["level_sensors"] if abs(s["r"] - r) < 1e-6)
+        zr = roof_underside_z(r) - s["paddle_below_roof_m"]
+        hd, hh = s["housing_d_m"], s["housing_h_m"]
+        parts.append(st.rod((x, y, zr - 0.15), (x, y, zr), hd / 2, 8))                          # paddle shaft
+        parts.append(c.box((x - hd, y - 0.004, zr - 0.15), (x + hd, y + 0.004, zr)))            # paddle
+        parts.append(st.rod((x, y, zr), (x, y, zr + hh), hd / 2, 16))                           # housing
     return c.merge_parts(parts)
 
 
 def build_hatch_and_ladder():
-    """Roof hatch near the eave over the outside ladder, and a straight inside ladder down the wall."""
+    """Roof hatch near the eave over the outside ladder. Inside ladder down the wall only if
+    SITE `inside_ladder` is set (Lubnymash option; sourced default is "no", rec_6fa26e86)."""
     a = math.radians(silo.LADDER_ANGLE)
     u = np.array([math.cos(a), math.sin(a), 0.0])
     t = np.array([-u[1], u[0], 0.0])
@@ -236,16 +301,17 @@ def build_hatch_and_ladder():
     zh = roof_underside_z(r_h)
     frame = [c.box(tuple(u * r_h - t * 0.35 + [0, 0, zh - 0.05]), tuple(u * r_h + t * 0.35 + [0, 0, zh + 0.12]))]
     ladder = []
-    r_l = R_IN - 0.25
-    for s in (-0.22, 0.22):
-        ladder.append(st.member(u * r_l + t * s + [0, 0, 0.0], u * r_l + t * s + [0, 0, silo.WALL_TOP - 0.3],
-                                st.FLAT_60x10, up=tuple(u)))
-    for z in np.arange(0.3, silo.WALL_TOP - 0.4, 0.3):
-        ladder.append(st.rod(u * r_l - t * 0.22 + [0, 0, z], u * r_l + t * 0.22 + [0, 0, z], 0.011, 6))
-    for z in np.arange(1.0, silo.WALL_TOP, 3.0):                                             # wall brackets
-        ladder.append(st.member(u * r_l + [0, 0, z], u * (R_IN - 0.01) + [0, 0, z], st.flat(0.05, 0.008)))
+    if EQ["inside_ladder"]:
+        r_l = R_IN - 0.25
+        for s in (-0.22, 0.22):
+            ladder.append(st.member(u * r_l + t * s + [0, 0, 0.0], u * r_l + t * s + [0, 0, silo.WALL_TOP - 0.3],
+                                    st.FLAT_60x10, up=tuple(u)))
+        for z in np.arange(0.3, silo.WALL_TOP - 0.4, 0.3):
+            ladder.append(st.rod(u * r_l - t * 0.22 + [0, 0, z], u * r_l + t * 0.22 + [0, 0, z], 0.011, 6))
+        for z in np.arange(1.0, silo.WALL_TOP, 3.0):                                         # wall brackets
+            ladder.append(st.member(u * r_l + [0, 0, z], u * (R_IN - 0.01) + [0, 0, z], st.flat(0.05, 0.008)))
     hatch_pos = u * r_h + [0, 0, zh]
-    return c.merge_parts(frame), c.merge_parts(ladder), hatch_pos
+    return c.merge_parts(frame), (c.merge_parts(ladder) if ladder else None), hatch_pos
 
 
 # ================================================================== grain
@@ -394,7 +460,7 @@ def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, 
     add("sweep_flight", s_flight, "auger", True)
     add("sweep_wheels", s_rubber, "rubber", "quads")
     ang = math.radians(SWEEP_ANGLE)
-    labels.append(("Зачисний шнек (до стіни 10.4 м)", (5.0 * math.cos(ang), 5.0 * math.sin(ang), 0.35)))
+    labels.append((f"Зачисний шнек (до стіни {SWEEP_LEN:.1f} м)", (5.0 * math.cos(ang), 5.0 * math.sin(ang), 0.35)))
     rafters, rings = build_roof_structure()
     add("rafters", rafters, "galv")
     add("purlins", rings, "galv")
@@ -406,8 +472,8 @@ def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, 
     labels.append(("Термопідвіска: датчики через 2 м", (x, y, 4.0)))
     labels.append(("Датчик температури", (x, y, roof_underside_z(r) - 1.25)))
     add("level_sensors", build_level_sensors(), "yellow", "quads")
-    labels.append(("Датчик рівня (роторний)", (9.6 * math.cos(math.radians(30)), 9.6 * math.sin(math.radians(30)),
-                                                roof_underside_z(9.6) - 0.7)))
+    lx, ly, lr = level_sensor_positions()[0]
+    labels.append(("Датчик рівня (роторний, 1 верхній — стандарт Лубнимаш)", (lx, ly, roof_underside_z(lr) - 0.7)))
     hframe, ladder, hatch = build_hatch_and_ladder()
     add("hatch_frame", hframe, "galv")
     add("inside_ladder", ladder, "galv", "quads")

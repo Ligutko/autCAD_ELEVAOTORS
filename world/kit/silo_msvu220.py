@@ -22,6 +22,13 @@ def aeration():
     return json.loads(SITE_JSON.read_text(encoding="utf-8"))["silo_aeration"]
 
 
+@functools.lru_cache(maxsize=1)
+def equipment():
+    """SITE.json `silo_equipment`: thermometry, level sensor, sweep auger, aeration norms
+    (research/silo_equipment.md, phase 2)."""
+    return json.loads(SITE_JSON.read_text(encoding="utf-8"))["silo_equipment"]
+
+
 # ------------------------------------------------------------------ wall
 R = 11.0                    # PDF p.6 Ø22000, LUB: nominal (mean) radius of corrugated wall
 RINGS = 13                  # LUB table: 21422 mm -> 13 tiers
