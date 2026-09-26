@@ -1,0 +1,25 @@
+{
+  "id": "rec_746af8ae",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "roof_vent_area_per_airflow",
+    "value": 0.1,
+    "unit": "m2 per 30 m3/min",
+    "qualifier": "Westeel: не менше 0,1 м² отвору на кожні 30 м³/хв повітря"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/contentassets/cd69efa24ad140b29439d07e976e5a6f/198818_r33.pdf",
+    "path": "inbox/raw/web/aggrowth.com/198818_r33.pdf",
+    "page": 10,
+    "quote": "Use a minimum 1 square foot (0.1m2) opening for each 1000ft3/min (30m3/min) of air.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "= 0,2 м² на 3600 м³/год, як OMAFRA. Grainnet (research B9) м’якше: 1 ft² на 1500 cfm. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

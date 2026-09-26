@@ -7,7 +7,7 @@ tags: [handoff, start-here]
 ---
 # 00 Handoff — для наступного агента
 
-Повернутись: [[Elevator 3D World MOC]] · Експертиза сесії 2026-09-24…26: [[08 Expertise 2026-09-24..26]]
+Повернутись: [[Elevator 3D World MOC]] · Експертиза: [[08 Expertise 2026-09-24..26]], [[09 Expertise 2026-09-26..27]] (аспірація, аерація з аркуша 2, дослідження фази 2, валідація між етапами)
 
 ## Що це
 Будуємо реальний комплекс у Blender за `Технологія 06.06.24.pdf`: 6 силосів МСВУ 220.13.В12, норійні вежі H5 і H6, естакади, мости, тунелі, а надалі приймальну частину H1–H4. Модель 1:1, фотореалістична, з розрізами й підписами, щоб показувати кейси «аварія → причина → як треба». Деталі: [[01 Goal and Vision]].
@@ -23,17 +23,22 @@ tags: [handoff, start-here]
 | Розподіл під головою: вводи 45°, ТЗА-300, спуски □300 | ✅ | `distribution.py` | `check_distribution.py` |
 | K3 естакади T8/T12/T15, міст T11/T14, галерея T7/T10 | ✅ | `gallery.py` | `check_gallery.py` |
 | K4 тунелі T9/T13/T16, ТЛ-50К, 42 стійки засувок | ✅ | `tunnel.py` | `check_tunnel.py` |
-| K5 нутро силоса з розрізами | ✅ | `silo_interior.py` | — |
+| K5 нутро силоса з розрізами; аерація підлоги з аркуша 2 (50 каналів) | ✅ | `silo_interior.py` | `check_aeration.py` |
 | E аспірація: бункери 8.1/8.2 за кресленням, установки й повітроводи (judgment), дві знахідки | ✅ | `aspiration.py` | `check_aspiration.py` (з перетинами на сітках) |
 | F приймальна частина H1–H4 | ✗ | — | — |
 | W1 оточення | ✗ (після об'єкта) | — | — |
 
 Повний склад з позначками ✅ ◐ ✗ — `OBJECT_SCOPE.md` у корені.
 
-## Наступний крок — аркуш 2 векторно (K5 і знахідка E-2)
-1. Доручити агенту-досліднику заміряти на аркуші 2 розкладку каналів аерації в підлозі силосів і положення символів вентиляторів аерації: кут, відстань від стіни, габарит подушки.
-2. Внести заміри в SITE.json (зараз у `silo_msvu220.py` `FAN_ANGLES` і відстань `wall + 2.2` — EST).
-3. Перевірка: `check_aspiration.py` сама покаже новий зазор бункер 8.1 ↔ вентилятор S2 (зараз 0.16 м). Для каналів аерації треба нова `check_aeration.py`: кількість каналів і їхні кінці проти креслення плюс зламаний варіант.
+## Наступний крок — фаза 2A (нутро силоса), стан на 2026-09-27
+Дослідження готове: `research/silo_equipment.md`, 82 картки. Блок SITE.json `silo_equipment` застосовано.
+
+Лишилось:
+1. Змінити кіт `silo_interior` за списком у [[09 Expertise 2026-09-26..27]] §5.
+2. Додати і прогнати `check_silo_interior.py` та всі перевірки.
+3. Зробити кадри K5.
+
+Потім 2B: дах і стіна.
 
 Далі за чергою: заміна `EST` на джерела → приймальна частина H1–H4 (спершу дослідження) → перенесення QA-воріт з `blender/` у `world/` → зведення двох вікі (`VAULT/` і `obsidian_handoff/`).
 
@@ -42,7 +47,7 @@ tags: [handoff, start-here]
 ## Як запустити (ПК користувача, Windows)
 ```
 B="/c/Program Files/Blender Foundation/Blender 4.5/blender.exe"
-"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration
+"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration aeration
 "$B" --background --python world/build/site.py             # фінальні кадри → world/out/site/
 "$B" --python world/build/site.py -- --no-render           # відкрити сцену в GUI і літати
 ```

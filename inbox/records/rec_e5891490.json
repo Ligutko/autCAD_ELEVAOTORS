@@ -1,0 +1,25 @@
+{
+  "id": "rec_e5891490",
+  "subject": "Датчики рівня силоса МСВУ 220",
+  "kind": "attribute",
+  "claim": {
+    "name": "level_sensor_lower_type",
+    "value": "мембранний (у прикладі не встановлено)",
+    "unit": "",
+    "qualifier": "опитувальний лист МСВУ: нижній датчик — «Ні», тип у полі «Мембранний»"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/msvu_ua.pdf",
+    "path": "inbox/raw/web/_fetch/msvu_ua.pdf",
+    "page": 1,
+    "quote": "Датчик рівня: … Нижній … Тип датчика … Мембранний",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Див. примітку до верхнього датчика. Нижній датчик — опція, у прикладі не замовлено. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

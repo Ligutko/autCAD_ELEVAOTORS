@@ -1,0 +1,25 @@
+{
+  "id": "rec_54d0d026",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "specific_airflow_upright",
+    "value": "3–6",
+    "unit": "m3/(h*t)",
+    "qualifier": "K-State: для вертикальних сховищ (силоси) 3–6, для горизонтальних 6–12 м³/год на т"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://entomology.k-state.edu/doc/finished-chapters/s156-ch11.pdf",
+    "path": "inbox/raw/web/entomology.k-state.edu/s156-ch11.pdf",
+    "page": 4,
+    "quote": "For upright storages (concrete silos and tall steel bins) airflow rates of 0.05 to 0.10 cfm/bu (3 to 6 (m3/h)/tonne) and for horizontal storages airflow rates of 0.10 to 0.20 cfm/bu (6 to 12 (m3/h)/tonne) are typically used.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Наш силос D 22 > H 15 — ближче до горизонтального (6–12). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

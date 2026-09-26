@@ -19,7 +19,7 @@ Plus: walkway headroom under the main, clearance to silo walls and aeration fans
 of silos and towers.
 
 Dust bin vs aeration fans: on the fan geometry of the silo kit (plan hulls). Touching fails; less than a
-service gap is reported as a finding (the bins are drawn, the fan positions are EST).
+service gap is reported as a finding (bins and fan positions are drawn, the fan pad size is EST).
 
 Broken variants that must fail: riser A on silo S1, roof hole not cut, pit cover hole not cut,
 T9 collector on the row axis, main at +1.0.
@@ -280,7 +280,7 @@ def checks(site, roof_holes=None, cover_holes=None):
         if f_gap < FAN_SERVICE:
             out.append((f"dust bin {b['id']} vs fan of {f_id}: FINDING, not a model error", True,
                         f"only {f_gap:.2f} m to the fan pad (< {FAN_SERVICE} m service gap). The bin is drawn (PDF p.3), "
-                        f"the fan radius is EST (silo_msvu220 build_fans): measure the fan symbols on sheet 2"))
+                        f"the fan position too (PDF p.2, SITE.json silo_aeration); the pad size is EST (silo_msvu220 build_fans)"))
     return out
 
 

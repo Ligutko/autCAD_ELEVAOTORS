@@ -1,0 +1,25 @@
+{
+  "id": "rec_2b80aa35",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "dimension",
+  "claim": {
+    "name": "perforated_area_required",
+    "value": 146,
+    "unit": "m2",
+    "qualifier": "потрібна площа перфорації для 52 640 м³/год при 6 м/хв (≈ 38 % площі днища)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://medcraveonline.com/OAJS/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "path": "inbox/raw/web/medcraveonline.com/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "page": null,
+    "quote": "6 m min -1 is recommended for horizontal facilities (flat storages or silos with diameter greater than the height)",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "52 640 / 60 / 6 = 146 м²; площа днища 379 м². Symaga HA — 18 % (rec_d0d7fe5e) ≈ 68 м² → 12,9 м/хв. Фермерська норма 6 м/хв для великого силоса з каналами не виконується; для промислових силосів це звично (вищий тиск вентилятора), але в кадрі варто пояснити. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_66e4de0e",
+  "subject": "Датчики рівня силоса МСВУ 220",
+  "kind": "attribute",
+  "claim": {
+    "name": "level_sensor_upper_type",
+    "value": "роторний",
+    "unit": "",
+    "qualifier": "опитувальний лист МСВУ: верхній датчик рівня — «Так», тип «Роторний» (заповнений приклад)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/msvu_ua.pdf",
+    "path": "inbox/raw/web/_fetch/msvu_ua.pdf",
+    "page": 1,
+    "quote": "Датчик рівня: … Верхній … Тип датчика … Роторний",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Бланк з полями форми. Відповідність поле→рядок встановлено за координатами полів (PyMuPDF): «Верхній» y=625 → «Так», тип y=623 → «Роторний»; «Нижній» y=645 → «Ні», тип y=643 → «Мембранний». Варіанти у списку типу: Мембранний / Роторний / Радарний. Це приклад, не стандарт серії. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

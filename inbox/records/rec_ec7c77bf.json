@@ -1,0 +1,25 @@
+{
+  "id": "rec_ec7c77bf",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "thermo_support_profile",
+    "value": "L100x100x10",
+    "unit": "mm",
+    "qualifier": "Symaga: опора термопідвіски — кутник L100×100×10 між двома кроквами, труба 1\" крізь дах"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 74,
+    "quote": "Proﬁle “L” 100x100x10",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Там само: «Structure designed for distributing the loads of the probes between two roof rafters» і «allows us to take out the probes from the upper part of the roof». Центральну підвіску кріплять на кришці завантажувального отвору. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

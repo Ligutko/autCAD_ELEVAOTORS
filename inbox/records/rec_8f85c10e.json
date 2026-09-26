@@ -1,0 +1,25 @@
+{
+  "id": "rec_8f85c10e",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "aerochute_axis_spacing",
+    "value": "1.5–2.0",
+    "unit": "m",
+    "qualifier": "Бровенко 1984: днище з аерожолобами закритого типу з відстанню між осями 1,5–2,0 м рівномірно охолоджує насип до 17 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tekhnosfera.com/hranenie-i-ventilirovanie-zerna-pshenitsy-v-metallicheskih-silosah-s-aerozhelobami-zakrytogo-tipa",
+    "path": "inbox/raw/web/tekhnosfera.com/brovenko-1984-aerozheloba.html",
+    "page": null,
+    "quote": "расстоянием между осями аэрожелобов 1,5-2,0 м",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Інша система (закриті аерожолоби, не відкриті канали з настилом), але це єдина знайдена вітчизняна цифра кроку. SITE.json після фази 1 (PDF p.2): гілки на r 3,1…10,1 м з кроком 1,4 м, ширина каналу 0,28 м — трохи щільніше за 1,5–2,0. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

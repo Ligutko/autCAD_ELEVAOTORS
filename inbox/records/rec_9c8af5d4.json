@@ -1,0 +1,25 @@
+{
+  "id": "rec_9c8af5d4",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_fan_airflow",
+    "value": 2000,
+    "unit": "m3/h",
+    "qualifier": "AGI FRAME AERAP-XM: вигнутий провітрювач з вентилятором 0,18 кВт, 2000 м³/год"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/globalassets/regions/emea/pdfs/220920-agi-emeaxfr-storagesilos-eng-8.5x11-web-pages.pdf",
+    "path": "inbox/raw/web/aggrowth.com/220920-agi-emeaxfr-storagesilos-eng.pdf",
+    "page": 14,
+    "quote": "AERAP-XM Curved roof vent, with powered fan 0.18 kW, Volume: 2,000 m³/h @ 5mm swg – ATEX 22.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Близький аналог по потужності; більший: 0,75 кВт — 8000 м³/год. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

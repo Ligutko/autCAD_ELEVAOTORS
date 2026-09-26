@@ -1,0 +1,27 @@
+{
+  "id": "rec_c98ddf27",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "count",
+  "claim": {
+    "name": "thermo_cable_count",
+    "value": 7,
+    "unit": "pcs",
+    "qualifier": "Neuero NL 22/24 (Ø22, циліндр 20,25 м): 7 термозондів по 5 датчиків (опція)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://neuero-ukraina.com.ua/goods/metalevi-silosi-dlya-zberigannya-zerna-nl-2224/",
+    "path": "inbox/raw/web/neuero-ukraina.com.ua/metalevi-silosi-nl-2224.html",
+    "page": null,
+    "quote": "зонд термометричний, по сім на силос із 5-ма термодатчиками (опція)",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_17065a5b"
+  ],
+  "notes": "Той самий діаметр, але 5 датчиків на 20 м — крок ≈ 4 м. Це «економна» комплектація; годиться як неправильний варіант для кейсу 2 (мало підвісок, рідкі датчики). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

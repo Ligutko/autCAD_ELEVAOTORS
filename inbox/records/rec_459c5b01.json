@@ -1,0 +1,25 @@
+{
+  "id": "rec_459c5b01",
+  "subject": "Конвеєр радіально-поворотний з тягачем (зачисний, 18,5 + 1,1 кВт)",
+  "kind": "dimension",
+  "claim": {
+    "name": "sweep_axis_height",
+    "value": "0.17–0.21",
+    "unit": "m",
+    "qualifier": "висота осі гвинта над підлогою: Ø315 → 0,17 м; Ø400 → 0,21 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zeo.ua/katalog-oborudovaniya/transportery/zachistnoy-shnek-zeo-sa",
+    "path": "inbox/raw/web/zeo.ua/zachistnoy-shnek-zeo-sa.html",
+    "page": null,
+    "quote": "Мінімальний залишок продукту після зачистки не більше 10 мм (в залежності від площинності полу).",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "h = D/2 + 0,01. Діаметр гвинта — розвилка rec_bd18d8b8 (Ø315) / rec_969eee56 (Ø400). Модель зараз: Ø300, вісь 0,17 м. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

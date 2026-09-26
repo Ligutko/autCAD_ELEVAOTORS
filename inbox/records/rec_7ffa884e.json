@@ -1,0 +1,25 @@
+{
+  "id": "rec_7ffa884e",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_opening_max_diameter",
+    "value": 610,
+    "unit": "mm",
+    "qualifier": "Westeel: круглий отвір під провітрювач у секторі даху — не більше 24\", по центру між ребрами"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/contentassets/cd69efa24ad140b29439d07e976e5a6f/198818_r33.pdf",
+    "path": "inbox/raw/web/aggrowth.com/198818_r33.pdf",
+    "page": 13,
+    "quote": "a circular opening shall have a maximum diameter of 24\"",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "24\" = 610 мм. Від краю отвору до ребра ≥ 2,5\" (64 мм). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

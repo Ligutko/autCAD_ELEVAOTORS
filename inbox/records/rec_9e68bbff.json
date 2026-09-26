@@ -1,0 +1,25 @@
+{
+  "id": "rec_9e68bbff",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "thermo_cable_diameter",
+    "value": 10.8,
+    "unit": "mm",
+    "qualifier": "Agrolog SL3000: круглий кабель Ø10,8 мм, розрив 3600 / 7500 кг, вгорі гак, внизу рим-болт"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.agrolog.io/temperature-sensor-cable",
+    "path": "inbox/raw/web/agrolog.io/temperature-sensor-cable.html",
+    "page": null,
+    "quote": "Temperature Sensor Cable : Diameters Ø10,8mm",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Там само: «Tensile strength : 3600kg/7500kg», «Silo floor mounting : Eye bolt». Agrolog постачає AGI FRAME. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

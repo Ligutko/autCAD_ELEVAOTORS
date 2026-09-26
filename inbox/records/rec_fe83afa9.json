@@ -1,0 +1,25 @@
+{
+  "id": "rec_fe83afa9",
+  "subject": "Датчики рівня силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "grain_roof_gap_difference",
+    "value": 0.75,
+    "unit": "m",
+    "qualifier": "насип з центру (27°) під дахом 30° підходить до даху спершу біля карниза; різниця зазору центр–стіна ≈ 0,75 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 4,
+    "quote": "Радіально-поворотний зачисний конвеєр.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "R·(tg30° − tg27°) = 10,99 × (0,577 − 0,510) = 0,75 м. Тому датчик верхнього рівня логічно ставити на зовнішній частині даху (r ≈ 8–9,5 м, біля кільця провітрювачів), щоб він спрацював раніше, ніж зерно закриє провітрювачі. Кут 27° — з моделі (REPOSE), кут даху 30° — Лубнимаш. Цитата службова (сторінка стандартної комплектації); число — розрахунок.",
+  "seen_in": []
+}

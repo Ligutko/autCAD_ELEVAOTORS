@@ -1,0 +1,25 @@
+{
+  "id": "rec_1e4aed55",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "roof_vent_velocity",
+    "value": "300–400",
+    "unit": "m/min",
+    "qualifier": "швидкість повітря в дахових провітрювачах 300–400 м/хв"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://medcraveonline.com/OAJS/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "path": "inbox/raw/web/medcraveonline.com/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "page": null,
+    "quote": "is the vent throughput velocity (from 300 to 400 m min -1 )",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_1516b708",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "air_path_ratio_max",
+    "value": 1.5,
+    "unit": "",
+    "qualifier": "найдовший шлях повітря від каналу до поверхні зерна ≤ 1,5 × найкоротшого"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.ontario.ca/page/grain-aeration",
+    "path": "inbox/raw/web/ontario.ca/grain-aeration.html",
+    "page": null,
+    "quote": "A good guideline to follow is to keep the longest air path from the duct to the grain surface no more than 1.5 times the shortest air path.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Те саме: K-State ch. 11 с. 4, MedCrave (Lopes & Steidle Neto 2022). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

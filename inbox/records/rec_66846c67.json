@@ -1,0 +1,25 @@
+{
+  "id": "rec_66846c67",
+  "subject": "Конвеєр радіально-поворотний з тягачем (зачисний, 18,5 + 1,1 кВт)",
+  "kind": "dimension",
+  "claim": {
+    "name": "sweep_travel_speed",
+    "value": 0.01,
+    "unit": "m/s",
+    "qualifier": "стара серія УРПК-400: швидкість опорного колеса 0,01 м/с (УРПК-250 — 0,091)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://ua.bizorg.su/zernokhranilischa-iz-ventiliruemykh-silosov-r/p15993235-konveyer-vintovoy-radialnopovorotnyy-u13urpk-dlya-mekhanizirovannoy-vygruzki-zerna-ostavshegosya-v-m",
+    "path": "inbox/raw/web/ua.bizorg.su/bizorg_urpk_lubnymash.html",
+    "page": null,
+    "quote": "Скорость передвижения опорного колеса, м/сек. 0,091 0,01",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "0,01 м/с = 0,6 м/хв; повне коло біля стіни (2π·10,4 ≈ 65 м) ≈ 110 хв. KMZ ТК-2: 0,87 м/хв — той самий порядок. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

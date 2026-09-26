@@ -1,0 +1,25 @@
+{
+  "id": "rec_559a1ce0",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "sensor_step",
+    "value": 1.5,
+    "unit": "m",
+    "qualifier": "крок датчиків на цифрових термопідвісках KMZ Industries"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/wp-content/uploads/2022/05/silosy-kmz-industries_-2022_ukr.pdf",
+    "path": "inbox/raw/web/kmzindustries.ua/silosy-kmz-industries_-2022_ukr.pdf",
+    "page": 23,
+    "quote": "Цифрові термопідвіски з пошаровим контролем температури з датчиками температур із кроком 1,5 м",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Інший український виробник (Карлівка). Для нашого силоса пріоритет — Лубнимаш, 2 м. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

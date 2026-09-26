@@ -1,0 +1,25 @@
+{
+  "id": "rec_979bf4cf",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "attribute",
+  "claim": {
+    "name": "thermo_top_attachment",
+    "value": "на крокви даху",
+    "unit": "",
+    "qualifier": "Neuero: кріплення термопідвісок з опорою на крокви"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://neuero-ukraina.com.ua/goods/metalevi-silosi-dlya-zberigannya-zerna-nl-2224/",
+    "path": "inbox/raw/web/neuero-ukraina.com.ua/metalevi-silosi-nl-2224.html",
+    "page": null,
+    "quote": "кріплення термопідвісок з опорою на крокви",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

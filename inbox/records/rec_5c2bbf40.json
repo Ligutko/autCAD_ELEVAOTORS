@@ -1,0 +1,25 @@
+{
+  "id": "rec_5c2bbf40",
+  "subject": "Датчики рівня силоса МСВУ 220",
+  "kind": "attribute",
+  "claim": {
+    "name": "level_sensor_standard",
+    "value": "прапорцевий ротаційний, верхній",
+    "unit": "",
+    "qualifier": "Neuero NL 22/24: один ротаційний датчик верхнього рівня"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://neuero-ukraina.com.ua/goods/metalevi-silosi-dlya-zberigannya-zerna-nl-2224/",
+    "path": "inbox/raw/web/neuero-ukraina.com.ua/metalevi-silosi-nl-2224.html",
+    "page": null,
+    "quote": "прапорцевий ротаційний датчик верхнього рівня",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

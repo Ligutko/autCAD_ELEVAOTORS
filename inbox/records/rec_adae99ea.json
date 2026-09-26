@@ -1,0 +1,25 @@
+{
+  "id": "rec_adae99ea",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_vent_hole_diameter",
+    "value": 420,
+    "unit": "mm",
+    "qualifier": "Symaga: дахові провітрювачі і вентилятори ставляться на спеціальні сектори з отвором Ø420"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 84,
+    "quote": "It´s installed over special roof sectors, with a hole of Ø420 mm.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Провітрювач Лубнимаш Ø565 × 330 (rec_bc03e784, rec_ba5a9f4a) — зовнішній ковпак на отворі такого порядку. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

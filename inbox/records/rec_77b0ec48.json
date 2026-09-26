@@ -1,0 +1,25 @@
+{
+  "id": "rec_77b0ec48",
+  "subject": "Люки і двері МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "wall_hatch_min_clear",
+    "value": "580x580",
+    "unit": "mm",
+    "qualifier": "KMZ: трактор зачисного шнека заносять лише через вхідний люк не менше 580 × 580 мм у світлі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/zachishhennya-silosiv-iz-plaskim-dnom",
+    "path": "inbox/raw/web/kmzindustries.ua/zachishhennya-silosiv-iz-plaskim-dnom.html",
+    "page": null,
+    "quote": "Можливість встановлення до силосів із внутрішніми розмірами вхідного люка не менше 580х580 мм",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Нижня межа для дверей у стіні. Symaga: 630 × 700 або 530 × 700 (rec_29a1610a). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_11f1e058",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "sensor_step",
+    "value": 2.0,
+    "unit": "m",
+    "qualifier": "крок датчиків температури на термопідвісці Лубнимаш"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-msvu-pd.html",
+    "page": null,
+    "quote": "комплект термоподвісок з датчиками температури розташованими у всьому об’єму силоса з кроком в 2 метри",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Сайт Лубнимаш, сторінка У13-МСВУ.ПД. Те саме в англ. буклеті `_fetch/lubnymash_silos_en.pdf` с. 14 («sensors, hanging each 2 meters»). Кількість підвісок Лубнимаш не публікує; в опитувальному листі — «Стандартне / Збільшене». Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

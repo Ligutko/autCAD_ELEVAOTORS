@@ -1,0 +1,25 @@
+{
+  "id": "rec_6b561bc6",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "dimension",
+  "claim": {
+    "name": "specific_airflow_ours",
+    "value": 11.0,
+    "unit": "m3/(h*t)",
+    "qualifier": "питома подача нашого силоса: 4 × ВЦ-5И (13 160 м³/год) на 4786 т пшениці"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://vniiz.org/science/publication/article-344",
+    "path": "inbox/raw/web/vniiz.org/article-344.html",
+    "page": null,
+    "quote": "не менее 10м 3 /ч",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "52 640 / (6381 × 0,75) = 11,0 м³/(год·т) ≥ 10 (ВНІІЗ). Подача ВЦ-5И — rec_d63ffe79 (при 2,02 кПа; реальна точка залежить від опору насипу). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

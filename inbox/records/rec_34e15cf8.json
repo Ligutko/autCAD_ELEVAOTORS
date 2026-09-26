@@ -1,0 +1,25 @@
+{
+  "id": "rec_34e15cf8",
+  "subject": "Люки і двері МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "wall_door_sill_height",
+    "value": "1.2–1.4",
+    "unit": "m",
+    "qualifier": "поріг дверей 2-го ярусу над підлогою; двері 1-го ярусу — поріг ≈ 0,2–0,3 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/globalassets/regions/emea/pdfs/220920-agi-emeaxfr-storagesilos-eng-8.5x11-web-pages.pdf",
+    "path": "inbox/raw/web/aggrowth.com/220920-agi-emeaxfr-storagesilos-eng.pdf",
+    "page": 8,
+    "quote": "All AGI FRAME FP Silos incorporate a heavy duty hinged single ring sidewall door in the second ring as standard.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "1-й ярус 1152 мм (RING_H, rec_c13a1152) + 50–250 мм до низу дверної рами → 1,2–1,4 м. Двері 630 × 700 (Symaga) вміщуються в ярус 1152. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

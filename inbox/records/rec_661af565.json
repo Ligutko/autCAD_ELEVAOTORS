@@ -1,0 +1,25 @@
+{
+  "id": "rec_661af565",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "attribute",
+  "claim": {
+    "name": "roof_fan_rule",
+    "value": "дахові вентилятори на силосах від Ø11 м",
+    "unit": "",
+    "qualifier": "KMZ Industries: на силоси діаметром від 11 м для видалення вологи під дахом ставлять дахові вентилятори"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/wp-content/uploads/2022/05/silosy-kmz-industries_-2022_ukr.pdf",
+    "path": "inbox/raw/web/kmzindustries.ua/silosy-kmz-industries_-2022_ukr.pdf",
+    "page": 10,
+    "quote": "На силоси діаметром від 11 м для видалення вологи під дахом встановлюються дахові вентилятори",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "На рендері KMZ с. 10 вентилятор — циліндричний кожух на патрубку над коробом провітрювача. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

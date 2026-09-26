@@ -1,0 +1,25 @@
+{
+  "id": "rec_728a2b35",
+  "subject": "Датчики рівня силоса МСВУ 220",
+  "kind": "attribute",
+  "claim": {
+    "name": "level_sensor_standard",
+    "value": "датчики верхнього граничного рівня; радар — преміум",
+    "unit": "",
+    "qualifier": "KMZ Industries: у стандарті датчики верхнього граничного рівня, у преміум — радар безперервного рівня"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/wp-content/uploads/2022/05/silosy-kmz-industries_-2022_ukr.pdf",
+    "path": "inbox/raw/web/kmzindustries.ua/silosy-kmz-industries_-2022_ukr.pdf",
+    "page": 16,
+    "quote": "Преміум-комплектація передбачає встановлення датчиків радарного типу дії для безперервного вимірювання рівня зерна в силосі",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

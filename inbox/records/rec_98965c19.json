@@ -1,0 +1,25 @@
+{
+  "id": "rec_98965c19",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "attribute",
+  "claim": {
+    "name": "roof_fan_type",
+    "value": "осьовий (гвинтовий) канальний вентилятор у горловині провітрювача",
+    "unit": "",
+    "qualifier": "Symaga HCDF-40-4T-0.25kW: гвинтовий канальний вентилятор, ставиться в дахові провітрювачі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 97,
+    "quote": "Helicoidal fan for conduct. Ready to be installed in the roof vents.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Та сама потужність 0,25 кВт, що в нашій специфікації. Мотор габариту 71 висить під крильчаткою всередині силоса (рис. с. 97). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

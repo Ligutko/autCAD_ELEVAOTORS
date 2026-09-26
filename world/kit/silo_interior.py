@@ -16,13 +16,11 @@ from . import steel as st
 
 R_IN = silo.R - 0.5 * silo.WAVE_DEPTH - silo.SHEET_T_BOTTOM      # inner face of the wall
 
-# ------------------------------------------------------------------ aeration floor (PDF p.2, research B9)
-CHANNEL_W = 0.505                  # research: Symaga SBH channel 505 mm
-CHANNEL_CLEAR_WALL = 0.6           # PDF p.2: channels stop short of the wall
-TUNNEL_BAND = (-1.2, 1.0)          # PDF p.2: 1200 / 1000 from the tunnel axis, no channels
-AXIS_CLEAR = 0.45                  # PDF p.2: channels stop at the vertical centreline
-BRANCH_T = [2.2, 4.0, 5.8, 7.6, 9.4]   # PDF p.2: 5 branches per quadrant; spacing EST 1.8 m
-FAN_ANGLES = silo.FAN_ANGLES       # collectors run from the four fans at 45 deg
+# ------------------------------------------------------------------ aeration floor (PDF p.2 vectors, SITE.json silo_aeration)
+AER = silo.aeration()
+CHANNEL_W = AER["channel_w"]       # PDF p.2: 0.28 m (research analog Symaga SBH 505 mm is superseded by the drawing)
+FAN_ANGLES = silo.FAN_ANGLES       # each collector runs from its fan towards the silo axis
+MIN_BRANCH = 0.85                  # PDF p.2: the shortest drawn branch is 1.05 m, a 0.645 m piece at the tunnel is left out
 
 # ------------------------------------------------------------------ gates (PDF p.2, p.6, p.7; research/tunnel_k4.md)
 # openings are symmetric at 3250 on all three sheets; the "2750" chain on p.6 misses the openings
@@ -53,37 +51,44 @@ def roof_underside_z(r):
 
 # ================================================================== floor
 
-def _clip_segment(p, d, half_len=12.0, steps=400):
-    """Longest run of p + s*d (s in [-half_len, half_len]) inside the channel area."""
-    s = np.linspace(-half_len, half_len, steps)
-    pts = p[None, :] + s[:, None] * d[None, :]
-    r = np.linalg.norm(pts, axis=1)
-    ok = (r < R_IN - CHANNEL_CLEAR_WALL - CHANNEL_W / 2) & \
-         ((pts[:, 1] > TUNNEL_BAND[1] + 0.3) | (pts[:, 1] < TUNNEL_BAND[0] - 0.3)) & \
-         (np.abs(pts[:, 0]) > AXIS_CLEAR)
-    same_side = np.sign(pts[:, 0]) == np.sign(p[0])
-    ok &= same_side & (np.sign(pts[:, 1]) == np.sign(p[1]))
-    if not ok.any():
-        return None
-    idx = np.where(ok)[0]
-    runs = np.split(idx, np.where(np.diff(idx) != 1)[0] + 1)
-    run = max(runs, key=len)
-    return pts[run[0]], pts[run[-1]]
+def _branch_pieces(u, s):
+    """Branch across the collector ray u at distance s from the axis, clipped like PDF p.2:
+    the outer corner of the channel rectangle on corner_r (about 0.5 m from the wall), the centreline
+    end at |x| = axis_x (vertical centreline) and at the tunnel band y (north / south).
+    Two pieces, one each side of the collector."""
+    lim = AER["limits"]
+    w = np.array([-u[1], u[0]])
+    p = u * s
+    reach = math.sqrt(max(lim["corner_r"] ** 2 - (s + CHANNEL_W / 2) ** 2, 0.0))
+    lo, hi = -reach, reach
+    sx, north = math.copysign(1.0, u[0]), u[1] > 0
+    for k, bound, sign in ((0, sx * lim["axis_x"], sx), (1, lim["tunnel_y"]["n" if north else "s"], 1.0 if north else -1.0)):
+        if abs(w[k]) < 1e-9:
+            continue
+        lam = (bound - p[k]) / w[k]                       # sign * (p[k] + lam * w[k]) >= sign * bound
+        if sign * w[k] > 0:
+            lo = max(lo, lam)
+        else:
+            hi = min(hi, lam)
+    half = CHANNEL_W / 2
+    pieces = []
+    for a0, a1 in ((lo, -half), (half, hi)):
+        if a1 - a0 >= MIN_BRANCH:
+            pieces.append((p + w * a0, p + w * a1))
+    return pieces
 
 
 def channel_layout():
-    """Aeration channels as (a, b) plan segments: 4 collectors + 5 branches per quadrant."""
+    """Aeration channels as (kind, a, b) plan segments, silo frame: per fan a collector from r0 to r1
+    along the fan direction and branches square to it at branch_s (PDF p.2 vectors)."""
     segs = []
     for deg in FAN_ANGLES:
-        u = np.array([math.cos(math.radians(deg)), math.sin(math.radians(deg))])   # collector direction
-        w = np.array([-u[1], u[0]])                                              # branch direction
-        a = u * (R_IN + 0.05)
-        b = u * 1.9
-        segs.append(("collector", a, b))
-        for t in BRANCH_T:
-            seg = _clip_segment(u * t, w)
-            if seg is not None and np.linalg.norm(seg[1] - seg[0]) > 0.8:
-                segs.append(("branch", seg[0], seg[1]))
+        u = np.array([math.cos(math.radians(deg)), math.sin(math.radians(deg))])
+        h = "n" if u[1] > 0 else "s"
+        segs.append(("collector", u * AER["collector_r0"][h], u * AER["collector_r1"]))
+        for s in AER["branch_s"]:
+            for a, b in _branch_pieces(u, s):
+                segs.append(("branch", a, b))
     return segs
 
 
@@ -378,7 +383,7 @@ def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, 
     add("floor", slab, "concrete")
     add("aeration_covers", covers, "perf")
     add("aeration_frames", frames, "galv")
-    labels.append(("Аераційний канал 505 мм, перфорований настил", tuple(np.append(segs[1][1], 0.0))))
+    labels.append((f"Аераційний канал {CHANNEL_W * 1000:.0f} мм, перфорований настил", tuple(np.append(segs[1][1], 0.0))))
     wells, gframes, gratings = build_gates()
     add("gate_wells", wells, "dark")
     add("gate_frames", gframes, "galv")

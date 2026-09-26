@@ -1,0 +1,25 @@
+{
+  "id": "rec_80955f70",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "duct_wall_gap_max",
+    "value": "0.5 × глибина зерна",
+    "unit": "",
+    "qualifier": "відстань від крайнього каналу до стіни < половини глибини зерна"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://medcraveonline.com/OAJS/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "path": "inbox/raw/web/medcraveonline.com/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "page": null,
+    "quote": "the distance between perforated ducts and storage walls should be less than one half grain depth",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "При заповненні 30 % (≈ 4,5 м біля стіни) → ≤ 2,25 м. SITE.json (PDF p.2): канали закінчуються на r 10,46 м, тобто ≈ 0,5 м від стіни (R_in 10,99) — умова виконується при глибині зерна ≥ 1,1 м. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

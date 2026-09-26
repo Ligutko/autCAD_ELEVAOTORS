@@ -1,0 +1,25 @@
+{
+  "id": "rec_502a2ba0",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "perforation_open_area",
+    "value": "10–25",
+    "unit": "%",
+    "qualifier": "частка відкритої площі перфорованого каналу"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://medcraveonline.com/OAJS/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "path": "inbox/raw/web/medcraveonline.com/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "page": null,
+    "quote": "Perforated ducts should have from 10 to 25% of the surface area open to prevent excessive pressure drop in the ducts.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Symaga SBH — 23 % (research B9), у діапазоні. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

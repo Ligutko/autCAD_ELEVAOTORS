@@ -1,0 +1,25 @@
+{
+  "id": "rec_870a60b1",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "attribute",
+  "claim": {
+    "name": "thermo_top_attachment",
+    "value": "до каркаса даху, з розчіпним пристроєм",
+    "unit": "",
+    "qualifier": "Лубнимаш: підвіски висять на каркасі даху; при зростанні навантаження система розчеплення від’єднує їх від даху"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-msvu-pd.html",
+    "page": null,
+    "quote": "Спеціальна система розчеплення від’єднає зв’язку датчиків від даху силосу при зростаючому навантаженні",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Там само: «датчиками температури, підвішеними до каркасу даху при розвантаженні силосу». Розмірів вузла немає. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

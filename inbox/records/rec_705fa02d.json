@@ -1,0 +1,25 @@
+{
+  "id": "rec_705fa02d",
+  "subject": "Люки і двері МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_hatch_radius",
+    "value": "8–9.5",
+    "unit": "m",
+    "qualifier": "радіус люка на даху від осі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/contentassets/cd69efa24ad140b29439d07e976e5a6f/198818_r33.pdf",
+    "path": "inbox/raw/web/aggrowth.com/198818_r33.pdf",
+    "page": 24,
+    "quote": "Make sure the manhole and the roof ladder are adjacent to one another and located to match conveniently with a wall ladder.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Люк ставлять поряд із драбиною даху над зовнішньою драбиною, у нижній частині схилу (Symaga с. 18: драбина даху веде від карниза до люка). Модель: R − 1,4 = 9,6 м — у межах. Розмір: 610 × 700 (Symaga, rec_454c0a1f) або Ø400 оглядовий (rec_78697c67). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

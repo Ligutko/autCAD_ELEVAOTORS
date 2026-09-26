@@ -1,0 +1,25 @@
+{
+  "id": "rec_7b7e339f",
+  "subject": "Люки і двері МСВУ 220",
+  "kind": "attribute",
+  "claim": {
+    "name": "roof_access",
+    "value": "технологічний перехід з галереї на дах; маршова драбина на даху",
+    "unit": "",
+    "qualifier": "Лубнимаш стандарт: перехід з надсилосної галереї на дах і маршова драбина на даху"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/lubnymash_2021_ua.pdf",
+    "path": "inbox/raw/web/_fetch/lubnymash_2021_ua.pdf",
+    "page": 4,
+    "quote": "Технологічний перехід з галереї на дах силосу.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Каталог Лубнимаш 2025.1 — PDF без текстового шару; цитату прочитано з рендера сторінки (130–220 dpi), автоматично перевірити неможливо. Там само: «Зовнішні вертикальні драбини, майданчики для відпочинку на корпусі силосу, маршева драбина на даху».",
+  "seen_in": []
+}

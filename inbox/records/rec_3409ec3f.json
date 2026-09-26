@@ -1,0 +1,25 @@
+{
+  "id": "rec_3409ec3f",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "roof_vent_area_per_airflow",
+    "value": 0.2,
+    "unit": "m2 per 1000 L/s",
+    "qualifier": "OMAFRA: на 1000 л/с — канал 0,13 м², перфорована площа 10 м², дахові отвори 0,20 м²"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.ontario.ca/page/grain-aeration",
+    "path": "inbox/raw/web/ontario.ca/grain-aeration.html",
+    "page": null,
+    "quote": "1,000 L/s 0.13 m 2 10.0 m 2 0.20 m 2",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Таблиця для фермерських силосів (Friesen & Harnes, Manitoba). Перфорована площа 10 м² на 1000 л/с = 6 м/хв — збігається з MedCrave. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

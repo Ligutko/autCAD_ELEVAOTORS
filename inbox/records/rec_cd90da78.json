@@ -1,0 +1,25 @@
+{
+  "id": "rec_cd90da78",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "thermo_ring1_radius",
+    "value": 2.8,
+    "unit": "m",
+    "qualifier": "OPI 72 ft: внутрішнє кільце — 4 підвіски на r 2,80 м (центральної немає)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lambtonconveyor.com/wp-content/uploads/2023/11/Cable-Installation-Rev1.2.pdf",
+    "path": "inbox/raw/web/lambtonconveyor.com/Cable-Installation-Rev1.2.pdf",
+    "page": 5,
+    "quote": "72’ 13 4 @ 9.2’ (2.80m), 9 @ 28.9’ (8.80m)",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Зараз у моделі: 1 у центрі + 4 на r 4,5 + 8 на r 8,5 (research B8, derived), тобто теж 13, але інше розбиття. Рядок таблиці на с. 5 — растрове зображення без текстового шару; цитату переписано з рендера 150 dpi. Текстовий шар тієї ж сторінки каже: «chart the distance “out” is from the edge of the roof cap, horizontally down the slope line of the roof», а с. 27 того ж документа: «Mounting distances are typically given parallel to the ground and from the dead center of the bin»; база знань OPI теж пише «from the bin center». Тому радіуси прочитано як відстань від осі в плані; якщо рахувати від краю кільця даху, додати ≈ 0,5–0,7 м.",
+  "seen_in": []
+}

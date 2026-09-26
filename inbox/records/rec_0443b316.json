@@ -1,0 +1,27 @@
+{
+  "id": "rec_0443b316",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "thermo_detection_distance",
+    "value": 0.9,
+    "unit": "m",
+    "qualifier": "реальна відстань виявлення гарячої плями: з 0,9 м зміна на 1–2 °F видна лише через 4–5 тижнів; з 1,8 і 2,7 м — нічого за 5 тижнів"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.world-grain.com/articles/17894-grain-operations-catching-spoilage-with-temperature-sensors",
+    "path": "inbox/raw/web/world-grain.com/17894-catching-spoilage-with-temperature-sensors.html",
+    "page": null,
+    "quote": "If the source of self-heating is as little as 3 feet (0.9 m) away from a sensor, it may take four to five weeks to detect a 1° F to 2° F change.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_6290833b"
+  ],
+  "notes": "Модель теплопровідності Iowa State (кукурудза, зима, гаряча пляма +3 °C за тиждень). Там само: «at 6 feet (1.8 m) and 9 feet (2.7 m), there is no change in temperature evidence of detecting spoilage even after five weeks». Для кейсу 2 це головне: навіть правильна розстановка бачить пляму лише поблизу підвіски. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

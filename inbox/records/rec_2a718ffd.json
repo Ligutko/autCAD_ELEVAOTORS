@@ -1,0 +1,25 @@
+{
+  "id": "rec_2a718ffd",
+  "subject": "Конвеєр радіально-поворотний з тягачем (зачисний, 18,5 + 1,1 кВт)",
+  "kind": "dimension",
+  "claim": {
+    "name": "sweep_screw_rpm",
+    "value": 150,
+    "unit": "rpm",
+    "qualifier": "стара серія Лубнимаш УРПК-400: частота обертання гвинта 150 об/хв (УРПК-250 — 280)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://ua.bizorg.su/zernokhranilischa-iz-ventiliruemykh-silosov-r/p15993235-konveyer-vintovoy-radialnopovorotnyy-u13urpk-dlya-mekhanizirovannoy-vygruzki-zerna-ostavshegosya-v-m",
+    "path": "inbox/raw/web/ua.bizorg.su/bizorg_urpk_lubnymash.html",
+    "page": null,
+    "quote": "Частота вращения винта, об/мин. 280 150",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Стара таблиця (bizorg, 2017), серія УРПК-250/400, 13,2 кВт. Для анімації шнека. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

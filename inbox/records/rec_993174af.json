@@ -1,0 +1,25 @@
+{
+  "id": "rec_993174af",
+  "subject": "Люки і двері МСВУ 220",
+  "kind": "attribute",
+  "claim": {
+    "name": "hatch_types_questionnaire",
+    "value": "люк вхідний; люк інспекційний",
+    "unit": "",
+    "qualifier": "опитувальний лист МСВУ: окремі пункти «Люк вхідний» і «Люк інспекційний», обидва «Так» у прикладі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/msvu_ua.pdf",
+    "path": "inbox/raw/web/_fetch/msvu_ua.pdf",
+    "page": 1,
+    "quote": "Люк вхідний … Люк інспекційний",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Розмірів у бланку немає. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

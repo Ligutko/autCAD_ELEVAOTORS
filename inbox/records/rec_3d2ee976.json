@@ -1,0 +1,25 @@
+{
+  "id": "rec_3d2ee976",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "count",
+  "claim": {
+    "name": "thermo_cable_count",
+    "value": 13,
+    "unit": "pcs",
+    "qualifier": "Range Data: силос 72 ft — 4 внутрішні + 9 зовнішніх"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://rangedata.net/cables-placement/",
+    "path": "inbox/raw/web/rangedata.net/cables-placement.html",
+    "page": null,
+    "quote": "A 72 foot, diameter bin 4 Center 9 Outside",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Незалежний постачальник (США) дає ту саму схему 4 + 9, що й OPI. Радіусів на сторінці немає. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

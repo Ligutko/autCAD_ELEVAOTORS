@@ -1,0 +1,25 @@
+{
+  "id": "rec_9d0b0426",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "sensor_step_typical_us",
+    "value": "1.8–2.4",
+    "unit": "m",
+    "qualifier": "типовий крок датчиків на кабелях у США"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.world-grain.com/articles/16287-grain-operations-temperature-sensors-and-cables",
+    "path": "inbox/raw/web/world-grain.com/16287-temperature-sensors-and-cables.html",
+    "page": null,
+    "quote": "The 9-foot (2.7-meter) radius claim appears to ignore the vertical spacing of sensors that on typical cables is 6 to 8 feet (1.8 to 2.4 meters).",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Узгоджується з Лубнимаш (2 м). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

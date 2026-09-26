@@ -1,0 +1,25 @@
+{
+  "id": "rec_0c499493",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_fan_position",
+    "value": "r ≈ 9 м; 2 шт. під 180°, поза смугою естакади",
+    "unit": "",
+    "qualifier": "де ставити 2 дахові вентилятори 0,25 кВт"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.ontario.ca/page/grain-aeration",
+    "path": "inbox/raw/web/ontario.ca/grain-aeration.html",
+    "page": null,
+    "quote": "The vents are placed about 2 m (6 ft ) back from the eave of the roof.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Вентилятор ставиться в один із провітрювачів нижнього кола (r ≈ 9–9,5 м). Два — діаметрально протилежно, під 90° до осі естакади, щоб не перетинати галерею і її опори. Точних схем розстановки не знайдено. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

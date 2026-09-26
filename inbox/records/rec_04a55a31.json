@@ -1,0 +1,25 @@
+{
+  "id": "rec_04a55a31",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "airflow_increase_partial_ducts",
+    "value": "50–100",
+    "unit": "%",
+    "qualifier": "K-State: у плоскодонних силосах, де канали займають 6–8 % площі, подачу збільшують на 50–100 %"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://entomology.k-state.edu/doc/finished-chapters/s156-ch11.pdf",
+    "path": "inbox/raw/web/entomology.k-state.edu/s156-ch11.pdf",
+    "page": 11,
+    "quote": "it is advisable to use 50% to 100% more aeration airflow",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Причина там само: у зонах підлоги, найдальших від каналів, подача значно менша. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_07580db3",
+  "subject": "Датчики рівня силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "rotary_extension_max",
+    "value": 3.66,
+    "unit": "m",
+    "qualifier": "BinMaster: вертикальний подовжувач роторного датчика для верхнього рівня — до 144\""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://binmaster.com/rotary-details/",
+    "path": "inbox/raw/web/binmaster.com/rotary-details.html",
+    "page": null,
+    "quote": "Custom lengths up to 144”",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Там само: монтажні плити для даху під кутом 0°, 10°, 20°, 30° (наш дах 30°); нижній рівень — «near the bottom of the bin wall». Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

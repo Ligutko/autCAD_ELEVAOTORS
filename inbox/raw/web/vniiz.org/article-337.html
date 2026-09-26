@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Аэродинамические параметры воздуха при вентилировании зерна в силосах вместимостью 1000, 2000, 5000 и 10000 тонн</title>
+
+    <meta name="keywords" content="вентилирование зерна, силосы" /> 
+    <meta name="description" content="В результате проведенных исследований была разработана новая динамическая модель послойного охлаждения зерновой массы. Рассмотрены различные режимы вентилирования зерновой массы, при включении 1, 2, 3 и 4 вентиляторов." /> 
+    
+
+    
+    
+        
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" />
+<meta name="x-stylesheet-fallback-test" content="" class="sr-only" /><script>!function(a,b,c,d){var e,f=document,g=f.getElementsByTagName("SCRIPT"),h=g[g.length-1].previousElementSibling,i=f.defaultView&&f.defaultView.getComputedStyle?f.defaultView.getComputedStyle(h):h.currentStyle;if(i&&i[a]!==b)for(e=0;e<c.length;e++)f.write('<link href="'+c[e]+'" '+d+"/>")}("position","absolute",["\/lib\/bootstrap\/dist\/css\/bootstrap.min.css"], "rel=\u0022stylesheet\u0022 ");</script>
+
+        <link rel="stylesheet" href="/css/site.min.css" />
+
+        <link rel="stylesheet" href="/lightbox/ekko-lightbox.min.css" />
+       
+    
+   
+</head>
+<body>
+
+    <div id="wrapper" class="wrapper">
+
+        <div id="sidebar-wrapper">
+            
+
+    <div class="searchpad">
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                
+<p class="sidebar-caption">Всероссийский Научно-Исследовательский Институт Зерна и продуктов его переработки</p>
+
+
+
+                
+
+
+            </div>
+        </div>
+        
+    </div>
+
+
+
+
+     
+         <ul class="sidebar-nav">
+             <li>
+                 <div id="react_0HNORA1GDGS1F"><a role="button" class="" data-reactroot=""><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Отправить сообщение</a></div>
+             </li>
+         </ul>
+    
+    
+
+
+        </div>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+
+                <div class="collapse" id="collapseSearch">
+    <div class="searchpad">
+       
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+                <form method="post" role="search" action="/Home/Search">
+                    <div class="form-group input-group input-group-sm">
+                        <input class="form-control" placeholder="Поиск" type="text" name="searchvalue" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-group-sm" type="submit">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                <input name="__RequestVerificationToken" type="hidden" value="CfDJ8B8mfgjgd2JBteCzj6hY9rc2iIMbo_0R_IYbpFzBD1A2KFmqNTkuPdl7dNK_tZQXA0qDYmdVCaborq21Acw-SXq9LvK3pPqkajWESRDfHCEKHihByf_1Kx4WVe0OkF0fOao60HAAqf5Av2jyftUPoUk" /></form>
+            </div>
+
+
+        </div>
+
+    </div>
+   
+</div>
+
+
+                <div class="navbar-header">
+
+                    <a id="top-sidebar-link" class="navbar-brand menu-toggle-btn" data-toggle="sidebar"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span></a>
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+<a class="navbar-brand herald" href="/"><span style="font-size:26px;"><span class="icon-heraldry_big"></span></span> ВНИИЗ</a>
+                </div>
+                <div class="navbar-collapse collapse">
+
+                    
+<ul class="nav navbar-nav">
+
+            <li>
+               
+ <a href="/">Главная</a>            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Институт <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                        <li>
+                            <a href="/institute/news">Новости и события</a>
+                        </li>
+                        <li>
+                            <a href="/institute/information-about-the-educational-organization">Сведения об образовательной организации</a>
+                        </li>
+                        <li>
+                            <a href="/institute/vniiz-management">Руководство института</a>
+                        </li>
+                        <li>
+                            <a href="/institute/history">Историческая справка</a>
+                        </li>
+                        <li>
+                            <a href="/institute/structure">Структура ВНИИЗ</a>
+                        </li>
+                        <li>
+                            <a href="/institute/tk002">Технический комитет (ТК 002)</a>
+                        </li>
+                        <li>
+                            <a href="/institute/goals-and-objectives">Цели и задачи ВНИИЗ</a>
+                        </li>
+                        <li>
+                            <a href="/institute/normative-documents">Нормативная документация</a>
+                        </li>
+                        <li>
+                            <a href="/institute/human-resources">Отдел по управлению персоналом</a>
+                        </li>
+                        <li>
+                            <a href="/institute/cooperation-and-partnership">Сотрудничество и партнерство</a>
+                        </li>
+                        <li>
+                            <a href="/institute/international-cooperation">Международное сотрудничество</a>
+                        </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Наука <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                        <li>
+                            <a href="/science/scientific-laboratories">Научные лаборатории</a>
+                        </li>
+                        <li>
+                            <a href="/science/publication">Публикации и обсуждения</a>
+                        </li>
+                        <li>
+                            <a href="/science/patents">Патенты</a>
+                        </li>
+                        <li>
+                            <a href="/science/innovative-technologies">Инновационные технологии</a>
+                        </li>
+                        <li>
+                            <a href="/science/gost-tu">ГОСТы, ТУ, СТО, НТД</a>
+                        </li>
+                        <li>
+                            <a href="/science/testing-center">Испытательный Центр</a>
+                        </li>
+                        <li>
+                            <a href="/science/video">Видео</a>
+                        </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Образование <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                        <li>
+                            <a href="/education/postgraduate-studies">Аспирантура</a>
+                        </li>
+                        <li>
+                            <a href="/education/educational-process">Образовательный процесс</a>
+                        </li>
+                        <li>
+                            <a href="/education/directions-of-training">Направления подготовки в аспирантуре ВНИИЗ</a>
+                        </li>
+                        <li>
+                            <a href="/education/for-learners">Информация для обучающихся</a>
+                        </li>
+                        <li>
+                            <a href="/education/e-library-system">Электронно-библиотечная система</a>
+                        </li>
+                        <li>
+                            <a href="/education/additional-professional-education">Дополнительное профессиональное образование</a>
+                        </li>
+                </ul>
+            </li>
+            <li>
+               
+                    <a href="/contacts">Контакты</a>
+            </li>
+    
+
+    <li>
+        <a data-toggle="collapse" href="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch">
+            Поиск
+        </a>
+    </li>
+   
+    
+</ul>
+
+
+
+                </div>
+
+
+            </div>
+        </nav>
+
+        <div class="container body-content content">
+            <div>
+                
+        <ol class="breadcrumb">
+                     <li><a href="/science">Наука</a></li>
+                     <li><a href="/science/publication">Публикации и обсуждения</a></li>
+            <li class="active">Аэродинамические параметры воздуха при вентилировании зерна в силосах вместимостью 1000, 2000, 5000 и 10000 тонн</li>
+        </ol>
+
+
+            </div>
+
+            
+
+<div class="row">
+      
+    <div class="col-lg-12">
+
+<h1>Аэродинамические параметры воздуха при вентилировании зерна в силосах вместимостью 1000, 2000, 5000 и 10000 тонн</h1><div>
+<p>Растущее с каждым годом производство зерна требует развитой сети для приема, обработки и хранения огромных масс товарного зерна.<br />
+<br />
+Народнохозяйственное значение зерна в значительной степени определяется тем, что существенные объемы зерна, при соответствующих условиях, могут храниться в течение длительного времени без существенного изменения качества и товарной ценности.<br />
+<br />
+На современном этапе технического развития предприятий послеуборочная обработка зерна играет решающую роль. Она позволяет гарантировать качество продовольственного зерна. Обеспечение сохранности зерна в нашей стране одна из важнейших задач, которая по масштабам и содержанию базируется на широкой научной основе. Для её успешного решения хлебоприёмные предприятия, наряду с очисткой, широко используют сушку и активное вентилирование зерна [1].<br />
+Ежегодно, на предприятиях переработки зерна, сушке и активному вентилированию подвергается до 70-90% всего убранного зерна [2]. В соответствии с практикой хранения зерновых культур, металлические вентилируемые силоса, заслуженно, можно считать наиболее рентабельными. Сроки строительства таких силосов в 2-3 раза короче, чем железобетонных силосов при меньших затратах, приблизительно на 15 %.<br />
+<br />
+В последнее время, для увеличения ёмкостей хранения на территории Российской Федерации в основном строят металлические силоса вместимостью от 2 000 до 10 000 тонн зерна, оборудованные системами активного вентилирования. С помощью последних, можно успешно охлаждать зерновую массу в больших объемах, избегая самосогревания, применять меры по борьбе с вредителями зерна [3]. Активное вентилирование &ndash; это принудительное продувание массы зерна холодным или подогретым воздухом [4].<br />
+<br />
+В отличие от естественной вентиляции, активное вентилирование позволяет создать и поддерживать оптимальные условия в больших объёмах зерна и благодаря этому снизить потери при хранении и более эффективно использовать объём хранилищ.<br />
+Режимы и приемы активного вентилирования зерна базируются на результатах научных исследований и многолетней практике хранения зерновых масс различных культур, как в России, так и за рубежом.<br />
+<br />
+Этот способ обработки зерна позволяет предотвратить и ликвидировать самосогревание зерна, охлаждать зерновую массу до температуры, обеспечивающей длительное хранение. Вентилирование теплым воздухом с низкой относительной влажностью позволяет подсушить зерно и ускоряет процесс послеуборочного дозревания, улучшает хлебопекарные качества зерна [5]. Охлаждение и подсушивание зерна создают в насыпи условия, неблагоприятные для развития вредителей и микроорганизмов.<br />
+<br />
+Норматив для определения объема нагнетаемого воздуха в зависимости от массы зерна не учитывает скорости воздуха. При вентилировании в одном и том же силосе разных масс зерна будут различные скорости воздуха [6]. В случае превышения относительной влажности воздуха в силосе, по сравнению с относительной влажностью наружного воздуха, рекомендуется обеспечить вентилирование пространства над зерном [7].<br />
+<br />
+В таблице 1 представлены результаты аэродинамических измерений воздуха, нагнетаемого для активного вентилирования зерна в силосе вместимостью 2000 тонн, заполненного пшеницей на 75% объема.<br />
+<img class="img-responsive" src="/fm_content_folder/uploads/articleimages/20181010img006/001.jpg" style="margin: 5px;" /><br />
+<br />
+Из данных таблицы 1 следует, что утечки воздуха из силоса составляют около 10% от объема воздуха, нагнетаемого вентилятором. Удельная подача воздуха в зерновую массу на 1 тонну не превышает 8,7 м3/т в час, что меньше норматива 10 м3/ч на тонну. Для обеспечения нормативного объема воздуха требуется подать в зерновую массу 15000 м3/ч*т, при которых перепад давления в слое толщиной 2950 мм должен составить 350 Па. Такое значение перепада установилось при уменьшении массы зерна в силосе до 1400 тонн или 70% вместимости силоса. В этом состоянии была обеспечена нормативная подача воздуха в силос 10,7 м3/ч*т. Мощность двигателя составила 8,5 кВт.<br />
+Удельные затраты электроэнергии составили,<br />
+<img class="img-responsive" src="/fm_content_folder/uploads/articleimages/20181010img006/002.jpg" style="margin: 5px;" /><br />
+На следующем рисунке 1 представлена типичная картина изменения температуры зерна в силосе при влиянии активного вентилирования.<br />
+<br />
+<img class="img-responsive" src="/fm_content_folder/uploads/articleimages/20181010img006/003.jpg" style="margin: 5px;" /><br />
+<br />
+В отличие от лабораторных исследований, в реальном силосе наблюдается повышение температуры в верхних слоях в начале вентилирования, линии 3,4,5,6. Происходит вынос дополнительного тепла из зон зерновой массы с необнаруженным в статике перегретым зерном. Это подтверждает, что вентилирование выравнивает температурное поле по слоям, и предупреждает развитие возможных очагов самосогревания зерна, находящихся за пределами контроля термометрии. С учетом вышеизложенного обстоятельства предложены минимальные предельно-допустимые сроки хранения зерна при его температуре свыше 20 &deg;С.<br />
+<br />
+Разработана новая динамическая модель послойного охлаждения зерновой массы, приведенная на рисунке 2, где Р - оператор Лапласа<br />
+<br />
+<img class="img-responsive" src="/fm_content_folder/uploads/articleimages/20181010img006/004.jpg" style="margin: 5px;" /><br />
+<br />
+Значения скоростей охлаждения зерна, полученные расчетом и экспериментально в лабораторных и производственных условиях, приблизительно равны и составляют около 0,17&deg;С/ч. Однако распространить эту модель повсеместно не представляется возможным, так как полученные численные значения коэффициентов носят ориентировочный характер и требуют уточнения по большим массивам экспериментальных данных.<br />
+<br />
+Данные замеров перепада давления воздуха в слоях зерна толщиной 2 м и 3м в силосе вместимостью 10000 т представлены в следующих ниже таблицах. Слой зерна имел толщину 3 м при измерениях перепадов давления между уровнями I-III и имел толщину 2 м при измерениях перепадов между уровнями II-III.<br />
+<br />
+<img class="img-responsive" src="/fm_content_folder/uploads/articleimages/20181010img006/005.jpg" style="margin: 5px;" /><br />
+<br />
+<img class="img-responsive" src="/fm_content_folder/uploads/articleimages/20181010img006/006.jpg" style="margin: 5px;" /><br />
+<br />
+При работе четырех вентиляторов (табл. А) среднее значение перепада давления в слое толщиной 2000 мм равно 125 Па, в слое толщиной 3000 мм &ndash; 175 Па. Расход воздуха в слое зерна, вычисленный по перепаду давления, при коэффициентах А=0,22 и n=1,1 составило: 85700 м3/ч при перепаде 125 Па и 85500 м3/ч при перепаде 175 Па. Скорость фильтрации воздуха в силосе соответственно составила: 3,79 см/с и 3,78 см/с, практически одинаковая в обеих вариантах.<br />
+<br />
+Измеренное значение расхода воздуха, нагнетаемого в силос каждым из вентиляторов, составило: 6,42 м3/с или 23100 м3/ч вентилятором №1; 5,78 м3/с или 20700 м3/ч вентилятором №2; 5.64 м3/с или 20300 м3/ч вентилятором №3; 5.95 м3/с или 21400 м3/ч вентилятором №4. Суммарный расход воздуха составил 23,79 м3/с или 85600 м3/ч. Скорость фильтрации воздуха в силосе составила 3,78 см/с или 0,038 м/с, которая равна скорости, вычисленной по формуле Рамзина (по перепаду давления).<br />
+В таблице 2, ниже приведены значения расходов воздуха, нагнетаемого в силос и проходящего через зерновой слой при включенных четырех и двух вентиляторах.<br />
+<br />
+<img class="img-responsive" src="/fm_content_folder/uploads/articleimages/20181010img006/007.jpg" style="margin: 5px;" /><br />
+<br />
+При включенных трех вентиляторах воздух в силосе распределялся неравномерно по сечению, имелись застойные зоны (см. таблицу Б) с отрицательными значениями перепадов давления. В дальнейшем этот режим не рассматривали. Полученные данные свидетельствуют о недопустимости вентилирования зерна при асимметричном нагнетании воздуха в силос.<br />
+<img class="img-responsive" src="/fm_content_folder/uploads/articleimages/20181010img006/008.jpg" style="margin: 5px;" /><br />
+<br />
+Из представленных данных следует, что вентилирование зерна в силосах фирмы &laquo;GSCOR&raquo; эффективнее по энергозатратам, так как у данного изготовителя металлических силосов практически отсутствуют утечки воздуха, за счет этого выше удельная скорость подачи воздуха при более низких удельных затратах электроэнергии.<br />
+<br />
+<b>Литература</b><br />
+1. Вентилирование зерна в зернохранилище [Электронный ресурс]. Режим доступа: - http://agrotech35.ru/blog/index.php/15-ventilirovanie-zerna-vzernokhranilishche.html (Дата обращения: 2016).<br />
+2. Активное вентилирование зерна на предприятиях элеваторной промышленности [Электронный ресурс]. Режим доступа: http://hlebprodukt.ru/ zerno/555-aktivnoe-ventilirovanie-zerna-na-predpriyatiyahelevatornoy-promyshlennosti.html (Дата обращения: 2014).<br />
+3. Активное вентилирование в силосах элеваторов [Электронный ресурс]. Режим доступа: - http://agro-portal24.ru/hranenie-zerna/3003-aktivnoeventilirovanie-v-silosah-elevatorov.html (Дата обращения: 2012).<br />
+4. Кинетика охлаждения зерна после сушки на установках активного вентилирования, 22-23 сентября 2015 года, В.Ф. Сорочинский, С.-15.<br />
+5. Активное вентилирование зерновых масс [Электронный ресурс]. Режим доступа: - http://chitalky.ru/?p=1436 (Дата обращения: 2016).<br />
+6. Кечкин И.А. Сборник научных трудов XI Международной научно- практической конференции молодых ученых и специалистов отделения сельскохозяйственных наук Российской академии наук/ВНИХИ &ndash; филиал ФГБНУ &laquo;ФНЦ пищевых систем им. В.М. Горбатова&raquo; РАН. &ndash; М.: &ndash; ВНИХИ &ndash; филиал ФГБНУ &laquo;ФНЦ пищевых систем им. В.М. Горбатова&raquo;, 2017. &ndash; С. 126.<br />
+7. Кечкин И.А., Разворотнев А.С., Гавриченков Ю.Д. Режимы хранения и вентилирования зерна пшеницы в металлических силосах большой вместимости // Хлебопродукты. - 2017. -№ 11.- С. 58.</p>
+
+<p style="text-align: right;"><b>Кечкин И.А.</b>, аспирант, ассистент ВНИИЗ &ndash; филиал &laquo;ФНЦ пищевых систем им. В.М.Горбатова&raquo;, г. Москва; Московский государственный университет технологий и управления им. К.Г.Разумовского (Первый казачий университет)<br />
+<br />
+<em>Статья опубликована в сборнике:<br />
+Научное обеспечение инновационных технологий производства и хранения сельскохозяйственной и пищевой продукции: сб. матер. I Международ. научн.-практ. конф. молодых ученых и аспирантов (09 &ndash; 23 апреля 2018 г., г. Краснодар) &ndash; С.271-276. URL: http://vniitti.ru/conf/conf2018/sbornik_conf_2018.pdf [Электронный ресурс]</em></p>
+</div>
+    
+    </div>
+
+</div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                
+
+
+    <style type="text/css">
+        .cmm {
+            margin-left: 30px;
+            margin-top: 5px;
+           
+        }
+        .replyshowlnk {
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+        }
+            .replyshowlnk:hover {
+                color: black;
+                text-decoration: none;
+            }
+
+        .cmodelview {
+            padding-bottom: 25px;
+            padding-right: 15px;
+            
+        }
+        .shadoweffect {
+            padding: 5px;
+            box-shadow: 0 0 7px rgba(0,0,0,0.5);
+            border-radius: 10px;
+        }
+        .commentmarg {
+            margin-top: 10px;
+        }
+        
+    </style>
+
+<hr />
+
+<div id="react_0HNORA1GDGS1G"><div class="row" data-reactroot=""><div class="col-lg-12"><div class="alert alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Чтобы оставить комментарий <a href="/Account/Register">зарегистрируйтесь</a> или <a href="/Office">войдите</a> на сайт используя свою учетную запись</div></div><div class="col-lg-12"></div></div></div>
+
+
+
+<script src="/ckeditor/ckeditor.js"></script>
+
+            </div>
+        </div>
+
+
+        </div>
+
+        <div class="clearfix">&nbsp;</div>
+
+        <footer class="footer">
+            <br />
+            <div class="container body-content">
+
+                
+<div class="row">
+<div class="col-lg-8 col-md-8 col-sm-8">
+<p>Всероссийский научно-исследовательский институт зерна и продуктов его переработки&nbsp;<br />
+филиал Федерального государственного бюджетного научного учреждения&nbsp;<br />
+&laquo;Федеральный научный центр пищевых систем им. В.М. Горбатова&raquo; РАН</p>
+
+<p>&copy; 2010 - 2026</p>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-4"><a aria-controls="collapseSearch" aria-expanded="false" data-toggle="collapse" href="#collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Поиск </a><br />
+<a class="menu-toggle-btn" data-toggle="sidebar"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Обратная связь </a><br />
+<a href="/contacts"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Контакты </a><br />
+<a href="/map"><span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span> Карта сайта </a><br />
+<a href="/privacy"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> О персональных данных пользователей </a></div>
+
+<div class="clearfix">&nbsp;</div>
+</div>
+
+
+            </div>
+
+        </footer>
+    </div>
+    <a href="#" id="toTop">Наверх &uarr;</a>
+
+    
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js" crossorigin="anonymous" integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+<script>(window.jQuery||document.write("\u003Cscript src=\u0022\/lib\/jquery\/dist\/jquery.min.js\u0022 crossorigin=\u0022anonymous\u0022 integrity=\u0022sha384-K\u002BctZQ\u002BLL8q6tP7I94W\u002BqzQsfRV2a\u002BAfHIi9k8z8l9ggpc8X\u002BYtst4yBo\/hH\u002B8Fk\u0022\u003E\u003C\/script\u003E"));</script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+<script>(window.jQuery && window.jQuery.fn && window.jQuery.fn.modal||document.write("\u003Cscript src=\u0022\/lib\/bootstrap\/dist\/js\/bootstrap.min.js\u0022 crossorigin=\u0022anonymous\u0022 integrity=\u0022sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\u0022\u003E\u003C\/script\u003E"));</script>
+
+
+        <script src="/js/site.min.js"></script>
+
+        <script src="/lightbox/ekko-lightbox.min.js"></script>
+
+
+        <script src="https://unpkg.com/react@16.2.0/umd/react.production.min.js">
+        </script>
+<script>(window.React||document.write("\u003Cscript src=\u0022\/js\/react\/react.production.min.16.js\u0022\u003E\u003C\/script\u003E"));</script>
+        <script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js">
+        </script>
+<script>(window.ReactDOM||document.write("\u003Cscript src=\u0022\/js\/react\/react-dom.production.min.16.js\u0022\u003E\u003C\/script\u003E"));</script>
+
+        <script src="/build/client.bundle.js"></script>
+    
+
+    <noindex>
+        <script>ReactDOM.hydrate(React.createElement(Components.ContactForm, {"captchurl":"/Home/GetImage","sendUrl":"/Home/SendQuickMessage","btnclass":""}), document.getElementById("react_0HNORA1GDGS1F"));
+ReactDOM.hydrate(React.createElement(Components.CommentListComponent, {"pidkey":465,"geturl":"/Comment/GetPageComments?_pageId=465","addurl":"/Comment/AddComment","delurl":"/Comment/DelComment","isadm":false}), document.getElementById("react_0HNORA1GDGS1G"));
+</script>
+    </noindex>
+
+    
+
+    
+<!-- Yandex.Metrika counter --><script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(20334097, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script><noscript><div><img src="https://mc.yandex.ru/watch/20334097" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+</body>
+</html>

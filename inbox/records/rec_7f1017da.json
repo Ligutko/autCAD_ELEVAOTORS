@@ -1,0 +1,25 @@
+{
+  "id": "rec_7f1017da",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "attribute",
+  "claim": {
+    "name": "roof_structure_for_cables",
+    "value": "внутрішній каркас даху до 15 000 кг з точками підвісу",
+    "unit": "",
+    "qualifier": "AGI FRAME: для силосів > FP18 внутрішній каркас даху з кількома точками підвісу термокабелів — стандарт"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/globalassets/regions/emea/pdfs/220920-agi-emeaxfr-storagesilos-eng-8.5x11-web-pages.pdf",
+    "path": "inbox/raw/web/aggrowth.com/220920-agi-emeaxfr-storagesilos-eng.pdf",
+    "page": 8,
+    "quote": "An internal galvanized steel structure to accept peak loads up to 15,000 kg. and multiple temperature cable suspension points is offerered as a standard on silos above model FP 18",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -4,11 +4,23 @@ Local frame: silo axis at (0, 0), Z = 0 on top of the foundation (site +0.600).
 Source tags: PDF p.N, LUB (Lubnymash catalogue), STD (standard / trade practice), EST (engineering estimate).
 """
 
+import functools
+import json
 import math
+from pathlib import Path
 
 import numpy as np
 
 from . import common as c
+
+SITE_JSON = Path(__file__).resolve().parents[1] / "site" / "SITE.json"
+
+
+@functools.lru_cache(maxsize=1)
+def aeration():
+    """SITE.json `silo_aeration`: fans and floor channels measured on PDF p.2 (extract_aeration_p2.py)."""
+    return json.loads(SITE_JSON.read_text(encoding="utf-8"))["silo_aeration"]
+
 
 # ------------------------------------------------------------------ wall
 R = 11.0                    # PDF p.6 Ø22000, LUB: nominal (mean) radius of corrugated wall
@@ -48,7 +60,8 @@ SPOUT_TOP = 21.422               # PDF p.8 / LUB: height to loading spout
 FOUND_R = 11.6                   # PDF p.2/p.4: foundation ring a bit wider than wall, EST 0.6 m
 FOUND_H = 0.6                    # PDF p.4, p.6: silo base at +0.600
 AERATION_FANS = 4                # PDF p.2: four fan symbols per silo at 45 deg
-FAN_ANGLES = [45.0, 135.0, 225.0, 315.0]
+FAN_ANGLES = aeration()["fan_angles_deg"]   # PDF p.2 vectors: 47.5 / 132.5 / 227.5 / 312.5, not the diagonals
+FAN_R = aeration()["fan_r"]                 # PDF p.2 vectors: fan symbol centre 12.25 m from the silo axis
 DOOR_ANGLE = 180.0 + 9.0         # EST: between stiffeners, towards the tunnel side
 LADDER_ANGLE = 270.0 - 6.75      # EST: west side, between stiffeners
 
@@ -350,7 +363,7 @@ def _disc_y(radius_fn, y0, y1, x, z, steps=48):
     return v, f
 
 
-def build_fans():
+def build_fans(fan_r=None, angles=None):
     """Centrifugal aeration fan, 11 kW (catalogue), on its own slab at grade.
 
     Local Z = 0 is the silo floor (+0.600). Grade is -FOUND_H. Sizes EST for an 11 kW
@@ -359,9 +372,11 @@ def build_fans():
     housings, motors, ducts, pads, dark = [], [], [], [], []
     wall = R + 0.5 * WAVE_DEPTH + SHEET_T_BOTTOM
     grade = -FOUND_H
-    for deg in FAN_ANGLES:
+    fan_r = FAN_R if fan_r is None else fan_r
+    inner = FOUND_R + 0.03                              # pad and base frame stop at the foundation plinth
+    for deg in (FAN_ANGLES if angles is None else angles):
         ang = math.radians(deg)
-        cx = wall + 2.2
+        cx = fan_r
         cz = grade + 0.95
         scroll = lambda a: 0.48 + 0.14 * ((a - 1.2) % (2 * math.pi)) / (2 * math.pi)  # noqa: E731
         v, f = _disc_y(scroll, -0.25, 0.25, cx, cz)
@@ -391,12 +406,12 @@ def build_fans():
         dark.append((c.transform(v, rot_z=ang), f))
         # base frame (channel) and pedestal under the scroll
         for y0, y1 in ((-1.05, -0.97), (0.30, 0.38)):
-            v, f = c.box((cx - 0.75, y0, grade + 0.15), (cx + 0.65, y1, grade + 0.30))
+            v, f = c.box((max(cx - 0.75, inner), y0, grade + 0.15), (cx + 0.65, y1, grade + 0.30))
             dark.append((c.transform(v, rot_z=ang), f))
         v, f = c.box((cx - 0.40, -0.25, grade + 0.30), (cx + 0.40, 0.25, cz - 0.45))
         housings.append((c.transform(v, rot_z=ang), f))
         # slab
-        v, f = c.box((cx - 1.0, -1.35, grade), (cx + 0.95, 0.70, grade + 0.15))
+        v, f = c.box((max(cx - 1.0, inner), -1.35, grade), (cx + 0.95, 0.70, grade + 0.15))
         pads.append((c.transform(v, rot_z=ang), f))
     return (c.merge_parts(housings), c.merge_parts(motors), c.merge_parts(ducts),
             c.merge_parts(pads), c.merge_parts(dark))

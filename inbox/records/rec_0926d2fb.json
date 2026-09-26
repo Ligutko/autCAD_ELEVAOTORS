@@ -1,0 +1,25 @@
+{
+  "id": "rec_0926d2fb",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "duct_spacing_max",
+    "value": "1.0 × глибина зерна",
+    "unit": "",
+    "qualifier": "відстань між сусідніми перфорованими каналами < глибини зерна"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://medcraveonline.com/OAJS/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "path": "inbox/raw/web/medcraveonline.com/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "page": null,
+    "quote": "the distance between adjacent perforated ducts should be less than the grain depth",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Purdue GQ-38 так само: «ducts should be spaced no farther apart than the grain is deep». Для повного силоса (15 м) умова м’яка; стає жорсткою при частковому заповненні: 30 % → 4,5 м. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

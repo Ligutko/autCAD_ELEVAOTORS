@@ -1,0 +1,25 @@
+{
+  "id": "rec_1c0c2f1d",
+  "subject": "Люки і двері МСВУ 220",
+  "kind": "count",
+  "claim": {
+    "name": "wall_doors",
+    "value": 2,
+    "unit": "pcs",
+    "qualifier": "KMZ Industries: 2 двері в нижніх двох ярусах; двері 2-го ярусу з внутрішньою і зовнішньою драбиною і пробовідбірником"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/wp-content/uploads/2022/05/silosy-kmz-industries_-2022_ukr.pdf",
+    "path": "inbox/raw/web/kmzindustries.ua/silosy-kmz-industries_-2022_ukr.pdf",
+    "page": 13,
+    "quote": "У стандартній комплектації силосів ВВК і СМВУ на плоскому днищі передбачені 2 дверей (на нижніх двох ярусах) для доступу в силос, а також для встановлення й експлуатації зачисного шнекового механізму",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "На рендері KMZ двері 1-го і 2-го ярусів зсунуті по колу. Neuero NL 22/24 теж «два вхідні люки». Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

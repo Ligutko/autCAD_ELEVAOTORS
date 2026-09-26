@@ -1,0 +1,25 @@
+{
+  "id": "rec_d73e19c7",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_fan_airflow_max",
+    "value": 4415,
+    "unit": "m3/h",
+    "qualifier": "Symaga HCDF-40 0,25 кВт: максимальна подача 4415 м³/год"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 97,
+    "quote": "Max ﬂow (m³/h) … 4415",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Число стоїть у сусідній клітинці таблиці с. 97. Там само: маса ≈ 12,5 кг, 1420 об/хв. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -1,0 +1,27 @@
+{
+  "id": "rec_6290833b",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "thermo_monitor_radius",
+    "value": 2.7,
+    "unit": "m",
+    "qualifier": "«емпіричне правило» продавців: одна підвіска контролює радіус 9 ft"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://rangedata.net/cables-placement/",
+    "path": "inbox/raw/web/rangedata.net/cables-placement.html",
+    "page": null,
+    "quote": "As a rule of thumb, one cable monitors a radius of 9 feet.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_0443b316"
+  ],
+  "notes": "Маркетингове правило без обґрунтування. Maier (World Grain 16287) пише, що твердження про радіус 9 ft не пояснене й ігнорує вертикальний крок датчиків. Для перевірки моделі — лише як «рекламний» радіус, не як фізика виявлення. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

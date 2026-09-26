@@ -1,0 +1,25 @@
+{
+  "id": "rec_894d3a4a",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_fan_impeller_diameter",
+    "value": 400,
+    "unit": "mm",
+    "qualifier": "діаметр крильчатки дахового вентилятора 0,25 кВт"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 97,
+    "quote": "HCDF-40-4T-0.25kW",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Індекс «40» у назві + отвір Ø420 під нього (с. 84). Зовні — ковпак як у провітрювача Ø565 × 330 (Лубнимаш) + мотор ≈ Ø140 × 200 під дахом. Діапазон 350–450 мм. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

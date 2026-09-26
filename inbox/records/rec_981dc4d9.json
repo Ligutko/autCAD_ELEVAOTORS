@@ -1,0 +1,25 @@
+{
+  "id": "rec_981dc4d9",
+  "subject": "Конвеєр радіально-поворотний з тягачем (зачисний, 18,5 + 1,1 кВт)",
+  "kind": "attribute",
+  "claim": {
+    "name": "sweep_motor_location_options",
+    "value": "S — мотор у силосі; SCD — мотор зовні",
+    "unit": "",
+    "qualifier": "Symaga: два виконання зачисного шнека — з мотором усередині (ATEX 21) і зовні"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 79,
+    "quote": "TYPE S · Motor located inside of the silo. ATEX 21",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

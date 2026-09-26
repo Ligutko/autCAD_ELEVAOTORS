@@ -1,0 +1,25 @@
+{
+  "id": "rec_42abc865",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "thermo_service_hole_diameter",
+    "value": 150,
+    "unit": "mm",
+    "qualifier": "OPI: сервісні отвори в даху біля голови кабелю Ø≈150 мм під знімною кришкою"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lambtonconveyor.com/wp-content/uploads/2023/11/Cable-Installation-Rev1.2.pdf",
+    "path": "inbox/raw/web/lambtonconveyor.com/Cable-Installation-Rev1.2.pdf",
+    "page": 25,
+    "quote": "Access holes are typically about 6” (15 cm) in diameter and can be covered by a sealed removable plate.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Лубнимаш має «технологічні люки (обслуговування термопідвісів)» (rec_2fb145ce), розмірів не дає. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

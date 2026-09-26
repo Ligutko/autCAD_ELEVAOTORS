@@ -1,0 +1,25 @@
+{
+  "id": "rec_f3ebe1e9",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "load",
+  "claim": {
+    "name": "thermo_cable_load_per_m",
+    "value": 40.2,
+    "unit": "kg/m",
+    "qualifier": "OPI: навантаження на кабель CDR2/HDR2 — понад 40,2 кг на метр глибини зерна"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lambtonconveyor.com/wp-content/uploads/2023/11/Cable-Installation-Rev1.2.pdf",
+    "path": "inbox/raw/web/lambtonconveyor.com/Cable-Installation-Rev1.2.pdf",
+    "page": 6,
+    "quote": "CDR2/HDR2 cables can generate loads exceeding 27 lb/ft (40.2 kg/m) of depth.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_d6da0d9f",
+  "subject": "МСВУ 220.13.В12, аерація підлоги (аркуш 2)",
+  "kind": "dimension",
+  "claim": {
+    "name": "branch_axis_clear",
+    "value": 0.566,
+    "unit": "m",
+    "qualifier": "кінці відгалужень біля вертикальної осі силоса"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "quote": "вектори аркуша 2: кінці відгалужень біля вертикальної осі силоса",
+    "bbox": null,
+    "retrieved_at": "2026-09-26",
+    "extractor": "extract_aeration_p2.py"
+  },
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Заміряно скриптом по векторах; масштаб з R 11000, звірено з осями силосів.",
+  "seen_in": [],
+  "basis": "sourced"
+}

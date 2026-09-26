@@ -1,0 +1,25 @@
+{
+  "id": "rec_b49418c9",
+  "subject": "Даховий вентилятор 0,25 кВт і дахові отвори",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_vent_eave_offset",
+    "value": 2.0,
+    "unit": "m",
+    "qualifier": "провітрювачі по колу даху ≈ 2 м від карниза (великий силос, фото OMAFRA)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.ontario.ca/page/grain-aeration",
+    "path": "inbox/raw/web/ontario.ca/grain-aeration.html",
+    "page": null,
+    "quote": "The vents are placed about 2 m (6 ft ) back from the eave of the roof.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "2 м по схилу 30° = 1,73 м у плані → r ≈ 9,3 м для Ø22. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

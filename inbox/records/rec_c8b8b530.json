@@ -1,0 +1,25 @@
+{
+  "id": "rec_c8b8b530",
+  "subject": "Датчики рівня силоса МСВУ 220",
+  "kind": "attribute",
+  "claim": {
+    "name": "level_sensor_standard",
+    "value": "1 датчик верхнього граничного рівня",
+    "unit": "",
+    "qualifier": "Лубнимаш: у комплект силоса МСВУ входить датчик верхнього граничного рівня"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://ua.bizorg.su/zernokhranilischa-iz-ventiliruemykh-silosov-r/p15993236-silosy-tipa-msvu-prednaznacheny-dlya-khraneniya-zernovykh-kultur",
+    "path": "inbox/raw/web/_fetch/bizorg_msvu.html",
+    "page": null,
+    "quote": "5. Датчик верхнего предельного уровня зерна.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Стара сторінка Лубнимаш на bizorg (2017). Сайт Лубнимаш теж: «датчик граничного завантаження силосу». Кількість — 1 (однина). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

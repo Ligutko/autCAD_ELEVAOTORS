@@ -1,0 +1,27 @@
+{
+  "id": "rec_fb3dcf5f",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "specific_airflow_min",
+    "value": 4,
+    "unit": "m3/(h*t)",
+    "qualifier": "KMZ Industries: продуктивність вентиляторів — не менше 4 м³/год на тонну"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/wp-content/uploads/2022/05/silosy-kmz-industries_-2022_ukr.pdf",
+    "path": "inbox/raw/web/kmzindustries.ua/silosy-kmz-industries_-2022_ukr.pdf",
+    "page": 10,
+    "quote": "Продуктивність вентиляторів – не менше 4 м3/год на тонну зернової маси",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_e5bab282"
+  ],
+  "notes": "Норма виробника, у 2,5 раза нижча за ВНІІЗ. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

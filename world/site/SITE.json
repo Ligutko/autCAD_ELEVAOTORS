@@ -109,6 +109,44 @@
        {"to": "T12", "from_conveyor": "T11", "path": [[-1.37, 0.0, 25.90], [-2.58, 0.0, 24.08]]},
        {"to": "T15", "from_conveyor": "T11", "path": [[-0.73, 0.0, 25.90], [0.585, 0.0, 24.08]]}]}
   ],
+  "silo_aeration": {
+    "src": "PDF p.2 вектори, inbox/extract_aeration_p2.py (звіт inbox/reports/aeration_p2.json): схема однакова в усіх 6 силосах, розкид <= 3 см",
+    "fan_r": 12.248, "fan_angles_deg": [47.5, 132.5, 227.5, 312.5],
+    "channel_w": 0.28,
+    "collector_r0": {"n": 2.003, "s": 2.406}, "collector_r1": 10.676,
+    "branch_s": [3.1, 4.5, 5.9, 7.3, 8.7, 10.1],
+    "limits": {"corner_r": 10.46, "axis_x": 0.566, "tunnel_y": {"n": 1.48, "s": -1.755}},
+    "note": "Тунель нижнього ряду (S3-S6) дзеркальний до верхнього (1200 на північ / 1000 на південь), а розкладка каналів на аркуші 2 така сама, як у верхньому ряду; перевірка check_aeration.py показує зазори до тунелю по рядах"
+  },
+  "silo_equipment": {
+    "src": "research/silo_equipment.md (фаза 2); у кожному полі — картка і basis",
+    "thermo": {
+      "rings": [{"n": 4, "r": 2.80, "a0_deg": 45}, {"n": 9, "r": 8.80, "a0_deg": 10}],
+      "src_rings": "analog OPI Cable Installation Rev1.2 p.5, 72 ft: 4 @ 2.80 m, 9 @ 28.9 ft 8.80 m (rec_17065a5b, rec_cd90da78, rec_9fe933d8); кути a0 — judgment: жодна підвіска не над лінією випускних отворів",
+      "sensor_step_m": 2.0, "src_step": "sourced Лубнимаш (rec_11f1e058)",
+      "top": "roof_frame_breakaway", "src_top": "sourced Лубнимаш (rec_870a60b1)",
+      "bottom_above_sweep_m": 0.3, "src_bottom": "judgment: низ кабелю над відбійником зачисного шнека, без прив'язки до підлоги (шнек обходить усе коло)",
+      "reference_layout": "OPI 72 ft", "detect_radius_marketing_m": 2.7, "src_detect": "rec_6290833b (2.7 м, реклама) ⟷ rec_0443b316 (0.9 м, Maier)",
+      "case2_wrong": {"rings": [{"n": 1, "r": 0.0, "a0_deg": 0}, {"n": 6, "r": 7.0, "a0_deg": 30}], "sensor_step_m": 4.0,
+                      "src": "analog Neuero NL 22/24: 7 зондів × 5 датчиків (rec_c98ddf27); радіус 7.0 — judgment"}
+    },
+    "level_sensors": [
+      {"role": "upper", "type": "rotary", "r": 9.0, "angle_deg": 60, "paddle_below_roof_m": 0.6, "housing_d_m": 0.12, "housing_h_m": 0.20,
+       "src": "sourced: 1 датчик верхнього рівня, роторний (rec_c8b8b530, rec_66e4de0e); r, кут, корпус — judgment"}
+    ],
+    "sweep": {
+      "screw_d_m": 0.315, "floor_gap_m": 0.01, "length_m": 10.6, "park_angle_deg": 200,
+      "drive": {"w_m": 1.1, "h_m": 1.9, "kw": 18.5}, "tractor": {"kw": 1.1, "at_frac": 0.65, "wheel_d_m": 0.40, "counterweights": 2},
+      "shield_h_m": 0.55,
+      "src": "шнек Ø315 — розвилка УРПК-315 / 400.М2 (rec_bd18d8b8 / rec_969eee56); зазор 10 мм analog ZEO (rec_b8bc4b54); довжина judgment (rec_1ad29c06); привод у центрі, кожух 1.1 × 1.9 — judgment з рендера Лубнимаш (rec_11afe8b3, rec_8df2e209); тягач на 0.65 довжини — sourced текст + рендер (rec_979d8f61); колесо analog KMZ (rec_c87b123a); висота відбійника — judgment"
+    },
+    "inside_ladder": false,
+    "src_inside_ladder": "sourced: внутрішня драбина — опція Лубнимаш, у прикладі опитувального листа «Ні» (rec_6fa26e86)",
+    "aeration": {
+      "fan_flow_m3h": 13160, "bulk_density_t_m3": 0.75, "specific_min_m3h_t": 10, "air_path_ratio_max": 1.5,
+      "src": "подача ВЦ-5И при 2.02 кПа — analog (rec_d63ffe79); норма ≥10 м³/(год·т) — analog ВНІІЗ (rec_e5bab282); шлях повітря ≤ 1.5 — analog OMAFRA, K-State (rec_1516b708)"
+    }
+  },
   "silo_gates": {
     "offsets_along_row": [-9.75, -6.5, -3.25, 0.0, 3.25, 6.5, 9.75],
     "sizes_mm": [350, 350, 350, 400, 350, 350, 350],

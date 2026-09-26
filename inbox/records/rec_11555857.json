@@ -1,0 +1,25 @@
+{
+  "id": "rec_11555857",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "dimension",
+  "claim": {
+    "name": "roof_vent_area_required",
+    "value": 2.9,
+    "unit": "m2",
+    "qualifier": "потрібна площа дахових отворів для 52 640 м³/год"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.ontario.ca/page/grain-aeration",
+    "path": "inbox/raw/web/ontario.ca/grain-aeration.html",
+    "page": null,
+    "quote": "1,000 L/s 0.13 m 2 10.0 m 2 0.20 m 2",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "14,62 м³/с × 0,20 м²/(м³/с) = 2,92 м² (OMAFRA, Westeel); при 350 м/хв (MedCrave) — 2,5 м². Отворів Ø420 (0,139 м²) — ≈ 21. Research B9 давав 1,75 м² за правилом Grainnet (1 ft² на 1500 cfm) і 48 000 м³/год. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

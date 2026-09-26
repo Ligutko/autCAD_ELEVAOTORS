@@ -1,0 +1,25 @@
+{
+  "id": "rec_d1b1070a",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "wall_layer_max_fluctuation",
+    "value": 1.0,
+    "unit": "m",
+    "qualifier": "шар зерна біля стіни з найбільшими коливаннями температури"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.world-grain.com/articles/16850-grain-operations-temperature-cable-placement",
+    "path": "inbox/raw/web/world-grain.com/16850-temperature-cable-placement.html",
+    "page": null,
+    "quote": "The silo wall and about a 3 foot (1 m) layer of grain closest to the wall experiences the greatest temperature fluctuations during a typical fall to late spring storage period.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для кейсу 2: цей шар підвіски майже не бачать (зовнішнє кільце за 2,2–2,5 м від стіни). Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_b8bc4b54",
+  "subject": "Конвеєр радіально-поворотний з тягачем (зачисний, 18,5 + 1,1 кВт)",
+  "kind": "dimension",
+  "claim": {
+    "name": "sweep_residue_max",
+    "value": 10,
+    "unit": "mm",
+    "qualifier": "ZEO-SA: залишок продукту після зачистки не більше 10 мм"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zeo.ua/katalog-oborudovaniya/transportery/zachistnoy-shnek-zeo-sa",
+    "path": "inbox/raw/web/zeo.ua/zachistnoy-shnek-zeo-sa.html",
+    "page": null,
+    "quote": "Мінімальний залишок продукту після зачистки не більше 10 мм (в залежності від площинності полу).",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Звідси зазор гвинт–підлога ≈ 10 мм. Там само: «Можливість виконання привідної станції з двигуном у підсилосній галереї». Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

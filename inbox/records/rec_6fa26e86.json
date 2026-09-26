@@ -1,0 +1,25 @@
+{
+  "id": "rec_6fa26e86",
+  "subject": "Люки і двері МСВУ 220",
+  "kind": "attribute",
+  "claim": {
+    "name": "inside_ladder",
+    "value": "опція, у прикладі «Ні»",
+    "unit": "",
+    "qualifier": "Лубнимаш: внутрішня драбина — додаткова комплектація; у прикладі опитувального листа не замовлена"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/wp-content/uploads/msvu_ua.pdf",
+    "path": "inbox/raw/web/_fetch/msvu_ua.pdf",
+    "page": 1,
+    "quote": "Наявність внутрішньої драбини силосу (без огорожі)",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Значення поля y=484 — «Ні». Каталог 2025.1 с. 4 відносить «Внутрішні драбини» до додаткової комплектації. Symaga с. 67: внутрішню драбину «not recommended … for security reasons». Модель зараз має внутрішню драбину на всю висоту — це опція, не стандарт. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

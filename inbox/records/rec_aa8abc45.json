@@ -1,0 +1,25 @@
+{
+  "id": "rec_aa8abc45",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "load",
+  "claim": {
+    "name": "thermo_cable_load_max",
+    "value": 770,
+    "unit": "kg",
+    "qualifier": "оцінка тяги на одну підвіску внутрішнього кільця при повному силосі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lambtonconveyor.com/wp-content/uploads/2023/11/Cable-Installation-Rev1.2.pdf",
+    "path": "inbox/raw/web/lambtonconveyor.com/Cable-Installation-Rev1.2.pdf",
+    "page": 6,
+    "quote": "CDR2/HDR2 cables can generate loads exceeding 27 lb/ft (40.2 kg/m) of depth.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Глибина зерна на r 2,8 м = 14,98 (стіна) + (10,99 − 2,8)·tg27° = 19,15 м; 19,15 × 40,2 ≈ 770 кг. Зовнішнє кільце r 8,8: 16,1 м → ≈ 650 кг. Разом 4 × 770 + 9 × 650 ≈ 8,9 т на дах. Для підпису, не для розрахунку даху. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

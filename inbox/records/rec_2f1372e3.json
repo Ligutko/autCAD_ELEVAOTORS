@@ -1,0 +1,25 @@
+{
+  "id": "rec_2f1372e3",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "attribute",
+  "claim": {
+    "name": "thermo_bottom_tie",
+    "value": "ламка прив’язь ≤ 25 % розривного зусилля кабелю",
+    "unit": "",
+    "qualifier": "OPI: низ підвіски в плоскодонному силосі прив’язують до підлоги ламким шнуром"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lambtonconveyor.com/wp-content/uploads/2023/11/Cable-Installation-Rev1.2.pdf",
+    "path": "inbox/raw/web/lambtonconveyor.com/Cable-Installation-Rev1.2.pdf",
+    "page": 26,
+    "quote": "Cables bottoms should be secured either by tie-down with a breakable material (i.e. bailer twine) no stronger than 25% of the cable breaking strength",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Модель: FLOOR_TIE 0,4 м — узгоджується. OPI радить зрізати прив’язі перед роботою зачисного шнека. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_0c1916ab",
+  "subject": "Аерація плоского днища: норми",
+  "kind": "norm",
+  "claim": {
+    "name": "perforated_air_velocity",
+    "value": 6,
+    "unit": "m/min",
+    "qualifier": "швидкість повітря через перфорацію: 6 м/хв для силосів з D > H (9 м/хв — для H > D)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://medcraveonline.com/OAJS/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "path": "inbox/raw/web/medcraveonline.com/sizing-of-pressure-aeration-systems-for-stored-grain.html",
+    "page": null,
+    "quote": "6 m min -1 is recommended for horizontal facilities (flat storages or silos with diameter greater than the height)",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Площа перфорації S = Q / V. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

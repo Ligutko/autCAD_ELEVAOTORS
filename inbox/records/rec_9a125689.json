@@ -1,0 +1,25 @@
+{
+  "id": "rec_9a125689",
+  "subject": "Конвеєр радіально-поворотний з тягачем (зачисний, 18,5 + 1,1 кВт)",
+  "kind": "dimension",
+  "claim": {
+    "name": "tractor_ballast_mass",
+    "value": 220,
+    "unit": "kg",
+    "qualifier": "трактор KMZ ТК-2: знімний консольний баласт 2 × 110 кг над зерном"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/zachishhennya-silosiv-iz-plaskim-dnom",
+    "path": "inbox/raw/web/kmzindustries.ua/zachishhennya-silosiv-iz-plaskim-dnom.html",
+    "page": null,
+    "quote": "Маса з’ємного баласту – два по 110 кг",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Там само: «Консольний баласт, винесений над зерновим шаром», «Швидкість руху 0,87 м/хв.». Узгоджується з противагами на рендері Лубнимаш. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

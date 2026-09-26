@@ -1,0 +1,25 @@
+{
+  "id": "rec_a595a933",
+  "subject": "Датчики рівня силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "rotary_sensor_thread",
+    "value": "1 1/2",
+    "unit": "in",
+    "qualifier": "Symaga: роторний датчик як максимальний ставиться на дах з подовжувачем, різьба 1½\""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 76,
+    "quote": "As max-level detector, it is installed on the roof, with an extension in order to reach the grain, with a threaded level indicator 1 ½”.",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Опора роторного датчика (с. 77): лист 5 мм, патрубок Ø55 зовн., різьба BSP 1½\". Під радар — фланцева опора, труба Ø106. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}

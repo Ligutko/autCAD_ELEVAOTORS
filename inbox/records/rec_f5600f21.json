@@ -1,0 +1,25 @@
+{
+  "id": "rec_f5600f21",
+  "subject": "Термометрія силоса МСВУ 220 (Ø22 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "thermo_cable_section",
+    "value": "21x13",
+    "unit": "mm",
+    "qualifier": "OPI CDR2 (для довжин 15–30 м): переріз кабелю 21 × 13 мм"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.flamanagriculture.com/storage/manuals/1426018809_cableinstall.pdf",
+    "path": "inbox/raw/web/flamanagriculture.com/1426018809_cableinstall.pdf",
+    "page": 3,
+    "quote": "Size (LxW) inch mm 0.67 x 0.47 17 x 12 0.79 x 0.47 21 x 13",
+    "retrieved_at": "2026-09-26",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Наші підвіски 16–20 м → клас CDR2. Кабель плаский (дві сталеві жили), не круглий. Цитату перевірено скриптом у збереженому файлі.",
+  "seen_in": []
+}
