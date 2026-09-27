@@ -1,0 +1,27 @@
+{
+  "id": "rec_59350869",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchor_embedment_72ft",
+    "value": 432,
+    "unit": "mm",
+    "qualifier": "глибина в бетоні (Depth In Concrete), бін 72 ft"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 50,
+    "quote": "72' 10-24 1\" W & N 1\" 17\"",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_e9473690"
+  ],
+  "notes": "17 in = 432 мм. Для 135 ft — 24 in, для 156 ft — 36 in.",
+  "seen_in": []
+}

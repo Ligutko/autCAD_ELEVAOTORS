@@ -1,0 +1,31 @@
+{
+  "id": "rec_97c6b82c",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchor_max_embedment_in_tunnel_roof",
+    "value": 0.3,
+    "unit": "m",
+    "qualifier": "найбільше закладення анкера в плиту перекриття тунелю 400 мм над порожниною"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 6,
+    "bbox": [
+      51.12,
+      616.88,
+      833.04,
+      623.12
+    ],
+    "quote": "+0,600",
+    "crop": "inbox/raw/pdf_crops/p06_gate_S1_center_1200dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "0.40 (плита +0.600…+0.200, rec_ce0a202f) − 0.05 захисний шар знизу − ≈ 0.05 висота анкерної плити/голови ≈ 0.30 м. Це менше за аналоги 0.35–0.43 м (Symaga, Sukup). Отже над тунелем потрібне інше рішення: наскрізний болт з плитою на стелі тунелю або закладна деталь у плиті — judgment, у кресленні не показано. [Креслення без текстового шару: підпис у quote прочитано очима з кропу.]",
+  "seen_in": []
+}

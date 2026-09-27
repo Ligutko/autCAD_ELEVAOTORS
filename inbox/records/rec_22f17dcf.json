@@ -1,0 +1,25 @@
+{
+  "id": "rec_22f17dcf",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "rule",
+  "claim": {
+    "name": "fan_transition_must_not_cut_stiffener",
+    "value": "перехідник вентилятора аерації не можна ставити, розрізаючи ребро",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/contentassets/cd69efa24ad140b29439d07e976e5a6f/198818_r33.pdf",
+    "path": "inbox/raw/web/aggrowth.com/198818_r33.pdf",
+    "page": 44,
+    "quote": "DO NOT CUT UPRIGHTS TO INSTALL FAN TRANSITION",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Westeel 198818 с. 44. У моделі вентилятори на 47.5 / 132.5 / 227.5 / 312.5°, а ребра — на 2.25 + k·4.5°, тобто ребро на 47.25° лише за 0.25° (≈ 48 мм) від осі вентилятора. Повітропровід має пройти крізь цоколь або стіну між ребрами (чистий проміжок ≈ 0.7 м).",
+  "seen_in": []
+}

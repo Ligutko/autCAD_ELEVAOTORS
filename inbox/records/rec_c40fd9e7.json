@@ -1,0 +1,25 @@
+{
+  "id": "rec_c40fd9e7",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "note",
+  "claim": {
+    "name": "flat_silo_foundation_options_ua",
+    "value": "силос з плоским дном стоїть на бетонній основі на палях або на щебеневій подушці залежно від геології",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://znp.nupp.edu.ua/files/archive/ua/22.pdf",
+    "path": "inbox/raw/web/znp.nupp.edu.ua/archive_ua_22.pdf",
+    "page": 5,
+    "quote": "розташовується на бетонній основі із застосуванням пальових фундаментів або на щебеневій подушці залежно від геологічних умов місцевості",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Збірник наукових праць ПолтНТУ, вип. 1(40), 2014 (Полтава). Загальний опис, без розмірів.",
+  "seen_in": []
+}

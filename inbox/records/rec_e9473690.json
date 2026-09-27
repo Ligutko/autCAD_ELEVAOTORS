@@ -1,0 +1,27 @@
+{
+  "id": "rec_e9473690",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchor_rod_length_symaga_std",
+    "value": 350,
+    "unit": "mm",
+    "qualifier": "механічний стандартний комплект: шпилька Ø20 × 350 для SBH 300…3208 (Ø3–32 м), клас 8.8 + гаряче цинкування, отвір заливають безусадковим розчином"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 46,
+    "quote": "SBH: L = 350mm Ø20, used to ﬁx the anchor plates of the SBH silo. From SBH 300 to SBH 3208",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_59350869"
+  ],
+  "notes": "350 — повна довжина шпильки, не закладення; закладення ≈ 350 − виступ (≈ 70–90) ≈ 260–280 мм. Для великих навантажень і сейсміки — варіант M30 (коди …ANVARM30).",
+  "seen_in": []
+}

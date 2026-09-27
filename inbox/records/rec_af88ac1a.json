@@ -1,0 +1,27 @@
+{
+  "id": "rec_af88ac1a",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "dimension",
+  "claim": {
+    "name": "frost_depth_loam",
+    "value": 0.66,
+    "unit": "m",
+    "qualifier": "глибина промерзання суглинків і глин (звіт з Лубенського району)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://geotop.com.ua/geologiya-i-geodeziya-poltavskaya-oblast_ua.php",
+    "path": "inbox/raw/web/geotop.com.ua/geologiya-i-geodeziya-poltavskaya-oblast_ua.html",
+    "page": null,
+    "quote": "В зимових умовах суглинки і глини промерзають до 0.66 м, дрібні і пилуваті піски, супіски промерзають на глибину 0.81 м.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_c8edcede"
+  ],
+  "notes": "Збігається з формулою d = d0·√Mt при d0 = 0.23 м (суглинки) і Mt ≈ 8.2 — тобто, ймовірно, нормативна, а не заміряна глибина.",
+  "seen_in": []
+}

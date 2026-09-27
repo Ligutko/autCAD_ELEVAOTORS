@@ -1,0 +1,31 @@
+{
+  "id": "rec_af9b4061",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "stiffeners_over_tunnel_void_per_silo",
+    "value": 4,
+    "unit": "pcs",
+    "qualifier": "ребра на ±2.25° і 180±2.25° від осі ряду стоять над порожниною тунелю (|Y| = 0.435 м < 1.0 м), ще 2 — на стіні тунелю або на її грані (±6.75°, |Y| = 1.30 м)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      780,
+      930,
+      830,
+      1000
+    ],
+    "quote": "2600",
+    "crop": "inbox/raw/pdf_crops/p02_S4_ring_tunnel_east_600dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Кути ребер з моделі: 2.25° + k·4.5° (world/kit/silo_msvu220.py stiffener_angles, PDF p.6: 80 ребер). Y = 11.08·sin(θ). Внутрішні грані тунелю Y −1.0/+1.2 (ряд 3–6), −1.2/+1.0 (ряд 1–2). Припущення: локальна вісь X силоса збігається з віссю ряду (тунелю). [Креслення без текстового шару: підпис у quote прочитано очима з кропу.]",
+  "seen_in": []
+}

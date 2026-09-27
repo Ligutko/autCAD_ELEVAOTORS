@@ -1,0 +1,25 @@
+{
+  "id": "rec_5a2a0bfe",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "dimension",
+  "claim": {
+    "name": "granular_layer_under_slab",
+    "value": "100–150",
+    "unit": "mm",
+    "qualifier": "ущільнений крупнозернистий матеріал під плитою і підошвою; ґрунт ≥ 192 кПа"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/contentassets/d2cb108646d240a5be3dd172502d6e08/198893_0921.pdf",
+    "path": "inbox/raw/web/aggrowth.com/198893_0921.pdf",
+    "page": 29,
+    "quote": "Use minimum 4” to 6” (100 - 150mm) of well-compacted coarse granular material below slab and curb footing.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "AGI Westeel 198893 с. 29. Для лесу цього мало — див. ДСТУ-Н 44 (подушки, трамбування 2.5–4 м).",
+  "seen_in": []
+}

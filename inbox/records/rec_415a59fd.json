@@ -1,0 +1,25 @@
+{
+  "id": "rec_415a59fd",
+  "subject": "Норми: деформації основи силоса",
+  "kind": "limit",
+  "claim": {
+    "name": "foundation_mean_settlement_max",
+    "value": 150,
+    "unit": "mm",
+    "qualifier": "середнє осідання фундаменту сталевого силоса"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2022/08/DBN-V_2_6-221-2021.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-V_2_6-221-2021.pdf",
+    "page": 8,
+    "quote": "середнє осідання - не більше ніж 150 мм",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "ДБН В.2.6-221:2021 п. 6.8.",
+  "seen_in": []
+}

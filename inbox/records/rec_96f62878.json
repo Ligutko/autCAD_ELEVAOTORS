@@ -1,0 +1,25 @@
+{
+  "id": "rec_96f62878",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "rule",
+  "claim": {
+    "name": "anchoring_required_if_overturning",
+    "value": "анкерування потрібне, якщо момент від вітру на порожній резервуар перевищує момент утримувальних сил",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zavod-rezervuar.ru/proektirovshhiku/spravochnaya-informacziya-gost-snipy-pb/sto-sa-03-002-2009/osnovaniya-i-fundamenty/",
+    "path": "inbox/raw/web/zavod-rezervuar.ru/sto-sa-03-002-2009-osnovaniya-i-fundamenty.html",
+    "page": null,
+    "quote": "момент от сил, вызванных ветровым воздействием, превышает момент от вертикальных удерживающих сил, действующих на пустой резервуар",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "СТО-СА-03-002-2009 п. 10.2.10.1. Та сама логіка перевірки, що в картці rec_7695f97b.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_a3002561",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "note",
+  "claim": {
+    "name": "flat_silo_foundation_types_ru",
+    "value": "силоси з плоским дном ставлять частіше на стрічкові або плитні фундаменти, використовують і пальові",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://melinvest.ru/press_office/articles/konstruktsiya-silosov-s-ploskim-dnom/",
+    "path": "inbox/raw/web/melinvest.ru/konstruktsiya-silosov-s-ploskim-dnom.html",
+    "page": null,
+    "quote": "Их устанавливают на фундаментах, чаще ленточных или плитных, но используют и свайные.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Мельинвест (РФ), виробник силосів Ø4.5–31.5 м.",
+  "seen_in": []
+}

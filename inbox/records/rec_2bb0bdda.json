@@ -1,0 +1,28 @@
+{
+  "id": "rec_2bb0bdda",
+  "subject": "Норми: деформації основи силоса",
+  "kind": "limit",
+  "claim": {
+    "name": "foundation_tilt_max",
+    "value": 0.002,
+    "unit": "ratio",
+    "qualifier": "крен фундаменту сталевого гофрованого силоса, частка ширини (діаметра)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2022/08/DBN-V_2_6-221-2021.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-V_2_6-221-2021.pdf",
+    "page": 8,
+    "quote": "крен фундаменту - не більше ніж 0,002 від його ширини (діаметру)",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_329f3f4b",
+    "rec_76e2a4eb"
+  ],
+  "notes": "ДБН В.2.6-221:2021 п. 6.8, чинні з 2022-09-01, на заміну ДБН В.2.2-8-98 у частині сталевих силосів. Проєкт датовано 05.06.2024 — норма чинна. Для кільця Ø22.75: різниця осідань протилежних країв ≤ 45.5 мм, кут ≤ 0.115°.",
+  "seen_in": []
+}

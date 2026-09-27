@@ -1,0 +1,25 @@
+{
+  "id": "rec_dc36cc8d",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "load",
+  "claim": {
+    "name": "wind_pressure_characteristic_W0",
+    "value": 410,
+    "unit": "Pa",
+    "qualifier": "характеристичне значення вітрового тиску, м. Лубни (найближче місто таблиці до Слободо-Петрівки)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://document.vobu.ua/wp-content/uploads/DBN/37.1.-DBN-V.1.2-22006.-SNBB.-Navantazhennya-i-vplivi.-Nor.pdf",
+    "path": "inbox/raw/web/document.vobu.ua/DBN-V.1.2-2-2006.pdf",
+    "page": 53,
+    "quote": "Лубни 410 1600 16 250",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "ДБН В.1.2-2:2006, додаток (таблиця за містами), стовпці W0 / S0 / b / WB. Гребінки в таблиці немає; Лубни ≈ 40 км, Полтава 470 Па. Текстовий шар PDF у cp1251, прочитаний як latin-1 — цитату звірено з перекодованим .txt.",
+  "seen_in": []
+}

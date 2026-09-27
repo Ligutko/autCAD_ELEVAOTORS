@@ -1,0 +1,25 @@
+{
+  "id": "rec_fe12b8a4",
+  "subject": "Норми: деформації основи силоса",
+  "kind": "rule",
+  "claim": {
+    "name": "base_plate_gap_fill",
+    "value": "проміжки під опорними плитами ребер — сталеві регулювальні пластини; під опорними кутиками — цементно-піщаний розчин ≥ М15",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2022/08/DBN-V_2_6-221-2021.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-V_2_6-221-2021.pdf",
+    "page": 7,
+    "quote": "Опорні плити ребер жорсткості та опорні кутики повинні щільно прилягати до поверхні фундаменту.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "п. 5.4.",
+  "seen_in": []
+}

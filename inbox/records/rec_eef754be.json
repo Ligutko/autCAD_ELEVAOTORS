@@ -1,0 +1,27 @@
+{
+  "id": "rec_eef754be",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchor_diameter_symaga_std",
+    "value": 20,
+    "unit": "mm",
+    "qualifier": "стандартний механічний анкер Symaga для плоскодонних SBH до Ø32 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 46,
+    "quote": "SBH: L = 350mm Ø20",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_5dab4d9b"
+  ],
+  "notes": "Суперечить Sukup (1\" ≈ 25.4 мм) — різні виробники і різні вітрові норми. Simeza: M16–M24 «за статикою» (research/PARTS_DIMENSIONS.md C).",
+  "seen_in": []
+}

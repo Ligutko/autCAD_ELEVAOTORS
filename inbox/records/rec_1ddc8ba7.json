@@ -1,0 +1,25 @@
+{
+  "id": "rec_1ddc8ba7",
+  "subject": "Аварії силосів (кейси 5, 6)",
+  "kind": "dimension",
+  "claim": {
+    "name": "transcona_tilt",
+    "value": 27,
+    "unit": "deg",
+    "qualifier": "крен елеватора Транскона (Канада, 1913) за 24 год після втрати несучої здатності ґрунту"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.geotech.hr/en/case-of-foundation-soil-failure-transcona-grain-elevator/",
+    "path": "inbox/raw/web/geotech.hr/transcona.html",
+    "page": null,
+    "quote": "within 24 hours the foundation soil collapsed, and the structure tilted about 27 °",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Класичний випадок: залізобетонний силосний корпус, м'яка глина під жорстким шаром, яку вишукування не виявили. Приклад «помилки вишукувань» для кейсу 5, але крайній: наш «зламаний» стан — частки градуса.",
+  "seen_in": []
+}

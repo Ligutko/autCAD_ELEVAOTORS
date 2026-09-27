@@ -1,0 +1,25 @@
+{
+  "id": "rec_b6c6d1c6",
+  "subject": "Аварії силосів (кейси 5, 6)",
+  "kind": "note",
+  "claim": {
+    "name": "silo_failure_uneven_settlement",
+    "value": "фундамент дає нерівномірну осадку під час завантаження — ребра жорсткості ламаються, силос нахиляється",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://propozitsiya.com/ua/9-prychyn-avariy-sylosiv",
+    "path": "inbox/raw/web/propozitsiya.com/9-prychyn-avariy-sylosiv.html",
+    "page": null,
+    "quote": "Не дивно, що ребра жорсткості почали ламатися, і силос нахилився",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Журнал «Пропозиція», «9 причин аварій силосів», розділ «Дефекти фундаментів» (з посиланням на SGS). Конкретного об'єкта і фото не названо.",
+  "seen_in": []
+}

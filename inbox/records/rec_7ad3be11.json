@@ -1,0 +1,25 @@
+{
+  "id": "rec_7ad3be11",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "note",
+  "claim": {
+    "name": "drill_drive_anchors_not_recommended",
+    "value": "механічні забивні анкери Sukup не рекомендує; дозволені закладні (L або W&N) і на епоксиді",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 50,
+    "quote": "Mechanical drill & drive anchors NOT RECOMMENDED by Sukup Manufacturing Co.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для кейсу 6: коли анкер свердлять (post-installed), довжину легко «зекономити» — закладний так не вкоротиш.",
+  "seen_in": []
+}

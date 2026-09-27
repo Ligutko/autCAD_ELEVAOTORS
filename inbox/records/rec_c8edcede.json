@@ -1,0 +1,27 @@
+{
+  "id": "rec_c8edcede",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "dimension",
+  "claim": {
+    "name": "frost_depth_region",
+    "value": 0.9,
+    "unit": "m",
+    "qualifier": "глибина промерзання, Полтавська область (таблиця по областях)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.burinnya-sverdlovyn.com.ua/hlybyna-promerzannia-hruntu/",
+    "path": "inbox/raw/web/burinnya-sverdlovyn.com.ua/hlybyna-promerzannia-hruntu.html",
+    "page": null,
+    "quote": "Полтавська область 0,9",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_af88ac1a"
+  ],
+  "notes": "Сайт бурової фірми, без посилання на норму і без типу ґрунту. Слабке джерело.",
+  "seen_in": []
+}

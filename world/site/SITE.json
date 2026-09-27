@@ -149,6 +149,51 @@
       "src": "подача ВЦ-5И при 2.02 кПа — analog (rec_d63ffe79); норма ≥10 м³/(год·т) — analog ВНІІЗ (rec_e5bab282); шлях повітря ≤ 1.5 — analog OMAFRA, K-State (rec_1516b708)"
     }
   },
+  "silo_foundation": {
+    "src": "research/foundation.md (фаза 3), 80 карток; рівень землі — ground_z",
+    "ring": {
+      "r_in": 10.775, "r_out": 11.375, "top_z": 0.6,
+      "src": "derived: PDF p.2 вектор, 6 силосів 10.774–10.777 / 11.373–11.376 (rec_006b7b47, rec_82817f8c); p.4 цоколь Ø22.745 (rec_4c478d1b)",
+      "gap_at_tunnel": "обривається на зовнішніх гранях стін тунелю; там стіну несе коробка тунелю, плита 0.40 (rec_36ce06d6, rec_ce0a202f)",
+      "stem_bottom_z": -1.2, "footing": {"w": 1.6, "t": 0.5, "bottom_z": -1.7},
+      "src_section": "judgment (rec_9ed552c6): низ ≤ −1.35 за промерзанням 0.9 м від землі (rec_f33231af), пропорції analog AGI (rec_20132bc0)",
+      "fan_duct_opening": {"w": 0.6, "z": [-0.1, 0.5]},
+      "src_fan_duct": "judgment: повітропровід вентилятора аерації йде під підлогою крізь отвір у кільці в кінець колектора (r 10.68 < r_in), бо на 47.5° вісь повітропроводу за 48 мм від ребра жорсткості 47.25° (фаза ребер 2.25° — заміряно з фасадів PDF p.6, p.7); Westeel: ребро не різати (rec_22f17dcf)"
+    },
+    "floor_slab": {"t": 0.25, "joint_to_ring_m": 0.02, "src": "judgment rec_f681983c; шов analog AGI rec_20132bc0; над тунелем підлога — плита перекриття тунелю 0.40"},
+    "concrete": {"class": "C20/25", "W": 6, "F": 150, "rebar": "A500C", "src": "judgment rec_eb7dd2fd; analog rec_3d29f278"},
+    "cushion": {"t": 1.0, "material": "ущільнений лесоподібний суглинок", "src": "judgment (rec_0aa15bc6: екран 1–1.5 м; rec_3937a38b)"},
+    "anchors": {
+      "per_stiffener": 1, "d_mm": 24, "grade": "8.8 HDG", "type": "cast_in_with_plate",
+      "r": 11.12, "hef": 0.40, "projection": 0.28, "plate": 0.08,
+      "src": "judgment rec_50d95de7; analog Sukup 1″ × 432 мм, Symaga Ø20 × 350 / M30 (rec_5dab4d9b, rec_59350869, rec_e9473690, rec_bb58f3f3, rec_fc7d6355); r — під гайкою анкерної опори кіта; виступ derived з опори кіта: верхня плита +0.215, гайка 0.045, запас різьби",
+      "over_tunnel": {"detail": "through_bolt", "plate": [0.2, 0.2, 0.016],
+                      "src": "derived: над порожниною тунелю плита 0.40 (rec_af9b4061, rec_97c6b82c), закладення 0.40 не вміщується; наскрізний болт з плитою 200×200×16 під стелею — judgment"}
+    },
+    "deformation_marks": {"n": 6, "angles_deg": [30, 90, 150, 210, 270, 330], "z": 0.45,
+                          "src": "ДБН В.2.6-221 п. 6.11–6.12: ≥ 6 марок на круглому фундаменті, діагоналі через центр (rec_e6c262da); кути поза тунелем — judgment"},
+    "apron": {"w": 2.0, "in_drawing": false, "src": "ДСТУ-Н 44 п. 12.8.3: вимощення ≥ 2 м на просідних ґрунтах (rec_833d7e46); на кресленні немає"},
+    "soil": {
+      "collapse_type": "I (можливо II)",
+      "layers_below_ground": [
+        {"to_m": 0.7, "name": "ґрунтово-рослинний шар, суглинок"},
+        {"to_m": 10.0, "name": "лесоподібний суглинок, макропористий, просідний"},
+        {"to_m": 20.0, "name": "непросідний суглинок / пісок"}
+      ],
+      "gwl_m": null,
+      "src": "analog: вишукування Лубенського району, 7–15 м лесоподібних суглинків, просідання 15–30 см (rec_a9de46a2, rec_025ada6a, rec_16f6e864, rec_d62abc6a); звіту по Слободо-Петрівці немає"
+    },
+    "limits": {
+      "tilt_max": 0.002, "settle_mean_max_m": 0.15, "anchor_plan_tol_m": 0.005, "anchor_top_tol_m": [-0.005, 0.045],
+      "found_top_tol_m": 0.0015, "frost_depth_m": 0.9, "edge_dist_min_m": 0.19, "hef_warn_m": 0.28,
+      "src": "sourced ДБН В.2.6-221:2021 пп. 6.3, 6.8, 6.10 (rec_2bb0bdda, rec_415a59fd, rec_559e7f33, rec_fe6a2a27); промерзання rec_79ff94c3; край і закладення — analog Sukup / Symaga (rec_c8edcede, rec_190302f4, rec_e9473690)"
+    },
+    "states": {
+      "design": {},
+      "case6_short_anchor": {"hef": 0.10, "src": "judgment rec_7e2aebe8"},
+      "case5_tilt": {"deg": 0.6, "toward_deg": 270, "settle_mean_m": 0.10, "cause": "замочування одного боку лесу", "src": "derived rec_aa01651d, judgment rec_7e2aebe8"}
+    }
+  },
   "silo_roof": {
     "src": "research/silo_equipment.md §4 (фаза 2B)",
     "vents": {

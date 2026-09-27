@@ -1,0 +1,25 @@
+{
+  "id": "rec_a5806fa6",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "formula",
+  "claim": {
+    "name": "concrete_cone_resistance",
+    "value": "N0Rk,c = k1·√fck·hef^1.5; k1 = 8.9 (тріщинуватий бетон, закладні з головкою) / 12.7 (без тріщин); c_cr,N = 1.5·hef, s_cr,N = 3·hef",
+    "unit": "N",
+    "qualifier": "EN 1992-4 (переказ)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://civilaxis.com/theory/anchor-bolt",
+    "path": "inbox/raw/web/civilaxis.com/anchor-bolt.html",
+    "page": null,
+    "quote": "k 1 k_1 k 1 ​ 8.9 for cast-in headed anchors in cracked concrete, 12.7 in uncracked concrete",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Вторинне джерело (CivilAxis) з переказом EN 1992-4:2018 §7.2.1.4; першоджерело EN 1992-4 не збережено. Цитата містить артефакти MathML з HTML, як у файлі.",
+  "seen_in": []
+}

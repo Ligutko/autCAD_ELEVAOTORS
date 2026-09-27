@@ -1,0 +1,25 @@
+{
+  "id": "rec_1f82d1e0",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "note",
+  "claim": {
+    "name": "raised_plinth_practice",
+    "value": "силос на круглому піднятому цоколі; нижня обичайка кріпиться до фундаменту; підйом не пускає воду",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 46,
+    "quote": "Circular raised step reinfor- ced with kolxik® or mortar or concre- te.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Symaga, лист 3.9. Той самий принцип, що й наш цоколь +0.600 над землею.",
+  "seen_in": []
+}

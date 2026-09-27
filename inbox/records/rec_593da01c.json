@@ -1,0 +1,27 @@
+{
+  "id": "rec_593da01c",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "dimension",
+  "claim": {
+    "name": "foundation_top_above_grade_max_us",
+    "value": 152,
+    "unit": "mm",
+    "qualifier": "верх фундаменту над планувальною відміткою ≤ 6\" (фермерські біни Sukup)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 35,
+    "quote": "Elevation of surface above grade should not exceed 6”.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_69751fc1"
+  ],
+  "notes": "6 in = 152 мм. У нашому кресленні цоколь 1.05 м над лінією землі (rec_69751fc1). Різна практика: у нас тунель і канали в підлозі вище землі; у Sukup — інше. Конфлікт записано.",
+  "seen_in": []
+}

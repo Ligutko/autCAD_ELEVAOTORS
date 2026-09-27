@@ -1,0 +1,25 @@
+{
+  "id": "rec_bb58f3f3",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchors_per_stiffener_symaga",
+    "value": 1,
+    "unit": "pcs",
+    "qualifier": "хімічний комплект: 1 анкер на ребро для SBH"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.symaga.com/wp-content/uploads/2021/09/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "path": "inbox/raw/web/symaga.com/Technical-Data.-Components-and-Accessories-v2.pdf",
+    "page": 46,
+    "quote": "SBH: 1 anchor / stiffener",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для SCE (на опорах) — 4 анкери на опору.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_1b555088",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "definition",
+  "claim": {
+    "name": "collapse_soil_condition_type_threshold",
+    "value": 5,
+    "unit": "cm",
+    "qualifier": "I тип — просідання від власної ваги при замочуванні відсутнє або ≤ 5 см; II тип — більше"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://studfile.net/preview/5026064/page:63/",
+    "path": "inbox/raw/web/studfile.net/5026064_page63.html",
+    "page": null,
+    "quote": "До першого типу ґрунтових умов віднесено такі товщі лесового ґрунту, де просідання від власної ваги зволоженого ґрунту не відбувається або не перевищує 5 см",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Підручник з основ і фундаментів (studfile, розділ 16), переказ норм СНиП 2.02.01 / ДБН В.1.1-5. У чинному ДСТУ-Н Б В.1.1-44:2016 поділу на I/II тип немає — там групи складності 1-А…2-В (табл. 8.1).",
+  "seen_in": []
+}

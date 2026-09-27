@@ -1,0 +1,25 @@
+{
+  "id": "rec_ab6f562f",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "note",
+  "claim": {
+    "name": "anchor_at_every_upright",
+    "value": "основні анкери — через опорні плити на кожному ребрі (upright); додатково 1/2\"×3\" у кожен отвір нижнього кутика",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/contentassets/d2cb108646d240a5be3dd172502d6e08/198893_0921.pdf",
+    "path": "inbox/raw/web/aggrowth.com/198893_0921.pdf",
+    "page": 34,
+    "quote": "One 1/2\" x 3\" (minimum embedment) anchor bolt needs to be installed into every slot into the bottom angle (6 per angle)",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "AGI Westeel 198893 (15–60 ft). Там же: «For stiffened bins the primary anchor bolt locations are through the base plates at each and every upright location».",
+  "seen_in": []
+}

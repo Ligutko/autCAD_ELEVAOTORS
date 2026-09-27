@@ -1,0 +1,25 @@
+{
+  "id": "rec_657f6d6c",
+  "subject": "Аварії силосів (кейси 5, 6)",
+  "kind": "note",
+  "claim": {
+    "name": "anchor_failure_signs",
+    "value": "ознаки відмови анкерування після бурі: анкери чи анкерні плити відсутні, зігнуті, зламані, корозія; тріщини бетону біля анкера або по зовнішньому краю фундаменту; зруйнований герметик між стіною і бетоном",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://extension.sdstate.edu/inspecting-grain-bins-after-windstorm",
+    "path": "inbox/raw/web/extension.sdstate.edu/inspecting-grain-bins-after-windstorm.html",
+    "page": null,
+    "quote": "Are any anchor bolts or anchor plates missing, bent, broken or corroded? Does the concrete show any cracks that indicate that the anchor bolt is not being held securely?",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "SDSU Extension. Що показувати в «зламаному» стані кейсу 6.",
+  "seen_in": []
+}

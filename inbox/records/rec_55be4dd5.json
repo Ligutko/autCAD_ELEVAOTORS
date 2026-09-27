@@ -1,0 +1,25 @@
+{
+  "id": "rec_55be4dd5",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "tolerance",
+  "claim": {
+    "name": "foundation_level_tolerance_us",
+    "value": "1/4\" на 10 ft",
+    "unit": "",
+    "qualifier": "рівність поверхні фундаменту (≈ 6 мм на 3 м)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 35,
+    "quote": "Foundation surface should not vary from level by more than 1/4” in 10 feet",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для порівняння: ДБН В.2.6-221 — ±1.5 мм під опорними плитами; AGI — 6 мм на 1200 мм.",
+  "seen_in": []
+}

@@ -1,0 +1,27 @@
+{
+  "id": "rec_f56a1482",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "dimension",
+  "claim": {
+    "name": "ring_foundation_width_min_tank",
+    "value": 1.0,
+    "unit": "m",
+    "qualifier": "кільцевий залізобетонний фундамент резервуара > 3000 м³: ширина ≥ 1.0 м, товщина ≥ 0.3 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zavod-rezervuar.ru/proektirovshhiku/spravochnaya-informacziya-gost-snipy-pb/sto-sa-03-002-2009/osnovaniya-i-fundamenty/",
+    "path": "inbox/raw/web/zavod-rezervuar.ru/sto-sa-03-002-2009-osnovaniya-i-fundamenty.html",
+    "page": null,
+    "quote": "Ширина кольцевого фундамента должна быть не менее 0,8 м для резервуаров объемом до 3000 м 3 и не менее 1,0 для резервуаров объемом свыше 3000 м 3 .",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_0cf61e17"
+  ],
+  "notes": "СТО-СА-03-002-2009 (РФ, вертикальні сталеві резервуари для нафти), п. 10.3.3. Резервуар з рідиною, не силос; наше кільце на кресленні 0.60 м. Конфлікт записано, щоб людина вирішила, чи це WARN.",
+  "seen_in": []
+}

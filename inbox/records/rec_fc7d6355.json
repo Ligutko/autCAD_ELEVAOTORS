@@ -1,0 +1,25 @@
+{
+  "id": "rec_fc7d6355",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchor_radius_offset_outside_wall",
+    "value": 78,
+    "unit": "mm",
+    "qualifier": "радіус анкерів більший за радіус біна на 3-1/16\""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 45,
+    "quote": "ANCHOR RADIUS: 37' 6 11/16\" BIN RADIUS: 37' 3 5/8\"",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Бін 75 ft, 2 анкери на ребро (с. 45); те саме 3-1/16\" для 21 і 24 ft (с. 37). Відстань між двома анкерами одного ребра — 7\" (178 мм). Сторінки — растрові креслення, цитату переписано з растру. [Цитата з растру: автоматично в тексті файлу не знаходиться.]",
+  "seen_in": []
+}

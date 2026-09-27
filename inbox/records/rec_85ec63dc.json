@@ -1,0 +1,25 @@
+{
+  "id": "rec_85ec63dc",
+  "subject": "Аварії силосів (кейси 5, 6)",
+  "kind": "note",
+  "claim": {
+    "name": "silo_failure_cause_geology",
+    "value": "руйнування силосів через неврахування геології або відмову замовника від паль: фундамент просідає, силос перекошується, тиск зерна на один бік зростає",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://agravery.com/uk/posts/author/show?slug=rozirvalo-banku-abo-comu-rujnuutsa-zernovi-silosi",
+    "path": "inbox/raw/web/agravery.com/rozirvalo-banku.html",
+    "page": null,
+    "quote": "Іноді силоси руйнуються через те, що при проекті не була врахована геологія, або замовник відмовився від забивання паль у ґрунт.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Agravery, керівник «Нойеро Україна» М. Годзик. Там же технічний директор KMZ Industries: «невірний висновок щодо несучої здатності ґрунтів на підставі неточної «геології»». Прямо про кейс 5.",
+  "seen_in": []
+}

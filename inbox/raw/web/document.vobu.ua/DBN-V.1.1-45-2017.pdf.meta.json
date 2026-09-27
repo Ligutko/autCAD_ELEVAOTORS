@@ -1,0 +1,9 @@
+{
+ "url": "https://document.vobu.ua/wp-content/uploads/DBN/DBN-V.1.1-45-2017.pdf",
+ "retrieved_at": "2026-09-27",
+ "sha256": "7e8f38850a2604a4967bc1d3c684bd84cb29548e0cda61dd9ebeee2bf903b434",
+ "bytes": 133290,
+ "extractor": "elevator-researcher",
+ "text_extract": "DBN-V.1.1-45-2017.pdf.txt (PyMuPDF / HTML strip; used to search quotes)",
+ "note": "текстовий шар у cp1251, прочитаний як latin-1; у .txt перекодовано"
+}

@@ -13,7 +13,7 @@ Wall doors: between stiffener flanges, inside one sheet tier; in the site frame 
 the steps cut nothing (real meshes, Blender BVH overlap), the free strip in front is a WARN.
 
 Broken variants that must fail: too few vents, vents not on sector centres, roof hatch on the ladder,
-door on a stiffener, door at an aeration fan, roof ribs off the stiffeners.
+door on a stiffener, door behind the outside ladder, roof ribs off the stiffeners.
 
 Run:
     blender --background --python world/build/check_silo_roof.py
@@ -226,12 +226,12 @@ def main():
     def door_on_stiffener(s):
         s["silo_hatches"]["wall_doors"][0]["angle_deg"] = 191.25
 
-    def door_at_fan(s):
-        s["silo_hatches"]["wall_doors"][0]["angle_deg"] = 49.5
+    def door_behind_ladder(s):
+        s["silo_hatches"]["wall_doors"][0]["angle_deg"] = 265.5      # mid-sector, 0.43 m from the caged ladder axis
 
     variants = [("too few vents: 12 + 4", few_vents, None), ("vents not on sector centres", off_sector, None),
                 ("roof hatch on the roof ladder", hatch_on_ladder, None), ("door on a stiffener", door_on_stiffener, None),
-                ("door at an aeration fan", door_at_fan, None), ("roof ribs half a sector off the stiffeners (old kit)", None, 0.0)]
+                ("door behind the outside caged ladder", door_behind_ladder, None), ("roof ribs half a sector off the stiffeners (old kit)", None, 0.0)]
     for name, patch, phase in variants:
         bad = copy.deepcopy(SITE)
         if patch:

@@ -1,0 +1,33 @@
+{
+  "id": "rec_69751fc1",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "dimension",
+  "claim": {
+    "name": "plinth_height_above_ground_line",
+    "value": 1.05,
+    "unit": "m",
+    "qualifier": "від лінії землі зі штриховкою (≈ −0.45) до верху цоколя +0.600"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 4,
+    "bbox": [
+      597.12,
+      845.76,
+      1003.2,
+      864.48
+    ],
+    "quote": "+0,600",
+    "crop": "inbox/raw/pdf_crops/p04_S2_plinth_west_800dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_593da01c"
+  ],
+  "notes": "Вертикальні червоні відрізки 845.76→864.48 pt = 18.72 pt × 56.02 = 1049 мм на обох силосах. Нижній край цоколя збігається з лінією землі (rec_3046318e, −0.455). [Креслення без текстового шару: підпис у quote прочитано очима з кропу.]",
+  "seen_in": []
+}

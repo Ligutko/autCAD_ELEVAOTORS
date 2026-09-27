@@ -1,0 +1,25 @@
+{
+  "id": "rec_d62abc6a",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "note",
+  "claim": {
+    "name": "district_geomorphology",
+    "value": "Гребінківський район — у межах Придніпровської низовини, поверхня — низовинна плоска лесова рівнина",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://esu.com.ua/article-26918",
+    "path": "inbox/raw/web/esu.com.ua/article-26918.html",
+    "page": null,
+    "quote": "Поверх­ня — низовин­на плоска лесова рівнина.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Енциклопедія Сучасної України, стаття «Гребінківський район». Про тип просідності і товщу — нічого.",
+  "seen_in": []
+}

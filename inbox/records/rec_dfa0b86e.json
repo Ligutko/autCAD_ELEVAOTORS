@@ -1,0 +1,25 @@
+{
+  "id": "rec_dfa0b86e",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "dimension",
+  "claim": {
+    "name": "bottom_above_ground_min_tank",
+    "value": 0.5,
+    "unit": "m",
+    "qualifier": "днище резервуара над спланованою землею ≥ 0.5 м, після осідання ≥ 0.15 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zavod-rezervuar.ru/proektirovshhiku/spravochnaya-informacziya-gost-snipy-pb/sto-sa-03-002-2009/osnovaniya-i-fundamenty/",
+    "path": "inbox/raw/web/zavod-rezervuar.ru/sto-sa-03-002-2009-osnovaniya-i-fundamenty.html",
+    "page": null,
+    "quote": "эта высота должна превышать максимальный уровень окружающей спланированной поверхности земли минимум на 0.5 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "СТО-СА-03-002-2009 п. 10.1.5. Наш цоколь 1.05 м — з запасом.",
+  "seen_in": []
+}

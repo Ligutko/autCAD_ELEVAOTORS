@@ -1,0 +1,27 @@
+{
+  "id": "rec_5dab4d9b",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchor_diameter_72ft",
+    "value": 25.4,
+    "unit": "mm",
+    "qualifier": "1\" W&N (з шайбою й гайкою), закладний або на епоксиді; бін 72 ft (21.9 м), 10–24 яруси"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 50,
+    "quote": "72' 10-24 1\" W & N 1\" 17\"",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_eef754be"
+  ],
+  "notes": "Sukup Commercial Bin Anchors, с. 50. 1 in ≈ M24–M27. Той самий рядок для 75–105 ft.",
+  "seen_in": []
+}

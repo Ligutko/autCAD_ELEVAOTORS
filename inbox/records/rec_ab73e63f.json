@@ -1,0 +1,25 @@
+{
+  "id": "rec_ab73e63f",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "note",
+  "claim": {
+    "name": "foundation_type_lubnymash",
+    "value": "залізобетонний фундамент з вбудованою системою вивантаження зерна",
+    "unit": "",
+    "qualifier": "опис МСВУ з плоским дном на сайті виробника"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-msvu-pd.html",
+    "page": null,
+    "quote": "підстава – залізобетонний фундамент з вбудованою системою вивантаження зерна",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Лубнимаш не дає ні типу (кільце / плита), ні розмірів, ні анкерів. Каталог 2025.1, lubnymash_silos_en і презентацію перевірено (Gemini + власні рендери) — там теж нічого.",
+  "seen_in": []
+}

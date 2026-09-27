@@ -1,0 +1,25 @@
+{
+  "id": "rec_20132bc0",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "dimension",
+  "claim": {
+    "name": "stemwall_width_analog",
+    "value": 0.457,
+    "unit": "m",
+    "qualifier": "T-фундамент AGI для 42–48 ft: стінка X = 1'6\" (457), висота стінки Y = 2'0\" (610), підошва A = 2'0\" (610) × B = 4'2\"…6'2\" (1.27–1.88 м), плита підлоги D = 6\" (152) окремо, через деформаційний шов"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aggrowth.com/contentassets/d2cb108646d240a5be3dd172502d6e08/198893_0921.pdf",
+    "path": "inbox/raw/web/aggrowth.com/198893_0921.pdf",
+    "page": 33,
+    "quote": "X 1'6\" 1'6\" 1'6\" 1'6\" Y 2'0\" 2'0\" 2'0\" 2'0\"",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Таблиця 13, с. 33; значення позначень — рис. 6 с. 30 (Detail A: «Expansion Joint», плита на «Well Compacted Gravel»). Для 54–60 ft у таблиці «To Be Determined». Наше кільце 0.60 м ширше за стінку AGI 0.46 м — узгоджується за порядком величини.",
+  "seen_in": []
+}

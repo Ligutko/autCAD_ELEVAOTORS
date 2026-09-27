@@ -1,0 +1,24 @@
+{
+  "id": "rec_d73320f0",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "note",
+  "claim": {
+    "name": "vertical_load_path",
+    "value": "вертикальне навантаження силоса передається на фундамент зовнішніми ребрами жорсткості",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "path": "inbox/raw/web/_fetch/lubnymash_silos_en.pdf",
+    "page": 8,
+    "quote": "Strengthen ribs carrying vertical silo loading on foundation are placed outside the silo body.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Те саме в презентації Лубнимаш (с. 9): «Снаружи расположенные ребра жесткости поддерживают вертикальные нагрузки силоса на фундамент». Тобто анкерна опора стоїть під кожним ребром.",
+  "seen_in": []
+}

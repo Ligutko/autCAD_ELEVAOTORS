@@ -1,0 +1,25 @@
+{
+  "id": "rec_0aa15bc6",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "rule",
+  "claim": {
+    "name": "compacted_loess_screen_thickness",
+    "value": "1–1.5",
+    "unit": "m",
+    "qualifier": "маловодопроникний екран з ущільненого лесового ґрунту в основі при II типі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://studfile.net/preview/5026064/page:63/",
+    "path": "inbox/raw/web/studfile.net/5026064_page63.html",
+    "page": null,
+    "quote": "екран улаштовують з ущільненого лесового ґрунту 1-1,5 м завтовшки",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Той самий підручник. Для моделі: шар ущільненого ґрунту під фундаментом у розрізі.",
+  "seen_in": []
+}

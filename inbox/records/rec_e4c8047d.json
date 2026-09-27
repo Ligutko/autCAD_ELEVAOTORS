@@ -1,0 +1,25 @@
+{
+  "id": "rec_e4c8047d",
+  "subject": "Аварії силосів (кейси 5, 6)",
+  "kind": "rule",
+  "claim": {
+    "name": "first_loading_staged_monitoring",
+    "value": "первинне завантаження поетапне, з місячним витримуванням під навантаженням і контролем осідання фундаменту",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.growhow.in.ua/vid-dribnoi-nedbalosti-do-katastrofy-shcho-stoit-za-avariiamy-sylosiv/",
+    "path": "inbox/raw/web/growhow.in.ua/vid-dribnoi-nedbalosti.html",
+    "page": null,
+    "quote": "Проводиться поетапно з місячним періодом витримування під навантаженням, із постійним контролем осідання фундаменту й стану конструкцій.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Growhow.in.ua. Узгоджується з ДБН В.2.2-8-98 п. 34.",
+  "seen_in": []
+}

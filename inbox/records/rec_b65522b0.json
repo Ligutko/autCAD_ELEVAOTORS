@@ -1,0 +1,25 @@
+{
+  "id": "rec_b65522b0",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "rule",
+  "claim": {
+    "name": "rebar_around_tunnel",
+    "value": "якщо під силосом тунель — додаткова арматура над і під тунелем",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 35,
+    "quote": "If tunnel is present, additional rebar must be used above and below tunnel.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Sukup, Reinforcing Steel. Для нашого перетину кільця з тунелем — аналог.",
+  "seen_in": []
+}

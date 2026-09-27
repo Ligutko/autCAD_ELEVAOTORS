@@ -1,0 +1,28 @@
+{
+  "id": "rec_329f3f4b",
+  "subject": "Норми: деформації основи силоса",
+  "kind": "limit",
+  "claim": {
+    "name": "foundation_tilt_max_rc_elevator",
+    "value": 0.004,
+    "unit": "ratio",
+    "qualifier": "окремо розташований силосний корпус монолітної залізобетонної конструкції; середнє осідання 40 см"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.bbcontrol.com.ua/wp-content/uploads/2024/12/dbn-v-2-1-10-2018-osnovy-i-fundamenty-budivel-ta-sporud-osnovni-polojennya.pdf",
+    "path": "inbox/raw/web/bbcontrol.com.ua/dbn-v-2-1-10-2018.pdf",
+    "page": 36,
+    "quote": "окремо розташований силосний корпус монолітної конструкції; - 0,004 40",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_2bb0bdda",
+    "rec_76e2a4eb"
+  ],
+  "notes": "ДБН В.2.1-10:2018, табл. А.1, поз. 4 (стор. 32 друку). Це залізобетонні елеватори, не сталевий силос; для сталевого є окрема норма ДБН В.2.6-221 (0.002 / 150 мм).",
+  "seen_in": []
+}

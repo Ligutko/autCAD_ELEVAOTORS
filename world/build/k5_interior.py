@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from kit import common as c  # noqa: E402
+from kit import foundation as fnd  # noqa: E402
 from kit import silo_interior as si  # noqa: E402
 from kit import silo_msvu220 as silo  # noqa: E402
 
@@ -79,15 +80,14 @@ def main():
     nx, ny = cut_n[0] / n, cut_n[1] / n
     c.mesh_from_arrays("CUT_GRAIN_SECTION", *si.grain_section(0.3, (nx, ny)), bpy.data.materials["WHEAT_CUT"],
                        collection=cutc)
-    t = (-ny, nx)
-    fr = silo.FOUND_R
-    fv = [(-t[0] * fr, -t[1] * fr, -silo.FOUND_H), (t[0] * fr, t[1] * fr, -silo.FOUND_H),
-          (t[0] * fr, t[1] * fr, 0.0), (-t[0] * fr, -t[1] * fr, 0.0)]
-    import numpy as np
-    c.mesh_from_arrays("CUT_FOUNDATION_SECTION", np.array(fv), np.array([(0, 1, 2, 3)]),
-                       bpy.data.materials["SILO_FOUNDATION"], collection=cutc)
+    rects = fnd.section_rects((nx, ny))
+    for k in ("ring", "footing", "floor_slab", "fill", "anchor"):
+        data = fnd.section_mesh(rects[k], (nx, ny), 0.004)
+        if data is not None:
+            mat = bpy.data.materials["SILO_FOUNDATION"] if k != "fill" else c.mat_painted("SOIL_FILL", (0.42, 0.41, 0.37), 0.95, grime=0.0)
+            c.mesh_from_arrays(f"CUT_FOUNDATION_{k.upper()}", *data, mat, collection=cutc)
     label_objs = c.labels(labels_def, "SILO_IN")
-    v, f = c.box((-800, -800, -0.8), (800, 800, -0.6))
+    v, f = c.box((-800, -800, -silo.FOUND_H - 0.2), (800, 800, -silo.FOUND_H))
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
     fog = volume_fog()
     measure["build_seconds"] = round(time.time() - t0, 1)

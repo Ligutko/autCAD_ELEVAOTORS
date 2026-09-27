@@ -79,9 +79,12 @@ SPOUT_R = 0.2                    # EST: Ø400 loading spout
 SPOUT_TOP = 21.422               # PDF p.8 / LUB: height to loading spout
 
 # ------------------------------------------------------------------ base
-FOUND_R = 11.6                   # PDF p.2/p.4: foundation ring a bit wider than wall, EST 0.6 m
+FOUND_R = _site()["silo_foundation"]["ring"]["r_out"]   # PDF p.2 / p.4: plinth R 11.375 (research/foundation.md)
 FLOOR_Z = 0.6                    # PDF p.4, p.6: silo base at +0.600 (site frame)
 FOUND_H = FLOOR_Z - c.ground_z() # plinth above ground: 1.05 (PDF p.4, ground -0.45)
+_DUCT_OPEN = _site()["silo_foundation"]["ring"]["fan_duct_opening"]
+DUCT_Z = (_DUCT_OPEN["z"][0] + 0.05 - FLOOR_Z, _DUCT_OPEN["z"][1] - 0.05 - FLOOR_Z)   # judgment: 5 cm clear in the opening
+DUCT_IN_R = aeration()["collector_r1"] - 0.05          # duct ends under the collector end (PDF p.2: r 10.68)
 AERATION_FANS = 4                # PDF p.2: four fan symbols per silo at 45 deg
 FAN_ANGLES = aeration()["fan_angles_deg"]   # PDF p.2 vectors: 47.5 / 132.5 / 227.5 / 312.5, not the diagonals
 FAN_R = aeration()["fan_r"]                 # PDF p.2 vectors: fan symbol centre 12.25 m from the silo axis
@@ -380,9 +383,10 @@ def build_eave_and_collar(peak_z):
     return c.merge_parts(parts)
 
 
-def build_foundation():
-    parts = [c.cylinder(FOUND_R, -FOUND_H, 0.0, steps=256)]
-    return c.merge_parts(parts)
+def build_foundation(band=None, state=None):
+    """Ring beam, footing, floor slab, anchors and settlement marks (world/kit/foundation.py)."""
+    from . import foundation
+    return foundation.build(band, state)
 
 
 def build_anchors():
@@ -438,8 +442,8 @@ def build_doors(doors=None):
             put(steps, (x0, -0.4, zt - 0.03), (x0 + STEP_GOING + 0.03, 0.4, zt), ang)
         for s in (-0.45, 0.43):                                                                     # stringers
             v = np.array([[0.05 + LANDING, s, z0], [0.05 + LANDING, s + 0.02, z0],
-                          [depth, s + 0.02, -FOUND_H], [depth, s, -FOUND_H]], float)
-            v = np.concatenate([v, v + [0, 0, -0.15]]) + [r, 0, 0]
+                          [depth, s + 0.02, -FOUND_H + 0.15], [depth, s, -FOUND_H + 0.15]], float)
+            v = np.concatenate([v, v + [0, 0, -0.15]]) + [r, 0, 0]                                  # foot on the ground
             f = np.array([(0, 1, 2, 3), (7, 6, 5, 4), (0, 4, 5, 1), (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)])
             steps.append((c.transform(v, rot_z=ang), f))
     return c.merge_parts(frame), c.merge_parts(panel), (c.merge_parts(steps) if steps else None)
@@ -546,7 +550,6 @@ def build_fans(fan_r=None, angles=None):
     medium-pressure fan: impeller housing Ø1.25 m scroll, width 0.5 m, outlet 0.45 x 0.5 m.
     """
     housings, motors, ducts, pads, dark = [], [], [], [], []
-    wall = R + 0.5 * WAVE_DEPTH + SHEET_T_BOTTOM
     grade = -FOUND_H
     fan_r = FAN_R if fan_r is None else fan_r
     inner = FOUND_R + 0.03                              # pad and base frame stop at the foundation plinth
@@ -560,11 +563,12 @@ def build_fans(fan_r=None, angles=None):
         for y0, y1 in ((-0.27, -0.25), (0.25, 0.27)):                                # side flanges
             v, f = _disc_y(lambda a: scroll(a) + 0.03, y0, y1, cx, cz)
             dark.append((c.transform(v, rot_z=ang), f))
-        # outlet duct: horizontal, from the top of the scroll to the wall
-        v, f = c.box((wall + 0.03, -0.25, cz + 0.10), (cx, 0.25, cz + 0.60))
+        # outlet duct: under the floor through the plinth opening into the collector end (SITE
+        # silo_foundation.ring.fan_duct_opening); the wall and its stiffeners stay uncut
+        dz0, dz1 = DUCT_Z
+        v, f = c.box((DUCT_IN_R, -0.25, dz0), (cx, 0.25, dz1))
         ducts.append((c.transform(v, rot_z=ang), f))
-        # transition into the wall: flange plate and a short transition piece
-        v, f = c.box((wall - 0.005, -0.34, 0.02), (wall + 0.03, 0.34, cz + 0.70))
+        v, f = c.box((FOUND_R + 0.002, -0.34, dz0 - 0.07), (FOUND_R + 0.03, 0.34, dz1 + 0.07))  # flange on the plinth face
         ducts.append((c.transform(v, rot_z=ang), f))
         # inlet bell and guard ring
         v, f = _cone_y(0.30, 0.36, 0.27, 0.46, cx, cz)
@@ -643,8 +647,11 @@ def build_roof_hatches(openings=None):
 
 # ================================================================== assembly
 
-def build(collection=None, materials=None, cut=None):
-    """Build the silo into `collection`. Returns (objects, measure)."""
+def build(collection=None, materials=None, cut=None, band=None, state=None, with_foundation=True):
+    """Build the silo into `collection`. band: tunnel band under this silo (foundation.tunnel_band),
+    None for a standalone silo (closed ring). state: SITE silo_foundation.states entry.
+    with_foundation=False leaves the foundation out (site scene builds it per silo).
+    Returns (objects, measure)."""
     m = materials or {
         "galv": c.mat_galvanized("SILO_GALV", age=0.30),
         "galv_old": c.mat_galvanized("SILO_GALV_ROOF", age=0.45, spangle_scale=60.0),
@@ -674,8 +681,10 @@ def build(collection=None, materials=None, cut=None):
     objs["roof"] = mk("SILO_ROOF", v, f, m["galv_old"], smooth=True, collection=collection)
     v, f = build_eave_and_collar(peak_z)
     objs["collar"] = mk("SILO_EAVE_COLLAR", v, f, m["galv"], smooth="quads", collection=collection)
-    v, f = build_foundation()
-    objs["foundation"] = mk("SILO_FOUNDATION", v, f, m["concrete"], collection=collection)
+    fmat = {"ring": "concrete", "footing": "concrete", "floor_slab": "concrete",
+            "anchor_rods": "galv_old", "anchor_plates": "dark", "marks": "galv"}
+    for k, (v, f) in (build_foundation(band, state) if with_foundation else {}).items():
+        objs[f"foundation_{k}"] = mk(f"SILO_FOUNDATION_{k.upper()}", v, f, m[fmat[k]], collection=collection)
     v, f = build_anchors()
     objs["anchors"] = mk("SILO_ANCHORS", v, f, m["galv_old"], collection=collection)
     (vf, ff), (vp, fp), steps = build_doors()

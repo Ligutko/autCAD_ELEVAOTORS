@@ -1,0 +1,25 @@
+{
+  "id": "rec_0bc07ac2",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "note",
+  "claim": {
+    "name": "anchor_system_large_bins",
+    "value": "система анкерування FULL SWEEP — стандарт для бінів 72 ft (22 м) і більше; закладні або клейові анкери за ACI; вітер до 90 mph (145 км/год)",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.aghs.ca/uploads/brock_commercialbins.pdf",
+    "path": "inbox/raw/web/aghs.ca/brock_commercialbins.pdf",
+    "page": 2,
+    "quote": "FULL SWEEP® Bin Anchoring System is standard on bins 72 feet (22 m) in diameter and larger.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Brock: анкерування великих бінів визначає не лише вітер, а й навантаження від зачисного шнека за один прохід (single-pass sweep).",
+  "seen_in": []
+}

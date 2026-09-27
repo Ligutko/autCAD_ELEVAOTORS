@@ -1,0 +1,24 @@
+{
+  "id": "rec_eb7dd2fd",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "judgment",
+  "claim": {
+    "name": "concrete_class_proposal",
+    "value": "C20/25 (W6, F150)",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "none",
+    "path": "",
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналоги: Sukup/AGI/Westeel 3000 psi ≈ 21 МПа ≈ C20/25 (циліндр). Українська практика для фундаментів сільгоспспоруд — C20/25…C25/30; W і F — judgment для ґрунту з можливим зволоженням і промерзанням. Арматура — A500C (judgment; аналог Grade 60).",
+  "seen_in": []
+}

@@ -1,0 +1,6286 @@
+=== page 1 ===
+ 
+ 
+42’ - 60’ DIA. COMMERCIAL BIN 
+CONSTRUCTION MANUAL 
+15K & 30K Roof 
+ 
+Roof rating is based on weight evenly distributed on peak ring as pure vertical load with uniformly distributed roof 
+snow load calculated from 40psf ground snow zone or 90 mph wind zone as defined by ASCE7-05 Code. 
+ 
+ 
+ 
+ 
+ 
+Date: 04/2016 
+Order:  
+Bin:  
+Customer: SAMPLE 
+Sukup Manufacturing Co. 
+Sukup Manufacturing Co.
+1555 255th Street, Box 677 
+Sheffield, Iowa, USA 50475-0677
+Phone: 641-892-4222 
+Fax: 641-892-4629 
+Website: www.sukup.com
+E-mail: info@sukup.com
+DATES 
+REVISIONS 
+SECTION 
+03/2016 – Updated warranty 
+03/2016 – Updated safety messages throughout 
+03/2016 – Updated bin loading & spout length guidelines .............................................. Operation & Management 
+03/2016 – Updated external roof ring & octagon lid installation instructions ..................................................... Roof 
+03/2016 – Updated poly roof vent assembly instructions .................................................................................. Roof 
+03/2016 – Added notes on sidewall reinforcement and overlapping base angle pieces ............................. Sidewall 
+03/2016 – Updated 30” x 60”door installation instructions .............................................................................. Doors 
+03/2015 – Updated roof sheet support heights ................................................................................................. Roof 
+
+=== page 2 ===
+ 
+ 
+IMPORTANT: 
+KEEP GALVANIZED SHEETS 
+ DRY BEFORE ERECTING! 
+  
+If this material is allowed to get wet or condensation is permitted
+to form between sheets, deterioration will occur. 
+ 
+ Upon receiving material, check for moisture between sheets. Do 
+not permit moisture from weather, condensation or other sources to
+remain between sheets. 
+ 
+ To help prevent white rust, store sheets away from moisture. Store 
+under cover in a heated building with adequate air circulation if 
+lengthy storage or adverse weather conditions are expected. Never
+allow water to stand on sheets or bundles. 
+ 
+ Sheets covered with tarpaulin or polyethylene should have enough 
+space between cover and sheets to allow air to circulate. 
+ 
+ If bundle gets wet, dry all materials immediately. Stack sheets on 
+edge in a dry place and force air between them. Allow for free 
+passage of air around each sheet when practical. 
+ 
+ NEVER lay steel on earth. Store on timber or blocks. Always store 
+material on a dry, solid surface in a manner that allows moisture to 
+run off of material. 
+ 
+Damage resulting from failure to take appropriate actions listed above 
+will void Sukup Manufacturing Co. warranty. 
+ 
+8/04/15 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   L0560 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+=== page 3 ===
+Sukup Manufacturing Co. 
+PO Box 677  Sheffield, IA  USA  50475 
+Phone:  641-892-4222  Fax:  641-892-4629 
+E-mail:  Info@sukup.com  Visit us at:  www.sukup.com 
+ 
+ 
+GRAIN BIN LIMITED WARRANTY 
+ 
+SUKUP MANUFACTURING CO. (Sukup) warrants, to original retail purchaser within 5 years from date of purchase, that grain 
+bin shall be free from defects in material and workmanship.  A part will not be considered defective if it substantially fulfills 
+performance specifications.  This includes cosmetic (appearance) issues that will not affect life of the structure.  Should any part 
+prove defective within warranty period, part will be replaced without charge F.O.B. Sukup Manufacturing Co., Sheffield, Iowa 
+USA or Distribution Centers - Arcola, Illinois;  Aurora, Nebraska;  Defiance, Ohio;  Jonesboro, Arkansas;  Cameron, Missouri;  
+Watertown, South Dakota.  To obtain warranty, a copy of original invoice is required. 
+WARRANTY CERTIFICATION - Warranty registration card should be mailed within two weeks of product delivery to certify 
+warranty coverage. 
+THE FOREGOING LIMITED WARRANTY IS EXCLUSIVE AND IN LIEU OF ALL OTHER WARRANTIES OF 
+MERCHANTABILITY, FITNESS OR PURPOSE AND OF ANY OTHER TYPE, WHETHER EXPRESS OR IMPLIED.  Sukup 
+neither assumes nor authorizes anyone to assume for it any other obligation or liability in connection with said part, and will not 
+be liable for incidental or consequential damages.  REMEDIES STATED HEREIN SHALL BE THE EXCLUSIVE REMEDIES 
+AVAILABLE UNDER THIS LIMITED WARRANTY. 
+Sukup reserves the right to change specifications, add improvements or discontinue manufacture of any of its equipment without 
+notice or obligation to purchasers of its equipment.  This warranty gives you specific legal rights.  You may also have other rights 
+which vary according to state or province. 
+WARRANTY EXCLUSIONS - Labor, transportation, or any cost related to a service call is not provided by Sukup.  This Limited 
+Warranty does not apply to damage resulting from misuse, neglect, normal wear, accident or improper installation or 
+maintenance. ITEMS NOT MANUFACTURED BY SUKUP ARE COVERED UNDER WARRANTIES OF THEIR RESPECTIVE 
+MANUFACTURERS AND ARE EXCLUDED FROM COVERAGE UNDER THE SUKUP WARRANTY.  SUKUP 
+MANUFACTURING CO. MAKES NO WARRANTY, EXPRESS OR IMPLIED, OF MERCHANTABILITY OR FITNESS FOR A 
+PARTICULAR PURPOSE. 
+Foundation recommendations are suggestions only and will vary according to local soil conditions.  Soil bearing tests must be 
+performed by a competent, independent engineering firm. Sukup will not assume responsibility for adverse result arising from 
+their use.  Sukup will not warrant damage or loss caused, in whole or in part, by inadequate or improper site selection, site 
+preparation, foundation, or any other failure to provide a suitable erection or installation environment for Sukup grain bin or of 
+any product, component, equipment, accessories, parts used in conjunction with Sukup grain bin.  Sukup will not warrant 
+damage or loss caused, in whole or in part, by use of bin in a manner other than for which it was designed, or by unauthorized 
+attachments, modifications, alterations, improper or inadequate maintenance, misuse or abuse of the bin. 
+Sukup is not liable for direct, indirect, incidental or consequential damages, including, without limitation, loss of anticipated 
+profits or benefits.  Not responsible for field modifications or erection defects which create structural or storage quality problems. 
+WARRANTY IS VOID - If not purchased from or constructed by an authorized dealer or a representative of Sukup 
+Manufacturing Co.; If used for substances other than grains and/or free flowing materials. 
+Prior to installation, purchaser has responsibility to properly store steel bin components.  Bin should be stored in dry, 
+temperature and humidity controlled areas to eliminate condensation and other moisture that causes white rust and corrosion.  
+Warranty does not extend to defects, damages or cosmetic (appearance) issues caused by improper storage or handling. 
+Sukup does not warrant any roof damage caused by excessive vacuum or internal pressure from fans or other air moving 
+systems.  Adequate ventilation and/or “make-up air” devices should be provided for all powered air handling systems. Warranty 
+is void if grain is above eave and against roof, as this will block roof vents and cause unwanted loads on roof sheets. Area 
+above surface of grain must allow free movement of air to vents. Sukup does not recommend use of downward flow systems 
+(suction). Severe structural roof damage may occur if fans or other air moving devices are operated during certain high 
+humidity/cold weather conditions.  Roof ventilators may frost over and plug or restrict air flow causing excessive vacuum or 
+internal pressures.  Roof damage may occur due to improperly installed grain temperature detection cable systems. 
+Sukup does not warrant failures due to filling bin off-center; unloading from door or off-center floor port; or radial cracks in 
+foundation.  If bin has a perforated floor on columns and columns fail, bin can shift sideways causing both sidewall and roof 
+damage. 
+UNAPPROVED PARTS OR MODIFICATION - All obligations of Sukup under this warranty are terminated if unapproved parts 
+are used, equipment is modified or altered in any way not approved by Sukup in writing, or is not erected or operated according 
+to Sukup installation or operating manuals. 
+ 
+ 
+©3/07/16 
+3
+
+=== page 4 ===
+ 
+Table of Contents 
+ 
+Important Message  ................................................................................................ 2 
+ 
+Limited Warranty  .................................................................................................... 3 
+ 
+Safety Section  ........................................................................................................ 5-15 
+ 
+Bin Operation & Management  ................................................................................ 16-32 
+ 
+Foundation & Anchor Locations  ............................................................................. 33-48 
+ 
+Commercial Anchors  .............................................................................................. 49-50 
+ 
+15K & 30K Roof Assembly  ..................................................................................... 51-78 
+ 
+Commercial Stiffened Sidewall  .............................................................................. 79-89 
+ 
+Wind Ring ............................................................................................................... 90-91 
+ 
+Doors ...................................................................................................................... 92-102 
+ 
+Sidedraw ................................................................................................................. 103-108 
+ 
+Ladders, Safety Cages & Platforms  ....................................................................... 109-139 
+ 
+Greene Sidewall / Easy Step Stairs  ....................................................................... 140-155 
+ 
+Color Chart .............................................................................................................. 156 
+ 
+ 
+ 
+IMPORTANT 
+ 
+Please read entire Bin Operation Manual and Construction Manual, paying close attention to safety sections. 
+Failure to read these manuals is a misuse of the product and could result in death or personal injury or 
+property damage. All personnel associated with the bin must read these manuals thoroughly as well. 
+ 
+Although every effort is made to ensure assembly drawings and instructions are written without errors, they 
+may happen. Therefore, if any concerns arise regarding any instructions or assembly drawings, please contact 
+Sukup Manufacturing Co. customer service immediately for clarification prior to proceeding with construction. 
+ 
+ 
+4
+
+=== page 5 ===
+IMP
+acc
+mo
+dec
+  
+On
+atte
+inte
+ 
+ 
+PORTANT: 
+cording to ill
+ore suitable a
+cal number w
+  Read man
+manual c
+R
+ safety deca
+ention to imp
+ensity.  
+ 
+RED -
+result 
+ 
+ORAN
+avoid
+ 
+YELLO
+may r
+ 
+BLUE
+related
+To prevent 
+ustration be
+area. Additio
+when orderin
+nual before in
+can result in
+Recogniz
+als, this symb
+portant instru
+- DANGER i
+in death or 
+NGE - WAR
+ed, could re
+OW - CAUT
+esult in mino
+E - NOTICE a
+d to property
+serious injur
+elow and are
+onal safety d
+ng. See con
+nstalling or u
+ death or se
+zing Saf
+bol and the s
+uctions rega
+indicates an
+serious injur
+NING indica
+sult in death
+TION indicate
+or or modera
+alerts you to p
+y damage. 
+ry or death t
+e legible. If a
+decals are av
+tact informa
+using produc
+erious injury.
+ 
+fety Dec
+ignal words 
+arding safety
+ imminently 
+ry. 
+ates a potent
+h or serious 
+es a potentia
+ate injury. 
+practices unr
+ 
+o you or you
+a suggested 
+vailable at n
+tion on cove
+ct. Failure to
+ Keep manu
+cal Inform
+Danger, Wa
+y. They indic
+hazardous 
+tially hazard
+injury. 
+ally hazardo
+related to pe
+ur family, be
+location is n
+o charge for
+er of manual
+o follow instr
+ual in a safe 
+mation 
+arning, Cautio
+cate potentia
+situation wh
+dous situatio
+ous situation 
+ersonal injury
+e certain that
+not clearly v
+r Sukup equ
+l. 
+uctions and 
+location for 
+on and Notic
+al hazards a
+hich, if not av
+n which, if n
+which, if no
+y, such as me
+t all decals a
+visible, place
+uipment. Plea
+safety preca
+future refere
+ce draw your 
+nd levels of 
+voided, will 
+not 
+t avoided, 
+essages 
+are in place 
+e decal in a 
+ase specify 
+ 
+autions in 
+ence. 
+5
+
+=== page 6 ===
+ 
+General Operational Safety Procedures 
+ 
+WARNING: Make hazards known to all personnel working in area so they can take 
+appropriate safety precautions. Failure to follow precautions listed below may 
+cause death or serious injury. 
+ 
+ 
+Hands, feet and clothing must be kept away from moving parts. Loose clothing can become 
+entangled in moving parts and cause serious injury. 
+ 
+Be aware of danger that is present when loading and unloading bin. Flowing and crusted grain 
+can trap and suffocate. 
+ 
+Do not enter bin without having an observer outside who is in constant contact with you. 
+ 
+Decals with specific messages are attached to equipment at various locations. Pay attention to 
+messages and always be alert to the possibility of personal injury or death. 
+ 
+Keep all guards and shields in place and secure while machines are in operation. 
+ 
+Ladders and working surfaces should have safety cages and handrails for safe use. Use a 
+lifeline and harness when danger of falling exists. 
+ 
+Keep bystanders and children away from grain bins and grain handling equipment. Bin sites 
+are not playgrounds! 
+ 
+Bins must be labeled to warn of entrapment and flowing grain hazards. 
+ 
+Proper operational procedures must be followed to ensure safety and well-being of all persons 
+working near or on grain bins when inspecting grain, performing maintenance or spraying 
+insecticides. 
+ 
+Hazards associated with grain bins include engulfment in grain, falls from heights, dust and 
+mold inhalation, pesticide exposure, electrocution, and injuries from augers. Take precautionary 
+steps to avoid these hazards. 
+ 
+Learn how to use controls and operate equipment correctly. Do not let anyone operate unit 
+(especially youth) without thorough training of basic operating and safety procedures. 
+ 
+Periodically check all mechanical and electrical components to keep them in good working 
+condition. Make no unauthorized modifications to equipment. Doing so may endanger function 
+and safety of unit. 
+ 
+Be aware of weather-related safety hazards. Icicles and snow falling from bin eave are 
+dangerous and can cause serious injury or death. Ice or moisture on ladders can cause slippery 
+conditions that may result in a life-threatening fall. 
+ 
+For added security and safety, attach a padlock to sidewall door latch. 
+ 
+ 
+If you must enter bin, shut off equipment and lock out all power sources before entering; keep 
+clear of all moving parts; use a safety harness and safety line, station another person outside of 
+bin; avoid center of bin; wear proper breathing equipment or respirator; follow applicable safety 
+regulations; ensure quick access to an ABC dry chemical fire extinguisher. 
+ 
+ 
+6
+
+=== page 7 ===
+ 
+ 
+No
+par
+gra
+ind
+Cra
+ 
+Ow
+con
+Peo
+brid
+you
+sum
+gra
+figu
+ 
+ 
+ 
+ 
+Gra
+the
+suf
+abo
+the
+to y
+ 
+Gra
+qui
+Flo
+ 
+Flo
+Ho
+bec
+ 
+ 
+ one should
+rts such as a
+ain is very d
+dividual’s ch
+awling betwe
+wners/operat
+nfined space
+ople can be
+dged grain, 
+u must unde
+mp (bins ere
+ain flows from
+ures below. 
+ain across b
+e funnel flow
+ffocated. An 
+out 6’ tall dis
+e entire body
+your knees a
+ain surface m
+icksand. Wh
+owing grain i
+owing grain i
+wever, the 
+cause grain 
+ 
+d enter a gra
+augers or be
+dangerous. W
+ance of bei
+een roof and
+tors are res
+e entry proce
+ecome caug
+and collapse
+erstand how
+ected with a 
+m top surfac
+From time au
+have 2 secon
+bottom and a
+w very dang
+8” auger ca
+splaces abou
+y could be su
+and totally h
+may appear 
+hen a single 
+s fluid. Obje
+s like water 
+amount of f
+exerts no bu
+Dange
+ain bin while
+eing crushed
+Working in 
+ing suffocat
+d peak could
+ponsible for
+edures (29C
+F
+ht or trappe
+e of a vertic
+w grain flows
+sidedraw ar
+ce down a ce
+2 seconds 
+uger starts, yo
+nds to react. 
+around sides
+erous. A pe
+an transfer 3
+ut 7-1/2 cub
+ubmerged in
+elpless to fre
+solid but no
+kernel is rem
+ects on surfa
+in that it wil
+force require
+uoyant force
+ers of En
+ it is being l
+d and/or suff
+a grain bin 
+ed. If store
+d cave grain 
+r developing
+CFR 1910.14
+Flowing &
+ed by grain i
+cal wall of gr
+s when it is 
+re only exce
+enter core to
+Based on
+ 
+4 
+ou              In 
+      yo
+s of bin doe
+erson in a b
+3,000 cubic f
+ic feet, assu
+n a funnel in 
+ee yourself i
+ot be. A sma
+moved from 
+ce sink and 
+ll exert press
+ed to pull s
+e and has mu
+ 
+ntering 
+ 
+loaded or un
+ocated by g
+without follo
+d grain is p
+and block e
+g site-specif
+46) can be fo
+ 
+& Crusted
+ 
+in several w
+rain. To bette
+unloaded. G
+eption). Whe
+o center sum
+ 8” unload
+seconds
+4 seconds
+u are trapped
+es not move
+bin would be
+feet of grain
+uming an ave
+about 8 sec
+in less than 
+ll opening in
+bottom of b
+heavy objec
+sure over en
+omeone up 
+uch greater 
+a Grain 
+nloaded due
+rain. Enterin
+owing prope
+peaked clos
+xit. 
+fic confined 
+ound at www
+d Grain 
+ways: entrap
+er understan
+Grain bins a
+en center sum
+mp. This is ca
+d auger 
+  
+8 s
+d 
+. The speed
+e carried to 
+n per hour (5
+erage body 
+conds. Even
+4 seconds.
+n unload gat
+bin, kernels d
+cts sink faste
+ntire area of
+ through gr
+internal frict
+Bin 
+e to risk of b
+ng a bin that
+er safety pro
+se to roof, b
+space entr
+w.osha.gov. 
+pment by flo
+nd why grain
+re first emp
+mp is opene
+alled funnel 
+seconds 
+After 8 seco
+completely c
+d at which g
+ center, qui
+52 cubic feet
+diameter of 
+n more impor
+e gives entir
+directly abov
+er than sma
+f any object 
+rain is much
+tion.
+being injured
+t has bridged
+ocedures in
+be extremel
+ry procedure
+owing grain, 
+n flow is so 
+tied through
+ed and auge
+flow and is i
+nds, you are 
+covered. 
+rain is remo
+ckly drawn 
+t per minute
+15 inches. T
+rtantly, you c
+re surface th
+ve it rush to 
+ll ones. 
+that is subm
+h greater tha
+d by moving 
+d or crusted 
+ncreases an 
+ly cautious. 
+es. OSHA’s 
+collapse of 
+dangerous, 
+h the center 
+er is started, 
+llustrated in 
+                     
+oved makes 
+under, and 
+e). A person 
+This means 
+could be up 
+he quality of 
+fill the void. 
+merged in it. 
+an in water 
+ 
+    
+7
+
+=== page 8 ===
+ 
+Even if grain has stopped flowing, submerged objects or people are difficult to extract. Even victims with 
+tremendous upper-body strength cannot pull themselves out if they are buried to the chest. The force 
+required to remove someone buried below the surface of grain can easily exceed 2,000 pounds, which is 
+about the same as needed to lift a small car. 
+ 
+If you become trapped in a bin of flowing grain with nothing to hold onto but you are still able to walk, stay 
+near outside wall. Keep walking until bin is empty or grain flow stops. If you become covered in flowing 
+grain, cup your hands over your mouth and take short breaths. This may keep you alive until help arrives. 
+Additional personnel should call for an emergency rescue team or fire department immediately. Ventilate bin 
+with an aeration system but DO NOT activate heat source. Wait for emergency crews to arrive before 
+attempting rescue. Offer assistance to rescuers and follow directions given by incident commander. 
+ 
+Bridged & Caked Grain 
+ 
+Spoiled grain tends to clump together and grain that is stored in cold temperatures can appear to have a 
+solid surface while, in reality, it may collapse if walked upon. Be aware of a potential engulfment hazard 
+when walking on surface crust. Never enter a bin unless you know the nature of previous grain removal, 
+especially if any crusting is evident. Proper safety precautions must be taken. After grain has been 
+removed, look for a funnel shape at surface of grain mass. If grain appears to be undisturbed, then it 
+has bridged and created a cavity. 
+Bridged grain may create air spaces in a partially unloaded bin (see above). As grain is removed from bin, a 
+cavity develops under crusted surface. This situation presents several dangers. First, the person may break 
+through the surface and be trapped instantly in flowing grain. Another danger is that a large void may be 
+created under the bridge by previous unloading so that a person who breaks through crust may be buried 
+under grain and suffocate, even without auger running. The third hazard is that if grain is wet enough to 
+mold and bridge across bin, there may be little oxygen present in cavity due to microbial gases. A person 
+falling into a cavity will be forced to breathe toxic gases, even though his head is above surrounding grain. 
+From outside of bin, use a pole or other object to break bridge, causing it to collapse. 
+ 
+Grain can also cake in a large mass against wall when it has been stored improperly or in poor condition. 
+Mass of grain can cause engulfment or crushing hazards to workers who attempt to break grain loose with 
+shovels or other objects. 
+This risk increases as capacity of bin increases. A person lying prone and covered by 1 foot of grain will be 
+subjected to a force of over 300 lbs. Be alert while working with grain that has gone out of condition. 
+Entering a bin when there may be molds, blocked flow, cavities, crusting, and possible cave-ins can cost 
+you your life. When you are breaking up large masses of vertically crusted grain, do so with a long wooden 
+pole from manhole above grain. 
+ 
+8
+
+=== page 9 ===
+ 
+Moving Parts 
+ 
+When bin is nearly empty, sweep (floor) auger travels at a faster speed around bin. If caught in rotating 
+auger, a body part can be pulled along with grain, cutting and tearing flesh. Also, an exposed auger in a 
+sump can cause serious injury if sump is stepped into or fallen into. All shields should be in place to prevent 
+body parts from getting caught. 
+ 
+To help prevent tragedy, SAFETY SHOULD BE THE TOP PRIORITY. Preparation is the first and most 
+important step. Failure to follow precautions listed below may cause death or serious injury. 
+ 
+ 
+ 
+Keep hands, feet and clothing away from moving parts. Loose clothing can become entangled in 
+rotating parts and cause serious injury or death. 
+ 
+ 
+Guards and shields are provided for your protection. Make sure all are secure and in place while 
+machine is in operation. 
+ 
+ 
+Replace safety shields that have been damaged or were removed for servicing equipment. Fasten 
+shields securely. 
+ 
+ 
+Be sure to wear tight-fitting clothing when working near a grain auger. Loose, floppy clothing, long 
+shoestrings and drawstrings on hooded jackets can easily become entangled in rotating parts. 
+Entangled clothing will pull the body into moving machinery and severe injury will result. 
+ 
+ 
+Limit number of people around augers when in use. Only those who are essential to job should be 
+there. 
+ 
+ 
+Watch children closely. Never leave them unattended. Keep them away from vehicles, flowing grain 
+and moving parts. Small hands and feet can penetrate even properly shielded augers, belts and 
+PTOs. Teach children which areas are safe and which are not. 
+ 
+ 
+Be certain all machinery is in good working condition. 
+ 
+ 
+9
+
+=== page 10 ===
+ 
+Loc
+sta
+act
+sou
+tag
+bee
+Gra
+ma
+pro
+Loc
+dev
+equ
+loc
+equ
+Tag
+equ
+ind
+tho
+Ow
+equ
+(29
+ 
+ 
+Wh
+by 
+eve
+cha
+ 
+Ow
+equ
+can
+ 
+ 
+ 
+ckout/Tagou
+artup of ma
+tivities. This 
+urce(s) befo
+g energy-iso
+en isolated e
+ 
+ain storage 
+ake sure the
+ocedures are
+ 
+ckout refers
+vice in a sa
+uipment bein
+king device
+uipment 
+ 
+gout refers 
+uipment ma
+dividual apply
+ose devices t
+ 
+wners/Opera
+uipment, co
+9CFR 1910.1
+ 
+hen entering
+respiratory 
+en death. W
+ance of deve
+wners/Opera
+uipment stan
+n be obtaine
+ 
+ut refers to s
+chinery and
+requires, in 
+re performin
+lating device
+effectively. 
+structures a
+ey take prop
+e followed be
+s to a device
+afe position 
+ng controlled
+es. Tags sho
+to placeme
+y not be op
+ying the dev
+that require 
+tors are re
+onditions an
+147) can be 
+ an inadequ
+hazards (ga
+Working in gra
+eloping a res
+tors are resp
+ndards. OSH
+ed at www.os
+pecific pract
+d equipmen
+part, that an
+ng service or
+e(s) to preve
+and handlin
+per steps to
+efore perform
+e that uses 
+and preven
+d cannot be 
+ould be affi
+ent of a tag
+perated until 
+vice and serv
+a restraint. 
+esponsible f
+nd situations
+obtained at 
+ately ventila
+ases, fumes 
+ain bins with
+spiratory dis
+ponsible for 
+HA’s persona
+sha.gov. 
+Sh
+When wo
+avoid inju
+care. An 
+other fore
+debris left
+bin. 
+ 
+Be aware
+allow any
+wagons. K
+unloading
+all times w
+ 
+Locko
+tices and pro
+nt or releas
+n authorized
+r maintenanc
+ent release 
+ng equipmen
+o prevent in
+ming any se
+a lock -- eit
+nt energizing
+operated u
+ixed in a m
+g on a dev
+tag device 
+vicing the eq
+for develop
+s at their in
+www.osha.g
+Ve
+ated area, ind
+and dust) th
+hout proper r
+ease. 
+developing 
+al protective
+arp Edg
+rking in, on 
+uries, wear p
+excellent sa
+ign material
+t near bin sit
+e of trucks, 
+yone to ride
+Keep childre
+. Always kn
+when grain is
+ 
+out/Tago
+ocedures to 
+e of hazard
+d individual is
+ce. It also re
+of hazardou
+nt may crea
+njuries, illnes
+rvice on equ
+her key or c
+g of a mac
+ntil lockout d
+manner that 
+ice that is 
+is removed
+quipment. T
+ping site-spe
+ndividual lo
+gov. 
+ntilation
+dividuals ma
+hat can cau
+respiratory p
+site-specific
+e equipment 
+ges & Ob
+or near a b
+protective c
+afety practic
+s that may g
+te may interf
+tractors, wa
+e on trucks
+en off grain
+now where a
+s being load
+out 
+ safeguard a
+dous energ
+solate mach
+equires auth
+us energy, a
+ate hazardo
+ss or death
+uipment or e
+combination 
+chine or equ
+device is rem
+clearly iden
+not capable
+d. These tag
+hese tags d
+ecific Locko
+cations. OS
+n 
+ay be at risk 
+se permane
+protection in
+c personal pr
+standards (2
+bstacles
+bin, rememb
+lothing and 
+ce is to kee
+get covered
+fere with saf
+agons, auge
+ equipped 
+n vehicles a
+all family me
+ed, unloade
+against unex
+y during se
+hinery or equ
+orized indivi
+and take ste
+us work are
+. Be certain
+entering bin. 
+type -- to h
+uipment. Th
+moved. Tag
+ntifies the i
+e of being l
+gs are singu
+do not provid
+out/Tagout 
+SHA’s Locko
+of being ov
+ent lung dam
+creases a p
+rotective 
+29CFR 1910
+s 
+ber that meta
+handle equ
+ep bin site c
+d up by snow
+fe, unobstru
+ers, hopper
+with grain 
+and out of b
+embers are 
+ed, moved or
+xpected ene
+ervice or m
+uipment from
+idual(s) to ei
+ps to verify 
+eas. Individu
+n proper loc
+hold an ener
+is device e
+s must be u
+ndividual se
+locked out, 
+ularly identifi
+de physical 
+procedures 
+out/Tagout 
+ercome 
+mage or 
+person’s 
+0.134) 
+al edges are
+uipment and
+clear of scra
+w or tall gras
+cted movem
+s and pits, 
+beds or gr
+bins while lo
+(especially 
+r otherwise h
+ergization or 
+maintenance 
+m its energy 
+ither lock or 
+energy has 
+uals should 
+ckout/tagout 
+rgy-isolating 
+nsures that 
+used with all 
+ervicing the 
+to indicate 
+ed with the 
+restraint on 
+based on 
+procedures 
+e sharp. To 
+d parts with 
+ap iron and 
+ss. Items or 
+ment around 
+etc. Never 
+avity dump 
+oading and 
+children) at 
+handled. 
+10
+
+=== page 11 ===
+ 
+SIDEWALL
+SHEET
+STIFFENER 
+LADDER RUNG 
+2-1/2” 
+WIND 
+RING 
+1-1/2” MINIMUM 
+BELOW LADDER 
+RUNG 
+4-1/2” MINIMUM 
+ABOVE LADDER 
+RUNG 
+11”
+LADDER 
+7” MINIMUM 
+FROM BIN 
+SIDEWALL TO 
+CENTER OF 
+LADDER 
+RUNG 
+Falls & Obstructions 
+ 
+Falls from grain bins at any height can cause injury. Ladders on bins can become very slippery or icy in 
+inclement weather. Maintain a secure handhold and foothold when climbing on bin. Metal is slippery when 
+wet. Never carry items while climbing on bins. Also, be certain no obstacles are in front of ladder. 
+ 
+Slippery metal, broken or loose ladder rungs and loose handholds can be very dangerous. Repair loose 
+ladder rungs and handholds as soon as they are discovered. Follow maintenance guidelines listed at back 
+of operation manual to prevent serious injury. 
+ 
+Make sure there are no obstructions near 
+ladder rungs. Be certain wind rings (usually 
+on taller commercial bins) are installed 
+according to illustration at right so adequate 
+clearances for hands and feet are provided. 
+Wind rings must be a minimum of 1-1/2” 
+below and 4-1/2” above any ladder rung. A 
+wind ring assembled within 4-1/2” above a 
+ladder rung can interfere with foothold and 
+cause you to fall. 
+ 
+American 
+Society 
+of 
+Agricultural 
+and 
+Biological Engineers (ASABE) standards 
+state that landing platforms shall be 
+provided at each 30’ of ladder height. 
+Center of outside ladder must be at least 7” 
+from sidewall. 
+ 
+NOTE: Failure to install ladder and safety 
+cages correctly and to use fall restraint or 
+arrest systems correctly may cause death 
+or serious injury. Contact your dealer if 
+proper ladder and accessories are not 
+installed. 
+ 
+ 
+Ladder Safety 
+ 
+ 
+Working load of ladder is 300 pounds. Do not overload. 
+ 
+Inspect ladder carefully before use. Never climb deteriorated, damaged or improperly assembled 
+ladder components. 
+ 
+Never use ladder if you are physically impaired. 
+ 
+Never carry items while climbing. 
+ 
+Always have another person present while climbing. 
+ 
+Use safety harness and safety line as required. 
+ 
+Metal is slippery when wet. Always maintain a firm grip and wear slip-resistant shoes when climbing. 
+ 
+Always face ladder when using it. 
+ 
+Never apply external load. Never push or pull anything while on ladder. 
+ 
+ 
+WARNING: Failure to follow precautions above may result in death or serious injury. 
+ 
+11
+
+=== page 12 ===
+ 
+Wh
+com
+ser
+inju
+ 
+A f
+the
+ma
+ 
+A f
+par
+ins
+ 
+Life
+com
+anc
+anc
+ser
+saf
+dis
+a m
+ma
+ 
+Ind
+a li
+sin
+ 
+Co
+eav
+sho
+sid
+ 
+ 
+hen working 
+mponents be
+rvice accord
+ury. 
+fall restraint
+e individual 
+anufacturer’s
+fall arrest s
+rameters. Fa
+tructions. 
+elines and 
+mponent co
+chorage at 
+chorages at 
+rve as a me
+fety harnes
+tribute the fa
+means of at
+anufacturer’s
+dividuals who
+feline and h
+gle person c
+nnections o
+ve of roof. I
+ould be used
+ewall. 
+at a height 
+efore each u
+ding to manu
+t system co
+is prevent
+s recommend
+system cons
+all arrest sy
+safety harn
+onsisting of 
+one end to
+both ends 
+eans for con
+ss has strap
+all arrest for
+ttaching it to
+s instructions
+o enter a gra
+arness. Whe
+cannot go fo
+utside bin o
+f work need
+d. When wo
+Fall Re
+where fall h
+use for wear
+ufacturer’s in
+onsists of a 
+ed from fa
+dations and 
+sists of a ha
+stems shou
+nesses are 
+a flexible 
+o hang verti
+to stretch h
+necting othe
+ps that wrap
+rces over thi
+o other com
+s when using
+ain storage s
+en entering a
+or help and g
+n roof shoul
+ds to be don
+orking inside
+ 
+estraints
+hazards exis
+, damage an
+nstructions. 
+body belt or
+alling. Fall r
+instructions
+arness, lany
+ld be used 
+used with 
+line (rope o
+cally (vertic
+orizontally (
+er componen
+p around an
+ighs, pelvis, 
+mponents of 
+g a lifeline a
+structure from
+any bin or st
+give first aid 
+d be made t
+ne on portio
+ bin, approp
+ 
+s & Arre
+st, always us
+nd other dete
+Failure to h
+r harness, la
+restraint sy
+. 
+yard and an
+in accordan
+both syste
+or cable) fo
+cal lifeline), 
+(horizontal li
+nts of a fall 
+ individual i
+waist, ches
+a fall prote
+nd safety ha
+m a level at 
+torage unit, 
+simultaneou
+to peak ring
+ons of sidew
+priate conne
+est Syste
+se a fall res
+erioration. R
+heed this wa
+anyard and a
+stems shou
+chor. The s
+nce with man
+ems. A lifel
+or connectio
+or for conn
+ifeline). Lifel
+protection s
+in a manne
+st, and shoul
+ection system
+arness.  
+or above sto
+have multipl
+usly. 
+g. Lifelines s
+wall, proper 
+ections shou
+ems 
+straint or fall
+Remove defe
+arning may c
+anchor. The
+uld be use
+system stops
+nufacturer’s 
+line is a 
+on to an 
+nection to 
+lines also 
+system. A 
+r that will 
+lders with 
+m. Follow 
+ored grain s
+le people ou
+hould not le
+equipment 
+ld be made 
+ arrest syste
+ective compo
+cause death
+e system is a
+d in accord
+s a fall with
+recommend
+hould be eq
+utside and on
+t individual e
+such as lifts
+to rafters, p
+em. Inspect 
+onents from 
+h or serious 
+arranged so 
+dance with 
+in specified 
+dations and 
+uipped with 
+ne inside. A 
+extend past 
+s or cranes 
+peak ring or 
+12
+
+=== page 13 ===
+ 
+Re
+pas
+or m
+A k
+Ma
+anc
+har
+ma
+add
+straint anc
+ssing pulley
+more. See in
+ 
+knot-passing
+anufacturing 
+chor at eave
+rness attach
+anufacturers’
+ditional safe
+Kn
+chor capable
+y with restr
+nstallation in
+g pulley is in
+Co.). A fee
+e of bin near
+hment. Do 
+’ instruction
+ty informatio
+TI
+not-Pass
+e of suppor
+raint anchor
+nstructions in
+ntended to b
+eder line sho
+ manhole. F
+not attach 
+s. Refer to 
+on.  
+FEEDER 
+LIFELINE
+IGHTEN FEEDE
+IT FROM
+sing Pull
+rting 1,800 
+r is provided
+n Bin Constr
+be used with
+ould pass th
+Feeder line is
+safety harn
+Fall Restra
+LINE USED TO
+E THROUGH PU
+ER LINE TO PRE
+ HANGING IN G
+ 
+ley & Re
+lbs. is prov
+d for use in c
+ruction Manu
+h a lifeline a
+hrough knot
+s used to pu
+ness to feed
+aints & Arres
+ 
+ PULL
+ULLEY.
+EVENT
+GRAIN.
+estraint 
+vided for us
+commercial b
+ual. 
+and safety h
+t-passing pu
+ull lifeline thr
+der line. Us
+st Systems 
+Anchor
+e inside of 
+bins with roo
+arness (neit
+ulley at peak
+ough knot-p
+se safety eq
+section and
+ 
+all Sukup b
+ofs rated for 
+ther supplied
+k and throu
+passing pulle
+quipment ac
+d to www.o
+bins. Knot-
+15,000 lbs. 
+d by Sukup 
+gh restraint 
+ey for safety 
+ccording to 
+sha.gov for 
+13
+
+=== page 14 ===
+ 
+Top Causes of Bin Failure 
+ 
+ 
+OFF-CENTER (ECCENTRIC) UNLOADING 
+AND/OR LOADING 
+ 
+Non-free flowing grain (spoiled, frozen, crusted 
+etc.) 
+ 
+Door panels not tightly secured against inner 
+door frame 
+ 
+Augers, spouts, or conveyors improperly 
+attached to roof 
+ 
+Sidedraw improperly installed or operated 
+ 
+Rusted wall sheets 
+ 
+Simultaneous loading and unloading 
+ 
+Settling of foundation (uneven pad) 
+ 
+Improper usage (storage and aeration) 
+ 
+Storing wet and dry grain in the same bin 
+without stirring 
+ 
+Neglect of bin maintenance 
+ 
+Modifications made during installation or 
+assembly 
+ 
+Incorrectly installed sidewall sheets and/or 
+stiffeners 
+ 
+Blocked roof vents causing excessive pressures 
+on roof (overfilling, frosted vents, etc.) 
+ 
+Improper temperature cable support and/or 
+placement  
+ 
+ 
+ 
+ 
+WARNING: Damage from issues 
+listed above may cause sudden 
+structural failure and collapse, which 
+may result in death or serious injury. Frequently 
+monitor and inspect bin and foundation for any 
+deflections, cracks or deviations that may 
+occur. Follow operation and maintenance 
+instructions described in this manual.
+ 
+ 
+ 
+ 
+ 
+Determining an Existing Bin’s Fitness for Duty 
+Farm and commercial bins are built to last for many years. However, factors such as weather, usage, 
+accidents and seismic activity can put stresses on a bin that compromise its structural fitness. Following 
+are issues to consider in determining whether a bin should be taken out of service and/or replaced. 
+ 
+ 
+Extensive rust on inside or outside of roof and/or sidewall sheets, or on stiffeners 
+ 
+Rust holes or significant wearing and/or tearing of roof and/or sidewall sheets 
+ 
+Damaged stiffeners or sidewall sheets (kinked or bent from off-center loading or unloading, etc.) 
+ 
+Leaking roof or sidewalls 
+ 
+Missing connections between wall and roof structure 
+ 
+Missing or sheared bolts 
+ 
+Loose, broken or shifted anchors 
+ 
+Damaged foundation or bin floor (cracks in concrete foundation, uneven settlement) 
+ 
+Minor levels of any of these issues should be repaired promptly. If levels are moderate to high, bin should 
+be taken out of service or replaced. If unsure, take pictures of the issues and contact an independent 
+consulting engineer. 
+ 
+Besides condition of bin, other factors to consider in determining whether to decommission it include age 
+of bin, insurability, capacity, compatibility with modern grain handling and moving equipment, and future 
+plans for bin site. 
+ 
+14
+
+=== page 15 ===
+ 
+Construction Safety 
+ 
+On grain bin construction sites, carelessness and/or operator error may result in serious injury or death. 
+Hazard control and accident prevention depend on awareness, cautiousness, and proper training of 
+personnel involved in construction of bin. Be certain all crew members are properly trained and thoroughly 
+familiar with all aspects of grain bin construction. 
+ 
+Listed below are items construction crew members should be knowledgeable of to minimize risk of injury 
+to personnel and damage to equipment. NOTE: Following items are examples taken from a broad list of 
+OSHA’s 
+Safety 
+and 
+Health 
+Regulations 
+for 
+Construction. 
+Generally, 
+these 
+are 
+common 
+requirements/items necessary on grain bin construction sites. 
+ 
+ 
+Personal Protective  
+- 
+Head Protection 
+- 
+Hearing Protection 
+- 
+Eye and Face Protection 
+- 
+Steel Toed Boots/Shoes 
+- 
+Gloves 
+ 
+Concrete Construction 
+ 
+Material Handling & Storage 
+ 
+Tools – Hand and Power 
+ 
+Welding and Cutting 
+ 
+Electrical 
+ 
+Ladders 
+ 
+Scaffolds and Working Platforms 
+ 
+Fall Protection 
+ 
+Steel Erection 
+- 
+Center Pole (Roof) Jack* 
+- 
+Sidewall Jacks* 
+ 
+Motorized Equipment 
+- 
+Trenchers 
+- 
+Forklifts 
+- 
+Skidsteers 
+- 
+Telehandlers 
+- 
+Boom Lifts 
+ 
+Cranes and Hoists 
+ 
+Signs and Signals for Use of Motorized Equipment 
+ 
+*NOTE: Be certain to read and fully understand correct operating procedures for bin jacking equipment. 
+This equipment is provided with understanding that purchaser/operator are thoroughly familiar with correct 
+applications and proper usage techniques. Jack manufacturers will assume no responsibility for damage 
+to equipment or any injury resulting from operation of their equipment. 
+ 
+Erectors/contractors are responsible for developing site-specific construction guidelines and procedures 
+based on equipment, conditions and situations at their individual location. OSHA’s Safety and Health 
+Regulations for Construction (29CFR1926) can be obtained at www.osha.gov. 
+ 
+ 
+15
+
+=== page 16 ===
+ 
+Bin Operation & Management 
+ 
+Bin Description 
+ 
+Sukup Manufacturing Co. grain bins are designed to meet a wide variety of needs, but all bins cannot be 
+used for all purposes. Listed below are different types of grain bins made by Sukup. See following page for 
+application definitions. Check to be certain which type of bin you ordered and received. Bin number is 
+listed on quote from dealer or on color chart that comes with bin. Example below illustrates how bin 
+numbers are read. Circle the bin you ordered. 
+ 
+Prefix   
+Description 
+B 
+ 
+Farm Bins 
+BD 
+ 
+Farm Heavy Gauge Drying Bins 
+BS 
+ 
+Farm Stiffened Bins 
+BSD 
+ 
+Farm Stiffened Heavy Gauge Drying Bins 
+BHM  
+Medium Duty Hopper Bins 
+BH 
+ 
+Heavy Duty Hopper Bins 
+BC 
+ 
+Commercial Bins 
+  
+ 
+NOTE: Bin numbers ending with an “X” indicate bin with a special design. Look for label on inside of door 
+for specific design/usage information. 
+ 
+ 
+(B) Farm Bins: 15’ to 48’ in diameter, maximum 10 rings tall.  
+- Bins are designed for storage, aeration and short-term wet holding. 
+- Limitation - Bins up to six rings are designed for stirring machine and general drying. May use stirring 
+device with up to three down augers. Bins seven or more rings tall are not designed for a stirring machine. 
+ 
+(BD) Farm Heavy Gauge Drying Bins: 18’ to 48’ in diameter, five or six rings tall. 
+- Designed for general drying, general wet holding, working and storage. May use stirring device with up to 
+five down augers, center unload continuous flow system or recirculating devices. 
+ 
+(BS) Farm Stiffened Bins: 15’ to 48’ in diameter, maximum 12 rings tall. 
+Bins are designed for storage, aeration and short-term wet holding. 
+- Limitation - Bins up to six rings are designed for stirring machine and general drying. May use stirring 
+device with up to three down augers. Bins seven or more rings tall are not designed for a stirring machine. 
+ 
+(BSD) Farm Stiffened Heavy Gauge Drying Bins: 18’ to 48’ in diameter, five or six rings tall. 
+- Designed for general drying, general wet holding, working and storage. May use stirring device with up to 
+five down augers, center unload continuous flow system or recirculating devices. 
+ 
+(BHM) Medium Duty Hopper Bins: 15’ to 21’ in diameter, three to six rings tall.  
+- Designed for corn and sorghum (48lbs./ft.³) storage, aeration and short-term wet holding; NOT DRYING. 
+- Limitation - 45⁰ Medium Duty Hopper bins can be utilized as working bins if total grain depth (outlet cone 
+to peak) is less than twice the bin diameter. IMPORTANT: Monitor cone panel wear with heavy use. 
+ 
+(BH) Heavy Duty Hopper Bins: 15’ to 36’ in diameter, three to 12 rings tall. 
+- Designed for storage, aeration and short-term wet holding; NOT DRYING.  
+- Limitation - 45⁰ Heavy Duty Hopper bins can be utilized as working bins if total grain depth (outlet cone to 
+peak) is less than twice the bin diameter IMPORTANT: Monitor cone panel wear with heavy use. 
+ 
+(BC) Commercial Bins: 18’ to 156’ in diameter, 13 rings and taller. 
+- Designed for storage only; NOT DRYING. Store only dry, cool, free-flowing grain. 
+- Limitation - May be used for short-term wet holding on 60’ diameter and smaller bins, max 12 rings tall. 
+16
+
+=== page 17 ===
+ 
+Bin Usage 
+ 
+Table below shows uses for which each bin is designed. 
+ 
+* See previous page to determine available sizes 
+** Available on bins up to 105’ diameter 
+ 
+Application Definitions 
+ 
+Storage – Storing dry, cool, free-flowing grain only. Generally should include an aeration method. 
+ 
+Aeration – Using fan(s) with full floor or aeration tunnels to keep dry grain within 10°F (6°C) of ambient air 
+temperature. 
+ 
+Drying – Drying wet grain to proper moisture content for storage. Type of grain and length of storage time 
+will determine proper moisture content. 
+ 
+Stirring Machine – Mixing grain using stirring augers while drying to ensure uniform condition. 
+ 
+Cooling – Requires full floor and properly sized fan(s) to achieve adequate cooling. 
+ 
+Short-term Wet Holding – Storing wet grain (over 16% moisture) up to 72 hours. Aeration is needed. 
+ 
+General Wet Holding – Storing wet grain (over 16% moisture) more than 72 hours. Aeration is required. 
+NOTE: Grain will deteriorate faster as temperature and moisture content increase. 
+ 
+Working – Refilling 25% or more of maximum bin capacity more than 12 times a year, where new grain 
+settles for more than 72 hours per occurrence. Working bins require grain to be unloaded by gravity out of 
+center sump only. 
+ 
+Sidedraw – Controlled removal of grain from side of bin. Available only on commercial bins. Sidedraws are 
+not to be used as a primary outlet in a working bin application. If 25% of maximum capacity will be 
+withdrawn more than 12 times a year through sidedraw, a special sidedraw working bin needs to be 
+designed. Contact Sukup Manufacturing Co. customer service. 
+ 
+Be sure to review bin descriptions on previous page for proper usage. 
+ 
+The following pages contain more information on operation and management of grain bins. Each section will 
+include one of the tags below (FARM, HOPPER, COMM., ALL) that identifies which type of bin applies to 
+that section. The ALL tag means the section refers to farm, hopper and commercial bins. 
+ 
+ 
+  
+ 
+Application 
+Type 
+Bin 
+Storage/
+Aeration 
+Drying 
+Stirring 
+Machine
+Cooling 
+Short-term 
+Wet Holding
+General Wet 
+Holding 
+Working 
+Sidedraw
+FARM 
+B 
+ 
+Limited* 
+Limited* 
+ 
+ 
+Ø 
+Ø 
+Ø 
+BD 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ø 
+BS 
+ 
+Limited* 
+Limited* 
+ 
+ 
+Ø 
+Ø 
+Ø 
+BSD 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ø 
+HOPPER 
+BHM 
+ 
+Ø 
+Ø 
+Ø 
+ 
+Ø 
+Limited* 
+Ø 
+BH 
+ 
+Ø 
+Ø 
+Ø 
+ 
+SQ 
+Limited* 
+SQ 
+COMM. 
+BC 
+ 
+Ø 
+Ø 
+Ø 
+Limited* 
+SQ 
+SQ 
+** 
+FARM 
+HOPPER 
+COMM. 
+ALL 
+Key:
+
+SQ
+Special Quote 
+Contact Sukup 
+Limited by    
+size of bin
+NOT designed for 
+this application
+
+Limited*
+Designed for this 
+application
+17
+
+=== page 18 ===
+ 
+Initial Fill 
+ 
+ 
+INSPECTION CHECKLIST BEFORE FIRST OPERATIONAL USE 
+ 
+Bin has been properly anchored to foundation. Anchor nuts should be finger-tight against shims. 
+ 
+Ladders, handrails, platforms, stairways and steps are securely in place. 
+ 
+All bolts are in place and securely tightened. 
+ 
+Unloading equipment and unload gates function correctly and are closed. 
+ 
+All guards and shields are in place. Safety decals are legible and in correct locations. 
+ 
+Working areas surrounding bin are clean and clear of clutter. 
+ 
+Check electrical performance and install lockouts (if needed) on equipment. 
+ 
+Any temperature cables must be fastened to floor using breakable string (fishing line). Absolutely no 
+weights or plates should be attached to bottoms of temperature cables that could overload roof. 
+ 
+On larger bins, filling in several stages as described below is required to prevent uneven settlement. These 
+instructions are general guidelines. Follow soil engineer’s instructions on initial filling. 
+ 
+Maximum uneven settlement (deviation) after filling bin (includes overall concrete deviation before bin 
+erection): 
+ 
+ 
+For 60’ diameter and smaller:  1-½” MAX 
+ 
+For larger than 60’ diameter: 2” MAX 
+ 
+IMPORTANT COMMERCIAL BIN INFORMATION: Sukup Manufacturing Co. requires stage 
+loading to prevent excessive uneven differential settlement after first initial fill. In first stage, 
+bin should be filled to no more than 1/3 of eave height. It would then take 10 days for desired 
+consolidation to occur. For second stage, bin should be filled to 2/3 of eave height. It would 
+then take another 10 days for desired consolidation to occur. Then the final 1/3 may be filled. 
+See illustration above. 
+ 
+IMPORTANT FARM BIN INFORMATION: If eave height is greater than bin diameter, bin 
+should be filled in two stages. First stage should be to height of bin’s diameter. Allow 10 days 
+for consolidation to occur, and then continue to fill rest of bin. If height is not greater than bin 
+diameter, initial fill can be completed in a 24-hour period. 
+ALL 
+FARM 
+COMM. 
+FILLING LARGER BIN IN MULTIPLE 
+STAGES WILL ALLOW EVEN 
+SETTLEMENT. 
+FILLING LARGER BIN IN ONE STAGE 
+ONLY MAY CAUSE UNEVEN PRESSURE 
+AND OFF-CENTER SETTLEMENT. 
+18
+
+=== page 19 ===
+ 
+Loading 
+ 
+Below are maximum fill rates depending on type of bin. 
+ 
+Farm Duty – 2-1/2 feet per hour (2/3 sidewall ring per hour). 
+Commercial – 5 feet per hour (1-1/3 sidewall rings per hour). 
+ 
+Do not exceed 50,000 bushels per hour fill rate. 
+ 
+NOTICE: Replacing loading equipment with higher capacity equipment may increase dynamic loads on a 
+bin. Increased dynamic loads on bin sidewalls can cause distress, distortion and structural failure. 
+ 
+If faster fill rates are desired, contact Sukup Manufacturing Co. 
+ 
+ 
+ 
+CHECKLIST FOR FILLING BIN 
+ 
+1. Check that unloading equipment is functioning correctly. 
+2. Close all intermediate sump gates. 
+3. Place power sweep auger, if so equipped, over intermediate sumps. 
+4. Shut sidewall door(s) properly. Inner door panels must be fully seated against frame over all 1” pegs 
+when closed and latched. 
+5. Fill only through center peak ring. 
+6. Know the maximum capacity of bin. Overfilling may cause bin failure. Maximum capacity is when 
+grain is 1” below eave. Use spout/chute to prevent overfilling. See Spout/Chute Lengths page. 
+ALL 
+OFF-CENTER LOADING CAN CAUSE 
+EXCESSIVE PRESSURE ON SIDEWALL 
+RESULTING IN LEANING OF BIN OR 
+STIFFENER BUCKLING. 
+BIN MUST BE LOADED THROUGH CENTER 
+OF ROOF SO GRAIN IS UNIFORMLY 
+DISTRIBUTED. 
+19
+
+=== page 20 ===
+ 
+Unloading 
+ 
+Standard bins are NOT designed as working bins. A bin is considered a working bin when 25% or more of 
+maximum capacity is withdrawn more than 12 times a year. If bin is to be a working bin, a special heavier 
+design must be used. 
+ 
+ 
+To maintain uniform loads on sidewalls, grain must be unloaded from center of bin. Center sump must be 
+opened first. Intermediate sump(s) must not be used until all grain has flowed by gravity through center 
+sump. 
+ 
+NOTICE: DO NOT simultaneously fill and unload bin. Simultaneous filling and unloading results in grain 
+behaving more like a fluid than granular material. Increased fluidic behavior of grain can cause increased 
+sidewall loads. Service life of bin can be drastically reduced and risk of structural failure, personal injury and 
+economic loss will increase by simultaneous loading and unloading. 
+ 
+WARNING: Off-center unloading could result in structural failure causing death or serious 
+injury. Never vacuum out of sidewall door unless all grain has been emptied by gravity 
+through center sump and then intermediate sump(s). Do not empty bin through sidewall 
+door or cut a hole in bin sidewall. This will cause uneven load distribution and excessive 
+downward pressure that may result in bin failure. 
+ 
+NOTICE: Replacing unloading equipment with higher capacity equipment may reduce structural integrity of 
+bin. Discharging grain at very high capacities alters dynamic loads on bin sidewall, possibly exceeding load 
+capacity and resulting in collapse. Consult an independent engineer before proceeding with modifications. 
+ 
+ALL 
+OFF-CENTER UNLOADING CAN CAUSE 
+EXCESSIVE DOWNWARD PRESSURE 
+RESULTING IN SIDEWALL BUCKLING. 
+CENTER SUMP 
+INTERMEDIATE 
+SUMPS 
+BIN MUST BE UNLOADED THROUGH CENTER 
+SUMP UNTIL ALL GRAIN HAS FLOWED BY 
+GRAVITY THROUGH CENTER SUMP. ONLY 
+THEN CAN INTERMEDIATE SUMP(S) BE USED.
+ 
+20
+
+=== page 21 ===
+ 
+Sweeping Bin 
+ 
+DANGER: Never enter bin while equipment is operating. Lock out all equipment and have 
+another person present when entering bin. When bin is nearly empty, sweep auger will 
+travel at an increasingly fast speed. Keep away from auger to avoid entanglement, which 
+will result in death or serious injury. 
+ 
+Single-Stage Sweeping 
+ 
+ 
+ 
+Multiple-Stage Sweeping 
+ 
+Standard Sukup grain bins are designed with anchors that allow sweeping of entire diameter of bin in one 
+stage. However, older Sukup bins 72’ dia. and larger that do not have two anchors per stiffener should be 
+swept in multiple stages beginning with inner section of floor, and then outer section after sweep extension 
+is added. Additional anchor brackets can be purchased from Sukup Manufacturing Co. and retrofitted to 
+enable single-stage sweeping. 
+ 
+For single-stage sweeping of Sukup bins 54’ to 105’ in diameter, bin must have 1” Grade 5 anchor bolts (17” 
+deep for “Inverted T” foundation, or deep into stemwall ring rebar zone for “T-Cap”), with a minimum of 7-
+1/2” from anchor to outside edge of stemwall. Check bin anchor specifications prior to using sweep. 
+ 
+ 
+STEPS TO SWEEPING BIN 
+ 
+1. Be certain that no bridged grain or vertical crusting is evident. 
+2. Start to sweep bin after all grain has flowed by gravity through center and intermediate sumps.  
+3. For Sukup Sweepway systems, stop equipment and engage clutch to remove grain. Sweepway 
+system is permanently installed so there is no need to enter bin. Turn on power to unload grain. 
+4. If you have a multiple-stage sweep, lock out inner sweep system before adding outer sweep section. 
+Have another person present. 
+5. If auger system fails, do not cut holes in bin sidewall to unload. This will cause uneven load 
+distributions that may cause bin failure. Call your nearest Sukup dealer for appropriate procedures. 
+Not following these steps will cause structural damage and loss of bin contents. 
+6. Return sweep to original position just behind intermediate sump gates. 
+ALL 
+21
+
+=== page 22 ===
+ 
+Material Stored 
+ 
+Storage bins are designed to store only dry, free-flowing grain that has been cooled. Do not put grain 
+exceeding 16% moisture in a storage bin. Only drying bins using a stirring machine can hold a mix of wet 
+and dry grain for a limited amount of time. NOTICE: Buckling of sidewall sheets can occur due to grain on 
+bottom drying and shrinking. This allows wet grain above to be supported only by bin sidewall. Failure 
+generally develops in area of drying front. 
+ 
+ 
+ 
+Do not mix quantities of wet grain with dried grain unless it’s in a bin with an operating stirring machine. 
+Partially dried grain shrinks and causes voids. Sidewall and stiffeners can buckle under immense pressure. 
+Standard storage bins are not designed for storage of high-moisture grains. 
+ 
+ 
+ 
+To guard against excessive sidewall loads caused by grain kernel expansion, grain bins must be 
+managed to prevent grain moisture from increasing above 16% during storage. In addition, do not 
+have grain moisture content variations of more than 2 moisture points in a storage bin. See warning 
+in Aeration section on avoiding frozen grain in bins. 
+ALL 
+22
+
+=== page 23 ===
+ 
+Material Stored 
+ 
+DO NOT FREEZE GRAIN due to problems it can create, particularly during warming and in larger bins. 
+Condensation during aeration can be a problem in grain cooled below freezing. It will be difficult to warm 
+grain in spring without condensation immediately freezing into ice. Frozen chunks block aeration warming 
+cycles and grain unloading. NOTICE: Condensation also re-wets grain and can cause sudden bin 
+failure and collapse due to expansion of kernels. If grain does freeze, begin thawing it once the average 
+outdoor temperature is 10°F to 15°F (6°C to 8°C) above grain temperature. Follow steps outlined in 
+segment below. NOTICE: Failure to follow instructions for thawing frozen grain may result in sudden 
+bin collapse and failure. 
+ 
+ 
+WARNING: Damage from frozen grain may cause sudden structural failure and collapse, 
+which may result in death or serious injury. Frequently monitor and inspect bin. Follow 
+operation and maintenance instructions described in this manual. 
+ 
+ 
+Managing Grain in Spring and Summer 
+ 
+Start fan when average outdoor temperature is 10°F to 15°F (6°C to 8°C) above grain temperature. Once 
+warm-up cycle is started, do not turn fan off. Stopping the warming front before a cycle is completed 
+encourages condensation of moisture and spoilage. As outside temperatures continue to warm, repeat this 
+cycle as often as needed until average grain temperature is 50°F to 60°F (10°C to 16°C). Maintain grain 
+temp. within 10°F to 15°F (5°C to 8°C) of average monthly temp. Do not warm grain to summer 
+temperatures above 60°F (16°C) in the southern U.S. or 50°F (10°C) in the northern U.S. due to insect 
+infestation and other storage issues. 
+ALL 
+23
+
+=== page 24 ===
+ 
+Material Stored 
+Do not plug eave and fill grain to top. Filling grain up against roof sheets may cause roof to expand outward 
+and fail, voiding warranty. Maximum fill height is 1” below eave. Opening manhole when a bin is 
+overfilled will cause grain to spill out, possibly resulting in someone being caught in grain flow. Check for 
+overfilling by tapping against manhole cover before opening. A hollow sound means it’s OK to open cover. 
+A solid sound means grain is against it. DO NOT OPEN manhole cover when there is grain against it. 
+Unload bin to get grain away from roof. Be certain ladder cages and platform handrails are in place and 
+correctly installed. See Spout/Chute Lengths page. 
+ 
+ 
+Stirring Machines 
+  
+ 
+Stirring machine should be run continuously while filling. NOTICE: Do not fill bin with grain above stirring 
+machine. Grain should be level 30” below eave. Roof peak ring failure can occur, especially during 
+unloading. See illustration above. Down augers should be free prior to start-up. Preceding notes are 
+general operating instructions. Be sure to read and understand stirring machine operator’s manual before 
+operating. 
+ALL 
+FARM 
+DON’T FILL 
+TO EAVE 
+ 
+LEAVE 1”
+MIN.GAP
+24
+
+=== page 25 ===
+ 
+Spout/Chute Lengths 
+(To prevent overfilling bin and off-center unloading) 
+ 
+When grain is being peaked, it is recommended that a spout or chute be used to stop grain when it has 
+reached its recommended peak filling height. This keeps grain at least 1” below eave, allowing maximum 
+storage. Listed below are proper lengths for spouts/chutes when filling bins with either dry or wet corn (22° 
+is dry and 28° is wet). Spout lengths are based on spout diameter of 20”. Wet corn should not be stored for 
+more than two days. “L” dimensions (see drawings and tables below) are taken from top of peak ring. 
+IMPORTANT: Do not use these dimensions on other grains. 
+ 
+ 
+ALL 
+25
+
+=== page 26 ===
+ 
+Ventilation 
+ 
+Grain bin roofs are not designed to withstand excessive air pressure differentials. General 
+recommendations are 1 ft² (.093 M²) opening for every 1500 CFM (2550 m³/hr.) that fan will produce. Power 
+roof vents may also be used. 
+ 
+Be alert to the possibility of frost buildup on air passage screens to the point of complete blockage. This 
+may occur when high relative humidity, high grain temperatures or high grain moisture levels are combined 
+with freezing or near freezing temperatures. Running fan(s) during these conditions can create frost buildup 
+and airflow blockage causing roof to dome. Precautionary measures must be taken to prevent this 
+condition. Keep peak and manhole lids closed during storage; open them whenever fans are run. 
+ 
+DO NOT USE NEGATIVE (SUCTION) AERATION. 
+ 
+ALL 
+ROOF VENTS, PEAK CAP 
+AND MANHOLE OPEN 
+FAILURE TO OPEN MANHOLE, 
+PEAK CAP AND ROOF VENTS 
+WHEN FAN IS TURNED ON 
+WHEN INTERNAL AIR 
+PRESSURE IS HIGHER 
+THAN OUTSIDE, IT MAY 
+CAUSE ROOF TO “DOME.”
+ADEQUATE ROOF 
+VENTS FOR AIR INLET 
+FAILURE TO HAVE 
+ADEQUATE ROOF VENTS 
+FOR AIR INLET
+NEGATIVE FAN 
+PULLS ROOF IN. 
+26
+
+=== page 27 ===
+ 
+Ventilation 
+ 
+Do not pile grain against roof. Grain piled too high will block roof vents. Blockage of roof vents will restrict 
+effective vent area by 95-98%, virtually eliminating vent area. Area above surface of grain must allow free 
+movement of air to vents. Be aware of possibility that screens of roof vent may collect moisture and freeze 
+shut. This can happen when high relative humidity, high grain temperatures, or high grain moisture levels 
+are combined with freezing or near freezing temperatures. Do not run fan(s) during these conditions. 
+Running fan(s) during these conditions can create frost buildup and airflow blockage causing roof to dome.  
+ 
+ 
+NOTICE: To prevent roof cave-ins, fans should be wired so negative air pressure (suction) roof fans start a 
+few seconds after positive fan. This is done so air has enough time to be pushed through grain to replace 
+air that leaves through roof. Failure to do this could result in roof failure. 
+ 
+ALL 
+BLOCKED ROOF VENTS 
+UNBLOCKED ROOF VENTS 
+27
+
+=== page 28 ===
+ 
+Temperature Cables 
+ 
+ 
+See roof section of Sukup bin erection manual for temperature cable installation instructions and support 
+requirements. Also see temperature cable manufacturer’s specifications. Cables are attached to brackets 
+that are attached to two roof ribs on a 5K roof or to rafters on a 15K to 50K roof. IMPORTANT: Closed-loop 
+eyebolts are required with use of temperature cable attachment brackets. NOTICE: Improper installation 
+of temperature cables may cause damage to roof due to down-pull when filling, settling or emptying 
+of grain. Tie cables to floor or concrete with breakable string (fishing line). Absolutely NO weights or 
+plates should be attached to bottoms of temperature cables. For hopper bins, DO NOT allow 
+temperature cables to extend into hopper area. See illustrations above. 
+ 
+Additional Loads 
+ 
+IMPORTANT: Loads created by additional components must not exceed bin design rating. Load ratings for 
+standard Sukup bins are listed on cover sheet of bin price pages. Ratings for special Sukup Commercial 
+bins are specified on quotation form. All concentrated loads on roof must be UNIFORMLY 
+DISTRIBUTED on peak ring. Use of separate support towers may be needed to properly distribute 
+overhead loads. Extra loads should NOT be attached directly to a sidewall stiffener unless 
+specifically designed for the application. Due to settling, any connections made to bin must contain a 
+properly designed slip joint. Components added incorrectly could cause structural damage to bin and void 
+all warranties. 
+ALL 
+WEIGHTS OR PLATES 
+MUST BE REMOVED. 
+TEMP. CABLE ATTACHED TO BRACKET IN 
+5K ROOF; BREAKABLE LINE ATTACHED TO 
+BOTTOM OF CABLE AND TO FLOOR 
+TEMP. CABLE IMPROPERLY ATTACHED TO 
+SINGLE ROOF BOLT; WEIGHT OR PLATE 
+ATTACHED TO BOTTOM OF CABLE 
+SUPPORT BRACE CONNECTED TO TOP OF 
+STIFFENER; SUPPORT BRACE CONNECTED 
+TO ROOF SHEET RIB; UNEVEN LOAD 
+DISCTRIBUTION ON PEAK RING 
+ADDITIONAL LOADS SUPPORTED BY 
+TOWERS; LOAD CONCENTRATED ON ROOF 
+EVENLY DISTRIBUTED AT PEAK RING 
+28
+
+=== page 29 ===
+ 
+Stiffener Loads 
+ 
+ 
+ 
+INCORRECTLY INSTALLED 
+ 
+ 
+CORRECTLY INSTALLED 
+1. Gaps between stiffeners   
+ 
+ 
+1. No gaps between stiffeners 
+2. Sidewall buckling  
+ 
+ 
+ 
+2. No buckling 
+3. Stiffeners not resting on floor 
+ 
+ 
+3. Stiffeners resting flat on floor 
+4. Concrete not level  
+ 
+ 
+ 
+4. Level concrete 
+ 
+Stiffeners carry vertical load on bin wall, therefore serve as structural columns. They should be attached to 
+sidewall and each other exactly as described in Sukup bin erection manual. They must form a continuous 
+column from eave to concrete floor. Do not cut stiffeners for any reason. There should be no more than a 
+1/16” gap between stiffeners before initial fill. 
+ 
+If a fan transition would interfere with stiffener, relocate transition so it fits between stiffeners. 
+ 
+If a stiffener location is over a tunnel, alternative support must be provided. Weld square or round tube, 
+minimum 3” wide, directly under stiffener column, with bottom of tube resting on concrete. 
+ 
+It is very important that bottom stiffener rest on concrete pad. Use shims to ensure there is no gap. 
+ 
+Depending on size and diameter of bin, stiffeners may need to be laminated (two continuous columns of 
+stiffeners; one against sidewall and the other against the first). Laminated stiffeners will have staggered 
+seams and no splice plates. See Sukup bin erection manual and color chart for proper assembly 
+instructions. 
+ 
+UNEVEN CONCRETE
+ALL 
+29
+
+=== page 30 ===
+ 
+Sidedraw 
+ 
+OFF-CENTER UNLOADING THROUGH SIDEWALL 
+ 
+NOTICE: Use only Sukup-designed sidedraw discharge units and interior baffles with Sukup bins. 
+Baffles help channel grain to discharge chute as grain flows from above. Never change function of a bin’s 
+intended use. Sukup bins are designed for specific amounts of grain and weight and to be loaded and 
+unloaded in a certain manner. If bin was not intended for a sidedraw, unloading pressures may cause bin 
+failure. Know the purpose for which bin was constructed.  
+ 
+NOTICE: Do not unload bin from sidewall without proper installation of a sidedraw system. Follow special 
+guidelines below for bins with sidedraws. Failure to do so will result in excessive pressures that can result in 
+sidewall leaning, buckling or other bin failure. 
+ 
+IMPORTANT GUIDELINES FOR SIDEDRAW USE 
+ 
+Never add sidedraw to existing bin without consulting an independent engineer or obtaining written 
+approval from Sukup Manufacturing Co. Bin may not be designed to accommodate a sidedraw. 
+ 
+Intended for use with dry grain only. Do not use sidedraw with poorly flowing grain products. 
+ 
+Do not use sidedraw until 90 days after first complete filling. 
+ 
+If two sidedraws are installed, they must be placed at least 90° from one another in same ring. On a 
+105’ bin, they must be placed 180° from each other in same ring. 
+ 
+Only one sidedraw may be used at a time. 
+ 
+Sidedraws are not to be used as primary outlets. Standard center sumps and conveyors should be 
+installed. After sidedraw use, unload from center sump, then intermediate sumps, and then sweep bin. 
+ 
+Do not unload from sidedraw and center sump at same time. 
+ 
+Do not simultaneously fill and discharge. 
+ 
+Sidedraw will leave grain in sloped position, creating off-center load. IMPORTANT: Before refilling, 
+unload through center sump so grain reaches equal wall heights around entire bin. Grain must be level 
+or in cone-down position before adding more grain. See next page. 
+ 
+Sidedraw must be installed in center of a sidewall sheet that is 
+no lower than fifth ring from bottom. 
+ 
+Top discharge baffle must straddle horizontal seam between first 
+and second rings from top of bin. 
+ 
+Sukup Manufacturing Co. recommends alternate usage of 
+sidedraws in bins 105’ in diameter to reduce structural stress on 
+bin. It is best to unload no more than four (4) rings of grain 
+before switching to other sidedraw. Use illustration at right as a 
+guide. 
+COMM. 
+BIN WITHOUT A PROPER 
+SIDEDRAW SYSTEM 
+BIN WITH PROPER SIDEDRAW SYSTEM 
+UNLOADS IN LAYERS EVENLY. 
+30
+
+=== page 31 ===
+ 
+Refilling after Sidedraw Use 
+ 
+Before a bin can be refilled after being even partially unloaded with a sidedraw, grain must be leveled or 
+completely emptied through center sump. It is important that sidewall pressure is equal before refilling. 
+Unload grain through center sump until grain reaches equal wall heights and an inverted cone is formed in 
+remaining grain. Once an inverted cone is achieved and sidewall pressures are equal, it is safe to refill bin 
+through center peak ring. See drawings below. 
+ 
+ 
+NOTE: Design of baffles shown above can be used only with a sidedraw system. Intermediate sumps 
+cannot be used as primary outlet. Unloading must be done through sidedraw, center sump and then 
+intermediate sumps. NOTICE: Never use intermediate sumps until all grain has flowed by gravity 
+through center sump. Unloading through intermediate sumps initially will cause uneven load 
+distribution that may cause bin damage or failure.  
+ 
+Before a bin can be refilled, it should be completely emptied. Total cleanout of bin prevents build-up of 
+compacted grain that cannot be emptied by gravity flow. Also, be certain no grain is matted to sidewall. If 
+matting occurs, remove any moldy grain with a wire brush and repaint. Since grain cannot be completely 
+emptied using sidedraw, grain must be emptied through center sump to form an inverted cone in remaining 
+grain. Formation of inverted cone will help evenly distribute lateral forces on bin sidewalls. 
+ 
+COMM. 
+LOADING WITHOUT LEVELING OR 
+EMPTYING GRAIN IN CONE-DOWN 
+POSITION WILL CREATE UNEVEN 
+SIDEWALL PRESSURES AND MAY CAUSE 
+BIN FAILURE. 
+BEFORE REFILLING AFTER SIDEDRAW 
+USE, EMPTY THROUGH CENTER SUMP 
+UNTIL INVERTED CONE IS ACHIEVED AND 
+SIDEWALL PRESSURES ARE EQUAL. 
+REFILL THROUGH CENTER PEAK RING.
+31
+
+=== page 32 ===
+ 
+Hopper Bins 
+ 
+IMPORTANT: Hopper bins are not intended for drying. Grain should be dry and cool when put in a 
+hopper bin for storage. Maximum allowable storage time for wet grain (over 16%) in a hopper bin may be 
+only one to two days. Storing high-moisture or spoiled grains may deteriorate galvanized coating of bin. 
+High-moisture grain may also cause grain to crust. Probe stored grain regularly to check its quality. Store 
+only free-flowing material. Do not store hard-to-flow material such as soybean meal or other materials that 
+will cake or crust. NOTICE: Unloading spoiled grain that is bridged or vertically crusted at a high rate of 
+speed may cause uneven pressures resulting in hopper tank failure. Check inside of bin while unloading to 
+ensure no vertical crusting is evident. 
+ 
+Approximate unloading capacities of hopper gates are based on clean, dry, free-flowing corn. 
+For standard 16” dia. gate: 19,000 BPH. 
+For optional 22” dia. gate: 40,000 BPH. 
+If using 22” dia. gate for commodities heavier than 40 lbs./ft.³, bin may require roof vents and heavier 
+sidewalls. Contact Sukup Manufacturing Co. for special quote. 
+Before filling hopper bin, be certain no objects or old grain remain inside. Thoroughly clean hopper bottom 
+after each use and be certain bottom unload gate is completely closed. Keep all persons out of bin except 
+when absolutely necessary. Refer to safety section for general guidelines on entering bins, ventilation, and 
+using safety harnesses. 
+ 
+Loading must be done through peak ring. Off-center filling may cause excessive loads, which may result in 
+bin leaning and/or sidewall stiffener buckling. Unloading must be done through outlet cone only. NOTICE: 
+Never cut holes in bin sidewall. Off-center unloading will result in excessive down pressure and uneven 
+load distribution that may cause sidewall buckling. Also, if hopper bin is sealed tight at eave, peak ring 
+cap and manhole must be opened when unloading grain. Lack of proper roof openings for rapid 
+unloading can cause roof to be pulled down. 
+HOPPER 
+32
+
+=== page 33 ===
+Foundation Recommendations for Sukup Grain Bins 
+ 
+ 
+Site Selection 
+ 
+When selecting a site for grain storage and handling, many factors need to be considered. Site must allow 
+convenient access for loading, unloading and related work if site is to become a grain system center. 
+ 
+Site should have soil that is firm, level and free of vegetation and underlying debris. Any added fill should be 
+thoroughly compacted to prevent uneven settlement from bin weight. 
+ 
+Locations of handling equipment, fans, heaters, ladders and stairways, etc., must be predetermined. Future 
+expansion should be factored into site selection process, and careful consideration must be paid to access to 
+electrical and gas lines, and to maintaining safe distances from power supply sources. 
+ 
+Electrical Clearances 
+ 
+Check with local electric utility for assistance in planning a safe grain storage and handling site. State codes 
+may vary on clearances. To prevent overhead electrical safety issues, bury electrical lines.  
+ 
+American National Standards Institute (ANSI) provides safety recommendation for grain bins in ANSI C7 1997. 
+Figures 1 and 2 show clearances for bins and grain handling equipment.  
+ 
+ 
+Fig. 1 – Clearances for grain bins filled by permanently installed augers, 
+conveyers or elevators. (ANSI C7 1997) 
+ 
+ 
+33
+
+=== page 34 ===
+ 
+Accessory Location 
+ 
+It is important that all components of grain bin be located properly to maximize efficiency and effectiveness of 
+equipment. Most factors should be considered before foundation is poured. Double-check desired location of 
+roof manhole, sidewall and roof ladders, eave and safety platform(s), conveyors, roof exhausters and 
+walkway(s). Fig. 3 shows a typical layout for a farm-duty bin. 
+Fig. 2 -- Clearances for 
+grain bins filled by portable 
+augers, conveyors or 
+elevators. (ANSI C7 1997)  
+Fig. 3 – Suggested 
+layout of bin 
+components 
+34
+
+=== page 35 ===
+Foundation Preparation Recommendations 
+ 
+DISCLAIMER: Sukup Manufacturing Co. assumes no responsibility regarding the foundation specifications. 
+This is not an engineered foundation and shall not be constructed as such. The specifications given are 
+intended for quoting and estimating purposes only. It shall be the sole responsibility of the customer to obtain 
+actual foundation drawings designed by and constructed to the specifications of a licensed professional 
+structural engineer with knowledge of the actual soil and load specific to the project and location.  
+Consideration should also include, but not be limited to, live loads, dead loads, wind loads, soil bearing loads, 
+seismic zone, proper moisture run-off on top of base, and types of aeration applied for the project. 
+ 
+Sukup Manufacturing Co. will not be responsible for any damage to a product, including, but not limited to, any 
+damage that results from poor soil conditions or inadequate concrete type, grade, bearing strength, and 
+construction method. Soil bearing tests must be performed by a competent, independent, engineering firm. 
+Concrete foundation construction must be done by a competent, concrete contractor. 
+ 
+Check local and/or regional building codes and regulations to ensure compliance. 
+ 
+All backfill material used in foundation preparations should be clean, crushed stone or sand/gravel mixture of a 
+highly compactable material. Backfill should be layered up in 6” lifts and well compacted. 
+ 
+ 
+Concrete Specifications 
+ 
+Cement is to be Type 1 Portland Cement that conforms to ASTM C150.  
+ 
+Maximum aggregate size is to be 3/4 of minimum clear spacing between reinforcing bars and/or wire mesh. 
+ 
+Concrete must be 3,000 psi compressive strength at 28 days cured minimum. 
+ 
+Concrete is to be cured at 50°F or above and kept moist for a minimum of seven (7) days. 
+ 
+Foundation surface should not vary from level by more than 1/4” in 10 feet or more than 1/4” from specified 
+elevation.  Uneven surface may cause bin failure. 
+ 
+Elevation of surface above grade should not exceed 6”. 
+ 
+A beveled edge around foundation allows water to run off of surface. 
+ 
+ 
+Reinforcing Steel 
+ 
+Steel reinforcing bar (rebar) should conform to ASTM A615 or ASTM A617 and be Grade 60 or better. 
+ 
+To properly size diameter of rebar for specific bin size, consult bin specifications chart. 
+ 
+All circumferential bar laps should be 35 bar diameters and staggered by 3’ minimum. 
+ 
+All laps of circumferential bar (rebar) must be continuous, connected by wire tie or weld. If tunnel is present, 
+additional rebar must be used above and below tunnel. 
+ 
+Number 6 (6” x 6”) wire mesh may be used. Overlap of wire mesh should be 6 inches minimum. 
+ 
+ 
+Anchor Bolts 
+ 
+Follow specifications on subsequent pages for appropriate size foundation and anchor bolts. 
+ 
+ 
+ 
+35
+
+=== page 36 ===
+Placing Anchor Bolts 
+ 
+STEP 1: Find anchor radius based on diameter of bin being built (Anchor radius is noted to left of Anchor 
+Placement drawing). 
+ 
+STEP 2: Scribe anchor radius into concrete. 
+ 
+STEP 3: Determine where origin point will be. Have one person hold tape measure there. Have other person 
+hold tape measure at distances shown at left of Anchor Placement drawing. Mark spots on radius – A, B, C, 
+etc. – for anchor points. Repeat this step on other side until all anchor points are marked on radius. 
+ 
+STEP 4: Place an anchor at every marked point. These will be at stiffener locations. 
+36
+
+=== page 37 ===
+37
+
+=== page 38 ===
+38
+
+=== page 39 ===
+ 
+39
+
+=== page 40 ===
+ 
+40
+
+=== page 41 ===
+ 
+41
+
+=== page 42 ===
+ 
+42
+
+=== page 43 ===
+ 
+ 
+43
+
+=== page 44 ===
+ 
+ 
+44
+
+=== page 45 ===
+ 
+ 
+ 
+45
+
+=== page 46 ===
+ 
+ 
+46
+
+=== page 47 ===
+ 
+ 
+ 
+47
+
+=== page 48 ===
+ 
+ 
+ 
+48
+
+=== page 49 ===
+Commercial Grain Bin Anchor Bolt Guidelines 
+- Based on ASCE7-05 Code, 90 mph wind zone - 
+ 
+A qualified geotechnical engineer should review all foundation specifications, including anchor bolt layout, 
+to ensure foundation design is compatible with maximum load-bearing capacity of soil and with any other 
+environmental factors at bin location.  
+ 
+Table on next page is provided as general guidance for minimum anchor bolt requirements (diameter and 
+depth in concrete). Pullout force depends on diameter of anchor. Mechanical drill and drive anchors require 
+ultimate pullout strength of 7,500 lbs. for 5/8” anchor bolts and 10,000 lbs. for 3/4” anchor bolts. Be certain 
+to follow anchor bolt manufacturer’s detailed installation instructions to prevent any uplift. Also, it is 
+important these guidelines be followed to ensure proper anchoring: 
+ 
+- Concrete pad must be allowed to cure for a minimum of 28 days prior to anchoring of 
+bin. 
+ 
+- Holes must be cleaned by using a wire brush and air to blow out dust. Cleaning hole will 
+minimize slippage after wedge/epoxy anchor is set. 
+ 
+- Nuts on anchors must be tightened to manufacturer’s specifications to withstand uplift. 
+ 
+Drawing below shows types of anchors used. At left are two different types of cast-in-place anchor: an “L” 
+style and a “W & N” (washer and nut) style. At right are two different post-installed anchors: a mechanical 
+drill and drive style and a drill and epoxy style. 
+INSTALL WITH EPOXY ACCORDING TO 
+MANUFACTURER’S SPECIFICATIONS. HOLE 
+SIZE/DEPTH MAY VARY ACCORDING TO TYPE OF 
+EPOXY USED. 
+ANCHOR BOLT WITH TWO (2) NUTS AND TWO 
+(2) 1/4 X 2-3/4” SQUARE WASHERS (BC5205) 
+  
+49
+
+=== page 50 ===
+Commercial Bin Anchors 
+ 
+ 
+Commercial Anchor Boots 
+ 
+          Single-Anchor Boot 
+ 
+ 
+ 
+ 
+ 
+Double-Anchor Boot 
+69’ Dia. and smaller (2 Stiffeners/Sidewall Sheet)                   72’ Dia. and larger (2 Stiffeners/Sidewall Sheet) 
+ 72’ Dia. and larger (3 Stiffeners/Sidewall Sheet) 
+ 
+3-10
+3/4" L
+3/4"
+8"
+2
+-
+-
+-
+1
+11-12
+3/4" L
+3/4"
+8"
+2
+-
+-
+-
+1
+13-24
+3/4" W & N
+3/4"
+13"
+3
+-
+-
+-
+2
+3-13
+3/4" L
+3/4"
+8"
+2
+-
+-
+-
+1
+14-24
+3/4" W & N
+3/4"
+13"
+3
+-
+-
+-
+2
+3-14
+3/4" L
+3/4"
+8"
+2
+-
+-
+-
+1
+15-24
+3/4" W & N
+3/4"
+13"
+3
+-
+-
+-
+2
+3-18
+1" W & N
+1"
+17"
+-
+2
+-
+-
+1
+19-24
+1" W & N
+1"
+17"
+-
+2
+-
+-
+2
+3-18
+1" W & N
+1"
+17"
+-
+1
+-
+-
+1
+19-24
+1" W & N
+1"
+17"
+-
+2
+-
+-
+2
+3-18
+1" W & N
+1"
+17"
+-
+2
+-
+-
+2
+19-24
+1" W & N
+1"
+17"
+-
+2
+-
+-
+2
+3-18
+1" W & N
+1"
+17"
+-
+3
+-
+-
+2
+19-24
+1" W & N
+1"
+17"
+-
+4
+-
+-
+2
+72'
+10-24
+1" W & N
+1"
+17"
+-
+1
+-
+-
+1
+75'
+10-24
+1" W & N
+1"
+17"
+-
+1
+-
+-
+1
+78'
+10-24
+1" W & N
+1"
+17"
+-
+1
+-
+-
+1
+90'
+10-24
+1" W & N
+1"
+17"
+-
+1
+-
+-
+1
+105'
+10-24
+1" W & N
+1"
+17"
+-
+1
+-
+-
+1
+135'
+10-24
+1-1/4" W & N
+1-1/4"
+24"
+-
+-
+1
+-
+1
+156'
+10-24
+1-1/2" W & N
+1-1/2"
+36"
+-
+-
+-
+1
+1
+* Refer to previous page for anchor types ("L" refers to shape of anchor, "W & N" refers to washer and nut).
+Mechanical drill & drive anchors NOT RECOMMENDED by Sukup Manufacturing Co.
+2-3/4" Sq.  
+BC5206
+Cast In       
+Place
+3" Sq.    
+BC5205
+Bin 
+DIA.
+69'
+54'
+Nut 
+Qty.
+2-3/4" x 3-1/2"   
+BS52082
+Depth In 
+Concrete
+Drill &        
+Epoxy
+3-1/2" Sq. 
+BC5209
+Ring 
+Height
+Washer Qty. Per Anchor (in bin box)
+66'
+60'
+36'
+42'
+48'
+Types of Anchors (in DIA)*
+SHIM AS NEEDED 
+SHIM AS NEEDED 
+50
+
+=== page 51 ===
+42’ - 60’ Dia. 15K & 30K Roof Assembly 
+ 
+Fig. 1 and Table 1 identify components used in construction of roof. Roofs designed to support 15,000 lbs. use 
+only one C-shaped rafter, while those for 30,000 lbs. use back-to-back C-shaped rafters. Both types use A-
+frame construction as shown in Fig. 1. Review notes below before beginning bin erection. 
+ 
+NOTE: 
+Leave all bolts loose to finger-tight unless otherwise specified. When tightening, follow torque 
+guidelines in Table 2. 
+ 
+BOLT 
+GRADE 
+FT-LBS 
+5/16 
+8.2 
+15-20 
+3/8 
+8.2 
+25-35 
+7/16 
+8.2 
+45-55 
+1/2 
+8.2 
+65-80 
+ 
+IMPORTANT: At no time should any bolts be substituted for those supplied by Sukup Manufacturing Co. 
+ 
+NOTES:  
+Center support jack must be capable of supporting a 12,000 lb. dead load and be adjustable 
+ + or – 12”. 
+ 
+Careful planning before starting first ring will simplify erection of bin. If design specifies a flush-
+floor aeration system, install flush-floor planking and supports prior to beginning erection of bin. 
+This will provide a safer work environment and prevent parts from falling into tunnels. If heavy 
+equipment such as center-pivot staircase or forklifts will be rolled or driven over flush-floor 
+system, cover it with plywood or steel to prevent damage to planks. 
+ 
+Place sidewall sheet bundles, appropriate components and hardware on foundation where they will not 
+interfere with assembly work. If rolling center-pivot staircase is used, be certain sidewall sheet bundles do not 
+interfere with staircase travel. 
+ 
+Assemble starter (first) ring of bin sidewall on concrete foundation; leave loose. Consult sidewall assembly 
+section of this manual. NOTE: For ease of anchoring bin to foundation, sidewall sheets must be placed so 
+stiffener bolt holes are aligned with anchor bolts. Also, distance from sidewall ring to anchor bolt should be 
+equal around entire circumference of bin. Establishing uniform distance will simplify setting and anchoring of 
+bin. Due to size and weight of bin, adjustments later will likely be more difficult. 
+42'
+14
+2
+14
+42
+28
+2
+48'
+16
+2
+16
+48
+32
+2
+54'
+18
+3
+18
+54
+54
+1
+60'
+20
+3
+20
+60
+60
+2
+Roof Sheet 
+Supports
+External Roof 
+Rings
+Number of Structural Components
+Main Components
+Bin Diameter
+Rafters
+Purlin       
+Rings
+Purlins at 
+Each Ring
+Roof         
+Sheets
+Fig. 1 
+Table 2 
+Table 1 
+51
+
+=== page 52 ===
+Stiffener Attaching Brackets 
+ 
+ 
+Rafters will attach to every other stiffener using a stiffener attaching bracket. Top of stiffener attaching bracket 
+attaches to top of sidewall sheet as shown in Fig. 2. NOTE: Stiffener attaching brackets should not be bolted to 
+sidewall at this time. 
+ 
+Stiffeners will not be attached to bin sidewall until sidewall construction begins. However, 39” top ring stiffeners 
+used on bins with odd number of rings can be attached at this time. Refer to sidewall assembly section of this 
+manual for proper location of stiffener. It is critical that these stiffeners be positioned correctly. Failure to do so 
+will result in difficulty installing remaining sidewall stiffeners and splices. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fig. 2 
+FILL HOLES WITH 
+3/8” HARDWARE  
+USE 3/8” X 1” BOLTS AND 3/8” NUTS 
+52
+
+=== page 53 ===
+Continuous Eave Clip  
+ 
+ 
+Fig. 3 
+ 
+ 
+Attach continuous eave clip to top of assembled starter ring using hardware specified on color chart. See Fig. 
+3. End of eave clip hangs over sidewall sheet. First hole of eave clip will align in vertical seam. After roof has 
+been completely assembled, rib clip tabs need to be bent back in to roof sheet ribs. 
+ 
+NOTE: Notches on bottom side of continuous eave clip are for production purposes only. They do not affect 
+structural integrity or function of clip. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+53
+
+=== page 54 ===
+Rafter Subassembly 
+ 
+Purlin bracket locations are indicated by groups of bolt holes along rafter. Each group consists of four (4) 9/16” 
+bolt holes. See Fig. 4. The 9/16” holes at ends of rafters are for peak ring and sidewall/stiffener attaching 
+brackets. Remaining double pairs of holes along rafter are for 30,000 lb. roof. When assembling a 30,000 lb. 
+roof, bolt rafter sections back-to-back using 1/2 x 1-1/4” bolts and 1/2” flange nuts at double-hole locations. 
+Leave all other holes empty unless otherwise specified. 
+ 
+NOTE: If using temperature cables, consider placement of cable brackets. Refer to instructions near end of 
+this section for proper installation. Refer to temperature cable manufacturer’s instructions for proper placement. 
+Fig. 4 
+54
+
+=== page 55 ===
+15,000 lb. Roof Rafter Attachments 
+ 
+15,000 lb. roof rafters consist of one (1) C-shaped channel. See Fig 5. Item descriptions and part numbers are 
+identical to those of 30,000 lb. roof rafter attachments shown on next page. Attach peak ring rafter brackets 
+and sidewall rafter attachment brackets to rafter using 1/2 x 1-1/4” bolts and 1/2” flange nuts as shown in 
+Details A and C of Fig. 5. Details A and C each show two orientations of C-shaped rafter. Assemble an equal 
+number of rafters each way. This is done so that during pre-assembly of rafters, C channels will align back-to-
+back from each other to strengthen rafter substructure. See Fig. 6 to help understand assembly shown in 
+Details A and C of Fig. 5. 
+ 
+ 
+Bolt purlin brackets to each side of rafter at specified locations using 1/2 x 1-1/4” bolts and 1/2” flange nuts as 
+shown in Detail B of Fig. 5. Tighten all purlin brackets. Do not tighten peak ring or sidewall attachment 
+brackets.  
+Fig. 5 
+Fig. 6 
+55
+
+=== page 56 ===
+30,000 lb. Roof Rafter Attachments 
+ 
+ 
+ITEM #
+DESCRIPTION
+COMP. #
+1
+Sidewall rafter attachment bracket
+BC350001
+2
+Rafter, C 10 x 2-1/2 x 12 ga, 42' Dia.
+BC354201A
+2
+Rafter, C 10 x 2-1/2 x 12 ga, 48' Dia.
+BC354801A
+2
+Rafter, C 10 x 2-1/2 x 12 ga, 54' Dia.
+BC355401A
+2
+Rafter, C 10 x 2-1/2 x 12 ga, 60' Dia.
+BC356001A
+3
+Peak ring rafter attachment bracket
+BC350008
+4
+Commercial purlin bracket
+BC356005
+5
+Bolt, 1/2 x 1-1/4"
+J0728
+6
+Flange nut, 1/2"
+BCL5952
+ 
+Table 3 
+ 
+30,000 lb. roof rafters consist of two (2) C-shaped channels. See Fig 7. Channels have bolt hole patterns 
+allowing them to be joined back-to-back. Bolt purlin brackets to each side of rafter at specified locations using 
+1/2 x 1-1/4” bolts and 1/2” flange nuts as shown in Detail B of Fig. 7. When attaching brackets to rafters, bolts 
+must pass through both rafter sections. NOTE: If temperature cable brackets are used, they must be attached 
+at this time. Refer to temperature cable bracket assembly instructions near end of this section. 
+ 
+Attach peak ring rafter attachment brackets and sidewall rafter attachment brackets to rafter using 1/2 x 1-1/4” 
+bolts and 1/2” flange nuts as shown in Details A and C of Fig. 7. 
+ 
+Tighten all purlin brackets and fasteners connecting two (2) C channels together. Do not tighten peak ring or 
+sidewall attachment brackets. 
+Fig. 7 
+56
+
+=== page 57 ===
+Purlin & Roof Sheet Support Bracket Attachment 
+ 
+Fig. 8 
+ 
+Bolt purlins to purlin brackets using 1/2 x 1-1/4” bolts, 1/2” flat washers and 1/2” flange nuts as shown in Fig. 8 
+and Image 1. Purlins are attached to eave side of purlin brackets. Leave bolts connecting purlins loose. Attach 
+roof sheet support bracket to purlin using 3/8 x 1” bolts and 3/8” flange nuts as shown in Fig. 8. For stacking 
+pre-assembled sets of rafters, it is recommended that roof sheet support brackets be assembled during rafter 
+substructure assembly. 
+ 
+Image 1 
+Fig. 8 
+1/2” FLANGE NUT
+3/8” FLANGE NUT
+57
+
+=== page 58 ===
+Rafter Substructure Assembly 
+Image 2 
+ 
+Set peak ring weldment on center support jack. Center support jack must be capable of supporting a 12,000 lb. 
+dead load and be adjustable + or - 12”. Jack should be set at a beginning height as stated below. This height 
+should be at mid-stroke of jack, allowing for adjustment of peak ring height. 
+ 
+The following dimensions are only starting points for building roof on one or two sidewall rings. Depending on 
+type of bin jack used, adjustments up or down may be required. HINT: To ease assembly, add 1” to 
+dimensions below. It is easier to take pressure off of center jack than to lift a raftered substructure. 
+ 
+NOTE: All dimensions are from bottom of peak ring. 
+ 
+42’ 
+One Ring 
+ 
+178” (14’ 10”) 
+42’ 
+Two Rings 
+ 
+222” (18’ 6”) 
+ 
+48’ 
+One Ring 
+ 
+202” (16’ 10”) 
+48’ 
+Two  Rings 
+ 
+246” (20’ 6”) 
+ 
+54’ 
+One Ring 
+ 
+225” (18’ 9”) 
+54’ 
+Two Rings 
+ 
+269” (22’ 5”) 
+ 
+60’ 
+One Ring 
+ 
+247” (20’ 7”) 
+60’ 
+Two Rings 
+ 
+291” (24’ 3”) 
+ 
+Section roof substructure into quarters and install remaining rafter subassemblies in an alternating sequence to 
+balance load. Once quartered, substructure will become somewhat self-supporting. 
+ 
+WARNING: Always wear personal protective equipment including a hard hat and always use 
+proper lifting equipment and methods when lifting any structural element of a bin. Failure to 
+follow these precautions may result in death or serious injury. 
+ 
+58
+
+=== page 59 ===
+Attaching Rafters to Peak Ring & Sidewalls of 15,000 lb. Roof 
+ 
+Position first rafter subassembly inside starter sidewall ring so sidewall attachment brackets are slightly below 
+attachment locations. Attach peak rafter attachment brackets to peak ring weldment with 1/2 x 1-1/4" bolts and 
+1/2” flange nuts as shown in Fig. 9. Tighten all 1/2" bolts connecting to peak ring. 
+ 
+Lift sidewall rafter attachment brackets to attachment locations (top of brackets flush with sidewall sheet) and 
+secure each bracket with three (3) 3/8 x 1” bolts and 3/8” flange nuts. Insert bolts from outside of bin sheet. 
+See Fig. 10. Tighten these bolts at each location. 
+ 
+Repeat processes above until all rafter subassemblies are attached to peak ring and sidewalls. 
+ 
+Attach remaining purlins and roof sheet supports between rafter subassemblies. See Fig. 8. All 1/2” bolts used 
+to assemble rafters should be tightened after rafters are completely assembled. 
+ 
+Fig. 9 
+BCL5952 
+1/2” FLANGE 
+NUTS  
+ 
+Fig. 10 
+BL5962
+3/8” FLANGE NUT
+BL5932
+3/8” x 1” BOLT
+59
+
+=== page 60 ===
+Attaching Rafters to Peak Ring & Sidewalls of 30,000 lb. Roof 
+ 
+Position first rafter subassembly inside starter sidewall ring so sidewall attachment brackets are slightly below 
+attachment locations. Attach peak ring rafter attachment brackets to peak ring weldment with 1/2 x 1-1/4" bolts 
+and 1/2” flange nuts as shown in Fig. 11. Tighten all 1/2" bolts connecting to peak ring. 
+ 
+ 
+Lift sidewall rafter attachment brackets to attachment locations (top of brackets flush with sidewall sheet) and 
+secure each bracket with three (3) 3/8 x 1” bolts and 3/8” flange nuts. Insert bolts from outside of bin sheet. 
+See Fig. 12. Tighten these bolts at each location. 
+ 
+Repeat processes above until all rafter subassemblies are attached to peak ring and sidewalls. 
+ 
+Attach remaining purlins and roof sheet supports between rafter subassemblies. See Fig. 8. All 1/2” bolts used 
+to assemble rafters should be tightened after rafters are completely assembled. 
+Fig. 11 
+J0728
+1/2" x 1-1/4”
+BOLTS
+BCL5952
+1/2” FLANGE
+NUTS
+ 
+Fig. 12 
+BL5932
+3/8” x 1” BOLT
+BL5962
+3/8” FLANGE NUT
+60
+
+=== page 61 ===
+Eave Tension Ring Assembly 
+ 
+ 
+Table 4 shows main components used in eave tension ring assembly. Before assembly, loosen turnbuckles 
+(threaded connectors away from center). They will be tightened inward later. 
+ 
+ 
+Insert eave tension ring sections through sidewall rafter attachment brackets. Install splices and 
+turnbuckles using 3/8 x 2-1/2" bolts and 3/8” flange nuts. See Fig. 13 Details A and B. 
+ 
+ 
+Turnbuckles should be spaced evenly around bin. 
+ 
+ 
+Final section of tension ring will have to be cut to proper length and drilled with a 7/16” drill bit to attach 
+properly. Drill holes to match with connecting turnbuckle or splice. Attach final section with 3/8 x 2-1/2" 
+bolts and 3/8” nuts. Tighten all 3/8” hardware. 
+ 
+ 
+To ensure starter ring roundness, tighten turnbuckles inward with punch or pipe wrench until snug. 
+Bin Dia.
+Turnbuckles
+Splices
+Tension Rings*
+42'
+3
+3
+6
+48'
+3
+4
+7
+54'
+3
+5
+8
+60'
+3
+6
+9
+Eave Tension Ring Components
+All tension ring lengths are 252" (21')
+Table 4 
+Fig. 13 
+BL5962
+3/8” FLANGE
+NUT
+61
+
+=== page 62 ===
+Peak Z-Ring Assemblies  
+ 
+Pre-assemble peak Z-ring using 3/8” x 1” carriage bolts and 3/8” flange nuts. NOTE: Peak Z-ring sections must 
+butt tightly together. See Fig. 14A, 14B, 14C or 14D, as applicable. Tighten all bolts. Attach peak Z-ring to top 
+of rafters. Align one top Z-ring bracket (BC350004) at a splice with primary rafter. 
+Fig. 14A – 42’ Dia. 
+Fig. 14B – 48’ Dia. 
+BL5962 
+3/8” FLANGE NUT 
+BL5962 
+3/8” FLANGE NUT 
+62
+
+=== page 63 ===
+ 
+Fig. 14C – 54’ Dia. 
+ 
+Fig. 14D – 60’ Dia. 
+ 
+BL5962
+3/8” FLANGE NUT
+BL5962 
+3/8” FLANGE NUT 
+63
+
+=== page 64 ===
+Z-Ring Attachments 
+ 
+ 
+Peak Z-ring brackets attach to end of rafter using 3/8 x 1” bolt(s) and 3/8” flange nut(s). When assembling 
+15,000 lb. roofs, brackets attach to only one (1) rafter as opposed to two (2) on a 30,000 lb. roof. For 15,000 lb. 
+roof, if C-shaped rafter opens to left, then left hole in Z-ring bracket is used. If C opens to right, then right hole 
+in Z-ring bracket is used. IMPORTANT: For proper roof sheet alignment, attach Z-ring brackets as shown in 
+Fig. 15. 
+Fig. 15 
+64
+
+=== page 65 ===
+Installation of Roof Sheets 
+ 
+ 
+Attach 1/2 x 1-1/2" foam (K6843) to peak ring weldment under outer lip. Attach 1/2 x 3” foam (K6847) to face of 
+Z-ring. Peel off protective film and place foam as shown in Detail B of Fig. 16. 
+ 
+Align roof sheet ribs with eave clip rib tabs as shown in Detail A of Fig. 16. First roof sheet will attach directly 
+over primary rafter and is the roof sheet to which roof ladder rungs will be attached. Primary rafter will be 
+centered directly under roof ladder sheet. Insert 5/16 x 1-1/4" bolts through bottom of roof sheet into 
+continuous eave clip. Fasten with 5/16” flange nuts. HINT: Leave bolts out near left-hand rib. This rib will be 
+above rib of last sheet installed. See Detail A of Fig. 16. 
+ 
+Insert 5/16 x 1-1/4” bin bolt through top of roof sheet and peak Z-ring. Fasten with 5/16” flange nuts. NOTE: Do 
+not assemble hardware where rafter interferes with Z-ring; there is no need to drill through rafter. Do not fasten 
+top four (4) holes on roof sheets or interference will occur with peak aprons. See Detail B. Be certain top of roof 
+sheets are secured to Z-ring on either side of a rafter. Continue installing roof sheets counterclockwise. Attach 
+roof ladder rungs onto roof sheet located directly over primary rafter as next sheet is put into place. This will 
+allow positioning of manhole sheet on either side of roof ladder sheet and avoid rafter-manhole interference. 
+Install peak ladder rungs on every other roof sheet near peak during roof sheet assembly. Tighten all roof 
+sheet bolts. 
+ 
+Install bent roof ring mounting brackets in roof ribs using 5/16 x 1-1/4” bin bolts and 5/16” flange nuts. See 
+Fig.16. Locations are listed below.  
+ 
+42’ 
+5th & 10th holes from eave (Use 9th hole instead of 10th if using tapered roof vent) 
+48’ 
+6th & 11th holes from eave. 
+54’ 
+5th & 11th holes from eave. 
+60’ 
+5th & 11th holes from eave. 
+ 
+Roof ring assembly instructions appear elsewhere in this section. 
+Fig. 16 
+65
+
+=== page 66 ===
+Peak Ring Apron Assembly 
+ 
+Fig. 17 
+ 
+Assemble first apron piece by sliding top edge under peak ring lip and inserting 5/16 x 1-1/4" bin bolt through 
+apron piece and Z-ring. Insert another 5/16 x 1-1/4" bin bolt through apron piece and roof sheet rib. Fasten 
+both with 5/16” flange nuts. Fill all holes. See Fig. 17. 
+ 
+NOTE: If difficulty occurs when aligning apron holes, it may be necessary to field-drill through roof sheet ribs. 
+Fasten apron to Z-ring and use apron roof sheet rib holes as pilot holes to ream or drill through roof sheet rib. 
+Misalignment may be caused by adjustments made during roof assembly or by settling of roof sheets. When all 
+roof sheet components are bolted in place and misalignment of apron holes occurs, it is very difficult to move 
+assembled roof sheets to align holes. It consumes less time to field-drill holes than try to align them. Use 
+existing 5/16 x 1-1/4” bolts and 5/16” flange nuts. Ensure there is a watertight seal on all field-drilled holes. 
+ 
+Apply bin caulk to edge of apron where two pieces overlap. Continue attaching apron pieces and applying 
+caulk until fully assembled. Tighten all bolts.  
+ 
+Hammer down all tabs on aprons with a rubber mallet. Bend them down between roof sheet ribs until there is a 
+small gap between all tabs and ribs. 
+ 
+Tighten all hardware not previously tightened. 
+ 
+ 
+ 
+66
+
+=== page 67 ===
+External Roof Ring Attachment 
+ 
+See Table 5 for quantities of roof ring components based on bin diameter. Bent roof ring brackets should have 
+been fastened at locations specified in Table 5 during assembly of roof panels. 
+ 
+Table 5 – Quantities of roof ring components 
+Bin Diameter 
+Bent Bracket, 
+Roof Ring 
+Location* 
+Internal Tube 
+Splices 
+Expanders
+10' Pieces** 
+U-Bolts 
+External 
+Splice 
+Tubes 
+42' 
+5 
+4 
+5 
+10 
+42 
+1 
+10*** 
+2 
+3 
+6 
+42 
+1 
+48' 
+6 
+5 
+5 
+11 
+48 
+1 
+11 
+2 
+3 
+6 
+48 
+1 
+54’ 
+5 
+6 
+7 
+14 
+54 
+1 
+11 
+3 
+4 
+8 
+54 
+1 
+60' 
+5 
+7 
+8 
+16 
+60 
+1 
+11 
+5 
+5 
+11 
+60 
+1 
+* Location determined by counting holes from bottom edge (eave) of roof sheet. 
+** Roof ring pieces are factory-rolled for intended location. 
+*** If using tapered roof vent on 42’ bin, upper ring must be at 9th hole from eave instead of 10th. 
+ 
+Pre-assemble expander assemblies (1 x 10” threaded rod, 1” nuts and 1” washers) before installing ring. Run 
+all four (4) 1” nuts to center of each threaded expansion rod. Position washers outside of nuts. Nuts and 
+washers will later be run outward after all sections of ring have been assembled. See Fig. 18. 
+ 
+ 
+Place first expander assembly near roof ladder. Center first ring section on roof ladder sheet. Evenly space 
+remaining expanders around roof ring as ring sections are placed into bent roof ring brackets. Install internal 
+tube splices (B5511) at all other locations except last one, where an external splice tube will be used. Fig. 19 
+shows 8” internal tube splice using a 5/16 x 1-1/4" bin bolt as a stopper. Fig. 20 shows 8” external splice tube 
+(B5512) using 5/16 x 2” bolt. Place 5/16” U-bolts on all roof ring mounting brackets. See Figs. 18 and 19. Do 
+not tighten U-bolt flange nuts until later after roof has been crowned. 
+ 
+Fig. 18 
+EXPANDER 
+ASSEMBLY 
+B5505 
+67
+
+=== page 68 ===
+ 
+ 
+External splice tube will be installed after all other splices and expanders are in place and ring sections are 
+trimmed. If final section of roof ring will be less than 24” long, split the difference with previously assembled 
+roof ring section and create two sections of equal length. See Fig. 20. Ensure there is a 3/8” gap between ring 
+sections for bolt that will be inserted. It may be necessary to deburr cut edges. 
+ 
+Fig. 20 
+ 
+Slide external splice tube (B5512) over one end of roof ring. Align ring sections and position splice over both. 
+Insert 5/16 x 2” bolt into splice tube and lock in place with 5/16” flange nut. 
+ 
+Adjust expander assembly nuts until a slight crown appears in middle of roof sheets. Tighten second set of 
+nuts (jam nuts) against expander nuts to help prevent loosening. Tighten 5/16” flange nuts on 5/16” U-bolts at 
+all bent roof ring brackets. 
+ 
+IMPORTANT: Roof ring will fail if expander assemblies become loose due to high winds or excessive 
+pressures. To guard against failure, be sure to follow procedures on these pages when installing ring. 
+Fig. 19 
+68
+
+=== page 69 ===
+Manhole Cover Assembly 
+ 
+ 
+Install manhole cover by attaching a single side hinge to pre-assembled manhole riser using 1/4 x 3/4” bolts 
+and 1/4” nuts. Ensure side hinge is bolted on outside of riser with hinge frame cylinder toward top. Also, hinges 
+should be placed opposite of sidewall ladder for ease of access into bin through manhole. NOTE: Slots in top 
+of riser eliminate interference between hinge frame and riser as lid is closed. Insert all bolts from inside of riser.  
+ 
+Insert hinge frame with attached cover to previously assembled side hinge. Place second side hinge onto 
+hinge frame and bolt to riser using 1/4 x 3/4” bolts and 1/4” nuts. Install vinyl edge guard around top of riser by 
+pressing onto lip. Cut away material over slots on hinged side so hinge frame can close. See Fig. 21. 
+ 
+Install spring hinge assembly into spring catch at base of riser. Spring hinge assembly secures lid by locking 
+handle down on lid and against manhole hinge catch. 
+  
+ 
+ 
+Fig. 21 
+Table 6 
+69
+
+=== page 70 ===
+Poly Roof Vent Assembly 
+ 
+Follow instructions on this and next page to install Poly Roof Vent. If using optional snow guard, attach as 
+shown in Fig. 24 before screen is attached to vent. See Fig. 25 and related instructions for attaching braces to 
+vents on bins in ASCE 7-05 Code, 120 mph or higher wind zone. 
+Fig. 22 
+ 
+Insert 5/16 x 1-1/4” bolts into pivoting screen holes from outside in as shown above. Tighten to poly vent with 
+5/16” flange nuts. Work the pivoting screen bolt hole loops over the 5/16 x 1-1/4” bolts with loops bent up as 
+shown in Detail A. Screen should be attached so it will be at a slight angle when vent is attached to roof. 
+Screen should not be vertical. Fasten 5/16” lock nuts to ends of 5/16” bolts as shown above to ensure screen 
+stays in place and can pivot freely on bolts. 
+Tabs of front bracket should be nested inside of poly vent. Apply butyl caulk to front edges of roof vent to 
+ensure a watertight seal when front bracket is fastened. 
+Attach front bracket to poly roof vent using 5/16 x 1-1/4” bolts and 5/16” flange nuts. Tighten all hardware. 
+ 
+70
+
+=== page 71 ===
+ 
+ 
+Fig. 23 
+ 
+Apply two strips of butyl caulk around cutout, one on each side of mounting holes, as shown in Fig. 23. 
+Additional butyl caulk is provided to apply a double stack on top side of roof vent cutout. Apply butyl caulk 
+close to mounting holes, leaving a 1” gap around outside strip. 
+Field-bend angle bracket using back of vent as a template. 
+Attach roof vent and angle bracket to roof sheet using 5/16 x 1-1/4” bolts, 5/16” fender washers and 5/16” 
+flange nuts as shown in Fig. 23. Use 5/16” fender washers on top side of poly flange. NOTE: To prevent 
+damage to poly roof vent flanges, secure vent to roof by tightening nuts on underside of roof sheet instead of 
+tightening bolts on top side. Check sealant along top side of roof vent base for any gaps or pockets. Apply a 
+bead of tube caulk (not provided) along top side of base to ensure a watertight seal. 
+ 
+IMPORTANT: Check caulk along top side of base yearly and re-apply as needed to prevent leakage. 
+ 
+71
+
+=== page 72 ===
+ 
+Attaching Optional Snow Guard & Vent Braces 
+ 
+Attach optional snow guard to vent screen as shown in Fig. 24 using 5/16” hardware. 
+Fig. 24 
+ 
+ 
+Braces for Vents in 120 mph or Higher Wind Zones 
+ 
+Add braces to poly roof vents to provide greater stability on bins in ASCE 7-05 Code, 120 mph or higher wind 
+zone. 
+Adjust braces so that holes on flat ends will attach to sides of roof vent and to top of roof sheet ribs as shown 
+in Fig. 25. Position braces so they are spaced out as much as possible. 
+ 
+After ensuring vent brace alignment, drill holes in sides of roof vent and top of roof ribs. 
+ 
+Use 5/16” hardware to attach D3936P7 braces to all four (4) corners of roof vent. 
+Fig. 25 
+72
+
+=== page 73 ===
+ 
+Tapered Poly Roof Vent Assembly 
+ 
+Fig. 26 
+ 
+NOTE: Vent comes pre-assembled from factory but should be taken apart for installation. 
+ 
+Position pre-assembled vent close to peak of bin, leaving enough room to attach vent to flat area of roof sheet 
+and allow for drainage around vent. Remove lid and screen by unscrewing five (5) 5/16 x 1-1/4” bolts from nut 
+inserts in body of vent. Turn body upside-down and use as a template for marking cutout opening. Draw lines 
+for cutout 1” inside of vent sides. After cutting out vent hole in roof, bend edges upward to create flange that 
+will help prevent water from leaking in. Turn vent body upright and position over cutout. Use pre-punched holes 
+in vent flanges as template for drilling attachment holes in roof sheet. Set vent body aside. 
+ 
+Apply two strips of butyl caulk around cutout, with one strip on each side of mounting holes. 
+ 
+Attach body of vent to roof using 5/16 x 1-1/4” bolts, 5/16” fender washers and 5/16” flange nuts. 
+ 
+NOTE: To prevent damage to poly roof vent flanges, secure vent to roof by tightening nuts on underside of roof 
+sheet instead of tightening bolts on outside. Check sealant along top side of roof vent body for any gaps or 
+pockets. Apply a bead of tube caulk (not provided) along top side of body to ensure a watertight seal. 
+ 
+Re-attach lid and screen to body of vent by screwing (5) 5/16 x 1-1/4” bolts into nut inserts in body of poly roof 
+vent. 
+ 
+IMPORTANT: Check caulk around vent yearly and re-apply as needed to prevent leakage. 
+5/16 x 1-1/4” SCREWS ATTACH
+TO NUT INSERTS IN TAPERED
+POLY ROOF VENT BODY.
+CUT OPENING IN ROOF 
+SHEET TO PROVIDE FOR 
+1” BENT-UP FLANGE OF 
+ROOF SHEET. 
+VENT BODY 
+LID 
+SCREEN 
+ROOF SHEET
+USE PRE-PUNCHED HOLES
+IN VENT BODY FLANGE AS
+TEMPLATE FOR DRILLING
+HOLES IN ROOF SHEET.
+73
+
+=== page 74 ===
+ 
+Single Temperature Cable Support Brackets 
+ 
+ 
+ 
+Single temperature cable support brackets can be attached to a single or double rafter. Position brackets close 
+to specified temperature cable hanging location. Attach brackets to rafters using 1/2 x 1-1/4" bolts and 1/2” 
+flange nuts. Align two shackle brackets with each rafter bracket and attach with 1/2 x 1-1/4" bolts and 1/2” 
+flange nuts. See Detail A of Fig. 27. Tighten all hardware. Detail B shows a single-rafter configuration. Detail C 
+shows a rafter bracket placed between back-to-back rafters. A shackle is used to hang temperature cable. 
+After attaching temperature cable to shackle, attach shackle to shackle brackets with screw pin. See Detail B. 
+ 
+IMPORTANT: Install only one temperature cable bracket per rafter. Ensure support brackets are in location 
+specified by temperature cable manufacturer. Do not attach more temperature cable supports than 
+recommended. Follow instructions from temperature cable provider.  
+ 
+Center temperature cable bracket must be 
+placed as close to peak ring as possible. 
+Field-drill two (2) holes using rafter bracket 
+as drill guide. See Fig. 28. A double rafter 
+configuration 
+requires 
+back-to-back 
+attachment of rafters and two additional 9/16” 
+holes 
+to 
+be 
+drilled. 
+Assemble 
+center 
+temperature cable per previous instructions 
+on this page. 
+ 
+ 
+Fig. 27 
+Fig. 28 
+74
+
+=== page 75 ===
+ 
+Double Temperature Cable Support Brackets 
+ 
+ 
+Double temperature cable support brackets can be attached to a single or double rafter. Position support 
+brackets on rafter close to specified temperature cable hanging location. Attach rafter bracket to rafter using 
+1/2 x 1-1/4" bolts and 1/2” flange nuts. Align angle bracket with rafter bracket and fasten with 1/2 x 1-1/4" bolts 
+and 1/2” flange nuts. See Details A and B of Fig. 30. Tighten all hardware. Detail A shows a single rafter. Detail 
+B shows a rafter bracket between back-to-back sections of a double rafter. 
+ 
+Attach double bracket, single bracket and two shackle brackets to purlin/rafter style support with 1/2 x 1-1/4" 
+bolts and 1/2” flange nuts as shown in Detail C of Fig. 30. Depending on size and height of bin, two different 
+supports are used: a 6” purlin-style support or a 10” rafter-style support. See Fig. 29. Attach purlin/rafter style 
+support assembly to angle brackets using 1/2 x 1-1/4" bolts and 1/2” flange nuts. Tighten all hardware. A 
+shackle is used to hang temperature cable from support brackets. After attaching temperature cable to 
+shackle, attach shackle-to-shackle brackets with screw pin. See Fig. 30 Detail C.  
+ 
+IMPORTANT: Use only one temperature cable bracket per rafter. Ensure support brackets are in location 
+specified by temperature cable manufacturer. Do not attach more temperature cable supports than 
+recommended. Follow instructions from temperature cable provider. 
+ 
+Fig. 30 
+Fig. 29 
+75
+
+=== page 76 ===
+ 
+Attaching Octagon Lid Weldment 
+ 
+Fig. 31 
+ 
+ 
+Attach octagon lid weldment to top of peak ring weldment. See Fig. 31. Top of peak ring weldment will fit 
+between inner and outer rings of lid weldment. Insert 1/2 x 3-1/2” bolt through lid and clamp bracket as shown 
+in Fig. 31 and secure with 1/2” flange nut. A total of four clamp brackets are provided. They should be 
+positioned equidistantly from one another. Ensure all four brackets are tight against flange of peak ring as 
+shown. 
+ 
+DISCLAIMER: If catwalk or other accessories will be attached to lid, lid must be welded to peak ring. Number 
+and type of welds must be determined by customer (or its retained engineer or construction supervisor). 
+Factors to consider include, but are not limited to, live loads, dead loads and wind loads. Weight of catwalk or 
+other accessories must be supported by a structure other than bin. Support structure must be designed by a 
+professional engineer. Sukup Manufacturing Co. will not be responsible for any damage to a product, including, 
+but not limited to, any damage that results from inadequate or improper bracing or welding methods and 
+materials. 
+ 
+Cut appropriately sized hole into top of lid weldment with a torch or plasma cutter to allow for downspout. To 
+ensure watertight seal, caulk all around after material cools. Apply touch-up paint if needed. 
+1/2” FLANGE NUT
+76
+
+=== page 77 ===
+ 
+Knot-passing Pulley, Restraint Anchor Installation 
+ 
+For added bin safety, a knot-passing pulley is mounted inside of bin near the peak on roofs rated for 15,000 
+pounds or more. Knot-passing pulley is intended to be used with a lifeline and safety harness (neither supplied 
+by Sukup Manufacturing Co.). A feeder line should pass through knot-passing pulley at peak and through 
+restraint anchor at eave of bin near manhole. See Fig. 32. Feeder line is used to pull lifeline through knot-
+passing pulley for safety harness attachment. Do not attach safety harness to feeder line. Use safety 
+equipment according to manufacturers’ instructions. Refer to Sukup Grain Bin Operation Manual Safety 
+Section and www.osha.gov for additional safety information. 
+ 
+IMPORTANT: At the rafter that is next to manhole, attach knot-passing pulley at the peak so pulley aligns with 
+restraint anchor near sidewall. Ensure that any temperature cables in bin will not interfere with feeder line. 
+ 
+Fig. 32 – Mount knot-passing pulley close to peak ring (single rafter shown) 
+ 
+Each kit contains knot-passing pulley, restraint anchor, rope for feeder line, brackets, decals and hardware 
+needed for mounting pulley and restraint anchor. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+KIT # 
+BIN DIAMETER, 
+ROOF RATING  
+ROPE 
+(FT.) 
+B0584 
+18’-24’, 15K & 30K
+24 
+B0579 
+27’-39’, 15K & 30K
+40 
+B0546 
+42’-60’, 15K & 30K  
+66 
+B0578 
+66’-78’, 15K & 30K
+90 
+B0591 
+84’-105’, 15K & 30K 
+120 
+B0596 
+90’-156’, 50K
+160 
+Table 7 
+FEEDER LINE USED TO PULL
+LIFELINE THROUGH PULLEY.
+TIGHTEN FEEDER LINE TO PREVENT
+IT FROM HANGING IN GRAIN.
+77
+
+=== page 78 ===
+ 
+NOTE: For ease of installation, it is best to install knot-passing pulley during assembly of roof substructure and 
+restraint anchor during assembly of first (top) ring of bin. 
+ 
+Knot-passing Pulley Installation: Attach knot-passing pulley to rafter bracket as shown in Fig. 32. Bracket 
+should be mounted to a rafter as close to peak ring as possible. Mounting of bracket will depend on type of 
+rafter. For single-rafter roof, field-drill two (2) 9/16” holes using rafter bracket as drill guide. See Fig. 33. A 
+double rafter (Fig. 34) requires two (2) additional 9/16” holes be field-drilled, with bracket mounted between 
+rafter sections. For I-beam roof rafter, drill four (4) 9/16” holes in I-beam and mount angle brackets as shown in 
+Fig. 35, then attach pulley mounting bracket. In all cases, 1/2” bolts and nuts are used to attach brackets, and 
+a shackle is used to hang knot-passing pulley from rafter bracket. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Restraint Anchor Installation: Install restraint anchor eyebolt 2” below horizontal line of eave clip bolt holes 
+on inside wall of bin. See Fig. 36. Field-drill 1/2” hole below manhole roof sheet rib. Insert eyebolt as shown, 
+making sure ring is perpendicular to ground, and secure with 1/2" washer and 1/2" flange nut. 
+ 
+As shown in Fig. 36, place decal L0907 on inside of bin just under eyebolt location. 
+Fig. 36 
+Fig. 33 - Mounted 
+to single rafter 
+  
+Fig. 34 - Mounted 
+to double rafter 
+Fig. 35 - Mounted 
+to I-beam rafter 
+78
+
+=== page 79 ===
+IMPORTANT: At no time should any 
+bolts be substituted for those 
+supplied by Sukup Manufacturing Co. 
+Commercial Stiffened Sidewall Assembly 
+ 
+Each Sukup commercial bin is shipped with a sidewall color chart similar to chart shown below. See back 
+page of manual for actual chart. This chart contains all information about sidewall gauges, stiffener gauges 
+and bolt sizes. Builder must refer to this information. Some bins have two stiffeners per sidewall sheet and 
+others have three. Assembly instructions in this section are the same for both except where noted. 
+@ = Standard sidewall ring location.   + = Extra sidewall ring for sidedraw system.   I = Insert splice 
+ 
+Table below shows colors used to indicate sidewall and stiffener gauges. 
+ 
+SIDEWALL
+GAUGE 
+COLOR 
+STIFFENER
+GAUGE 
+20 
+RED 
+ 
+18 
+GRAY 
+ 
+17 
+BLUE 
+2 
+15 
+WHITE 
+15 
+14 
+PINK 
+14 
+13 
+YELLOW 
+6 
+12 
+BLACK 
+12 
+11 
+PURPLE 
+ 
+10 
+GREEN 
+10 
+9 
+BROWN 
+ 
+8 
+ORANGE
+8 
+ 
+IMPORTANT: Sukup grain bins require a snug fit connection. A snug fit is when steel sheets are fully drawn 
+together, allowing for a thin layer of caulk and compressing rubber washers to seal bolt holes. A snug fit is 
+usually attained with a few impacts of an impact wrench. Use table below as a guideline for gauging impact 
+wrench effectiveness. Wrench should be able to achieve stated torque on a dry fit connection (no caulk 
+between sheets). 
+ 
+ 
+ 
+ 
+ 
+ 
+IMPORTANT: If bin door and unload system will be in same sidewall sheet, ensure that sheet is reinforced 
+around cutout for unload system. See last page of this section for cutout reinforcement instructions. 
+BOLT 
+GRADE 
+FT-LBS 
+5/16 
+8.2 
+15-20 
+3/8 
+8.2 
+25-35 
+7/16 
+8.2 
+45-55 
+1/2 
+8.2 
+65-80 
+79
+
+=== page 80 ===
+Fastener Usage 
+ 
+Two types of nut – flange and hex – are used on Sukup commercial bin bolts, depending on size of bolt and 
+connection for which bolt is used. Flange nuts are used on all bolts connecting stiffeners to sidewall sheets and 
+on all bolts connecting laminated stiffeners (These bolts are inserted from inside of bin). See table below for 
+nuts to use on bolts connecting sidewall sheets together (These bolts are inserted from outside of bin). 
+ 
+ 
+3/8” 
+7/16” 
+1/2" 
+Stiffener
+Flange
+Flange
+Flange
+Sidewall
+Flange
+Hex 
+Hex 
+ 
+ 
+ 
+Jack Bolt Usage 
+  
+Please read information on jack bolts carefully to understand quantity supplied. Quantity depends on diameter 
+and height of bin. Quantity is based on jacks having four (4) bolt holes in their attaching brackets. Number of 
+jacks per ring is based on diameter of bin bolt used in that particular ring. Quantity of jack bolts is determined 
+by multiplying number of jacks used in each ring by four (4) bolts. 
+ 
+Listed below are four (4) diameters of jack bolts used on Sukup bins. Diameter of jack bolt is based on 
+diameter of bin bolt. Longer jack bolts are needed as thickness of sidewall increases. NOTE: Number of jacks 
+per sidewall sheet is based on weight of structure being lifted. Generally, more jacks will be used as more rings 
+are added. 
+ 
+ 
+5/16” Bin Bolt 
+1 Bin Jack per 2 Sidewall Sheets  
+5/16” x 1-3/4" Jack Bolts 
+ 
+3/8” Bin Bolt  
+1 Bin Jack per 1.5 Sidewall Sheets 
+3/8” x 2” Jack Bolts 
+ 
+7/16” Bin Bolt 
+1 Bin Jack per 1 Sidewall Sheet 
+ 
+7/16” x 2” Jack Bolts 
+ 
+1/2” Bin Bolt  
+1 Bin Jack per 1 Sidewall Sheet 
+ 
+1/2” x 2-3/4” Jack Bolts 
+ 
+ 
+After a ring has been added and bin jacks are lowered, jack bolts can either be left in sidewall or removed and 
+replaced with bin bolts of appropriate length. Jack bolts are supplied without reducing quantity of standard-size 
+bolts. Be sure to use bolts sized for heavier sidewall sheets as rings are added during construction. 
+80
+
+=== page 81 ===
+Special Sidewall Sheets 
+ 
+Up to four special sheets are used on Sukup commercial bins to transition from smaller bolts in upper rings to 
+larger bolts in lower rings. These sheets contain different size holes and/or horizontal row punch patterns and 
+are distinguished by paint schemes as follows: Purple/Black (shown below); Brown/Green; Purple/Orange; 
+Red. 
+ 
+Special 12ga (Purple/Black) Sheets 
+ 
+These sheets are used to transition from a 12ga (upper) and 11ga (lower) ring of sheets. Two sizes of holes 
+are punched in the 12ga Purple/Black sheet. As shown in Fig. 1, 13/32” holes are punched in top horizontal 
+row and vertical columns, while 15/32” holes are punched in bottom horizontal row. This is done so 15/32" 
+holes and 4-11/16” hole spacing on bottom of 12ga sheets will match top of attaching 11ga sheets with no 
+additional drilling or reaming required. 
+ 
+NOTE: There is a specific top and a bottom to Purple/Black sheets and they are painted on top edge only, as 
+shown in Fig. 1. Be sure to use 3/8” bolts in 13/32” holes and 7/16” bolts in 15/32” holes. 
+ 
+Special 10ga Brown/Green Sheets 
+ 
+These sheets are used for horizontal seam spacing transition from 4-11/16” spacing (top of sheet) to 2-11/32” 
+spacing (bottom). 
+ 
+Special 8ga Laminated Purple/Orange Sheets 
+ 
+These laminated sheets are used for going from 7/16” bolts (top of sheet) to 1/2" bolts (bottom). Holes in top 
+horizontal row are 15/32”, while those in bottom horizontal row are 9/16”. 
+ 
+Special Red Sheets for 7/16” stiffener bolts 
+ 
+These sheets have red paint in upper corners in addition to their normal color code. They use 7/16” bolts instead 
+of 3/8” bolts on stiffeners. They are used for attaching 2ga and 6ga stiffeners. 
+ 
+Use of these four special sheets depends on size of bin. See color chart for proper sheet locations. All special 
+sheets are included in sidewall bundles. 
+ 
+Color coding is same whether sheet is punched for two stiffeners or three stiffeners. 
+ 
+13/32” HOLES – 3/8” BOLTS
+TOP HORIZONTAL ROW & 
+VERTICAL COLUMNS
+15/32” HOLES – 7/16” BOLTS 
+BOTTOM HORIZONTAL ROW 
+Fig. 1  
+81
+
+=== page 82 ===
+Assembly Instructions 
+ 
+Place sidewall panels around perimeter of foundation. Each sidewall panel will slightly lap inside of previous panel 
+as shown in Fig. 2. 
+ 
+NOTES: Instructions show assembly proceeding clockwise. If working counterclockwise, ensure proper 
+placement of caulk. Note that drawings below show view from inside of bin. 
+ 
+Wipe vertical edge of panel clean and apply 44” strips of caulk as shown in Fig. 3, depending on whether 
+panels will be attached as single sheets or double-laminated. For triple- or quadruple-laminated sheets, apply 
+caulk as shown in Fig. 4. Attach panels as shown in Figs. 3 or 4 using bolts listed on color gauge chart. 
+ 
+Leave all bolts loose to finger-tight until sidewall rings are completely assembled. 
+ 
+Fig. 2 
+ 
+Fig. 3 
+82
+
+=== page 83 ===
+Triple- & Quadruple-Laminated Sidewall Sheet Splice Plates 
+ 
+ 
+ 
+Fig. 4 – Splicing laminated sidewall sheets (Triple-laminate sheets shown) 
+ 
+Triple- and quadruple-laminated sheets hang like single sheets and double-laminated sheets except there is no 
+vertical seam overlap. Sheets butt up against each other. As shown in Fig. 4, two (2) splice plates are used 
+both inside and outside of bin. Inside splice plates are color-coded red, painted on one edge only. 
+IMPORTANT: Always keep painted edges up. NOTE: Tops of inside splice plates attach at a horizontal seam; 
+tops of outside splice plates attach just below horizontal seam. Attach splice plates after all triple- or quadruple-
+laminated sheets are hung. Inside splice plates can be assembled after all laminated sheets are hung. 
+ 
+IMPORTANT: Insert splice flashing between two outermost sidewall sheets as shown in Fig. 4. 
+ 
+As shown in Fig. 4 Detail A, apply caulk to perimeter on inside of each outside splice plate. Apply another line 
+of caulk as shown between lines of bolt holes of each outside splice plate. Inside and outside splice plates will 
+be attached with same hardware. Consult color chart for proper size of bolts. 
+ 
+Tighten bolts on ring after all connections have been made. 
+ 
+ 
+83
+
+=== page 84 ===
+Align sidewall panels so stiffeners will align with anchor locations. Bins with even number of sidewall rings 
+require two rings and an 83” starter stiffener. Bins with odd number of sidewall rings use 39” starter stiffener and 
+require one ring be assembled. 
+ 
+Attach starter stiffeners to sidewall 4" below top of sidewall sheet as shown in Fig. 5. Use bolts and nuts specified by 
+color chart. Roof rafters will attach at every other stiffener location on bins with two stiffeners per sidewall sheet, and 
+at every third stiffener on bins with three stiffeners per sidewall sheet. For bins up to 105’ with even number of rings, 
+83” stiffeners can be installed after roof is built. 
+ 
+Ensure proper vertical alignment of stiffeners to sidewall by bolting 88" stiffener through hole (not slot) to 
+horizontal sidewall seam. NOTE: Sukup logo sign goes in second ring from top. 
+ 
+NOTE: Top stiffener on a 135’ or 156’ dia. bin is always 39” regardless of number of rings. The next stiffener 
+on a 135’ or 156’ dia. bin with odd number of rings is 88”. The next stiffener on a 135’ or 156’ dia. bin with 
+even number of rings is 44”, followed by 88” stiffeners. See color chart. 
+ 
+ 
+Fig. 5 
+ 
+NOTE: Top stiffener position is same for bins with odd or even number of sidewall rings. 
+ 
+ 
+ 
+ 
+84
+
+=== page 85 ===
+ 
+ 
+Fig. 6 
+ 
+Ensure proper vertical alignment of stiffener by using punch as shown in Fig. 6. Do not allow stiffener to sag or 
+it will make assembly difficult. 
+ 
+Tighten sidewall hardware after each ring is assembled. Tighten stiffener and splice hardware after each set 
+has been attached to sidewall. Using appropriately rated erection jacks, raise bin. 
+ 
+ 
+Clean bottom corners of sidewall sheets and, as shown in Fig. 7, apply caulk 6” in each direction from center of 
+vertical seam. 
+Fig. 7 
+85
+
+=== page 86 ===
+ 
+Attach next ring. Consult color chart for specific location of gauges and bolt sizes. Stagger vertical seams from 
+one ring to next, making sure to line up stiffener holes. See Fig. 8 for alignment on bins with three stiffeners per 
+sheet. When there are two stiffeners per sheet, vertical seams will stagger between stiffeners. Depending on 
+size and diameter of bin, sidewall rings may need to be laminated. See color chart. 
+ 
+NOTE: Sidewall sheets are painted on one edge only, according to color chart. For ease of erection, always 
+hang sheets with painted edges up. 
+Assemble stiffeners and stiffener splices as shown in Fig. 9. Consult color gauge chart for appropriate 
+schedule of gauges. NOTE: Correctly sized bolts must be used in all holes as indicated in color chart unless 
+otherwise specified. If bolts do not fit, holes must be reamed out and positioned accordingly. All bolts must be 
+fastened with correctly sized nuts. Angled brackets are noted on color chart as “A” (Example: 10 I + A). They 
+attach behind stiffener flange at top of specified stiffener inserts. If there is no “A” in splice column on color 
+chart, bin does not require angled brackets. See Fig. 9. 
+Fig. 8 – Aligning 
+stiffener holes and 
+attaching next ring 
+Fig. 9 – Splicing stiffeners 
+86
+
+=== page 87 ===
+Laminating Commercial Insert Stiffeners 
+ 
+Depending on size and diameter of bin, stiffeners may need to be laminated. Stiffeners will have staggered 
+seams and no splice plates. See Fig. 10. Consult color gauge chart. 
+ 
+Assemble and install wind rings as required. Consult wind ring assembly section for instructions. Consult color 
+gauge chart for location and number of wind rings. 
+ 
+Attach sidedraw chutes as needed. Consult sidedraw assembly section for instructions. 
+ 
+Fig. 10 
+Insert stiffeners are offset to act as splices. Only two (2) pieces can be 
+laminated at a time. NEVER laminate three (3) pieces together. 
+ 
+Stiffeners should always be attached directly to sidewalls. Angled brackets are 
+noted on color chart as “A” (Example: 10 I + A). They attach behind stiffener 
+flange at top of specified stiffener inserts. If there is no “A” in splice column on 
+color chart, bin does not require angled brackets. 
+ 
+Insert assembly requires correctly attaching insert to stiffener using appropriate 
+bolt holes: three (3) pairs above joint overlap; two (2) pairs below; two (2) pairs 
+at bottom of insert; and three (3) pairs spaced between. See Fig. 10. 
+ 
+IMPORTANT: Fill all holes on laminating stiffener flange. Laminating (insert) 
+stiffeners may have wind ring holes at a location that does not require a wind 
+ring. Holes at these locations still need to be filled. Be certain all wind ring, 
+splice and center holes are filled on laminating stiffener flange. 
+87
+
+=== page 88 ===
+ 
+Fig. 11 
+ 
+Apply caulk to bolt-on base angle as shown in Fig. 11 and bolt to bottom of sidewall sheets. NOTE: Ensure 
+base angle pieces overlap by one bolt hole. 
+ 
+If foundation sealant is used, apply to bottom of base angle before lowering bin onto concrete or hopper 
+bottom. 
+ 
+NOTE: All weight should be taken of off bin jacks before base angle bolts are tightened. Shim gaps between 
+stub weldment and concrete. IMPORTANT: Do not force shims. Assemble square washer(s) and anchor nut 
+on anchor bolt and tighten. See chart in Anchor Bolt section of this manual for size and quantity of square or 
+rectangular washers and anchor nuts. See Fig. 12. 
+ 
+          Single-Anchor Boot 
+ 
+ 
+ 
+ 
+ 
+Double-Anchor Boot 
+69’ Dia. and smaller (2 Stiffeners/Sidewall Sheet)                          72’ Dia. and larger (2 Stiffeners/Sidewall Sheet) 
+  72’ Dia. and larger (3 Stiffeners/Sidewall Sheet) 
+ 
+Fig. 12 
+SHIM AS NEEDED 
+SHIM AS NEEDED 
+88
+
+=== page 89 ===
+Reinforcing Sidewall Cutouts 
+ 
+Bin sidewall should be reinforced around any non-supported cutout wider than 13” (e.g., conveyors) using 22” 
+anchor brackets or similar supports. See Fig. 13. Attach base plates to all 22” anchor brackets using two (2) 
+3/8 x 1” bolts and two (2) 3/8” flange nuts. Attach 22” anchor brackets to sidewall using same size bolts used in 
+vertical seams of sidewall sheets, with a minimum of 3/8” bolt. 
+ 
+Fig. 13 – 20” cutout reinforced by 22” anchor brackets (B5700) and base plates (B5701) 
+ 
+For any cutout larger than 30” wide it may be necessary to field-weld C-shaped channel pieces together and 
+bolt to sidewall as shown in Fig. 14. Use same size of bolts as used in vertical seams of sidewall sheets, with a 
+minimum of 3/8” bolt. 
+ 
+Fig. 14 – 30” cutout reinforced by C-channel 
+ 
+89
+
+=== page 90 ===
+ 
+ 
+Wind Ring Assembly 
+ 
+Fig. 1 
+ 
+Consult color/gauge chart located either in manual or with sidewall sheets for number of wind rings necessary 
+for bin.  Standard wind ring locations are indicated on chart by an “@” symbol. Additional wind rings needed on 
+bin with a sidedraw are indicated by a “+” symbol. 
+ 
+Top stiffeners, 39” & 83”, have only one set of holes for wind ring brackets, located two-thirds from top of top 
+ring. The 88” stiffeners are punched with two sets of holes so that wind ring brackets can be attached in middle 
+of sidewall ring. Use bottom holes on bins with odd number of rings. Use top holes on bins with even number 
+of sidewall rings. See Fig. 1. 
+ 
+Unless otherwise stated on color chart, wind rings are located in top ring, third ring, fifth ring and so on (every 
+other ring starting at top). These wind ring locations meet ASAE Standard S412.1 which leaves at least 1-1/2” 
+below the rung and 4-1/2” above the rung where an obstruction (wind ring) is located.  
+ 
+90
+
+=== page 91 ===
+ 
+ 
+ 
+Fig. 2 
+ 
+Loosely attach two wind ring brackets (BC3106) to each stiffener as shown in Fig. 2 using 3/8 x 1-1/4" bolts 
+(B5972) and 3/8" flange nuts (B5962). Insert wind ring sections through brackets. 
+ 
+Butt wind ring sections against each other as shown in Fig. 2. Position splice clamps (BC3101) over ends of 
+wind ring sections.  Attach clamps with 3/8 x 1” bolts (B5932) and 3/8” flange nuts (B5962), leaving bolts loose 
+to finger tight. IMPORTANT: Splices must be located between stiffeners. Staggering of splices is 
+recommended. 
+ 
+Total length of wind ring sections will be too long for circumference of bin. Last section will need to be cut to 
+butt against first section assembled. Final wind ring section should span at least two sidewall stiffeners. 
+ 
+NOTE: Some wind ring assemblies require that a trimmed piece from a previously assembled ring be used. All 
+leftover sections that are longer than 9’ should be saved for possible future use. 
+ 
+Once all wind ring sections have been fastened to stiffeners and spliced, tighten hardware. 
+ 
+Further secure each splice to wind ring using 1/4 x 1” self-drilling screw (J0498) as shown in Fig. 2. 
+91
+
+=== page 92 ===
+Farm Duty Doors Section 
+ 
+44” & 66” Sidewall Door Installation (D, W, & W1) 
+ 
+NOTE: Use 3/8 x 1” bin bolts for all doors. 
+ 
+1. Remove inner door panels from frame. 
+ 
+2. Determine top of frame from bottom. Bottom of frame has sloped sill to direct rain away from inner panel. 
+ 
+3. Apply double row of rope caulk to frame flanges. Top flange will receive caulk on outside of flange. Side and 
+bottom flanges will receive caulk on inside, or backside, of flange. See Fig. 1. 
+ 
+ 
+Fig. 1 
+ 
+ 
+ 
+92
+
+=== page 93 ===
+4. Place door frame into door opening. Top flange of frame will mount inside of sidewall. Side and bottom 
+flanges will mount outside of sidewall panels. Insert 3/8 x 1” bin bolts from outside of bin, leaving nuts loose. 
+Leave bolts out of door hinge support locations. See next page. 
+ 
+NOTE: Second sidewall ring from bottom will have short panels, one on each side of door. 44” door will overlap 
+bottom ring. 66” door overlaps cutout in bottom ring. 
+ 
+5. Place door panels back into door frame and lock hammer-head latches. See Fig. 2. 
+ 
+6. Tighten door frame bolts in sequence shown in Fig. 2. Complete by working around door frame until all bolts 
+are tightened. No particular sequence is required for rest of bolts. 
+ 
+ 
+Fig. 2 
+ 
+93
+
+=== page 94 ===
+Fig. 6 
+Fig. 5 
+B53421 – HINGE SUPPORT 
+7. Loosely bolt hinge support pieces (B53421) to bin wall and door frame as shown in Fig. 3. Hinge support 
+pieces are shown in relation to door pegs.  
+ 
+8. Slide hinge supports up until they touch hinge braces (B53341). Fig. 4 shows how some bolts are below and 
+others are above hinge braces. 
+ 
+9. Loosen 5/16” bolts and slide hinge braces 
+over until hinge holes line up with holes in 
+hinge supports. See Fig. 5. Insert a 3/8” bolt 
+through each hole and turn nut on loosely. 
+ 
+10. Tighten nuts connecting hinge braces to 
+door and hinge supports to door frame. 
+ 
+11. Turn 3/8” nuts all the way onto hinge 
+bolts, then back them off 1/2 to 3/4 turn. 
+Place a second 3/8” nut onto each 3/8” bolt 
+to lock them into place. See Fig. 5. Double-
+check door panels to ensure 3/8” bolts are 
+not too tight and door panels can open freely. 
+ 
+12. Install outer door panel with hinges in desired direction. Adjust hinges and latches as needed. 
+ 
+13. Install door catch. See Fig. 6. Remove and use 
+existing bolt for catch mounting, or field-drill hole 
+into bin sidewall if an existing bolt is not in correct 
+spot. 
+ 
+14. Attach doorstep below door. It may be possible 
+to align some bolt holes with those in bin sidewall. 
+If not, field-drill four (4) mounting holes. Use 5/16 x 
+1" bin bolts and 5/16" nuts to attach doorstep to 
+bin. 
+Fig. 4 
+Fig. 3 
+94
+
+=== page 95 ===
+Commercial Doors Section 
+ 
+26” x 28” Door (N) 
+ 
+Fig. 1 
+ 
+ 
+Fig. 1 shows 26” x 28” Commercial Door fully assembled. Note that door assembly is centered between two 
+stiffeners. Sidewall sheet for door will have square opening and bolt holes for attachment of door frame. 
+ 
+IMPORTANT: Fill all holes in sidewall sheet above and below vertical members of frame. 
+ 
+26” x 28” Door 
+95
+
+=== page 96 ===
+26” x 28” Commercial Door Components, Installation 
+ 
+Fig. 2 & Table 1 
+ 
+ITEM # 
+DESCRIPTION 
+COMP. #
+QTY.
+ITEM #
+DESCRIPTION 
+COMP. # 
+QTY.
+1 
+Outer door frame 
+BC5501 
+1 
+13 
+Lock washer, 1/4” 
+J1195 
+4 
+2 
+Inner door frame 
+BC5502 
+1 
+14 
+Hex nut, 1/4” 
+J0990 
+4 
+3 
+Inner door 
+BC5503 
+1 
+15 
+Screw, 3/8 – 16 x 3/4" 
+J0605 
+8 
+4 
+Inner door hinge 
+BC5504 
+2 
+16
+Lock nut, 3/8” 
+J1025 
+6 
+5 
+Angle brace, 36” 
+BC5508 
+3 
+17
+Screw, 3/8 – 16 x 1-3/4” 
+J0645 
+2 
+6 
+Hanger bracket 
+B5314 
+2 
+18
+Outer door 
+BC5505 
+1 
+7 
+Door latch, left 
+B5318 
+1 
+19
+Door lock catch 
+BC5506 
+2 
+8 
+Door latch, right 
+B5319 
+1 
+20
+Door handle bar 
+BC5507 
+2 
+9 
+Inner door handle 
+BC5509 
+1 
+21
+Door handle 
+B5356-03
+1 
+10 
+Bolt, 3/8 – 16 x 1” 
+B5932 
+33 
+22
+Outside door hinge 
+BC5510 
+2 
+11 
+Flange nut, 3/8” 
+B5962 
+39 
+23
+Inside door hinge 
+BC5511 
+1 
+12 
+Bolt, 1/4 – 20 x 3/4" 
+J0505 
+4 
+ 
+ 
+Fig. 2 and Table 1 show components of 26” x 28” Commercial Door. Note differences between outer and inner 
+door frames (Items 1 & 2). Outer frame has half-moons welded to it to match outside corrugation. Inner frame 
+has half-moons welded to it to match inside corrugation and inside door panel hinges. If looking at inside door 
+frame from inside of bin, hinges must be on right-hand side. Frames bolt to sidewall sheets using 7/16” 
+hardware. 
+ 
+After inside and outside frames are assembled, attach inner door panel assembly with hinge to inside door 
+frame. Attach outer door assembly to outside door frame. 
+ 
+96
+
+=== page 97 ===
+30” x 60” Commercial Door (W2) 
+ 
+Fig. 3 
+ 
+ 
+Fig. 3 shows fully assembled 30” x 60” Commercial Walk-Thru Door. 
+ 
+See Fig. 4 and Table 2 for component identification. 
+ 
+ 
+97
+
+=== page 98 ===
+30” x 60” Commercial Door Components, Installation 
+ 
+ITEM # 
+DESCRIPTION 
+COMP. # 
+QTY.
+1 
+Outer door frame 
+BCD5410
+1 
+2 
+Inner door frame 
+BCD5420
+1 
+3 
+Clamped door sheet 
+BCD5428
+1 
+4 
+Inner door assy., top 
+BCD5430
+1 
+5 
+Inner door assy., bottom 
+BCD5435
+1 
+6 
+Outer door assy. 
+BCD5440
+1 
+7 
+Outer door hinge bracket
+BCD5444
+2 
+8 
+Outer door catch 
+BCD5445
+2 
+9 
+Hinge bracket shim 
+BCD5446
+4 
+10 
+Door frame shim 
+BCD5404
+2 
+11 
+Stiffener boot 
+BCD6144
+2 
+12 
+Stiffener shim, 7ga 
+BC52507 
+2 
+13 
+Stiffener shim, 11ga 
+BC5250 
+2 
+14 
+Screw, 1 - 8 x 4-1/2” 
+J0913 
+2 
+15 
+Hex nut, 1” 
+J1060 
+2 
+16 
+Square washer, 3 x 3/4" 
+BC52062 
+4 
+17 
+Corrugated end plate 
+BCD5015
+4 
+ 
+Fig. 4 and Table 2 show components of 30” x 60” Commercial Door. Clamped door sheet (Item 3) needs to be 
+installed on inside of bin first. Clamped sheet has half-moons welded onto it to match inside corrugations. 
+Attach clamped sheet using same hardware as used on sidewall ring to which it is attached. See color chart. 
+NOTE: Leave out outside column of bolts until attachment of corrugated end plates (Item 17). 
+ 
+Bolt corrugated end plates to outside edges of clamped door sheet (Item 3). Attach outer and inner frames 
+(Items 1 & 2) to clamped door sheet. Frames use 7/16” hardware. Insert door frame shims (Item 10) as 
+needed. 
+ 
+Attach inner door assemblies (Items 4 & 5) to inner door frame as shown in Fig. 5 on next page. Attach outer 
+door assembly (Item 6) and door catches (Item 8) to outer door frame. Use hinge bracket shims (BCD5446) as 
+needed under outer door hinge bracket (Item 7) so outer door will close and latch properly. 
+ 
+Attach stiffener boots (Item 11) to outer frame with 1” bolts, square washers, 1” nuts and shims (Items 12 and 
+13) as needed.
+Fig. 4 & Table 2 
+98
+
+=== page 99 ===
+ 
+ 
+ 
+Fig.5 
+99
+
+=== page 100 ===
+Commercial Walk-Thru Door (U) 
+ 
+ 
+ 
+Fig. 6 
+ 
+Fig. 6 shows fully assembled Commercial Walk-Thru Door. 
+ 
+Depending on size of bin, door will have one frame or two. See Fig. 7 and Table 3 for identification of 
+components used to install one-frame door in bin from 48’ to 78’ dia. See Fig. 8 and Table 4 for identification of 
+components used to install two-frame door in bin from 75’ to 105’ dia. 
+ 
+ 
+100
+
+=== page 101 ===
+Commercial Walk-Thru Door for 48’ to 78’ dia. bin, Components, Installation 
+ 
+ITEM # 
+DESCRIPTION 
+COMP. # 
+QTY.
+BIN DIA. 
+1 
+Outside frame 
+BCD5075 
+1 
+48-78 
+2 
+Flat cut-out weldment 
+BCD5051W
+1 
+48-60 
+BCD5052W
+72-78 
+3 
+Outside door assembly 
+BCD5080 
+1 
+48-78 
+4 
+Lock catch 
+BCD5082 
+2 
+48-78 
+5 
+Stiffener boot 
+BCD5022 
+2 
+48-78 
+6 
+Screw, 1 - 8 x 4-1/2” 
+J0913 
+2 
+48-78 
+7 
+Square washer, 3 x 3/4" 
+BC52062 
+4 
+48-78 
+8 
+Hex nut, 1” 
+J1060 
+2 
+48-78 
+9 
+Corrugated end plate 
+BCD5015 
+4 
+48-78 
+10 
+Inside door hinge 
+BCD5025 
+1 
+48-78 
+11 
+Inner door assembly, top 
+BCD5035 
+1 
+48-78 
+12 
+Inner door assembly, bottom
+BCD5037 
+1 
+48-78 
+12** 
+BCD5037P 
+13 
+Inside frame 
+BCD5140 
+1 
+48-78* 
+13** 
+BCD5140P 
+14 
+Stiffener shim, 11ga 
+BC5250 
+2 
+48-78 
+15 
+Stiffener shim, 7ga 
+BC52507 
+2 
+48-78 
+16 
+Frame shim 
+BCD5046 
+6 
+48-78 
+*72’ to 78’, 9-15 ring bin 
+**Plenum-punched bins 
+ 
+Fig. 7 and Table 3 show components of Commercial Walk-Thru Door for 48’ to 78’ dia. bins. Flat cutout sheet 
+(Item 2) needs to be installed on inside of bin first. Flat sheet has half-moons welded onto it to match inside 
+corrugations. Attach flat cutout sheet using same hardware as used on sidewall ring to which it is attached. 
+See color chart. NOTE: Leave out outside column of bolts until attachment of corrugated end plates (Item 9). 
+ 
+Bolt corrugated end plates to outside edges of flat cutout sheet (Item 2). Attach outside and inside frames 
+(Items 1 & 13) to flat cutout sheet. Frames use 1/2” hardware. Insert door frame shims (Item 16) as needed. 
+ 
+Use hinge pin weldment (Item 10) to attach inner door assemblies (Items 11 & 12) to inside door frame. Attach 
+outer door assembly (Item 3) and door catches (Item 4) to outside door frame. 
+ 
+Attach stiffener boots (Item 5) to outside frame with 1” bolts, square washers, 1” nuts, and shims (Items 14 and 
+15) as needed. 
+Fig. 7 & Table 3 
+101
+
+=== page 102 ===
+Commercial Walk-Thru Door for 72’ to 105’ dia. bin, Components, Installation 
+ 
+ITEM # 
+DESCRIPTION 
+COMP. # 
+QTY.
+BIN DIA. 
+1 
+Outside frame 
+BCD5075 
+1 
+72-105 
+2 
+Inside frame 
+BCD5070 
+1 
+72*-135 
+2** 
+BCD5070P 
+3 
+Flat cutout weldment 
+BCD5050W
+1 
+135 
+BCD5051W
+90-105 
+BCD5052W
+72-78 
+4 
+Flat cutout 
+BCD50501 
+1 
+135 
+BCD50511 
+90-105 
+5 
+Square washer, 3 x 3/4" 
+BC52062 
+4 
+72-105 
+6 
+Outside door assembly 
+BCD5080 
+1 
+72-105 
+7 
+Lock catch 
+BCD5082 
+2 
+72-105 
+8 
+Stiffener boot 
+BCD5022 
+2 
+72-105 
+9 
+Screw, 1 - 8 x 4-1/2” 
+J0913 
+2 
+72-105 
+10 
+Hex nut, 1” 
+J1060 
+2 
+72-105 
+11 
+Corrugated end plate 
+BCD5015 
+4 
+72-105 
+12 
+Inside door hinge 
+BCD5025 
+1 
+72-105 
+13 
+Inner door assembly, top 
+BCD5035 
+1 
+72-105 
+14 
+Inner door assembly, bottom
+BCD5037 
+1 
+72-105 
+14** 
+BCD5037P 
+15 
+Stiffener shim, 11ga 
+BC5250 
+2 
+72-105 
+16 
+Stiffener shim, 7ga 
+BC52507 
+2 
+72-105 
+17 
+Frame shim 
+BCD5046 
+6 
+72-105 
+*72’ to 78’, 16-24 ring bin 
+**Plenum-punched bins 
+ 
+Fig. 8 and Table 4 show components of Commercial Walk-Thru Door for 72’ to 105’ dia. bins. Flat cutout 
+sheets (Items 3 & 4) need to be installed on inside of bin first. NOTE: One flat sheet (Item 3) has half moons 
+welded onto it to match inside corrugations. Attach flat cutout sheets using same hardware as used on sidewall 
+ring to which they are attached. See color chart. NOTE: Leave out outside column of bolts until attachment of 
+corrugated end plates (Item 11). 
+ 
+Bolt corrugated end plates to outside edges of inside flat sheet (Item 4). Attach outside and inside frames 
+(Items 1 & 2) to flat cutout sheets. Frames use 1/2” hardware. Insert door frame shims (Item 17) as needed. 
+ 
+Use hinge pin weldment (Item 12) to attach inner door assemblies (Items 13 & 14) to inside door frame. Attach 
+outer door assembly (Item 6) and door catches (Item 7) to outside door frame. 
+ 
+Attach stiffener boots (Item 8) to outside frame with 1” bolts, square washers, 1” nuts, and shims (Items 15 and 
+16) as needed. 
+Fig. 8 & Table 4 
+102
+
+=== page 103 ===
+ 
+Sidedraw Assembly 
+ 
+NOTICE: Use only Sukup-designed sidedraw discharge units and interior baffles with Sukup bins. 
+Baffles help channel grain to discharge chute as grain flows from above. Never change function of a bin’s 
+intended use. Sukup bins are designed for specific amounts of grain and weight and to be loaded and 
+unloaded in a certain manner. If bin was not intended for a sidedraw, unloading pressures may cause bin 
+failure. See Fig. 1. Know the purpose for which bin was constructed. 
+ 
+NOTICE: Do not unload bin from sidewall without proper installation of a sidedraw system. Follow special 
+guidelines below for bins with sidedraws. Failure to do so will result in excessive pressures that can result in 
+sidewall leaning, buckling or other bin failure. 
+ 
+IMPORTANT GUIDELINES FOR SIDEDRAW USE 
+ 
+ 
+Never add sidedraw to existing bin without consulting an independent engineer or obtaining written 
+approval from Sukup Manufacturing Co. Bin may not be designed to accommodate a sidedraw. 
+ 
+Intended for use with dry grain only. Do not use sidedraw with poorly flowing grain products. 
+ 
+Do not use sidedraw until 90 days after first complete filling. 
+ 
+If two sidedraws are installed, they must be placed at least 90° from one another in same ring. On a 105’ 
+bin, they must be placed 180° from each other in same ring. 
+ 
+Only one sidedraw may be used at a time. 
+ 
+Sidedraws are not to be used as primary outlets. Standard center sumps and conveyors should be 
+installed. After sidedraw use, unload from center sump, then intermediate sumps, and then sweep bin. 
+ 
+Do not unload from sidedraw and center sump at same time. 
+ 
+Do not simultaneously fill and discharge. 
+ 
+Sidedraw will leave grain in sloped position, creating off-center load. IMPORTANT: Before refilling, unload 
+through center sump so grain reaches equal wall heights around entire bin. Grain must be level or in cone-
+down position before adding more grain. See next page. 
+ 
+Sidedraw must be installed in center of a sidewall sheet that is no 
+lower than fifth ring from bottom. 
+ 
+Top discharge baffle must straddle horizontal seam between first 
+and second rings from top of bin. 
+ 
+Sukup Manufacturing Co. recommends alternate usage of 
+sidedraws in bins 105’ in diameter to reduce structural stress on 
+bin. It is best to unload no more than four (4) rings of grain before 
+switching to other sidedraw. See Fig. 2 as a guide. 
+Fig. 1 
+BIN WITHOUT A PROPER 
+SIDEDRAW SYSTEM 
+BIN WITH PROPER SIDEDRAW SYSTEM 
+UNLOADS IN LAYERS EVENLY. 
+Fig. 2 
+103
+
+=== page 104 ===
+ 
+Baffle Assembly 
+ 
+It is important that all components of grain bin be positioned properly to maximize efficiency and effectiveness 
+of equipment. Most planning should be done before foundation is poured, including location of sidedraw. 
+Concrete stemwall height will affect discharge chute height and extension length. Discharge chute should be 
+centered between stiffeners and no lower than five (5) rings from bottom. DO NOT assemble discharge chute 
+on a vertical seam.  
+ 
+Discharge chute weldment is at a 45° angle. Extensions should be at the same angle. Sidewall sheet buckling 
+and/or bin sidewall failure may occur if discharge angle is modified. 
+ 
+ 
+ 
+Fig. 3 
+ 
+It is important that baffle assembly begins at correct location. Always center baffle column between two 
+stiffeners. First baffle must straddle first and second rings from top of bin. See Fig. 3. Fasten baffle to 
+horizontal seam bolts using 1/2" diameter holes as shown in Fig. 3. After baffle is attached to horizontal seam, 
+field-drill holes through sidewall sheets using baffle as a template. Attach baffle to sidewall using 3/8” 
+hardware. Continue attaching baffles at every horizontal seam until reaching discharge chute weldment located 
+no lower than fifth (5th) ring from bottom of bin. 
+ 
+ 
+104
+
+=== page 105 ===
+ 
+Discharge Chute & Slide Gate Assembly  
+ 
+Using inside sidedraw discharge chute support as a template, drill holes and cut openings in sidewall and 
+laminating sheets as shown in Fig. 4 or Fig. 5, depending on number of stiffeners. Remember that discharge 
+chute must be installed no lower than fifth (5th) ring from bottom of bin, centered both horizontally and 
+vertically between stiffeners on sidewall sheet. Laminating sheet (shorter sidewall sheet) will be attached to 
+inside of sidewall sheet. Ends of laminating sheet will be attached using same bolts as sidewall stiffeners. 
+ 
+Attach discharge chute to sidewall sheet, laminating sheet and inside chute support using same bolt size that 
+is designated for that sidewall sheet gauge. Consult color chart sent with manual to determine which size bolt 
+to use. Apply bin caulk around discharge chute bolt plate (on both sides of bolt holes) for a watertight seal. 
+ 
+Attach final baffle to horizontal seam directly above discharge chute. Final baffle is fastened to sidewall sheet 
+in same manner previously stated. Also, fasten rack and pinion gate to end of discharge chute using 3/8 x 1-
+1/4” hex bolt and 3/8” hex nut. 
+Fig. 4 – Installation on 
+sheet with two stiffeners 
+Fig. 5 – Installation on 
+sheet with three stiffeners 
+105
+
+=== page 106 ===
+ 
+Baffle Layout 
+ 
+Fig. 6 
+ 
+It is important that all baffles are centered between two stiffeners to maintain a continuous column all the way 
+down to discharge chute. Remember that baffles straddle two sidewall sheets and attach at horizontal seams. 
+Top baffle must be connected to both first and second sidewall rings. 
+ 
+Final baffle must cover discharge chute as shown in Fig. 6. 
+ 
+ 
+DISCHARGE CHUTE CENTERED 
+BETWEEN STIFFENERS. 
+106
+
+=== page 107 ===
+ 
+Chain Guide Wheel Assembly (BC3001) 
+ 
+ 
+ 
+ 
+ 
+Fig. 7 
+ 
+ 
+All bolts, nuts, washers and straps are placed in same box as sprocket wheel and chain guide. Follow 
+recommended steps and proper placement of straps and sprocket wheel. See Fig. 7. 
+ 
+1. Place U-straps over rack & pinion gate wheel. 
+2. Position sprocket wheel and chain guide against rack & pinion gate wheel so slots in sprocket wheel are in 
+line with holes in U-strap. 
+3. Push bolts in from front as shown in Fig. 7, going first through slots in sprocket wheel and then through 
+holes in U-straps. Fasten loosely with flat washers, lock washers and nuts. 
+4. Center the sprocket wheel on rack & pinion gate wheel. Tighten bolts. 
+5. Position chain through chain guide and around sprocket wheel until equal lengths are hanging down on 
+each side. 
+6. Connect ends of chain together to form a continuous loop. 
+ 
+ 
+ 
+ 
+ 
+107
+
+=== page 108 ===
+ 
+Sidedraw Extension Limitations 
+ 
+Table below shows maximum sidedraw extension dimensions based on sidedraw being located in fifth (5th) ring 
+from bottom of bin. If for any reason a longer extension is needed, contact Sukup Manufacturing Co. for 
+analysis of situation. Sidewall sheet buckling and/or bin sidewall failure may occur if maximum dimensions in 
+table below are exceeded. NOTE: Dimensions are based on discharge chute flange extending 12” from bin 
+sidewall. 
+ 
+ 
+ 
+BIN DIAMETER 
+# RINGS 
+42' 
+48' 
+54'
+60'
+75'
+90' 
+105' 
+9 
+30" 
+30" 
+30" 
+36" 
+36" 
+42" 
+42" 
+10 
+30" 
+30" 
+36" 
+36" 
+36" 
+42" 
+50" 
+11 
+30" 
+30" 
+36" 
+36" 
+42" 
+42" 
+50" 
+12 
+30" 
+36" 
+36" 
+36" 
+42" 
+50" 
+57" 
+13 
+30" 
+36" 
+36" 
+36" 
+42" 
+57" 
+57" 
+14 
+36" 
+36" 
+42" 
+42" 
+50" 
+57" 
+70" 
+15 
+36" 
+36" 
+42" 
+50" 
+57" 
+57" 
+70" 
+16 
+36" 
+42" 
+42" 
+50" 
+57" 
+70" 
+70" 
+17 
+36" 
+42" 
+50" 
+50" 
+57" 
+70" 
+70" 
+18 
+42" 
+42" 
+50" 
+50" 
+57" 
+70" 
+70" 
+19 
+42" 
+42" 
+50" 
+50" 
+57" 
+70" 
+70" 
+20 
+42" 
+50" 
+50" 
+50" 
+70" 
+70" 
+70" 
+21 
+50" 
+50" 
+50" 
+57" 
+70" 
+70" 
+70" 
+22 
+50" 
+50" 
+50" 
+57" 
+70" 
+70" 
+70" 
+23 
+50" 
+50" 
+50" 
+57" 
+70" 
+70" 
+70" 
+24 
+50" 
+50" 
+50" 
+57" 
+70" 
+70" 
+70" 
+Maximum sidedraw extension lengths
+108
+
+=== page 109 ===
+ 
+Ladders, Safety Cages & Platforms 
+ 
+Inside 44” & 33” Ladders, Angled Standoff Brackets 
+ 
+ 
+Attach ladders to sidewall with angled inside ladder splice brackets at every horizontal seam. The only 
+exception will be at top of each ladder assembly. Splice brackets must be moved down 4” to avoid interference 
+with roof sheets and ladder caps. Bins with stirring machine will be shipped with a 33” ladder that assembles 
+below stirring machine track. See Fig. 1. When installing ladder sections, rung treads must face upward. 
+ 
+Fig. 1 
+ 
+ 
+NOTE: 3/8” hardware is used to assemble all inside ladder packages. 
+ 
+Insert sidewall/splice bracket bolts from outside of bin to create a watertight seal. If outside ladder brackets are 
+used at that same location, remove washer and place between outside bracket and sidewall. Ladder should be 
+centered under manhole opening. NOTE: If inside ladder package is ordered, every sidewall ring except 
+bottom one will have an inside ladder attached to it. 
+ 
+ 
+ 
+109
+
+=== page 110 ===
+ 
+Inside 44” Ladders, 90 Standoff Brackets 
+ 
+ 
+Attach ladder to sidewall with 90 inside ladder splice brackets at every horizontal seam. See Fig. 2. The only 
+exception will be at top of each ladder assembly. Splice brackets must be moved down 4” to avoid interference 
+with roof sheets and ladder caps. When installing ladder sections, rung treads must face upward. 
+ 
+Fig. 2 
+ 
+NOTE: 3/8” hardware is used to assemble all inside ladder packages. 
+ 
+Insert sidewall/splice bracket bolts from outside of bin to create a watertight seal. If outside ladder brackets are 
+used at that same location, remove washer and place between outside bracket and sidewall. Ladder should be 
+centered under manhole opening. NOTE: If inside ladder package is ordered, every sidewall ring except 
+bottom one will have an inside ladder attached to it. 
+ 
+110
+
+=== page 111 ===
+ 
+Additional Ladder Support Brackets  
+  
+ 
+ 
+ 
+To provide added stability to inside bin ladders, one to four pairs of support brackets are provided, depending 
+on height of bin. One pair should be installed in bins with 6 to 12 rings; two pairs in bins with 13 to 18 rings; 
+three pairs in bins with 19 to 24 rings; and four pairs in bins with 25 to 27 rings. See guidelines above for 
+attaching locations. Some examples: A 10-ring bin requires one (1) set of ladder support brackets attached at 
+2nd horizontal seam; a 14-ring bin requires two (2) sets of ladder support brackets, attached at 2nd and 6th 
+horizontal seams; a 22-ring bin requires three (3) sets of ladder support brackets, attached at 2nd, 6th, & 10th 
+horizontal seams. 
+ 
+Install brackets at ladder splice, using existing horizontal seam bolt in middle hole of support bracket. Field-drill 
+one hole above and one below horizontal seam as shown in Fig. 4 and secure with 3/8” hardware. Bolts should 
+be inserted from outside of bin. Attach brackets to inside of ladder rails as shown, using holes provided and 
+3/8” hardware. TIP: It may help to mark on supplied color chart the locations of these additional ladder support 
+brackets. 
+ 
+NOTE: Horizontal seams are at top of specified ring. Do NOT count base angle seam. 
+Bin Height Set(s) of Support 
+Brackets 
+Horizontal Seam Used 
+for Bracket Attachment*
+6-12 
+1 
+2nd 
+13-18 
+2 
+2nd, 6th 
+19-24 
+3 
+2nd, 6th, 10th 
+25-27 
+4 
+2nd, 6th, 10th, 14th 
+*Location determined by counting seams from bottom 
+as shown in Fig. 4. Do not count base angle seam. 
+Fig. 4 
+Fig. 3 
+111
+
+=== page 112 ===
+ 
+Outside 44” Ladders 
+ 
+44” ladder sections will attach at each sidewall ring. Attach ladders to sidewall with outside ladder splice 
+brackets at every horizontal seam. The only exception will be at top and bottom of each ladder assembly. 
+Splice brackets must be moved up or down 4” to avoid interference with roof sheets, landing platform brackets, 
+concrete and ladder caps. See Fig. 5. When installing 44” ladder sections, rung treads must face upward. 
+ 
+ 
+ 
+ 
+NOTE: 3/8” hardware is used to assemble all ladders, platforms, and cages. 
+ 
+Insert sidewall/splice bracket bolts from inside of bin to create a watertight seal. If outside ladder brackets are 
+used at that same location, remove washer and place between outside bracket and sidewall. See Fig. 6. 
+Fig. 5 
+Fig. 6 
+112
+
+=== page 113 ===
+ 
+Ladder Extension (B5020) 
+ 
+ 
+Ladder extension assembly is provided with cage and platform packages. It is an additional option for 3-5 ring 
+ladder packages. 
+ 
+Fig. 7 
+ 
+ 
+Extensions are provided as a means to walk “through” ladder onto roof steps. Extensions are connected to 
+ladder rails using extension bracket offsets. When attaching extension bracket to ladder, hardware will be 
+inserted through three (3) pieces (extension bracket, ladder siderail and ladder bracket). Assemble extension 
+bracket to top hole on ladder siderail first, then attach ladder bracket to siderail and sidewall. Attach ladder 
+extensions to extension brackets and stabilize to roof ribs using extension braces. See Fig. 7. Assemble with 
+3/8” hardware. Slide plastic ladder caps over tops of extensions. NOTE: Field drilling may be required when 
+attaching extension braces. Extension braces may need to be attached by a different means to avoid 
+interference with manhole. 
+113
+
+=== page 114 ===
+ 
+Extension and Standard D-ring 
+ 
+Fig. 8 shows differences between an extension D-ring and a standard D-ring. Extension D-rings are used only 
+at ladder extension. Standard D-rings are used only on ladders. Both D-rings have same outside dimensions 
+except for what is shown in Details A & B of Fig. 8. 
+ 
+Fig. 8 
+ 
+ 
+ 
+114
+
+=== page 115 ===
+ 
+Ladder Cage/No Platform 
+  
+ 
+Fig. 9 
+ 
+Some ladder and cage assemblies do not require use of platforms. For these, an extension package is 
+available as an option to access roof steps. If safety cage is used on these ladders, an extension D-ring is 
+required to fit between extension rails. Assemble ladder extension D-rings to ladder extensions at same 
+locations as if platform were mounted in 1st position. Connect platform uprights to D-rings with 3/8” hardware 
+and tighten. See Fig. 9. Extension braces may need to be attached by a different means to avoid interference 
+with manhole. 
+ 
+115
+
+=== page 116 ===
+ 
+44” Cages with 22” Flared Bottoms 
+ 
+Fig. 10 
+ 
+As bin is built, continue to add appropriate ladder and cage sections. Refer to following pages for specific 
+ladder and cage layouts. Cage sections consist of standard D-rings and seven (7) uprights. Standard D-rings 
+attach to inside of ladder siderails. A flared D-ring is always used at bottom of each cage assembly. Top D-ring 
+must be connected to center of top ladder. This allows bottom flared D-ring to be at proper height above the 
+next surface (concrete or landing platform). Assemble standard D-rings and uprights to ladder sections with 
+3/8” hardware. See Fig. 10.  
+116
+
+=== page 117 ===
+ 
+36” Platform Locations 
+ 
+Fig. 11 shows the four (4) positions where platform can be located. NOTE: Each location is at same level as a 
+ladder rung in first ring. For 1st & 2nd positions, 44” sidewall bracket mounts to sidewall at horizontal seam. For 
+3rd & 4th positions, center hole of 44” sidewall bracket is mounted at second horizontal seam. Field drilling is 
+needed. 
+Fig.11 
+ 
+117
+
+=== page 118 ===
+ 
+36” Platform Starting Locations 
+ 
+Location of ladder is a critical factor in constructing a grain bin. Careful thought must be given to position of 
+sidewall and roof ladders in relationship to overall layout of site and auxiliary equipment. Location of roof ladder 
+and manhole during bin construction will establish location of sidewall ladder. Sidewall ladder and eave 
+platform must be in line with roof ladder and manhole. Fig. 12 shows eave platform starting location on a 
+sidewall sheet with 9-3/8” bolt hole spacing. Lower drawing shows ladder centered between stiffeners. 
+ 
+ 
+Fig. 12 
+118
+
+=== page 119 ===
+ 
+36” Platform Assembly (B5010) 
+Fig. 13 
+ 
+Entire platform assembly is constructed with 3/8” hardware. Begin assembly of platform by attaching sidewall 
+brackets to sidewall. Some holes may need to be field-drilled depending on which position was chosen. Attach 
+platform support and brace angles to sidewall bracket at correct locations. NOTE: Leave all bolts loose until 
+assembly is complete.  
+ 
+Attach platform to top of platform supports and fasten the three (3) corner posts to platform’s 4” toeboard. 
+Fasten long and short platform handrails to corner posts. Tighten platform assembly. See Fig. 13. HINT: When 
+assembling platform with safety cages, some hardware will have to be left out of platform assembly at this 
+time. 
+119
+
+=== page 120 ===
+ 
+Top & Bottom Corner Post, 36” Platform 
+ 
+Fig. 14 shows the four locations platform can be positioned. Top and bottom corner posts will not be moved 
+vertically. Only the platform assembly itself will be able to move up or down on corner posts. NOTE: Top half 
+D-ring fastens to top hole in top corner post and bottom half D-ring fastens to bottom hole of bottom corner 
+post. 
+ 
+ 
+Fig. 14 
+ 
+TOP HALF D-RING (B5087) 
+FASTENS TO TOP HOLE. 
+BOTTOM HALF D-RING (B5087) 
+FASTENS TO BOTTOM HOLE. 
+120
+
+=== page 121 ===
+ 
+Eave Platform Cage, 36” Platform 
+ 
+Fig. 15 
+ 
+When assembling cage to platform, top and bottom extensions must be attached to D-rings as shown in Fig. 
+15. Top portion of cage can be assembled first, but a second sidewall ring must be added before bottom 
+extension is installed to finish platform cage. NOTE: If platform is mounted in 3rd or 4th position, adaptor 
+uprights must be field-cut and attached to platform. 
+DASHED TOP HALF D-RING ADAPTOR 
+(B5107) AND THREE UPRIGHTS (B5091) 
+ARE NOT USED WHEN PLATFORM IS 
+MOUNTED IN 3
+RD OR 4
+TH POSITION. 
+ 
+121
+
+=== page 122 ===
+ 
+Eave Platform Cage Assembly, 36” Platform 
+Fig. 16 
+ 
+Final assembly of platform cage to extensions and platform is shown in Fig. 16. Platform assembly is shown in 
+2nd position. All cage and platform assemblies are connected with 3/8” hardware. Remove D-ring overlaps to 
+ensure smooth, snag-free edges. 
+ 
+NOTE: Six (6) platform uprights and five (5) 44” uprights are sent with this assembly. Depending on diameter 
+of bin, one upright may be discarded at each location where half D-rings connect to corner post. Be certain that 
+gap is no more than 9”. 
+122
+
+=== page 123 ===
+ 
+44” Cages with 22” Flared Bottoms 
+Fig. 17 
+ 
+As bin is built, continue to add appropriate ladder and cage sections. Refer to following pages for specific 
+ladder and cage layouts. Cage sections consist of standard D-rings and seven (7) uprights. Standard D-rings 
+attach to inside of ladder siderails. A flared D-ring is always used at bottom of each cage assembly. Top D-ring 
+must be connected to center of top ladder. This allows bottom flared D-ring to be at proper height above the 
+next surface (concrete or landing platform). Assemble standard D-rings and uprights to ladder sections with 
+3/8” hardware. See Fig. 17. 
+123
+
+=== page 124 ===
+ 
+Landing Platform Layout, 36” Platform 
+ 
+Fig. 18 
+ 
+ 
+Fig. 18 shows where flared D-ring should be assembled in relation to landing platform. When assembled 
+correctly, flared D-ring should be two (2) sidewall rings above landing platform. Landing platform must be 
+attached to sidewall in 1st position. This will ensure OSHA standards are met, as well as ease erection of 
+ladder and cages. Two ladders attach to sidewall on same ring at landing platform location. Remember that at 
+top and bottom of each ladder assembly, sidewall brackets need to be moved either up or down 4” to avoid 
+interference with roof sheets, landing platform brackets, concrete, and ladder caps. 
+ 
+ 
+ 
+124
+
+=== page 125 ===
+ 
+Landing Platform with Cage, 36” Platform 
+ 
+ 
+Fig. 19 
+ 
+ 
+Assemble landing platform to sidewall directly under ladder. Mount landing platform in 1st position. Attach 
+44” ladder in ring above platform to connect D-rings. Fasten corner post extension to bottom of open-faced 
+corner post. Install half D-rings to inside of ladder siderail and fasten them to corner post and corner post 
+extension. Connect safety cage uprights to D-rings with 3/8” hardware and tighten. Slide ladder caps over 
+siderails of top ladder section. See Fig. 19. Also, remove D-ring overlaps to ensure smooth, snag-free edges. 
+ 
+125
+
+=== page 126 ===
+ 
+54” Platform Locations 
+ 
+Fig. 20 shows the two positions where platform can be located. NOTE: Each location is at same level as a 
+ladder rung in first ring. For both positions, 44” sidewall brackets mount to sidewall at horizontal seams. Field 
+drilling is needed. 
+ 
+Fig. 20 
+ 
+126
+
+=== page 127 ===
+ 
+54” Platform Starting Locations 
+ 
+The starting location of ladder is a critical factor in constructing a grain bin. Careful thought must be given to 
+position of sidewall and roof ladders in relationship to overall layout of site and auxiliary equipment. Location of 
+roof ladder and manhole during bin construction will establish location of sidewall ladder. Sidewall ladder and 
+eave platform must be in line with roof ladder and manhole. Fig. 21 shows ladder and eave platform starting 
+locations when either 3 or 4 roof sheets attach per sidewall sheet. 
+ 
+IMPORTANT: When attaching ladder and safety cages to a stiffened bin, locate ladders between two (2) 
+stiffeners. When constructing bin with raftered substructure, be certain manhole is not aligned over a rafter. 
+Suggestion: Locate roof ladder on roof sheet to right of primary rafter. Manhole can then be placed on sheet to 
+right of roof ladder. This ensures that eave platform will be centered over a stiffener. Platforms are designed to 
+ensure that when additional ladder columns are offset, they are not centered over a stiffener. 
+ 
+NOTE: Manhole platform should be mounted in 2nd position, roof stair platform should be mounted in 1st 
+position. 
+Fig. 21 
+127
+
+=== page 128 ===
+ 
+54” Platform Assembly 
+ 
+Fig. 22 
+ 
+Entire platform assembly is constructed with 3/8” hardware. Begin assembly of platform by attaching sidewall 
+brackets to sidewall. Some holes may need to be field-drilled depending on which position was chosen. Attach 
+platform support and brace angles to sidewall bracket at correct locations. NOTE: Leave all bolts loose until 
+assembly is complete. 
+ 
+Attach platform to top of platform supports and fasten the three (3) corner posts to 4” toeboard. Fasten long 
+and short platform handrails to corner posts. See Fig. 22. Only three (3) corner posts are shown. Platform and 
+handrails will attach to extensions that will be connected to cage. 
+128
+
+=== page 129 ===
+ 
+Top & Bottom Corner Post, 54” Platform 
+ 
+Fig. 23 shows the two locations where platform can be positioned. Top and bottom corner posts will not be 
+moved vertically. Only the platform assembly itself will be able to move up or down on corner posts. NOTE: 
+Top half D-ring fastens to top hole in top corner post and bottom half D-ring fastens to bottom hole of bottom 
+corner post. See Fig. 23. 
+ 
+ 
+Fig. 23 
+129
+
+=== page 130 ===
+ 
+Eave Platform Cage, 54” Platform 
+ 
+Fig. 24 
+ 
+ 
+When assembling cage to platform, top and bottom extensions must be attached to D-rings as shown in Fig. 
+24. Top portion of cage can be assembled first, but a second sidewall ring must be added before bottom 
+extension is installed to finish platform cage. 
+130
+
+=== page 131 ===
+ 
+Eave Platform Cage Assembly, 54” Platform 
+Fig. 25 
+ 
+Final assembly of platform cage to corner post and platform is shown in Fig 25. Manhole platform is shown in 
+2nd position. Roof stair platform (also known as stiffener platform) is shown in 1st position. All cage and platform 
+assemblies are connected with 3/8” hardware. Remove D-ring overlaps to ensure smooth, snag-free edges. 
+ 
+NOTE: Six (6) platform uprights and five (5) 44” uprights are sent with this assembly. Depending on diameter 
+of bin, one upright may be discarded at each location where a half D-ring connects to a corner post. Be certain 
+gap is no more than 9”. 
+131
+
+=== page 132 ===
+ 
+44” Cages with 22” Flared Bottoms 
+ 
+As bin is built, continue to add appropriate ladder and cage sections. Refer to following pages for specific 
+ladder and cage layouts. Cage sections consist of standard D-rings and seven (7) uprights. Standard D-rings 
+attach to inside of ladder siderails. A flared D-ring is always used at bottom of each cage assembly. Top D-ring 
+must be connected to center of top ladder. This allows bottom flared D-ring to be at proper height above the 
+next surface (concrete or landing platform). Assemble standard D-rings and uprights to ladder sections with 
+3/8” hardware. See Fig. 26.  
+Fig. 26 
+132
+
+=== page 133 ===
+ 
+Landing Platform Layout, 54” Platform 
+ 
+ 
+Fig. 27 
+ 
+Fig. 27 shows where flared D-ring should be assembled in relation to landing platform. When assembled 
+correctly, flared D-ring should be two (2) sidewall rings above landing platform. Landing platform must be 
+attached to sidewall in 1st position. This will ensure OSHA standards are met, as well as ease erection of 
+ladder and cages. Two ladders attach to sidewall on same ring at landing platform location. Remember that at 
+top and bottom of each ladder assembly, sidewall brackets need to be moved either up or down 4” to avoid 
+interference with roof sheets, landing platform brackets, concrete and ladder caps. 
+ 
+To ensure that additional ladder columns will be centered between two stiffeners, attach landing platform to 
+sidewall as shown in Fig. 27. Top ladder column should have already been centered between two stiffeners. 
+ 
+133
+
+=== page 134 ===
+ 
+Landing Platform with Cage, 54” Platform 
+ 
+ 
+ 
+Fig. 28 
+ 
+ 
+ 
+Assemble landing platform to sidewall directly under ladder. Mount landing platform in 1st position. Attach 
+44” ladder in ring above platform, centered between two stiffeners to connect D-rings. Fasten corner post 
+extension to bottom of open-faced corner post. Install half D-rings to inside of ladder siderail and fasten them 
+to corner post and corner post extension. Connect safety cage uprights to D-rings with 3/8” hardware and 
+tighten. Slide ladder caps over siderails of top ladder. See Fig. 28. Also, remove D-ring overlap to ensure 
+smooth, snag-free edges. 
+ 
+ 
+134
+
+=== page 135 ===
+ 
+Ladder Layout, 3-Ring to 5-Ring Bins 
+ 
+ 
+Fig. 29 
+135
+
+=== page 136 ===
+ 
+Ladder & Cage Layout, 6-Ring to 9-Ring Bins 
+ 
+ 
+Fig. 30 
+136
+
+=== page 137 ===
+ 
+Ladder & Cage Layout, 9-Ring to 16-Ring Bins 
+ 
+ 
+Fig. 31 
+137
+
+=== page 138 ===
+ 
+Ladder & Cage Layout, 17-Ring to 24-Ring Bins 
+ 
+ 
+Fig. 32 
+138
+
+=== page 139 ===
+ 
+Fig. 33 
+Ladder Platform Swing Gate 
+ 
+Use drawings and parts list below to assemble ladder platform swing gate. 
+Assemble swing gate and attach to hinge plate using U-bolts (J0556) and 5/16” flange nuts (B5922). 
+ 
+Field-drill holes in upright for attachment of hinge brackets (BSG0004). Top of upper bracket should be 4-1/2” 
+from top of handrail as shown in Fig. 34. 
+ 
+Fasten hinge brackets to upright with 5/16 – 18 x 3/4" screws (J0522) and 5/16” flange nuts (B5922). 
+ 
+ 
+ITEM # 
+DESCRIPTION 
+QTY. 
+COMP. # 
+1 
+Hinge plate 
+1 
+BSG0003 
+2 
+Rail tubing 
+2 
+BSG0001 
+3 
+Hinge bracket 
+2 
+BSG0004 
+4 
+Torsion spring 
+2 
+J23832 
+5 
+Screw, 5/16 – 18 x 4” 
+2 
+J0598 
+6 
+Flange nut, 5/16” 
+16 
+B5922 
+7 
+U-bolt, 5/16 – 18 x 2”, 1-1/4” ID 
+4 
+J0556 
+8 
+Screw, 5/16 – 18 x 3/4" 
+4 
+J0522 
+9 
+Screw, 5/16 – 18 x 2” 
+2 
+J0584 
+10 
+Rail splice 
+1 
+BSR1015 
+Fig. 34 
+139
+
+=== page 140 ===
+ 
+ 
+ 
+ 
+Sidewall Stair assembly instructions 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+140
+
+=== page 141 ===
+ 
+                                                                                                                                                     Page  
+ 
+2
+On standard 32” or 44” sidewall bins the 35000 
+Platform will go around the bin 4 bolt spaces 
+or 37 ½”.  The 12100 stair section will go 
+around the bin 2 bolt spaces or 18 3/4”.  The 
+13200 Stair section will go around the bin 3 
+bolt spaces or 28 1/8”.  The 14400 stair section 
+will go around the bin 4 bolts or 37 ½”.  On 
+bins with different size sheets the measurement 
+will be the same but the bolt spacing may be 
+different.  On these bins the wall brackets and 
+kneebraces will have to be field drilled.  
+ 
+Regular platforms are 39” long and extend 26” 
+from bin wall.  All stair sections are 26” from 
+outside siderail to bin wall and have a 6” wall 
+bracket to hold away from the bin wall.  The 
+post and handrail will add another 1 ½” to the 
+width of the stairs and platform. 
+141
+
+=== page 142 ===
+ 
+                                                                                                                                                     Page  
+ 
+3
+Installing Sidewall Stairs 
+ 
+Attach wall brackets (2205 using the center 
+hole of the wall bracket on the horizontal seam) 
+and kneebraces to bin, using bin bolts with 
+seals.  If this is a new bin the brackets and 
+sections can be put on as the bin is going up.  If 
+it is an existing bin install all the wall brackets 
+and kneebraces on to the bin, then assemble 
+and install the stairs starting from the bottom.  
+One person can then climb the stairs as you are 
+going up. 
+ 
+Installing stairs on a 44” sidewall. 
+ 
+Platform 5 ½” Below eave of bin. (See Fig.1) 
+Use a 35000 Platform on top. 
+Next a 13200 Stair section. 
+Next a 14400 Stair section.  This is for the top 
+2 rings. Continue down the bin with 14400 
+sections.  Holes at the top of the Platform 
+wall brackets will be field drilled.  The rest of 
+the holes will fit on the horizontal hole punched 
+in the bin. 
+ 
+ 
+Figure 1 Platform at 5 ½” on 44” sheets____ 
+  
+Platform 16” Below eave of bin. (See Fig. 2) 
+Use a 35000 Platform on top. 
+Next a 12100 Stair section. 
+Next a 14400 Stair section.  This is for the top 
+2 rings. Continue down the bin with 14400 
+sections.  Holes at the top and bottom of the 
+Platform wall brackets will be field drilled.  
+The rest of the holes will fit on the horizontal 
+hole punched in the bin 
+ 
+ 
+ 
+ 
+Figure 2 Platform at 16” on 44” sheets_____ 
+  
+Installing stairs on 32” sidewall 
+ 
+Platform 5 ½” Below eave of bin. (See Fig. 3) 
+Use a 35000 Platform on top. 
+Next a 12100 Stair section. 
+Next a 13200 Stair section.  This is for the top 
+2 rings. Continue down the bin with 13200 
+sections.  Holes at the top and bottom of the 
+Platform wall brackets will be field drilled.  
+The rest of the holes will fit on the horizontal 
+hole punched in the bin. 
+ 
+Figure 3 Platform at 5 ½” on 32” sheets____ 
+  
+Platform 16” Below eave of bin. (See Fig. 4) 
+Use a 35000 Platform on top. 
+Next a 14400 Stair section. 
+142
+
+=== page 143 ===
+ 
+                                                                                                                                                     Page  
+ 
+4
+Next a 13200 Stair section.  This is for the top 
+3 rings. Continue down the bin with 13200 
+sections.  Holes at the top and bottom of the 
+Platform wall brackets will be field drilled.  
+The rest of the holes will fit on the horizontal 
+hole punched in the bin. 
+ 
+Figure 4 Platform at 16” on 32” sheets_____ 
+  
+The stairs and platform are assembled with 
+5/16 x ¾ cap screws and 5/16 nuts.  Use a 5/16 
+flatwasher on a slot. 
+ 
+Assembling the 35000 Platform. (See Fig.5) 
+ 
+After attaching wall brackets and kneebraces to 
+the bin wall assemble the platform.  First take 
+the platform deck and attach the 4 corner posts. 
+The post position will be determined by which 
+way you are going around the bin. 
+ 
+Figure 5  
+35000 Platform 
+ 
+Attach the inside and outside siderail 
+extensions.  The outside is the one with 7 holes.  
+ 
+Attach platform to the (4401) wall brackets and 
+(2208) kneebraces on the bin.  The top of the 
+platform deck will be 3” above the top of the 
+wall brackets.  The kneebrace attaches to the 
+platform post in the second and third holes 
+from the bottom of the post.  Attach the 
+handrails.  The handrails go on the outside of 
+the posts and are attached with 5/16 x 1 ½ 
+carriage bolt and 5/16 whiz nuts. Tighten all 
+bolts. 
+ 
+Assembling Stair Sections. 
+All of the stair sections go together the same 
+way. 
+ 
+ 
+Figure 6 
+12100 Stair Section 
+ 
+Figure 7 
+13200 Stair Section 
+143
+
+=== page 144 ===
+ 
+                                                                                                                                                     Page  
+ 
+5
+ 
+ 
+Figure 8 
+14400 Stair Section_________ 
+ 
+Assembling sections 
+Attach the inside and outside siderails to the 
+steps.  The side of the step the siderails go on is 
+determined by the direction the stairs go around 
+the bin.  The Outside siderail is the one with 
+the 5 holes in the ends and is longer than the 
+Inside siderail.  Attach with the painted end up.  
+The ends of the siderails will be parallel with 
+the steps.  On 14400 sections the outside 
+siderail has slots where the upper and lower 
+steps attach.  The steps can be adjusted to fit 
+the curve of the bin. These bolts will be 
+tightened after the section is on the bin.  
+Tighten the rest of the bolts.   
+ 
+Attaching sections to bin. (See Fig. 9) 
+Attach the inside siderail using the single slot   
+(A and B) 4” from end of siderail to the wall 
+brackets using the lowest hole (B) in the upper 
+wall bracket and the highest hole in the lower 
+wall bracket. (A) 
+Fasten the inside siderails together holes (C and 
+D) using 5/16 bolts, nuts and flatwashers (since 
+slots are present).  At this time equalize the 
+siderail on the slotted holes and tighten bolts.  
+Holes marked Note A is not used at this 
+time.   
+ 
+ 
+Figure 9 
+ 
+Attaching outside siderail (See Fig. 10) 
+Level the step farthest from the splice.  Align 
+the horizontal row of holes in the end of the 
+siderail. There will be an offset in the upper 
+and lower siderail depending on the diameter of 
+the bin.  The smaller the bin the longer outward 
+lap, the larger the bin the longer the inward lap.  
+Fasten the splice using the 2 most outward (E) 
+holes that line up.  Attach the post to the 
+outside siderails using the upper and lower 
+holes (F) of the set of 3.  The center hole (Note 
+B) is not used at this time.   
+ 
+Outside Lap for 
+Large diameter Bins
+Outside Lap for 
+Small diameter Bins
+Note B
+Note B 
+E
+E
+E
+E
+F
+F
+F
+F
+Outside siderail overlap
+ 
+Figure 10 
+ 
+Attach the kneebrace to the end of the post.   
+Level step and tighten bolts in outside siderail 
+splice.  Plumb post and tighten.  Tighten all 
+bolts in the sections.  Attach the rest of the 
+sections by repeating process. 
+144
+
+=== page 145 ===
+ 
+                                                                                                                                                     Page  
+ 
+6
+ 
+Figure 11 
+ 
+Bottom Knee Brace Bracket (See Fig. 11) 
+This item is shipped in the Stair Platform 
+bundle but it goes at the very bottom of the 
+stairs, place the long flange with the holes 
+down.  Attach to the inside siderail and the wall 
+bracket using holes marked Note C.  This is 
+the only time the hole marked Note A from 
+figure 9 is used.   
+Attach to the outside side rail and post using 
+holes  marked F and  Note D. (This is the only 
+time this hole marked Note D is used).  Using 
+the kneebrace that was replaced at the top 
+section attach the kneebrace to the hole in the 
+lower flange of the kneebrace bracket near the 
+outside rail.  Level step.  Field drill the hole in 
+the sidewall for the other end of knee brace and 
+attach to bin wall.  Tighten all bolts. 
+ 
+Attaching handrails 
+After all the sections are installed.  Attach 
+handrails.  The stair handrails need to be arched 
+to fit bin diameter.  They should be arched so 
+that the curve will match the side of the bin.  
+As a guide place the handrail against the holes 
+that the wall brackets are attached to.  The 
+upper rail should go on the outside of the post.  
+The lower rail goes on the inside of the post.  
+The handrails have 1 starter hole in the large 
+end.  Check position of hole before bending 
+handrail.  Beginning at the bottom and 
+progressing up the stairs attach the handrail 
+with a self drilling stitch screw.  
+ 
+Read and follow directions carefully  for 
+installation.  We are not responsible for damage 
+or accidents caused by improper installation. 
+ 
+Our stairs are designed to hold one person and 
+weight one person can carry per set.  
+ 
+Installing 36000 Intermediate Platform 
+ 
+The 36000 Intermediate Platform will add 
+one step to the rise of the stairs.  The section 
+above or below will need to be one step shorter.  
+On a 44” sheet bin a 13200 section will be used 
+either above or below the Intermediate 
+Platform.  On a 32” sheet a 12100 will be used. 
+ 
+Figure 12   36000 Intermediate Platform 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+GIS0001-04 
+145
+
+=== page 146 ===
+1 
+ 
+Easy Step Instructions 
+Please read this entire sheet before starting to avoid the need to disassemble and redo steps. 
+1.Platform Layout  
+ES3544 Platform rests 12” below the eave and the A-frame brackets are 4 bolt spaces apart (37 ½”). It is 
+recommended to place two thirds of the platform under the roof ladder with the remainder under the 
+manhole.  The ES2600 Stair Section attaches to the platform and has an A-frame 3 bolt spaces (28 1/8”) 
+from the platform A-frame.  This Stair Section is included in the ES-3544 platform package. 
+ 
+146
+
+=== page 147 ===
+2 
+ 
+2. Intermediate Platform Layout  
+ 
+1. The platform should be laid out with the longer end toward the upward run of the 
+stairs. 
+2. From the top down, the wall brackets are spaced 2, 3, 3 in terms of bolt spaces 
+ Two from the last stair section 
+ Three from the first intermediate platform wall bracket. 
+ Three from the last intermediate platform wall bracket to the next stair wall 
+bracket. 
+3. Platform A-frame wall brackets should be assembled like the platform layout shows in 
+the instruction manual 
+147
+
+=== page 148 ===
+3 
+ 
+3. Bottom Section Layout 
+ 
+ 
+  
+ 
+ 
+ 
+148
+
+=== page 149 ===
+4 
+ 
+Assemble Stair Sections 
+Painted end of Siderails are 
+ALWAYS UP.  
+The ES4400 Stair Section 
+has five steps.  The A-
+frame attaches 4 bolt 
+spaces (37.5”) from the 
+preceding A-frame. 
+The Outside Siderails on 
+ES4400 Stair Sections are 
+two-piece      
+Attach the steps and 
+tighten the steps to the 
+inside Siderail also tighten 
+the round-hole connections to the outside Siderail but leave the slot connections loose for later 
+adjustment. 
+ 
+ 
+ 
+149
+
+=== page 150 ===
+5 
+ 
+Assemble A-Frames 
+A-Frame Layout Drawing 
+150
+
+=== page 151 ===
+6 
+ 
+ Assemble the Platform  
+These Instructions are for putting the stairs on as the bin is being built. 
+Attach the platform A-frames to begin installation.   
+IMPORTANT: See wall bracket layout drawing for up and down indicator on wall bracket 
+Attach the mid brace to the bottom of the platform skin through the pre punched holes.  
+Attach Platform Skin to A-frames with the four short platform mount posts.   
+Attach the Platform posts and the kickboard post to the corners of the platform. 
+151
+
+=== page 152 ===
+7 
+ 
+Attach the kick boards, hand and intermediate rails. 
+Attach Stair Section to platform with the hole in the platform skin and the bottom hole of the posts 
+on the inside and outside Siderail.   The shallow holes on the outside Siderail are for smaller bins 
+(typ. 60’ and under) and the deep holes are for larger bins.  The top of the side rail is flush with deck 
+to clear the kick board.   
+ 
+ 
+Outside Siderail Connection  
+ 
+ 
+ 
+Inside Entry Detail 
+ 
+ 
+Try to keep the inside Siderail as close to the center of the adjustment slot as possible to keep the 
+stairs from creeping forward down the bin.  Continue to monitor this as you put successive sections 
+on by watching the connections on the short post to the Siderail.  Stay as close as possible to center 
+and keep post plumb. 
+Tighten Stair Sections from the inside out and from the top down.   Always level the bottom step 
+before tightening the outside Siderail splice.  Use the slotted connections on the outside Siderail to 
+adjust steps for even fan pattern. 
+Tighten all connections 
+ 
+ 
+ 
+152
+
+=== page 153 ===
+8 
+ 
+Attach Stair Sections 
+Attach the A-frame to the bottom of the Siderail using the top hole on the short post and the top 
+hole (of the two) in the baluster post directly above the wall cross.  After jacking the bin the A-frame 
+will fit into place and be ready to attach the wall bracket to the bin wall.  
+The bin wall brackets call for one bolt at the top and bottom of the bracket on the horizontal bolt 
+seam. 
+See layout section for 
+attachment bolt 
+spacing info. 
+When attaching 
+ES4400 Stair Sections, 
+use the same 
+procedure as the Stair 
+Section on the 
+platform, except level 
+the middle step and 
+tighten the upper 
+splice, then level the 
+bottom step and 
+tighten the middle 
+splice.   
+ES4400 wall brackets 
+are spaced 4 bolt 
+spaces, or 37.5” 
+around the bin. 
+ 
+ 
+4 bolt spaces 
+3 bolt 
+spaces 
+4 bolt spaces 
+153
+
+=== page 154 ===
+9 
+ 
+Attach Bottom Section 
+The bottom section uses a special configuration of the A-frame.  For assembly see the A-frame 
+drawing.   It attaches in the middle of the Stair Section and it is two bolt spaces, or 18.75”+/-  from 
+the last wall mount. 
+There is an extra baluster post included with 
+the platform that attaches to the bottom of 
+the bottom section.  This allows the handrail 
+to end at the bottom of the stairs. 
+ 
+ 
+ 
+ 
+154
+
+=== page 155 ===
+10 
+ 
+Attach Handrail 
+Shape the round handrail according to the 
+circumference of the bin and attach them to the 
+baluster posts using the coated “p-strap” with 
+the swaged end facing up in the direction of the 
+stair run.  The handrail clamp should be 
+oriented outward.  Insert the bolt through both 
+holes on the handrail clamp, push the bolt 
+through the hole in the baluster post, and 
+fasten the nut to the outside so that the bolt 
+head is on the inside of the stairs.  Make sure 
+the handrail clamp is fastened tightly together 
+and the post is not between the two tabs.  The 
+bottom of each handrail section should be flush 
+with the down hill edge of the Handrail Clamp.  
+There is a self drilling screw for each stair 
+section to screw the handrail into the handrail 
+clamp. 
+Intermediate rails bolt on the posts through the 
+slots and are to be centered between each baluster post.   
+ 
+Recommended: Tubing Roll Former from Harbor Freight for Shaping Handrail to Bin Diameter. 
+Clamp it to the tailgate or make up a hitch adapter and have smooth shaped handrail. 
+ Pittsburgh - Item#99736 
+155
+
+=== page 156 ===
+COLOR 
+CHART 
+GOES 
+HERE! 

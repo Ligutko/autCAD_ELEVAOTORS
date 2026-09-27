@@ -1,0 +1,24 @@
+{
+  "id": "rec_28c83250",
+  "subject": "Норми: деформації основи силоса",
+  "kind": "dimension",
+  "claim": {
+    "name": "tilt_limit_in_model_terms",
+    "value": 45.5,
+    "unit": "mm",
+    "qualifier": "гранична різниця осідань протилежних країв кільця Ø22.75 м; кут 0.115°; зсув верху даху +21.4 — 43 мм"
+  },
+  "source": {
+    "origin": "derived",
+    "path": "",
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "0.002 × 22.75 = 0.0455 м; atan(0.002) = 0.1146°; 0.002 × 21.42 = 0.043 м. Вхід: rec_2bb0bdda (ДБН В.2.6-221 п. 6.8), rec_4c478d1b.",
+  "seen_in": []
+}

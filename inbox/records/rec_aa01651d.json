@@ -1,0 +1,24 @@
+{
+  "id": "rec_aa01651d",
+  "subject": "Аварії силосів (кейси 5, 6)",
+  "kind": "dimension",
+  "claim": {
+    "name": "tilt_from_one_side_soaking",
+    "value": "0.38–0.76",
+    "unit": "deg",
+    "qualifier": "крен при просіданні одного краю на 15–30 см (замочування лесу з одного боку); 3.3–6.6 × норми; зсув верху даху 0.14–0.28 м"
+  },
+  "source": {
+    "origin": "derived",
+    "path": "",
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "i = Δs / 22.75: 0.15 → 0.0066 (0.378°), 0.30 → 0.0132 (0.756°). Вхід: rec_a9de46a2 (просідання 15–30 см, analog), rec_2bb0bdda. Припущення: протилежний край не просів.",
+  "seen_in": []
+}

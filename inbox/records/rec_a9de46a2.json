@@ -1,0 +1,25 @@
+{
+  "id": "rec_a9de46a2",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "dimension",
+  "claim": {
+    "name": "loess_thickness_and_collapse",
+    "value": "7–15 м товща, просідання 15–30 см",
+    "unit": "",
+    "qualifier": "лесоподібні супіски, легкі і середні суглинки; ділянка в Лубенському районі на правому березі Сули"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://geotop.com.ua/geologiya-i-geodeziya-poltavskaya-oblast_ua.php",
+    "path": "inbox/raw/web/geotop.com.ua/geologiya-i-geodeziya-poltavskaya-oblast_ua.html",
+    "page": null,
+    "quote": "На обраній ділянці поширені лесоподібні породи потужністю 7-15м – супіски, легкі і середні суглинки з просадковістю 15-30см.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Реклама вишукувальної фірми з описом реального звіту в Лубенському районі (≈ 40–50 км від об'єкта). Та сама сторінка: зверху 0.6–0.9 м світло-коричневі суглинки, нижче палево-жовті лесовидні макропористі просідні суглинки 1.8–2.4 м, супіски 1.2 м, жовто-бурі 2.5 м. Не наш майданчик; для моделі — порядок величин.",
+  "seen_in": []
+}

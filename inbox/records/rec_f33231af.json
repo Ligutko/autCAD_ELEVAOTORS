@@ -1,0 +1,24 @@
+{
+  "id": "rec_f33231af",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "elevation",
+  "claim": {
+    "name": "ring_bottom_min_by_frost",
+    "value": -1.35,
+    "unit": "m",
+    "qualifier": "найвища допустима відмітка низу фундаменту за промерзанням"
+  },
+  "source": {
+    "origin": "derived",
+    "path": "",
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Лінія землі −0.45 (rec_3046318e) − 0.9 м (rec_c8edcede, консервативно; rec_af88ac1a дає 0.66 → −1.11) = −1.35. ДБН В.2.6-221 п. 6.3.",
+  "seen_in": []
+}

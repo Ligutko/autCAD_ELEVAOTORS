@@ -1,0 +1,25 @@
+{
+  "id": "rec_3e315eb0",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "note",
+  "claim": {
+    "name": "anchors_per_stiffener_72ft",
+    "value": "1–2",
+    "unit": "pcs",
+    "qualifier": "72 ft і більше: подвійний анкерний башмак при 2 ребрах на лист, одинарний при 3 ребрах на лист"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 50,
+    "quote": "72’ Dia. and larger (2 Stiffeners/Sidewall Sheet)",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Картинка на с. 50: башмак — зварна «заглушка» ребра на опорній плиті, анкер з гайкою і квадратною шайбою 2-3/4\"–3-1/2\". У МСВУ 80 ребер (4.5°), тобто густіше за 2 на лист — одинарний анкер на ребро.",
+  "seen_in": []
+}

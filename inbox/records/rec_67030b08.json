@@ -1,0 +1,25 @@
+{
+  "id": "rec_67030b08",
+  "subject": "Аварії силосів (кейси 5, 6)",
+  "kind": "note",
+  "claim": {
+    "name": "loess_leak_progressive_settlement",
+    "value": "прогресуючі нерівномірні осідання будівлі на лесі через витоки виробничих вод у ґрунт основи; тріщини 15–51 мм",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://journal-ndibk.com.ua/index.php/scienceandconstruction/article/download/148/149",
+    "path": "inbox/raw/web/journal-ndibk.com.ua/article_148_149.pdf",
+    "page": 1,
+    "quote": "причиною нерівномірних деформацій є погіршення деформаційних характеристик лесових просідаючих ґрунтів основ унаслідок підтоплення витоками виробничих вод",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Наука та будівництво 3(45)'2025, НДІБК. Будівля, не силос. Механізм для кейсу 5: замочування одного боку (витік, водовідведення з даху) — нерівномірне просідання.",
+  "seen_in": []
+}

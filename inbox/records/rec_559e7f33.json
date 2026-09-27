@@ -1,0 +1,25 @@
+{
+  "id": "rec_559e7f33",
+  "subject": "Норми: деформації основи силоса",
+  "kind": "tolerance",
+  "claim": {
+    "name": "anchor_plan_deviation_max",
+    "value": 5,
+    "unit": "mm",
+    "qualifier": "відхил анкерного болта в плані від проєктного положення"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2022/08/DBN-V_2_6-221-2021.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-V_2_6-221-2021.pdf",
+    "page": 8,
+    "quote": "відхил розташування анкерних болтів у плані від заданого положення - не більше ніж 5 мм",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "п. 6.10. Також центр болтової групи ≤ 5 мм.",
+  "seen_in": []
+}

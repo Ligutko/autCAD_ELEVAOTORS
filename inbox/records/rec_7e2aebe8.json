@@ -1,0 +1,24 @@
+{
+  "id": "rec_7e2aebe8",
+  "subject": "Аварії силосів (кейси 5, 6)",
+  "kind": "judgment",
+  "claim": {
+    "name": "broken_states_proposal",
+    "value": "кейс 6: закладення 0.10 м замість 0.40 (1/4 довжини, 1/8 опору); кейс 5: крен 0.6° (Δs ≈ 0.24 м на 22.75 м) у бік замоченого краю",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "none",
+    "path": "",
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "0.10 — типова довжина, яку «добивають» перфоратором без глибокого свердління (judgment; кейс із FIELD_CASES.md без цифр). 0.6° — середина derived-діапазону 0.38–0.76° (rec_aa01651d), у 5.3 раза більше за норму 0.115°.",
+  "seen_in": []
+}

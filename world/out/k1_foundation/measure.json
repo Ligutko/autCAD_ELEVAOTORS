@@ -1,0 +1,16 @@
+{
+  "build_seconds": 2.6,
+  "cut_deg": 92.25,
+  "section_rects": {
+    "ring": 2,
+    "footing": 2,
+    "floor_slab": 2,
+    "tunnel": 5,
+    "fill": 2,
+    "soil_0": 4,
+    "soil_1": 13,
+    "anchor": 2
+  },
+  "anchors_per_silo": 80,
+  "through_bolts": 4
+}

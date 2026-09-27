@@ -1,0 +1,25 @@
+{
+  "id": "rec_190302f4",
+  "subject": "Анкери силоса МСВУ 220",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchor_edge_distance_min",
+    "value": 190,
+    "unit": "mm",
+    "qualifier": "від анкера до зовнішнього краю стінки фундаменту (Sukup, силоси 54–105 ft)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.sukup-eu.com/media/1834/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "path": "inbox/raw/web/sukup-eu.com/binconstruction_commercialstiffened-42-60-foot-15k-30k-roof-2017.pdf",
+    "page": 21,
+    "quote": "bin must have 1” Grade 5 anchor bolts (17” deep for “Inverted T” foundation, or deep into stemwall ring rebar zone for “T-Cap”), with a minimum of 7- 1/2” from anchor to outside edge of stemwall",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "7.5 in = 190 мм. Sukup 54–105 ft (16.5–32 м) охоплює наші 22 м. Для односкладового (single-stage) зачищення шнеком — як у МСВУ з УРПК.",
+  "seen_in": []
+}

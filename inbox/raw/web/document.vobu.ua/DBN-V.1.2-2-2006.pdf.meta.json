@@ -1,0 +1,9 @@
+{
+ "url": "https://document.vobu.ua/wp-content/uploads/DBN/37.1.-DBN-V.1.2-22006.-SNBB.-Navantazhennya-i-vplivi.-Nor.pdf",
+ "retrieved_at": "2026-09-27",
+ "sha256": "d7c01fc9f5c0f7e54d4e617e03e069bea0de13136dffb4d4e4cb6caf9314dbf2",
+ "bytes": 1542446,
+ "extractor": "elevator-researcher",
+ "text_extract": "DBN-V.1.2-2-2006.pdf.txt (PyMuPDF / HTML strip; used to search quotes)",
+ "note": "текстовий шар у cp1251, прочитаний як latin-1; у .txt перекодовано"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "rec_006b7b47",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "dimension",
+  "claim": {
+    "name": "foundation_ring_inner_radius",
+    "value": 10.775,
+    "unit": "m",
+    "qualifier": "внутрішнє червоне коло навколо стіни (R 11.000) кожного з 6 силосів на плані ±0.000"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      527,
+      820,
+      813,
+      1106
+    ],
+    "quote": "R11000",
+    "crop": "inbox/raw/pdf_crops/p02_S4_ring_tunnel_east_600dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Вектор аркуша 2 (PyMuPDF get_drawings, червоні дуги товщини 0.72 навколо кожного силоса), МНК-коло по кожній дузі. Масштаб 79.924 мм/pt від підписаного R11000 стіни (rec_5e8d7132). Шість силосів: 10.774–10.777 м, залишок ≤ 7 мм. Підпису немає, «R11000» — підпис стіни, від якого взято масштаб. bbox — повернена сторінка, pt, силос S4. [Креслення без текстового шару: підпис у quote прочитано очима з кропу.]",
+  "seen_in": []
+}

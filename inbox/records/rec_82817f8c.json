@@ -1,0 +1,31 @@
+{
+  "id": "rec_82817f8c",
+  "subject": "МСВУ 220.13.В12 (фундамент)",
+  "kind": "dimension",
+  "claim": {
+    "name": "foundation_ring_outer_radius",
+    "value": 11.375,
+    "unit": "m",
+    "qualifier": "зовнішнє червоне коло навколо стіни на плані ±0.000"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      527,
+      820,
+      813,
+      1106
+    ],
+    "quote": "R11000",
+    "crop": "inbox/raw/pdf_crops/p02_S4_ring_tunnel_east_600dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Те саме вимірювання, що й внутрішнє коло: 11.373–11.376 м на 6 силосах. Незалежно підтверджено розрізом аркуша 4 (цоколь 22.742–22.749 м завширшки, rec_4c478d1b). [Креслення без текстового шару: підпис у quote прочитано очима з кропу.]",
+  "seen_in": []
+}

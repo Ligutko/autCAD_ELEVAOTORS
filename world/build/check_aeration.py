@@ -100,7 +100,8 @@ def checks(site, report, aer=None):
 
     a_ = aer or si.AER
     parts = silo.build_fans(a_["fan_r"], a_["fan_angles_deg"])      # the fan geometry the silo kit builds
-    v = np.concatenate([np.asarray(p[0], float) for p in parts])
+    # the duct (index 2) passes the plinth through its opening on purpose: check_foundation.py holds it
+    v = np.concatenate([np.asarray(p[0], float) for k, p in enumerate(parts) if k != 2])
     low = v[v[:, 2] < -1e-3]                                        # below the plinth top (silo frame z = 0)
     intrude = silo.FOUND_R - float(np.hypot(low[:, 0], low[:, 1]).min())
     out.append(("aeration fans stay out of the foundation plinth", intrude <= 1e-3,

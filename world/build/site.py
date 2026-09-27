@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT))
 
 from kit import aspiration as asp  # noqa: E402
 from kit import common as c  # noqa: E402
+from kit import foundation as fnd  # noqa: E402
 from kit import gallery as gal  # noqa: E402
 from kit import noria_tower as tower  # noqa: E402
 from kit import silo_msvu220 as silo  # noqa: E402
@@ -64,13 +65,20 @@ def assemble(quick=False):
 
     # silo prototype in a hidden collection, instanced at every silo position
     proto = bpy.data.collections.new("KIT_SILO_MSVU220")
-    _, silo_measure = silo.build(collection=proto)
+    _, silo_measure = silo.build(collection=proto, with_foundation=False)
+    fmat = {"ring": "concrete", "footing": "concrete", "floor_slab": "concrete",
+            "anchor_rods": "galv_old", "anchor_plates": "dark", "marks": "galv"}
     for s in site["silos"]:
         inst = bpy.data.objects.new(s["id"], None)
         inst.instance_type = "COLLECTION"
         inst.instance_collection = proto
         inst.location = (s["x"], s["y"], s["z"])
         scene.collection.objects.link(inst)
+        fcol = bpy.data.collections.new(f"{s['id']}_FOUNDATION")
+        scene.collection.children.link(fcol)
+        for k, (v, f) in fnd.build(fnd.tunnel_band(site, s)).items():
+            o = c.mesh_from_arrays(f"{s['id']}_FOUNDATION_{k.upper()}", v, f, m[fmat[k]], collection=fcol)
+            o.location = (s["x"], s["y"], s["z"])
 
     tunnels = site.get("tunnels", [])
     roof_holes, cover_holes = asp.riser_holes(site, tun)     # aspiration risers through the tunnel roof / pit cover

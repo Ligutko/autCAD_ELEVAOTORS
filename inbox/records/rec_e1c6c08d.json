@@ -1,0 +1,25 @@
+{
+  "id": "rec_e1c6c08d",
+  "subject": "Ґрунти ділянки (Слободо-Петрівка, Гребінківська ТГ)",
+  "kind": "load",
+  "claim": {
+    "name": "snow_load_characteristic_S0",
+    "value": 1600,
+    "unit": "Pa",
+    "qualifier": "характеристичне значення снігового навантаження, м. Лубни"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://document.vobu.ua/wp-content/uploads/DBN/37.1.-DBN-V.1.2-22006.-SNBB.-Navantazhennya-i-vplivi.-Nor.pdf",
+    "path": "inbox/raw/web/document.vobu.ua/DBN-V.1.2-2-2006.pdf",
+    "page": 53,
+    "quote": "Лубни 410 1600 16 250",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для даху: Лубнимаш заявляє ≥ 180 кг/м² ≈ 1.77 кПа (rec дахової фази). До фундаменту стосується лише як частина вертикального навантаження.",
+  "seen_in": []
+}

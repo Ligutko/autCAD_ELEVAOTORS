@@ -1,0 +1,25 @@
+{
+  "id": "rec_01e55d8f",
+  "subject": "Норми: деформації основи силоса",
+  "kind": "rule",
+  "claim": {
+    "name": "site_investigation_boreholes",
+    "value": "свердловини під плитний фундамент ширше 10 м: глибина ≥ ½ ширини, але ≥ 20 м; відстань ≤ 50 м; ≥ 3 під фундамент зблокованих силосів, ≥ 2 під окремий силос",
+    "unit": "",
+    "qualifier": ""
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2022/08/DBN-V_2_6-221-2021.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-V_2_6-221-2021.pdf",
+    "page": 8,
+    "quote": "глибину свердловин приймають рівною половині ширини фундаменту, але не менше ніж 20 м для нескельних ґрунтів",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "п. 6.4–6.5. Для кейсу 5 («помилка вишукувань»): мілка свердловина, що не дійшла до слабкого шару, — пряме порушення цього пункту.",
+  "seen_in": []
+}
