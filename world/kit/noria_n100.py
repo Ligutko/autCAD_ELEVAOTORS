@@ -49,6 +49,24 @@ LEG_CENTRES_X = (CX - LEG_OFFSET, CX + LEG_OFFSET)
 MOTOR_KW = 22
 
 
+def hood_length(mdl):
+    """Length of the head hood along the belt plane (as build() makes it)."""
+    sx, _ = leg_size(mdl)
+    return (LEG_CENTRES_X[1] + sx / 2 + 0.30) - (LEG_CENTRES_X[0] - sx / 2 - 0.02)
+
+
+def vent_panel(model):
+    """(along X, across Y) of the head explosion vent. Area = SITE designed.vents of the tower that
+    carries this model (РД 14-568-03 as an analog, research/design/sensors_interlocks.md); the panel
+    spans the housing width less 40 mm per side and runs along the hood crown."""
+    import json
+    site = json.loads(c.SITE_JSON.read_text(encoding="utf-8"))
+    tower = next((t["id"] for t in site["noria_towers"] if t["noria_model"] == model), None)
+    area = site.get("designed", {}).get("vents", {}).get(tower, 0.22)
+    wy = 2 * (MODELS[model]["housing_half_y"] - 0.04)
+    return area / wy, wy
+
+
 def leg_size(mdl):
     """Outer leg casing (across the bucket projection = local X, across the belt = local Y)."""
     return mdl["leg_clear"][0] + 2 * LEG_SHEET, mdl["leg_clear"][1] + 2 * LEG_SHEET
@@ -429,8 +447,9 @@ def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
               c.box((outlet[0] - h, BELT_Y - h, outlet[2]), (outlet[0] + h, BELT_Y + h, z_head - 0.74)),
               c.box((outlet[0] - h - 0.04, BELT_Y - h - 0.04, outlet[2]), (outlet[0] + h + 0.04, BELT_Y + h + 0.04, outlet[2] + 0.02))]
     # explosion vent on the hood crown (framed rupture panel)
-    vent = [c.box(((hx0 + hx1) / 2 - 0.25, BELT_Y - 0.22, z_head + hood_r - 0.02),
-                  ((hx0 + hx1) / 2 + 0.25, BELT_Y + 0.22, z_head + hood_r + 0.05))]
+    vx, vy = vent_panel(model)                               # sized to the designed area, sunk into the crown
+    vent = [c.box(((hx0 + hx1) / 2 - vx / 2, BELT_Y - vy / 2, z_head + hood_r - 0.12),
+                  ((hx0 + hx1) / 2 + vx / 2, BELT_Y + vy / 2, z_head + hood_r + 0.05))]
     labels.append(("Вибухорозрядник голови", ((hx0 + hx1) / 2, BELT_Y, z_head + hood_r + 0.05)))
     parts["head"] = c.merge_parts([head_back] + throat)
     parts["head_cover"] = head_front

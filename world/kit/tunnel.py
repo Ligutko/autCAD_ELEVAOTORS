@@ -91,6 +91,7 @@ def build_civil(site, t, extra_holes=()):
     parts = [c.box((xa, y0 - w, fz - fs), (xb, y1 + w, fz))]                       # floor slab
     parts += _wall_with_gap(xa, xb, y0 - w, y0, fz, rz, None)                        # south wall
     parts += _wall_with_gap(xa, xb, y1, y1 + w, fz, rz, (sx0, sx1))                  # north wall, stair opening
+    parts.append(c.box((sx0, y1, cz), (sx1, y1 + w, rz)))                             # lintel over it (headroom = ceiling)
     parts.append(c.box((x0 - ew, y0, fz), (x0, y1, rz)) if far_west else c.box((x1, y0, fz), (x1 + ew, y1, rz)))
     holes = [(x, s / 2 + 0.01, t["row_y"]) for x, s in _gate_positions(site, t)] + list(extra_holes)
     parts += _roof_with_holes(xa, xb, y0, y1, cz, rz, holes)
@@ -100,6 +101,44 @@ def build_civil(site, t, extra_holes=()):
               c.box((sx1, y1 + w, fz), (sx1 + w, sy1 + w, rz)),
               c.box((sx0, sy1, fz), (sx1, sy1 + w, c.ground_z()))]                  # exit end open at grade
     return c.merge_parts(parts)
+
+
+def pavilion(site, t):
+    """Light steel pavilion over the exit stair well (designed, research/design/fire_water_and_site.md):
+    returns dict of the numbers the check measures and the parts."""
+    es, w, rz = t["exit_stair"], t["wall_t"], t["roof_top_z"]
+    sx0, sx1 = es["x_inner"]
+    y0o = t["row_y"] + t["inner_y_rel_row"][1] + w                   # outer face of the tunnel north wall
+    sy1 = t["row_y"] + es["y_rel_row"][1]
+    g = c.ground_z()
+    d = site["designed"]["tunnel_exit_pavilion"]
+    dw, dh = d["door"]
+    sill = g + d["sill_over_ground"]
+    door_w = min(dw, sx1 - sx0)                                      # the well is narrower than the designed door
+    eave_lo = sill + dh + 0.35
+    eave_hi = eave_lo + 0.35                                         # slope away from the tunnel
+    ov = 0.25
+    X0, X1, Y0, Y1 = sx0 - w - ov, sx1 + w + ov, y0o - 0.05, sy1 + w + ov
+    zr = lambda y: eave_hi + (eave_lo - eave_hi) * (y - Y0) / (Y1 - Y0)
+    roof_v = np.array([(X0, Y0, zr(Y0)), (X1, Y0, zr(Y0)), (X1, Y1, zr(Y1)), (X0, Y1, zr(Y1)),
+                       (X0, Y0, zr(Y0) + 0.08), (X1, Y0, zr(Y0) + 0.08), (X1, Y1, zr(Y1) + 0.08), (X0, Y1, zr(Y1) + 0.08)])
+    roof = (roof_v, np.array([(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)]))
+    posts, clad = [], []
+    for x in (sx0 - w / 2, sx1 + w / 2):
+        for y in (y0o + 0.1, sy1 + w / 2):
+            posts.append(st.member((x, y, rz), (x, y, zr(y) - 0.01), st.SHS_100, up=(1, 0, 0)))
+        clad.append(c.box((x - 0.01, y0o + 0.1, rz), (x + 0.01, sy1 + w / 2, zr(sy1) - 0.02)))  # side sheets (low edge)
+    clad.append(c.box((sx0 - w / 2, y0o + 0.05, rz), (sx1 + w / 2, y0o + 0.07, zr(y0o) - 0.02)))  # back sheet over the tunnel roof
+    ye = sy1 + w / 2
+    cx = (sx0 + sx1) / 2
+    clad.append(c.box((sx0 - w / 2, ye - 0.01, sill + dh), (sx1 + w / 2, ye + 0.01, zr(ye) - 0.02)))  # lintel sheet
+    door = [c.box((cx - door_w / 2, ye - 0.02, sill), (cx + door_w / 2, ye + 0.02, sill + dh))]
+    sill_box = [c.box((sx0, sy1, g), (sx1, sy1 + w, sill))]
+    parts = {"pav_roof": roof, "pav_posts": c.merge_parts(posts), "pav_clad": c.merge_parts(clad),
+             "pav_door": c.merge_parts(door), "pav_sill": c.merge_parts(sill_box)}
+    meas = {"covers": (X0, Y0, X1, Y1), "well": (sx0 - w, y0o, sx1 + w, sy1 + w), "door": (door_w, dh), "sill": sill - g,
+            "eave": (eave_hi, eave_lo), "overhang": ov}
+    return parts, meas
 
 
 def build_exit_stair(t):
@@ -318,6 +357,10 @@ def build(site, t, collection=None, materials=None, roof_holes=()):
     add("exit_stringers", s, galv)
     add("exit_treads", tr, grating)
     add("exit_rails", r, galv, smooth="quads")
+    if "tunnel_exit_pavilion" in site.get("designed", {}):             # phase 5D: pavilion over the exit well
+        pav, _ = pavilion(site, t)
+        for k, data in pav.items():
+            add(k, data, dark if k in ("pav_door",) else (concrete if k == "pav_sill" else galv))
     inlet = boot_inlet(site, t)
     conv, measure = build_conveyor(site, t, inlet)
     look = {"casing": galv, "cover": galv, "belt": rubber, "idlers": dark, "pulleys": dark, "drive": dark,

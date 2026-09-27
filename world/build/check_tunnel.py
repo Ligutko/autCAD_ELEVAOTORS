@@ -67,7 +67,54 @@ def checks(site, t):
         ("spout starts over the pit", px0 <= sp[0] <= px1 and py0 <= sp[1] <= py1, f"spout start {sp}"),
         ("tunnel section fits the pit wall", py0 - 0.05 <= y0 and y1 <= py1 + 0.05,
          f"tunnel y {y0:.3f}..{y1:.3f}, pit y {py0:.3f}..{py1:.3f}"),
-    ]
+    ] + roof_closed(site, t) + pavilion_checks(site, t)
+
+
+def roof_closed(site, t):
+    """A ray from the sky onto the strip between the tunnel roof and the exit well (over the stair opening in
+    the north wall) must hit concrete at the roof top: the 2026-09-27 frames showed an open slot there."""
+    from mathutils import Vector
+    from mathutils.bvhtree import BVHTree
+    import numpy as np
+    v, f = tun.build_civil(site, t)
+    polys = [tuple(int(i) for i in row) for block in (f if isinstance(f, list) else [f]) for row in np.asarray(block)]
+    tree = BVHTree.FromPolygons([tuple(p) for p in np.asarray(v, float)], polys)
+    es, w = t["exit_stair"], t["wall_t"]
+    _, _, _, y1, _, _ = tun.inner_box(site, t)
+    hits = []
+    for x in np.linspace(es["x_inner"][0] + 0.05, es["x_inner"][1] - 0.05, 5):
+        for y in (y1 + 0.02, y1 + w / 2, y1 + w - 0.02):
+            loc, *_ = tree.ray_cast(Vector((x, y, 10.0)), Vector((0, 0, -1)))
+            hits.append(None if loc is None else round(loc.z, 3))
+    ok = all(h is not None and abs(h - t["roof_top_z"]) <= 0.01 for h in hits)
+    return [("roof closed over the stair opening (rays from the sky hit the roof top)", ok, f"hits {sorted(set(hits), key=str)}")]
+
+
+def pavilion_checks(site, t):
+    """Phase 5D (designed, research/design/fire_water_and_site.md): the exit well is covered against the
+    weather, the door is not narrower than the stair and sits on a sill, the roof sheds away from the
+    tunnel, the pavilion keeps clear of the silo plinths."""
+    if "tunnel_exit_pavilion" not in site.get("designed", {}):
+        return []
+    _, m = tun.pavilion(site, t)
+    X0, Y0, X1, Y1 = m["covers"]
+    wx0, wy0, wx1, wy1 = m["well"]
+    ov = min(wx0 - X0, X1 - wx1, Y1 - wy1)
+    door_w, door_h = m["door"]
+    hi, lo = m["eave"]
+    fnd = site["silo_foundation"]["ring"]["r_out"]
+    clear = min(((x - s["x"]) ** 2 + (y - s["y"]) ** 2) ** 0.5 - fnd for s in site["silos"] for x in (X0, X1) for y in (Y0, Y1))
+    out = [("exit pavilion covers the stair well (overhang >= 0.2 m), roof sheds away from the tunnel",
+            X0 <= wx0 and X1 >= wx1 and Y0 <= wy0 and ov >= 0.2 and hi > lo, f"overhang {ov:.2f} m, eave {hi:+.2f} -> {lo:+.2f}"),
+           ("exit door not narrower than the stair flight (0.7), on a sill >= 0.15 against run-off",
+            door_w >= 0.7 and m["sill"] >= 0.15 - 1e-6, f"door {door_w:.2f} x {door_h:.2f} m, sill {m['sill']:.2f} m"),
+           ("exit pavilion clear of the silo foundations (>= 0.1 m)", clear >= 0.1, f"{clear:.2f} m")]
+    if door_h < 2.0:
+        out.append(("exit door clear height under 2.0 m: WARN", True, f"{door_h:.2f} m"))
+    if door_w < site["designed"]["tunnel_exit_pavilion"]["door"][0]:
+        out.append(("exit door narrower than designed: FINDING", True,
+                    f"the well is {door_w:.2f} m wide inside, the designed door {site['designed']['tunnel_exit_pavilion']['door'][0]} m"))
+    return out
 
 
 def main():
@@ -82,7 +129,9 @@ def main():
     bad_len["tunnels"][0]["conveyor"]["drive_x"] += 0.5
     bad_gates = copy.deepcopy(site)
     bad_gates["silo_gates"]["offsets_along_row"] = [-9.75, -6.5, -3.25, 0.0, 2.75, 5.5, 8.25]
-    for label, s in (("drive pulley moved 0.5 m", bad_len), ("old 2750 gate chain", bad_gates)):
+    bad_sill = copy.deepcopy(site)
+    bad_sill["designed"]["tunnel_exit_pavilion"]["sill_over_ground"] = 0.0
+    for label, s in (("drive pulley moved 0.5 m", bad_len), ("old 2750 gate chain", bad_gates), ("exit door without a sill", bad_sill)):
         failed = [n for n, ok, _ in checks(s, s["tunnels"][0]) if not ok]
         ok_all &= bool(failed)
         print(f"{'PASS' if failed else 'FAIL'}  {label} must be rejected: failed {failed}", flush=True)

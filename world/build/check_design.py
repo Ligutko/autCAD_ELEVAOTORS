@@ -115,8 +115,14 @@ def checks(site):
     vents = {k: d["vents"].get(k, 0) for k in VENT_MIN}
     reg = {m["id"]: m for m in site["equipment"]["items"]}
     reg_ok = all(reg.get(f"{k}.vent", {}).get("area_m2", 0) >= VENT_MIN[k] for k in VENT_MIN)
-    out.append(("explosion vents of H5 / H6 >= РД 14-568-03 (analog)", all(vents[k] >= VENT_MIN[k] for k in VENT_MIN) and reg_ok,
-                f"{vents} vs {VENT_MIN}"))
+    from kit import noria_n100 as nn
+    built = {}
+    for t in site["noria_towers"]:
+        vx, vy = nn.vent_panel(t["noria_model"])
+        built[t["id"]] = (round(vx * vy, 3), vx <= nn.hood_length(nn.MODELS[t["noria_model"]]) - 0.1)
+    geo_ok = all(built[k][0] >= VENT_MIN[k] - 1e-6 and built[k][1] for k in VENT_MIN)
+    out.append(("explosion vents of H5 / H6 >= РД 14-568-03 (analog), in SITE and on the built head", all(vents[k] >= VENT_MIN[k] for k in VENT_MIN) and reg_ok and geo_ok,
+                f"SITE {vents}, built (area, fits the hood) {built} vs {VENT_MIN}"))
 
     sm = d["sampler"]
     out.append(("sampler reach: FINDING", True, f"{sm['model']} reaches {sm['reach_m'][0]}-{sm['reach_m'][1]} m: about "
