@@ -1,6 +1,6 @@
 ---
 type: environment
-updated: 2026-09-26
+updated: 2026-09-27
 tags: [cloud, network, render]
 ---
 # 07 Environment
@@ -20,5 +20,15 @@ tags: [cloud, network, render]
 - Blender 4.5.2: `C:\Program Files\Blender Foundation\Blender 4.5\blender.exe`. Запуск: `blender --background --python world/build/<сцена>.py`. Без `--factory-startup`, бо Pillow стоїть у `%APPDATA%\Blender Foundation\Blender\4.5\scripts\modules`.
 - Фінальний кадр 1.5–3 хв (CPU); повний перерендер 4 сцен ≈40+ хв — у фоні.
 - Гілка — `master` у `origin` (ligutko/autcad_elevaotors).
-- Ключі в `.env` (не виводити): `APIFY_TOKEN`, `YOUTUBE_API_KEY`, `VERTEX_PROJECT_ID`, `VERTEX_LOCATION`, `VERTEX_LOCATION_MEDIA`. Vertex `gemini-2.5-pro` працює, `gemini-3-*` дає 404.
+- Ключі в `.env` (не виводити): `APIFY_TOKEN`, `YOUTUBE_API_KEY`, `VERTEX_PROJECT_ID`, `VERTEX_LOCATION`, `VERTEX_LOCATION_MEDIA`. Акаунт спільний з іншими проєктами (project id правильний, location `global`, для медіа `us-central1`).
+- Gemini, перевірено живими викликами 2026-09-27:
+  - креслення й PDF — `gemini-3.1-pro-preview`, запасна `gemini-2.5-pro`;
+  - швидкі задачі — `gemini-3.5-flash`.
+
+  Запис «`gemini-3-*` дає 404» був хибним: 404 давали неточні назви (`gemini-3-pro`, `gemini-3.1-pro`). Точний список — `client.models.list()`.
+- Зміни Google 2026:
+  - Vertex AI перейменовано на Gemini Enterprise Agent Platform; хост і авторизація ті самі;
+  - `imagen-*` вимкнено назавжди 2026-08-17, заміна — `gemini-3-pro-image`;
+  - пакет `vertexai.generative_models` застарів, використовувати `from google import genai`. Наш код уже так і робить.
+- Ліміти: обрив агента 2026-09-27 був через ліміт сесії Claude (HTTP 429, `five_hour`), а не Gemini. Після скидання ліміту агента продовжують через SendMessage.
 - Відкриваються: lubnymash.com, go4b.com, symaga.com, skf.com, kmzindustries.ua. grabcad і traceparts дають 403 (обходити через Apify).

@@ -1,6 +1,6 @@
 ---
 type: handoff
-updated: 2026-09-26
+updated: 2026-09-27
 repo: ligutko/autcad_elevaotors
 branch: master
 tags: [handoff, start-here]
@@ -28,12 +28,20 @@ tags: [handoff, start-here]
 | K4 тунелі T9/T13/T16, ТЛ-50К, 42 стійки засувок | ✅ | `tunnel.py` | `check_tunnel.py` |
 | K5 нутро силоса з розрізами; аерація підлоги з аркуша 2 (50 каналів) | ✅ | `silo_interior.py` | `check_aeration.py` |
 | E аспірація: бункери 8.1/8.2 за кресленням, установки й повітроводи (judgment), дві знахідки | ✅ | `aspiration.py` | `check_aspiration.py` (з перетинами на сітках) |
+| Граф процесу 7A: 33 вузли, 42 ребра, 82 маршрути, засувки зі схеми арк. 1; реєстр обладнання 546.88 кВт | ✅ | `process.py` | `check_process.py` |
 | W1 оточення | ✗ (після об'єкта) | — | — |
 
 Повний склад з позначками ✅ ◐ ✗ — `OBJECT_SCOPE.md` у корені.
 
-## Наступний крок — фаза 5 (обв'язка) або фаза 7 (граф процесу), стан на 2026-09-27
-Фаза 4 закрита 2026-09-27: [[11 Expertise 2026-09-27 phase 4]], 11 перевірок ALL PASS.
+## Наступний крок — фаза 7B (повна технологічна схема, проєктуємо відсутнє), стан на 2026-09-27
+7A закрита 2026-09-27: [[12 Expertise 2026-09-27 phase 7A]], 12 перевірок ALL PASS. Дослідження для 7B (агент, `research/process_design.md`) запущено того ж дня.
+
+**Рішення людини 2026-09-27.** Модель — тестовий об'єкт: спершу маркетинг, потім симулятор. У ній мають бути всі системи реального елеватора. Що креслення не дає (об'єкт після нас добудовували інші), **проєктуємо самі за реальними аналогами**. Кожен такий вузол:
+- шар `designed`;
+- проєктна записка з ≥2 аналогами і нормою;
+- власна перевірка.
+
+Порядок: 7A → 7B (повна технологічна схема) → 5 (добудова в 3D) → 7C (маршрути, ролик «шлях зерна»). Деталі — [[03 Roadmap]], розділ «Рішення людини 2026-09-27».
 
 ### Як було записано перед фазою 4
 Фази 2 і 3 закриті 2026-09-27, усі 10 перевірок ALL PASS (`python world/build/check_all.py`). Підсумки — [[09 Expertise 2026-09-26..27]] §5–7 і [[10 Expertise 2026-09-27 phase 3]].
@@ -48,7 +56,7 @@ tags: [handoff, start-here]
 ```
 python world/build/check_all.py                             # усі перевірки одним запуском, підсумок; обов'язково перед комітом
 B="/c/Program Files/Blender Foundation/Blender 4.5/blender.exe"
-"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration aeration silo_interior silo_roof
+"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration aeration silo_interior silo_roof foundation receiving process
 "$B" --background --python world/build/site.py             # фінальні кадри → world/out/site/
 "$B" --python world/build/site.py -- --no-render           # відкрити сцену в GUI і літати
 ```

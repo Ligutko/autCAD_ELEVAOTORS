@@ -24,19 +24,27 @@ tools: Read, Glob, Grep, Bash, Write, Edit, WebSearch, WebFetch
 | Відкрити сторінку або PDF | `curl -sL -A "Mozilla/5.0"` або WebFetch. З цього ПК відкриваються lubnymash.com, go4b.com, symaga.com, skf.com, kmzindustries.ua |
 | Пошук | WebSearch |
 | Сайт з захистом від ботів (grabcad, traceparts — 403), пошук Google з повними сторінками | Apify: `POST https://api.apify.com/v2/acts/<actor>/run-sync-get-dataset-items`, заголовок `Authorization: Bearer $APIFY_TOKEN`. Для пошуку зі змістом сторінок — `apify~rag-web-browser`. Apify платний: не більше 5 запусків на завдання, спершу пробуй curl |
-| Прочитати креслення, скан, фото, великий PDF | Gemini 2.5 Pro через Vertex (див. нижче) |
+| Прочитати креслення, скан, фото, великий PDF | Gemini 3.1 Pro через Vertex (див. нижче) |
 | Відео з обладнанням | YouTube Data API (`$YOUTUBE_API_KEY`), `search.list` коштує 100 одиниць, не більше 3 пошуків на завдання |
 | Недоступно | docs.cntd.ru (не відповідає) |
 
-Gemini (перевірено: `gemini-2.5-pro` працює, `gemini-3-*` дає 404):
+Gemini (живі виклики 2026-09-27, `google-genai` 1.60, location `global`):
+- для креслень і PDF — `gemini-3.1-pro-preview`, запасна — `gemini-2.5-pro`;
+- швидкі масові задачі — `gemini-3.5-flash`.
+
+Точні назви обов'язкові: `gemini-3-pro`, `gemini-3.1-pro`, `gemini-3.5-pro` дають 404, бо таких моделей немає. Список доступних — `c.models.list()`. Тест на вирізці арк. 4 з відомими 7 розмірами і 9 позиціями: усі чотири моделі прочитали все, а `gemini-2.5-pro` ще й вигадав одну зайву позицію.
+
+Не використовуй:
+- застарілий пакет `vertexai.generative_models` / `vertexai.vision_models`, лише `from google import genai`;
+- моделі `imagen-*`: Google вимкнув їх назавжди 2026-08-17. Для картинок — `gemini-3-pro-image`.
 
 ```python
 import os
 from google import genai
 from google.genai import types
-c = genai.Client(vertexai=True, project=os.environ["VERTEX_PROJECT_ID"], location=os.environ["VERTEX_LOCATION"])
+c = genai.Client(vertexai=True, project=os.environ["VERTEX_PROJECT_ID"], location=os.environ["VERTEX_LOCATION"])  # global
 pdf = types.Part.from_bytes(data=open(path, "rb").read(), mime_type="application/pdf")
-r = c.models.generate_content(model="gemini-2.5-pro", contents=[pdf, "Випиши всі габаритні розміри норії з цитатами і номером сторінки"])
+r = c.models.generate_content(model="gemini-3.1-pro-preview", contents=[pdf, "Випиши всі габаритні розміри норії з цитатами і номером сторінки"])
 ```
 
 Відповідь Gemini — не джерело. Джерело — документ. Від Gemini бери тільки підказку, де в документі число, і цитату, яку можна перевірити.
