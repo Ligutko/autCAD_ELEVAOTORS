@@ -1,0 +1,28 @@
+{
+  "id": "rec_e7c34451",
+  "subject": "Сідельний тягач МАЗ-6430W8 (6x4) — аналог важчого тягача",
+  "kind": "dimension",
+  "claim": {
+    "name": "turning_radius",
+    "value": {
+      "front_outer_wheel_track_m": 7.7,
+      "outer_overall_m": 8.5
+    },
+    "unit": "m",
+    "qualifier": "табл. 1.1: найменший радіус повороту по осі сліду переднього зовнішнього колеса; зовнішній габаритний радіус; не більше"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://izh-maz.ru/data/documents/MAZ-5440WX-Evro-4.pdf",
+    "path": "inbox/raw/web/izh-maz.ru/MAZ-5440WX-Evro-4.pdf",
+    "page": 3,
+    "quote": "Наименьший радиус поворота автомобиля по оси следа переднего внешнего (относительно центра поворота) колеса, м, не более 7,7 Внешний минимальный габаритный радиус поворота автомобиля, м, не более 8,5",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Верхня межа для тривісного тягача 6x4.",
+  "seen_in": []
+}

@@ -1,0 +1,32 @@
+{
+  "id": "rec_7f0c2c19",
+  "subject": "Норма: NIST Handbook 44 (2026), §2.20 Scales, UR.2.6.1 Vehicle Scales",
+  "kind": "norm",
+  "claim": {
+    "name": "scale_straight_approach_length",
+    "value": {
+      "min": "0,5 x довжини платформи",
+      "not_required_over_m": 12,
+      "width": "не менше ширини платформи"
+    },
+    "unit": "m",
+    "qualifier": "UR.2.6.1 (b): пряма ділянка на в'їзді й виїзді автомобільних ваг"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.nist.gov/system/files/documents/2025/12/30/2-20-26-HB44-20251222.pdf",
+    "path": "inbox/raw/web/nist.gov/HB44_2026_section_2.20.pdf",
+    "page": 53,
+    "quote": "(b) the length at least one-half the length of the platform but not required to be more than 12 m (40 ft), and",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_6cbea234",
+    "rec_6c92404e"
+  ],
+  "notes": "Метрологічна норма США. Українського нормативу на пряму ділянку перед статичними вагами не знайдено. Для платформи 24 м — 12 м з кожного боку.",
+  "seen_in": []
+}

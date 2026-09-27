@@ -1,0 +1,28 @@
+{
+  "id": "rec_b0190f3e",
+  "subject": "Норма: Правила охорони праці на автомобільному транспорті (наказ МНС від 09.07.2012 № 964)",
+  "kind": "norm",
+  "claim": {
+    "name": "site_speed_limit",
+    "value": {
+      "territory_kmh": 10,
+      "indoors_kmh": 5
+    },
+    "unit": "km/h",
+    "qualifier": "п. 1.7 розділу про рух по території підприємства"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.rada.gov.ua/laws/show/z1299-12/print",
+    "path": "inbox/raw/web/zakon.rada.gov.ua/z1299-12_print.html",
+    "page": null,
+    "quote": "1.7. Швидкість руху транспортних засобів по території підприємства не повинна перевищувати 10 км/год., а в приміщеннях - 5 км/год.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Правила для роботодавців, що експлуатують автотранспорт. Для елеватора — орієнтир для знака обмеження швидкості і класу освітлення (ДБН В.2.5-28 табл. 8.12, рядок ≤ 10 км/год).",
+  "seen_in": []
+}

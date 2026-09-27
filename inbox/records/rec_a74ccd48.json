@@ -1,0 +1,28 @@
+{
+  "id": "rec_a74ccd48",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_road_width",
+    "value": {
+      "carriageway_min_m": 3.5,
+      "or_strip_min_m": 6.0
+    },
+    "unit": "m",
+    "qualifier": "п. 15.3.1: ширина проїздів для пожежних автомобілів"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 132,
+    "quote": "Для пожежних автомобілів слід передбачати проїзди завширшки не менше ніж 3,5 м або смуги завширшки не менше ніж 6 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Абзац про житлові й громадські будинки. Для виробничих у 15.3.2 окремої ширини немає, тож 3,5 м — нижня межа. Траса 5,0–6,0 м її перекриває.",
+  "seen_in": []
+}

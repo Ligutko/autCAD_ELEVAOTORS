@@ -1,0 +1,35 @@
+{
+  "id": "rec_5538dc37",
+  "subject": "Під'їзд пожежних автомобілів до силосів і робочої будівлі",
+  "kind": "dimension",
+  "claim": {
+    "name": "fire_road_edge_to_wall",
+    "value": {
+      "silos_m": [
+        5,
+        8
+      ],
+      "work_tower_m": [
+        8,
+        10
+      ],
+      "sides": "дві"
+    },
+    "unit": "m",
+    "qualifier": "відстань від краю проїзду до стіни силоса і робочої будівлі"
+  },
+  "source": {
+    "origin": "derived",
+    "url": null,
+    "path": null,
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Висота силоса МСВУ 220.13.В12 — 21,422 м (Plant3D_Equipment_Catalog.json), це діапазон 12–28 м, отже 5–8 м (rec_72ce91d4). Робоча будівля з норіями H ≈ 33 м > 28 м — 8–10 м. Силос ширший за 18 м і діє виняток для зерна, тож проїзд з двох сторін (rec_8422434d, rec_e10c3765). Доступ автодрабин з двох сторін при довжині понад 18 м — ДБН В.2.2-8-98 п. 3.1 (rec_3e847f91). Висоту робочої будівлі взято з висоти норії, а не з креслення будівлі.",
+  "seen_in": []
+}

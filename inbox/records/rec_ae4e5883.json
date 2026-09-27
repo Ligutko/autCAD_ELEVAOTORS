@@ -1,0 +1,32 @@
+{
+  "id": "rec_ae4e5883",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_distance_industrial_buildings",
+    "value": {
+      "I_II_IIIa_to_I_II_IIIa_cat_ABV_m": 9,
+      "reduced_m": 6,
+      "cat_GD": "не нормується"
+    },
+    "unit": "m",
+    "qualifier": "табл. 15.3: протипожежні відстані між виробничими будівлями I, II, IIIа ступенів вогнестійкості"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 125,
+    "quote": "9 м – для будівель та споруд з виробництвом категорій А, Б і В (див. примітку)",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_a8bed8b4",
+    "rec_28ec1018"
+  ],
+  "notes": "Прим.: для II ступеня з категоріями А, Б, В — 6 м, якщо є автоматичне пожежогасіння або питоме пожежне навантаження категорії В ≤ 10 кг/м². При блокуванні силосів з робочою будівлею відстань між ними не нормується (ДБН В.2.2-8-98 п. 2.2).",
+  "seen_in": []
+}

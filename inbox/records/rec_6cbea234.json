@@ -1,0 +1,28 @@
+{
+  "id": "rec_6cbea234",
+  "subject": "Автомобільні ваги динамічні (ТОВ «Техноваги»): вимоги до під'їзних шляхів",
+  "kind": "dimension",
+  "claim": {
+    "name": "scale_approach_length_in_motion",
+    "value": 16,
+    "unit": "m",
+    "qualifier": "довжина під'їзних шляхів до і після ваг для зважування в русі; на цій довжині ± 3 мм від площини платформи, похил ≤ 1 %"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://technowagy.com.ua/products/vesy-avtomobilnye-dinamicheskie/",
+    "path": "inbox/raw/web/technowagy.com.ua/vesy_dinamicheskie.html",
+    "page": null,
+    "quote": "довжина під’їзних шляхів повинна бути достатньою для повного одночасного розміщення всіх коліс найдовшого транспортного засобу та становити не менше 16 м до і після ваги.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_7f0c2c19",
+    "rec_6c92404e"
+  ],
+  "notes": "Вимога для динамічних ваг (зважування в русі, ДСТУ OIML R 134-1). Наші ваги статичні, тому вимога суворіша за потрібну; беремо її як верхню межу.",
+  "seen_in": []
+}

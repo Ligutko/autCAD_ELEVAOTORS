@@ -1,0 +1,30 @@
+{
+  "id": "rec_639fe089",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "ag_site_entries",
+    "value": {
+      "area_threshold_ha": 5,
+      "entries_min": 2,
+      "entries_min_spacing_m": 200,
+      "perimeter_ring_min_width_m": 3.5
+    },
+    "unit": "",
+    "qualifier": "п. 15.3.5: сільськогосподарські підприємства площею понад 5 га"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 133,
+    "quote": "Сільськогосподарські підприємства, площа яких перевищує 5 га, повинні мати не менше двох вїздів на територію",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Умови: в'їзди на відстані ≥ 200 м; з внутрішнього боку огорожі по периметру — круговий проїзд ≥ 3,5 м. Чи ділянка елеватора більша за 5 га — не перевірено.",
+  "seen_in": []
+}

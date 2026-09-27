@@ -1,0 +1,25 @@
+{
+  "id": "rec_9e99298a",
+  "subject": "Автомобільні ваги надземного монтажу (Solent Scales, UK)",
+  "kind": "dimension",
+  "claim": {
+    "name": "scale_ramp_length",
+    "value": 3.5,
+    "unit": "m",
+    "qualifier": "довжина пандуса з кожного боку для ваг надземного монтажу"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.solentscales.co.uk/blog/how-much-room-do-you-need-for-a-weighbridge/",
+    "path": "inbox/raw/web/solentscales.co.uk/how-much-room-weighbridge.html",
+    "page": null,
+    "quote": "Recommended ramp length is typically 3.5 metres on each side.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для платформи на +0,30…0,40 м над дорогою (SCALES_IN/OUT) пандус 3,5 м дає ухил ≈ 9–11 %.",
+  "seen_in": []
+}

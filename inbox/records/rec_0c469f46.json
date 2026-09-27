@@ -1,0 +1,32 @@
+{
+  "id": "rec_0c469f46",
+  "subject": "Автомобільні ваги SCALES_IN / SCALES_OUT (платформа 24 м)",
+  "kind": "dimension",
+  "claim": {
+    "name": "straight_before_after_scales",
+    "value": {
+      "norm_min_m": 12,
+      "in_motion_analog_m": 16,
+      "manufacturer_comfort_m": [
+        50,
+        60
+      ]
+    },
+    "unit": "m",
+    "qualifier": "довжина прямої ділянки до і після ваг"
+  },
+  "source": {
+    "origin": "derived",
+    "url": null,
+    "path": null,
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "NIST UR.2.6.1: 0,5 x 24 = 12 м, а більше 12 м норма не вимагає (rec_7f0c2c19). Динамічні ваги — 16 м (rec_6cbea234). KMZ — 50–60 м для зручності маневру (rec_6c92404e). Нормативний мінімум 12 м; 50–60 м — рекомендація виробника без посилання на норму. Автопоїзд 22 м випрямляється на ділянці приблизно своєї довжини (22–25 м, judgment).",
+  "seen_in": []
+}

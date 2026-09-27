@@ -58,6 +58,9 @@ def _strip(pts, half_w, z):
     v = np.concatenate([np.column_stack([left, np.full(len(pts), z)]), np.column_stack([right, np.full(len(pts), z)])])
     n = len(pts)
     f = np.array([(i, i + 1, n + i + 1, n + i) for i in range(n - 1)])
+    e1, e2 = v[f[0][1]] - v[f[0][0]], v[f[0][3]] - v[f[0][0]]
+    if np.cross(e1, e2)[2] < 0:                                      # face up whatever the run direction
+        f = f[:, ::-1]
     return v, f
 
 
@@ -72,10 +75,16 @@ def build_roads(site=None):
     sp = spec(site)
     z = c.ground_z() + sp["road_z_over_ground"]
     roads = []
-    for ln in sp["lanes"]:
+    for k, ln in enumerate(sp["lanes"]):
         pts = lane_polyline(ln)
         hw = [lane_width(ln, p[0]) / 2 for p in pts] if "pts" in ln else ln["w"] / 2
-        roads.append(_strip(pts, hw, z))
+        roads.append(_strip(pts, hw, z + 0.002 * k))                  # a few mm apart: no z-fighting at junctions
+        if ln.get("end_pad"):                                        # 12 x 12 turnaround at a dead end
+            x0, y0, x1, y1 = ln["end_pad"]
+            roads.append(c.box((x0, y0, z - 0.02), (x1, y1, z)))
+    hs = sp["fire_tanks"].get("hardstand")                           # fire engine pier by the tanks
+    if hs:
+        roads.append(c.box((hs[0], hs[1], z - 0.02), (hs[2], hs[3], z)))
     # scales: steel platform +0.35 over the road with a concrete ramp each end (естакадні, rec_767b01b7)
     decks, ramps = [], []
     g = c.ground_z() + sp["road_z_over_ground"]

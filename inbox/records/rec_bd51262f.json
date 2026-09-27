@@ -1,0 +1,28 @@
+{
+  "id": "rec_bd51262f",
+  "subject": "Норма: ДБН В.2.5-74:2013 Водопостачання. Зовнішні мережі та споруди",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_reservoir_pier",
+    "value": [
+      12,
+      12
+    ],
+    "unit": "m",
+    "qualifier": "п. 13.3.2, прим. 3: під'їзд з майданчиком (пірсом) біля пожежних резервуарів"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.poproekty.com.ua/wp-content/uploads/2021/04/DBN-V.2.5-74-2013-Vodopostachannya.-Zovnishni-merezhi-ta-sporudi.-Osnovni-polozhennya-proektuvannya.pdf",
+    "path": "inbox/raw/web/poproekty.com.ua/DBN-V.2.5-74-2013.pdf",
+    "page": 186,
+    "quote": "під'їзди з майданчиками (пірсами) розмірами не менше ніж 12х12 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Проєктна редакція ДБН (див. rec_ac1e65d6).",
+  "seen_in": []
+}

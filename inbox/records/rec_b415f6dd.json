@@ -1,0 +1,32 @@
+{
+  "id": "rec_b415f6dd",
+  "subject": "Норма: СНиП 2.05.07-91* Промышленный транспорт (розд. 5, автомобільний транспорт)",
+  "kind": "norm",
+  "claim": {
+    "name": "overhead_clearance_min",
+    "value": {
+      "min_total_m": 5.0,
+      "rule": "висота розрахункового автомобіля + 1,0 м"
+    },
+    "unit": "m",
+    "qualifier": "п. 5.64: висота споруд над внутрішніми автодорогами"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://portal.stroimdom.com.ua/files/docs/snip-2.05.07-91-_1996,-s-izm.-1-1996_.pdf",
+    "path": "inbox/raw/web/portal.stroimdom.com.ua/snip_2.05.07-91.pdf",
+    "page": 107,
+    "quote": "общее их возвышение над проезжей частью должно быть не менее 5,0 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_849cef6c",
+    "rec_70f5920e",
+    "rec_221cb732"
+  ],
+  "notes": "",
+  "seen_in": []
+}

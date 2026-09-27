@@ -1,0 +1,29 @@
+{
+  "id": "rec_3710fc66",
+  "subject": "Кільцева одностороння траса автотранспорту елеватора",
+  "kind": "dimension",
+  "claim": {
+    "name": "carriageway_width_one_way",
+    "value": {
+      "no_kerb_m": 5.0,
+      "with_kerbs_m": 6.0,
+      "shoulder_m": 1.0
+    },
+    "unit": "m",
+    "qualifier": "ширина проїзної частини на прямих ділянках"
+  },
+  "source": {
+    "origin": "derived",
+    "url": null,
+    "path": null,
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "4,5 м (табл. 46, IV-в, автомобіль ≤ 2,75 м, rec_44e6ced5) + 0,5 м (автопоїзди розрахункові, п. 5.17, rec_582de362) = 5,0 м. З бортовим каменем — +0,5 м з кожного боку (rec_3479e365) = 6,0 м; при швидкості ≤ 30 км/год уширення біля бортів можна не робити. Узбіччя укріплені на всю ширину (п. 5.22, rec_97da5935), ширина узбіччя IV-в — 1,0 м (табл. 46). На кривих додається уширення.",
+  "seen_in": []
+}

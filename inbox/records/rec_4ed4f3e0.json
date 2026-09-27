@@ -1,0 +1,30 @@
+{
+  "id": "rec_4ed4f3e0",
+  "subject": "Норма: ДБН В.2.5-28:2018 Природне і штучне освітлення",
+  "kind": "norm",
+  "claim": {
+    "name": "industrial_storage_area_illuminance",
+    "value": {
+      "short_term_handling_loading": 20,
+      "continuous_handling_loading": 50,
+      "label_reading_covered_platforms": 100,
+      "inspection": 200
+    },
+    "unit": "lx",
+    "qualifier": "табл. 8.18 «Промислові та складські території»: середня освітленість, не менше"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.isu.net.ua/sites/default/files/normdocs/dbn_v_2.5-28_2018.pdf",
+    "path": "inbox/raw/web/zakon.isu.net.ua/dbn_v_2.5-28_2018.pdf",
+    "page": 31,
+    "quote": "Короткострокова обробка великих вантажів і матеріалів, навантаження і розвантаження великих товарів 20 0,25 55 20",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для завальної ями й відвантаження під Ш1 (постійна робота під час приймання) підходить рядок «тривала обробка… навантаження-розвантаження» — 50 лк. Для ваг — ДБН В.2.2-8-98 табл. 6: 100 / 200 лк (rec_94a3120c). PDF — скан з OCR-шаром; цитата дослівна з OCR-шару.",
+  "seen_in": []
+}

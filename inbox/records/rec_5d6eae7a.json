@@ -1,0 +1,32 @@
+{
+  "id": "rec_5d6eae7a",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "road_to_building_distance",
+    "value": {
+      "no_entry_len_le_20m": 1.5,
+      "no_entry_len_gt_20m": 3.0,
+      "entry_2axle": 8.0,
+      "entry_3axle": 12.0,
+      "entry_electrocar_only": 5.0,
+      "site_fence": 1.5
+    },
+    "unit": "m",
+    "qualifier": "табл. 7.1: відстань від бортового каменю або краю укріпленого узбіччя до зовнішніх стін будівель"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 44,
+    "quote": "б) те саме за довжиною будинку понад 20 м 3 в) за наявності в’їзду в будівлю двохосьових автомобілів і автонавантажувачів 8",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Прим. 2: при в'їзді в цех автомобілів з причепами відстань визначають розрахунком.",
+  "seen_in": []
+}

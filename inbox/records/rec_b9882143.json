@@ -1,0 +1,25 @@
+{
+  "id": "rec_b9882143",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "road_to_supports_distance",
+    "value": 0.5,
+    "unit": "m",
+    "qualifier": "табл. 7.1 п. 4: від краю дороги до опор естакад і шляхопроводів, стовпів, щогл"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 44,
+    "quote": "Зовнішні межі опор естакад і шляхопроводів, димових труб, стовпів, щогл, виступаючих частин будівель: пілястр, контрфорсів, зовнішніх сходів тощо 0,5",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Стосується опор галерей, естакади Ш1 і щогл освітлення.",
+  "seen_in": []
+}

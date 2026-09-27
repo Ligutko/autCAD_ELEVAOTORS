@@ -1,0 +1,28 @@
+{
+  "id": "rec_49efcc2a",
+  "subject": "Сідельний тягач МАЗ-5440W8 (4x2) — аналог розрахункового тягача",
+  "kind": "dimension",
+  "claim": {
+    "name": "turning_radius",
+    "value": {
+      "front_outer_wheel_track_m": 7.4,
+      "outer_overall_m": 9.0
+    },
+    "unit": "m",
+    "qualifier": "табл. 1.2: найменший радіус повороту по осі сліду переднього зовнішнього колеса; зовнішній габаритний радіус; не більше"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://izh-maz.ru/data/documents/MAZ-5440WX-Evro-4.pdf",
+    "path": "inbox/raw/web/izh-maz.ru/MAZ-5440WX-Evro-4.pdf",
+    "page": 4,
+    "quote": "Наименьший радиус поворота автомобиля по оси следа переднего внешнего (относительно центра поворота) колеса, м, не более 7,4 Внешний минимальный габаритный радиус поворота автомобиля, м, не более 9,0",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог: поширений в Україні магістральний тягач 4x2 під зерновозні напівпричепи. Марку автопарку не задано. Потрібен для правила СНиП п. 5.50 (3,5 x R).",
+  "seen_in": []
+}

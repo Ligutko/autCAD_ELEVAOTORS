@@ -1,0 +1,29 @@
+{
+  "id": "rec_ac1e65d6",
+  "subject": "Норма: ДБН В.2.5-74:2013 Водопостачання. Зовнішні мережі та споруди",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_reservoir_intake_to_buildings",
+    "value": {
+      "I-II": 10,
+      "III-V_and_open_combustible_storage": 30,
+      "flammable_liquids_gases": 40
+    },
+    "unit": "m",
+    "qualifier": "п. 13.3.4: відстань від точки забору води з резервуарів до будівель"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.poproekty.com.ua/wp-content/uploads/2021/04/DBN-V.2.5-74-2013-Vodopostachannya.-Zovnishni-merezhi-ta-sporudi.-Osnovni-polozhennya-proektuvannya.pdf",
+    "path": "inbox/raw/web/poproekty.com.ua/DBN-V.2.5-74-2013.pdf",
+    "page": 187,
+    "quote": "до будівель I і II ступенів вогнестійкості - не менше ніж 10 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Там само: до будівель III–V ступенів і відкритих складів горючих матеріалів — ≥ 30 м; до установок з ЛЗР, ГР, ГГ — ≥ 40 м. У колонтитулі файлу «пр. ДБН В.2.5 :2013», тобто це проєктна редакція; з остаточним текстом ДБН В.2.5-74:2013 не звірено.",
+  "seen_in": []
+}

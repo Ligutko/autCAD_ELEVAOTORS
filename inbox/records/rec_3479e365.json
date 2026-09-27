@@ -1,0 +1,29 @@
+{
+  "id": "rec_3479e365",
+  "subject": "Норма: СНиП 2.05.07-91* Промышленный транспорт (розд. 5, автомобільний транспорт)",
+  "kind": "norm",
+  "claim": {
+    "name": "carriageway_widening_at_kerb",
+    "value": {
+      "per_kerb_min_m": 0.5,
+      "rule": "2 x висота бортового каменю",
+      "may_omit_if_speed_le_kmh": 30
+    },
+    "unit": "m",
+    "qualifier": "п. 5.17: уширення проїзної частини біля бортового каменю; при розрахунковій швидкості ≤ 30 км/год (в'їзди в цехи, склади) можна не робити"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://portal.stroimdom.com.ua/files/docs/snip-2.05.07-91-_1996,-s-izm.-1-1996_.pdf",
+    "path": "inbox/raw/web/portal.stroimdom.com.ua/snip_2.05.07-91.pdf",
+    "page": 93,
+    "quote": "со стороны каждого бортового камня на двухкратную его высоту, но не менее чем на 0,5 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Там само: для ділянок, де розрахункова швидкість не більше 30 км/год, «допускается не предусматривать уширение проезжей части со стороны бортового камня».",
+  "seen_in": []
+}

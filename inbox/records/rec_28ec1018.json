@@ -1,0 +1,32 @@
+{
+  "id": "rec_28ec1018",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "closed_switchgear_fire_distance",
+    "value": {
+      "I-II": 7,
+      "III-IIIa-IIIb": 9,
+      "IV-V": 10
+    },
+    "unit": "m",
+    "qualifier": "табл. 15.9: протипожежні відстані від закритих розподільних пристроїв трансформаторних пунктів до будинків за ступенем вогнестійкості"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 130,
+    "quote": "Ступінь вогнестійкості сусіднього будинку чи споруди Відстань, м I і II 7",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_a8bed8b4",
+    "rec_ae4e5883"
+  ],
+  "notes": "Прим.: до житлових і громадських будівель при не більше ніж двох сухих трансформаторах до 1000 кВт і 10 кВ не нормується. Силоси — виробничі споруди, тому це виключення до них не застосовується.",
+  "seen_in": []
+}

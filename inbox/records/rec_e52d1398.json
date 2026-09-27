@@ -1,0 +1,28 @@
+{
+  "id": "rec_e52d1398",
+  "subject": "Габаритне кільце повороту (Директива 96/53/ЄС, дод. I п. 1.5)",
+  "kind": "norm",
+  "claim": {
+    "name": "swept_circle",
+    "value": {
+      "outer_radius_m": 12.5,
+      "inner_radius_m": 5.3
+    },
+    "unit": "m",
+    "qualifier": "будь-який автомобіль або автопоїзд у русі має розвертатися в кільці із зовнішнім радіусом 12,50 м і внутрішнім 5,30 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.legislation.gov.uk/eudr/1996/53/annex/I",
+    "path": "inbox/raw/web/legislation.gov.uk/eudr_1996_53_annex_I.html",
+    "page": null,
+    "quote": "Any motor vehicle or vehicle combination which is in motion must be able to turn within a swept circle having an outer radius of 12,50 m and an inner radius of 5,30 m",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Норма ЄС для автопоїздів до 18,75 м. Українського аналога з цифрами не знайдено. Автопоїзди до 22 м (ПДР п. 22.5) можуть займати ширшу смугу — потрібна перевірка траєкторією. Текст з legislation.gov.uk: eur-lex.europa.eu з цього ПК повертав 202 без тіла.",
+  "seen_in": []
+}

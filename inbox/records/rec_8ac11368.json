@@ -1,0 +1,28 @@
+{
+  "id": "rec_8ac11368",
+  "subject": "Освітлення території елеватора (референс виробника опор «Полігональ»)",
+  "kind": "dimension",
+  "claim": {
+    "name": "lighting_pole_height",
+    "value": [
+      8,
+      10
+    ],
+    "unit": "m",
+    "qualifier": "висота гранованих опор освітлення на території елеватора"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://polygonal.com.ua/fotogalereya.php",
+    "path": "inbox/raw/web/polygonal.com.ua/fotogalereya.html",
+    "page": null,
+    "quote": "Освітлення території елеватора. Застосовані грановані опори висотою 10 м і 8 м.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Один реальний елеватор, назву не вказано. Висот прожекторних щогл на елеваторах з документом не знайдено.",
+  "seen_in": []
+}

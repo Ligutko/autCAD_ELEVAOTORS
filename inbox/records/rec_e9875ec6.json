@@ -1,0 +1,28 @@
+{
+  "id": "rec_e9875ec6",
+  "subject": "U-подібний розворот автопоїзда з напівпричепом (генплан елеватора)",
+  "kind": "dimension",
+  "claim": {
+    "name": "turnaround_loop_diameter_min",
+    "value": [
+      25.9,
+      27.0
+    ],
+    "unit": "m",
+    "qualifier": "мінімальний діаметр петлі або майданчика розвороту за СНиП 2.05.07-91 п. 5.50 для тягача з напівпричепом"
+  },
+  "source": {
+    "origin": "derived",
+    "url": null,
+    "path": null,
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "D = 3,5 x R_перед.зовн.колеса: 3,5 x 7,4 = 25,9 м (МАЗ-5440W8, rec_49efcc2a); 3,5 x 7,7 = 27,0 м (МАЗ-6430W8, rec_e7c34451); правило — rec_3b20579b. Зовнішній радіус ≈ 13,0–13,5 м. Збігається з кільцем ЄС 12,5 / 5,3 м (rec_e52d1398) плюс запас 0,5–1,0 м.",
+  "seen_in": []
+}

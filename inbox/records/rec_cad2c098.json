@@ -1,0 +1,25 @@
+{
+  "id": "rec_cad2c098",
+  "subject": "Норма: ДБН В.2.5-74:2013 Водопостачання. Зовнішні мережі та споруди",
+  "kind": "norm",
+  "claim": {
+    "name": "hydrant_spacing",
+    "value": "визначається розрахунком за сумарною витратою і пропускною здатністю гідрантів; кожну будівлю гасять щонайменше від двох гідрантів при витраті від 15 л/с, з рукавами не довшими, ніж у 13.3.4",
+    "unit": "",
+    "qualifier": "п. 12.16: відстань між гідрантами"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.poproekty.com.ua/wp-content/uploads/2021/04/DBN-V.2.5-74-2013-Vodopostachannya.-Zovnishni-merezhi-ta-sporudi.-Osnovni-polozhennya-proektuvannya.pdf",
+    "path": "inbox/raw/web/poproekty.com.ua/DBN-V.2.5-74-2013.pdf",
+    "page": 160,
+    "quote": "Відстань між гідрантами визначається розрахунком, що враховує сумарну витрату води на пожежогасіння та пропускну спроможність встановлюваного типу гідрантів.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Фіксованого кроку (наприклад, 150 м) у тексті немає. Рукавна лінія за 13.3.4 — до 200 м при пожежному автомобілі. Практичний крок 100–150 м — це judgment, не норма.",
+  "seen_in": []
+}

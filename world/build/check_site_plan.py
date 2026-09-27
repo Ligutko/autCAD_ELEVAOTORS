@@ -13,7 +13,9 @@ FAIL:
   fire tanks: 2, each >= the designed volume;
   the cable trestle and the designed buildings keep >= 0.3 m from silo plinths and towers.
 WARN: straight approach to a scales under 50 m (KMZ); lab farther than 30 m from the sampler (pneumatic
-line); U-turn centreline radius under 9 m or width under 6 m (judgment until research/site_plan_norms.md).
+line). Norm checks (research/site_plan_norms.md): lanes >= 4.5 m (СНиП табл. 46), U-turn swept circle
+12.5 / 5.3 m (96/53/EC), clear height >= 4.5 (WARN < 5.0), scales straights >= 12 m (NIST), КТП >= 6 m from silos
+(WARN < 12), fire water pier >= 10 m from buildings, fire access to every silo, no loose road ends.
 
 Broken variants that must fail: scales in on the pit ramp, sampler post 7 m off the lane, hydrant 1 m from
 the pit shed, U-turn centre at x -18 (through the plinth of silo «3»), out lane on y 44.0 (off Ш1, on the tower footings).
@@ -42,7 +44,6 @@ TRUCK_W = 2.55                        # body width of a road train (judgment unt
 CLEAR = 0.3
 HYD_ROAD, HYD_WALL = 2.5, 5.0         # ДБН В.2.5-74 (rec_944e9792)
 APPROACH = 50.0                       # KMZ (rec_6c92404e)
-UTURN_R, UTURN_W = 9.0, 6.0           # judgment
 HEADROOM = 4.5                        # judgment
 
 
@@ -72,9 +73,12 @@ def obstacles(site):
     for s in r["old_silos"]:
         y = s["y"] + s["plinth_r"] + dr.WET_FAN_OFFSET
         ob.append((f"wet fan pad {s['label']}", "rect", (s["x"] - 0.7, y - 0.6, s["x"] + 0.7, y + 0.6)))
-    for b in site["aspiration"]["dust_bins"]:
+    for b in site["aspiration"]["dust_bins"]:                           # legs only: a trailer backs in under the gate
         (cx, cy), (fx, fy) = b["center"], b["frame"]
-        ob.append((f"dust bin {b['id']}", "rect", (cx - fx / 2, cy - fy / 2, cx + fx / 2, cy + fy / 2)))
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                lx, ly = cx + sx * (fx / 2 - 0.075), cy + sy * (fy / 2 - 0.075)
+                ob.append((f"dust bin {b['id']} leg", "rect", (lx - 0.075, ly - 0.075, lx + 0.075, ly + 0.075)))
     for t in site["noria_towers"]:
         hx, hy = t["size"][0] / 2, t["size"][1] / 2
         ob.append((f"tower {t['id']}", "rect", (t["x"] - hx, t["y"] - hy, t["x"] + hx, t["y"] + hy)))
@@ -161,11 +165,6 @@ def checks(site):
     for lid, name, d in hits:
         worst[(lid, name)] = min(d, worst.get((lid, name), 9))
     out.append(("lanes keep >= 0.3 m from every structure", not hits, f"{dict(list(worst.items())[:6])}"))
-    u = lanes["uturn"]
-    if u["arc"]["r"] < UTURN_R or u["w"] < UTURN_W:
-        out.append(("U-turn under the judgment radius / width: WARN", True, f"r {u['arc']['r']}, w {u['w']}"))
-    else:
-        out.append(("U-turn radius / width (judgment until the norm)", True, f"r {u['arc']['r']}, w {u['w']}"))
 
     walls = [o for o in ob if not o[0].startswith(("fire tank", "wet fan", "dust bin", "T5 trestle", "shed outer"))]
     shed = r["pit"]["building"]
@@ -196,7 +195,101 @@ def checks(site):
                   ((g1[0], g1[1]), (g1[2], g1[1]), (g1[2], g1[3]), (g1[0], g1[3])) for _, k2, g2 in base)
     out.append(("cable trestle and designed buildings keep >= 0.3 m from silo plinths and towers", worst_t >= CLEAR and worst_b >= CLEAR,
                 f"trestle {worst_t:.2f} m, buildings {worst_b:.2f} m"))
+    out += norm_checks(site)
     return out
+
+
+def norm_checks(site):
+    """research/site_plan_norms.md: widths, the U-turn swept circle, headroom, scales straights, КТП distance,
+    fire water intake, fire access to the silos from two sides, dead ends."""
+    out = []
+    sp = spl.spec(site)
+    nm = sp["norms"]
+    lanes = {ln["id"]: ln for ln in sp["lanes"]}
+    main = [lanes[k] for k in ("in", "west", "out")]
+    wmin = min(ln["w"] for ln in main)
+    out.append(("truck lanes >= 4.5 m (СНиП табл. 46), one-lane ring allowed (п. 5.22)", wmin >= nm["lane_w_min"], f"min {wmin} m"))
+    if wmin < nm["lane_w_trains"]:
+        out.append(("truck lanes under 5.0 m for road trains: WARN", True, f"{wmin}"))
+    nar = lanes["out"].get("narrow")
+    if nar and nar["w"] < nm["lane_w_min"]:
+        out.append(("lane under Ш1 narrower than 4.5 m: FINDING", True,
+                    f"{nar['w']} m: the existing cleaning tower columns leave 4.2 m clear, less than a one-lane road (СНиП табл. 46)"))
+    u = lanes["uturn"]
+    r_out, r_in = u["arc"]["r"] + u["w"] / 2, u["arc"]["r"] - u["w"] / 2
+    so, si = nm["swept_circle"]
+    out.append(("U-turn holds the road-train swept circle 12.5 / 5.3 m (96/53/EC)", r_out >= so - 1e-6 and r_in <= si + 1e-6,
+                f"outer {r_out:.2f}, inner {r_in:.2f}"))
+    if r_out < nm["uturn_outer_rec"] - 1e-6:
+        out.append(("U-turn outer edge under 13.0 m (margin): WARN", True, f"{r_out:.2f}"))
+    b = site["receiving"]["cleaning_tower"]["bin_Sh1"]
+    head = b["outlet"][1] - (c.ground_z() + sp["road_z_over_ground"])
+    out.append(("clear height under Ш1 >= 4.5 m (cab + 0.5)", head >= nm["headroom_min"], f"{head:.2f} m"))
+    if head < nm["headroom_rec"]:
+        out.append(("clear height under Ш1 under 5.0 m: WARN", True, f"{head:.2f}"))
+    for key, lid in (("scales_in", "in"), ("scales_out", "out")):
+        ln = lanes[lid]
+        x0, x1 = sp[key]["x"]
+        rp = sp[key]["ramp"]
+        xs = [p[0] for p in ln["pts"]]
+        before = (max(xs) - (x1 + rp)) if lid == "in" else ((x0 - rp) - max(b["x"]))
+        after = ((x0 - rp) - lanes["in"]["pts"][-1][0]) if lid == "in" else (sp["gate"]["x"] - (x1 + rp))
+        out.append((f"{key}: straight >= 12 m before and after (NIST HB44, analog)", min(before, after) >= nm["scales_straight_min"],
+                    f"before {before:.1f}, after {after:.1f} m"))
+    k = sp["ktp"]
+    d_ktp = min(dist((x, y), "circle", (s["x"], s["y"], 11.0)) for s in site["silos"] for x in k["x"] for y in k["y"])
+    lo, hi = nm["ktp_from_silo"]
+    out.append(("КТП >= 6 m from the silo walls (least of the norms)", d_ktp >= lo, f"{d_ktp:.1f} m"))
+    if d_ktp < hi:
+        out.append(("КТП under 12 m from a silo (strictest norm): WARN", True, f"{d_ktp:.1f}"))
+    hs = sp["fire_tanks"]["hardstand"]
+    blds = [sp["apk"], sp["ktp"], sp["gate"]["kpp"]]
+    mid = ((hs[0] + hs[2]) / 2, (hs[1] + hs[3]) / 2)
+    d_in = min(dist(mid, "rect", (q["x"][0], q["y"][0], q["x"][1], q["y"][1])) for q in blds)
+    d_in = min([d_in] + [dist(mid, "circle", (s["x"], s["y"], 11.0)) for s in site["silos"]])
+    out.append(("fire water intake (pier) >= 10 m from buildings, pier >= 12 x 12", d_in >= nm["fire_intake_from_building"]
+                and hs[2] - hs[0] >= 12 and hs[3] - hs[1] >= 12, f"{d_in:.1f} m, pier {hs[2] - hs[0]:.0f} x {hs[3] - hs[1]:.0f}"))
+
+    f0, f1 = nm["fire_access"]["from_wall"]
+    sides = {}
+    for s in site["silos"]:
+        served = set()
+        for ln in sp["lanes"]:
+            if ln.get("kind") == "service":                              # dust-bin spurs are too narrow for a fire engine
+                continue
+            pts = spl.lane_polyline(ln, 0.5)
+            hw = ln["w"] / 2
+            n = 0
+            for a in np.radians(np.arange(0, 360, 5)):
+                wx, wy = s["x"] + 11.0 * math.cos(a), s["y"] + 11.0 * math.sin(a)
+                d = min(math.hypot(wx - p[0], wy - p[1]) for p in pts) - hw
+                n += f0 <= d <= f1
+            if n >= 3:                                                   # >= 15 degrees of the wall faces the road
+                served.add(ln["id"])
+        sides[s["id"]] = sorted(served)
+    none = [k for k, v in sides.items() if not v]
+    one = {k: v for k, v in sides.items() if len(v) == 1}
+    out.append(("fire access: every silo has a road 5-8 m from its wall (ДБН Б.2.2-12 п. 15.3.2)", not none, f"{sides}"))
+    if one:
+        out.append(("fire access from one side only: FINDING", True,
+                    f"{one}: the drawn rows are 3.5 m apart and the corridor between the towers is 7 m, no room for a road 5 m off both walls"))
+
+    loose = []
+    for ln in sp["lanes"]:
+        if ln.get("kind") not in ("fire", "service"):
+            continue
+        for end in (ln["pts"][0], ln["pts"][-1]):
+            on = any(min(math.hypot(end[0] - p[0], end[1] - p[1]) for p in spl.lane_polyline(o, 0.25)) <= o["w"] / 2 + 0.05
+                     for o in sp["lanes"] if o is not ln)
+            pad = ln.get("end_pad") and (ln["end_pad"][0] - 0.1 <= end[0] <= ln["end_pad"][2] + 0.1
+                                         and ln["end_pad"][1] - 0.1 <= end[1] <= ln["end_pad"][3] + 0.1)
+            binb = next((bb for bb in site["aspiration"]["dust_bins"] if bb["id"] == ln.get("to_bin")), None)
+            under = binb is not None and math.hypot(end[0] - binb["center"][0], end[1] - binb["center"][1]) <= 0.2
+            if not (on or pad or under):
+                loose.append((ln["id"], end))
+    out.append(("fire / service roads: every end joins a road, a 12 x 12 turnaround or ends under its dust bin", not loose, f"loose {loose}"))
+    return out
+
 
 
 def main():

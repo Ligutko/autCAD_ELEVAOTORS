@@ -1,0 +1,25 @@
+{
+  "id": "rec_e10c3765",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_access_grain_exception",
+    "value": "послаблення «проїзд з однієї поздовжньої сторони» для будівель завширшки 18–100 м не поширюється на будівлі з переробки та зберігання зерна",
+    "unit": "",
+    "qualifier": "п. 15.3.2, другий абзац"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 133,
+    "quote": "Для будівлі або споруди завширшки від 18 м до 100 м (крім будівель із переробки та зберігання зерна) дозволяється улаштування проїзду з однієї повздовжньої сторони",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

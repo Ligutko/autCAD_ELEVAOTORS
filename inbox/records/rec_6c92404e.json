@@ -22,7 +22,10 @@
   },
   "basis": "analog",
   "status": "unverified",
-  "conflict_with": [],
+  "conflict_with": [
+    "rec_7f0c2c19",
+    "rec_6cbea234"
+  ],
   "notes": "Ваги естакадного типу 6–24 м, до 100 т, на з/б фундаментних плитах на піщано-гравійній подушці.",
   "seen_in": []
 }

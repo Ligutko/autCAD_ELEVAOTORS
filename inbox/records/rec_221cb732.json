@@ -1,0 +1,32 @@
+{
+  "id": "rec_221cb732",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "through_passage_min",
+    "value": {
+      "width_m": 3.5,
+      "height_m": 4.25
+    },
+    "unit": "m",
+    "qualifier": "п. 15.3.4: наскрізні проїзди в житлових кварталах — ширина у світлі і висота; мінімум під пожежну техніку"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 133,
+    "quote": "Наскрізні проїзди слід приймати завширшки (у світлі) не менше 3,5 м, заввишки – не менше 4,25 м.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_b415f6dd",
+    "rec_849cef6c",
+    "rec_70f5920e"
+  ],
+  "notes": "Мінімум для пожежних машин, не для автопоїздів висотою 4,0–4,35 м.",
+  "seen_in": []
+}

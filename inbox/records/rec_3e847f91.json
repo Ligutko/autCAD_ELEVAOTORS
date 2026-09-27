@@ -1,0 +1,28 @@
+{
+  "id": "rec_3e847f91",
+  "subject": "Норма: ДБН В.2.2-8-98 Підприємства, будівлі і споруди по зберіганню та переробці зерна",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_ladder_access_sides",
+    "value": {
+      "length_le_18m": "одна сторона",
+      "length_gt_18m": "дві сторони"
+    },
+    "unit": "",
+    "qualifier": "п. 3.1: доступ пожежних і автомеханічних драбин у верхню частину будівель і споруд"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://mininfra.gov.ua/storage/app/sites/1/uploaded-files/61-dbn-v22-8-98-pidprijemstva-budivli-i-sporudi-po.pdf",
+    "path": "inbox/raw/web/mininfra.gov.ua/dbn_v2.2-8-98.pdf",
+    "page": 5,
+    "quote": "з одної сторони - при довжині будинку до 18 м, з двох сторін - при довжині будинку понад 18 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Статус чинності ДБН В.2.2-8-98 на 2026 р. не перевірено.",
+  "seen_in": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "rec_369c7684",
+  "subject": "Норма: СНиП 2.05.07-91* Промышленный транспорт (розд. 5, автомобільний транспорт)",
+  "kind": "norm",
+  "claim": {
+    "name": "design_speed_intrasite",
+    "value": {
+      "min_kmh": 15,
+      "factor": 0.5
+    },
+    "unit": "km/h",
+    "qualifier": "прим. 2 до табл. 45: розрахункову швидкість на перетинах і промислових внутрішньомайданчикових дорогах зменшують удвічі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://portal.stroimdom.com.ua/files/docs/snip-2.05.07-91-_1996,-s-izm.-1-1996_.pdf",
+    "path": "inbox/raw/web/portal.stroimdom.com.ua/snip_2.05.07-91.pdf",
+    "page": 92,
+    "quote": "надлежит уменьшать в два раза, но принимать не менее 15 км/ч",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для доріг III-в (до 0,35 млн т нетто на рік в обидва боки, табл. 43) основна швидкість 30 км/год, на території — 15 км/год.",
+  "seen_in": []
+}

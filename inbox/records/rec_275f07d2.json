@@ -1,0 +1,31 @@
+{
+  "id": "rec_275f07d2",
+  "subject": "Норма: СНиП 2.05.07-91* Промышленный транспорт (розд. 5, автомобільний транспорт)",
+  "kind": "norm",
+  "claim": {
+    "name": "min_plan_radius_by_speed",
+    "value": {
+      "15_kmh": 15,
+      "20_kmh": 20,
+      "25_kmh": 25,
+      "30_kmh": 30,
+      "40_kmh": 60
+    },
+    "unit": "m",
+    "qualifier": "табл. 51: найменші радіуси кривих у плані при перевезенні звичайних вантажів (менше значення — для стандартних автомобілів)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://portal.stroimdom.com.ua/files/docs/snip-2.05.07-91-_1996,-s-izm.-1-1996_.pdf",
+    "path": "inbox/raw/web/portal.stroimdom.com.ua/snip_2.05.07-91.pdf",
+    "page": 99,
+    "quote": "обычных грузов, в том числе сортиментов 200 125 100 60 30 25; 35 20; 30 15; 25",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Табл. 51 діє при зниженні норм (п. 5.45). Швидкість на території — 15 км/год (rec_369c7684), отже R ≥ 15 м. Для петлі розвороту діє п. 5.50, а не табл. 51.",
+  "seen_in": []
+}

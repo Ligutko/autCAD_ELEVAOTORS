@@ -1,0 +1,4136 @@
+
+=====PAGE 1
+Handbook 44 – 2026 
+Section 2 
+2-1
+Section 2 
+Table of Contents 
+Page 
+2.20. 
+Scales .................................................................................................................................................... 2-3 
+2.21. 
+Belt-Conveyor Scale Systems .............................................................................................................. 2-65 
+2.22. 
+Automatic Bulk Weighing Systems ...................................................................................................... 2-83 
+2.23. 
+Weights ............................................................................................................................................... 2-93 
+2.24. 
+Automatic Weighing Systems ............................................................................................................ 2-101 
+2.25. 
+Weigh-In-Motion Systems Used for Vehicle Enforcement Screening – Tentative Code ....................... 2-119 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 2
+Section 2 
+Handbook 44 – 2026 
+2-2 
+ 
+THIS PAGE INTENTIONALLY LEFT BLANK 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 3
+Handbook 44 – 2026 
+2.20. Scales 
+2-3 
+Table of Contents 
+ Page 
+Section 2.20.   Scales........................................................................................................................................ 2-7 
+A. 
+Application .............................................................................................................................................. 2-7 
+A.1. General. .......................................................................................................................................... 2-7 
+A.2. Wheel-Load Weighers, Portable Axle-Load Weighers, and Axle-Load Scales.................................. 2-7 
+A.3. Additional Code Requirements. ...................................................................................................... 2-7 
+S. 
+Specifications ........................................................................................................................................... 2-7 
+S.1. 
+Design of Indicating and Recording Elements and of Recorded Representations. ............................. 2-7 
+S.1.1. 
+Zero Indication. ................................................................................................................. 2-7 
+S.1.2. 
+Value of Scale Division Units. ........................................................................................... 2-8 
+S.1.3. 
+Graduations. .................................................................................................................... 2-10 
+S.1.4. 
+Indicators. ....................................................................................................................... 2-10 
+S.1.5. 
+Weighbeams. .................................................................................................................. 2-10 
+S.1.6. 
+Poises.............................................................................................................................. 2-11 
+S.1.7. 
+Capacity Indication, Weight Ranges, and Unit Weights. ................................................... 2-12 
+S.1.8. 
+Computing Scales............................................................................................................ 2-12 
+S.1.9. 
+Prepackaging Scales. ....................................................................................................... 2-13 
+S.1.10. Adjustable Components. .................................................................................................. 2-14 
+S.1.11. Provision for Sealing. ...................................................................................................... 2-14 
+S.1.12. Manual Weight Entries. ................................................................................................... 2-15 
+S.1.13. Vehicle On-Board Weighing Systems:  Vehicle in Motion. .............................................. 2-15 
+S.1.14. Weigh-in-Motion (WIM) Vehicle Scales.......................................................................... 2-15 
+S.1.15. Recorded Representations, Multi-Independent Platform Vehicle Scale Systems.  .............. 2-16 
+S.2. 
+Design of Balance, Tare, Level, Damping, and Arresting Mechanisms. .......................................... 2-17 
+S.2.1. 
+Zero-Load Adjustment. ................................................................................................... 2-17 
+S.2.2. 
+Balance Indicator. ........................................................................................................... 2-18 
+S.2.3. 
+Tare. ............................................................................................................................... 2-18 
+S.2.4. 
+Level-Indicating Means. .................................................................................................. 2-19 
+S.2.5. 
+Damping Means. ............................................................................................................. 2-19 
+S.3. 
+Design of Load-Receiving Elements. ............................................................................................ 2-20 
+S.3.1. 
+Travel of Pans of Equal-Arm Scale. ................................................................................. 2-20 
+S.3.2. 
+Drainage. ........................................................................................................................ 2-20 
+S.3.3. 
+Scoop Counterbalance. .................................................................................................... 2-20 
+S.3.4. 
+Length of Weigh-In-Motion Vehicle Scales. .................................................................... 2-20 
+S.4. 
+Design of Weighing Elements. ...................................................................................................... 2-20 
+S.4.1. 
+Antifriction Means. ......................................................................................................... 2-20 
+S.4.2. 
+Adjustable Components. .................................................................................................. 2-20 
+S.4.3. 
+Multiple Load-Receiving Elements. ................................................................................. 2-20 
+S.5. 
+Design of Weighing Devices, Accuracy Class. ............................................................................... 2-21 
+S.5.1. 
+Designation of Accuracy Class. ....................................................................................... 2-21 
+S.5.2. 
+Parameters for Accuracy Class. ....................................................................................... 2-21 
+S.5.3. 
+Multi-Interval and Multiple Range Scales, Division Value. .............................................. 2-21 
+S.5.4. 
+Relationship of Minimum Load Cell Verification Interval Value to the Verification  
+Scale Interval. ................................................................................................................. 2-21 
+S.6. 
+Marking Requirements.................................................................................................................. 2-23 
+S.6.1. 
+Nominal Capacity; Vehicle and Axle-Load Scales. .......................................................... 2-23 
+S.6.2. 
+Location of Marking Information. .................................................................................... 2-23 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 4
+2.20. Scales 
+Handbook 44 – 2026 
+2-4 
+S.6.3. 
+Scales, Main Elements, and Components of Scales or Weighing Systems. ........................ 2-23 
+S.6.4. 
+Railway Track Scales. ..................................................................................................... 2-28 
+S.6.5. 
+Livestock Scales. ............................................................................................................. 2-29 
+S.6.6. 
+Counting Feature, Minimum Individual Piece Weight, and Minimum Sample  
+Piece Count. .................................................................................................................... 2-30 
+N. 
+Notes ...................................................................................................................................................... 2-30 
+N.1. Test Procedures. ........................................................................................................................... 2-30 
+N.1.1. 
+Increasing-Load Test. ...................................................................................................... 2-30 
+N.1.2. 
+Decreasing-Load Test (Automatic Indicating Scales). ...................................................... 2-30 
+N.1.3. 
+Shift Test. ....................................................................................................................... 2-30 
+N.1.4. 
+Sensitivity Test................................................................................................................ 2-34 
+N.1.5. 
+Discrimination Test. ........................................................................................................ 2-34 
+N.1.6. 
+RFI Susceptibility Tests, Field Evaluation........................................................................ 2-34 
+N.1.7. 
+Ratio Test........................................................................................................................ 2-34 
+N.1.8. 
+Material Tests. ................................................................................................................ 2-34 
+N.1.9. 
+Zero-Load Balance Change. ............................................................................................ 2-34 
+N.1.10. Counting Feature Test. .................................................................................................... 2-35 
+N.1.11. Substitution Test. ............................................................................................................ 2-35 
+N.1.12. Strain-Load Test. ............................................................................................................. 2-35 
+N.2. Verification (Testing) Standards.................................................................................................... 2-35 
+N.3. Minimum Test Weights and Test Loads. ....................................................................................... 2-35 
+N.3.1. 
+Minimum Test-Weight Load and Tests for Railway Track Scales. .................................... 2-35 
+N.3.2. 
+Field Standard Weight Carts. ........................................................................................... 2-36 
+N.4. Coupled-in-Motion Railroad Weighing Systems.1F ......................................................................... 2-37 
+N.4.1. 
+Weighing Systems Used to Weigh Trains of Less Than Ten Cars. .................................... 2-37 
+N.4.2. 
+Weighing Systems Placed in Service Prior to January 1, 1991, and Used to Weigh  
+Trains of Ten or More Cars. ............................................................................................ 2-37 
+N.4.3. 
+Weighing Systems Placed in Service on or After January 1, 1991, and Used to Weigh 
+Trains of Ten or More Cars. ............................................................................................ 2-37 
+N.5. Uncoupled-in-Motion Railroad Weighing System. ........................................................................ 2-38 
+N.6. Nominal Capacity of Prescription Scales. ...................................................................................... 2-38 
+N.7. Weigh-in-Motion Vehicle Scales Test Procedures. ........................................................................ 2-39 
+N.7.1.  Reference Scale. .............................................................................................................. 2-39 
+N.7.2. 
+Reference Vehicle. .......................................................................................................... 2-39 
+N.7.3. 
+Test Speeds. .................................................................................................................... 2-39 
+N.7.4. 
+Static Tests for Weigh-in-Motion Vehicle Scales. ............................................................ 2-39 
+N.7.5. 
+Dynamic Tests for Weigh-in-Motion Vehicle Scales. ....................................................... 2-39 
+T. 
+Tolerances Applicable to Devices not Marked I, II, III, III L, or IIII .................................................. 2-40 
+T.1. 
+Tolerance Values. ......................................................................................................................... 2-40 
+T.1.1. 
+General. .......................................................................................................................... 2-40 
+T.1.2. 
+Postal and Parcel Post Scales. .......................................................................................... 2-40 
+T.2. 
+Sensitivity Requirement (SR). ....................................................................................................... 2-42 
+T.2.1. 
+Application. .................................................................................................................... 2-42 
+T.2.2. 
+General. .......................................................................................................................... 2-42 
+T.2.3. 
+Prescription Scales. ......................................................................................................... 2-42 
+T.2.4. 
+Jewelers’ Scales. ............................................................................................................. 2-42 
+T.2.5. 
+Dairy-Product Test Scales. .............................................................................................. 2-42 
+T.2.6. 
+Grain Test Scales............................................................................................................. 2-42 
+T.2.7. 
+Vehicle, Axle-Load, Livestock, and Animal Scales. ......................................................... 2-42 
+T.2.8. 
+Railway Track Scales. ..................................................................................................... 2-43 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 5
+Handbook 44 – 2026 
+2.20. Scales 
+2-5 
+T.3. 
+Sensitivity Requirement, Equilibrium Change Required. ............................................................... 2-43 
+T.N.    Tolerances Applicable to Devices Marked I, II, III, III L, and IIII. .................................................. 2-43 
+T.N.1. Principles. .................................................................................................................................... 2-43 
+T.N.1.1. Design............................................................................................................................. 2-43 
+T.N.1.2. Accuracy Classes. ........................................................................................................... 2-43 
+T.N.1.3. Verification Scale Interval. .............................................................................................. 2-43 
+T.N.2. Tolerance Application. .................................................................................................................. 2-43 
+T.N.2.1. General. .......................................................................................................................... 2-43 
+T.N.2.2. Type Evaluation Examinations. ....................................................................................... 2-43 
+T.N.2.3. Subsequent Verification Examinations. ............................................................................ 2-43 
+T.N.2.4. Multi-Interval and Multiple Range (Variable Division-Value) Scales. .............................. 2-44 
+T.N.2.5. Ratio Tests. ..................................................................................................................... 2-44 
+T.N.3. Tolerance Values. ......................................................................................................................... 2-44 
+T.N.3.1. Maintenance Tolerance Values. ....................................................................................... 2-44 
+T.N.3.2. Acceptance Tolerance Values. ......................................................................................... 2-44 
+T.N.3.3. Wheel-Load Weighers and Portable Axle-Load Weighers of Class IIII. ............................ 2-44 
+T.N.3.4. Crane and Hopper (Other than Grain Hopper) Scales. ...................................................... 2-44 
+T.N.3.5. Separate Main Elements:  Load Transmitting Element, Indicating Element, Etc. ............... 2-44 
+T.N.3.6. Coupled-In-Motion Railroad Weighing Systems. ............................................................. 2-44 
+T.N.3.7. Uncoupled-in-Motion Railroad Weighing Systems........................................................... 2-45 
+T.N.3.8. Dynamic Monorail Weighing System. ............................................................................. 2-45 
+T.N.3.9. Materials Test on Customer-Operated Bulk Weighing Systems for Recycled Materials..... 2-45 
+T.N.3.10. Prescription Scales with a Counting Feature. .................................................................. 2-45 
+T.N.3.11. Tolerances for Substitution Test. .................................................................................... 2-46 
+T.N.3.12. Tolerances for Strain-Load Test. .................................................................................... 2-46 
+T.N.4. Agreement of Indications. ............................................................................................................. 2-46 
+T.N.4.1. Multiple Indicating/Recording Elements. ......................................................................... 2-46 
+T.N.4.2. Single Indicating/Recording Element. .............................................................................. 2-46 
+T.N.4.3. Single Indicating Element/Multiple Indications. ............................................................... 2-46 
+T.N.4.4. Shift or Section Tests....................................................................................................... 2-46 
+T.N.4.5. Time Dependence............................................................................................................ 2-46 
+T.N.4.6. Time Dependence (Creep) for Load Cells during Type Evaluation. .................................. 2-47 
+T.N.4.7. Creep Recovery for Load Cells During Type Evaluation. ................................................. 2-48 
+T.N.5. Repeatability. ............................................................................................................................... 2-48 
+T.N.6. Sensitivity. ................................................................................................................................... 2-49 
+T.N.6.1. Test Load. ....................................................................................................................... 2-49 
+T.N.6.2. Minimum Change of Indications. ..................................................................................... 2-49 
+T.N.7. Discrimination. ............................................................................................................................. 2-49 
+T.N.7.1. Analog Automatic Indicating (i.e., Weighing Device with Dial, Drum, Fan, etc.). ............. 2-49 
+T.N.7.2. Digital Automatic Indicating. .......................................................................................... 2-49 
+T.N.8. Influence Factors. ......................................................................................................................... 2-49 
+T.N.8.1. Temperature. ................................................................................................................... 2-50 
+T.N.8.2. Barometric Pressure. ....................................................................................................... 2-50 
+T.N.8.3. Electric Power Supply. .................................................................................................... 2-50 
+T.N.9. Radio Frequency Interference (RFI) and Other Electromagnetic Interference Susceptibility. .......... 2-50 
+UR.   User Requirements .............................................................................................................................. 2-51 
+UR.1. Selection Requirements................................................................................................................. 2-51 
+UR.1.1. General. .......................................................................................................................... 2-51 
+UR.1.2. Grain Hopper Scales. ....................................................................................................... 2-52 
+UR.1.3. Value of the Indicated and Recorded Scale Division. ....................................................... 2-52 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 6
+2.20. Scales 
+Handbook 44 – 2026 
+2-6 
+UR.1.4. Grain-Test Scales:  Value of the Scale Divisions. ............................................................. 2-52 
+UR.1.5. Recording Element, Class III L Railway Track Scales. ..................................................... 2-53 
+UR.2. Installation Requirements.............................................................................................................. 2-53 
+UR.2.1. Supports. ......................................................................................................................... 2-53 
+UR.2.2. Suspension of Hanging Scale. .......................................................................................... 2-53 
+UR.2.3. Protection From Environmental Factors. .......................................................................... 2-53 
+UR.2.4. Foundation, Supports, and Clearance. .............................................................................. 2-53 
+UR.2.5. Access to Weighing Elements. ......................................................................................... 2-53 
+UR.2.6. Approaches. .................................................................................................................... 2-53 
+UR.2.7. Stock Racks. ................................................................................................................... 2-54 
+UR.2.8. Hoists.............................................................................................................................. 2-54 
+UR.2.9. Provision for Testing Dynamic Monorail Weighing Systems. ............................................ 2-54 
+UR.2.10. Primary Indicating Elements Provided by the User. ........................................................ 2-54 
+UR.3. Use Requirements. ........................................................................................................................ 2-54 
+UR.3.1. Recommended Minimum Load. ....................................................................................... 2-54 
+UR.3.2. Maximum Load. .............................................................................................................. 2-55 
+UR.3.3. Single-Draft Vehicle Weighing. ....................................................................................... 2-57 
+UR.3.4. Weighing of Axle Loads and Axle-Group Loads. ............................................................. 2-57 
+UR.3.5. Wheel-Load Weighing. ................................................................................................... 2-58 
+UR.3.6. Special Designs. .............................................................................................................. 2-58 
+UR.3.7. Wet Commodities............................................................................................................ 2-58 
+UR.3.8. Minimum Load on a Vehicle Scale. ................................................................................. 2-58 
+UR.3.9. Minimum Load for Weighing Livestock. ......................................................................... 2-58 
+UR.3.10. Use of Manual Weight Entries. ....................................................................................... 2-59 
+UR.3.11. Dynamic Monorail Weighing Systems. ........................................................................... 2-59 
+UR.3.12. Minimum Count. ............................................................................................................ 2-59 
+UR.3.13. Correct Stored Piece Weight. .......................................................................................... 2-59 
+UR.3.14. Fault Indications for Weigh-in-Motion Vehicle Scales .................................................... 2-59 
+UR.4. Maintenance Requirements. .......................................................................................................... 2-59 
+UR.4.1. Balance Condition. .......................................................................................................... 2-59 
+UR.4.2. Level Condition............................................................................................................... 2-59 
+UR.4.3. Scale Modification. ......................................................................................................... 2-59 
+UR.5. Coupled-in-Motion Railroad Weighing Systems. ........................................................................... 2-60 
+Scales Code Index ............................................................................................................................................ 2-61 
+ 
+ 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 7
+Handbook 44 – 2026 
+2.20. Scales 
+2-7 
+Section 2.20.  Scales 
+A. Application 
+A.1. General. – This code applies to all types of weighing devices other than automatic bulk-weighing systems, 
+belt-conveyor scales, and automatic weighing systems.  The code comprises requirements that generally apply to all 
+weighing devices, and specific requirements that are applicable only to certain types of weighing devices. 
+(Amended 1972 and 1983) 
+A.2. Wheel-Load Weighers, Portable Axle-Load Weighers, and Axle-Load Scales. – The requirements for 
+wheel-load weighers, portable axle-load weighers, and axle-load scales apply only to such scales in official use for 
+the enforcement of traffic and highway laws or for the collection of statistical information by government agencies. 
+A.3. Additional Code Requirements. – In addition to the requirements of this code, devices covered by the Scales 
+code shall meet the requirements of Section 1.10. General Code. 
+S. Specifications 
+S.1. Design of Indicating and Recording Elements and of Recorded Representations. 
+S.1.1. Zero Indication. 
+(a) On a scale equipped with indicating or recording elements, provision shall be made to either indicate or 
+record a zero-balance condition. 
+(b) On an automatic-indicating scale or balance indicator, provision shall be made to indicate or record an 
+out-of-balance condition on both sides of zero. 
+(c) A zero-balance condition may be indicated by other than a continuous digital zero indication, provided 
+that an effective automatic means is provided to inhibit a weighing operation or to return to a continuous 
+digital indication when the scale is in an out-of-balance condition. 
+(Added 1987) (Amended 1993) 
+(Amended 1987) 
+S.1.1.1. Digital Indicating Elements. 
+(a) A digital zero indication shall represent a balance condition that is within ± ½ the value of the scale 
+division d. 
+(b) After zero-setting (gross zero or net zero after a tare operation) the effect of zero deviation on the 
+result of the weighing shall be not more than ± 0.25 e. 
+[Nonretroactive as of January 1, 2025] 
+(c) A digital indicating device shall have a “center-of-zero” indicator that indicates a zero-balance 
+condition when the deviation from zero is not more than ± 0.25 e.  A “center-of-zero” indicator may 
+operate when zero is indicated for gross and/or net mode(s). The “center-of-zero” indicator is not 
+mandatory on a device equipped with an auxiliary indication or equipped with an enabled zero 
+tracking mechanism that maintains a “center-of-zero” condition to ± 0.25 e. 
+[Nonretroactive as of January 1, 1993] 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 8
+2.20. Scales 
+Handbook 44 – 2026 
+2-8 
+(d) For electronic cash registers (ECRs) and point-of-sale systems (POS systems) the display of 
+measurement units shall be a minimum of 9.5 mm (3/8 inch) in height.  
+[Nonretroactive as of January 1, 2021] 
+(Added 2019) 
+(Amended 1992, 2008, 2019, and 2024) 
+S.1.1.2. No-Load Reference Value. – On a single draft manually operated receiving hopper scale installed 
+below grade, used to receive grain, and utilizing a no-load reference value, provision shall be made to indicate 
+and record the no-load reference value prior to the gross load value. 
+(Added 1983) 
+S.1.2. Value of Scale Units. – Except for batching scales and weighing systems used exclusively for weighing 
+in predetermined amounts, the value of a scale division “d” and the verification scale interval “e” expressed in 
+a unit of weight shall be equal to: 
+(a) 1, 2, or 5; or 
+(b) a decimal multiple or submultiple of 1, 2, or 5; or 
+ Examples:  scale divisions may be 10, 20, 50, 100; or 0.01, 0.02, 0.05; or 0.1, 0.2, 0.5, etc. 
+(c)  a binary submultiple of a specific unit of weight. 
+ Examples:  scale divisions may be ½, ¼, 1/8, 1/16, etc. 
+[Nonretroactive as of January 1, 1986] 
+(Amended 2024) 
+S.1.2.1. Digital Indicating Scales, Units. – Except for postal scales, a digital-indicating scale shall indicate 
+weight values using only a single unit of measure.  Weight values shall be presented in a decimal format with 
+the value of the scale division “d” expressed as 1, 2, or 5, or a decimal multiple or submultiple of 1, 2, or 5. 
+The requirement that the value of the scale division “d” be expressed only as 1, 2, or 5, or a decimal multiple 
+or submultiple of only 1, 2, or 5 does not apply to net weight indications and recorded representations that 
+are calculated from gross and tare weight indications where the scale division “d” of the gross weight is 
+different from the scale division “d” of the tare weight(s) on multi-interval or multiple range scales.  For 
+example, a multiple range or multi-interval scale may indicate and record tare weights in a lower weighing 
+range (WR) or weighing segment (WS), gross weights in the higher weighing range or weighing segment, 
+and net weights as follows: 
+55 kg Gross Weight (WR2 d = 5 kg) 
+10.05 lb Gross Weight (WS2 d = 0.05 lb) 
+– 4 kg Tare Weight   (WR1 d = 2 kg) 
+– 0.06 lb Tare Weight   (WS1 d = 0.02 lb) 
+= 51 kg Net Weight     (Mathematically Correct) 
+= 9.99 lb Net Weight     (Mathematically Correct) 
+[Nonretroactive as of January 1, 1989] 
+(Added 1987) (Amended 2008 and 2024) 
+S.1.2.2. Verification Scale Interval “e”.  
+S.1.2.2.1. Class I and II Scales and Dynamic Monorail Scales Equipped with an Auxiliary 
+Indication. – Only a Class I or II scale or a dynamic monorail may be equipped with an auxiliary 
+indication.  The auxiliary indication may be either a rider or vernier on an analog device, or a scale 
+division “d” to the right of the decimal point on a digital device that is differentiated, for example by 
+size, shape, or color.  
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 9
+Handbook 44 – 2026 
+2.20. Scales 
+2-9 
+A scale with an auxiliary indication shall not be equipped with an extended display mode.  
+The verification scale interval “e” on a scale equipped with an auxiliary indication shall be determined 
+as follows: 
+(a) The value of “e” shall be greater than “d” and less than or equal to 10 “d” (d < e ≤ 10 d), and  
+(b) The value of “e” must satisfy the relationship, e = 10k of the unit of measure, where k is a positive 
+or negative whole number or zero. 
+Examples:  
+10−2 = 0.01, 10−1 = 0.1, 100 = 1, 101 = 10, 102 = 100, etc.    
+The requirement in subpart (a) does not apply to a Class I devices with e = 1 mg, where d shall be less 
+than “e” (d < e).   
+Examples:  
+If e = 1 g for Class I or II, then “d” may only be 0.5 g, 0.2 g, or 0.1 g 
+If e = 1 mg for Class I, then “d” may be 0.5 mg, 0.2 mg, 0.1 mg, 0.05 mg, 0.02 mg, etc. 
+(Added 1999) (Amended 2024) 
+S.1.2.2.2. Class III, III L, and IIII Scales. – The value of “e” is specified by the manufacturer as 
+marked on the device.  Except for dynamic monorail scales, “e” must be equal to “d”. 
+(Added 1999) (Amended 2024 and 2025) 
+S.1.2.2.2.1.  Dynamic Monorail Scales. – On a dynamic monorail scale the value of “e” shall be 
+equal to or greater than “d.” 
+(Added 2024) 
+S.1.2.2.2.2.  Weight Classifiers. – On a weight classifier, such as a postal or shipping scale that 
+rounds up and is marked for special use, the value of “e” shall be equal to “d.” 
+(Added 2024) (Amended 2025) 
+S.1.2.2.3. Extended Display Mode. – A scale with an auxiliary indication shall not be equipped with 
+an extended display mode. When a scale is equipped with an extended display mode, displaying an 
+indication with a scale division “d” smaller than “e” shall be possible only: 
+(a) while pressing a key; or 
+(b) for a period not exceeding 5 seconds after a manual command.  
+Printing or transferring data via interface shall not be possible while the extended display mode is in 
+operation. 
+(Added 2024) 
+(Amended 2021 and 2024) 
+S.1.2.3. Prescription Scale with a Counting Feature. – A Class I or Class II prescription scale with an 
+operational counting feature shall not calculate a piece weight or total count unless the sample used to 
+determine the individual piece weight meets the following conditions: 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 10
+2.20. Scales 
+Handbook 44 – 2026 
+2-10 
+(a) minimum individual piece weight is greater than or equal to 3 e; and 
+(b) minimum sample piece count is greater than or equal to 10 pieces. 
+(Added 2003) 
+S.1.3. Graduations. 
+S.1.3.1. Length. – Graduations shall be so varied in length that they may be conveniently read. 
+S.1.3.2. Width. – In any series of graduations, the width of a graduation shall in no case be greater than the 
+width of the clear space between graduations.  The width of main graduations shall be not more than 50 % 
+greater than the width of subordinate graduations.  Graduations shall be not less than 0.2 mm (0.008 in) wide. 
+S.1.3.3. Clear Space Between Graduations. – The clear space between graduations shall be not less than 
+0.5 mm (0.02 in) for graduations representing money-values, and not less than 0.75 mm (0.03 in) for other 
+graduations.  If the graduations are not parallel, the measurement shall be made: 
+(a) along the line of relative movement between the graduations at the end of the indicator; or 
+(b) if the indicator is continuous, at the point of widest separation of the graduations. 
+S.1.4. Indicators. 
+S.1.4.1. Symmetry. – The index of an indicator shall be of the same shape as the graduations, at least 
+throughout that portion of its length associated with the graduations. 
+S.1.4.2. Length. – The index of an indicator shall reach to the finest graduations with which it is used, 
+unless the indicator and the graduations are in the same plane, in which case, the distance between the end of 
+the indicator and the ends of the graduations, measured along the line of the graduations, shall be not more 
+than 1.0 mm (0.04 in). 
+S.1.4.3. Width. – The width of the index of an indicator in relation to the series of graduations with which 
+it is used shall be not greater than: 
+(a) the width of the narrowest graduation; 
+[Nonretroactive as of January 1, 2002] 
+(b) the width of the clear space between weight graduations; and 
+(c) three-fourths of the width of the clear space between money-value graduations. 
+When the index of an indicator extends along the entire length of a graduation, that portion of the index of 
+the indicator that may be brought into coincidence with the graduation shall be of the same width throughout 
+the length of the index that coincides with the graduation. 
+S.1.4.4. Clearance. – The clearance between the index of an indicator and the graduations shall in no case 
+be more than 1.5 mm (0.06 in). 
+S.1.4.5. Parallax. – Parallax effects shall be reduced to the practicable minimum. 
+S.1.5. Weighbeams. 
+S.1.5.1. Normal Balance Position. – The normal balance position of the weighbeam of a beam scale shall 
+be horizontal. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 11
+Handbook 44 – 2026 
+2.20. Scales 
+2-11 
+S.1.5.2. Travel. – The weighbeam of a beam scale shall have equal travel above and below the horizontal.  
+The total travel of the weighbeam of a beam scale in a trig loop or between other limiting stops near the 
+weighbeam tip shall be not less than the minimum travel shown in Tables 1M and 1.  When such limiting 
+stops are not provided, the total travel at the weighbeam tip shall be not less than 8 % of the distance from 
+the weighbeam fulcrum to the weighbeam tip. 
+Table 1M. 
+Minimum Travel of Weighbeam of Beam Scale 
+Between Limiting Stops 
+ 
+Table 1. 
+Minimum Travel of Weighbeam of Beam Scale 
+Between Limiting Stops 
+Distance from 
+Weighbeam Fulcrum to 
+Limiting Stops 
+(centimeters) 
+Minimum Travel 
+Between 
+Limiting Stops 
+(millimeter) 
+ 
+Distance from 
+Weighbeam Fulcrum to 
+Limiting Stops 
+(inches) 
+Minimum Travel 
+Between  
+Limiting Stops 
+(inch) 
+< 30 
+10 
+ 
+< 12 
+0.4 
+> 30 to 50 
+13 
+ 
+> 12 to 20 
+0.5 
+> 50 to 100 
+18 
+ 
+> 20 to 40 
+0.7 
+> 100 
+23 
+ 
+> 40 
+0.9 
+ 
+S.1.5.3. Subdivision. – A subdivided weighbeam bar shall be subdivided by scale division graduations, 
+notches, or a combination of both.  Graduations on a particular bar shall be of uniform width and 
+perpendicular to the top edge of the bar.  Notches on a particular bar shall be uniform in shape and dimensions 
+and perpendicular to the face of the bar.  When a combination of graduations and notches is employed, the 
+graduations shall be positioned in relation to the notches to indicate notch values clearly and accurately. 
+S.1.5.4. Readability. – A subdivided weighbeam bar shall be so subdivided and marked, and a weighbeam 
+poise shall be so constructed, that the weight corresponding to any normal poise position can easily and 
+accurately be read directly from the beam, whether or not provision is made for the optional recording of 
+representations of weight. 
+S.1.5.5. Capacity. – On an automatic-indicating scale having a nominal capacity of 15 kg (30 lb) or less 
+and used for direct sales to retail customers: 
+(a) the capacity of any weighbeam bar shall be a multiple of the reading-face capacity; 
+(b) each bar shall be subdivided throughout or shall be subdivided into notched intervals, each equal to 
+the reading-face capacity; and 
+(c) the value of any turnover poise shall be equal to the reading-face capacity. 
+S.1.5.6. Poise Stop. – Except on a steelyard with no zero graduation, a shoulder or stop shall be provided 
+on each weighbeam bar to prevent a poise from traveling and remaining back of the zero graduation. 
+S.1.6. Poises. 
+S.1.6.1. General. – No part of a poise shall be readily detachable.  A locking screw shall be perpendicular 
+to the longitudinal axis of the weighbeam and shall not be removable.  Except on a steelyard with no zero 
+graduation, the poise shall not be readily removable from a weighbeam.  The knife-edge of a hanging poise 
+shall be hard and sharp and so constructed as to allow the poise to swing freely on the bearing surfaces in the 
+weighbeam notches. 
+S.1.6.2. Adjusting Material. – The adjusting material in a poise shall be securely enclosed and firmly fixed 
+in position; if softer than brass, it shall not be in contact with the weighbeam. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 12
+2.20. Scales 
+Handbook 44 – 2026 
+2-12 
+S.1.6.3. Pawl. – A poise, other than a hanging poise, on a notched weighbeam bar shall have a pawl that 
+will seat the poise in a definite and correct position in any notch, wherever in the notch the pawl is placed, 
+and hold it there firmly and without appreciable movement.  The dimension of the tip of the pawl that is 
+transverse to the longitudinal axis of the weighbeam shall be at least equal to the corresponding dimension 
+of the notches. 
+S.1.6.4. Reading Edge or Indicator. – The reading edge or indicator of a poise shall be sharply defined, 
+and a reading edge shall be parallel to the graduations on the weighbeam. 
+S.1.7. Capacity Indication, Weight Ranges, and Unit Weights. 
+(a) Gross Capacity. – An indicating or recording element shall not display nor record any values when the 
+gross load (not counting the initial dead load that has been canceled by an initial zero-setting mechanism) 
+is in excess of 105 % of scale capacity. 
+(b) Capacity Indication. – Electronic computing scales (excluding postal scales and weight classifiers) shall 
+neither display nor record a gross or net weight in excess of scale capacity plus 9 d. 
+[Nonretroactive as of January 1, 1993] 
+The total value of weight ranges and of unit weights in effect or in place at any time shall automatically be 
+accounted for on the reading face and on any recorded representation. 
+This requirement does not apply to: (1) single-revolution dial scales, (2) multi-revolution dial scales not equipped 
+with unit weights, (3) scales equipped with two or more weighbeams, nor (4) devices that indicate mathematically 
+derived totalized values. 
+(Amended 1990, 1992, and 1995) 
+S.1.8. Computing Scales. 
+S.1.8.1. Money-Value Graduations, Metric Unit Prices. – The value of the graduated intervals 
+representing money-values on a computing scale with analog indications shall not exceed: 
+(a) 1 cent at all unit prices of 55 cents per kilogram and less; 
+(b) 2 cents at unit prices of 56 cents per kilogram through $2.75 per kilogram (special graduations 
+defining 5-cent intervals may be employed but not in the spaces between regular graduations); 
+(c) 5 cents at unit prices of $2.76 per kilogram through $7.50 per kilogram; or 
+(d) 10 cents at unit prices above $7.50 per kilogram. 
+Value figures and graduations shall not be duplicated in any column or row on the graduated chart.  (Also 
+see S.1.8.3. Money-Value Computation.) 
+S.1.8.2. Money-Value Graduations, U.S. Customary Unit Prices. – The value of the graduated intervals 
+representing money-values on a computing scale with analog indications shall not exceed: 
+(a) 1 cent at all unit prices of 25 cents per pound and less; 
+(b) 2 cents at unit prices of 26 cents per pound through $1.25 per pound (special graduations defining 
+5-cent intervals may be employed but not in the spaces between regular graduations); 
+(c) 5 cents at unit prices of $ 1.26 per pound through $3.40 per pound; or 
+(d) 10 cents at unit prices above $3.40 per pound. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 13
+Handbook 44 – 2026 
+2.20. Scales 
+2-13 
+Value figures and graduations shall not be duplicated in any column or row on the graduated chart.  (Also 
+see S.1.8.3. Money-Value Computation.) 
+S.1.8.3. Money-Value Computation. – A computing scale with analog quantity indications used in retail 
+trade may compute and present digital money-values to the nearest quantity graduation when the value of the 
+minimum graduated interval is 0.005 kg (0.01 lb) or less.  (Also see Section 1.10. General Code G-S.5.5. 
+Money-Values, Mathematical Agreement.)  
+S.1.8.4. Customer’s Indications. – Weight indications shall be shown on the customer’s side of computing 
+scales when these are used for direct sales to retail customers.  Computing scales equipped on the operator’s 
+side with digital indications, such as the net weight, unit price, or total price, shall be similarly equipped on 
+the customer’s side.  Unit price displays visible to the customer shall be in terms of single whole units of 
+weight and not in common or decimal fractions of the unit.  Scales indicating in metric units may indicate 
+price per 100 g. 
+(Amended 1985 and 1995) 
+S.1.8.4.1. Scales that will function as either a normal round off scale or as a weight classifier shall be 
+provided with a sealable means for selecting the mode of operation and shall have a clear indication 
+(annunciator), adjacent to the weight display on both the operator’s and customer’s side whenever the 
+scale is operating as a weight classifier. 
+[Nonretroactive as of January 1, 2001] 
+(Added 1999) 
+S.1.8.5. Recorded Representations, Point-of-Sale Systems. – The sales information recorded by cash 
+registers when interfaced with a weighing element shall contain the following information for items weighed 
+at the checkout stand: 
+(a) the net weight; 
+(b) the unit price; 
+(c) the total price; 
+(d) the product class or, in a system equipped with price look-up capability, the product name or code 
+number; and 
+(e) the tare weight. 
+[Nonretroactive as of January 1, 2025] 
+Weight values shall be identified as tare and net, or gross if applicable.  The unit of weight shall be identified 
+as kilograms, kg, grams, g, ounces, oz, pounds, or lb.   
+For devices interfaced with scales indicating in metric units, the unit price may be expressed in price per 
+100 grams.   
+(Amended 1995, 2005, and 2021) 
+S.1.9. Prepackaging Scales. 
+S.1.9.1. Value of the Scale Division. – On a prepackaging scale, the value of the intervals representing 
+weight values shall be uniform throughout the entire reading face.  The recorded weight values shall be 
+identical with those on the indicator. 
+S.1.9.2. Label Printer. – A prepackaging scale or a device that produces a printed ticket to be used as the 
+label for a package shall print all values digitally and of such size, style of type, and color as to be clear and 
+conspicuous on the label. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 14
+2.20. Scales 
+Handbook 44 – 2026 
+2-14 
+S.1.10. Adjustable Components. – An adjustable component such as a pendulum, spring, or potentiometer 
+shall be held securely in adjustment and, except for a zero-load balance mechanism, shall be located within the 
+housing of the element. 
+(Added 1986) 
+S.1.11. Provision for Sealing. 
+S.1.11.1. Devices and Systems Adjusted Using a Removable Digital Storage Device. – For devices and 
+systems in which the calibration or configuration parameters, as defined in Appendix D. Definitions can be 
+changed by use of a removable digital storage device, security shall be provided for those parameters as 
+specified in G-S.8.2. Devices and Systems Adjusted Using Removable Digital Storage Devices. 
+(Added 2019)   
+S.1.11.2. All Other Devices. – Except on Class I scales and devices specified in S.1.11.1., the following 
+provisions for sealing apply: 
+(a) Except on Class I scales, provision shall be made for applying a security seal in a manner that 
+requires the security seal to be broken before an adjustment can be made to any component affecting 
+the performance of an electronic device. 
+[Nonretroactive as of January 1, 1979] 
+(b) Except on Class I scales, a device shall be designed with provision(s) for applying a security seal 
+that must be broken, or for using other approved means of providing security (e.g., data change 
+audit trail available at the time of inspection), before any change that detrimentally affects the 
+metrological integrity of the device can be made to any electronic mechanism. 
+[Nonretroactive as of January 1, 1990] 
+(c) Except on Class I scales, audit trails shall use the format set forth in Table S.1.11. Categories of 
+Device and Methods of Sealing. 
+[Nonretroactive as of January 1, 1995] 
+(Amended 2019) 
+A device may be fitted with an automatic or a semi-automatic calibration mechanism.  This mechanism shall be 
+incorporated inside the device.  After sealing, neither the mechanism nor the calibration process shall facilitate 
+fraud. 
+(Amended 1989, 1991, 1993, and 2019) 
+ 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 15
+Handbook 44 – 2026 
+2.20. Scales 
+2-15 
+S.1.12. Manual Weight Entries. – A device when being used for direct sale shall accept an entry of a manual 
+gross or net weight value only when the scale gross or net* weight indication is at zero.  Recorded manual weight 
+entries, except those on labels generated for packages of standard weights, shall identify the weight value as a 
+manual weight entry by one of the following terms: “Manual Weight,” “Manual Wt,” or “MAN WT.”  The use 
+of a symbol to identify multiple manual weight entries on a single document is permitted, provided that the symbol 
+is defined on the same page on which the manual weight entries appear and the definition of the symbol is 
+automatically printed by the recording element as part of the document. 
+[Nonretroactive as of January 1, 1993] [*Nonretroactive as of January 1, 2005] 
+(Added 1992) (Amended 2004) 
+S.1.13. Vehicle On-Board Weighing Systems:  Vehicle in Motion. – When the vehicle is in motion, a vehicle 
+on-board weighing system shall either: 
+(a) be accurate; or 
+(b) inhibit the weighing operation. 
+(Added 1993) 
+S.1.14. Weigh-in-Motion (WIM) Vehicle Scales. 
+S.1.14.1. Identification of a Fault. – Fault conditions shall be presented to the customer and the operator 
+in a clear and unambiguous manner. No weight values shall be indicated or recorded when a fault condition 
+is detected.  The following fault conditions shall be identified, if applicable: 
+(a) Vehicle speed was below the minimum or above the maximum speed as specified by the 
+manufacturer. 
+(b) A change in vehicle speed greater than that specified by the manufacturer was detected. 
+Table S.1.11.  
+Categories of Device and Methods of Sealing 
+Categories of Device 
+Methods of Sealing 
+Category 1:  No remote configuration 
+capability. 
+Seal by physical seal or two event counters:  one for calibration 
+parameters and one for configuration parameters. 
+Category 2:  Remote configuration capability, 
+but access is controlled by physical hardware.  
+The device shall clearly indicate that it is in 
+the remote configuration mode and record 
+such message if capable of printing in this 
+mode. 
+The hardware enabling access for remote communication must be 
+at the device and sealed using a physical seal or two event 
+counters:  one for calibration parameters and one for 
+configuration parameters. 
+Category 3:  Remote configuration capability 
+access may be unlimited or controlled through 
+a software switch (e.g., password). 
+An event logger is required in the device; it must include an event 
+counter (000 to 999), the parameter ID, the date and time of the 
+change, and the new value of the parameter.  A printed copy of 
+the information must be available through the device or through 
+another on-site device.  The event logger shall have a capacity to 
+retain records equal to 10 times the number of sealable 
+parameters in the device, but not more than 1000 records are 
+required.  (Note:  Does not require 1000 changes to be stored for 
+each parameter.) 
+[Nonretroactive as of January 1, 1995] 
+(Table added 1993) 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 16
+2.20. Scales 
+Handbook 44 – 2026 
+2-16 
+(c) Vehicle direction of travel was not valid for the installation. 
+(d) The amount of time all vehicle axles were simultaneously on the scale was below the minimum data 
+acquisition time. 
+(e) Vehicle path of travel was outside the lateral side edges of the load-receiving element. 
+S.1.14.2. Information to be Recorded. – In addition to the information that is normally recorded for 
+vehicle scales, the following shall also be printed and/or stored electronically for each vehicle weighment, if 
+applicable: 
+(a) Scale identification if more than one lane at the site has the ability to weigh a vehicle in motion. 
+(b) Vehicle direction of travel if the weigh-in-motion vehicle scale is bi-directional. 
+(Added 2021) 
+S.1.15. Recorded Representations, Multi-Independent Platform Vehicle Scale Systems. (See Note 1) 
+S.1.15.1. Axle and Axle-Group Loads. − All recorded representations of the different axle and axle-group 
+loads of a vehicle when weighed in a single draft on a multi-independent platform vehicle scale system shall 
+be identified by providing indication of either: 
+(a) the portion of the vehicle to which they represent (e.g., “axle group 1, axle group 2, axle group 3,” 
+or if using axle and axle group descriptions, “steering axle, drive axles, trailer axles”); or 
+(b) the particular independent scale platform from which they were obtained (e.g., “Platform 1, Platform 
+2, Platform 3”).      
+S.1.15.2. Total Vehicle Weight. − If a summed total of all axle and axle-group loads of a vehicle weighed 
+on a multi-independent platform vehicle scale system is recorded, the recorded value shall be clearly 
+identified as: 
+(a) “Total Vehicle Weight,” “Vehicle Weight,” (or other similar terms that clearly identify the value as 
+the vehicle’s total weight) providing all axle(s) and axle groups of the vehicle weighed were 
+positioned on a live portion of the weighing/load-receiving elements and weighed simultaneously 
+when the summed total was determined (See Note 2); or  
+(b) “Not-Legal-For-Trade” unless all axle and axle groups of the vehicle weighed were simultaneously 
+positioned on a live portion of the weighing/load-receiving elements when the summed total was 
+determined, or the vehicle was weighed using the alternative method described in Note 2 of this 
+paragraph.   
+Note 1:  Multi-independent platform means each platform of the scale is a single independent weighing/load-receiving 
+element unattached to adjacent elements and with its own A/D conversion circuitry and displayed weight. 
+Note 2: Alternatively, the individual components of the vehicle being weighed may be uncoupled, positioned completely on 
+the live elements of the scale, weighed separately, and then totaled.   
+(Added 2023) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 17
+Handbook 44 – 2026 
+2.20. Scales 
+2-17 
+S.2. Design of Balance, Tare, Level, Damping, and Arresting Mechanisms. 
+S.2.1. Zero-Load Adjustment. 
+S.2.1.1. General. – A scale shall be equipped with means by which the zero-load balance may be adjusted.  
+Any loose material used for this purpose shall be enclosed so that it cannot shift in position and alter the 
+balance condition of the scale. 
+Except for an initial zero-setting mechanism, an automatic zero adjustment outside the limits specified in 
+S.2.1.3. Scales Equipped with an Automatic Zero-Tracking Mechanism is prohibited. 
+(Amended 2010) 
+S.2.1.2. Scales used in Direct Sales. – A manual zero-setting mechanism (except on a digital scale with 
+an analog zero-adjustment mechanism with a range of not greater than one scale division) shall be operable 
+or accessible only by a tool outside of and entirely separate from this mechanism, or it shall be enclosed in a 
+cabinet.  Except on Class I or II scales, a balance ball shall either meet this requirement or not itself be 
+rotatable. 
+A semiautomatic zero-setting mechanism shall be operable or accessible only by a tool outside of and 
+separate from this mechanism or it shall be enclosed in a cabinet, or it shall be operable only when the 
+indication is stable within plus or minus: 
+(a) 3.0 scale divisions for scales of more than 2000 kg (5000 lb) capacity in service prior to 
+January 1, 1981, and for all axle-load, railway track, and vehicle scales; or 
+(b) 1.0 scale division for all other scales. 
+S.2.1.3. Scales Equipped with an Automatic Zero-Tracking Mechanism. 
+S.2.1.3.1. Automatic Zero-Tracking Mechanism for Scales Manufactured Between January 1, 
+1981, and January 1, 2007. – The maximum load that can be “rezeroed,” when either placed on or 
+removed from the platform all at once under normal operating conditions, shall be for: 
+(a) bench, counter, and livestock scales:  0.6 scale division; 
+(b) vehicle, axle-load, and railway track scales:  3.0 scale divisions; and 
+(c) all other scales:  1.0 scale division. 
+(Amended 2005) 
+S.2.1.3.2. Automatic Zero-Tracking Mechanism for Scales Manufactured on or after January 1, 
+2007. – The maximum load that can be “rezeroed,” when either placed on or removed from the platform 
+all at once under normal operating conditions, shall be: 
+(a) for vehicle, axle-load, and railway track scales:  3.0 scale division; and 
+(b) for all other scales:  0.5 scale division. 
+(Added 2005) 
+S.2.1.3.3. Means to Disable Automatic Zero-Tracking Mechanism on Class III L Devices. – 
+Class III L devices equipped with an automatic zero-tracking mechanism shall be designed with a 
+sealable means that would allow zero tracking to be disabled during the inspection and test of the device. 
+[Nonretroactive as of January 1, 2001] 
+(Added 1999) (Amended 2005) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 18
+2.20. Scales 
+Handbook 44 – 2026 
+2-18 
+S.2.1.4. Monorail Scales. – On a static monorail scale equipped with digital indications, means shall be 
+provided for setting the zero-load balance to within 0.02 % of scale capacity.  On a dynamic monorail 
+weighing system, means shall be provided to automatically maintain these conditions. 
+(Amended 1999) 
+S.2.1.5. Initial Zero-Setting Mechanism. – Scales of accuracy Classes I, II, and III may be equipped with 
+an initial zero-setting device. 
+(a) For weighing, load-receiving, and indicating elements in the same housing or covered on the same 
+CC, an initial zero-setting mechanism shall not zero a load in excess of 20 % of the maximum 
+capacity of the scale unless tests show that the scale meets all applicable tolerances for any amount 
+of initial load compensated by this device within the specified range. 
+(b) For indicating elements not permanently attached to weighing and load-receiving elements covered 
+on a separate CC, the maximum initial zero-setting mechanism range of electronic indicators shall 
+not exceed 20 % of the configured capacity. 
+[Nonretroactive as of January 1, 2009] 
+(Added 2008) 
+(Added 1990) (Amended 2008) 
+S.2.1.6. Combined Zero-Tare (“0/T”) Key. – Scales not intended to be used in direct sales applications 
+may be equipped with a combined zero and tare function key, provided that the device is clearly marked as 
+to how the key functions.  The device must also be clearly marked on or adjacent to the weight display with 
+the statement “Not for Direct Sales.” 
+(Added 1998) 
+S.2.2. Balance Indicator. – On a balance indicator consisting of two indicating edges, lines, or points, the ends 
+of the indicators shall be sharply defined.  When the scale is in balance, the ends shall be separated by not more 
+than 1.0 mm (0.04 in). 
+S.2.2.1. Dairy-Product Test, Grain-Test, Prescription, and Class I and II Scales. – Except on digital 
+indicating devices, a dairy-product test, grain-test, prescription, or Class I or II scale shall be equipped with 
+a balance indicator.  If an indicator and a graduated scale are not in the same plane, the clearance between 
+the indicator and the graduations shall be not more than 1.0 mm (0.04 in). 
+S.2.2.2. Equal-Arm Scale. – An equal-arm scale shall be equipped with a balance indicator.  If the 
+indicator and balance graduation are not in the same plane, the clearance between the indicator and the 
+balance graduation shall be not more than 1.0 mm (0.04 in). 
+[Nonretroactive as of January 1, 1989] 
+(Added 1988) 
+S.2.3. Tare. – On any scale (except a monorail scale equipped with digital indications and multi-interval scales 
+or multiple range scales when the value of tare is determined in a lower weighing range or weighing segment), 
+the value of the tare division shall be equal to the value of the scale division.*  The tare mechanism  
+shall operate only in a backward direction (that is, in a direction of underregistration) with respect to the zero-load 
+balance condition of the scale.  A device designed to automatically clear any tare value shall also be designed to 
+prevent the automatic clearing of tare until a complete transaction has been indicated. * 
+[*Nonretroactive as of January 1, 1983] 
+(Amended 1985 and 2008) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 19
+Handbook 44 – 2026 
+2.20. Scales 
+2-19 
+Note:  On a computing scale, this requires the input of a unit price, the display of the unit price, and a computed positive total 
+price at a readable equilibrium.  Other devices require a complete weighing operation, including tare, net, and gross weight 
+determination.* 
+[*Nonretroactive as of January 1, 1983] 
+S.2.3.1. Monorail Scales Equipped with Digital Indications. – On a static monorail weighing system 
+equipped with digital indications, means shall be provided for setting any tare value of less than 5 % of the 
+scale capacity to within 0.02 % of scale capacity.  On a dynamic monorail weighing system, means shall be 
+provided to automatically maintain this condition. 
+(Amended 1999) 
+S.2.4. Level-Indicating Means. – Except for portable wheel-load weighers and portable axle-load scales a 
+portable scale shall be equipped with level -indicating means if its weighing performance is changed by an amount 
+greater than the appropriate acceptance tolerance when it is tilted up to and including 5 % rise over run in any 
+direction from a level position and rebalanced.  The level-indicating means shall be readable without removing 
+any scale parts requiring a tool. 
+[This requirement is nonretroactive as of January 1, 1986, for prescription, jewelers’, and dairy-product test   
+scales and scales marked Class I and II.] 
+Note:  Portable wheel-load weighers and portable axle-load scales shall be accurate when tilted up to and including 5 % rise 
+over run in any direction from a level position and rebalanced. 
+(Amended 1991 and 2008) 
+S.2.4.1. Vehicle On-Board Weighing Systems. – A vehicle on-board weighing system shall operate 
+within tolerance when the weighing system is tilted up to and including 5 % rise over run in any direction 
+from a level position and rebalanced.  If the accuracy of the system is affected by out-of-level conditions 
+normal to the use of the device, the system shall be equipped with an out-of-level sensor that inhibits the 
+weighing operation when the system is out of level to the extent that the accuracy limits are exceeded. 
+(Added 1992) (Amended 2008) 
+S.2.5. Damping Means. – An automatic-indicating scale and a balance indicator shall be equipped with 
+effective means to damp oscillations and to bring the indicating elements quickly to rest. 
+S.2.5.1. Digital Indicating Elements. – Digital indicating elements equipped with recording elements shall 
+be equipped with effective means to permit the recording of weight values only when the indication is stable 
+within plus or minus: 
+(a) 3.0 scale divisions for scales of more than 2000 kg (5000 lb) capacity in service prior to 
+January 1, 1981, hopper (other than grain hopper) scales with a capacity exceeding 22 000 kg 
+(50 000 lb), and for all vehicle, axle-load, livestock, and railway track scales; and 
+(b) 1.0 scale division for all other scales. 
+The values recorded shall be within applicable tolerances. 
+(Amended 1995) 
+S.2.5.2. Jewelers’, Prescription, and Class I, and Class II Scales. – A jewelers’, prescription, Class I, or 
+Class II scales shall be equipped with appropriate means for arresting the oscillation of the mechanism. 
+S.2.5.3. Class I and Class II Prescription Scales with a Counting Feature. – A Class I or Class II 
+prescription scale shall indicate to the operator when the piece weight computation is complete by a stable 
+display of the quantity placed on the load-receiving element. 
+(Added 2003) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 20
+2.20. Scales 
+Handbook 44 – 2026 
+2-20 
+S.3. Design of Load-Receiving Elements. 
+S.3.1. Travel of Pans of Equal-Arm Scale. – The travel between limiting stops of the pans of a 
+nonautomatic-indicating equal-arm scale not equipped with a balance indicator shall be not less than the minimum 
+travel shown in Table 2M. and Table 2. Minimum Travel of Pans of Nonautomatic Indicating Equal-Arm Scale 
+without Balance Indicator. 
+Table 2M. 
+Minimum Travel of Pans of 
+Nonautomatic Indicating Equal-Arm Scale 
+without Balance Indicator 
+ 
+Table 2. 
+Minimum Travel of Pans of 
+Nonautomatic Indicating Equal-Arm Scale 
+without Balance Indicator 
+Nominal Capacity 
+(kilograms) 
+Minimum Travel of 
+Pans 
+(millimeters) 
+ 
+Nominal Capacity 
+(pounds) 
+Minimum Travel of 
+Pans 
+(inch) 
+2 or less 
+9 
+ 
+4 or less 
+0.35 
+2+ to 5, inclusive 
+13 
+ 
+4+ to 12, inclusive 
+0.5 
+5+ to 12, inclusive 
+19 
+ 
+12+ to 26, inclusive 
+0.75 
+Over 12 
+25 
+ 
+Over 26 
+1.0 
+ 
+S.3.2. Drainage. – A load-receiving element intended to receive wet commodities shall be so constructed as to 
+drain effectively. 
+S.3.3. Scoop Counterbalance. – A scoop on a scale used for direct sales to retail customers shall not be 
+counterbalanced by a removable weight.  A permanently attached scoop-counterbalance shall indicate clearly on 
+both the operator’s and customer’s sides of the scale whether it is positioned for the scoop to be on or off the 
+scale. 
+S.3.4. Length of Weigh-In-Motion Vehicle Scales. – The load-receiving element shall be of sufficient length 
+to allow the weighment of any vehicle intended to be weighed on the scale in a single draft (i.e., all axles of the 
+vehicle are on the load-receiving element simultaneously during the weighment). 
+(Added 2021) 
+S.4. Design of Weighing Elements. 
+S.4.1. Antifriction Means. – Frictional effects shall be reduced to a minimum by suitable antifriction elements.  
+Opposing surfaces and points shall be properly shaped, finished, and hardened.  A platform scale having a frame 
+around the platform shall be equipped with means to prevent interference between platform and frame. 
+S.4.2. Adjustable Components. – An adjustable component such as a nose-iron or potentiometer shall be held 
+securely in adjustment.  The position of a nose-iron on a scale of more than 1000 kg (2000 lb) capacity, as 
+determined by the factory adjustment, shall be accurately, clearly, and permanently defined. 
+(Amended 1986) 
+S.4.3. Multiple Load-Receiving Elements. – Except for mechanical bench and counter scales, a scale with a 
+single indicating or recording element, or a combination indicating-recording element, that is coupled to two or 
+more load-receiving elements with independent weighing systems, shall be provided with means to prohibit the 
+activation of any load-receiving element (or elements) not in use, and shall be provided with automatic means to 
+indicate clearly and definitely which load-receiving element (or elements) is in use. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 21
+Handbook 44 – 2026 
+2.20. Scales 
+2-21 
+S.5. Design of Weighing Devices, Accuracy Class. 
+S.5.1. Designation of Accuracy Class. – Weighing devices are divided into accuracy classes and shall be 
+designated as I, II, III, III L, or IIII. 
+[Nonretroactive as of January 1, 1986] 
+S.5.2. Parameters for Accuracy Class. – The accuracy class of a weighing device is designated by the 
+manufacturer and shall comply with parameters shown in Table 3. 
+[Nonretroactive as of January 1, 1986] 
+S.5.3. Multi-Interval and Multiple Range Scales, Division Value. – On a multi-interval scale and multiple 
+range scale, the value of “e” shall be equal to the value of “d.” 0F1 
+(Added 1986) (Amended 1995) 
+S.5.4. Relationship of Minimum Load Cell Verification Interval Value to the Verification Scale Interval. 
+– The relationship of the value for the minimum load cell verification scale interval, vmin, to the verification scale 
+interval, e, for a specific scale using National Type Evaluation Program (NTEP) certified load cells shall comply 
+with the following formulae where N is the number of load cells in a single independent1 weighing/load-receiving 
+element (such as hopper, railroad track, or vehicle scale weighing/load-receiving elements): 
+(a)   𝑉𝑚𝑖𝑛≤
+𝑒
+√𝑁   for scales without lever systems; and 
+(b)   𝑉𝑚𝑖𝑛≤
+𝑒
+√𝑁  × (𝑠𝑐𝑎𝑙𝑒 𝑚𝑢𝑙𝑡𝑖𝑝𝑙𝑒)   for scales with lever systems. 
+1“Independent” means with a weighing/load-receiving element not attached to adjacent elements and with its 
+own A/D conversion circuitry and displayed weight. 
+This requirement does not apply to complete weighing/load-receiving elements or scales, which satisfy all the 
+following criteria: 
+- 
+the complete weighing/load-receiving element or scale has been evaluated for compliance with T.N.8.1. 
+Temperature under the NTEP; 
+- 
+the complete weighing/load-receiving element or scale has received an NTEP Certificate of 
+Conformance; and 
+- 
+the complete weighing/load-receiving element or scale is equipped with an automatic zero-tracking 
+mechanism which cannot be made inoperative in the normal weighing mode.  (A test mode which permits 
+the disabling of the automatic zero-tracking mechanism is permissible, provided the scale cannot 
+function normally while in this mode. 
+[Nonretroactive as of January 1, 1994] 
+(Added 1993) (Amended 1996, 2016, and 2024) 
+ 
+ 
+1  Footnote 1 to Table 3. Parameters for Accuracy Classes. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 22
+2.20. Scales 
+Handbook 44 – 2026 
+2-22 
+0BTable 3. 
+Parameters for Accuracy Classes 
+Class 
+Value of the Verification Scale Interval  
+(e) 
+Number of Verification Scale3 Intervals (n) 
+Minimum 
+Maximum 
+SI Units 
+I 
+equal to or greater than 1 mg 
+50 000 
+-- 
+II 
+1 mg to 50 mg, inclusive 
+100 
+100 000 
+ 
+equal to or greater than 100 mg 
+5 000 
+100 000 
+III1,4 
+0.1 g to 2 g, inclusive 
+100 
+10 000 
+ 
+equal to or greater than 5 g 
+500 
+10 000 
+III L2 
+equal to or greater than 2 kg 
+2 000 
+10 000 
+IIII 
+equal to or greater than 5 g 
+100 
+1 200 
+U.S. Customary Units 
+III4 
+0.000 2 lb to 0.005 lb, inclusive 
+100 
+10 000 
+ 
+0.005 oz to 0.125 oz, inclusive 
+100 
+10 000 
+ 
+equal to or greater than 0.01 lb 
+500 
+10 000 
+ 
+equal to or greater than 0.25 oz 
+500 
+10 000 
+III L2 
+equal to or greater than 5 lb 
+2 000 
+10 000 
+IIII 
+greater than 0.01 lb 
+100 
+1 200 
+ 
+greater than 0.25 oz 
+100 
+1 200 
+1 A Class III scale marked “For prescription weighing only” may have a verification scale interval (e) not less 
+than 0.01 g. 
+(Added 1986) (Amended 2003 and 2024) 
+ 
+2 The value of a verification scale interval (e) for crane and hopper (other than grain hopper) scales shall be not 
+less than 0.2 kg (0.5 lb).  The minimum number of verification scale intervals (n) shall be not less than 1000. 
+(Amended 2024) 
+ 
+3 On a multiple range or multi-interval scale, the number of intervals for each range independently shall not exceed 
+the maximum specified for the accuracy class.  The number of verification scale intervals, (n), for each weighing 
+range is determined by dividing the scale capacity for each range by the verification scale interval, (e), for each 
+range.  On a scale system with multiple load-receiving elements and multiple indications, each element considered 
+shall not independently exceed the maximum specified for the accuracy class.  If the system has a summing 
+indicator, the nmax for the summed indication shall not exceed the maximum specified for the accuracy class. 
+(Added 1997) (Amended 2024) 
+ 
+4 The minimum number of verification scale intervals (n) for a Class III Hopper Scale used for weighing grain 
+shall be 2000. 
+(Amended 2024) 
+[Nonretroactive as of January 1, 1986] 
+(Amended 1986, 1987, 1997, 1998, 1999, 2003, 2004, and 2024) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 23
+Handbook 44 – 2026 
+2.20. Scales 
+2-23 
+S.6. Marking Requirements. – (Also see G-S.1. Identification, G-S.4. Interchange or Reversal of Parts, 
+G-S.6. Marking Operational Controls, Indications, and Features, G-S.7. Lettering, G-UR.2.1.1. Visibility of 
+Identification, and UR.3.4.1. Use in Pairs.) 
+S.6.1. Nominal Capacity; Vehicle and Axle-Load Scales. – For all vehicle and axle-load scales, the marked 
+nominal capacity shall not exceed the concentrated load capacity (CLC) times the quantity of the number of 
+sections in the scale minus 0.5. 
+As a formula, this is stated as:  
+nominal capacity < CLC × (N − 0.5) 
+where N = the number of sections in the scale. 
+[Nonretroactive as of January 1, 1989] 
+Note:  When the device is used in a combination railway track and vehicle weighing application, the above formula shall apply 
+only to the vehicle scale application. 
+(Added 1988) (Amended 1999 and 2002) 
+S.6.2. Location of Marking Information. – Scales that are not permanently attached to an indicating element, 
+and for which the load-receiving element is the only part of the weighing/load-receiving element visible after 
+installation, may have the marking information required in Section 1.10. General Code, G-S.1. Identification and 
+Section 2.20. Scales Code, S.6. Marking Requirements located in an area that is accessible only through the use 
+of a tool; provided that the information is easily accessible (e.g., the information may appear on the junction box 
+under an access plate).  The identification information for these scales shall be located on the weighbridge (load-
+receiving element) near the point where the signal leaves the weighing element or beneath the nearest access 
+cover. 
+(Added 1989) 
+S.6.3. Scales, Main Elements, and Components of Scales or Weighing Systems. – Scales, main elements of 
+scales when not contained in a single enclosure for the entire scale, load cells for which Certificates of 
+Conformance (CC) have been issued under the National Type Evaluation Program (NTEP), and other equipment 
+necessary to a weighing system, but having no metrological effect on the weighing system, shall be marked as 
+specified in Table S.6.3.a. Marking Requirements and explained in the accompanying notes in Table S.6.3.b. 
+Notes for Table S.6.3.a. 
+(Added 1990) 
+ 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 24
+2.20. Scales 
+Handbook 44 – 2026 
+2-24 
+Table S.6.3.a. 
+Marking Requirements 
+ 
+Weighing Equipment  
+To Be Marked With  
+ 
+Weighing, 
+Load-
+Receiving, 
+and 
+Indicating 
+Element in 
+Same Housing 
+or Covered on 
+the Same CC1 
+Indicating 
+Element not 
+Permanently 
+Attached to 
+Weighing and 
+Load-
+Receiving 
+Element or 
+Covered by a 
+Separate CC 
+Weighing and 
+Load-
+Receiving 
+Element Not 
+Permanently 
+Attached to 
+Indicating 
+Element or 
+Covered by a 
+Separate CC 
+Load Cell 
+with CC 
+(11) 
+Other 
+Equipment 
+or Device 
+(10) 
+Manufacturer’s ID 
+(1) 
+X 
+X 
+X 
+X 
+ 
+X 
+Model Designation and Prefix (1) 
+X 
+X 
+X 
+X 
+ 
+X 
+Serial Number and Prefix 
+(2) 
+X 
+X 
+X 
+X 
+ X (16) 
+Certificate of Conformance Number 
+(CC) 
+(23) 
+X 
+X 
+X 
+X 
+ 
+X (23) 
+Accuracy Class 
+(17) 
+X 
+ 
+X (8) 
+ 
+X (19) 
+X 
+ 
+Nominal Capacity 
+(3)(18)(20) 
+X 
+X 
+X 
+ 
+ 
+Value of Scale Division, “d” (3)(4) 
+X 
+X 
+ 
+ 
+ 
+Value of Verification Scale  
+Interval “e” 
+(3)(4) 
+X 
+X 
+ 
+ 
+ 
+Temperature Limits 
+(5) 
+X 
+X 
+X 
+X 
+ 
+Concentrated Load Capacity (CLC)
+ 
+(12)(20)(22) 
+ 
+X 
+ 
+X (9) 
+ 
+ 
+Special Application 
+(13) 
+X 
+X 
+X 
+ 
+ 
+Maximum Number of Verification 
+Scale Intervals (nmax) 
+(6) 
+ 
+ 
+X (8) 
+ 
+X (19) 
+X 
+ 
+Minimum Verification Scale Interval 
+(emin) 
+ 
+ 
+ 
+X (19) 
+ 
+ 
+“S” or “M” 
+(7) 
+ 
+ 
+ 
+X 
+ 
+Direction of Loading 
+(15) 
+ 
+ 
+ 
+X 
+ 
+Minimum Dead Load 
+ 
+ 
+ 
+X 
+ 
+Maximum Capacity 
+ 
+ 
+ 
+X 
+ 
+Minimum and Maximum Speed (25) 
+ 
+X 
+ 
+ 
+ 
+Maximum Speed Change (26) 
+ 
+X 
+ 
+ 
+ 
+Vehicle Direction Restriction (27) 
+ 
+X 
+ 
+ 
+ 
+Vehicle Restriction (28) 
+ 
+X 
+ 
+ 
+ 
+Safe Load Limit 
+ 
+ 
+ 
+X 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 25
+Handbook 44 – 2026 
+2.20. Scales 
+2-25 
+Table S.6.3.a. 
+Marking Requirements 
+Load Cell Verification Interval 
+(vmin) 
+(21) 
+ 
+ 
+ 
+X 
+ 
+Section Capacity and Prefix
+ 
+(14)(20)(22)(24) 
+ 
+X 
+X 
+ 
+ 
+Note:  For applicable notes, Table S.6.3.b. 
+1 Weighing/load-receiving elements and indicators which are in the same housing or which are permanently attached 
+will generally appear on the same CC.  If not in the same housing, elements shall be hard-wired together or sealed 
+with a physical seal or an electronic link.  This requirement does not apply to peripheral equipment that has no input 
+or effect on device calibrations or configurations. 
+(Note Added 2001) 
+(Added 1990) (Amended 1992, 1999, 2000, 2001, 2002, 2004, 2021, 2023, 2024, and 2025) 
+ 
+Table S.6.3.b. 
+Notes for Table S.6.3.a. Marking Requirements 
+1. Manufacturer's identification and model designation and model designation prefix.* 
+[*Nonretroactive as of January 1, 2003] 
+(Also see G-S.1. Identification.)  [Prefix lettering may be initial capitals, all capitals or all lower case] 
+(Amended 2000) 
+ 
+2. Serial number [Nonretroactive as of January 1, 1968] and prefix [Nonretroactive as of January 1, 1986].  (Also 
+see G-S.1. Identification.) 
+ 
+3. The device shall be marked with the nominal capacity.  The nominal capacity may be prefaced by the terms 
+“capacity” or “Max.”  For any scale where the value of “e” is equal to the value of “d” (see S.1.2.2.), the 
+nominal capacity shall be shown together with the value of the scale division “d” or the verification scale 
+interval “e” (e.g., 15 × 0.005 kg, or capacity = 15 kg, d = 0.005 kg, or Max 15 kg e = 0.005 kg) in a clear and 
+conspicuous manner and be readily apparent when viewing the reading face of the scale indicator unless already 
+apparent by the design of the device.  On multiple range or multi-interval scales the value of the scale division 
+“d” or verification scale interval “e” shall be marked together with its associated nominal capacity.  For any 
+scale that has no “d” or any scale where “e” does not equal “d” refer to Note 4. 
+ [Nonretroactive as of January 1, 1983] 
+(Amended 2005 and 2024) 
+ 
+4. Exceptions to Note 3 regarding marking of “e” and “d”.  
+(a) For an ungraduated scale such as an equal arm scale where the scale graduations do not represent a fixed 
+weight quantity, the nominal capacity shall be shown together with the verification scale interval “e” (e.g. 
+capacity 1,000 g e = 0.1 g, or Max 1,000 g e = 0.1 g). These devices have no “d”. 
+(b) For a scale where e does not equal d, such as a scale equipped with an auxiliary indication, the nominal 
+capacity shall be shown together with the verification scale interval “e,” and the scale division “d” (e.g., 
+capacity 1,000 g e = 0.1 g d = 0.01 g, or Max 1,000 g e = 0.1 g d = 0.01 g). 
+ [Nonretroactive as of January 1, 1986] 
+(Amended 2024 and 2025) 
+ 
+5. Required only on Class III, III L, and IIII devices if the temperature range on the NTEP CC is narrower than 
+and within − 10 °C to 40 °C (14 °F to 104 °F).   
+[Nonretroactive as of January 1, 1986] 
+(Amended 1999) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 26
+2.20. Scales 
+Handbook 44 – 2026 
+2-26 
+Table S.6.3.b. 
+Notes for Table S.6.3.a. Marking Requirements 
+6. This value may be stated on load cells in units of 1000; e.g., n:  10 is 10 000 divisions.   
+[Nonretroactive as of January 1, 1988] 
+ 
+7. Denotes compliance for single or multiple load cell applications.  It is acceptable to use a load cell with the “S” 
+or Single Cell designation in multiple load cell applications as long as all other parameters meet applicable 
+requirements.  A load cell with the “M” or Multiple Cell designation can be used only in multiple load cell 
+applications.  
+ [Nonretroactive as of January 1, 1988] 
+(Amended 1999) 
+ 
+8. An indicating element not permanently attached to a weighing element shall be clearly and permanently marked 
+with the accuracy Class of I, II, III, III L, or IIII, as appropriate, and the maximum number of verification scale 
+intervals, nmax, for which the indicator complies with the applicable requirement.  Indicating elements that 
+qualify for use in both Class III and III L applications may be marked III/III L and shall be marked with the nmax 
+for which the device complies with the applicable requirements for each accuracy class.   
+ [Nonretroactive as of January 1, 1988] 
+(Amended 2024) 
+ 
+9. For vehicle and axle-load scales only.  The CLC shall be added to the load-receiving element of any such scale 
+not previously marked at the time of modification.   
+ [Nonretroactive as of January 1, 1989] 
+(Amended 2002) 
+ 
+10. Necessary to the weighing system but having no metrological effect, e.g., auxiliary remote display, keyboard, etc. 
+ 
+11. The markings may be either on the load cell or in an accompanying document; except that, if an accompanying 
+document is provided, the serial number shall appear both on the load cell and in the document.  [Nonretroactive 
+as of January 1, 1988]  The manufacturer’s name or trademark, the model designation, and identifying symbols 
+for the model and serial numbers as required by paragraph G-S.1. Identification shall also be marked both on 
+the load cell and in any accompanying document.  
+ [Nonretroactive as of January 1, 1991] 
+ 
+12. Required on the indicating element and the load-receiving element of vehicle and axle-load scales.  Such 
+marking shall be identified as “concentrated load capacity” or by the abbreviation “CLC.”*   
+ [*Nonretroactive as of January 1, 1989] 
+(Amended 2002) 
+ 
+13. A scale designed for a special application rather than general use shall be conspicuously marked with suitable 
+words, visible to the operator and to the customer, restricting its use to that application, e.g., postal scale, 
+prepack scale, weight classifier, etc.*  When a scale is installed with an operational counting feature, the scale 
+shall be marked on both the operator and customer sides with the statement “The counting feature is not legal 
+for trade,” except when a Class I or Class II prescription scale complies with all Handbook 44 requirements 
+applicable to counting features. 
+[*Nonretroactive as of 1986]  
+(Amended 1994 and 2003) 
+ 
+14. Required on livestock* and railway track scales.  When marked on vehicle and axle-load scales manufactured 
+before January 1, 1989, it may be used as the CLC.  For livestock scales manufactured between January 1, 1989, 
+and January 1, 2003, required markings may be either CLC or section capacity.   
+ [*Nonretroactive as of January 1, 2003] 
+(Amended 2002) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 27
+Handbook 44 – 2026 
+2.20. Scales 
+2-27 
+Table S.6.3.b. 
+Notes for Table S.6.3.a. Marking Requirements 
+15. Required if the direction of loading the load cell is not obvious.  
+ [Nonretroactive as of January 1, 1988] 
+ 
+16. Serial number [Nonretroactive as of January 1, 1968] and prefix [Nonretroactive as of January 1, 1986].  (Also 
+see G-S.1. Identification.)  Modules without “intelligence” on a modular system (e.g., printer, keyboard module, 
+cash drawer, and secondary display in a point-of-sale system) are not required to have serial numbers. 
+ 
+17. The accuracy class of a device shall be marked on the device with the appropriate designation as I, II, III, III L, 
+or IIII. 
+[Nonretroactive as of January 1, 1986] 
+ 
+18. The nominal capacity shall be conspicuously marked as follows: 
+(a) on any scale equipped with unit weights or weight ranges; 
+(b) on any scale with which counterpoise or equal-arm weights are intended to be used; 
+(c) on any automatic-indicating or recording scale so constructed that the capacity of the indicating or recording 
+element, or elements, is not immediately apparent; 
+(d) on any scale with a nominal capacity less than the sum of the reading elements; and 
+(e) on the load-receiving element (weighbridge) of vehicle, axle-load, and livestock scales.* 
+[*Nonretroactive as of January 1, 1989] 
+(Amended 1992) 
+ 
+19. For weighing and load-receiving elements not permanently attached to indicating element or covered by a 
+separate CC. 
+[Nonretroactive as of January 1, 1988] 
+(Amended 1992) 
+ 
+20. Combination vehicle/railway track scales must be marked with both the nominal capacity and CLC for vehicle 
+weighing and the nominal capacity and section capacity for railway weighing.  All other requirements relating 
+to these markings will apply. 
+[Nonretroactive as of January 1, 2000] 
+(Added 1999) 
+ 
+21. The value of the load cell verification interval (vmin) must be stated in mass units.  In addition to this information, 
+a device may be marked with supplemental representations of vmin. 
+[Nonretroactive as of January 1, 2001] 
+(Added 1999) 
+ 
+22. Combination vehicle/livestock scales must be marked with both the CLC for vehicle weighing and the section 
+capacity for livestock weighing.  All other requirements relative to these markings will apply.   
+ [Nonretroactive as of January 1, 2003] 
+(Added 2002) (Amended 2003) 
+Note:  The marked section capacity for livestock weighing may be less than the marked CLC for vehicle weighing. 
+(Amended 2003) 
+ 
+23. Required only if a CC has been issued for the device or equipment.   
+[Nonretroactive as of January 1, 2003] 
+(G-S.1. Identification (e) Added 2001) 
+24. The section capacity shall be prefaced by the words “Section Capacity” or an abbreviation of that term.  
+Abbreviations shall be “Sec Cap” or “Sec C.”  All capital letters and periods may be used. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 28
+2.20. Scales 
+Handbook 44 – 2026 
+2-28 
+Table S.6.3.b. 
+Notes for Table S.6.3.a. Marking Requirements 
+[Nonretroactive as of January 1, 2005] 
+(Added 2004) 
+ 
+25. Weigh-in-motion vehicle scales must be marked with minimum and maximum vehicle speed limitations. 
+(Added 2021) 
+ 
+26. Weigh-in-motion vehicle scales must be marked with the maximum vehicle speed change allowed during the 
+weighment. 
+(Added 2021) 
+ 
+27. Weigh-in-motion vehicle scales must be marked as “uni-directional” if the travel direction is restricted. 
+(Added 2021) 
+ 
+28. Weigh-in-Motion vehicle scales shall be marked with any vehicle restrictions, if applicable, using the terms 
+specified on the NTEP Certificate of Conformance, which shall be readily apparent when viewing the reading 
+face of the scale indicator.  
+(Added 2023) 
+ 
+S.6.4. Railway Track Scales. – A railway track scale shall be marked with the maximum capacity of each 
+section of the load-receiving element of the scale.  Such marking shall be accurately and conspicuously presented 
+on, or adjacent to, the identification or nomenclature plate that is attached to the indicating element of the scale.  
+The nominal capacity marking shall satisfy the following: 
+(a) For scales manufactured from January 1, 2002, through December 31, 2013: 
+(1) the nominal capacity of a scale with more than two sections shall not exceed twice its rated section 
+capacity; and 
+(2) the nominal capacity of a two-section scale shall not exceed its rated section capacity. 
+(b) For scales manufactured on or after January 1, 2014, the nominal scale capacity shall not exceed the 
+lesser of: 
+(1) the sum of the Weigh Module Capacities as shown in Table S.6.4.M. and Table S.6.4.; or 
+(2) the Rated Section Capacity (RSC) multiplied by the Number of Sections (Ns) minus the Number of 
+Dead Spaces (Nd) minus 0.5.  As a formula this is stated as: 
+RSC × (Ns – Nd – 0.5)  
+;or 
+(3) 290 300 kg (640 000 lb). 
+(Amended 1988, 2001, 2002, and 2013) 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 29
+Handbook 44 – 2026 
+2.20. Scales 
+2-29 
+Table S.6.4.M. 
+Railway Track Scale – Weigh Module Capacity 
+Weigh Module Length 
+(meters) 
+Weigh Module Capacity 
+(kilograms) 
+< 1.5 
+36 300 
+1.5 to < 3.0 
+72 600 
+3.0 to < 4.5 
+108 900 
+4.5 to < 7.0 
+145 100 
+7.0 to < 9.0 
+168 700 
+9.0 to < 10.5 
+192 300 
+10.5 to < 12.0 
+234 100 
+12.0 to < 17.0 
+257 600 
+Note:  The capacity of a particular module is based on its length as shown above.  To determine the “sum of 
+the weigh module capacities” referenced in paragraph S.6.4.(b)(1): (1) determine the length of each 
+individual weigh module in the scale; (2) find its corresponding “weigh module capacity” in the table above; 
+and (3) add all of the individual weigh module capacities.” 
+ 
+(Table Added 2013) 
+Table S.6.4. 
+Railway Track Scale – Weigh Module Capacity 
+Weigh Module Length 
+(feet) 
+Weigh Module Capacity 
+(pounds) 
+< 5 
+80 000 
+5 to < 10 
+160 000 
+10 to < 15 
+240 000 
+15 to < 23 
+320 000 
+23 to < 29 
+372 000 
+29 to < 35 
+424 000 
+35 to < 40 
+516 000 
+40 to < 56 
+568 000 
+Note:  The capacity of a particular module is based on its length as shown above.  To determine the “sum of 
+the weigh module capacities” referenced in paragraph S.6.4.(b)(1): (1) determine the length of each 
+individual weigh module in the scale; (2) find its corresponding “weigh module capacity” in the table above; 
+and (3) add all of the individual weigh module capacities.” 
+(Table Added 2013) 
+ 
+S.6.5. Livestock Scales.  – A livestock scale manufactured prior to January 1, 1989, or after January 1, 2003, 
+shall be marked with the maximum capacity of each section of the load-receiving element of the scale.  Livestock 
+scales manufactured between January 1, 1989, and January 1, 2003, shall be marked with either the Concentrated 
+Load Capacity (CLC) or the Section Capacity.  Such marking shall be accurately and conspicuously presented 
+on, or adjacent to the identification or nomenclature plate that is attached to the indicating element of the scale.   
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 30
+2.20. Scales 
+Handbook 44 – 2026 
+2-30 
+The nominal capacity of a scale with more than two sections shall not exceed twice its rated section capacity.  
+The nominal capacity of a two-section scale shall not exceed its rated section capacity.* 
+[*Nonretroactive as of January 1, 2003] 
+(Added 2002) 
+Also see Note 14 in Table S.6.3.b. Notes for Table S.6.3.a. Marking Requirements. 
+S.6.6. Counting Feature, Minimum Individual Piece Weight, and Minimum Sample Piece Count. – A 
+Class I or Class II prescription scale with an operational counting feature shall be marked with the minimum 
+individual piece weight and minimum number of pieces used in the sample to establish an individual piece weight. 
+(Added 2003) 
+N. Notes 
+N.1. Test Procedures. 
+N.1.1. Increasing-Load Test. – The increasing-load test shall be conducted on all scales with the test loads 
+approximately centered on the load-receiving element of the scale, except on a scale having a nominal capacity 
+greater than the total available known test load.  When the total test load is less than the nominal capacity, the test 
+load is used to greatest advantage by concentrating it, within prescribed load limits, over the main load supports 
+of the scale. 
+N.1.2. Decreasing-Load Test (Automatic Indicating Scales). – The decreasing-load test shall be conducted 
+with the test load approximately centered on the load-receiving element of the scale. 
+N.1.2.1. Scales Marked I, II, III, or IIII. – Except for portable wheel load weighers, decreasing-load tests 
+shall be conducted on scales marked I, II, III or IIII and with “n” equal to or greater than 1000 with test loads 
+equal to the maximum test load at each tolerance value.  For example, on a Class III scale, at test loads equal 
+to 4000 d, 2000 d, and 500 d; for scales with n less than 1000, the test load shall be equal to one-half of the 
+maximum load applied in the increasing-load test.  (Also see Table 6. Maintenance Tolerances.) 
+(Amended 1998) 
+N.1.2.2. All Other Scales. – On all other scales, except for portable wheel load weighers, the 
+decreasing-load test shall be conducted with a test load equal to one-half of the maximum load applied in the 
+increasing-load test. 
+(Amended 1998) 
+N.1.3. Shift Test. 
+N.1.3.1. Dairy-Product Test Scales.  – A shift test shall be conducted with a test load of 18 g successively 
+positioned at all points on which a weight might reasonably be placed in the course of normal use of the 
+scale. 
+N.1.3.2. Equal-Arm Scales. – A shift test shall be conducted with a half-capacity test load centered 
+successively at four points positioned equidistance between the center and the front, left, back, and right 
+edges of each pan as shown in the diagrams below.  An equal test load shall be centered on the other pan.  
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 31
+Handbook 44 – 2026 
+2.20. Scales 
+2-31 
+ 
+N.1.3.3. Vehicle Scales, Axle-Load Scales, and Livestock Scales. 
+N.1.3.3.1. Vehicle Scales, Axle-Load Scales, and Combination Vehicle/Livestock Scales. 
+(a) Minimum Shift Test. – At least one shift test shall be conducted with a minimum test load of 
+12.5 % of scale capacity, which may be performed anywhere on the load-receiving element 
+using the prescribed test patterns and maximum test loads specified below.  (Combination 
+Vehicle/Livestock Scales shall also be tested consistent with N.1.3.3.2. Prescribed Test Pattern 
+and Test Loads for Livestock Scales with More Than Two Sections and Combination 
+Vehicle/Livestock Scales.) 
+(Amended 1991, 2000, and 2003) 
+(b) Prescribed Test Pattern and Loading for Vehicle Scales, Axle-Load Scales, and 
+Combination Vehicle/Livestock Scales. – The normal prescribed test pattern shall be an area 
+of 1.2 m (4 ft) in length and 3.0 m (10 ft) in width or the width of the scale platform, whichever 
+is less.  Multiple test patterns may be utilized when loaded in accordance with paragraph (c), 
+(d), or (e) as applicable.  An example of a possible test pattern is shown in the diagram below. 
+(Amended 1997, 2001, and 2003) 
+4’ 
+ 
+4’ 
+ 
+4’ 
+ 
+4’ 
+ 
+4’ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Section 
+1 
+  
+Midway between 
+sections 1 and 2 
+ 
+Section 
+2 
+ 
+Midway between 
+sections 2 and 3 
+ 
+Section 
+3 
+ 
+(c) Loading Precautions for Vehicle Scales, Axle-Load Scales, and Combination 
+Vehicle/Livestock Scales.  – When loading the scale for testing, one side of the test pattern 
+shall be loaded to no more than half of the concentrated load capacity or test load before loading 
+the other side.  The area covered by the test load may be less than 1.2 m (4 ft) × 3.0 m (10 ft) 
+or the width of the scale platform, whichever is less; for test patterns less than 1.2 m (4 ft) in 
+length the maximum loading shall meet the formula:  [(wheel base of test cart or length of test 
+load divided by 48 in) × 0.9 × CLC].  The maximum test load applied to each test pattern shall 
+not exceed the concentrated load capacity of the scale.  When the test pattern exceeds 1.2 m 
+(4 ft), the maximum test load applied shall not exceed the concentrated load capacity times the 
+largest “r” factor in Table UR.3.2.1. Span Maximum Load for the length of the area covered by 
+the test load.  For load-receiving elements installed prior to January 1, 1989, the rated section 
+capacity may be substituted for concentrated load capacity to determine maximum loading.  An 
+example of a possible test pattern is shown above. 
+(Amended 1997 and 2003) 
+(d) Multiple Pattern Loading. – To test to the nominal capacity, multiple patterns may be 
+simultaneously loaded in a manner consistent with the method of use. 
+(e) Other Designs. – Special design scales and those that are wider than 3.7 m (12 ft) shall be 
+tested in a manner consistent with the method of use but following the principles described 
+above. 
+(Amended 1988, 1991, 1997, 2000, 2001, and 2003) 
+(Amended 2003) 
+N.1.3.3.2. Prescribed Test Pattern and Test Loads for Livestock Scales with More Than Two 
+Sections and Combination Vehicle/Livestock Scales.  – A minimum test load of 5 000 kg (10 000 lb) 
+or one-half of the rated section capacity, whichever is less, shall be placed, as nearly as possible, 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 32
+2.20. Scales 
+Handbook 44 – 2026 
+2-32 
+successively over each main load support as shown in the diagram below.  For livestock scales 
+manufactured between January 1, 1989, and January 1, 2003, the required loading shall be no greater 
+than one-half CLC.   
+ 
+ 
+Position 1 
+ 
+ 
+ 
+ 
+Position 2 
+ 
+ 
+
+ 
+Position 3 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Position 6 
+ 
+ 
+ 
+ 
+Position 5 
+ 
+ 
+ 
+ 
+Position 4 
+ 
+
+ 
+ = Load Bearing Point 
+(Added 2003) (Amended 2016) 
+N.1.3.3.3. Prescribed Test Patterns and Test Loads for Two-Section Livestock Scales. – A shift 
+test shall be conducted using the following prescribed test loads and test patterns:  1) When a single field 
+standard weight is used, the prescribed test load shall be applied centrally in the prescribed test pattern; 
+or  2) When multiple field standard weights are used as the prescribed test load, the load shall be applied 
+in a consistent pattern in the shift test positions throughout the test and applied in a manner that does not 
+concentrate the load in a test pattern that is less than when the same load is a single field standard weights 
+on the load-receiving element. 
+The shift test load shall not exceed one-half the rated section capacity or one-half the rated concentrated 
+load capacity whichever is applicable, using either: 
+(a) A one-half nominal capacity test load centered as nearly as possible, successively at the center 
+of each quarter of the load-receiving element as shown in N.1.3.7. All Other Scales Except 
+Crane Scales, Hanging Scales, Hopper Scales, Wheel-Load Weighers, and Portable Axle-Load 
+Weighers Figure 1; or 
+(b) A one-quarter nominal capacity test load centered as nearly as possible, successively over each 
+main load support as shown in N.1.3.7. All Other Scales Except Crane Scales, Hanging Scales, 
+Hopper Scales, Wheel-Load Weighers, and Portable Axle-Load Weighers Figure 2. 
+ 
+(Added 2007) (Amended 2016) 
+N.1.3.4. Railway Track Scales Weighing Individual Cars in Single Drafts.  – A shift test shall be 
+conducted with at least two different test loads, if available, distributed over, to the right and left of, each pair 
+of main levers or other weighing elements supporting each section of the scale. 
+N.1.3.5. Monorail Scales, Static Test.  – A shift test shall be conducted with a test load equal to the largest 
+load that can be anticipated to be weighed in a given installation, but never less than one-half scale capacity.  
+The load shall be placed successively on the right end, the left end, and the center of the live rail. 
+(Added 1985) 
+N.1.3.5.1. Dynamic Monorail Weighing Systems. – Dynamic tests with livestock carcasses or 
+portions of carcasses shall be conducted during normal plant production.  No less than 20 test loads using 
+carcasses or portions of carcasses of the type normally weighed shall be used in the dynamic test.  If the 
+plant conveyor chain does not space or prevent the carcasses or portions of carcasses from touching one 
+another, dynamic tests shall not be conducted until this condition has been corrected. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 33
+Handbook 44 – 2026 
+2.20. Scales 
+2-33 
+All carcasses or portions of carcasses shall be individually weighed statically on either the same scale 
+being tested dynamically or another monorail scale with the same or smaller divisions and in close 
+proximity.  (The scale selected for static weighing of the carcasses or portions of carcasses shall first be 
+tested statically with certified test weights that have been properly protected from the harsh environment 
+of the packing plant to ensure they maintain accuracy.) 
+If the scale being tested is used for weighing freshly slaughtered animals (often referred to as a “hot 
+scale”), care must be taken to get a static weighment as quickly as possible before or following the 
+dynamic weighment to avoid loss due to shrink.  If multiple dynamic tests are conducted using the same 
+carcasses or portions of carcasses, static weights shall be obtained before and after multiple dynamic 
+tests.  If the carcass or portion of a carcass changes weight between static tests, the amount of weight 
+change shall be taken into account, or the carcass or portion of a carcass shall be disregarded for tolerance 
+purposes. 
+Note:  For a dynamic monorail test, the reference scale shall comply with the principles in Appendix A, Fundamental 
+Considerations, paragraph 3.2. Tolerances for Standards. 
+(Added 1996) (Amended 1999 and 2007) 
+N.1.3.6. Vehicle On-Board Weighing Systems.  – The shift test for a vehicle on-board weighing system 
+shall be conducted in a manner consistent with its normal use.  For systems that weigh as part of the lifting 
+cycle, the center of gravity of the load may be shifted in the vertical direction as well as from side to side.  In 
+other cases, the center of gravity may be moved to the extremes of the load-receiving element using loads of 
+a magnitude that reflect normal use (i.e., the load for the shift test may exceed one-half scale capacity), and 
+may, in some cases, be equal to the capacity of the scale.  The shift test may be conducted when the weighing 
+system is out of level to the extent that the weighing system remains operational. 
+(Added 1992) 
+N.1.3.7. All Other Scales Except Crane Scales, Hanging Scales, Hopper Scales, Wheel-Load 
+Weighers, and Portable Axle-Load Weighers.  – A shift test shall be conducted using the following 
+prescribed test loads and test patterns.  A single field standard weight used as the prescribed test load shall 
+be applied centrally in the prescribed test pattern.  When multiple field standard weights are used as the 
+prescribed test load, the load shall be applied in a consistent pattern in the shift test positions throughout the 
+test and applied in a manner that does not concentrate the load in a test pattern that is less than when that 
+same load is a single field standard weight on the load-receiving element. 
+(a) For scales with a nominal capacity of 500 kg (1000 lb) or less, a shift test shall be conducted using 
+a one-third nominal capacity test load (defined as test weights in amounts of at least 30 % of scale 
+capacity, but not to exceed 35 % of scale capacity) centered as nearly as possible at the center of 
+each quadrant of the load-receiving element using the prescribed test pattern as shown in Figure 1. 
+(b) For scales with a nominal capacity greater than 500 kg (1000 lb), a shift test may be conducted by 
+either using a one-third nominal capacity test load (defined as test weights in amounts of at least 
+30 % of scale capacity, but not to exceed 35 % of scale capacity) centered as nearly as possible at 
+the center of each quadrant of the load-receiving element using the prescribed test pattern as shown 
+in Figure 1, or by using a one-quarter nominal capacity test load centered as nearly as possible, 
+successively, over each corner of the load-receiving element using the prescribed test pattern as 
+shown in Figure 2. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 34
+2.20. Scales 
+Handbook 44 – 2026 
+2-34 
+Figure 1                                                                   Figure 2 
+ 
+Position 
+1 
+ 
+ 
+Position 
+2 
+Position 
+1 
+ 
+Position 
+2 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Position 
+4 
+ 
+Position 
+3 
+ 
+ 
+ 
+ 
+ Position 
+4 
+ 
+Position 
+3 
+(Added 2003) 
+(Amended 1987, 2003, and 2007) 
+N.1.4. Sensitivity Test. – A sensitivity test shall be conducted on nonautomatic-indicating (weighbeam) scales 
+only, with the weighing device in equilibrium at zero-load and at maximum test load.  The test shall be conducted 
+by increasing or decreasing the test load in an amount equal to the applicable value specified in T.2. Sensitivity 
+Requirement (SR) or T.N.6. Sensitivity. 
+N.1.5. Discrimination Test. – Except for digital electronic scales designated Accuracy Class I or II in which 
+the value of e = d and is less than 5 mg, a discrimination test shall be conducted on all automatic indicating 
+scales with the weighing device in equilibrium at or near zero load and at or near maximum test load, and under 
+controlled conditions in which environmental factors are reduced to the extent that they will not affect the results 
+obtained.  For scales equipped with an Automatic Zero-Tracking Mechanism (AZT), the discrimination test may 
+be conducted at a range outside of the AZT range. 
+[Nonretroactive as of January 1, 1986] 
+(Added 1985) (Amended 2004 and 2021) 
+N.1.5.1. Digital Device. – On a digital device, this test is conducted from just below the lower edge of the 
+zone of uncertainty for increasing load tests, or from just above the upper edge of the zone of uncertainty for 
+decreasing-load tests. 
+N.1.6. RFI Susceptibility Tests, Field Evaluation. – An RFI test shall be conducted at a given installation 
+when the presence of RFI has been verified and characterized if those conditions are considered “usual and 
+customary.” 
+(Added 1986) 
+N.1.7. Ratio Test. – A ratio test shall be conducted on all scales employing counterpoise weights and on 
+nonautomatic-indicating equal-arm scales. 
+N.1.8. Material Tests. – A material test shall be conducted on all customer-operated bulk weighing systems 
+for recycled materials using bulk material for which the device is used.  Insert into the device, in a normal manner, 
+several accurately pre-weighed samples (free of foreign material) in varying amounts approximating average 
+drafts. 
+N.1.9. Zero-Load Balance Change. – A zero-load balance change test shall be conducted on all scales after 
+the removal of any test load.  The zero-load balance should not change by more than the minimum tolerance 
+applicable.  (Also see G-UR.4.2. Abnormal Performance.) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 35
+Handbook 44 – 2026 
+2.20. Scales 
+2-35 
+N.1.10. Counting Feature Test.  – A test of the counting function shall be conducted on all Class I and Class 
+II prescription scales having an active counting feature used in “legal for trade” applications.  The test should 
+verify that the scale will not accept a sample with less than either the minimum sample piece count or the 
+minimum sample weight of 30 e.  Counting feature accuracy should be verified at a minimum of two test loads.  
+Verification of the count calculations shall be based upon the weight indication of the test load. 
+Note: 
+(1) The minimum sample weight is equal to the marked minimum individual piece weight times the marked minimum sample 
+piece count. 
+(2) Test load as used in this section refers to actual calibration test weights selected from an appropriate test weight class. 
+(Added 2003) 
+N.1.11. Substitution Test.  – In the substitution test procedure, material or objects are substituted for known 
+test weights, or a combination of known test weights and previously quantified material or objects, using the scale 
+under test as a comparator.  Additional test weights or other known test loads may be added to the known test 
+load to evaluate higher weight ranges on the scale. 
+(Added 2003) 
+N.1.12. Strain-Load Test.  – In the strain-load test procedure, an unknown quantity of material or objects are 
+used to establish a reference load or tare to which test weights or substitution test loads are added. 
+(Added 2003) 
+N.2. Verification (Testing) Standards. – Field standard weights used in verifying weighing devices shall comply 
+with requirements of NIST Handbook 105-Series standards (or other suitable and designated standards) or the 
+tolerances expressed in Appendix A, Fundamental Considerations, paragraph 3.2. Tolerances for Standards (i.e., 
+one-third of the smallest tolerance applied). 
+(Amended 1986) 
+N.3. Minimum Test Weights and Test Loads. – The minimum test weights and test loads for in-service tests 
+(except railway track scales) are shown in Table 4. (Also see Footnote 2 in Table 4. Minimum Test Weights and Test 
+Loads.) 
+(Added 1984) (Amended 1988) 
+N.3.1. Minimum Test-Weight Load and Tests for Railway Track Scales. 
+(Amended 1990 and 2012) 
+N.3.1.1. Initial and Subsequent Tests. – The test-weight load shall be not less than 35 000 kg (80 000 lb).  
+A strain-load test conducted up to the used capacity of the weighing system is recommended. 
+(Added 1990) (Amended 2012) 
+N.3.1.2. Interim Test. – An Interim Test may be used to return a railway track scale into temporary service 
+following repairs that could affect the accuracy of the weighing system providing all of the following 
+conditions are met: 
+(a) a test weight load of not less than 13 500 kg (30 000 lb) shall be used; 
+(b) a shift (section) test shall be conducted using a test-weight load of not less than 13 500 kg 
+(30 000 lb); 
+(c) a strain-load test shall be conducted up to at least 25 % of scale capacity;  
+(d)   all test results shall be within applicable tolerances; and  
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 36
+2.20. Scales 
+Handbook 44 – 2026 
+2-36 
+(e) the official with statutory authority shall be immediately notified when scales are repaired and 
+placed in temporary service with an Interim Test.  The length of temporary service following repair 
+is at the discretion of the official with statutory authority. 
+(Added 1990) (Amended 2012) 
+N.3.1.3. Enforcement Action for Inaccuracy. – To take enforcement action on a scale that is found to be 
+inaccurate, a minimum test load of 13 500 kg (30 000 lb) must be used. 
+(Added 1990) 
+Table 4. 
+Minimum Test Weights and Test Loads1 
+Devices in Metric Units 
+ 
+Devices in U.S. Customary Units 
+Device Capacity 
+(kg)  
+Minimums  
+(in terms of device capacity) 
+Device Capacity 
+(lb) 
+Minimums  
+(in terms of device capacity) 
+Test Weights 
+(greater of) 
+Test 
+Loads2 
+Test Weights  
+(greater of) 
+Test  
+Loads2 
+0 to 150  
+100 % 
+ 
+ 
+0 to 300  
+100 % 
+ 
+151 to 1 500  
+25 % or 150 kg 
+75 % 
+ 
+301 to 3 000  
+25 % or 300 lb 
+75 % 
+1 501 to 20 000  
+12.5 % or 500 kg 
+50 % 
+ 
+3001 to 40 000  
+12.5 % or 1 000 lb 
+50 % 
+> 20 001  
+12.5 % or 5 000 kg 
+25 %3 
+ 
+> 40 001  
+12.5 % or 10 000 lb 
+25 %3 
+Where practicable: 
+• 
+Test weights to dial face capacity, 1000 d, or test load to used capacity, if greater than minimums specified. 
+• 
+During initial verification, a scale should be tested to capacity. 
+1 If the amount of test weight in Table 4. Minimum Test Weights and Test Loads combined with the load on the 
+scale would result in an unsafe condition, then the appropriate load will be determined by the official with statutory 
+authority. 
+2 The term “test load” means the sum of the combination of field standard test weights and any other applied load 
+used in the conduct of a test using substitution test methods.  Not more than three substitutions shall be used during 
+substitution testing, after which the tolerances for strain load tests shall be applied to each set of test loads. 
+3 The scale shall be tested from zero to at least 12.5 % of scale capacity using known test weights and then to at 
+least 25 % of scale capacity using either a substitution or strain load test that utilizes known test weights of at least 
+12.5 % of scale capacity.  Whenever practical, a strain load test should be conducted to the used capacity of the 
+scale.  When a strain load test is conducted, the tolerances apply only to the test weights or substitution test loads. 
+(Amended 1988, 1989, 1994, and 2003) 
+Note:  GIPSA requires devices subject to their inspection to be tested to at least “used capacity,” which is calculated 
+based on the platform area of the scale and a weight factor assigned to the species of animal weighed on the scale.  
+“Used capacity” is calculated using the formula: 
+Used Scale Capacity = Scale Platform Area × Species Weight Factor 
+Where species weight factor = 540 kg/m2 (110 lb/ft2) for cattle, 340 kg/m2 (70 lb/ft2) for calves and hogs, and 
+240 kg/m2 (50 lb/ft2) for sheep and lambs. 
+ 
+N.3.2. Field Standard Weight Carts. – Field Standard Weight Carts that comply with the tolerances expressed 
+in Appendix A, Fundamental Considerations, paragraph 3.2. Tolerances for Standards (i.e., one-third of the 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 37
+Handbook 44 – 2026 
+2.20. Scales 
+2-37 
+smallest tolerance applied) may be included as part of the minimum required test load (Also see Table 4. 
+Minimum Test Weights and Test Loads.) for shift tests and other test procedures. 
+(Added 2004) 
+N.4. Coupled-in-Motion Railroad Weighing Systems.1F2 
+N.4.1. Weighing Systems Used to Weigh Trains of Less Than Ten Cars. – These weighing systems shall be 
+tested using a consecutive-car test train consisting of the number of cars weighed in the normal operation run over 
+the weighing system a minimum of five times in each mode of operation following the final calibration. 
+(Added 1990) (Amended 1992) 
+N.4.2. Weighing Systems Placed in Service Prior to January 1, 1991, and Used to Weigh Trains of Ten or 
+More Cars. – The minimum test train shall be a consecutive-car test train of no less than ten cars run over the 
+scale a minimum of five times in each mode of operation following final calibration. 
+(Added 1990) (Amended 1992) 
+N.4.3. Weighing Systems Placed in Service on or After January 1, 1991, and Used to Weigh Trains of Ten 
+or More Cars. 
+(a) These weighing systems shall be tested using a consecutive-car test train of no less than ten cars run over 
+the scale a minimum of five times in each mode of operation following final calibration; or 
+(b) if the official with statutory authority determines it necessary, the As-Used Test Procedures outlined in 
+N.4.3.1. shall be used. 
+ 
+(Added 1990) (Amended 1992) 
+N.4.3.1. As-Used Test Procedures. – A weighing system shall be tested in a manner that represents the 
+normal method of operation and length(s) of trains normally weighed.  The weighing systems may be tested 
+using either a: 
+(a) consecutive-car test train of a length typical of train(s) normally weighed; or 
+(b) distributed-car test train of a length typical of train(s) normally weighed. 
+However, a consecutive-car test train of a shorter length may be used, provided that initial verification test 
+results for the shorter consecutive-car test train agree with the test results for the distributed-car or full-length 
+consecutive-car test train as specified in N.4.3.1.1. Initial Verification. 
+The official with statutory authority shall be responsible for determining the minimum test train length to be 
+used on subsequent tests. 
+(Added 1990) (Amended 1992) 
+N.4.3.1.1. Initial Verification. – Initial verification tests should be performed on any new weighing 
+system and whenever either the track structure or the operating procedure changes.  If a consecutive-car 
+test train of length shorter than trains normally weighed is to be used for subsequent verification, the 
+shorter consecutive-car test train results shall be compared either to a distributed-car or to a consecutive-
+car test train of length(s) typical of train(s) normally weighed. 
+The difference between the total train weight of the train(s) representing the normal method of operation 
+and the weight of the shorter consecutive-car test train shall not exceed 0.15 %.  If the difference in test 
+ 
+2 A test weight car that is representative of one of the types of cars typically weighed on the scale under test may be 
+used wherever reference weight cars are specified. 
+(Added 1991) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 38
+2.20. Scales 
+Handbook 44 – 2026 
+2-38 
+results exceeds 0.15 %, the length of the shorter consecutive-car test train shall be increased until 
+agreement within 0.15 % is achieved.  Any adjustments to the weighing system based upon the use of a 
+shorter consecutive-car test train shall be offset to correct the bias that was observed between the full-
+length train test and the shorter consecutive-car test train. 
+(Added 1990) (Amended 1992 and 1993) 
+N.4.3.1.2. Subsequent Verification. – The test train may consist of either a consecutive-car test train 
+with a length not less than that used in initial verification, or a distributed-car test train representing the 
+number of cars used in the normal operation. 
+(Added 1990) 
+N.4.3.1.3. Distributed-Car Test Trains. 
+(a) The length of the train shall be typical of trains that are normally weighed. 
+(b) The reference weight cars shall be split into three groups, each group consisting of ten cars or 
+10 % of the train length, whichever is less. 
+(Amended 1991) 
+(c) The test groups shall be placed near the front, around the middle, and near the end of the train. 
+(d) Following the final adjustment, the distributed-car test train shall be run over the scale at least 
+three times or shall produce 50 weight values, whichever is greater. 
+(e) The weighing system shall be tested in each mode of operation. 
+(Added 1990) (Amended 1992) 
+N.4.3.1.4. Consecutive-Car Test Trains. 
+(a) A consecutive-car test train shall consist of at least ten cars. 
+(b) If the consecutive-car test train consists of between ten and twenty cars, inclusive, it shall be 
+run over the scale a minimum of five times in each mode of operation following the final 
+calibration. 
+(c) If the consecutive-car test train consists of more than twenty cars, it shall be run over the scale 
+a minimum of three times in each mode of operation. 
+(Added 1990) (Amended 1992) 
+N.5. Uncoupled-in-Motion Railroad Weighing System. – An uncoupled-in-motion scale shall be tested statically 
+before being tested in motion by passing railroad reference weight cars over the scale.  When an uncoupled-in-motion 
+railroad weighing system is tested, the car speed and the direction of travel shall be the same as when the scale is in 
+normal use.  The minimum in-motion test shall be three reference weight cars passed over the scale three times.  The cars 
+shall be selected to cover the range of weights that are normally weighed on the system and to reflect the types of cars 
+normally weighed. 
+(Added 1993) 
+N.6. Nominal Capacity of Prescription Scales. – The nominal capacity of a prescription scale shall be assumed to 
+be one-half apothecary ounce, unless otherwise marked.  (Applicable only to scales not marked with an accuracy 
+class.) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 39
+Handbook 44 – 2026 
+2.20. Scales 
+2-39 
+N.7. Weigh-in-Motion Vehicle Scales Test Procedures.  
+N.7.1. Reference Scale. – A static scale as approved by the local jurisdiction shall be used to establish the 
+weight of reference vehicles used in this procedure. 
+N.7.1.1. Dimension. – The reference scale shall be of such dimension and spacing as to weigh reference 
+vehicles in a single draft. 
+N.7.1.2. Location. – The reference scale should be located near the weigh-in-motion vehicle scale to 
+minimize the effect of vehicle fuel consumption.  The reference scale and the weigh-in-motion vehicle scale 
+may be the same scale. 
+N.7.1.3. Timing. – The reference scale shall be tested immediately prior to using it to establish reference 
+vehicle weights.  A subsequent test of the reference scale may be performed immediately following the 
+establishment of the reference vehicle weights to ensure its repeatability. 
+N.7.1.4. Qualification. – The reference scale shall comply with the principles in Appendix A, Fundamental 
+Considerations, paragraph 3.2. Tolerances for Standards. 
+N.7.2. Reference Vehicle. – One or more reference vehicles shall be used to provide varying weight conditions 
+for testing.  Reference vehicles should be representative of vehicles that are customarily weighed on the weigh-
+in-motion vehicle scale during normal operation.  A motorized field standard weight cart with tests weights and 
+a driver may be used as an additional reference vehicle. 
+N.7.2.1. Weight Conditions. – Reference vehicle(s) shall be selected to provide at least a high and a low 
+weight condition.  Different types of vehicles may be used. 
+N.7.2.2. Load Position. – Loads on the reference vehicle should be positioned equally side-to-side. 
+N.7.2.3. Static Weight. – Reference vehicle(s) shall be statically weighed on a reference scale as defined 
+in N.7.1 Reference Scale immediately before being used to conduct the weigh-in-motion vehicle scale tests. 
+N.7.2.3.1. Rounding. – Error weights may be added to the reference vehicle to increase its weight to 
+a whole scale division to minimize rounding errors. 
+N.7.2.3.2. Re-Weighing. – Reference vehicles may be re-weighed at the discretion of the testing 
+authority. 
+N.7.3. Test Speeds. – The speed of the reference vehicle shall be maintained within the parameters as specified 
+by the manufacturer during each test (see also paragraphs S.1.14.1.(a) Identification of a Fault, Vehicle Speed 
+and S.1.14.1.(b) Identification of a Fault, Change in Vehicle Speed). 
+N.7.3.1. Range. – Various speeds of the reference vehicle shall be used between the minimum and 
+maximum operating speeds specified for the weigh-in-motion vehicle scale.  The minimum speed capability 
+of the reference vehicle may be used as the minimum speed. 
+N.7.4. Static Tests for Weigh-in-Motion Vehicle Scales. – The weigh-in-motion vehicle scale shall comply 
+with applicable vehicle scale tests defined in N.1. Test Procedures when tested statically. 
+N.7.5. Dynamic Tests for Weigh-in-Motion Vehicle Scales. – Test procedures shall simulate the normal 
+intended use as closely as possible (i.e., test as used). 
+N.7.5.1. Vehicles. – The tests shall be performed using the reference vehicle(s) defined in N.7.2. Reference 
+Vehicle. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 40
+2.20. Scales 
+Handbook 44 – 2026 
+2-40 
+N.7.5.2. Weighments. – Each reference vehicle shall have a minimum of five weighments at the speeds 
+defined in N.7.3. Test Speeds. 
+N.7.5.3. Vehicle Position. – Reference vehicle(s) must stay within the defined roadway along the load-
+receiving element (see also S.1.14.1.(e) Identification of a Fault, Vehicle Path of Travel). 
+N.7.5.4. Travel Directions. – The tests shall be performed in both directions of travel unless travel 
+direction is restricted by the marking. 
+N.7.5.5. Results. – At the conclusion of the weigh-in-motion tests, there shall be a minimum of 10 total 
+weight readings for the reference vehicle(s) for each applicable direction of travel.  The tolerance for each 
+weight reading shall be based on the gross vehicle weight and the applicable tolerance values for Class III L. 
+(Added 2021) 
+T. Tolerances Applicable to Devices not Marked I, II, III, III L, or IIII 
+T.1. Tolerance Values. 
+T.1.1. General. – The tolerances applicable to devices not marked with an accuracy class shall have the 
+tolerances applied as specified in Table T.1.1. Tolerances for Unmarked Scales. 
+Note:  When Table T.1.1. refers to T.N. sections it shall be accepted that the scale division d on the unmarked scale always 
+equals the verification scale interval e. 
+(Amended 1990 and 2024) 
+T.1.2. Postal and Parcel Post Scales. – The tolerances for postal and parcel post scales are given in Table T.1.1. 
+Tolerances for Unmarked Scales and Table 5. Maintenance and Acceptance Tolerances for Unmarked Postal and 
+Parcel Post Scales. 
+(Amended 1990)
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 41
+2.20. Scales 
+Handbook 44 – 2025 
+2-41
+(Table Added 1990) (Amended 1992, 1993, and 2012) 
+Table T.1.1.  
+Tolerances for Unmarked Scales 
+Type of Device 
+Subcategory 
+Minimum 
+Tolerance 
+Acceptance 
+Tolerance 
+Maintenance 
+Tolerance 
+Decreasing-Load 
+Multiplier1 
+Other Applicable 
+Requirements 
+Vehicle, axle-load, livestock, railway 
+track (weighing statically), crane, and 
+hopper (other than grain hopper) 
+Class III L, T.N.3.1 (Table 6) and T.N.3.2. 
+1.0 
+T.N.2., T.N.3., T.N.4.1., 
+T.N.4.2., T.N.4.3., T.N.4.4., 
+T.N.5., T.N.7.2., T.N.8.1.4.4, 
+T.N.9. 
+Grain test scales 
+n  10 000 
+n > 10 000 
+Class III, T.N.3.1. (Table 6) and T.N.3.2. 
+Class II, T.N.3.1. (Table 6) and T.N.3.2. 
+1.0 
+T.N.8.1.4.4, T.N.9. 
+Railway track scales weighing in 
+motion 
+T.N.3.6. except that for T.N.3.6.2. (a), no single error shall 
+exceed four times the maintenance tolerance. 
+1.0 
+T.N.8.1.4.4, T.N.9. 
+Monorail scales, in-motion 
+T.N.3.8. 
+1.0 
+T.N.8.1.4.4, T.N.9. 
+Customer-operated bulk-weighing 
+systems for recycled materials 
+± 5 % of applied material test load. 
+Average error on 10 or more test loads  2.5 %. 
+1.0 
+T.N.8.1.4.4, T.N.9. 
+Wheel-load weighers and portable 
+axle-load scales 
+Tested 
+individually or 
+in pairs2 
+0.5 d or 50 lb, 
+whichever is greater 
+1 % of test load 
+2 % of test load 
+1.53
+T.N.8.1.4.4, T.N.9. 
+Prescription scales 
+0.1 grain (6 mg) 
+0.1 % of test load 
+0.1 % of test load 
+1.5 
+T.N.8.1.4.4, T.N.9. 
+Jewelers’ scales 
+Graduated 
+0.5 d 
+0.05 % of test load 0.05 % of test load 
+1.5 
+Ungraduated 
+Sensitivity or 
+smallest weight, 
+whichever is less 
+T.N.8.1.4.4, T.N.9. 
+Dairy-product test scale 
+Loads < 18 g 
+18 g load 
+0.2 grain 
+0.2 grain 
+0.2 grain 
+0.3 grain 
+0.2 grain 
+0.5 grain 
+1.5 
+T.N.8.1.4.4, T.N.9. 
+Postal and parcel post scales 
+designed/used to weigh loads < 2 lb 
+Loads < 2 lb 
+15 grain, 1 g, 1/32 oz, 
+0.03 oz, or 0.002 lb 
+15 grain, 1 g, 
+1/32 oz, 0.03 oz, or 
+0.002 lb 
+15 grain, 1 g, 1/32 oz, 
+0.03 oz, or 0.002 lb 
+1.5 
+T.N.8.1.4.4, T.N.9. 
+Loads  2 lb 
+Table 5 
+Table 5 
+Table 5 
+Other postal and parcel post scales 
+Table 5 
+Table 5 
+Table 5 
+1.5 
+T.N.8.1.4.4, T.N.9. 
+All other scales (including grain 
+hopper) 
+n > 5000 
+0.5 d or 0.05 % of 
+scale capacity, 
+whichever is less 
+0.05 % of test load 
+0.1 % of test load 
+1.5 
+T.N.2.5., T.N.4.1., T.N.4.2., 
+T.N.4.3., T.N.5., T.N.7.2.,   
+T.N.8.1.4.4, T.N.9. 
+n  5000 
+Class III, T.N.3.1., Table 6 and T.N.3.2. 
+1.0 
+T.N.2., T.N.3., T.N.4.1., 
+T.N.4.2., T.N.4.3., T.N.5., 
+T.N.7.2., T.N.8.1.4.4, T.N.9. 
+1 The decreasing load test applies only to automatic indicating scales. 
+2 If marked and tested as a pair, the tolerance shall be applied to the sum of the indication. 
+3 The decreasing load test does not apply to portable wheel load weighers. 
+4 T.N.8.1.4. Operating Temperature. is nonretroactive and effective for unmarked devices 
+manufactured as of January 1, 1981. 
+2.20 Scales 
+ Handbook 44 - 2026 
+2-41
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026 
+
+=====PAGE 42
+2.20. Scales 
+Handbook 44 – 2026 
+2-42 
+ 
+T.2. Sensitivity Requirement (SR). 
+T.2.1. Application. – The sensitivity requirement (SR) is applicable to all nonautomatic-indicating scales not marked 
+I, II, III, III L, or IIII, and is the same whether acceptance or maintenance tolerances apply. 
+T.2.2. General. – Except for scales specified in paragraphs T.2.3. Prescription Scales through T.2.8. Railway Track 
+Scales:  2 e, 0.2 % of the scale capacity, or 40 lb, whichever is least. 
+(Amended 2024) 
+T.2.3. Prescription Scales.   6 mg (0.1 grain). 
+T.2.4. Jewelers’ Scales.  
+T.2.4.1. With One-Half Ounce Capacity or Less.  – 6 mg (0.1 grain). 
+T.2.4.2. With More Than One-Half Ounce Capacity. – 1 e or 0.05 % of the scale capacity, whichever is less. 
+(Amended 2024) 
+T.2.5. Dairy-Product Test Scales. 
+T.2.5.1. Used in Determining Butterfat Content. – 32 mg (0.5 grain). 
+T.2.5.2. Used in Determining Moisture Content. – 19 mg (0.3 grain). 
+T.2.6. Grain Test Scales. – The sensitivity shall be as stated in T.N.6. Sensitivity. 
+(Amended 1987) 
+T.2.7. Vehicle, Axle-Load, Livestock, and Animal Scales. 
+T.2.7.1. Equipped With Balance Indicators.  – 1 e. 
+(Amended 2024) 
+T.2.7.2. Not Equipped With Balance Indicators.  – 2 e or 0.2 % of the scale capacity, whichever is less. 
+(Amended 2024) 
+Table 5.  
+Maintenance and Acceptance Tolerances for Unmarked 
+Postal and Parcel Post Scales 
+Scale Capacity 
+Test Loads 
+Maintenance Tolerance 
+(±) 
+Acceptance Tolerance 
+(±) 
+(lb) 
+(lb) 
+(oz) 
+(lb) 
+(oz) 
+(lb) 
+0 to 4* 
+0 to 1 
+1/32 
+0.002 
+1/32 
+0.002 
+ 
+> 1 
+1/8 
+0.008 
+1/16 
+0.004 
+> 4* 
+0 to 7 
+3/16 
+0.012 
+3/16 
+0.012 
+ 
+> 7 to 24 
+3/8 
+0.024 
+3/16 
+0.012 
+ 
+> 24 to 30 
+1/2 
+0.030 
+1/4 
+0.015 
+ 
+> 30 
+0.1 % of Test Load 
+0.05 % of Test Load 
+*Also see Table T.1.1. Tolerances for Unmarked Scales for scales designed and/or used to weigh loads less than 2 lb. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 43
+Handbook 44 – 2026 
+2.20. Scales 
+2-43 
+T.2.8. Railway Track Scales.  – 3 e or 100 lb, whichever is less. 
+(Amended 2024) 
+T.3. Sensitivity Requirement, Equilibrium Change Required. – The minimum change in equilibrium with test loads 
+equal to the values specified in T.2. Sensitivity Requirements (SR) shall be as follows: 
+(a) Scale with a Trig Loop but without a Balance Indicator. – The position of rest of the weighbeam shall change 
+from the center of the trig loop to the top or bottom, as the case may be. 
+(b) Scale with a Single Balance Indicator and Having a Nominal Capacity of Less Than 250 kg (500 lb).  – The 
+position of rest of the indicator shall change 1.0 mm (0.04 in) or one division on the graduated scale, whichever is 
+greater. 
+(c) Scale with a Single Balance Indicator and Having a Nominal Capacity of 250 kg (500 lb) or Greater.  – The 
+position of rest of the indicator shall change 6.4 mm (0.25 in) or one division on the graduated scale or the width 
+of the central target area, whichever is greater.  However, the indicator on a batching scale shall change 3.2 mm 
+(0.125 in) or one division on the graduated scale, whichever is greater. 
+(d) Scale with Two Opposite-Moving Balance Indicators. – The position of rest of the two indicators moving in 
+opposite directions shall change 1.0 mm (0.04 in) with respect to each other. 
+(e) Scale with Neither a Trig Loop nor a Balance Indicator. – The position of rest of the weighbeam or lever 
+system shall change from the horizontal, or midway between limiting stops, to either limit of motion. 
+T.N.   Tolerances Applicable to Devices Marked I, II, III, III L, and IIII. 
+T.N.1. Principles. 
+T.N.1.1. Design. – The tolerance for a weighing device is a performance requirement independent of the design 
+principle used. 
+T.N.1.2. Accuracy Classes. – Weighing devices are divided into accuracy classes according to the number of 
+verification scale intervals (n) and the value of the verification scale intervals (e). 
+(Amended 2024) 
+T.N.1.3. Verification Scale Interval. – The tolerance for a weighing device is related to the value of the verification 
+scale interval (e) and is expressed in terms of e. 
+(Amended 2024) 
+T.N.2. Tolerance Application. 
+T.N.2.1. General. – The tolerance values are positive (+) and negative (−) with the weighing device adjusted to zero 
+at no load.  When tare is in use, the tolerance values are applied from the tare zero reference (zero net weight indication); 
+the tolerance values apply to the net weight indication for any possible tare load using certified test loads. 
+(Amended 2008) 
+T.N.2.2. Type Evaluation Examinations. – For type evaluation examinations, the tolerance values apply to 
+increasing and decreasing load tests within the temperature, power supply, and barometric pressure limits specified 
+in T.N.8. 
+T.N.2.3. Subsequent Verification Examinations. – For subsequent verification examinations, the tolerance values 
+apply regardless of the influence factors in effect at the time of the conduct of the examination.  (Also see 
+G-N.2. Testing with Nonassociated Equipment.) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 44
+2.20. Scales 
+Handbook 44 – 2026 
+2-44 
+T.N.2.4. Multi-Interval and Multiple Range (Variable Division-Value) Scales.  – For multi-interval and multiple 
+range scales, the tolerance values are based on the value of the verification scale interval of the range in use. 
+(Amended 2025) 
+T.N.2.5. Ratio Tests. – For ratio tests, the tolerance values are 0.75 of the applicable tolerances. 
+T.N.3. Tolerance Values. 
+T.N.3.1. Maintenance Tolerance Values. – The maintenance tolerance values are as specified in Table 6. 
+Maintenance Tolerances. 
+T.N.3.2. Acceptance Tolerance Values. – The acceptance tolerance values shall be one-half the maintenance 
+tolerance values. 
+T.N.3.3. Wheel-Load Weighers and Portable Axle-Load Weighers of Class IIII.  – The tolerance values are two 
+times the values specified in T.N.3.1. Maintenance Tolerance Values and T.N.3.2. Acceptance Tolerance Values. 
+(Amended 1986) 
+T.N.3.4. Crane and Hopper (Other than Grain Hopper) Scales.  – The maintenance and acceptance tolerances 
+shall be as specified in T.N.3.1. Maintenance Tolerance Values and T.N.3.2. Acceptance Tolerance Values for 
+Class III L, except that the tolerance for crane and construction materials hopper scales shall not be less than 1 e or 
+0.1 % of the scale capacity, whichever is less. 
+(Amended 1986 and 2024) 
+Table 6.   
+Maintenance Tolerances 
+(All values in this table are in verification scale intervals (e)) 
+Tolerance 
+ 
+1 
+2 
+3 
+5 
+Class 
+Test Load Applied 
+ I 
+      0 to 50 000 
+50 001 to 
+200 000 
+200 001 + 
+ 
+ 
+ II 
+      0 to   5 000 
+5 001 to 
+20 000 
+20 001 + 
+ 
+ 
+ III 
+      0 to      500 
+501 to 
+2 000 
+2 001 to 
+4 000 
+4 001 + 
+ IIII 
+      0 to        50 
+51 to 
+200 
+201 to 
+400 
+401 + 
+ III L 
+   0 to      500 
+501 to 
+1 000 
+Add 1 e for each additional 500 e or fraction thereof 
+(Only applies to Class III L) 
+(Amended 2024) 
+T.N.3.5. Separate Main Elements:  Load Transmitting Element, Indicating Element, Etc.  – If a main element 
+separate from a complete weighing device is submitted for laboratory type evaluation, the tolerance for the main 
+element is 0.7 that for the complete weighing device.  This fraction includes the tolerance attributable to the testing 
+devices used. 
+(Amended 2015) 
+T.N.3.6. Coupled-In-Motion Railroad Weighing Systems.  – The maintenance and acceptance tolerance values for 
+the group of weight values appropriate to the application must satisfy the following conditions: 
+(Amended 1990 and 1992) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 45
+Handbook 44 – 2026 
+2.20. Scales 
+2-45 
+T.N.3.6.1. – For any group of weight values, the difference in the sum of the individual in-motion car weights of 
+the group as compared to the sum of the individual static weights shall not exceed 0.2 %. 
+(Amended 1990) 
+T.N.3.6.2. –  If a weighing system is used to weigh trains of five or more cars, and if the individual car weights 
+are used, any single weight value within the group must meet the following criteria: 
+(a) no single error may exceed three times the static maintenance tolerance; 
+(b) not more than 5 % of the errors may exceed two times the static maintenance tolerance; and 
+(c) not more than 35 % of the errors may exceed the static maintenance tolerance. 
+(Amended 1990 and 1992) 
+T.N.3.6.3. – For any group of weight values wherein the sole purpose is to determine the sum of the group, 
+T.N.3.6.1. alone applies. 
+(Amended 1990) 
+T.N.3.6.4. – For a weighing system used to weigh trains of less than five cars, no single car weight within the 
+group may exceed the static maintenance tolerance. 
+(Amended 1990 and 1992) 
+T.N.3.7. Uncoupled-in-Motion Railroad Weighing Systems. – The maintenance and acceptance tolerance values 
+for any single weighment within a group of non-interactive (i.e., uncoupled) loads, the weighment error shall not exceed 
+the static maintenance tolerance. 
+(Amended 1992) 
+T.N.3.8. Dynamic Monorail Weighing System. – Acceptance tolerance shall be the same as the maintenance 
+tolerance shown in Table 6. Maintenance Tolerances.  On a dynamic test of twenty or more individual test loads, 10 % 
+of the individual test loads may be in error, each not to exceed two times the tolerance.  The error on the total of the 
+individual test loads shall not exceed ± 0.2 %.  (Also see Note in N.1.3.5.1. Dynamic Monorail Weighing Systems.)  
+For equipment undergoing type evaluation, a tolerance equal to one-half the maintenance tolerance values shown in 
+Table 6. Maintenance Tolerances shall apply. 
+[Nonretroactive January 1, 2002] 
+(Added 1986) (Amended 1999 and 2001) 
+T.N.3.9. Materials Test on Customer-Operated Bulk Weighing Systems for Recycled Materials. – The 
+maintenance and acceptance tolerance shall be ± 5 % of the applied materials test load except that the average error on 
+ten or more test materials test loads shall not exceed ± 2.5 %. 
+(Added 1986) 
+T.N.3.10. Prescription Scales with a Counting Feature.  – In addition to Table 6. Maintenance Tolerances (for 
+weight), the indicated piece count value computed by a Class I or Class II prescription scale counting feature shall 
+comply with the tolerances in Table T.N.3.10. Maintenance and Acceptance Tolerances in Excess and in Deficiency 
+for Count. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 46
+2.20. Scales 
+Handbook 44 – 2026 
+2-46 
+Table T.N.3.10.   
+Maintenance and Acceptance Tolerances 
+in Excess and in Deficiency for Count 
+Indication of Count 
+Tolerance 
+(piece count) 
+0 to 100 
+0  
+101 to 200 
+1  
+201 or more 
+       0.5 % 
+(Added 2003) 
+T.N.3.11. Tolerances for Substitution Test.  – Tolerances are applied to the scale based on the substitution test 
+load. 
+(Added 2003) 
+T.N.3.12. Tolerances for Strain-Load Test.  – Tolerances apply only to the test weights or substitution test loads. 
+(Added 2003) 
+T.N.4. Agreement of Indications. 
+T.N.4.1. Multiple Indicating/Recording Elements.  – In the case of a scale or weighing system equipped with more 
+than one indicating element or indicating element and recording element combination, where the indicators or 
+indicator/recorder combination are intended to be used independently of one another, tolerances shall be applied 
+independently to each indicator or indicator/recorder combination. 
+(Amended 1986) 
+T.N.4.2. Single Indicating/Recording Element. – In the case of a scale or weighing system with a single indicating 
+element or an indicating/recording element combination, and equipped with component parts such as unit weights, 
+weighbeam and weights, or multiple weighbeams that can be used in combination to indicate a weight, the difference 
+in the weight value indications of any load shall not be greater than the absolute value of the applicable tolerance for 
+that load, and shall be within tolerance limits. 
+(Amended 1986) 
+T.N.4.3. Single Indicating Element/Multiple Indications. – In the case of an analog indicating element equipped 
+with two or more indicating means within the same element, the difference in the weight indications for any load other 
+than zero shall not be greater than one-half the value of the verification scale interval (e) and be within tolerance limits. 
+(Amended 1986 and 2024) 
+T.N.4.4. Shift or Section Tests. – The range of the results obtained during the conduct of a shift test or a section test 
+shall not exceed the absolute value of the maintenance tolerance applicable and each test result shall be within 
+applicable tolerances. 
+(Added 1986) 
+T.N.4.5. Time Dependence. – A time dependence test shall be conducted during type evaluation and may be 
+conducted during field verification, provided test conditions remain constant. 
+(Amended 1989 and 2005) 
+T.N.4.5.1. Time Dependence:  Class II, III, and IIII Non-Automatic Weighing Instruments. – A 
+non-automatic weighing instrument of Classes II, III, and IIII shall meet the following requirements at constant 
+test conditions.  During type evaluation, this test shall be conducted at 20 C ± 2 C (68 F ± 4 F): 
+(a) When any load is kept on an instrument, the difference between the indication obtained immediately after 
+placing the load and the indication observed during the following 30 minutes shall not exceed 0.5 e.  
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 47
+Handbook 44 – 2026 
+2.20. Scales 
+2-47 
+However, the difference between the indication obtained at 15 minutes and the indication obtained at 
+30 minutes shall not exceed 0.2 e. 
+(b) If the conditions in (a) are not met, the difference between the indication obtained immediately after 
+placing the load on the instrument and the indication observed during the following four hours shall not 
+exceed the absolute value of the maximum permissible error at the load applied. 
+(Added 2005) (Amended 2006 and 2010) 
+T.N.4.5.2. Time Dependence: Class III L Non-Automatic Weighing Instruments. – A non-automatic 
+weighing instrument of Class III L shall meet the following requirements: 
+(a) When any load is kept on an instrument, the difference between the indication obtained immediately after 
+placing the load and the indication observed during the following 30 minutes shall not exceed 1.5 e.  
+However, the difference between the indication obtained at 15 minutes and the indication obtained at 
+30 minutes shall not exceed 0.6 e. 
+(b) If the conditions in (a) are not met, the difference between the indication obtained immediately after 
+placing the load on the instrument and the indication observed during the following four hours shall not 
+exceed the absolute value of the maximum permissible error at the load applied. 
+(Added 2005) (Amended 2010) 
+T.N.4.5.3. Zero Load Return: Non-automatic Weighing Instruments.  – A non-automatic weighing 
+instrument shall meet the following requirements at constant test conditions.  During type evaluation, this test shall 
+be conducted at 20 C ± 2 C (68 F ± 4 F).  The deviation on returning to zero as soon as the indication has 
+stabilized, after the removal of any load which has remained on the instrument for 30 minutes shall not exceed: 
+(a) 0.5 e for Class II and IIII devices, 
+(b) 0.5 e for Class III devices with 4 000 or fewer divisions, 
+(c) 0.83 e for Class III devices with more than 4 000 divisions, or 
+(d) one-half of the absolute value of the applicable tolerance for the applied load for Class III L devices. 
+For a multi-interval instrument, the deviation shall not exceed 0.83 e1 (where e1 is the interval of the first weighing 
+segment of the scale). 
+On a multiple range instrument, the deviation on returning to zero from Maxi (load in the applicable weighing 
+range) shall not exceed 0.83 ei (interval of the weighing range).  Furthermore, after returning to zero from any load 
+greater than Max1 (capacity of the first weighing range) and immediately after switching to the lowest weighing 
+range, the indication near zero shall not vary by more than e1 (interval of the first weighing range) during the 
+following five minutes. 
+(Added 2010) 
+T.N.4.6. Time Dependence (Creep) for Load Cells during Type Evaluation. – A load cell (force transducer) 
+marked with an accuracy class shall meet the following requirements at constant test conditions: 
+(a) Permissible Variations of Readings. – With a constant maximum load for the measuring range (Dmax) between 
+90 % and 100 % of maximum capacity (Emax), applied to the load cell, the difference between the initial reading 
+and any reading obtained during the next 30 minutes shall not exceed the absolute value of the maximum 
+permissible error (mpe) for the applied load. (Also see Table T.N.4.6. Maximum Permissible Error (mpe) for 
+Load Cells During Type Evaluation.)  The difference between the reading obtained at 20 minutes and the reading 
+obtained at 30 minutes shall not exceed 0.15 times the absolute value of the mpe.  (Also see Table T.N.4.6. 
+Maximum Permissible Error (mpe) for Load Cells During Type Evaluation) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 48
+2.20. Scales 
+Handbook 44 – 2026 
+2-48 
+(b) Apportionment Factors. – The mpe for creep shall be determined from Table T.N.4.6. Maximum 
+Permissible Error (mpe) for Load Cells During Type Evaluation using the following apportionment factors 
+(pLC): 
+pLC = 0.7 for load cells marked with S (single load cell applications), 
+pLC = 1.0 for load cells marked with M (multiple load cell applications), and 
+pLC = 0.5 for Class III L load cells marked with S or M. 
+(Added 2005) (Amended 2006) 
+Table T.N.4.6. 
+Maximum Permissible Error (mpe)* for Load Cells During Type Evaluation 
+mpe in Load Cell Verifications Divisions (v) = pLC × Basic Tolerance in v 
+Class 
+pLC × 0.5 v 
+pLC × 1.0 v 
+pLC × 1.5 v 
+ I 
+      0 v to  50 000 v 
+50 001 v to 
+200 000 v 
+200 001 v + 
+ II 
+      0 v to    5 000 v 
+5 001 v to 
+20 000 v 
+20 001 v + 
+ III 
+      0 v to       500 v 
+501 v to 
+2 000 v 
+2 001 v + 
+ IIII 
+      0 v to         50 v 
+51 v to 
+200 v 
+201 v + 
+ III L 
+      0 v to       500 v 
+501 v to 
+1 000 v 
+(Add 0.5 v to the basic tolerance for each additional 
+500 v or fraction thereof up to a maximum load of 
+10 000 v) 
+v represents the load cell verification interval 
+pLC represents the apportionment factors applied to the basic tolerance 
+pLC = 0.7 for load cells marked with S (single load cell applications) 
+pLC = 1.0 for load cells marked with M (multiple load cell applications) 
+pLC = 0.5 for Class III L load cells marked with S or M 
+*mpe = pLC × Basic Tolerance in load cell verifications divisions (v) 
+(Table Added 2005) (Amended 2006) 
+ 
+T.N.4.7. Creep Recovery for Load Cells During Type Evaluation. – The difference between the initial reading of 
+the minimum load of the measuring range (Dmin) and the reading after returning to minimum load subsequent to the 
+maximum load (Dmax) having been applied for 30 minutes shall not exceed: 
+(a) 0.5 times the value of the load cell verification interval (0.5 v) for Class II and IIII load cells; 
+(b) 0.5 times the value of the load cell verification interval (0.5 v) for Class III load cells with 4 000 or fewer 
+divisions; 
+(c) 0.83 times the value of the load cell verification interval (0.83 v) for Class III load cells with more than 
+4 000 divisions; or 
+(d) 2.5 times the value of the load cell verification interval (2.5 v) for Class III L load cells. 
+(Added 2006) (Amended 2009 and 2011) 
+T.N.5. Repeatability. – The results obtained from several weighings of the same load under reasonably static test 
+conditions shall agree within the absolute value of the maintenance tolerance for that load, and shall be within applicable 
+tolerances. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 49
+Handbook 44 – 2026 
+2.20. Scales 
+2-49 
+T.N.6.  Sensitivity. – This section is applicable to all nonautomatic-indicating scales marked I, II, III, III L, or IIII. 
+T.N.6.1.  Test Load. 
+(a) The test load for sensitivity for nonautomatic-indicating vehicle, axle-load, livestock, and animal scales shall 
+be 1 e for scales equipped with balance indicator, and 2 e or 0.2 % of the scale capacity, whichever is less, for 
+scales not equipped with balance indicators. 
+(b) For all other nonautomatic-indicating scales, the test load for sensitivity shall be 1 e at zero and 2 e at 
+maximum test load. 
+(Amended 2024) 
+T.N.6.2. Minimum Change of Indications. – The addition or removal of the test load for sensitivity shall cause a 
+minimum permanent change as follows: 
+(a) for a scale with trig loop but without a balance indicator, the position of the weighbeam shall change from the 
+center to the outer limit of the trig loop; 
+(b) for a scale with balance indicator, the position of the indicator shall change one division on the graduated 
+scale, the width of the central target area, or the applicable value as shown below, whichever is greater: 
+Scale of Class I or II:  1 mm (0.04 in), 
+Scale of Class III or IIII with a maximum capacity of 30 kg (70 lb) or less:  2 mm (0.08 in), 
+Scale of Class III, III L, or IIII with a maximum capacity of more than 30 kg (70 lb):  5 mm (0.20 in); 
+(c) for a scale without a trig loop or balance indicator, the position of rest of the weighbeam or lever system shall 
+change from the horizontal or midway between limiting stops to either limit of motion. 
+(Amended 1987) 
+T.N.7. Discrimination. 
+T.N.7.1.  Analog Automatic Indicating (i.e., Weighing Device with Dial, Drum, Fan, etc.). – A test load 
+equivalent to 1.4 d shall cause a change in the indication of at least 1.0 d.  (Also see N.1.5. Discrimination Test.) 
+T.N.7.2.  Digital Automatic Indicating. – A test load equivalent to 1.4 d shall cause a change in the indicated or 
+recorded value of at least 2.0 d.  This requires the zone of uncertainty to be not greater than three-tenths of the value of 
+the scale division.  (Also see N.1.5.1. Digital Device.) 
+T.N.8. Influence Factors.  – The following factors are applicable to tests conducted under controlled conditions only, 
+provided that: 
+(a) types of devices approved prior to January 1, 1986, and manufactured prior to January 1, 1988, need not meet the 
+requirements of this section; 
+(b) new types of devices submitted for approval after January 1, 1986, shall comply with the requirements of this 
+section; and 
+(c) all devices manufactured after January 1, 1988, shall comply with the requirements of this section. 
+(Amended 1985) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 50
+2.20. Scales 
+Handbook 44 – 2026 
+2-50 
+T.N.8.1.  Temperature. – Devices shall satisfy the tolerance requirements under the following temperature 
+conditions: 
+T.N.8.1.1. If not specified in the operating instructions for Class I or II scales, or if not marked on the device for 
+Class III, III L, or IIII scales, the temperature limits shall be:  − 10 C to 40 C (14 F to 104 F). 
+T.N.8.1.2. If temperature limits are specified for the device, the range shall be at least that specified in 
+Table T.N.8.1.2. Temperature Range by Class. 
+Table T.N.8.1.2. 
+Temperature Range by Class 
+Class 
+Temperature Range 
+I 
+5 °C (9 F) 
+II 
+15 °C (27 F) 
+III, III L, and IIII 
+30 °C (54 F) 
+ 
+T.N.8.1.3.  Temperature Effect on Zero-Load Balance. – The zero-load indication shall not vary by more than: 
+(a) three e per 5 C (9 F) change in temperature for Class III L devices; or 
+(b) one e per 5 C (9 F) change in temperature for all other devices. 
+(Amended 1990 and 2024) 
+T.N.8.1.4.  Operating Temperature. – Except for Class I and II devices, an indicating or recording element 
+shall not display nor record any usable values until the operating temperature necessary for accurate weighing and 
+a stable zero balance condition have been attained. 
+T.N.8.2.  Barometric Pressure. – Except for Class I scales, the zero indication shall not vary by more than one scale 
+division for a change in barometric pressure of 1 kPa over the total barometric pressure range of 95 kPa to 105 kPa 
+(28 in to 31 in of Hg). 
+T.N.8.3.  Electric Power Supply. 
+T.N.8.3.1.  Power Supply, Voltage and Frequency. 
+(a) Weighing devices that operate using alternating current must perform within the conditions defined in 
+paragraphs T.N.3. Tolerance Values through T.N.7. Discrimination, inclusive, when tested over the range 
+of − 15 % to + 10 % of the marked nominal line voltage(s) at 60 Hz, or the voltage range marked by the 
+manufacturer, at 60 Hz. 
+(Amended 2003) 
+(b) Battery operated instruments shall not indicate nor record values outside the applicable tolerance limits 
+when battery power output is excessive or deficient. 
+T.N.8.3.2.  Power Interruption. – A power interruption shall not cause an indicating or recording element to 
+display or record any values outside the applicable tolerance limits. 
+T.N.9. Radio Frequency Interference (RFI) and Other Electromagnetic Interference Susceptibility. – The 
+difference between the weight indication due to the disturbance and the weight indication without the disturbance shall not 
+exceed one e; or the equipment shall: 
+(a) blank the indication; or 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 51
+Handbook 44 – 2026 
+2.20. Scales 
+2-51 
+(b) provide an error message; or 
+(c) the indication shall be so completely unstable that it cannot be interpreted, or transmitted into memory or to a 
+recording element, as a correct measurement value. 
+The tolerance in T.N.9. Radio Frequency Interference (RFI) and Other Electromagnetic Interference Susceptibility is to be 
+applied independently of other tolerances.  For example, if indications are at allowable basic tolerance error limits when 
+the disturbance occurs, then it is acceptable for the indication to exceed the applicable basic tolerances during the 
+disturbance.   
+(Amended 1997 and 2024) 
+UR.   User Requirements 
+UR.1.  Selection Requirements. – Equipment shall be suitable for the service in which it is used with respect to elements 
+of its design, including but not limited to, its capacity, number of scale divisions, value of the scale division or verification 
+scale division, minimum capacity, and computing capability. 2F3 
+UR.1.1.  General. 
+(a) For devices marked with a class designation, the typical class or type of device for particular weighing 
+applications is shown in Table 7a. Typical Class or Type of Device for Weighing Applications. 
+(b) For devices not marked with a class designation, Table 7b. Applicable to Devices not Marked with a Class 
+Designation applies. 
+Table 7a. 
+Typical Class or Type of Device for Weighing Applications 
+Class 
+Weighing Application or Scale Type 
+I 
+Precision laboratory weighing 
+II 
+Laboratory weighing, precious metals and gem weighing, grain test scales 
+III 
+All commercial weighing not otherwise specified, grain test scales, retail precious metals and semi-precious 
+gem weighing, grain-hopper scales, animal scales, postal scales, vehicle on-board weighing systems with 
+a capacity less than or equal to 30 000 lb, and scales used to determine laundry charges 
+III L 
+Vehicle scales (including weigh-in-motion vehicle scales), vehicle on-board weighing systems with a 
+capacity greater than 30 000 lb, axle-load scales, livestock scales, railway track scales, crane scales, and 
+hopper (other than grain hopper) scales 
+IIII 
+Wheel-load weighers and portable axle-load weighers used for highway weight enforcement 
+Note:  A scale with a higher accuracy class than that specified as “typical” may be used. 
+(Amended 1985, 1986, 1987, 1988, 1992, 1995, 2012, and 2021) 
+ 
+3 Purchasers and users of scales such as railway track, hopper, and vehicle scales should be aware of possible additional 
+requirements for the design and installation of such devices. 
+(Footnote Added 1995) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 52
+2.20. Scales 
+Handbook 44 – 2026 
+2-52 
+Table 7b. 
+Applicable to Devices Not Marked with a Class Designation 
+Scale Type or Design 
+Maximum Value of d 
+Retail Food Scales, 50 lb capacity and less 
+1 oz 
+Animal Scales 
+1 lb 
+Grain Hopper Scales 
+ 
+Capacity up to and including 50 000 lb 
+ 
+Capacity over 50 000 lb 
+ 
+10 lb (not greater than 0.05 % of capacity) 
+20 lb 
+Crane Scales 
+not greater than 0.2 % of capacity 
+Vehicle and Axle-Load Scales Used in Combination 
+ 
+Capacity up to and including 200 000 lb 
+ 
+Capacity over 200 000 lb 
+ 
+20 lb 
+50 lb 
+Railway Track Scales 
+ 
+With weighbeam 
+ 
+Automatic indicating 
+ 
+20 lb 
+100 lb 
+Scales with capacities greater than 500 lb except 
+otherwise specified 
+0.1 % capacity (but not greater than 50 lb) 
+Wheel-Load Weighers 
+0.25 % capacity (but not greater than 50 lb) 
+Note:  For scales not specified in this table, G-UR.1.1. Suitability of Equipment and UR.1. Selection Requirements 
+apply. 
+(Added 1985) (Amended 1989) 
+ 
+UR.1.2.  Grain Hopper Scales. – Hopper scales manufactured as of January 1, 1986, that are used to weigh grain 
+shall be Class III and have a minimum of 2 000 scale divisions. 
+(Amended 2012) 
+UR.1.3.  Value of the Indicated and Recorded Scale Division. – The value of the scale division as recorded shall 
+be the same as the division value indicated. 
+[Nonretroactive as of January 1, 1986] 
+(Added 1985) (Amended 1999) 
+UR.1.3.1.  Exceptions. – The provisions of UR.1.3. Value of the Indicated and Recorded Scale Division shall 
+not apply to: 
+(a) Class I scales, or 
+(b) Dynamic monorail weighing systems when the value of d is less than the value of e. 
+(Added 1999) 
+UR.1.4.  Grain-Test Scales:  Value of the Scale Divisions. – The scale division for grain-test scales shall not exceed 
+0.2 g for loads through 500 g, and shall not exceed 1 g for loads above 500 g through 1 000 g. 
+(Added 1992) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 53
+Handbook 44 – 2026 
+2.20. Scales 
+2-53 
+UR.1.5.  Recording Element, Class III L Railway Track Scales. – Class III L Railway Track Scales must be 
+equipped with a recording element. 
+[Nonretroactive as of January 1, 1996] 
+(Added 1995) 
+UR.2.  Installation Requirements. 
+UR.2.1.  Supports. – A scale that is portable and that is being used on a counter, table, or the floor shall be so 
+positioned that it is firmly and securely supported. 
+UR.2.2.  Suspension of Hanging Scale. – A hanging scale shall be freely suspended from a fixed support when in 
+use. 
+UR.2.3.  Protection From Environmental Factors. – The indicating elements, the lever system or load cells, and 
+the load-receiving element of a permanently installed scale, and the indicating elements of a scale not intended to be 
+permanently installed, shall be adequately protected from environmental factors such as wind, weather, and RFI that 
+may adversely affect the operation or performance of the device. 
+UR.2.4.  Foundation, Supports, and Clearance. – The foundation and supports of any scale installed in a fixed 
+location shall be such as to provide strength, rigidity, and permanence of all components, and clearance shall be 
+provided around all live parts to the extent that no contacts may result when the load-receiving element is empty, nor 
+throughout the weighing range of the scale.  An in-motion railway track scale is not required to provide clearance using 
+rail gaps to separate the live rail portion of the weighing/load-receiving element from that which is not live if the scale 
+is designed to be installed and operated using continuous rail.  On vehicle and livestock scales, the clearance between 
+the load-receiving elements and the coping at the bottom edge of the platform shall be greater than at the top edge of 
+the platform.* 
+[*Nonretroactive as of January 1, 1973] 
+(Amended 2014) 
+UR.2.5.  Access to Weighing Elements. – Adequate provision shall be made for ready access to the pit of a vehicle, 
+livestock, animal, axle-load, or railway track scale for the purpose of inspection and maintenance.  Any of these scales 
+without a pit shall be installed with adequate means for inspection and maintenance of the weighing elements. 
+(Amended 1985) 
+UR.2.6.  Approaches. 
+UR.2.6.1.  Vehicle Scales.  – On the entrance and exit end(s) of a vehicle scale there shall be a straight approach 
+as follows: 
+(a) the width at least the width of the platform, 
+(b) the length at least one-half the length of the platform but not required to be more than 12 m (40 ft), and 
+(c) not less than 3 m (10 ft) of any approach adjacent to the platform shall be in the same plane as the 
+platform.  Any slope in the remaining portion of the approach shall ensure (1) ease of vehicle access, 
+(2) ease for testing purposes, and (3) drainage away from the scale. 
+In addition to (a), (b), and (c), scales installed in any one location for a period of six months or more shall have 
+not less than 3 m (10 ft) of any approach adjacent to the platform constructed of concrete or similar durable 
+material to ensure that this portion remains smooth and level and in the same plane as the platform; however, 
+grating of sufficient strength to withstand all loads equal to the concentrated load capacity of the scale may be 
+installed in this portion. 
+[Nonretroactive as of January 1, 1976] 
+(Amended 1977, 1983, 1993, 2006, and 2010) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 54
+2.20. Scales 
+Handbook 44 – 2026 
+2-54 
+UR.2.6.2.  Axle-Load Scales. – At each end of an axle-load scale there shall be a straight paved approach in the 
+same plane as the platform.  The approaches shall be the same width as the platform and of sufficient length to 
+insure the level positioning of vehicles during weight determinations. 
+UR.2.7.  Stock Racks. – A livestock or animal scale shall be equipped with a suitable stock rack, with gates as 
+required, which shall be securely mounted on the scale platform.  Adequate clearances shall be maintained around the 
+outside of the rack. 
+UR.2.8.  Hoists.  – On vehicle scales equipped with means for raising the load-receiving element from the weighing 
+element for vehicle unloading, means shall be provided so that it is readily apparent to the scale operator when the 
+load-receiving element is in its designed weighing position. 
+UR.2.9.  Provision for Testing Dynamic Monorail Weighing Systems. – Provisions shall be made at the time of 
+installation of a dynamic monorail weighing systems for testing in accordance with N.1.3.5.1. Dynamic Monorail 
+Weighing Systems (a rail around or other means for returning the test carcasses to the scale being tested). 
+[Nonretroactive as of January 1, 1998] 
+(Added 1997) (Amended 1999) 
+UR.2.10. Primary Indicating Elements Provided by the User. – Video display terminals and other user-provided 
+indicating elements on scales interfaced with a cash register in a point-of-sale (POS) system shall comply with the 
+minimum height requirements specified in part (d) of paragraph S.1.1.1. Digital Indicating Elements. 
+[Nonretroactive as of January 1, 2021] 
+(Added 2019) 
+UR.3.  Use Requirements. 
+UR.3.1.  Recommended Minimum Load. – A recommended minimum load is specified in Table 8.  Recommended 
+Minimum Load since the use of a device to weigh light loads is likely to result in relatively large errors. 
+Table 8. 
+Recommended Minimum Load 
+Class 
+Value of Scale Division 
+(d or e*) 
+Recommended Minimum Load 
+(d or e*) 
+I 
+equal to or greater than 0.001 g 
+100 
+II 
+0.001 g to 0.05 g, inclusive 
+20 
+ 
+equal to or greater than 0.1 g 
+50 
+III 
+All 
+    20** 
+   III L 
+All 
+50 
+IIII 
+All 
+10 
+*For Class I and II devices equipped with auxiliary reading means (i.e., a rider, a vernier, or a least 
+significant decimal differentiated by size, shape or color), the value of the verification scale division “e” is 
+the value of the scale division immediately preceding the auxiliary means.  For Class III and IIII devices the 
+value of “e” is specified by the manufacturer as marked on the device; “e” must be less than or equal to “d.” 
+(Added 1999) 
+ 
+**A minimum load of 10 d is recommended for a weight classifier marked in accordance with a statement 
+identifying its use for special applications. 
+(Added 1990) 
+(Amended 1990) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 55
+Handbook 44 – 2026 
+2.20. Scales 
+2-55 
+UR.3.1.1.  Minimum Load, Grain Dockage Determination.  – When determining the quantity of foreign 
+material (dockage) in grain, the weight of the sample shall be equal to or greater than 500 scale divisions. 
+(Added 1985) 
+UR.3.2.  Maximum Load. – A scale shall not be used to weigh a load of more than the nominal capacity of the scale. 
+UR.3.2.1. Maximum Loading for Vehicle Scales.  – A vehicle scale shall not be used to weigh loads exceeding 
+the maximum load capacity of its span as specified in Table UR.3.2.1. Span Maximum Load. 
+(Added 1996) 
+Table UR.3.2.1. 
+Span Maximum Load 
+Distance in Feet 
+Between the 
+Extremes of any 
+Two or More 
+Consecutive 
+Axles 
+Ratio of CLC to Maximum Load (“r” factor) Carried on Any 
+Group of Two or More Consecutive Axles. 
+ 
+2 axles 
+3 axles 
+4 axles 
+5 axles 
+6 axles 
+7 axles 
+8 axles 
+9 axles 
+41 
+1.000 
+ 
+INSTRUCTIONS: 
+1. Determine the scale’s CLC. 
+2. Count the number of axles on the vehicle in a given span and determine 
+the distance in feet between the first and last axle in the span. 
+3. Multiply the CLC by the corresponding multiplier in the table.* 
+4. The resulting number is the scale’s maximum concentrated load for 
+a single span based on the vehicle configuration. 
+* note and formula found at the end of the table. 
+51 
+1.000 
+ 
+61 
+1.000 
+ 
+71 
+1.000 
+ 
+8 and less1 
+1.000 
+1.000 
+More than 81 
+1.118 
+1.235 
+9 
+1.147 
+1.257 
+10 
+1.176 
+1.279 
+11 
+1.206 
+1.301 
+12 
+1.235 
+1.324 
+1.471 
+1.632 
+ 
+ 
+ 
+ 
+13 
+1.265 
+1.346 
+1.490 
+1.651 
+ 
+ 
+ 
+ 
+14 
+1.294 
+1.368 
+1.510 
+1.669 
+ 
+ 
+ 
+ 
+15 
+1.324 
+1.390 
+1.529 
+1.688 
+1.853 
+ 
+ 
+ 
+16 
+1.353 
+1.412 
+1.549 
+1.706 
+1.871 
+ 
+ 
+ 
+17 
+1.382 
+1.434 
+1.569 
+1.724 
+1.888 
+ 
+ 
+ 
+18 
+1.412 
+1.456 
+1.588 
+1.743 
+1.906 
+ 
+ 
+ 
+19 
+1.441 
+1.478 
+1.608 
+1.761 
+1.924 
+ 
+ 
+ 
+20 
+1.471 
+1.500 
+1.627 
+1.779 
+1.941 
+ 
+ 
+ 
+21 
+1.500 
+1.522 
+1.647 
+1.798 
+1.959 
+ 
+ 
+ 
+22 
+1.529 
+1.544 
+1.667 
+1.816 
+1.976 
+ 
+ 
+ 
+23 
+1.559 
+1.566 
+1.686 
+1.835 
+1.994 
+ 
+ 
+ 
+24 
+1.588 
+1.588 
+1.706 
+1.853 
+2.012 
+2.176 
+ 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 56
+2.20. Scales 
+Handbook 44 – 2026 
+2-56 
+Table UR.3.2.1. 
+Span Maximum Load 
+Distance in Feet 
+Between the 
+Extremes of any 
+Two or More 
+Consecutive 
+Axles 
+Ratio of CLC to Maximum Load (“r” factor) Carried on Any 
+Group of Two or More Consecutive Axles. 
+ 
+2 axles 
+3 axles 
+4 axles 
+5 axles 
+6 axles 
+7 axles 
+8 axles 
+9 axles 
+25 
+1.618 
+1.610 
+1.725 
+1.871 
+2.029 
+2.194 
+ 
+ 
+26 
+ 
+1.632 
+1.745 
+1.890 
+2.047 
+2.211 
+ 
+ 
+27 
+ 
+1.654 
+1.765 
+1.908 
+2.065 
+2.228 
+ 
+ 
+28 
+ 
+1.676 
+1.784 
+1.926 
+2.082 
+2.245 
+2.412 
+ 
+29 
+ 
+1.699 
+1.804 
+1.945 
+2.100 
+2.262 
+2.429 
+ 
+30 
+ 
+1.721 
+1.824 
+1.963 
+2.118 
+2.279 
+2.445 
+ 
+31 
+ 
+1.743 
+1.843 
+1.982 
+2.135 
+2.297 
+2.462 
+ 
+32 
+ 
+1.765 
+1.863 
+2.000 
+2.153 
+2.314 
+2.479 
+2.647 
+33 
+ 
+ 
+1.882 
+2.018 
+2.171 
+2.331 
+2.496 
+2.664 
+34 
+ 
+ 
+1.902 
+2.037 
+2.188 
+2.348 
+2.513 
+2.680 
+35 
+ 
+ 
+1.922 
+2.055 
+2.206 
+2.365 
+2.529 
+2.697 
+36 
+ 
+ 
+2.0002 
+2.074 
+2.224 
+2.382 
+2.546 
+2.713 
+37 
+ 
+ 
+2.0002 
+2.092 
+2.241 
+2.400 
+2.563 
+2.730 
+38 
+ 
+ 
+2.0002 
+2.110 
+2.259 
+2.417 
+2.580 
+2.746 
+39 
+ 
+ 
+2.000 
+2.129 
+2.276 
+2.434 
+2.597 
+2.763 
+40 
+ 
+ 
+2.020 
+2.147 
+2.294 
+2.451 
+2.613 
+2.779 
+41 
+ 
+ 
+2.039 
+2.165 
+2.312 
+2.468 
+2.630 
+2.796 
+42 
+ 
+ 
+2.059 
+2.184 
+2.329 
+2.485 
+2.647 
+2.813 
+43 
+ 
+ 
+2.078 
+2.202 
+2.347 
+2.502 
+2.664 
+2.829 
+44 
+ 
+ 
+2.098 
+2.221 
+2.365 
+2.520 
+2.681 
+2.846 
+45 
+ 
+ 
+2.118 
+2.239 
+2.382 
+2.537 
+2.697 
+2.862 
+46 
+ 
+ 
+2.137 
+2.257 
+2.400 
+2.554 
+2.714 
+2.879 
+47 
+ 
+ 
+2.157 
+2.276 
+2.418 
+2.571 
+2.731 
+2.895 
+48 
+ 
+ 
+2.176 
+2.294 
+2.435 
+2.588 
+2.748 
+2.912 
+49 
+ 
+ 
+2.196 
+2.313 
+2.453 
+2.605 
+2.765 
+2.928 
+50 
+ 
+ 
+2.216 
+2.331 
+2.471 
+2.623 
+2.782 
+2.945 
+51 
+ 
+ 
+2.235 
+2.349 
+2.488 
+2.640 
+2.798 
+2.961 
+52 
+  
+ 
+2.255 
+2.368 
+2.506 
+2.657 
+2.815 
+2.978 
+53 
+ 
+ 
+2.275 
+2.386 
+2.524 
+2.674 
+2.832 
+2.994 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 57
+Handbook 44 – 2026 
+2.20. Scales 
+2-57 
+Table UR.3.2.1. 
+Span Maximum Load 
+Distance in Feet 
+Between the 
+Extremes of any 
+Two or More 
+Consecutive 
+Axles 
+Ratio of CLC to Maximum Load (“r” factor) Carried on Any 
+Group of Two or More Consecutive Axles. 
+ 
+2 axles 
+3 axles 
+4 axles 
+5 axles 
+6 axles 
+7 axles 
+8 axles 
+9 axles 
+54 
+ 
+ 
+2.294 
+2.404 
+2.541 
+2.691 
+2.849 
+3.011 
+55 
+ 
+ 
+2.314 
+2.423 
+2.559 
+2.708 
+2.866 
+3.028 
+56 
+ 
+ 
+2.333 
+2.441 
+2.576 
+2.725 
+2.882 
+3.044 
+57 
+ 
+ 
+2.3533 
+2.460 
+2.594 
+2.742 
+2.899 
+3.061 
+58 
+ 
+ 
+ 
+2.478 
+2.612 
+2.760 
+2.916 
+3.077 
+59 
+ 
+ 
+ 
+2.496 
+2.629 
+2.777 
+2.933 
+3.094 
+60 
+ 
+ 
+ 
+2.515 
+2.647 
+2.794 
+2.950 
+3.110 
+*Note:  This table was developed based upon the following formula.  Values may be rounded in some cases for ease of 
+use. 
+                     
+
+
+
+
++
++
+
+
+
+
+−
+
+=
+36
+  
+  
+12
+  
+  
+1
+ 
+500
+N
+N
+LN
+r
+W
+ 
+1 Tandem Axle Weight. 
+2 Exception – These values in the third column correspond to the maximum loads in which the inner bridge dimensions 
+of 36 ft, 37 ft, and 38 ft are considered to be equivalent to 39 ft.  This allows a weight of 68 000 lb on axles 2 
+through 5. 
+3 Corresponds to the Interstate Gross Weight Limit. 
+ 
+UR.3.3.  Single-Draft Vehicle Weighing.  – A vehicle or a coupled-vehicle combination shall be commercially 
+weighed on a vehicle scale only as a single draft.  That is, the total weight of such a vehicle or combination shall not 
+be determined by adding together the results obtained by separately and not simultaneously weighing each end of such 
+vehicle or individual elements of such coupled combination.  However, the weight of: 
+(a) a coupled combination may be determined by uncoupling the various elements (tractor, semitrailer, trailer), 
+weighing each unit separately as a single draft, and adding together the results; or 
+(b) a vehicle or coupled-vehicle combination may be determined by adding together the weights obtained while 
+all individual elements are resting simultaneously on more than one scale platform. 
+This paragraph does not apply to highway-law-enforcement scales, scales used for the collection of statistical data, or 
+scales used to charge a fee for the service of providing weights of the different axle loads, axle-group loads, and total 
+weight of vehicles and coupled-vehicle combinations when the only use of those values is to determine compliance 
+with established highway weight requirements and safe distribution of the load. 
+(Added 1992) (Amended 2024) 
+UR.3.4.  Weighing of Axle Loads and Axle-Group Loads. – Establishing weight values for the different individual 
+axle loads and axle-group loads of a vehicle or coupled-vehicle combination is oftentimes necessary to verify 
+compliance with established highway weight requirements and safe distribution of the load.   When a fee is charged 
+for this service, the scale’s application is considered “commercial” under the provisions of paragraph G-A.1. 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 58
+2.20. Scales 
+Handbook 44 – 2026 
+2-58 
+Commercial and Law Enforcement Equipment and the scale shall comply with all applicable NIST Handbook 44 
+requirements for commercial weighing systems.  
+When weight values for axle loads and/or axle-group loads are obtained using multiple-independent platform vehicle 
+scale systems in which all parts of the vehicle or coupled-vehicle combination being weighed are simultaneously 
+positioned on live elements of the scale, the values for the different axle loads and axle-group loads may be summed 
+to establish the legal gross vehicle weight.   
+In no case, however, shall a summed result of the different axle loads and axle-group loads of a vehicle or coupled 
+vehicle combination weighed in multiple drafts be used as the legal gross vehicle weight unless subpart (a) or (b) of 
+paragraph UR.3.3. Single-Draft Vehicle Weighing is met. (Also see paragraph S.1.15. Recorded Representations, 
+Multi-Independent Platform Vehicle Scale Systems.) 
+(Added 2024) 
+UR.3.5.  Wheel-Load Weighing. 
+UR.3.5.1. Use in Pairs. – When wheel-load weighers or portable axle-load weighers are to be regularly used in 
+pairs, both weighers of each such pair shall be appropriately marked to identify them as weighers intended to be 
+used in combination. 
+UR.3.5.2. Level Condition.  – A vehicle of which either an axle-load determination or a gross-load 
+determination is being made utilizing wheel-load weighers or portable axle-load weighers, shall be in a reasonably 
+level position at the time of such determination. 
+UR.3.6.  Special Designs. – A scale designed and marked for a special application (such as a prepackaging scale or 
+prescription scale with a counting feature) shall not be used for other than its intended purpose.3F4 
+(Amended 2003) 
+UR.3.7.  Wet Commodities. – Wet commodities not in watertight containers shall be weighed only on a scale having 
+a pan or platform that will drain properly. 
+(Amended 1988) 
+UR.3.8.  Minimum Load on a Vehicle Scale.  – A vehicle scale shall not be used to weigh net loads smaller than: 
+(a) 10 d when weighing scrap material for recycling or weighing refuse materials at landfills and transfer stations; 
+and 
+(b) 50 d for all other weighing. 
+As used in this paragraph, scrap materials for recycling shall be limited to ferrous metals, paper (including cardboard), 
+textiles, plastic, and glass. 
+(Amended 1988, 1992, and 2006) 
+UR.3.9.  Minimum Load for Weighing Livestock.  – A scale with scale divisions greater than 2 kg (5 lb) shall not 
+be used for weighing net loads smaller than 500 d. 
+(Amended 1989) 
+ 
+4 Prepackaging scales and prescription scales with a counting feature (and other commercial devices) used for putting up packages in 
+advance of sale are acceptable for use in commerce only if all appropriate provisions of NIST Handbook 44 are met.  Users of such 
+devices must be alert to the legal requirements relating to the declaration of quantity on a package.  Such requirements are to the effect 
+that, on the average, the contents of the individual packages of a particular commodity comprising a lot, shipment, or delivery must 
+contain at least the quantity declared on the label.  The fact that a prepackaging scale may overregister, but within established tolerances, 
+and is approved for commercial service is not a legal justification for packages to contain, on the average, less than the labeled quantity. 
+(Amended 2003) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 59
+Handbook 44 – 2026 
+2.20. Scales 
+2-59 
+UR.3.10. Use of Manual Weight Entries.  – Manual gross or net weight entries are permitted for use in the following 
+applications only when: 
+(a) a point-of-sale system interfaced with a scale is giving credit for a weighed item; 
+(b) an item is pre-weighed on a legal for trade scale and marked with the correct net weight; 
+(c) a device or system is generating labels for standard weight packages; 
+(d) postal scales or weight classifiers are generating manifests for packages to be picked up at a later time; or 
+(e) livestock and vehicle scale systems generate weight tickets to correct erroneous tickets. 
+(Added 1992) (Amended 2000 and 2004) 
+UR.3.11. Dynamic Monorail Weighing Systems. – When the value of d is different from the value of e, the 
+commercial transaction must be based on e. 
+(Added 1999) 
+UR.3.12. Minimum Count. – A prescription scale with an operational counting feature shall not be used to count a 
+quantity of less than 30 pieces weighing a minimum of 90 e. 
+(Added 2003) 
+Note:  The minimum count as defined in this paragraph refers to the use of the device in the filling of prescriptions and is different 
+from the minimum sample piece count as defined in S.1.2.3. Prescription Scale with a Counting Feature and as required to be 
+marked on the scale by S.6.6. Counting Feature, Minimum Individual Piece Weight, and Minimum Sample Piece Count. 
+(Note Added 2004) 
+UR.3.13. Correct Stored Piece Weight. – For prescription scales with a counting feature, the user is responsible for 
+maintaining the correct stored piece weight.  This is especially critical when a medicine has been reformulated or comes 
+from different lots. 
+(Added 2003) 
+UR.3.14. Fault Indications for Weigh-in-Motion Vehicle Scales. – The fault conditions defined in S.1.14.1. 
+Identification of a Fault shall be presented to the customer and the operator in a clear and conspicuous manner. 
+(Added 2021) 
+UR.4.  Maintenance Requirements. 
+UR.4.1.  Balance Condition. – The zero-load adjustment of a scale shall be maintained so that, with no load on the 
+load-receiving element and with all load-counterbalancing elements of the scale (such as poises, drop weights, or 
+counterbalance weights) set to zero, the scale shall indicate or record a zero balance condition.  A scale not equipped 
+to indicate or record a zero-load balance shall be maintained in balance under any no-load condition. 
+UR.4.2.  Level Condition.  – If a scale is equipped with a level-condition indicator, the scale shall be maintained in 
+level. 
+UR.4.3.  Scale Modification.  – The dimensions (e.g., length, width, thickness, etc.) of the load receiving element 
+of a scale shall not be changed beyond the manufacturer’s specifications, nor shall the capacity of a scale be increased 
+beyond its design capacity by replacing or modifying the original primary indicating or recording element with one of 
+a higher capacity, except when the modification has been approved by a competent engineering authority, preferably 
+that of the engineering department of the manufacturer of the scale, and by the weights and measures authority having 
+jurisdiction over the scale. 
+(Amended 1996) 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 60
+2.20. Scales 
+Handbook 44 – 2026 
+2-60 
+UR.5.  Coupled-in-Motion Railroad Weighing Systems.  
+(a) A coupled-in-motion weighing system placed in service on or after January 1, 1991, should be tested in the manner 
+in which it is operated, with the locomotive either pushing or pulling the cars at the designed speed and in the 
+proper direction.  The cars used in the test train should represent the range of gross weights that will be used during 
+the normal operation of the weighing system.  Except as provided in N.4.2. Weighing Systems Placed in Service 
+Prior to January 1, 1991, and Used to Weigh Trains of Ten or More Cars and N.4.3.(a) Weighing Systems Placed 
+in Service on or After January 1, 1991, and Used to Weigh Trains of Ten or More Cars, normal operating 
+procedures should be simulated as nearly as practical.  Approach conditions for a train length in each direction of 
+the scale site are more critical for a weighing system used for individual car weights than for a unit-train-weights-
+only facility, and should be considered prior to installation. 
+(b) For coupled-in-motion point-based weighing systems used only for dynamic weighing, the user shall provide an 
+alternate certified scale to be used as a reference scale.  The weights and measures authority having jurisdiction 
+over the weighing system shall determine if the reference scale provided is suitable in terms of size, capacity, 
+minimum division, performance requirements, and the proximity to the weighing system under evaluation.  The 
+reference weight cars weighed on the reference scale may then be used for calibration and annual inspection by 
+the jurisdiction with statutory authority for the system. 
+(Added 1990) (Amended 1992 and 2021)  
+ 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 61
+Handbook 44 – 2026 
+2.20. Scales 
+2-61 
+Scales Code Index 
+A 
+Acceptance................................................... 19, 42, 44, 45 
+Acceptance tolerance ............................... 19, 42, 44, 45, 46 
+Accuracy ............... 18, 19, 21, 22, 24, 26, 27, 38, 40, 43, 51 
+Accuracy class ................. 18, 21, 22, 24, 26, 38, 40, 43, 51 
+Adjustable components ............................................. 14, 20 
+Adjustment.............................................. 14, 17, 20, 38, 59 
+Apportionment factor .................................................... 48 
+Approaches .............................................................. 53, 54 
+Audit trail...................................................................... 14 
+Automatic zero-tracking mechanism ................... 17, 21, 34 
+Axle and Axle-Group loads............................................ 16 
+Axle-Group-Loads......................................................... 57 
+Axle-load scales ....................................... 7, 19, 41, 49, 54 
+B 
+Balance condition ...................................... 7, 17, 18, 50, 59 
+Balance indicator ........................... 7, 18, 19, 20, 42, 43, 49 
+Balance position ............................................................ 10 
+Barometric pressure .................................................. 43, 50 
+C 
+Capacity11, 12, 15, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 
+30, 31, 32, 33, 35, 36, 38, 41, 42, 44, 49, 51, 52, 53, 55, 
+59 
+Capacity indication ........................................................ 12 
+Certificate of Conformance ............................................ 21 
+Class8, 9, 14, 17, 19, 21, 22, 24, 25, 26, 27, 30, 35, 41, 44, 46, 
+47, 49, 50, 51, 52, 53, 54 
+Class I8, 9, 14, 17, 18, 19, 21, 22, 26, 27, 30, 40, 41, 42, 43, 
+44, 49, 50, 51, 52, 54 
+Class II8, 9, 17, 18, 19, 21, 22, 26, 27, 30, 40, 41, 42, 43, 44, 
+46, 47, 49, 50, 51, 54 
+Class III 9, 17, 18, 21, 22, 25, 26, 27, 30, 40, 41, 42, 43, 44, 
+46, 47, 49, 50, 51, 53, 54 
+Class III L . 17, 21, 22, 25, 26, 27, 40, 41, 42, 43, 44, 47, 49, 
+50, 51, 53, 54 
+Class IIII9, 21, 22, 25, 26, 27, 30, 40, 42, 43, 44, 46, 47, 49, 
+50, 51, 54 
+CLC .................................................. 23, 24, 26, 27, 31, 55 
+Clearance ........................................................... 10, 18, 53 
+Concentrated load capacity ............................................ 24 
+Consecutive-car test.................................................. 37, 38 
+Counting feature ....................... 9, 19, 26, 30, 35, 45, 58, 59 
+Crane and hopper .......................................................... 44 
+Crane and hopper (other than grain hopper) .................. 22 
+Creep ....................................................................... 47, 48 
+D 
+Dairy-product test ....................................18, 19, 30, 41, 42 
+Damping means............................................................. 19 
+Decreasing load test ................................................. 41, 43 
+Direct sales ............................................. 11, 13, 17, 18, 20 
+Discrimination test ......................................................... 34 
+Distributed-car test ................................................... 37, 38 
+Dynamic-Monorail-Scales ................................................ 9 
+E 
+Electric power supply ..................................................... 50 
+Environmental factors .............................................. 34, 53 
+Exceptions-to-3 .............................................................. 25 
+Extended_Display-Mode .................................................. 9 
+F 
+Field standard .......................................................... 35, 36 
+Foundation .................................................................... 53 
+G 
+Graduations ............................................ 10, 11, 12, 13, 18 
+Grain-test................................................................. 18, 52 
+H 
+Hoists ............................................................................ 54 
+I 
+Index of an indicator ...................................................... 10 
+Indicating element......... 7, 19, 23, 24, 26, 28, 29, 44, 46, 53 
+Indicator ...... 7, 10, 12, 13, 18, 19, 20, 22, 26, 43, 46, 49, 59 
+Influence factors ...................................................... 43, 49 
+Information to be recorded ............................................. 16 
+Initial verification ...............................................36, 37, 38 
+Initial zero-setting mechanism .................................. 12, 18 
+Installation requirements ................................................ 53 
+J 
+Jewelers' ........................................................................ 42 
+L 
+Level ........................................... 17, 19, 33, 53, 54, 58, 59 
+Level condition ...................................................19, 58, 59 
+Level-indicating means .................................................. 19 
+Load cell ............................... 21, 23, 25, 26, 27, 47, 48, 53 
+Load cell verification interval ..............................21, 27, 48 
+M 
+Main elements ......................................................... 23, 44 
+Maintenance .......................... 41, 42, 44, 45, 46, 48, 53, 59 
+Maintenance requirements .............................................. 59 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 62
+2.20. Scales 
+Handbook 44 – 2026 
+2-62 
+Maintenance tolerance ....................... 41, 42, 44, 45, 46, 48 
+Manual weight entries .............................................. 15, 59 
+Marking requirements ............................................... 23, 24 
+Material test ............................................................ 34, 41 
+Maximum permissible error (mpe) ............................. 47, 48 
+Minimum load .................................................... 54, 55, 58 
+Minimum test weights .............................................. 35, 36 
+Money-value computation ............................................. 13 
+Money-value graduations ............................................... 12 
+Multi-independent platform .................................................. 16 
+Multi-interval ..................................................... 21, 22, 44 
+Multiple range .......................................................... 21, 44 
+N 
+No-load reference value ................................................... 8 
+Nominal capacity......... 11, 23, 24, 25, 27, 30, 31, 38, 43, 55 
+Non-automatic.......................................................... 46, 47 
+O 
+On-board ...................................................... 15, 19, 33, 51 
+Operating temperature ................................................... 50 
+P 
+Parallax ......................................................................... 10 
+Piece .................................................................... 9, 46, 59 
+Point-of-sale ............................................................. 13, 59 
+Poise ........................................................................ 11, 12 
+Portable axle-load weighers ....................... 7, 33, 44, 51, 58 
+Power interruption ......................................................... 50 
+Prescription ..... 18, 19, 22, 26, 30, 35, 38, 41, 42, 45, 58, 59 
+R 
+“r” factor ....................................................................... 55 
+Ratio test .................................................................. 34, 44 
+Readability .................................................................... 11 
+Recorded representations .......................................... 13, 16 
+Recording elements .............................................. 7, 19, 46 
+Repeatability ................................................................. 48 
+RFI .................................................................... 34, 50, 53 
+S 
+Scale modification ......................................................... 59 
+Scales 
+Automatic indicating ...................................... 30, 34, 41 
+Axle load ............................................ 26, 27, 31, 51, 52 
+Belt-conveyor .............................................................. 7 
+Computing ........................................................... 12, 13 
+Crane ................................................................... 33, 52 
+Dairy-product test ........................................... 19, 30, 42 
+Gem weighing ........................................................... 51 
+Grain test ............................................................ 41, 51 
+Hanging ............................................................... 33, 53 
+Hopper ..................................................... 33, 44, 51, 52 
+Jewelers’ ........................................................ 19, 41, 42 
+Livestock ..... 17, 19, 23, 26, 27, 29, 31, 32, 49, 51, 53, 59 
+Monorail ........................................... 8, 9, 18, 19, 32, 41 
+Parcel post ..................................................... 40, 41, 42 
+Postal .................................. 8, 12, 26, 40, 41, 42, 51, 59 
+Prepackaging ....................................................... 13, 58 
+Prescription......................................... 19, 35, 41, 45, 59 
+Railway track17, 19, 26, 27, 28, 32, 35, 41, 43, 51, 52, 53 
+Vehicle17, 19, 20, 23, 26, 27, 28, 31, 39, 49, 51, 53, 54, 55, 
+58, 59 
+Weighbeam................................................................ 10 
+Sealing .................................................................... 14, 15 
+Security seal .................................................................. 14 
+Sensitivity requirement ............................................ 42, 43 
+Sensitivity test ............................................................... 34 
+Shift test ............................................ 30, 31, 32, 33, 37, 46 
+Single-draft .................................................................... 57 
+Stock racks .................................................................... 54 
+Strain-load test ......................................................... 35, 46 
+Subsequent verification .......................................37, 38, 43 
+Substitution ........................................................35, 36, 46 
+Supports .................................................................. 30, 53 
+Symmetry ...................................................................... 10 
+T 
+Tare .............................................................. 17, 18, 19, 43 
+Temperature ........................................... 21, 24, 25, 43, 50 
+Test loads .................................... 30, 32, 35, 36, 41, 43, 45 
+Test pattern .................................................................... 31 
+Time dependence ........................................................... 46 
+Tolerances . 18, 19, 35, 36, 40, 41, 42, 43, 44, 46, 48, 51, 58 
+Total vehicle weight ....................................................... 16 
+Travel ................................................................. 11, 20, 38 
+Type evaluation ........................... 23, 43, 44, 45, 46, 47, 48 
+U 
+Unit prices ..................................................................... 12 
+Unit weights .......................................................12, 27, 46 
+Use requirements ........................................................... 54 
+V 
+Vehicle on-board weighing system ................ 15, 19, 33, 51 
+Verification scale interval ............................................... 21 
+Verification scale interval-e .............................................. 8 
+W 
+Weighbeam ................................................................... 10 
+Weighing elements.................................. 20, 21, 31, 32, 53 
+Weighing systems 
+Coupled-in-motion ..........................................37, 44, 60 
+Uncoupled-in-motion .................................................. 38 
+Weight classifier ..................................... 12, 13, 26, 54, 59 
+Weight ranges .......................................................... 12, 27 
+Weight units ..................................................................... 8 
+Weight-Classifiers ........................................................... 9 
+Wheel-load weighers............................7, 19, 33, 44, 52, 58 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 63
+Handbook 44 – 2026 
+2.20. Scales 
+2-63 
+Z 
+Zero indication ...........................................................7, 50 
+Zero-load adjustment ................................................ 17, 59 
+Zero-load balance .............................. 14, 17, 18, 34, 50, 59 
+Zero-tracking mechanism ....... See Automatic zero-tracking 
+mechanism  
+ 
+ 
+ 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026
+
+=====PAGE 64
+2.20. Scales 
+Handbook 44 – 2026 
+2-64 
+ 
+THIS PAGE INTENTIONALLY LEFT BLANK 
+This publication is available free of charge from https://doi.org/10.6028/NIST.HB.44-2026

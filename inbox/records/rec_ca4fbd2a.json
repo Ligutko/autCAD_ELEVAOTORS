@@ -1,0 +1,28 @@
+{
+  "id": "rec_ca4fbd2a",
+  "subject": "Норма: НАПБ В.01.057-2006/200 Правила пожежної безпеки в агропромисловому комплексі України",
+  "kind": "norm",
+  "claim": {
+    "name": "deadend_turnaround_pad",
+    "value": [
+      12,
+      12
+    ],
+    "unit": "m",
+    "qualifier": "п. 4.1.11: глухі проїзди й під'їзди до будинків, споруд і вододжерел закінчуються майданчиками для розвертання"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.rada.gov.ua/laws/show/z0313-07/print",
+    "path": "inbox/raw/web/zakon.rada.gov.ua/z0313-07_print.html",
+    "page": null,
+    "quote": "Глухі   проїзди,   під'їзди  до  будинків,  споруд  і вододжерел  повинні  закінчуватись  площадками   для   розвертання транспортних  засобів  розміром  не менше 12х12 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

@@ -1,0 +1,38 @@
+{
+  "id": "rec_72ce91d4",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_road_to_wall_distance",
+    "value": {
+      "height_le_12": [
+        5,
+        25
+      ],
+      "height_12_28": [
+        5,
+        8
+      ],
+      "height_gt_28": [
+        8,
+        10
+      ]
+    },
+    "unit": "m",
+    "qualifier": "п. 15.3.2: відстань від краю проїзної частини до зовнішніх стін виробничих будинків залежно від висоти"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 133,
+    "quote": "заввишки від 12 м до 28 м включно – в межах 5 – 8 м;",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Інші рядки: до 12 м — 5–25 м; понад 28 м — 8–10 м.",
+  "seen_in": []
+}

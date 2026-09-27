@@ -1,0 +1,28 @@
+{
+  "id": "rec_575442a8",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "gate_width",
+    "value": {
+      "rule": "найбільша ширина автомобіля + 1,5 м",
+      "min_m": 4.5
+    },
+    "unit": "m",
+    "qualifier": "п. 7.2.15: ширина воріт автомобільних в'їздів на майданчик підприємства"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 43,
+    "quote": "більшій ширині застосовуваних автомобілів плюс 1,5 м, але не менше 4,5 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Те саме в Правилах охорони праці на автотранспорті (z1299-12, п. 7.2). Для автомобіля 2,6 м виходить 4,5 м.",
+  "seen_in": []
+}

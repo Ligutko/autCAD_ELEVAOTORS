@@ -1,0 +1,35 @@
+{
+  "id": "rec_04fd1622",
+  "subject": "U-подібний розворот автопоїзда з напівпричепом (генплан елеватора)",
+  "kind": "dimension",
+  "claim": {
+    "name": "uturn_180_geometry",
+    "value": {
+      "outer_edge_radius_m": [
+        13.0,
+        13.5
+      ],
+      "inner_edge_radius_m_max": 4.8,
+      "carriageway_width_in_loop_m": [
+        8.2,
+        8.7
+      ]
+    },
+    "unit": "m",
+    "qualifier": "U-подібний розворот на 180°: радіус зовнішньої кромки, внутрішньої кромки, ширина проїзної частини в петлі"
+  },
+  "source": {
+    "origin": "derived",
+    "url": null,
+    "path": null,
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Вхід: кільце ЄС 12,5 / 5,3 м (rec_e52d1398), тобто габаритна смуга 7,2 м. Запас від габариту до кромки (judgment): 0,5–1,0 м зовні, 0,5 м всередині. Зовнішня кромка R = 12,5 + 0,5…1,0 = 13,0–13,5 м; внутрішня R ≤ 5,3 − 0,5 = 4,8 м; ширина 8,2–8,7 м. Перевірка за СНиП п. 5.50 (rec_e9875ec6): діаметр 25,9–27,0 м — збігається. Для автопоїзда 22 м (причіпний) траєкторією (AutoTURN / Vehicle Tracking) не перевірено.",
+  "seen_in": []
+}

@@ -1,0 +1,34 @@
+{
+  "id": "rec_a6a8abc5",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_deadend_turnaround",
+    "value": {
+      "deadend_max_m": 150,
+      "loop_axis_radius_min_m": 10,
+      "pad_min_m": [
+        12,
+        12
+      ]
+    },
+    "unit": "m",
+    "qualifier": "п. 15.3.6: тупикові проїзди не довші за 150 м, закінчуються кільцевим об'їздом радіусом по осі ≥ 10 м або майданчиком ≥ 12 x 12 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 134,
+    "quote": "майданчиками для розвороту, розмір яких враховує технічні характеристики пожежної техніки, але не менше 12 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_03e9ee4c"
+  ],
+  "notes": "Початок пункту — на попередній сторінці PDF: «Тупикові проїзди слід передбачати довжиною не більше ніж 150 м… кільцевими об’їздами радіусом по осі проїзду не менше 10 м». Це мінімум під пожежну техніку, не під автопоїзд.",
+  "seen_in": []
+}

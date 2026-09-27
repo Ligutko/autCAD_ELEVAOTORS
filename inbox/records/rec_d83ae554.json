@@ -1,0 +1,31 @@
+{
+  "id": "rec_d83ae554",
+  "subject": "Норма: ДБН В.2.5-28:2018 Природне і штучне освітлення",
+  "kind": "norm",
+  "claim": {
+    "name": "outdoor_traffic_illuminance",
+    "value": {
+      "pedestrian_walkways": 5,
+      "vehicles_le_10kmh": 10,
+      "vehicles_le_40kmh": 20,
+      "turning_and_loading_areas": 50,
+      "U0_min": 0.4
+    },
+    "unit": "lx",
+    "qualifier": "табл. 8.12 «Загальне освітлення при зовнішніх роботах»: середня освітленість, не менше; U0 — рівномірність"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.isu.net.ua/sites/default/files/normdocs/dbn_v_2.5-28_2018.pdf",
+    "path": "inbox/raw/web/zakon.isu.net.ua/dbn_v_2.5-28_2018.pdf",
+    "page": 29,
+    "quote": "Проїжджа частина для транспорту, що рухається зі швидкістю не більше 10 км/год: велосипедів, вантажівок, екскаваторів 10 0,4 50 20",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Рядок 50 лк: «Пішохідні проходи, розвороти, вантажно-розвантажувальні майданчики 50 0,4 50 20» (у PDF м'який перенос у слові «розвантажувальні»). Рядок ≤ 40 км/год — 20 лк; пішохідні тротуари — 5 лк (U0 0,25). Таблиці 8.12–8.24 наведено за [2] (п. 8.3.8), тобто за EN 12464-2. PDF — скан з OCR-шаром; цитата дослівна з OCR-шару.",
+  "seen_in": []
+}

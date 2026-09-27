@@ -1,0 +1,29 @@
+{
+  "id": "rec_8422434d",
+  "subject": "Норма: ДБН Б.2.2-12:2019 Планування та забудова територій",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_access_sides",
+    "value": {
+      "width_le_18m": "одна сторона",
+      "width_gt_18m": "дві сторони",
+      "width_gt_100m_or_area_gt_10ha": "усі сторони"
+    },
+    "unit": "",
+    "qualifier": "п. 15.3.2: під'їзд пожежних автомобілів з твердим покриттям по всій довжині виробничих і сільськогосподарських будівель"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dreamdim.ua/wp-content/uploads/2019/07/DBN-B22-12-2019.pdf",
+    "path": "inbox/raw/web/dreamdim.ua/DBN-B22-12-2019.pdf",
+    "page": 133,
+    "quote": "з двох сторін при ширині понад 18 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Силос Ø 22 м ширший за 18 м, тож під'їзд потрібен з двох сторін. Послаблення «з однієї поздовжньої сторони» для 18–100 м не поширюється на будівлі з переробки та зберігання зерна (rec_e10c3765).",
+  "seen_in": []
+}
