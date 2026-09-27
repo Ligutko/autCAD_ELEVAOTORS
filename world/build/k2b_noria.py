@@ -48,7 +48,7 @@ def main():
     t0 = time.time()
     objs, measure = tower.build(spec)
     measure["build_seconds"] = round(time.time() - t0, 1)
-    v, f = c.box((-800, -800, -0.2), (800, 800, 0.0))
+    v, f = c.box((-800, -800, c.ground_z() - 0.2), (800, 800, c.ground_z()))
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
     labels = [o for o in bpy.data.objects if o.name.startswith("LBL_")]
 

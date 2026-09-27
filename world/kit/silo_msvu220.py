@@ -80,7 +80,8 @@ SPOUT_TOP = 21.422               # PDF p.8 / LUB: height to loading spout
 
 # ------------------------------------------------------------------ base
 FOUND_R = 11.6                   # PDF p.2/p.4: foundation ring a bit wider than wall, EST 0.6 m
-FOUND_H = 0.6                    # PDF p.4, p.6: silo base at +0.600
+FLOOR_Z = 0.6                    # PDF p.4, p.6: silo base at +0.600 (site frame)
+FOUND_H = FLOOR_Z - c.ground_z() # plinth above ground: 1.05 (PDF p.4, ground -0.45)
 AERATION_FANS = 4                # PDF p.2: four fan symbols per silo at 45 deg
 FAN_ANGLES = aeration()["fan_angles_deg"]   # PDF p.2 vectors: 47.5 / 132.5 / 227.5 / 312.5, not the diagonals
 FAN_R = aeration()["fan_r"]                 # PDF p.2 vectors: fan symbol centre 12.25 m from the silo axis

@@ -103,7 +103,7 @@ def build_bin(b, riser_y, max_flight=6.0):
     frame, shell, gate = [], [], []
     for sx in (-1, 1):
         for sy in (-1, 1):
-            frame.append(st.member((cx + sx * fx / 2, cy + sy * fy / 2, 0.0), (cx + sx * fx / 2, cy + sy * fy / 2, z1), st.SHS_150))
+            frame.append(st.member((cx + sx * fx / 2, cy + sy * fy / 2, c.ground_z()), (cx + sx * fx / 2, cy + sy * fy / 2, z1), st.SHS_150))
     corners = [(-1, -1), (1, -1), (1, 1), (-1, 1)]
     for (ax, ay), (bx, by) in zip(corners, corners[1:] + corners[:1]):
         frame.append(st.member((cx + ax * fx / 2, cy + ay * fy / 2, z1 - 0.1), (cx + bx * fx / 2, cy + by * fy / 2, z1 - 0.1), st.shs(0.12)))
@@ -120,7 +120,7 @@ def build_bin(b, riser_y, max_flight=6.0):
     gate.append(c.box((cx + 0.3, cy - 0.07, z0 - 0.2), (cx + 0.75, cy + 0.07, z0 - 0.05)))
     away = -side_towards(b, riser_y)                              # ladder face: away from the main
     lx = cx + 0.5
-    stiles, rungs, cage, rest, rails, toes = _caged_ladder(lx, cy + away * fy / 2, away, 0.0, z2, max_flight)
+    stiles, rungs, cage, rest, rails, toes = _caged_ladder(lx, cy + away * fy / 2, away, c.ground_z(), z2, max_flight)
     k = max(1, math.ceil(z2 / max_flight - 1e-9))
     x_top = lx + (0.35 if (k - 1) % 2 else -0.35)                 # the last flight comes out here
     yl, yo, e = cy + away * (s - 0.05), cy - away * (s - 0.05), s - 0.05

@@ -98,7 +98,7 @@ def build_civil(site, t, extra_holes=()):
     parts += [c.box((sx0 - w, y1, fz - fs), (sx1 + w, sy1 + w, fz)),
               c.box((sx0 - w, y1 + w, fz), (sx0, sy1 + w, rz)),
               c.box((sx1, y1 + w, fz), (sx1 + w, sy1 + w, rz)),
-              c.box((sx0, sy1, fz), (sx1, sy1 + w, rz))]
+              c.box((sx0, sy1, fz), (sx1, sy1 + w, c.ground_z()))]                  # exit end open at grade
     return c.merge_parts(parts)
 
 
@@ -106,7 +106,7 @@ def build_exit_stair(t):
     es = t["exit_stair"]
     x = sum(es["x_inner"]) / 2
     y0 = t["row_y"] + es["y_rel_row"][0] + 0.3
-    s, tr, r, _ = st.stair_flight(x, y0, t["floor_z"], 0.0, width=0.7, direction=1)
+    s, tr, r, _ = st.stair_flight(x, y0, t["floor_z"], c.ground_z(), width=0.7, direction=1)
     return s, tr, r
 
 
@@ -261,8 +261,11 @@ def build_services(site, t):
     return c.merge_parts(lamps), c.merge_parts(tray), lamp_pts
 
 
-def ground_cells(extent, holes, z0=-0.2, z1=0.0):
-    """Ground slab as rectangles, leaving out plan holes (x0, y0, x1, y1) such as tunnels and pits."""
+def ground_cells(extent, holes, thick=0.2):
+    """Ground slab (top at SITE ground_z) as rectangles, leaving out plan holes (x0, y0, x1, y1)
+    such as tunnels and pits."""
+    z1 = c.ground_z()
+    z0 = z1 - thick
     xs = sorted({-extent, extent} | {h[0] for h in holes} | {h[2] for h in holes})
     ys = sorted({-extent, extent} | {h[1] for h in holes} | {h[3] for h in holes})
     parts = []

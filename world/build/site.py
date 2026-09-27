@@ -129,7 +129,8 @@ def main():
 
     cams = {
         "site_drone.png": c.camera("CAM_DRONE", (70, -70, 55), (-8, 12, 10), lens=28),
-        "site_ground.png": c.camera("CAM_GROUND", (28, -16, 1.7), (-2, 8, 16), lens=20),
+        "site_ground.png": c.camera("CAM_GROUND", (28, -16, c.ground_z() + 1.7), (-2, 8, 16), lens=20),
+        "site_tunnel_exit.png": c.camera("CAM_EXIT", (-56.5, 9.5, c.ground_z() + 1.7), (-51.1, 2.8, -1.2), lens=24),
         "site_gallery_walk.png": c.camera("CAM_WALK", (-3.5, 0.4, 24.9), (-30, 0.2, 23.6), lens=20),
         "site_bridge.png": c.camera("CAM_BRIDGE", (9, 12.7, 17), (0, 12.7, 24.5), lens=24),
         "site_aspiration_81.png": c.camera("CAM_ASP_81", (-15.5, 50.5, 4.5), (-26.5, 36.8, 7.5), lens=22),
@@ -141,10 +142,15 @@ def main():
         bpy.ops.wm.save_as_mainfile(filepath=str(path), compress=True)
         print("saved", path, "build", build_s, "s", flush=True)
         return
+    only = [a.split("=", 1)[1] for a in sys.argv if a.startswith("--only=")]
     for name, cam in cams.items():
+        if only and name not in only:
+            continue
         t = time.time()
         c.render(scene, cam, OUT / name)
         print("rendered", name, round(time.time() - t, 1), "s", flush=True)
+    if only:
+        return
     measure = {"build_seconds": build_s, "silos": len(site["silos"]),
                "towers": [t["id"] for t in site["noria_towers"]],
                "galleries": [ln["id"] for ln in site["silo_top_galleries"]["lines"]] + [b["id"] for b in site["bridges"]],

@@ -48,7 +48,7 @@ def main():
     for col in bpy.data.collections:          # labels are for explainer shots only
         if col.name.startswith("LABELS_"):
             col.hide_render = True
-    v, f = c.box((-1500, -1500, -0.2), (1500, 1500, 0.0))
+    v, f = c.box((-1500, -1500, c.ground_z() - 0.2), (1500, 1500, c.ground_z()))
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
 
     x, y = spec["x"], spec["y"]

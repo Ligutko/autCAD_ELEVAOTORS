@@ -32,7 +32,7 @@ def main():
     objs, measure = silo.build()
     measure["build_seconds"] = round(time.time() - t0, 1)
 
-    v, f = c.box((-1500, -1500, -0.8), (1500, 1500, -0.6))
+    v, f = c.box((-1500, -1500, -silo.FOUND_H - 0.2), (1500, 1500, -silo.FOUND_H))
     c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
 
     base = (0, 0, 0)

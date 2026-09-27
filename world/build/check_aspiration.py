@@ -239,8 +239,8 @@ def checks(site, roof_holes=None, cover_holes=None):
             for p, q in zip(dct["path"], dct["path"][1:]):
                 if max(p[2], q[2]) <= 0.6:
                     continue
-                if _slope(p, q) < 10 and min(p[2], q[2]) - rad < HEADROOM:
-                    low.append(f"{dct['kind']} at z {min(p[2], q[2]):.2f}")
+                if _slope(p, q) < 10 and min(p[2], q[2]) - rad - c.ground_z() < HEADROOM:
+                    low.append(f"{dct['kind']} at z {min(p[2], q[2]):.2f} (ground {c.ground_z()})")
                 for s in site["silos"]:
                     g = _seg_dist_2d((s["x"], s["y"]), p, q) - rad - SILO_WALL
                     if g < CLEAR:

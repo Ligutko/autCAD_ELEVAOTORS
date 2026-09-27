@@ -3,11 +3,22 @@
 Every kit module builds geometry in metres with real thickness.
 """
 
+import functools
+import json
 import math
+from pathlib import Path
 
 import bpy  # noqa: I001  bpy first: the pip module registers bmesh and mathutils
 import numpy as np
 from mathutils import Vector
+
+SITE_JSON = Path(__file__).resolve().parents[1] / "site" / "SITE.json"
+
+
+@functools.lru_cache(maxsize=1)
+def ground_z():
+    """Finished ground level in the site frame (SITE.json `ground_z`, PDF p.4)."""
+    return float(json.loads(SITE_JSON.read_text(encoding="utf-8"))["ground_z"])
 
 
 # ---------------------------------------------------------------- meshes
