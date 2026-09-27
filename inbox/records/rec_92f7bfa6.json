@@ -1,0 +1,33 @@
+{
+  "id": "rec_92f7bfa6",
+  "subject": "Аналог: стовп для 3D-огорожі (Металосітка, Дніпро)",
+  "kind": "analog",
+  "claim": {
+    "name": "fence_post",
+    "value": {
+      "section_mm": [
+        60,
+        40,
+        1.2
+      ],
+      "length_m": 2.5,
+      "mount": "бетонування"
+    },
+    "unit": "mm",
+    "qualifier": "каталог стовпів; також висоти сітки на складі 1,53 / 1,73 / 2 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://metallosetka.dp.ua/uk-ua/products/stolby-i-aksessuary/",
+    "path": "inbox/raw/web/metallosetka.dp.ua/stolby.html",
+    "page": null,
+    "quote": "Стовп для паркану 3D H – 2,5 м / ППЛ / 60х40х1.2мм / бетон",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Стовп 2,5 м: ≈ 0,5 м у бетоні + до 2,0 м над землею.",
+  "seen_in": []
+}

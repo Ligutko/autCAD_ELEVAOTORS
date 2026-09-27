@@ -168,9 +168,202 @@ def top_area(v, f, z):
     return a
 
 
+# ---------------------------------------------------------------- W1b fence, gates, aprons
+
+_BOX_F = np.array([(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)])
+
+
+def boxes(lo, hi):
+    """Many axis-aligned boxes at once (corner order as common.box): lo, hi (n, 3) -> (verts, faces)."""
+    lo, hi = np.asarray(lo, float).reshape(-1, 3), np.asarray(hi, float).reshape(-1, 3)
+    sel = np.array([[i, j, k] for i in (0, 1) for j in (0, 1) for k in (0, 1)])       # 8 corners
+    v = np.where(sel[None, :, :] == 0, lo[:, None, :], hi[:, None, :]).reshape(-1, 3)
+    f = (_BOX_F[None, :, :] + 8 * np.arange(len(lo))[:, None, None]).reshape(-1, 4)
+    return v, f
+
+
+def fence_sides(fe):
+    """The four sides of the fence rectangle: {side: (fixed coord, t0, t1, axis of t, outward sign)}."""
+    x0, y0, x1, y1 = fe["rect"]
+    return {"S": (y0, x0, x1, 0, -1.0), "E": (x1, y0, y1, 1, 1.0), "N": (y1, x0, x1, 0, 1.0), "W": (x0, y0, y1, 1, -1.0)}
+
+
+def openings(site):
+    """Gaps in the fence: [(side, t0, t1, kind, gate dict or None)] — a gate centred on its lane axis, the wicket."""
+    fe = spec(site)["fence"]
+    sides = fence_sides(fe)
+    out = []
+    for gt in fe["gates"]:
+        ln = spl.lane(spl.spec(site), gt["lane"])
+        fixed, _, _, ax, _ = sides[gt["side"]]
+        end = min(ln["pts"], key=lambda p: abs(p[1 - ax] - fixed))              # the lane end on this side
+        cen = end[ax]
+        out.append((gt["side"], cen - gt["clear"] / 2, cen + gt["clear"] / 2, "gate", gt))
+    w = fe["wicket"]
+    out.append((w["side"], w["c"] - w["w"] / 2, w["c"] + w["w"] / 2, "wicket", None))
+    return out
+
+
+def fence_runs(site):
+    """Solid fence stretches between openings: [(side, t0, t1)]."""
+    fe = spec(site)["fence"]
+    runs = []
+    for side, (fixed, t0, t1, ax, sg) in fence_sides(fe).items():
+        cuts = sorted((a, b) for s, a, b, *_ in openings(site) if s == side)
+        t = t0
+        for a, b in cuts:
+            if a > t:
+                runs.append((side, t, a))
+            t = max(t, b)
+        if t < t1:
+            runs.append((side, t, t1))
+    return runs
+
+
+def _to_world(side, fe, t_lo, t_hi, n_lo, n_hi, z_lo, z_hi):
+    """Boxes given along a side (t along it, n outward from the fence line) -> world lo, hi."""
+    fixed, _, _, ax, sg = fence_sides(fe)[side]
+    t_lo, t_hi, n_lo, n_hi, z_lo, z_hi = np.broadcast_arrays(*(np.asarray(a, float) for a in (t_lo, t_hi, n_lo, n_hi, z_lo, z_hi)))
+    a, b = fixed + sg * n_lo, fixed + sg * n_hi
+    c_lo, c_hi = np.minimum(a, b), np.maximum(a, b)
+    if ax == 0:                                                            # t runs along x, the side is at fixed y
+        return np.column_stack([t_lo, c_lo, z_lo]), np.column_stack([t_hi, c_hi, z_hi])
+    return np.column_stack([c_lo, t_lo, z_lo]), np.column_stack([c_hi, t_hi, z_hi])
+
+
+def _mesh_panel(fe, side, t0, t1, n, z0, z1):
+    """Welded mesh between t0 and t1 at offset n: vertical wires every mesh[0], horizontal every mesh[1]."""
+    wd = fe["wire_d"] / 2
+    sx, sz = fe["mesh"]
+    tv = np.arange(t0 + sx / 2, t1 - sx / 4, sx)
+    zh = np.arange(z0 + sz / 4, z1 + 1e-6, sz)
+    lo1, hi1 = _to_world(side, fe, tv - wd, tv + wd, n - wd, n + wd, z0, z1)
+    lo2, hi2 = _to_world(side, fe, t0, t1, n - wd, n + wd, zh - wd, zh + wd)
+    return np.concatenate([lo1, lo2]), np.concatenate([hi1, hi2])
+
+
+def fence_height(fe):
+    return fe["plinth_h"] + fe["panel_h"]
+
+
+def gate_leaf(fe, op):
+    """Open position of a sliding gate leaf along the fence inside the site: (t0, t1)."""
+    side, a, b, _, gt = op
+    L = fe["leaf_ratio"] * gt["clear"]
+    return (b, b + L) if gt["roll"] > 0 else (a - L, a)
+
+
+def build_fence(site=None):
+    """Posts, plinths and welded mesh panels on every run; sliding gate leaves (rolled back, open) with their
+    guide posts; the wicket leaf. Returns {"posts", "plinth", "mesh"}: (verts, faces)."""
+    site = site or _site()
+    fe = spec(site)["fence"]
+    g = c.ground_z()
+    ph, top = fe["plinth_h"], fence_height(fe)
+    pw, pt = fe["post"]
+    posts_lo, posts_hi, pl_lo, pl_hi, me_lo, me_hi = [], [], [], [], [], []
+
+    def post(side, t, size=(pw, pt), h=top + 0.05):
+        lo, hi = _to_world(side, fe, t - size[1] / 2, t + size[1] / 2, -size[0] / 2, size[0] / 2, g, g + h)
+        posts_lo.append(lo)
+        posts_hi.append(hi)
+
+    for side, t0, t1 in fence_runs(site):
+        n = max(1, int(np.ceil((t1 - t0) / fe["panel_w"] - 1e-9)))
+        ts = np.linspace(t0, t1, n + 1)
+        for t in ts:
+            post(side, t)
+        lo, hi = _to_world(side, fe, ts[:-1] + pt / 2, ts[1:] - pt / 2, -fe["plinth_t"] / 2, fe["plinth_t"] / 2, g, g + ph)
+        pl_lo.append(lo)
+        pl_hi.append(hi)
+        for a, b in zip(ts, ts[1:]):
+            lo, hi = _mesh_panel(fe, side, a + pt / 2 + 0.01, b - pt / 2 - 0.01, 0.0, g + ph + 0.02, g + top)
+            me_lo.append(lo)
+            me_hi.append(hi)
+    for op in openings(site):
+        side, a, b, kind, gt = op
+        for t in (a, b):
+            post(side, t, size=(0.1, 0.1), h=top + 0.1)                       # heavier gate posts (judgment)
+        if kind == "gate":
+            l0, l1 = gate_leaf(fe, op)
+            for t in (l0 + 0.3, l1 - 0.3):                                    # roller supports under the open leaf
+                lo, hi = _to_world(side, fe, t - 0.1, t + 0.1, -0.45, -0.25, g, g + 0.35)
+                posts_lo.append(lo)
+                posts_hi.append(hi)
+            n = -0.35                                                         # leaf runs just inside the fence line
+            frame = [(l0, l1, n - 0.03, n + 0.03, g + 0.35, g + 0.45), (l0, l1, n - 0.03, n + 0.03, g + top - 0.06, g + top),
+                     (l0, l0 + 0.06, n - 0.03, n + 0.03, g + 0.35, g + top), (l1 - 0.06, l1, n - 0.03, n + 0.03, g + 0.35, g + top)]
+            for fr in frame:
+                lo, hi = _to_world(side, fe, *fr)
+                posts_lo.append(lo)
+                posts_hi.append(hi)
+            lo, hi = _mesh_panel(fe, side, l0 + 0.06, l1 - 0.06, n, g + 0.45, g + top - 0.06)
+            me_lo.append(lo)
+            me_hi.append(hi)
+        else:                                                                 # wicket leaf, closed
+            lo, hi = _mesh_panel(fe, side, a + 0.06, b - 0.06, 0.0, g + 0.05, g + top - 0.05)
+            me_lo.append(lo)
+            me_hi.append(hi)
+    cat = lambda xs: np.concatenate(xs)
+    return {"posts": boxes(cat(posts_lo), cat(posts_hi)), "plinth": boxes(cat(pl_lo), cat(pl_hi)),
+            "mesh": boxes(cat(me_lo), cat(me_hi))}
+
+
+def apron_rects(site=None):
+    """Aprons around the structures that stand on grass: each footprint grown by the apron width; overlapping
+    ones merged into one pad (a common pad under the fire tanks and the pump house)."""
+    site = site or _site()
+    a = spec(site)["aprons"]
+    sp = spl.spec(site)
+    w = a["w"]
+    rects = []
+    for key in a["for"]:
+        if key == "fire_tanks":
+            ft = sp["fire_tanks"]
+            r = ft["d"] / 2
+            rects += [(x - r - w, y - r - w, x + r + w, y + r + w) for x, y in ft["c"]]
+        else:
+            q = sp["gate"]["kpp"] if key == "kpp" else sp["fire_tanks"]["pump_house"] if key == "pump_house" else sp[key]
+            rects.append((q["x"][0] - w, q["y"][0] - w, q["x"][1] + w, q["y"][1] + w))
+    merged = True
+    while merged:
+        merged = False
+        for i in range(len(rects)):
+            for j in range(i + 1, len(rects)):
+                p, q = rects[i], rects[j]
+                if p[0] <= q[2] and q[0] <= p[2] and p[1] <= q[3] and q[1] <= p[3]:
+                    rects[i] = (min(p[0], q[0]), min(p[1], q[1]), max(p[2], q[2]), max(p[3], q[3]))
+                    del rects[j]
+                    merged = True
+                    break
+            if merged:
+                break
+    return rects
+
+
+def build_aprons(site=None):
+    """Concrete aprons as flat pads just over the ground, under the shoulders and roads they meet."""
+    site = site or _site()
+    a = spec(site)["aprons"]
+    z = c.ground_z() + a["z_over_ground"]
+    parts = []
+    for x0, y0, x1, y1 in apron_rects(site):                                # merged: pads never overlap each other
+        v = np.array([(x0, y0, z), (x1, y0, z), (x1, y1, z), (x0, y1, z)])
+        parts.append((v, _faces_up(v, [(0, 1, 2, 3)])))
+    return c.merge_parts(parts)
+
+
 def build(site=None):
     site = site or _site()
     g = ground(site, ground_holes(site))
     sh, _ = build_shoulders(site)
-    return {"ground_yard": ("yard", False, g["yard"]), "ground_grass": ("grass", False, g["grass"]),
-            "shoulders": ("shoulder", False, sh)}
+    out = {"ground_yard": ("yard", False, g["yard"]), "ground_grass": ("grass", False, g["grass"]),
+           "shoulders": ("shoulder", False, sh)}
+    e = spec(site)
+    if "aprons" in e:
+        out["aprons"] = ("yard", False, build_aprons(site))
+    if "fence" in e:
+        fp = build_fence(site)
+        out.update({"fence_posts": ("fence", False, fp["posts"]), "fence_plinth": ("concrete", False, fp["plinth"]),
+                    "fence_mesh": ("fence", False, fp["mesh"])})
+    return out

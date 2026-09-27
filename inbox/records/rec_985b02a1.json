@@ -1,0 +1,28 @@
+{
+  "id": "rec_985b02a1",
+  "subject": "Норма: ДБН В.1.1-5-2000 ч. II Будинки і споруди на просідаючих ґрунтах — вимощення",
+  "kind": "norm",
+  "claim": {
+    "name": "apron_width_min",
+    "value": {
+      "self_weight_subsidence_m": 2.0,
+      "combine_with": "тротуари та під'їзди"
+    },
+    "unit": "m",
+    "qualifier": "ч. II, с. 50; друге число (без просідання від власної ваги) на сторінці dnaop випало — див. rec_833d7e46 (ДСТУ-Н Б В.1.1-44:2016 п. 12.8.3: 1,5 м)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dnaop.com/html/32645_10.html",
+    "path": "inbox/raw/web/dnaop.com/dbn_v1.1-5-2000_p10.html",
+    "page": null,
+    "quote": "Ширина вимощення повинна бути не менше 2 м на майданчиках з грунтовими умовами, де можливе просідання від власної ваги грунту … слід, як правило, суміщувати з тротуарами та під'їздами",
+    "retrieved_at": "2026-09-27",
+    "extractor": "claude-main-session"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Підтверджує rec_833d7e46 незалежним документом. Ґрунти ділянки — тип I, можливо II (rec_025ada6a), тому в моделі 2.0 м: FAIL < 1.5, WARN < 2.0.",
+  "seen_in": []
+}

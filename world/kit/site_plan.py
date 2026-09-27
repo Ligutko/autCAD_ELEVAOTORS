@@ -211,7 +211,7 @@ def build_roads(site=None):
         for xa, xb, za, zb in ((x0 - r, x0, g, top), (x1, x1 + r, top, g)):
             v = np.array([(xa, y0, za), (xb, y0, zb), (xb, y1, zb), (xa, y1, za), (xa, y0, g), (xb, y0, g), (xb, y1, g), (xa, y1, g)])
             ramps.append((v, np.array([(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)])))
-    return {"roads": ("dark", False, c.merge_parts(roads)), "scale_decks": ("galv_old", False, c.merge_parts(decks)),
+    return {"roads": ("road", False, c.merge_parts(roads)), "scale_decks": ("galv_old", False, c.merge_parts(decks)),
             "scale_ramps": ("concrete", False, c.merge_parts(ramps))}
 
 

@@ -397,7 +397,7 @@ def mat_crushed_stone(name="CRUSHED_STONE", tint=(0.26, 0.25, 0.23)):
     return mat
 
 
-def mat_concrete_yard(name="CONCRETE_YARD", tint=(0.55, 0.54, 0.50)):
+def mat_concrete_yard(name="CONCRETE_YARD", tint=(0.44, 0.43, 0.40)):
     """Weathered concrete/asphalt hardstanding with expansion joints and oil/dust staining, seen from 2-200 m.
     Real elevator yards use hard pavement, not exposed crushed stone: crushed stone is a base layer under it
     (rec_6360894e: "бетон В25 0.18 м / піщано-цементна суміш 0.05 / щебінь 0.15 / пісок 0.20"), and two
@@ -407,34 +407,68 @@ def mat_concrete_yard(name="CONCRETE_YARD", tint=(0.55, 0.54, 0.50)):
     mat.use_nodes = True
     nodes, links = mat.node_tree.nodes, mat.node_tree.links
     bsdf = _bsdf(mat)
-    tex = _node(nodes, "ShaderNodeTexCoord", (-1100, 0))
-    joints = _node(nodes, "ShaderNodeTexVoronoi", (-850, 200), Scale=6.0)
-    joints.feature = "DISTANCE_TO_EDGE"
-    links.new(tex.outputs["Object"], joints.inputs["Vector"])
-    stains = _node(nodes, "ShaderNodeTexNoise", (-850, -150), Scale=1.2, Detail=6.0, Roughness=0.65)
-    links.new(tex.outputs["Object"], stains.inputs["Vector"])
-    stain_ramp = _node(nodes, "ShaderNodeValToRGB", (-600, -150))
-    stain_ramp.color_ramp.elements[0].position = 0.45
-    stain_ramp.color_ramp.elements[1].position = 0.60
-    links.new(stains.outputs["Fac"], stain_ramp.inputs["Fac"])
-    joint_ramp = _node(nodes, "ShaderNodeValToRGB", (-650, 350))
-    joint_ramp.color_ramp.elements[0].position = 0.0
-    joint_ramp.color_ramp.elements[1].position = 0.03
-    links.new(joints.outputs["Distance"], joint_ramp.inputs["Fac"])
-    joint_mix = _node(nodes, "ShaderNodeMix", (-450, 250))
-    joint_mix.data_type = "RGBA"
-    joint_mix.inputs[6].default_value = (*tint, 1.0)
-    joint_mix.inputs[7].default_value = (tint[0] * 0.5, tint[1] * 0.5, tint[2] * 0.5, 1.0)
-    links.new(joint_ramp.outputs["Color"], joint_mix.inputs["Factor"])
-    stain_mix = _node(nodes, "ShaderNodeMix", (-200, 150))
-    stain_mix.data_type = "RGBA"
-    links.new(stain_ramp.outputs["Color"], stain_mix.inputs["Factor"])
-    links.new(joint_mix.outputs[2], stain_mix.inputs[6])
-    stain_mix.inputs[7].default_value = (tint[0] * 0.35, tint[1] * 0.34, tint[2] * 0.32, 1.0)
-    links.new(stain_mix.outputs[2], bsdf.inputs["Base Color"])
-    bsdf.inputs["Roughness"].default_value = 0.75
-    bump = _node(nodes, "ShaderNodeBump", (-200, -250), Strength=0.15, Distance=0.01)
-    links.new(joints.outputs["Distance"], bump.inputs["Height"])
+    slab = 5.0                                  # joint grid, m: ~25-30 x the 0.18 m slab (judgment, usual pavement practice)
+    tex = _node(nodes, "ShaderNodeTexCoord", (-1400, 0))
+    cell = _node(nodes, "ShaderNodeVectorMath", (-1150, 300))
+    cell.operation = "DIVIDE"
+    cell.inputs[1].default_value = (slab, slab, 1.0)
+    links.new(tex.outputs["Object"], cell.inputs[0])
+    floor = _node(nodes, "ShaderNodeVectorMath", (-950, 300))
+    floor.operation = "FLOOR"
+    links.new(cell.outputs[0], floor.inputs[0])
+    tone = _node(nodes, "ShaderNodeTexWhiteNoise", (-750, 300))              # one tone per slab
+    tone.noise_dimensions = "3D"
+    links.new(floor.outputs[0], tone.inputs["Vector"])
+    frac = _node(nodes, "ShaderNodeVectorMath", (-950, 100))
+    frac.operation = "FRACTION"
+    links.new(cell.outputs[0], frac.inputs[0])
+    sep = _node(nodes, "ShaderNodeSeparateXYZ", (-750, 100))
+    links.new(frac.outputs[0], sep.inputs[0])
+    joint = None
+    for k, axis in enumerate(("X", "Y")):                                 # distance to the nearest joint line, in slab units
+        d = _node(nodes, "ShaderNodeMath", (-550, 150 - 80 * k))
+        d.operation = "PINGPONG"
+        d.inputs[1].default_value = 0.5
+        links.new(sep.outputs[axis], d.inputs[0])
+        joint = d if joint is None else joint
+        if k:
+            mn = _node(nodes, "ShaderNodeMath", (-400, 120))
+            mn.operation = "MINIMUM"
+            links.new(joint.outputs[0], mn.inputs[0])
+            links.new(d.outputs[0], mn.inputs[1])
+            joint = mn
+    line = _node(nodes, "ShaderNodeMath", (-250, 120))                     # 1 on a 12 mm joint, 0 elsewhere
+    line.operation = "LESS_THAN"
+    line.inputs[1].default_value = 0.006 / slab
+    links.new(joint.outputs[0], line.inputs[0])
+    base = _node(nodes, "ShaderNodeMapRange", (-550, 300), **{"To Min": 0.93, "To Max": 1.06})
+    links.new(tone.outputs["Value"], base.inputs["Value"])
+    tint_c = _node(nodes, "ShaderNodeMix", (-350, 350))
+    tint_c.data_type = "RGBA"
+    tint_c.blend_type = "MULTIPLY"
+    tint_c.inputs["Factor"].default_value = 1.0
+    tint_c.inputs[6].default_value = (*tint, 1.0)
+    links.new(base.outputs["Result"], tint_c.inputs[7])
+    dust = _node(nodes, "ShaderNodeTexNoise", (-750, -150), Scale=0.35, Detail=4.0, Roughness=0.55)
+    links.new(tex.outputs["Object"], dust.inputs["Vector"])
+    dust_r = _node(nodes, "ShaderNodeMapRange", (-550, -150), **{"From Min": 0.5, "From Max": 0.75, "To Min": 0.0, "To Max": 0.25})
+    links.new(dust.outputs["Fac"], dust_r.inputs["Value"])
+    dusty = _node(nodes, "ShaderNodeMix", (-150, 250))                    # grain dust and tyre dirt, low contrast
+    dusty.data_type = "RGBA"
+    links.new(dust_r.outputs["Result"], dusty.inputs["Factor"])
+    links.new(tint_c.outputs[2], dusty.inputs[6])
+    dusty.inputs[7].default_value = (tint[0] * 0.78, tint[1] * 0.74, tint[2] * 0.66, 1.0)
+    joint_c = _node(nodes, "ShaderNodeMix", (50, 200))
+    joint_c.data_type = "RGBA"
+    links.new(line.outputs[0], joint_c.inputs["Factor"])
+    links.new(dusty.outputs[2], joint_c.inputs[6])
+    joint_c.inputs[7].default_value = (tint[0] * 0.3, tint[1] * 0.3, tint[2] * 0.3, 1.0)
+    links.new(joint_c.outputs[2], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = 0.85
+    grain = _node(nodes, "ShaderNodeTexNoise", (-550, -350), Scale=60.0, Detail=8.0)
+    links.new(tex.outputs["Object"], grain.inputs["Vector"])
+    bump = _node(nodes, "ShaderNodeBump", (50, -250), Strength=0.12, Distance=0.004)
+    links.new(grain.outputs["Fac"], bump.inputs["Height"])
     links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
     return mat
 

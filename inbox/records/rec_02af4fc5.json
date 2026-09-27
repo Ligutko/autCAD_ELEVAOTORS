@@ -1,0 +1,31 @@
+{
+  "id": "rec_02af4fc5",
+  "subject": "Аналог: секції 3D-огорожі «Сітка Захід» (Україна) — довжина й висоти",
+  "kind": "analog",
+  "claim": {
+    "name": "fence_panel",
+    "value": {
+      "length_m": 2.5,
+      "height_range_m": [
+        0.8,
+        2.43
+      ]
+    },
+    "unit": "m",
+    "qualifier": "каталог секцій"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://sitkazahid.com/catalog/sekciji-eko/c292/",
+    "path": "inbox/raw/web/sitkazahid.com/sekciji-eko.html",
+    "page": null,
+    "quote": "огороджувальні секції стандартної довжини 2,5 м … висотою від 0,8 м до 2,43 м",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Крок стовпів = довжина секції 2,5 м.",
+  "seen_in": []
+}

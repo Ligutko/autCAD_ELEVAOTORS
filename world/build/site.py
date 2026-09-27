@@ -40,6 +40,7 @@ def materials():
         "motor": c.mat_painted("SITE_MOTOR_BLUE", (0.05, 0.16, 0.35), 0.35),
         "concrete": c.mat_concrete("SITE_CONCRETE"),
         "red": c.mat_painted("SITE_GATE_RED", (0.55, 0.06, 0.04), 0.45, grime=0.3),
+        "road": c.mat_concrete_yard("SITE_ROAD", tint=(0.36, 0.35, 0.33)),   # concrete B25 drives (rec_6360894e), tyre-worn
     }
 
 
@@ -147,7 +148,8 @@ def assemble(quick=False):
         assert sorted(env.ground_holes(site)) == sorted(holes), "ground holes drifted from environment.ground_holes"
         col = bpy.data.collections.new("ENVIRONMENT")
         scene.collection.children.link(col)
-        m.update({"yard": c.mat_concrete_yard("SITE_YARD"), "grass": c.mat_grass("SITE_GRASS"), "shoulder": c.mat_crushed_stone("SITE_SHOULDER")})
+        m.update({"yard": c.mat_concrete_yard("SITE_YARD"), "grass": c.mat_grass("SITE_GRASS"), "shoulder": c.mat_crushed_stone("SITE_SHOULDER"),
+                  "fence": c.mat_painted("SITE_FENCE_RAL6005", (0.02, 0.09, 0.05), 0.45, grime=0.15)})   # polymer-coated mesh, judgment
         for k, (mat, smooth, (v, f)) in env.build(site).items():
             c.mesh_from_arrays(f"ENV_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
     else:
