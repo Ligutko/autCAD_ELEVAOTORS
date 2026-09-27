@@ -1,6 +1,7 @@
-"""Phase 7A check: the process graph (SITE.json `process`, `equipment`) against the sheet 1 schema,
-the spec (p.8-12) and the geometry of the model. Constants below are typed from the drawing and the
-spec independently of SITE.json.
+"""Phase 7A/7B check: the process graph (SITE.json `process`, `equipment`) against the sheet 1 schema,
+the spec (p.8-12), the geometry of the model and, for the designed layer (7B), the functions of a real
+elevator, the НПАОП sensors and the interlocks. Constants below are typed from the drawing and the
+spec independently of SITE.json. Design notes and designed sizes: check_design.py.
 
 FAIL (drawing / spec):
   every edge joins known nodes, every gate is in the register, every spec gate 6.1-6.15 is used once;
@@ -54,7 +55,11 @@ LOAD_POINTS = {"T7": 3, "T8": 3, "T10": 2, "T11": 2, "T12": 2, "T14": 1, "T15": 
 SPEC_GATES = [f"6.{k}" for k in range(1, 16)]
 NEED_T_H = 100.0                                                                     # spec: real 100 t/h
 SILOS = ["S1", "S2", "S3", "S4", "S5", "S6"]
+WET = ["OS2", "OS3"]
+SPEC_KINDS = ("motor", "gate", "gate_manual", "splitter")
 TOL = 0.12
+# НПАОП 15.0-1.01-17 (research/design/sensors_interlocks.md): a trip must be detectable on every mover
+NEED_SENSOR = {"noria": ("speed", "plug"), "conveyor_belt": ("speed",), "conveyor_chain": ("plug",)}
 
 
 # ------------------------------------------------------------------ geometry of the conveyors
@@ -232,7 +237,7 @@ def checks(site):
     have = Counter()
     kw = {}
     for m in reg.values():
-        if m["layer"] == "drawn":
+        if m["layer"] == "drawn" and m["kind"] in SPEC_KINDS:
             have[m["model"]] += m["qty"]
             kw.setdefault(m["model"], set()).add(m["kw"])
     diff = {k: (have.get(k, 0), n) for k, (n, _) in SPEC.items() if have.get(k, 0) != n}
@@ -241,7 +246,7 @@ def checks(site):
     extra = sorted(set(have) - set(SPEC))
     out.append(("equipment register = spec p.8-12 (model, count, kW)", not diff and not kwd and not tcs and not extra,
                 f"count {diff}, kW {kwd}, ТЦС {tcs}, not in spec {extra}"))
-    total = sum((m["kw"] or 0) * m["qty"] for m in reg.values() if m["layer"] == "drawn")
+    total = sum((m["kw"] or 0) * m["qty"] for m in reg.values() if m["layer"] == "drawn" and m["kind"] in SPEC_KINDS)
     spec_total = sum(n * (w or 0) for n, w in SPEC.values()) + sum(TCS_KW.values())
     out.append(("installed power of the new stage = spec lines", abs(total - spec_total) < 0.01,
                 f"register {total:.2f} kW, spec {spec_total:.2f} kW"))
@@ -262,12 +267,43 @@ def checks(site):
     out.append(("edge ends meet in the model (spouts, heads, drops, outlets, boots)", not geo_bad, f"{geo_bad[:4]}"))
 
     routes = g.routes()
+    via = lambda r, *ns: all(n in g.route_nodes(r) for n in ns)
     pairs = {(r[0]["from"], r[-1]["to"]) for r in routes}
-    need = [("PIT", s) for s in SILOS] + [(a, b) for a in SILOS for b in SILOS] \
-        + [(s, t) for s in SILOS for t in ("TRUCK_OUT", "T5", "T3")] + [(h, s) for h in ("H3", "H4") for s in SILOS]
+    need = [("TRUCK_IN", s) for s in SILOS] + [(a, b) for a in SILOS for b in SILOS] + [(s, "TRUCK_EXIT") for s in SILOS]
     lost = [p for p in need if p not in pairs]
-    out.append(("every route of the schema exists (pit, silo <-> silo, silo -> cleaning / T5 / T3, H3 / H4)",
-                not lost, f"{len(need) - len(lost)}/{len(need)}, lost {lost[:6]}"))
+    for s in SILOS:                                               # sheet 1: T10 -> 6.9 T5 / 6.10 T3 from every silo
+        for mid in ("T5", "T3"):
+            if not any(r[0]["from"] == s and via(r, "T10", mid) for r in routes):
+                lost.append((s, f"T10->{mid}"))
+    for h in ("H3", "H4"):                                        # sheet 1: H3 (6.3), H4 (6.5) -> T7 -> new silos
+        if not any(via(r, h, "T7") and r[-1]["to"] in SILOS for r in routes):
+            lost.append((h, "T7->silo"))
+    out.append(("every route of the schema exists (truck -> silo, silo <-> silo, silo -> cleaning -> truck, T5 / T3, H3 / H4 -> T7)",
+                not lost, f"{len(need) + 14 - len(lost)}/{len(need) + 14}, lost {lost[:6]}"))
+
+    # functions of a real elevator (research/design/*.md): intake dry / wet, drying, dispatch over the scales
+    fn = {
+        "dry intake: truck -> scales -> pit -> new silo": [r for r in routes if r[0]["from"] == "TRUCK_IN" and r[-1]["to"] in SILOS
+                                                           and via(r, "SCALES_IN", "PIT")],
+        "wet intake: truck -> pre-cleaning (separator 5) -> wet silo": [r for r in routes if r[0]["from"] == "TRUCK_IN"
+                                                                       and r[-1]["to"] in WET and via(r, "SEP5")],
+        "drying: each wet silo -> dryer -> new silo": [w for w in WET if any(r[0]["from"] == w and r[-1]["to"] in SILOS
+                                                                              and via(r, "DRYER") for r in routes)],
+        "dispatch: each silo -> separator 5 -> Ш1 -> truck -> scales out": [s for s in SILOS if any(
+            r[0]["from"] == s and r[-1]["to"] == "TRUCK_EXIT" and via(r, "SEP5", "SH1", "SCALES_OUT") for r in routes)],
+    }
+    wet_part, dry_part = set(), set()
+    for r in routes:
+        ns = g.route_nodes(r)
+        if "DRYER" in ns:
+            k = ns.index("DRYER")
+            wet_part |= set(ns[:k])
+            dry_part |= set(ns[k + 1:])
+    mixed = sorted((wet_part & dry_part) - set(SILOS))
+    out.append(("wet grain before the dryer and dry grain after it share no node (no mixing)", not mixed, f"shared {mixed}"))
+    missing_fn = [k for k, v in fn.items() if not v or (k.startswith(("drying", "dispatch")) and len(v) < (2 if "drying" in k else 6))]
+    out.append(("functions of a real elevator exist (dry / wet intake, drying, dispatch over the scales)", not missing_fn,
+                f"missing {missing_fn}"))
 
     leaks, spare = [], []
     for r in routes:
@@ -281,13 +317,46 @@ def checks(site):
     out.append(("opening a route's gates sends all grain to its sink (no leak, no jam)", not leaks, f"{len(leaks)} {leaks[:2]}"))
     out.append(("every gate of a route is needed", not spare, f"{len(spare)} {spare[:3]}"))
 
-    low, unknown = [], set()
+    low, unknown, dry = [], set(), Counter()
     for r in routes:
         (t, n), unk = g.bottleneck(r)
         unknown |= set(unk)
-        if t is not None and t < NEED_T_H:
-            low.append((g.describe(r), n, t))
-    out.append(("spec capacity of every mover on a route >= 100 t/h", not low, f"{low[:3]}; no number: {sorted(unknown)}"))
+        drawn = [m for m in g.route_motors(r) if g.nodes[m]["layer"] == "drawn" and g.nodes[m]["t_h"] < NEED_T_H]
+        if drawn:
+            low.append((g.describe(r), drawn))
+        if g.category(r) == "dry":
+            dry[(n, t)] += 1
+    out.append(("spec capacity of every drawn mover on a route >= 100 t/h", not low, f"{low[:3]}; no number (existing): {sorted(unknown)}"))
+    out.append(("drying routes: FINDING", True, f"bottleneck {dict(dry)}: the dryer takes ≈{24 * g.nodes['DRYER']['t_h']:.0f} t/day "
+                f"of wet grain against 100 t/h intake"))
+
+    # sensors and interlocks (research/design/sensors_interlocks.md)
+    sens = {}
+    for m in reg.values():
+        if m["kind"] == "sensor" and m.get("on"):
+            sens.setdefault(m["on"], set()).add(m["id"].split(".")[-1])
+    on_routes = {m for r in routes for m in g.route_motors(r)}
+    blind = []
+    for m in sorted(on_routes):
+        k = g.nodes[m]["kind"]
+        need_s = NEED_SENSOR.get(k, ("speed", "plug"))
+        if not any(s in sens.get(m, ()) for s in need_s):
+            blind.append(m)
+        if k == "noria" and not {"speed", "plug"} <= sens.get(m, set()):
+            blind.append(f"{m} (noria needs speed + plug)")
+    out.append(("every mover on a route has a trip sensor (НПАОП: noria speed + plug, belt speed, chain plug)", not blind, f"blind {blind}"))
+    brakes = [h for h in g.nodes if g.nodes[h]["kind"] == "noria" and f"{h}.brake" not in reg]
+    out.append(("every noria has a brake against run-back (НПАОП, >= 50 t/h)", not brakes, f"without {brakes}"))
+    bad_trip = []
+    for r in routes:
+        m = g.route_motors(r)
+        for k, x in enumerate(m):
+            stop, run = g.trip(r, x)
+            if set(stop) != set(m[:k + 1]) or set(run) != set(m[k + 1:]) or g.start_order(r)[-1] != m[0]:
+                bad_trip.append(f"{g.describe(r)} @ {x}")
+    rules = {i["id"] for i in site["process"].get("interlocks", [])}
+    out.append(("interlocks: start against the grain, a trip stops all upstream, downstream runs empty",
+                not bad_trip and {"start", "trip", "stop", "plug", "speed"} <= rules, f"{bad_trip[:2]}, rules {sorted(rules)}"))
 
     model = {}
     for t in site["noria_towers"]:
@@ -340,7 +409,20 @@ def run(site):
     def v_gate(s):
         edge(s, "H5", "T8")["gates"] = ["6.6", "6.7"]
 
-    variants = [("S2 drop moved 2 m", v_drop), ("T14 head off T10", v_t14), ("no T7 -> T11 edge", v_no_t7_t11),
+    def v_plug(s):
+        s["equipment"]["items"] = [m for m in s["equipment"]["items"] if m["id"] != "H6.plug"]
+    def v_h2(s):
+        s["process"]["edges"].remove(edge(s, "H2", "T3"))
+    def v_scales(s):
+        edge(s, "SCALES_IN", "PIT")["from"] = "TRUCK_IN"
+        s["process"]["edges"].remove(edge(s, "TRUCK_IN", "SCALES_IN"))
+
+    def v_mix(s):
+        edge(s, "T4", "H3")["to"] = "TOWER_PIT"                  # the first trace: dry grain back into the pit
+        edge(s, "T6", "H2")["to"] = "TOWER_PIT"
+
+    variants = [("dry and wet grain through the tower pit (first trace)", v_mix), ("H6 without a plug sensor", v_plug), ("no H2 -> T3 edge (wet silo 2 cut off from the dryer)", v_h2),
+                ("trucks bypass the scales", v_scales), ("S2 drop moved 2 m", v_drop), ("T14 head off T10", v_t14), ("no T7 -> T11 edge", v_no_t7_t11),
                 ("T9 outlet outside the H5 pit", v_t9), ("T8 outlets swapped", v_swap), ("gate 6.7 renamed 6.16", v_rename),
                 ("drawn edge H6 -> T15 without geometry", v_open), ("gate 6.7 also on the H5 -> T8 branch", v_gate)]
     for name, patch in variants:

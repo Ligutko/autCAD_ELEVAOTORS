@@ -18,6 +18,7 @@ from pathlib import Path
 
 SITE_JSON = Path(__file__).resolve().parents[1] / "site" / "SITE.json"
 MOVERS = ("noria", "conveyor", "conveyor_chain", "conveyor_belt")
+UNITS = ("dryer",)                       # process units with a capacity but no place in the start order
 
 
 @lru_cache(maxsize=1)
@@ -121,17 +122,29 @@ class Graph:
     def start_order(self, route):
         return list(reversed(self.route_motors(route)))
 
+    def trip(self, route, motor):
+        """Emergency stop of `motor` on `route`: (stop now = it and everything feeding it,
+        run empty = everything downstream, which clears the grain it already carries)."""
+        m = self.route_motors(route)
+        k = m.index(motor)
+        return m[:k + 1], m[k + 1:]
+
     def bottleneck(self, route, caps=None):
-        """(t/h, node) of the smallest known capacity, and the movers with no number."""
+        """(t/h, node) of the smallest known capacity (movers and process units), and the movers
+        with no number."""
         caps = caps or {}
         known, unknown = [], []
-        for n in self.route_motors(route):
+        for n in self.route_nodes(route):
+            if self.nodes[n]["kind"] not in MOVERS + UNITS:
+                continue
             t = caps.get(n, self.nodes[n].get("t_h"))
             (known if t is not None else unknown).append((t, n))
         return (min(known) if known else (None, None)), [n for _, n in unknown]
 
     def category(self, route):
         a, b = route[0]["from"], route[-1]["to"]
+        if any(self.nodes[n]["kind"] == "dryer" for n in self.route_nodes(route)):
+            return "dry"
         if self.is_silo(a) and a == b:
             return "recirculate"
         if self.is_silo(a) and self.is_silo(b):

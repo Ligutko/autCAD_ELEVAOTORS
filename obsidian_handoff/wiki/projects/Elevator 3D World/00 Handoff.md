@@ -29,12 +29,13 @@ tags: [handoff, start-here]
 | K5 нутро силоса з розрізами; аерація підлоги з аркуша 2 (50 каналів) | ✅ | `silo_interior.py` | `check_aeration.py` |
 | E аспірація: бункери 8.1/8.2 за кресленням, установки й повітроводи (judgment), дві знахідки | ✅ | `aspiration.py` | `check_aspiration.py` (з перетинами на сітках) |
 | Граф процесу 7A: 33 вузли, 42 ребра, 82 маршрути, засувки зі схеми арк. 1; реєстр обладнання 546.88 кВт | ✅ | `process.py` | `check_process.py` |
-| W1 оточення | ✗ (після об'єкта) | — | — |
+| 7B шар designed: ваги, сушарка в будівлі «4», вологі силоси «2», «3», датчики НПАОП, блокування, КТП, пожежна вода — записки `research/design/` | ✅ дані, 3D — фаза 5 | `process.py` | `check_process.py`, `check_design.py` |
+| W1 оточення | ✗ (перед роликом 7C) | — | — |
 
 Повний склад з позначками ✅ ◐ ✗ — `OBJECT_SCOPE.md` у корені.
 
-## Наступний крок — фаза 7B (повна технологічна схема, проєктуємо відсутнє), стан на 2026-09-27
-7A закрита 2026-09-27: [[12 Expertise 2026-09-27 phase 7A]], 12 перевірок ALL PASS. Дослідження для 7B (агент, `research/process_design.md`) запущено того ж дня.
+## Наступний крок — фаза 5 (добудова в 3D за шаром `designed`), стан на 2026-09-27
+7A і 7B закриті 2026-09-27: [[12 Expertise 2026-09-27 phase 7A]], [[13 Expertise 2026-09-27 phase 7B]], 13 перевірок ALL PASS. Порядок далі: 5 → W1 (оточення) → 7C (ролик).
 
 **Рішення людини 2026-09-27.** Модель — тестовий об'єкт: спершу маркетинг, потім симулятор. У ній мають бути всі системи реального елеватора. Що креслення не дає (об'єкт після нас добудовували інші), **проєктуємо самі за реальними аналогами**. Кожен такий вузол:
 - шар `designed`;
@@ -56,7 +57,7 @@ tags: [handoff, start-here]
 ```
 python world/build/check_all.py                             # усі перевірки одним запуском, підсумок; обов'язково перед комітом
 B="/c/Program Files/Blender Foundation/Blender 4.5/blender.exe"
-"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration aeration silo_interior silo_roof foundation receiving process
+"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration aeration silo_interior silo_roof foundation receiving process design
 "$B" --background --python world/build/site.py             # фінальні кадри → world/out/site/
 "$B" --python world/build/site.py -- --no-render           # відкрити сцену в GUI і літати
 ```
