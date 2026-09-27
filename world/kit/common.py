@@ -329,6 +329,116 @@ def mat_ground(name="GROUND"):
     return mat
 
 
+def mat_grass(name="GRASS"):
+    """Summer meadow grass (Poltava, July): green with drier patches and clumps, seen from 2-500 m."""
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nodes, links = mat.node_tree.nodes, mat.node_tree.links
+    bsdf = _bsdf(mat)
+    tex = _node(nodes, "ShaderNodeTexCoord", (-1200, 0))
+    big = _node(nodes, "ShaderNodeTexNoise", (-950, 250), Scale=0.08, Detail=6.0, Roughness=0.6)
+    mid = _node(nodes, "ShaderNodeTexNoise", (-950, 0), Scale=2.5, Detail=8.0, Roughness=0.65)
+    clump = _node(nodes, "ShaderNodeTexVoronoi", (-950, -250), Scale=35.0)
+    for n in (big, mid, clump):
+        links.new(tex.outputs["Object"], n.inputs["Vector"])
+    ramp = _node(nodes, "ShaderNodeValToRGB", (-700, 250))
+    ramp.color_ramp.elements[0].position = 0.30
+    ramp.color_ramp.elements[0].color = (0.05, 0.085, 0.022, 1.0)          # lush
+    ramp.color_ramp.elements[1].position = 0.80
+    ramp.color_ramp.elements[1].color = (0.15, 0.14, 0.05, 1.0)            # sun-dried patches
+    links.new(big.outputs["Fac"], ramp.inputs["Fac"])
+    shade = _node(nodes, "ShaderNodeMix", (-450, 150))
+    shade.data_type = "RGBA"
+    shade.blend_type = "MULTIPLY"
+    shade.inputs["Factor"].default_value = 0.45
+    links.new(ramp.outputs["Color"], shade.inputs[6])
+    grey = _node(nodes, "ShaderNodeValToRGB", (-700, 0))
+    grey.color_ramp.elements[0].color = (0.55, 0.55, 0.55, 1.0)
+    grey.color_ramp.elements[1].color = (1.35, 1.35, 1.35, 1.0)
+    links.new(mid.outputs["Fac"], grey.inputs["Fac"])
+    links.new(grey.outputs["Color"], shade.inputs[7])
+    links.new(shade.outputs[2], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = 0.95
+    bsdf.inputs["Specular IOR Level"].default_value = 0.1                  # blades scatter, no glassy sheen at grazing angles
+    bump = _node(nodes, "ShaderNodeBump", (-300, -250), Strength=0.5, Distance=0.03)
+    links.new(clump.outputs["Distance"], bump.inputs["Height"])
+    links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    return mat
+
+
+def mat_crushed_stone(name="CRUSHED_STONE", tint=(0.26, 0.25, 0.23)):
+    """Compacted crushed stone (road shoulders, yard), 20-40 mm fraction."""
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nodes, links = mat.node_tree.nodes, mat.node_tree.links
+    bsdf = _bsdf(mat)
+    tex = _node(nodes, "ShaderNodeTexCoord", (-1000, 0))
+    stones = _node(nodes, "ShaderNodeTexVoronoi", (-800, 150), Scale=70.0)
+    dirt = _node(nodes, "ShaderNodeTexNoise", (-800, -150), Scale=0.4, Detail=5.0)
+    links.new(tex.outputs["Object"], stones.inputs["Vector"])
+    links.new(tex.outputs["Object"], dirt.inputs["Vector"])
+    mix = _node(nodes, "ShaderNodeMix", (-450, 150))
+    mix.data_type = "RGBA"
+    mix.inputs[6].default_value = (*tint, 1.0)
+    mix.inputs[7].default_value = (tint[0] * 0.62, tint[1] * 0.62, tint[2] * 0.6, 1.0)
+    links.new(stones.outputs["Distance"], mix.inputs["Factor"])
+    soil = _node(nodes, "ShaderNodeMix", (-250, 100))
+    soil.data_type = "RGBA"
+    soil.inputs[7].default_value = (0.16, 0.13, 0.09, 1.0)
+    links.new(mix.outputs[2], soil.inputs[6])
+    ramp = _node(nodes, "ShaderNodeMapRange", (-450, -150), **{"From Min": 0.45, "From Max": 0.75, "To Min": 0.0, "To Max": 0.5})
+    links.new(dirt.outputs["Fac"], ramp.inputs["Value"])
+    links.new(ramp.outputs["Result"], soil.inputs["Factor"])
+    links.new(soil.outputs[2], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = 0.95
+    bump = _node(nodes, "ShaderNodeBump", (-250, -250), Strength=0.7, Distance=0.015)
+    links.new(stones.outputs["Distance"], bump.inputs["Height"])
+    links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    return mat
+
+
+def mat_concrete_yard(name="CONCRETE_YARD", tint=(0.55, 0.54, 0.50)):
+    """Weathered concrete/asphalt hardstanding with expansion joints and oil/dust staining, seen from 2-200 m.
+    Real elevator yards use hard pavement, not exposed crushed stone: crushed stone is a base layer under it
+    (rec_6360894e: "бетон В25 0.18 м / піщано-цементна суміш 0.05 / щебінь 0.15 / пісок 0.20"), and two
+    surveyed elevator sites show concrete/asphalt yard + grass with no separate gravel-yard category
+    (rec_2e1a2104, rec_020c1c9a); ДБН В.2.2-8-98 п.2.8 also calls for minimal hard (asphalt) cover (rec_26c845c0)."""
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nodes, links = mat.node_tree.nodes, mat.node_tree.links
+    bsdf = _bsdf(mat)
+    tex = _node(nodes, "ShaderNodeTexCoord", (-1100, 0))
+    joints = _node(nodes, "ShaderNodeTexVoronoi", (-850, 200), Scale=6.0)
+    joints.feature = "DISTANCE_TO_EDGE"
+    links.new(tex.outputs["Object"], joints.inputs["Vector"])
+    stains = _node(nodes, "ShaderNodeTexNoise", (-850, -150), Scale=1.2, Detail=6.0, Roughness=0.65)
+    links.new(tex.outputs["Object"], stains.inputs["Vector"])
+    stain_ramp = _node(nodes, "ShaderNodeValToRGB", (-600, -150))
+    stain_ramp.color_ramp.elements[0].position = 0.45
+    stain_ramp.color_ramp.elements[1].position = 0.60
+    links.new(stains.outputs["Fac"], stain_ramp.inputs["Fac"])
+    joint_ramp = _node(nodes, "ShaderNodeValToRGB", (-650, 350))
+    joint_ramp.color_ramp.elements[0].position = 0.0
+    joint_ramp.color_ramp.elements[1].position = 0.03
+    links.new(joints.outputs["Distance"], joint_ramp.inputs["Fac"])
+    joint_mix = _node(nodes, "ShaderNodeMix", (-450, 250))
+    joint_mix.data_type = "RGBA"
+    joint_mix.inputs[6].default_value = (*tint, 1.0)
+    joint_mix.inputs[7].default_value = (tint[0] * 0.5, tint[1] * 0.5, tint[2] * 0.5, 1.0)
+    links.new(joint_ramp.outputs["Color"], joint_mix.inputs["Factor"])
+    stain_mix = _node(nodes, "ShaderNodeMix", (-200, 150))
+    stain_mix.data_type = "RGBA"
+    links.new(stain_ramp.outputs["Color"], stain_mix.inputs["Factor"])
+    links.new(joint_mix.outputs[2], stain_mix.inputs[6])
+    stain_mix.inputs[7].default_value = (tint[0] * 0.35, tint[1] * 0.34, tint[2] * 0.32, 1.0)
+    links.new(stain_mix.outputs[2], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = 0.75
+    bump = _node(nodes, "ShaderNodeBump", (-200, -250), Strength=0.15, Distance=0.01)
+    links.new(joints.outputs["Distance"], bump.inputs["Height"])
+    links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    return mat
+
+
 def mat_rubber(name="RUBBER"):
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True

@@ -17,7 +17,10 @@ line). Norm checks (research/site_plan_norms.md): lanes >= 4.5 m (СНиП та�
 12.5 / 5.3 m (96/53/EC), clear height >= 4.5 (WARN < 5.0), scales straights >= 12 m (NIST), КТП >= 6 m from silos
 (WARN < 12), fire water pier >= 10 m from buildings, fire access to every silo, no loose road ends.
 
-Broken variants that must fail: scales in on the pit ramp, sampler post 7 m off the lane, hydrant 1 m from
+Road surface: the outer corner of every bend is paved (rays down on the built mesh), the surface seen from above
+faces up and no face lies within 1 mm of another (coplanar overlaps render black).
+
+Broken variants that must fail: roads without the corner fill, scales in on the pit ramp, sampler post 7 m off the lane, hydrant 1 m from
 the pit shed, U-turn centre at x -18 (through the plinth of silo «3»), out lane on y 44.0 (off Ш1, on the tower footings).
 
 Run:
@@ -36,7 +39,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from kit import common as c  # noqa: E402
-from kit import drying as dr  # noqa: E402
 from kit import site_plan as spl  # noqa: E402
 
 REACH = (0.72, 5.35)                  # ПГ-2.10.180 (rec_2e227fdb)
@@ -48,57 +50,11 @@ HEADROOM = 4.5                        # judgment
 
 
 def obstacles(site):
-    """[(name, kind, geom)]: ('circle', (x, y, r)) or ('rect', (x0, y0, x1, y1)) footprints."""
-    ob = []
-    rf = site["silo_foundation"]["ring"]["r_out"]
-    ob += [(s["id"], "circle", (s["x"], s["y"], rf)) for s in site["silos"]]
-    r = site["receiving"]
-    ob += [(f"old silo {s['label']}", "circle", (s["x"], s["y"], s["plinth_r"])) for s in r["old_silos"]]
-    tp = r["tower"]["pit"]
-    ob.append(("receiving tower pit", "rect", (tp["inner_x"][0] - tp["wall_t"], tp["inner_y"][0] - tp["wall_t"],
-                                              tp["inner_x"][1] + tp["wall_t"], tp["inner_y"][1] + tp["wall_t"])))
-    ct = r["cleaning_tower"]
-    h = ct["col"] / 2
-    ob += [("cleaning tower column", "rect", (x - h, y - h, x + h, y + h)) for x in ct["cols_x"] for y in ct["cols_y"]]
-    # the cleaning tower footings are flush with the ground (±0.05): wheels roll over them, not an obstacle
-    ob += [("shed outer post", "rect", (x - 0.6, y - 0.6, x + 0.6, y + 0.6)) for x, y in r["pit"]["outer_posts"]]
-    b4 = r["building_4"]
-    ob.append(("building 4 / dryer", "rect", (b4["outer_x"][0], b4["outer_y"][0], b4["outer_x"][1], b4["outer_y"][1])))
-    g = dr.geom(site)
-    f = dr.TRESTLE_FOOT
-    for tr in g["T5"]["trestles"]:
-        for px in (tr["x"] - tr["hx"], tr["x"] + tr["hx"]):
-            for py in tr["y"]:
-                ob.append(("T5 trestle footing", "rect", (px - f, py - f, px + f, py + f)))
-    for s in r["old_silos"]:
-        y = s["y"] + s["plinth_r"] + dr.WET_FAN_OFFSET
-        ob.append((f"wet fan pad {s['label']}", "rect", (s["x"] - 0.7, y - 0.6, s["x"] + 0.7, y + 0.6)))
-    for b in site["aspiration"]["dust_bins"]:                           # legs only: a trailer backs in under the gate
-        (cx, cy), (fx, fy) = b["center"], b["frame"]
-        for sx in (-1, 1):
-            for sy in (-1, 1):
-                lx, ly = cx + sx * (fx / 2 - 0.075), cy + sy * (fy / 2 - 0.075)
-                ob.append((f"dust bin {b['id']} leg", "rect", (lx - 0.075, ly - 0.075, lx + 0.075, ly + 0.075)))
-    for t in site["noria_towers"]:
-        hx, hy = t["size"][0] / 2, t["size"][1] / 2
-        ob.append((f"tower {t['id']}", "rect", (t["x"] - hx, t["y"] - hy, t["x"] + hx, t["y"] + hy)))
-    sp = spl.spec(site)
-    for key in ("apk", "ktp"):
-        ob.append((key, "rect", (sp[key]["x"][0], sp[key]["y"][0], sp[key]["x"][1], sp[key]["y"][1])))
-    k = sp["gate"]["kpp"]
-    ob.append(("kpp", "rect", (k["x"][0], k["y"][0], k["x"][1], k["y"][1])))
-    ph = sp["fire_tanks"]["pump_house"]
-    ob.append(("pump house", "rect", (ph["x"][0], ph["y"][0], ph["x"][1], ph["y"][1])))
-    ob += [("fire tank", "circle", (x, y, sp["fire_tanks"]["d"] / 2)) for x, y in sp["fire_tanks"]["c"]]
-    return ob
+    """[(name, kind, geom)]: ('circle', (x, y, r)) or ('rect', (x0, y0, x1, y1)) footprints (kit/site_plan.footprints)."""
+    return spl.footprints(site)
 
 
-def dist(p, kind, gm):
-    if kind == "circle":
-        return math.hypot(p[0] - gm[0], p[1] - gm[1]) - gm[2]
-    x0, y0, x1, y1 = gm
-    dx, dy = max(x0 - p[0], 0, p[0] - x1), max(y0 - p[1], 0, p[1] - y1)
-    return math.hypot(dx, dy) if dx or dy else -min(p[0] - x0, x1 - p[0], p[1] - y0, y1 - p[1])
+dist = spl.footprint_dist
 
 
 def checks(site):
@@ -196,6 +152,47 @@ def checks(site):
     out.append(("cable trestle and designed buildings keep >= 0.3 m from silo plinths and towers", worst_t >= CLEAR and worst_b >= CLEAR,
                 f"trestle {worst_t:.2f} m, buildings {worst_b:.2f} m"))
     out += norm_checks(site)
+    out += surface_checks(site)
+    return out
+
+
+def surface_checks(site):
+    """The built road mesh: the outer corner of every bend is paved (rays down), faces point up, no face lies
+    within 1 mm of another (coplanar overlaps render black in Cycles)."""
+    from mathutils import Vector
+    from mathutils.bvhtree import BVHTree
+    out = []
+    sp = spl.spec(site)
+    v, f = spl.build_roads(site)["roads"][2]
+    polys = [tuple(int(i) for i in q) for blk in f for q in blk]
+    bvh = BVHTree.FromPolygons([Vector(p) for p in v], polys)
+    top = float(v[:, 2].max()) + 1.0
+    open_ = []
+    for ln in sp["lanes"]:
+        for other in sp["lanes"]:
+            p, q = ln.get("pts"), other.get("pts")
+            if not p or not q:
+                continue
+            bends = [(p[i - 1], p[i], p[i + 1]) for i in range(1, len(p) - 1)] if other is ln else                     ([(p[-2], p[-1], q[1])] if math.dist(p[-1], q[0]) < 0.01 else [])
+            for a, cp, b in bends:
+                d1 = np.subtract(cp, a) / math.dist(cp, a)
+                d2 = np.subtract(b, cp) / math.dist(b, cp)
+                hw = min(spl.lane_width(ln, cp[0]), spl.lane_width(other, cp[0])) / 2
+                out_dir = (d1 - d2) / np.linalg.norm(d1 - d2)                     # away from the turn
+                miter = hw / math.sqrt((1 + float(np.dot(d1, d2))) / 2)             # axis to the outer edge corner
+                for probe in (np.add(cp, out_dir * miter * 0.5), np.add(cp, out_dir * miter * 0.9)):
+                    hit, *_ = bvh.ray_cast(Vector((probe[0], probe[1], top)), Vector((0, 0, -1)), 5.0)
+                    if hit is None:
+                        open_.append((ln["id"], tuple(cp)))
+    out.append(("outer corner of every road bend is paved (rays down on the built roads)", not open_, f"open {sorted(set(open_))}"))
+    down, stacked = 0, 0
+    for q in polys:                                  # what a camera sees from above must face it (box bottoms don't count)
+        cen = v[list(q)].mean(axis=0)
+        hit, nrm, *_ = bvh.ray_cast(Vector((cen[0], cen[1], top)), Vector((0, 0, -1)), top - float(v[:, 2].min()) + 1.0)
+        down += hit is not None and nrm.z <= 0
+        stacked += len({r[2] for r in bvh.find_nearest_range(Vector(cen), 1e-3)}) > 1
+    out.append(("road surface seen from above faces up and no face lies within 1 mm of another", down == 0 and stacked == 0,
+                f"{down} down, {stacked} stacked of {len(polys)}"))
     return out
 
 
@@ -325,6 +322,14 @@ def run(site):
             if ln["id"] == "uturn":
                 ln["arc"]["r"] = (63.25 - 44.0) / 2
                 ln["arc"]["c"][1] = (63.25 + 44.0) / 2
+
+    joins = spl.corner_joins
+    spl.corner_joins = lambda sp: []                                     # the ribbons alone leave the outer corners open
+    failed = [n for n, ok, _ in checks(site) if not ok]
+    spl.corner_joins = joins
+    hit = any("outer corner" in n for n in failed)
+    ok_all &= hit
+    print(f"{'PASS' if hit else 'FAIL'}  broken variant must be rejected — roads without the corner fill: failed {failed}", flush=True)
 
     variants = [("scales in on the pit ramp", v_scales), ("sampler post 7 m off the lane", v_sampler),
                 ("hydrant 1 m from the pit shed", v_hydrant), ("U-turn centre at x -18 (through silo «3»)", v_uturn), ("out lane on y 44.0", v_lane)]

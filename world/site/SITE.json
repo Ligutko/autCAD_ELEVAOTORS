@@ -1098,6 +1098,9 @@
     "power": {"note": "research/design/power_control.md", "ktp_kva": [630, 630], "voltage": "10/0.4 кВ", "category": "II", "kc": [0.45, 0.75], "cos_phi": 0.75, "extra_kw": {"dryer": 33.0, "existing_block": 150.0, "aspiration": 15.0, "lighting_other": 30.0}, "src": "ДБН В.2.2-8-98 табл. 5, п. 7.1 (rec_62e70183, rec_405dd11e); existing 150 kW judgment"},
     "fire_water": {"note": "research/design/fire_water_and_site.md", "tanks": 2, "tank_m3": 135, "need_m3": [162, 270], "hydrant_from_road_max": 2.5, "hydrant_from_wall_min": 5.0, "src": "ДБН В.2.5-74:2013 (rec_56098e60, rec_661777f6, rec_944e9792, rec_0e3d2268)"},
     "vents": {"note": "research/design/sensors_interlocks.md", "H5": 0.338, "H6": 0.145, "src": "РД 14-568-03 табл. 2, 3 (rec_56e8efc2), analog"},
-    "tunnel_exit_pavilion": {"note": "research/design/fire_water_and_site.md", "door": [0.9, 2.1], "sill_over_ground": 0.15, "tunnels": ["T9", "T13", "T16"], "basis": "judgment"}
+    "tunnel_exit_pavilion": {"note": "research/design/fire_water_and_site.md", "door": [0.9, 2.1], "sill_over_ground": 0.15, "tunnels": ["T9", "T13", "T16"], "basis": "judgment"},
+    "environment": {"note": "research/design/environment.md", "season": "summer", "src_season": "decision 2026-09-24 (04 Decisions Log): summer is the main season, winter a separate preset",
+      "shoulder": {"w": 1.0, "z_over_ground": 0.004, "z_step": 0.002, "src": "СНиП 2.05.07-91 табл. 46 (IV-в) 1.0 м, п. 5.22 укріплені на всю ширину (rec_3710fc66, rec_97da5935)", "surface": "crushed stone, judgment"},
+      "yard": {"rects": [[-58.0, -19.75, 58.0, 45.5], [-46.0, 45.5, 13.7, 63.25]], "src": "ДБН В.2.2-8-98 п. 2.8 (rec_26c845c0): hard surface minimal, the rest greened; analogs rec_9d26127a, rec_6360894e (concrete B25 pavement over crushed-stone base, not exposed gravel), rec_2e1a2104, rec_020c1c9a (two surveyed elevator sites: concrete/asphalt yard + grass, no gravel-yard category). Corrected 2026-09-28: concrete/asphalt yard, not crushed stone, inside the fire ring and around the existing receiving block, bounded by road centrelines; grass outside"}}
   }
 }

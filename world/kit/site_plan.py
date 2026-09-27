@@ -64,10 +64,117 @@ def _strip(pts, half_w, z):
     return v, f
 
 
+def footprints(site=None):
+    """Plan footprints of everything a road or strip must keep off: [(name, kind, geom)],
+    ('circle', (x, y, r)) or ('rect', (x0, y0, x1, y1)). Shared by check_site_plan and environment."""
+    from . import drying as dr
+    site = site or _site()
+    ob = []
+    rf = site["silo_foundation"]["ring"]["r_out"]
+    ob += [(s["id"], "circle", (s["x"], s["y"], rf)) for s in site["silos"]]
+    r = site["receiving"]
+    ob += [(f"old silo {s['label']}", "circle", (s["x"], s["y"], s["plinth_r"])) for s in r["old_silos"]]
+    tp = r["tower"]["pit"]
+    ob.append(("receiving tower pit", "rect", (tp["inner_x"][0] - tp["wall_t"], tp["inner_y"][0] - tp["wall_t"],
+                                              tp["inner_x"][1] + tp["wall_t"], tp["inner_y"][1] + tp["wall_t"])))
+    ct = r["cleaning_tower"]
+    h = ct["col"] / 2
+    ob += [("cleaning tower column", "rect", (x - h, y - h, x + h, y + h)) for x in ct["cols_x"] for y in ct["cols_y"]]
+    # the cleaning tower footings are flush with the ground (±0.05): wheels roll over them, not an obstacle
+    ob += [("shed outer post", "rect", (x - 0.6, y - 0.6, x + 0.6, y + 0.6)) for x, y in r["pit"]["outer_posts"]]
+    b4 = r["building_4"]
+    ob.append(("building 4 / dryer", "rect", (b4["outer_x"][0], b4["outer_y"][0], b4["outer_x"][1], b4["outer_y"][1])))
+    g = dr.geom(site)
+    f = dr.TRESTLE_FOOT
+    for tr in g["T5"]["trestles"]:
+        for px in (tr["x"] - tr["hx"], tr["x"] + tr["hx"]):
+            for py in tr["y"]:
+                ob.append(("T5 trestle footing", "rect", (px - f, py - f, px + f, py + f)))
+    for s in r["old_silos"]:
+        y = s["y"] + s["plinth_r"] + dr.WET_FAN_OFFSET
+        ob.append((f"wet fan pad {s['label']}", "rect", (s["x"] - 0.7, y - 0.6, s["x"] + 0.7, y + 0.6)))
+    for b in site["aspiration"]["dust_bins"]:                           # legs only: a trailer backs in under the gate
+        (cx, cy), (fx, fy) = b["center"], b["frame"]
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                lx, ly = cx + sx * (fx / 2 - 0.075), cy + sy * (fy / 2 - 0.075)
+                ob.append((f"dust bin {b['id']} leg", "rect", (lx - 0.075, ly - 0.075, lx + 0.075, ly + 0.075)))
+    for t in site["noria_towers"]:
+        hx, hy = t["size"][0] / 2, t["size"][1] / 2
+        ob.append((f"tower {t['id']}", "rect", (t["x"] - hx, t["y"] - hy, t["x"] + hx, t["y"] + hy)))
+    sp = spec(site)
+    for key in ("apk", "ktp"):
+        ob.append((key, "rect", (sp[key]["x"][0], sp[key]["y"][0], sp[key]["x"][1], sp[key]["y"][1])))
+    k = sp["gate"]["kpp"]
+    ob.append(("kpp", "rect", (k["x"][0], k["y"][0], k["x"][1], k["y"][1])))
+    ph = sp["fire_tanks"]["pump_house"]
+    ob.append(("pump house", "rect", (ph["x"][0], ph["y"][0], ph["x"][1], ph["y"][1])))
+    ob += [("fire tank", "circle", (x, y, sp["fire_tanks"]["d"] / 2)) for x, y in sp["fire_tanks"]["c"]]
+    return ob
+
+
+def footprint_dist(p, kind, gm):
+    """Signed plan distance from point p to a footprint (negative inside)."""
+    if kind == "circle":
+        return math.hypot(p[0] - gm[0], p[1] - gm[1]) - gm[2]
+    x0, y0, x1, y1 = gm
+    dx, dy = max(x0 - p[0], 0, p[0] - x1), max(y0 - p[1], 0, p[1] - y1)
+    return math.hypot(dx, dy) if dx or dy else -min(p[0] - x0, x1 - p[0], p[1] - y0, y1 - p[1])
+
+
 def scales_box(sp, key):
     s = sp[key]
     y = lane(sp, s["lane"])["pts"][0][1]
     return s["x"][0], y - 1.5, s["x"][1], y + 1.5
+
+
+def faces_up(v, f):
+    """Flip every face whose normal points down (faces (n, k) on verts v): a face turned down renders black."""
+    f = np.array(f)
+    p = v[f]
+    nz = np.cross(p[:, 1] - p[:, 0], p[:, -1] - p[:, 0])[:, 2]
+    f[nz < 0] = f[nz < 0, ::-1]
+    return f
+
+
+def pieces(ln):
+    """A lane as pieces a ribbon follows without folding: each straight segment, or the whole arc."""
+    if "arc" in ln:
+        return [ln]
+    return [dict(ln, pts=[a, b]) for a, b in zip(ln["pts"], ln["pts"][1:])]
+
+
+def corner_joins(sp):
+    """Bends where two straight pieces meet end to start: inside a polyline lane, or one lane ending where the
+    next begins (the fire ring corners). [(corner xy, d_in, d_out, half width, outer side +1 left / -1 right)]."""
+    ends = []
+    for ln in sp["lanes"]:
+        if "pts" not in ln:
+            continue
+        p = [np.asarray(q, float) for q in ln["pts"]]
+        ends.append((ln, p))
+    out = []
+
+    def add(cp, a, b, hw):
+        d1, d2 = (cp - a) / np.linalg.norm(cp - a), (b - cp) / np.linalg.norm(b - cp)
+        turn = d1[0] * d2[1] - d1[1] * d2[0]
+        if abs(turn) > 1e-6:
+            out.append((cp, d1, d2, hw, -1.0 if turn > 0 else 1.0))
+
+    for ln, p in ends:
+        for a, cp, b in zip(p, p[1:], p[2:]):
+            add(cp, a, b, lane_width(ln, cp[0]) / 2)
+        for ln2, p2 in ends:
+            if ln2 is not ln and np.linalg.norm(p[-1] - p2[0]) < 0.01:
+                add(p[-1], p[-2], p2[1], min(lane_width(ln, p[-1][0]), lane_width(ln2, p2[0][0])) / 2)
+    return out
+
+
+def corner_fill(cp, d1, d2, reach, side):
+    """Outer corner of a bend out to `reach` from the axis: (corner, on the in-normal, miter point, on the out-normal)."""
+    n1, n2 = side * np.array([-d1[1], d1[0]]), side * np.array([-d2[1], d2[0]])
+    bis = (n1 + n2) / np.linalg.norm(n1 + n2)
+    return [cp, cp + n1 * reach, cp + bis * reach / float(np.dot(bis, n1)), cp + n2 * reach]
 
 
 def build_roads(site=None):
@@ -75,10 +182,18 @@ def build_roads(site=None):
     sp = spec(site)
     z = c.ground_z() + sp["road_z_over_ground"]
     roads = []
-    for k, ln in enumerate(sp["lanes"]):
-        pts = lane_polyline(ln)
-        hw = [lane_width(ln, p[0]) / 2 for p in pts] if "pts" in ln else ln["w"] / 2
-        roads.append(_strip(pts, hw, z + 0.002 * k))                  # a few mm apart: no z-fighting at junctions
+    k = 0
+    for ln in sp["lanes"]:
+        for pc in pieces(ln):                                        # straight pieces: a ribbon never folds at a bend
+            pts = lane_polyline(pc)
+            hw = [lane_width(pc, p[0]) / 2 for p in pts] if "pts" in pc else pc["w"] / 2
+            roads.append(_strip(pts, hw, z + 0.002 * k))              # a few mm apart: no z-fighting at junctions
+            k += 1
+    for cp, d1, d2, hw, side in corner_joins(sp):                    # the outer corner the square ribbon ends leave open
+        q = corner_fill(cp, d1, d2, hw, side)
+        v = np.array([(*p, z) for p in q])
+        roads.append((v, faces_up(v, [(0, 1, 2), (0, 2, 3)])))
+    for ln in sp["lanes"]:
         if ln.get("end_pad"):                                        # 12 x 12 turnaround at a dead end
             x0, y0, x1, y1 = ln["end_pad"]
             roads.append(c.box((x0, y0, z - 0.02), (x1, y1, z)))

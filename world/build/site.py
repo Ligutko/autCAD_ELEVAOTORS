@@ -142,8 +142,17 @@ def assemble(quick=False):
     for col in bpy.data.collections:          # labels are for explainer shots only
         if col.name.startswith("LABELS_"):
             col.hide_render = True
-    v, f = tun.ground_cells(2000, holes)
-    c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
+    if "environment" in site.get("designed", {}):           # phase W1: yard + summer grass, road shoulders
+        from kit import environment as env
+        assert sorted(env.ground_holes(site)) == sorted(holes), "ground holes drifted from environment.ground_holes"
+        col = bpy.data.collections.new("ENVIRONMENT")
+        scene.collection.children.link(col)
+        m.update({"yard": c.mat_concrete_yard("SITE_YARD"), "grass": c.mat_grass("SITE_GRASS"), "shoulder": c.mat_crushed_stone("SITE_SHOULDER")})
+        for k, (mat, smooth, (v, f)) in env.build(site).items():
+            c.mesh_from_arrays(f"ENV_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
+    else:
+        v, f = tun.ground_cells(2000, holes)
+        c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
     build_s = round(time.time() - t0, 1)
 
     return scene, site, build_s, silo_measure, asp_measure

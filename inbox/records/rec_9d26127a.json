@@ -1,0 +1,29 @@
+{
+  "id": "rec_9d26127a",
+  "subject": "Аналог: ЛАН-ОІЛ, елеваторний комплекс + біоетанол (Ланівці) — озеленення території",
+  "kind": "analog",
+  "claim": {
+    "name": "greening_share",
+    "value": {
+      "greening_coefficient": 0.53,
+      "grass_ha": 4.25,
+      "roads_ha": 5.1
+    },
+    "unit": "",
+    "qualifier": "ОВД, с. 207 (коефіцієнт), с. 29 (площі трави й доріг для поливу)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kremenets.te.gov.ua/storage/app/sites/35/uploaded-files/1-zvit-z-ovd-tov-lan-oil-bioetanol.pdf",
+    "path": "inbox/raw/web/kremenets.te.gov.ua/lan-oil_ovd.pdf",
+    "page": 207,
+    "quote": "Територія підприємства буде озеленена (коефіцієнт озеленення на рівні 53%)",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Площі з с. 29: «Площа покриття з трави Sз га 4.25», «Площа доріг Sт га 5.1». Комплекс більший за наш і має біоетанольний завод; беремо лише принцип: дороги з твердим покриттям, решта — трава.",
+  "seen_in": []
+}
