@@ -1,0 +1,31 @@
+{
+  "id": "rec_fae114d4",
+  "subject": "Існуючі силоси «2», «3»",
+  "kind": "dimension",
+  "claim": {
+    "name": "anchor_ring_radius",
+    "value": 4690,
+    "unit": "mm",
+    "qualifier": "R4690 — радіус штрих-пунктирного кола, на якому стоять анкерні опори"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      682.9,
+      224.0,
+      816.8,
+      359.1
+    ],
+    "quote": "R4690",
+    "crop": "inbox/raw/pdf_crops/p02_recv_silo2_400dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "extract_receiving_p2.py"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Підпис R4690 (двічі, на обох силосах). Вектор: «3» R 4.6894, «2» R 4.6896 (чорне штрих-пунктирне коло). Кільце анкерів ЗОВНІ стіни (R 4.29) на 0.40 м. Координати SITE: X на схід від осі веж H5/H6, Y на північ від осі ряду 3-6, z — відмітки. bbox — повернена сторінка, pt.",
+  "seen_in": []
+}

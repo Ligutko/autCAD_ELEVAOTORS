@@ -1,0 +1,37 @@
+{
+  "id": "rec_690fd397",
+  "subject": "Існуючі силоси «2», «3»",
+  "kind": "dimension",
+  "claim": {
+    "name": "wall_and_plinth_radii",
+    "value": {
+      "wall_r_m": [
+        4.2599,
+        4.2903
+      ],
+      "plinth_outer_r_m": 5.09
+    },
+    "unit": "m",
+    "qualifier": "два близькі червоні кола (стіна, товщина лінії ≈30 мм) і зовнішнє коло фундаменту"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      682.9,
+      224.0,
+      816.8,
+      359.1
+    ],
+    "quote": "",
+    "crop": "inbox/raw/pdf_crops/p02_recv_silo2_400dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "extract_receiving_p2.py"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Стіна R 4.26/4.29 (D ≈ 8.55 м), зовнішнє коло R 5.09 (D ≈ 10.18 м) — найімовірніше край фундаментного кільця. Підписаний лише R4690 (кільце анкерів). Координати SITE: X на схід від осі веж H5/H6, Y на північ від осі ряду 3-6, z — відмітки. bbox — повернена сторінка, pt.",
+  "seen_in": []
+}

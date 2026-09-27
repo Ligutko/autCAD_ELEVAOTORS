@@ -1,0 +1,39 @@
+{
+  "id": "rec_0a819296",
+  "subject": "Конвеєр T6 (приймальна частина)",
+  "kind": "dimension",
+  "claim": {
+    "name": "plan_extent",
+    "value": {
+      "axis_y": 53.425,
+      "x": [
+        -21.697,
+        0.497
+      ],
+      "width": 0.393,
+      "note": "від силоса «3» через силос «2» у вежу"
+    },
+    "unit": "m",
+    "qualifier": "синій кожух у плані ±0.000: вісь і кінці"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      576.5,
+      284.1,
+      1001.9,
+      300.3
+    ],
+    "quote": "T6",
+    "crop": "inbox/raw/pdf_crops/p02_recv_block_200dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "extract_receiving_p2.py"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Між осями T6 і T2 підписано 550 ({'from': (-10.61, 53.976), 'to': (-10.61, 53.429), 'measured_mm': 547}). Тип конвеєра не підписаний; специфікація нової черги його не містить (існуючий). Координати SITE: X на схід від осі веж H5/H6, Y на північ від осі ряду 3-6, z — відмітки. bbox — повернена сторінка, pt.",
+  "seen_in": []
+}

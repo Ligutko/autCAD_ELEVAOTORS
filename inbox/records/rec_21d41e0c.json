@@ -1,0 +1,48 @@
+{
+  "id": "rec_21d41e0c",
+  "subject": "Приймальна вежа (4)",
+  "kind": "dimension",
+  "claim": {
+    "name": "column_grid",
+    "value": {
+      "cols_x": [
+        -2.002,
+        4.199
+      ],
+      "cols_y": [
+        51.401,
+        57.405
+      ],
+      "centre": [
+        1.099,
+        54.403
+      ],
+      "size": [
+        6.201,
+        6.004
+      ]
+    },
+    "unit": "m",
+    "qualifier": "сітка 4 колон вежі 6200 × 6000 (червоні квадрати 0.20 м)"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      823.0,
+      235.3,
+      914.3,
+      332.9
+    ],
+    "quote": "6200 6000",
+    "crop": "inbox/raw/pdf_crops/p02_recv_tower_600dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "extract_receiving_p2.py"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "6200 ({'from': (-1.997, 50.533), 'to': (4.199, 50.533), 'measured_mm': 6196}), 6000 ({'from': (4.918, 57.4), 'to': (4.918, 51.406), 'measured_mm': 5994}). У SITE.json receiving.tower_H1_H4 x 1.1, y 54.8 (EST): X збігається, Y на 0.4 м північніше за креслення. Координати SITE: X на схід від осі веж H5/H6, Y на північ від осі ряду 3-6, z — відмітки. bbox — повернена сторінка, pt.",
+  "seen_in": []
+}

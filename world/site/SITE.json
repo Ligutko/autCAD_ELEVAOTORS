@@ -7,7 +7,7 @@
   "notes": [
     "План з PDF p.2 і p.3 розмірами: 24000 між силосами в парі, 29000 між силосами 4 і 5 через вежу, 25500 між рядами.",
     "Вісь веж H5/H6 посередині прольоту 29 м (p.2: 14.5 м від осі силоса).",
-    "Координати приймального комплексу H1-H4 зняті з масштабу аркуша 2, позначка EST."
+    "Приймальний блок H1-H4 (існуючий, спрощено) заміряно з вектора арк. 2-5: блок receiving, research/receiving.md (2026-09-27)."
   ],
   "ground_z": -0.45,
   "src_ground_z": "PDF p.4 розріз приямка H6: лінія землі заміряна від підписаних −1.900 і −5.100 → −0.451 (rec_3046318e, перевірено вдруге 2026-09-27); цоколь силоса над землею 1.05 (rec_69751fc1). Підлога вежі й кришка приямка +0.600, низ силоса +0.600",
@@ -64,9 +64,9 @@
     {"id": "G_H14_H5", "x": [-2.00, 0.80], "y": [28.40, 51.40], "deck_top_z": 25.60, "deck_bot_z": 25.40,
      "truss_bottom_z": 23.90, "rails_z": [26.20, 26.80],
      "conveyors": [
-       {"id": "T7",  "x": -1.055, "tail": [54.97, 25.97], "head": [24.47, 26.8]},
-       {"id": "T10", "x": -0.155, "tail": [24.94, 26.02], "head": [53.93, 26.02]}],
-     "src": "PDF p.3, p.4; the receiving tower H1-H4 at the north end is not modelled yet"}
+       {"id": "T7",  "x": -1.055, "tail": [55.36, 25.96], "head": [24.87, 26.8]},
+       {"id": "T10", "x": -0.155, "tail": [24.94, 26.02], "head": [53.946, 26.022]}],
+     "src": "PDF p.3, p.4; T7 pulleys from the p.4 drum marks 24.87 / 55.36 (rec_3543ac08, rec_66c16f74; L 30.49 = spec 30.5; was 24.47 / 54.97, the head then sat on the T11 inlet instead of the drum), T10 drive 53.946 (rec_ec92d4b3); the receiving tower is SITE receiving"}
   ],
   "tunnels": [
     {"id": "T9", "row_y": 25.5, "tower": "H5", "end_x": -51.598, "inner_y_rel_row": [-1.2, 1.0],
@@ -232,7 +232,538 @@
     "src": "PDF p.2, p.6, p.7: отвори симетрично з кроком 3250; ланцюг «2750» на арк. 6 не влучає в отвори (rec_be615fd3, research/tunnel_k4.md)"
   },
   "receiving": {
-    "tower_H1_H4": {"x": 1.1, "y": 54.8, "size": [6.2, 6.0], "top_z": 33.0, "src": "PDF p.2 масштаб, p.4 відмітки; положення EST"}
+    "status": "existing, not in the spec (sheets 8-12 list only H5, H6, T7-T16); user decision 2026-09-27: simplified, tie-ins with the new stage in detail",
+    "src": "research/receiving.md, inbox/extract_receiving_p2.py, inbox/reports/receiving_p2.json; PDF p.1-p.5 (29 cards)",
+    "tower": {
+      "cols_x": [
+        -2.002,
+        4.199
+      ],
+      "cols_y": [
+        51.401,
+        57.405
+      ],
+      "top_z": 33.0,
+      "roof_rails_z": [
+        33.6,
+        34.2
+      ],
+      "levels_z": [
+        30.0,
+        26.8,
+        24.4,
+        22.0,
+        19.4,
+        9.2,
+        0.0
+      ],
+      "decks": [
+        {
+          "z": 30.0,
+          "rects": [
+            [
+              -1.902,
+              51.501,
+              4.099,
+              57.305
+            ]
+          ]
+        },
+        {
+          "z": 26.8,
+          "rects": [
+            [
+              -1.902,
+              51.501,
+              4.099,
+              57.305
+            ],
+            [
+              -2.998,
+              50.605,
+              0.795,
+              51.406
+            ],
+            [
+              -2.998,
+              54.009,
+              -1.998,
+              57.405
+            ]
+          ]
+        },
+        {
+          "z": 24.4,
+          "rects": [
+            [
+              -1.902,
+              51.501,
+              1.799,
+              57.305
+            ]
+          ]
+        },
+        {
+          "z": 22.0,
+          "rects": [
+            [
+              1.799,
+              51.501,
+              4.099,
+              57.305
+            ],
+            [
+              4.203,
+              54.009,
+              5.203,
+              57.405
+            ]
+          ]
+        },
+        {
+          "z": 19.4,
+          "rects": [
+            [
+              -1.902,
+              51.501,
+              4.099,
+              57.305
+            ]
+          ]
+        },
+        {
+          "z": 9.2,
+          "rects": [
+            [
+              -1.902,
+              51.501,
+              4.099,
+              57.305
+            ]
+          ]
+        }
+      ],
+      "pit": {
+        "inner_x": [
+          -1.748,
+          3.949
+        ],
+        "inner_y": [
+          51.406,
+          57.151
+        ],
+        "wall_t": 0.5,
+        "floor_z": -5.8,
+        "mid_floor_z": -2.4
+      },
+      "src": "derived PDF p.2 (rec_21d41e0c, rec_bbd152f2), p.3 plans +24.4/+22.0/+26.8 (rec_a4d59747), p.4 levels (rec_29580e76); SITE had y 54.8 EST, drawn 54.403; +9.2 inside the tower is a deck, the concrete floor of the cleaning tower stops at the south columns (judgment)"
+    },
+    "noria_generic": {
+      "leg_axis_gap": 0.9,
+      "leg_w": 0.39,
+      "boot_len": 1.5,
+      "boot_w": 0.8,
+      "head_w": 0.9,
+      "drive": [
+        0.8,
+        0.6,
+        0.6
+      ],
+      "src": "leg gap 0.90 derived (p.4 section, rec_7c736976); leg, boot, head, drive sizes judgment (models of H1-H4 not in the PDF)"
+    },
+    "norias": [
+      {
+        "id": "H1",
+        "axis": [
+          1.101,
+          55.199
+        ],
+        "legs_along": "Y",
+        "boot_top_z": -3.83,
+        "head_z": [
+          33.98,
+          36.04
+        ],
+        "head_len": 2.5,
+        "t_h": 100
+      },
+      {
+        "id": "H2",
+        "axis": [
+          2.698,
+          55.199
+        ],
+        "legs_along": "Y",
+        "boot_top_z": -3.83,
+        "head_z": [
+          22.95,
+          24.96
+        ],
+        "head_len": 2.5,
+        "drive_towards": "+X",
+        "t_h": null
+      },
+      {
+        "id": "H3",
+        "axis": [
+          2.549,
+          52.504
+        ],
+        "legs_along": "X",
+        "boot_top_z": -3.83,
+        "head_z": [
+          33.45,
+          35.47
+        ],
+        "head_len": 2.0,
+        "t_h": 100
+      },
+      {
+        "id": "H4",
+        "axis": [
+          -0.501,
+          55.199
+        ],
+        "legs_along": "Y",
+        "boot_top_z": -3.83,
+        "head_z": [
+          27.45,
+          29.46
+        ],
+        "head_len": 2.5,
+        "drive_towards": "-X",
+        "t_h": 100
+      }
+    ],
+    "src_norias": "axes derived p.2 (rec_7c736976; 1600 + 1600, 2200, 1100, 1400 signed); head z and boot top derived p.4 (rec_8d661f7e); head lengths and H3 head along X judgment; t/h from sheet 1 headers (H2 absent there)",
+    "pit": {
+      "x": [
+        -2.898,
+        5.1
+      ],
+      "y": [
+        60.651,
+        66.655
+      ],
+      "floor_z": -5.0,
+      "wall_t": 0.3,
+      "deck_z": 0.1,
+      "outlets": [
+        [
+          1.101,
+          62.656
+        ],
+        [
+          1.101,
+          64.651
+        ]
+      ],
+      "channel": {
+        "x": [
+          0.295,
+          2.146
+        ]
+      },
+      "building": {
+        "x": [
+          -3.503,
+          5.695
+        ],
+        "y": [
+          60.047,
+          67.25
+        ],
+        "cols_x": [
+          -3.249,
+          1.096,
+          5.455
+        ],
+        "cols_y": [
+          60.301,
+          67.005
+        ],
+        "eave_z": 7.1,
+        "roof_top_z": 10.1
+      },
+      "drive": {
+        "y": [
+          60.949,
+          65.552
+        ],
+        "x": [
+          -20.901,
+          13.703
+        ],
+        "deck_z": 0.1,
+        "flat_x": [
+          -12.902,
+          5.695
+        ],
+        "direction": "-X"
+      },
+      "outer_posts": [
+        [
+          -5.905,
+          60.301
+        ],
+        [
+          8.145,
+          60.301
+        ],
+        [
+          -5.905,
+          67.005
+        ],
+        [
+          8.145,
+          67.005
+        ]
+      ],
+      "src": "derived p.2 (rec_670d24cc, rec_c6dfdf20, rec_07d52817, rec_72b8152c, rec_5b5a701d), p.4 heights (rec_fd6b7b4b); wall_t and hopper slopes judgment; drive at +0.100 sourced; ramp 1:10 signed but drawn 8.0 m long for 0.55 m (finding)"
+    },
+    "conveyors": [
+      {
+        "id": "T1",
+        "x": 1.097,
+        "y": [
+          66.147,
+          55.904
+        ],
+        "z_ends": [
+          -4.8,
+          -3.2
+        ],
+        "w": 0.49,
+        "src": "derived p.2, p.4 (rec_a411dcdf, rec_4406774b), 9 deg signed"
+      },
+      {
+        "id": "T2",
+        "y": 53.976,
+        "x": [
+          -9.852,
+          2.444
+        ],
+        "w": 0.4,
+        "z": 0.0,
+        "src": "plan derived (rec_3944f546); z judgment: plan at ±0.000"
+      },
+      {
+        "id": "T6",
+        "y": 53.425,
+        "x": [
+          -21.697,
+          0.497
+        ],
+        "w": 0.39,
+        "z": 0.0,
+        "src": "plan derived (rec_0a819296); z judgment"
+      },
+      {
+        "id": "T4",
+        "y": 53.899,
+        "x": [
+          2.645,
+          11.239
+        ],
+        "w": 0.29,
+        "z": 0.0,
+        "src": "plan derived (rec_f450c6ea); z judgment"
+      }
+    ],
+    "old_silos": [
+      {
+        "id": "OS3",
+        "label": "3",
+        "x": -20.15,
+        "y": 53.703,
+        "wall_r": 4.29,
+        "plinth_r": 5.09,
+        "anchor_r": 4.69,
+        "anchors": 20,
+        "anchor_a0_deg": 8.6,
+        "floor_z": 0.0,
+        "wall_h": 11.52
+      },
+      {
+        "id": "OS2",
+        "label": "2",
+        "x": -8.15,
+        "y": 53.703,
+        "wall_r": 4.29,
+        "plinth_r": 5.09,
+        "anchor_r": 4.69,
+        "anchors": 20,
+        "anchor_a0_deg": 8.6,
+        "floor_z": 0.0,
+        "wall_h": 11.52
+      }
+    ],
+    "src_old_silos": "centres, radii, 20 anchors derived p.2 (rec_302fbba5, rec_37006160, rec_690fd397, rec_fae114d4 R4690 signed, rec_56e349e9); ±0.000 signed; wall_h JUDGMENT: no height in the PDF, 10 tiers × 1.152 m",
+    "building_4": {
+      "outer_x": [
+        5.081,
+        11.622
+      ],
+      "outer_y": [
+        49.353,
+        57.947
+      ],
+      "floor_z": 0.0,
+      "eave_z": 6.0,
+      "src": "plan derived (rec_eec676e7); purpose unknown; eave JUDGMENT (no height in the PDF)"
+    },
+    "cleaning_tower": {
+      "cols_x": [
+        -5.8,
+        -3.503,
+        0.497,
+        2.799
+      ],
+      "cols_y": [
+        43.105,
+        47.905
+      ],
+      "col": 0.6,
+      "floor_z": 9.2,
+      "floor_y": [
+        42.98,
+        51.4
+      ],
+      "room_y": [
+        42.98,
+        48.02
+      ],
+      "wall_top_z": 16.1,
+      "roof_z": 16.3,
+      "roof_raised": {
+        "y": [
+          45.21,
+          48.02
+        ],
+        "top_z": 17.49
+      },
+      "x_extent": [
+        -6.1,
+        3.1
+      ],
+      "bin_Sh1": {
+        "x": [
+          -3.0,
+          0.0
+        ],
+        "y": [
+          43.19,
+          47.81
+        ],
+        "box_z": [
+          7.0,
+          9.2
+        ],
+        "outlet": [
+          45.5,
+          4.66
+        ]
+      },
+      "separator_5": {
+        "y": [
+          44.17,
+          46.85
+        ],
+        "z": [
+          9.9,
+          12.13
+        ]
+      },
+      "gravity_pipe": {
+        "x": 1.1,
+        "node_1": [
+          53.0,
+          30.59
+        ],
+        "from": [
+          52.33,
+          23.32
+        ],
+        "to": [
+          47.27,
+          18.26
+        ],
+        "d_mm": 250
+      },
+      "bin_Sh1_to_tower": {
+        "x": -1.5,
+        "from": [
+          46.1,
+          4.7
+        ],
+        "to": [
+          52.3,
+          -0.5
+        ]
+      },
+      "src": "columns, Y extents and heights derived p.2, p.4 (rec_915519a2, rec_a9973fcc), roof +16.300 signed; X extent, bin X, pipe X (= section plane x 1.1), pipe d JUDGMENT"
+    },
+    "joints": {
+      "T7": {
+        "x": -1.052,
+        "casing_h": 0.5,
+        "inlets": [
+          {
+            "y": 52.37,
+            "from": "H3"
+          },
+          {
+            "y": 53.37,
+            "from": "H1"
+          },
+          {
+            "y": 54.01,
+            "from": "H4"
+          }
+        ],
+        "src": "inlets y derived p.4 (rec_3543ac08, chain 1000 / 642 / 1358 signed); sources H1 (6.1), H3 (7 / 6.3), H4 (7 / 6.5) sourced sheet 1 (rec_005f7a92); which head feeds which inlet JUDGMENT (nearest)"
+      },
+      "T10": {
+        "x": -0.152,
+        "casing_h": 0.5,
+        "outlets": [
+          {
+            "y": 51.869,
+            "to": "gravity_pipe",
+            "join": [
+              51.9,
+              22.9
+            ]
+          },
+          {
+            "y": 53.865,
+            "to": "splitter_7",
+            "splitter_z": 24.8,
+            "branches": [
+              {
+                "gate": "6.9",
+                "to": "T5",
+                "end": [
+                  53.7,
+                  22.0
+                ]
+              },
+              {
+                "gate": "6.10",
+                "to": "T3",
+                "end": [
+                  53.9,
+                  19.4
+                ]
+              }
+            ]
+          }
+        ],
+        "src": "derived p.4, p.5 (rec_ec92d4b3); splitter z judgment; T3 and T5 are not drawn beyond their spout ends"
+      },
+      "spout_mm": 300,
+      "gallery_end_y": 51.406
+    }
   },
   "aspiration": {
     "status": "Бункери пилу — креслення (арк. 1, 3). Установки (фільтр РЦИЕ + вентилятор) і траси повітроводів на кресленні відсутні: інженерне рішення за нормами «Указания» 1998, дод. 22 (research/tunnel_k4.md «Аспірація (блок E)», rec_533cc352, rec_1317454f, rec_2bc8fce0, rec_f933486a). Висоти бункерів — judgment",

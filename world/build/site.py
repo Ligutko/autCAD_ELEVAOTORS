@@ -22,6 +22,7 @@ from kit import common as c  # noqa: E402
 from kit import foundation as fnd  # noqa: E402
 from kit import gallery as gal  # noqa: E402
 from kit import noria_tower as tower  # noqa: E402
+from kit import receiving as rcv  # noqa: E402
 from kit import silo_msvu220 as silo  # noqa: E402
 from kit import steel as st  # noqa: E402
 from kit import tunnel as tun  # noqa: E402
@@ -114,6 +115,17 @@ def assemble(quick=False):
         w = spec["pit"]["wall_t"]
         holes.append((spec["x"] + x0 - w, spec["y"] + y0 - w, spec["x"] + x1 + w, spec["y"] + y1 + w))
 
+    if "tower" in site.get("receiving", {}):                # existing receiving block, simplified (phase 4)
+        col = bpy.data.collections.new("RECEIVING")
+        scene.collection.children.link(col)
+        for k, (mat, smooth, (v, f)) in rcv.build(site["receiving"], site).items():
+            c.mesh_from_arrays(f"RECEIVING_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
+        r = site["receiving"]
+        p, w = r["pit"], r["pit"]["wall_t"]
+        tp = r["tower"]["pit"]
+        holes += [(p["x"][0] - w, p["y"][0] - w, p["x"][1] + w, p["y"][1] + w),
+                  (tp["inner_x"][0] - tp["wall_t"], tp["inner_y"][0] - tp["wall_t"], tp["inner_x"][1] + tp["wall_t"], tp["inner_y"][1] + tp["wall_t"])]
+
     asp_measure = {}
     if "aspiration" in site:
         col = bpy.data.collections.new("ASPIRATION")
@@ -138,6 +150,8 @@ def main():
     cams = {
         "site_drone.png": c.camera("CAM_DRONE", (70, -70, 55), (-8, 12, 10), lens=28),
         "site_ground.png": c.camera("CAM_GROUND", (28, -16, c.ground_z() + 1.7), (-2, 8, 16), lens=20),
+        "site_receiving.png": c.camera("CAM_RECV", (38.0, 22.0, 42.0), (-6.0, 57.0, 6.0), lens=24),
+        "site_truck_pit.png": c.camera("CAM_TRUCK", (19.0, 62.2, c.ground_z() + 1.7), (0.0, 63.4, 4.0), lens=22),
         "site_tunnel_exit.png": c.camera("CAM_EXIT", (-56.5, 9.5, c.ground_z() + 1.7), (-51.1, 2.8, -1.2), lens=24),
         "site_gallery_walk.png": c.camera("CAM_WALK", (-3.5, 0.4, 24.9), (-30, 0.2, 23.6), lens=20),
         "site_bridge.png": c.camera("CAM_BRIDGE", (9, 12.7, 17), (0, 12.7, 24.5), lens=24),

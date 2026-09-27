@@ -1,0 +1,38 @@
+{
+  "id": "rec_c6dfdf20",
+  "subject": "Завальна яма (1)",
+  "kind": "dimension",
+  "claim": {
+    "name": "hopper_outlets",
+    "value": {
+      "x": 1.101,
+      "y": [
+        62.656,
+        64.651
+      ],
+      "spacing_mm": 2000
+    },
+    "unit": "m",
+    "qualifier": "дві лійки ями з випусками на T1, між ними 2000"
+  },
+  "source": {
+    "origin": "local",
+    "path": "Технологія 06.06.24.pdf",
+    "page": 2,
+    "bbox": [
+      845.5,
+      147.7,
+      891.8,
+      187.7
+    ],
+    "quote": "2000",
+    "crop": "inbox/raw/pdf_crops/p02_recv_pit_300dpi.png",
+    "retrieved_at": "2026-09-27",
+    "extractor": "extract_receiving_p2.py"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Пірамідальні лінії від кутів ями сходяться до двох випусків; підпис 2000 (лінія {'from': (3.0, 64.651), 'to': (3.0, 62.656), 'measured_mm': 1995}). На розрізі арк. 4 під ними засувки 6.24 і 6.25. Координати SITE: X на схід від осі веж H5/H6, Y на північ від осі ряду 3-6, z — відмітки. bbox — повернена сторінка, pt.",
+  "seen_in": []
+}
