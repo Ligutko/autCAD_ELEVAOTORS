@@ -1,0 +1,25 @@
+{
+  "id": "rec_f307fa3d",
+  "subject": "Автоматизація елеватора (Техникон, РФ, огляд)",
+  "kind": "attribute",
+  "claim": {
+    "name": "route_start_sequence",
+    "value": "пуск маршруту — від кінцевого механізму до початкового (проти потоку), зупинка — у зворотному порядку",
+    "unit": "",
+    "qualifier": "блокування пуску/зупинки"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://technikonprom.ru/blog/avtomatizaciya-elevatora/",
+    "path": "inbox/raw/web/technikonprom.ru/avtomatizaciya-elevatora.html",
+    "page": null,
+    "quote": "Запуск начинается с конечного устройства и движется к начальному для предотвращения завалов зерна.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Українську норму з прямим формулюванням не знайдено; ВНТП 05-88 п. 17.7 вимагає блокувань, НПАОП — датчиків підпору і швидкості.",
+  "seen_in": []
+}

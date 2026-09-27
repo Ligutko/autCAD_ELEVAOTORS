@@ -1,0 +1,30 @@
+{
+  "id": "rec_3ebdcd45",
+  "subject": "Норма: ПДР України п. 22.5 (габарити автотранспорту)",
+  "kind": "norm",
+  "claim": {
+    "name": "max_vehicle_length",
+    "value": {
+      "truck_m": 12,
+      "road_train_m": 22,
+      "tractor_semitrailer_m": 18.75,
+      "gross_mass_t": 40
+    },
+    "unit": "m / t",
+    "qualifier": "найбільша довжина і маса без спецдозволу"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://green-way.com.ua/uk/dovidniki/pdr-single/rozdil-22/punkt-5",
+    "path": "inbox/raw/web/green-way.com.ua/pdr_22_5.html",
+    "page": null,
+    "quote": "Довжина: вантажного автомобіля 12 автопоїзда 22 автомобіля (тягача) з напівпричепом 18,75",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Звідси: платформа 18 м не вміщує автопоїзд 22 м за одне встановлення, 24 м — вміщує.",
+  "seen_in": []
+}

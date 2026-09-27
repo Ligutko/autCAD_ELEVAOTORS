@@ -1,0 +1,39 @@
+{
+  "id": "rec_7fee1cbf",
+  "subject": "Автомобільні ваги Оптима-В (Автовес, Україна)",
+  "kind": "dimension",
+  "claim": {
+    "name": "lengths_capacity_ramps",
+    "value": {
+      "lengths_m": [
+        14,
+        16,
+        18,
+        20,
+        22,
+        24
+      ],
+      "capacity_t": [
+        60,
+        80
+      ],
+      "ramp_h_max_m": 0.35
+    },
+    "unit": "m / t",
+    "qualifier": "довжини платформи, НГЗ, висота пандусів"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.avtoves.ua/ukr/catalog/avtomobilnyye-vesy/product.html?id=4514",
+    "path": "inbox/raw/web/avtoves.ua/optima_v_4514.html",
+    "page": null,
+    "quote": "у вигляді металевих або бетонних пандусів висотою до 350 мм",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Встановлення поверхневе або напівповерхневе, фундамент монолітний або збірний.",
+  "seen_in": []
+}

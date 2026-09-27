@@ -1,0 +1,25 @@
+{
+  "id": "rec_4a3425dd",
+  "subject": "Норма: ДБН В.2.2-8-98 Підприємства, будівлі і споруди по зберіганню та переробці зерна",
+  "kind": "norm",
+  "claim": {
+    "name": "dryer_furnace_and_waste_bins",
+    "value": "приміщення вогняних топок сушарок відділяти глухими стінами (≥ 2 год) і перекриттями (≥ 1 год) з виходом назовні; бункери відходів і пилу — з негорючих матеріалів з проїздом транспорту під ними",
+    "unit": "",
+    "qualifier": "п. 1.x (с. 2)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://mininfra.gov.ua/storage/app/sites/1/uploaded-files/61-dbn-v22-8-98-pidprijemstva-budivli-i-sporudi-po.pdf",
+    "path": "inbox/raw/web/mininfra.gov.ua/dbn_v2.2-8-98.pdf",
+    "page": null,
+    "quote": "Бункери для відходів і пилу повинні проектуватися з негорючих матеріалів з забезпеченням проїзду під ними транспортних засобів.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Статус чинності ДБН В.2.2-8-98 на 2026 р. не перевірено. ",
+  "seen_in": []
+}

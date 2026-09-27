@@ -1,0 +1,25 @@
+{
+  "id": "rec_535b7b57",
+  "subject": "4B: Bucket Elevator Monitoring Systems (J. Wheat, 2002)",
+  "kind": "attribute",
+  "claim": {
+    "name": "ignition_sources",
+    "value": "три джерела нагріву в норії: проковзування стрічки на голові, тертя стрічки об кожух, відмова підшипника; струм двигуна не показує проковзування — потрібен датчик швидкості",
+    "unit": "",
+    "qualifier": "навіщо датчики"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.go4b.com/usa/technical-support/technical-papers/bucket-elevator-monitoring.pdf",
+    "path": "inbox/raw/web/go4b.com/bucket-elevator-monitoring.pdf",
+    "page": null,
+    "quote": "On bucket elevators there are three primary heat generating areas with the potential to ignite dust in the atmosphere or dust lying around the elevator.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

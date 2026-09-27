@@ -1,0 +1,37 @@
+{
+  "id": "rec_44285229",
+  "subject": "Завальна яма KMZ Industries",
+  "kind": "dimension",
+  "claim": {
+    "name": "pit_sizes",
+    "value": {
+      "capacity_m3": [
+        40,
+        55,
+        77
+      ],
+      "drive_area_L_mm": [
+        6640,
+        9370,
+        12100
+      ],
+      "drive_area_W_mm": 4000
+    },
+    "unit": "mixed",
+    "qualifier": "місткість і розмір проїзної решітки"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/en/product/zavalni-jami",
+    "path": "inbox/raw/web/kmzindustries.ua/zavalni_jami_en.html",
+    "page": null,
+    "quote": "The capacity of the pit is 40 m 3 , 55 m 3 , and 77 m 3 .",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Решітки оцинковані, проїзні, на поперечних балках у фундаменті. Розмір комірки не вказано.",
+  "seen_in": []
+}

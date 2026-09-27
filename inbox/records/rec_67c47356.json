@@ -1,0 +1,25 @@
+{
+  "id": "rec_67c47356",
+  "subject": "Зерносушарка шахтна Лубнимаш У13-СШ",
+  "kind": "attribute",
+  "claim": {
+    "name": "wet_bin_level_sensors",
+    "value": "надсушильний (накопичувальний) бункер з верхнім і нижнім датчиками рівня; датчики вологості на вході й виході — опція; пневматичний пристрій розвантаження",
+    "unit": "",
+    "qualifier": "автоматика сушарки"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "2. Верхній датчик рівня зерна. 3. Збільшений накопичувальний бункер. 4. Нижній датчик рівня зерна.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Об'єм надсушильного бункера на сторінці не вказано.",
+  "seen_in": []
+}

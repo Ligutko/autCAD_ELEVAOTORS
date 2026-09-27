@@ -1,0 +1,29 @@
+{
+  "id": "rec_d87e377e",
+  "subject": "Зерносушарка Лубнимаш СШ-100.М3",
+  "kind": "dimension",
+  "claim": {
+    "name": "dimensions_LxWxH",
+    "value": [
+      11.646,
+      9.206,
+      22.435
+    ],
+    "unit": "m",
+    "qualifier": "габаритні розміри довжина × ширина × висота"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "Довжина [ мм ] 11 500 11 500 11 500 11 646 11 646 13 060 11 646 11 646 11 646 11 646 Ширина [ мм ] 3 800 4 455 4 455 5 206 5 206 8 050 9 206 9 206 13 206 17 206 Висота [ мм ] 18 200 20 330 22 550 20 315 22 435 28 800 20 315 22 435 22 435 22 435",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "СШ-100.М3 — восьма колонка. СШ-80 і СШ-100 мають ту саму ширину 9 206, отже 80/100 — дві шахти, як у СШ-40/50.",
+  "seen_in": []
+}

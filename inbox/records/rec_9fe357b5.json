@@ -1,0 +1,30 @@
+{
+  "id": "rec_9fe357b5",
+  "subject": "4B Watchdog Elite: система моніторингу норії",
+  "kind": "dimension",
+  "claim": {
+    "name": "sensor_set",
+    "value": {
+      "touchswitch_belt_alignment": 4,
+      "bearing_temp_NTC": 4,
+      "speed_sensor": "P800 на валу башмака",
+      "extra_pair": "натяжний барабан (якщо є)"
+    },
+    "unit": "pcs",
+    "qualifier": "склад датчиків на одну норію"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.go4b.com/usa/technical-support/product-manuals/watchdog/watchdog-installation-guide.pdf",
+    "path": "inbox/raw/web/go4b.com/watchdog-installation-guide.pdf",
+    "page": 4,
+    "quote": "Four Touchswitch sensors are mounted on the elevator (two at the head or drive end and two at the boot or tail end) in order to detect a misaligned belt.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "с. 4. Температура: до 6 входів, по датчику на кожен підшипник голови і башмака.",
+  "seen_in": []
+}

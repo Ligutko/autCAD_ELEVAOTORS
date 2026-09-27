@@ -1,0 +1,36 @@
+{
+  "id": "rec_5a301d66",
+  "subject": "Зовнішнє пожежогасіння (розрахунок)",
+  "kind": "dimension",
+  "claim": {
+    "name": "fire_water",
+    "value": {
+      "flow_l_s": [
+        15,
+        25
+      ],
+      "duration_h": 3,
+      "volume_m3": [
+        162,
+        270
+      ],
+      "reservoirs": "2 × 50 %"
+    },
+    "unit": "m3",
+    "qualifier": "витрата, тривалість, об'єм резервуарів"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.poproekty.com.ua/wp-content/uploads/2021/04/DBN-V.2.5-74-2013-Vodopostachannya.-Zovnishni-merezhi-ta-sporudi.-Osnovni-polozhennya-proektuvannya.pdf",
+    "path": "inbox/raw/web/poproekty.com.ua/DBN-V.2.5-74-2013.pdf",
+    "page": null,
+    "quote": "I і II А, Б, В 10 10 15 20 30 35 40",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Найбільша будівля — силос Ø22: об'єм ≈ 380 м² × (21,4 + конус даху) ≈ 8,9 тис. м³ → графа 5–20 тис. м³: 15 л/с (I–II ст., кат. А–В) або 25 л/с (рядок IV ст., кат. В). V = q × 3 год × 3,6 = 162…270 м³, у двох резервуарах по 50 % (п. 13.3.3). Аналог Біловод: резервуар 500 м³ (рекомендовано 2 × 250) + кільце Ø100–150 з гідрантами. Ступінь вогнестійкості металевого силоса і категорію — не перевірено.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_b4daaa80",
+  "subject": "Оперативні хопери вологого зерна (KMZ Industries, практика)",
+  "kind": "norm",
+  "claim": {
+    "name": "precleaning_vs_intake",
+    "value": "продуктивність попереднього очищення ≥ продуктивності приймального конвеєра, краще на 15–30 % більше",
+    "unit": "",
+    "qualifier": "співвідношення очищення / приймання"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/elevators/tehnichne-osnashhennja-elevatora-jak-viznachiti-kilkist-operativnih-nakopichuvalnih-hoperiv-ta-ih-mistkist",
+    "path": "inbox/raw/web/kmzindustries.ua/hoppers_article.html",
+    "page": null,
+    "quote": "Продуктивність попереднього очищення має бути не меншою за продуктивність приймального конвеєра, а краще – більше на 15–30%",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

@@ -1,0 +1,42 @@
+{
+  "id": "rec_94a3120c",
+  "subject": "Норма: ДБН В.2.2-8-98 Підприємства, будівлі і споруди по зберіганню та переробці зерна",
+  "kind": "norm",
+  "claim": {
+    "name": "lighting_lux",
+    "value": {
+      "noria_head_and_separator_floors": {
+        "incandescent": 30,
+        "discharge": 75
+      },
+      "other_tower_floors_over_under_silo_receiving_galleries_dryer": {
+        "incandescent": 20,
+        "discharge": 50
+      },
+      "truck_and_rail_scales": {
+        "incandescent": 100,
+        "discharge": 200
+      },
+      "waste_shop": {
+        "incandescent": 20,
+        "discharge": 50
+      }
+    },
+    "unit": "lx",
+    "qualifier": "табл. 6: освітленість на 0,8 м від підлоги"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://mininfra.gov.ua/storage/app/sites/1/uploaded-files/61-dbn-v22-8-98-pidprijemstva-budivli-i-sporudi-po.pdf",
+    "path": "inbox/raw/web/mininfra.gov.ua/dbn_v2.2-8-98.pdf",
+    "page": null,
+    "quote": "Решта поверхів робочої будівлі, надсилосний і підсилосний поверхи, приймальні пристрої, галереї, сушарка VIIIб 20 50",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Статус чинності ДБН В.2.2-8-98 на 2026 р. не перевірено. При промисловому телебаченні — 100–150 лк (прим. 3).",
+  "seen_in": []
+}

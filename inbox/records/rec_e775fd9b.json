@@ -1,0 +1,25 @@
+{
+  "id": "rec_e775fd9b",
+  "subject": "Статус норми ДСТУ Б В.2.5-38:2008",
+  "kind": "norm",
+  "claim": {
+    "name": "status",
+    "value": "скасовано з 01.11.2019, чинні ДСТУ EN 62305",
+    "unit": "",
+    "qualifier": "статус стандарту"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://fs-lps.com/en/vidmina-dstu-bv2-5-38-2008/",
+    "path": "inbox/raw/web/fs-lps.com/vidmina-dstu-bv2-5-38-2008.html",
+    "page": null,
+    "quote": "Скасування ДСТУ Б В.2.5-38:2008 “Улаштування блискавкозахисту будівель та споруд”",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "У збереженому HTML є лише заголовок сторінки (тіло вантажиться скриптом); дата 01.11.2019 і заміна на ДСТУ EN 62305 — з тексту сторінки у видачі пошуку. Джерело — сайт компанії з блискавкозахисту, не офіційний реєстр; перевірити в каталозі ДСТУ.",
+  "seen_in": []
+}

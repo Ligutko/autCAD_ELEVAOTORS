@@ -1,0 +1,28 @@
+{
+  "id": "rec_d02a2290",
+  "subject": "Автомобільні ваги АКСІС 60-18-К-П (Axis, Україна)",
+  "kind": "dimension",
+  "claim": {
+    "name": "platform_size",
+    "value": [
+      18,
+      3
+    ],
+    "unit": "m",
+    "qualifier": "безфундаментні колійного типу, 60 т, 4 пандуси, 8 датчиків"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://max-box.com.ua/ua/p346473735-vesy-dlya-gruzovyh.html",
+    "path": "inbox/raw/web/max-box.com.ua/axis_60_18_k_p.html",
+    "page": null,
+    "quote": "Розмір платформи, м 18х3",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Колійний тип: дві колії під колеса замість суцільного настилу.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_8551fe19",
+  "subject": "Норма: ВНТП 05-88 (хлібоприймальні підприємства й елеватори)",
+  "kind": "norm",
+  "claim": {
+    "name": "accumulation_per_intake_line_min",
+    "value": 150,
+    "unit": "t",
+    "qualifier": "п. 5.14: накопичувальні ємності для формування партій"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://library.nadzor-info.ru/doc/141097",
+    "path": "inbox/raw/web/library.nadzor-info.ru/doc141097.html",
+    "page": null,
+    "quote": "накопительные емкости в размере суточного поступления зерна, но не менее 150 тонн для каждой приемной линии",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "ВНТП 05-88 — союзна відомча норма 1988 р. Прямо чинною в Україні не є, але на неї посилаються українські виробники (KMZ, стаття про хопери) як на «Норми технологічного проектування». Сучасного українського ВНТП для елеваторів не знайдено. ",
+  "seen_in": []
+}

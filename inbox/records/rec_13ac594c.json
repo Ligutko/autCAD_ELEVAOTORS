@@ -1,0 +1,25 @@
+{
+  "id": "rec_13ac594c",
+  "subject": "Норма: ДБН В.2.2-8-98 Підприємства, будівлі і споруди по зберіганню та переробці зерна",
+  "kind": "norm",
+  "claim": {
+    "name": "lightning_ref",
+    "value": "блискавкозахист — з урахуванням РД 34.21.122",
+    "unit": "",
+    "qualifier": "п. 7.3"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://mininfra.gov.ua/storage/app/sites/1/uploaded-files/61-dbn-v22-8-98-pidprijemstva-budivli-i-sporudi-po.pdf",
+    "path": "inbox/raw/web/mininfra.gov.ua/dbn_v2.2-8-98.pdf",
+    "page": null,
+    "quote": "Захист від блискавки будівель і споруд слід проектувати з урахуванням вимог РД 34.21.122.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Статус чинності ДБН В.2.2-8-98 на 2026 р. не перевірено. РД 34.21.122 — союзна інструкція 1987 р.; сучасна база — ДСТУ EN 62305.",
+  "seen_in": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "rec_40db959a",
+  "subject": "Аналог: перевантажувальний зерновий термінал 250 т/год, ОВД (EIB 90286076)",
+  "kind": "dimension",
+  "claim": {
+    "name": "wet_silos",
+    "value": {
+      "count": 4,
+      "each_t": 200,
+      "dryers": "2 × Mathews 3180 BEM-NG, 100 т/год кожна"
+    },
+    "unit": "t",
+    "qualifier": "силоси вологого зерна перед сушарками"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.eib.org/attachments/registers/90286076.pdf",
+    "path": "inbox/raw/web/eib.org/eib_90286076.pdf",
+    "page": null,
+    "quote": "накопичення у чотирьох силосах вологого зерна по 200 т кожний",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_7e36d0bf",
+  "subject": "Зерносушарка Лубнимаш У13-СШ",
+  "kind": "attribute",
+  "claim": {
+    "name": "fuel_burner_type",
+    "value": "газ, лінійний пальник MAXON у шахті гарячого повітря",
+    "unit": "",
+    "qualifier": "тип пальника і де стоїть"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "Модульний лінійний пальник європейського виробництва",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Окремої топки-будівлі немає: пальник вбудований у шахту гарячого повітря (позиції 22–25 схеми). Для біомаси потрібен окремий теплогенератор поруч — у Лубнимаш на цій сторінці не описано.",
+  "seen_in": []
+}

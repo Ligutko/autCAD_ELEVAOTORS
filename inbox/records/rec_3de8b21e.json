@@ -1,0 +1,45 @@
+{
+  "id": "rec_3de8b21e",
+  "subject": "Ваговий автомобілерозвантажувач (ВІС, Україна)",
+  "kind": "dimension",
+  "claim": {
+    "name": "specs",
+    "value": {
+      "capacity_t": [
+        40,
+        60,
+        80
+      ],
+      "platform_m": [
+        12,
+        14,
+        16,
+        18,
+        20,
+        21
+      ],
+      "tilt_deg": 38,
+      "motor_kW": [
+        22,
+        30,
+        37
+      ]
+    },
+    "unit": "mixed",
+    "qualifier": "вантажопідйомність, довжина платформи, кут, привод"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://vis.ua/product/vahovyy-avtomobilerozvantazhuvach/",
+    "path": "inbox/raw/web/vis.ua/vahovyy_avtomobilerozvantazhuvach.html",
+    "page": null,
+    "quote": "Кут нахилу платформи, град. 38",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

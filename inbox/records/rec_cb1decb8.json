@@ -1,0 +1,25 @@
+{
+  "id": "rec_cb1decb8",
+  "subject": "Аналог: елеватор с. Біловод (Сумська обл.), ОВНС 69-17 (EIB)",
+  "kind": "attribute",
+  "claim": {
+    "name": "fire_water",
+    "value": "кільцева мережа протипожежного водопроводу Ø100–150 з гідрантами в колодязях, пожежний резервуар 500 м³ (рекомендовано 2 × 250), насосна пожежогасіння",
+    "unit": "",
+    "qualifier": "протипожежне водопостачання діючого елеватора"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.eib.org/attachments/registers/86543276.pdf",
+    "path": "inbox/raw/web/eib.org/eib_86543276.pdf",
+    "page": null,
+    "quote": "один протипожежний резервуар об'ємом 500,0 м³",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

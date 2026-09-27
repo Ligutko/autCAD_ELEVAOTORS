@@ -1,0 +1,51 @@
+{
+  "id": "rec_d8fac2c2",
+  "subject": "Завальна яма RIELA (Україна / DE)",
+  "kind": "dimension",
+  "claim": {
+    "name": "pit_params",
+    "value": {
+      "bin_m3": [
+        60,
+        65
+      ],
+      "depth_m": [
+        2.5,
+        3.0
+      ],
+      "drive_zone_LxW_m": [
+        24,
+        7
+      ],
+      "grates_LxW_m": [
+        12,
+        [
+          3.5,
+          4.5
+        ]
+      ],
+      "grate_load_t_axle": 7,
+      "funnel_deg": 45,
+      "conveyor_t_h": [
+        40,
+        200
+      ]
+    },
+    "unit": "mixed",
+    "qualifier": "параметри проїзної ями без розвантажувача"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://riela.com.ua/zavalna-yama/",
+    "path": "inbox/raw/web/riela.com.ua/zavalna-yama.html",
+    "page": null,
+    "quote": "Навантаження на решітку 7 т/вісь",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Яма проїзного типу під самоскиди / зерновози з заднім і бічним розвантаженням.",
+  "seen_in": []
+}

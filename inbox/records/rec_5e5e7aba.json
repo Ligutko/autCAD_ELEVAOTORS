@@ -1,0 +1,29 @@
+{
+  "id": "rec_5e5e7aba",
+  "subject": "Автомобільні ваги ВА18-60 (АВС Технології, Дніпро)",
+  "kind": "dimension",
+  "claim": {
+    "name": "platform_LxWxH",
+    "value": [
+      18.06,
+      3.03,
+      0.3
+    ],
+    "unit": "m",
+    "qualifier": "вагова платформа, 60 (80) т, 8 тензодатчиків, маса 8100 кг"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://abc-dnepr.com/ua/p462522259-vesy-avtomobilnye-metrov.html",
+    "path": "inbox/raw/web/abc-dnepr.com/abc_va18-60.html",
+    "page": null,
+    "quote": "Довжина 18060 мм Ширина 3030 мм Висота 300 мм",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Український виробник; варіанти фундаменту: монолітний поверхневий, монолітний заглиблений, збірний.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_acfb2354",
+  "subject": "Норма: ВНТП 05-88 (хлібоприймальні підприємства й елеватори)",
+  "kind": "norm",
+  "claim": {
+    "name": "dryer_hours_per_month",
+    "value": 615,
+    "unit": "h/month",
+    "qualifier": "п. 2.14, стаціонарні сушарки"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://library.nadzor-info.ru/doc/141097",
+    "path": "inbox/raw/web/library.nadzor-info.ru/doc141097.html",
+    "page": null,
+    "quote": "Расчетное время работы зерносушильного оборудования следует принимать из расчета 615 часов в месяц для стационарных зерносушилок",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "ВНТП 05-88 — союзна відомча норма 1988 р. Прямо чинною в Україні не є, але на неї посилаються українські виробники (KMZ, стаття про хопери) як на «Норми технологічного проектування». Сучасного українського ВНТП для елеваторів не знайдено. ",
+  "seen_in": []
+}

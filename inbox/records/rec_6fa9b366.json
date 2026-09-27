@@ -1,0 +1,25 @@
+{
+  "id": "rec_6fa9b366",
+  "subject": "Аналог: елеватор с. Біловод (Сумська обл.), ОВНС 69-17 (EIB)",
+  "kind": "dimension",
+  "claim": {
+    "name": "power_installed_queue1",
+    "value": 1670,
+    "unit": "kW",
+    "qualifier": "електроенергія 1 черги (з 2 сушарками, 15 силосами, очищенням)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.eib.org/attachments/registers/86543276.pdf",
+    "path": "inbox/raw/web/eib.org/eib_86543276.pdf",
+    "page": 11,
+    "quote": "1670 кВт (5010 тис.кВт·год/рік) — 1 черга",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Існуюча частина 850 кВт, 2 черга 310 кВт, разом 2830 кВт. Орієнтир для КТП: об'єкт більший за наш.",
+  "seen_in": []
+}

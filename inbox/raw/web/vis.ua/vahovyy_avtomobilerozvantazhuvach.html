@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html class="no-js" lang="uk">
+	
+	
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>(()=>{class RocketLazyLoadScripts{constructor(){this.v="2.0.5",this.userEvents=["keydown","keyup","mousedown","mouseup","mousemove","mouseover","mouseout","touchmove","touchstart","touchend","touchcancel","wheel","click","dblclick","input"],this.attributeEvents=["onblur","onclick","oncontextmenu","ondblclick","onfocus","onmousedown","onmouseenter","onmouseleave","onmousemove","onmouseout","onmouseover","onmouseup","onmousewheel","onscroll","onsubmit"]}async t(){this.i(),this.o(),/iP(ad|hone)/.test(navigator.userAgent)&&this.h(),this.u(),this.l(this),this.m(),this.k(this),this.p(this),this._(),await Promise.all([this.R(),this.L()]),this.lastBreath=Date.now(),this.S(this),this.P(),this.D(),this.O(),this.M(),await this.C(this.delayedScripts.normal),await this.C(this.delayedScripts.defer),await this.C(this.delayedScripts.async),await this.T(),await this.F(),await this.j(),await this.A(),window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this.everythingLoaded=!0,this.lastTouchEnd&&await new Promise(t=>setTimeout(t,500-Date.now()+this.lastTouchEnd)),this.I(),this.H(),this.U(),this.W()}i(){this.CSPIssue=sessionStorage.getItem("rocketCSPIssue"),document.addEventListener("securitypolicyviolation",t=>{this.CSPIssue||"script-src-elem"!==t.violatedDirective||"data"!==t.blockedURI||(this.CSPIssue=!0,sessionStorage.setItem("rocketCSPIssue",!0))},{isRocket:!0})}o(){window.addEventListener("pageshow",t=>{this.persisted=t.persisted,this.realWindowLoadedFired=!0},{isRocket:!0}),window.addEventListener("pagehide",()=>{this.onFirstUserAction=null},{isRocket:!0})}h(){let t;function e(e){t=e}window.addEventListener("touchstart",e,{isRocket:!0}),window.addEventListener("touchend",function i(o){o.changedTouches[0]&&t.changedTouches[0]&&Math.abs(o.changedTouches[0].pageX-t.changedTouches[0].pageX)<10&&Math.abs(o.changedTouches[0].pageY-t.changedTouches[0].pageY)<10&&o.timeStamp-t.timeStamp<200&&(window.removeEventListener("touchstart",e,{isRocket:!0}),window.removeEventListener("touchend",i,{isRocket:!0}),"INPUT"===o.target.tagName&&"text"===o.target.type||(o.target.dispatchEvent(new TouchEvent("touchend",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new MouseEvent("mouseover",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new PointerEvent("click",{target:o.target,bubbles:!0,cancelable:!0,detail:1,clientX:o.changedTouches[0].clientX,clientY:o.changedTouches[0].clientY})),event.preventDefault()))},{isRocket:!0})}q(t){this.userActionTriggered||("mousemove"!==t.type||this.firstMousemoveIgnored?"keyup"===t.type||"mouseover"===t.type||"mouseout"===t.type||(this.userActionTriggered=!0,this.onFirstUserAction&&this.onFirstUserAction()):this.firstMousemoveIgnored=!0),"click"===t.type&&t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),"touchstart"===this.lastEvent&&"touchend"===t.type&&(this.lastTouchEnd=Date.now()),"click"===t.type&&(this.lastTouchEnd=0),this.lastEvent=t.type,t.composedPath&&t.composedPath()[0].getRootNode()instanceof ShadowRoot&&(t.rocketTarget=t.composedPath()[0]),this.savedUserEvents.push(t)}u(){this.savedUserEvents=[],this.userEventHandler=this.q.bind(this),this.userEvents.forEach(t=>window.addEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.addEventListener("visibilitychange",this.userEventHandler,{isRocket:!0})}U(){this.userEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.removeEventListener("visibilitychange",this.userEventHandler,{isRocket:!0}),this.savedUserEvents.forEach(t=>{(t.rocketTarget||t.target).dispatchEvent(new window[t.constructor.name](t.type,t))})}m(){const t="return false",e=Array.from(this.attributeEvents,t=>"data-rocket-"+t),i="["+this.attributeEvents.join("],[")+"]",o="[data-rocket-"+this.attributeEvents.join("],[data-rocket-")+"]",s=(e,i,o)=>{o&&o!==t&&(e.setAttribute("data-rocket-"+i,o),e["rocket"+i]=new Function("event",o),e.setAttribute(i,t))};new MutationObserver(t=>{for(const n of t)"attributes"===n.type&&(n.attributeName.startsWith("data-rocket-")||this.everythingLoaded?n.attributeName.startsWith("data-rocket-")&&this.everythingLoaded&&this.N(n.target,n.attributeName.substring(12)):s(n.target,n.attributeName,n.target.getAttribute(n.attributeName))),"childList"===n.type&&n.addedNodes.forEach(t=>{if(t.nodeType===Node.ELEMENT_NODE)if(this.everythingLoaded)for(const i of[t,...t.querySelectorAll(o)])for(const t of i.getAttributeNames())e.includes(t)&&this.N(i,t.substring(12));else for(const e of[t,...t.querySelectorAll(i)])for(const t of e.getAttributeNames())this.attributeEvents.includes(t)&&s(e,t,e.getAttribute(t))})}).observe(document,{subtree:!0,childList:!0,attributeFilter:[...this.attributeEvents,...e]})}I(){this.attributeEvents.forEach(t=>{document.querySelectorAll("[data-rocket-"+t+"]").forEach(e=>{this.N(e,t)})})}N(t,e){const i=t.getAttribute("data-rocket-"+e);i&&(t.setAttribute(e,i),t.removeAttribute("data-rocket-"+e))}k(t){Object.defineProperty(HTMLElement.prototype,"onclick",{get(){return this.rocketonclick||null},set(e){this.rocketonclick=e,this.setAttribute(t.everythingLoaded?"onclick":"data-rocket-onclick","this.rocketonclick(event)")}})}S(t){function e(e,i){let o=e[i];e[i]=null,Object.defineProperty(e,i,{get:()=>o,set(s){t.everythingLoaded?o=s:e["rocket"+i]=o=s}})}e(document,"onreadystatechange"),e(window,"onload"),e(window,"onpageshow");try{Object.defineProperty(document,"readyState",{get:()=>t.rocketReadyState,set(e){t.rocketReadyState=e},configurable:!0}),document.readyState="loading"}catch(t){console.log("WPRocket DJE readyState conflict, bypassing")}}l(t){this.originalAddEventListener=EventTarget.prototype.addEventListener,this.originalRemoveEventListener=EventTarget.prototype.removeEventListener,this.savedEventListeners=[],EventTarget.prototype.addEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalAddEventListener.call(this,e,i,o):(t.savedEventListeners.push({target:this,remove:!1,type:e,func:i,options:o}),"mouseenter"!==e&&"mouseleave"!==e||t.originalAddEventListener.call(this,e,t.savedUserEvents.push,o))},EventTarget.prototype.removeEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalRemoveEventListener.call(this,e,i,o):t.savedEventListeners.push({target:this,remove:!0,type:e,func:i,options:o})}}J(t,e){this.savedEventListeners=this.savedEventListeners.filter(i=>{let o=i.type,s=i.target||window;return e!==o||t!==s||(this.B(o,s)&&(i.type="rocket-"+o),this.$(i),!1)})}H(){EventTarget.prototype.addEventListener=this.originalAddEventListener,EventTarget.prototype.removeEventListener=this.originalRemoveEventListener,this.savedEventListeners.forEach(t=>this.$(t))}$(t){t.remove?this.originalRemoveEventListener.call(t.target,t.type,t.func,t.options):this.originalAddEventListener.call(t.target,t.type,t.func,t.options)}p(t){let e;function i(e){return t.everythingLoaded?e:e.split(" ").map(t=>"load"===t||t.startsWith("load.")?"rocket-jquery-load":t).join(" ")}function o(o){function s(e){const s=o.fn[e];o.fn[e]=o.fn.init.prototype[e]=function(){return this[0]===window&&t.userActionTriggered&&("string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=i(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{const e=arguments[0][t];delete arguments[0][t],arguments[0][i(t)]=e})),s.apply(this,arguments),this}}if(o&&o.fn&&!t.allJQueries.includes(o)){const e={DOMContentLoaded:[],"rocket-DOMContentLoaded":[]};for(const t in e)document.addEventListener(t,()=>{e[t].forEach(t=>t())},{isRocket:!0});o.fn.ready=o.fn.init.prototype.ready=function(i){function s(){parseInt(o.fn.jquery)>2?setTimeout(()=>i.bind(document)(o)):i.bind(document)(o)}return"function"==typeof i&&(t.realDomReadyFired?!t.userActionTriggered||t.fauxDomReadyFired?s():e["rocket-DOMContentLoaded"].push(s):e.DOMContentLoaded.push(s)),this},s("on"),s("one"),s("off"),t.allJQueries.push(o)}e=o}t.allJQueries=[],o(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){o(t)}})}P(){const t=new Map;document.write=document.writeln=function(e){const i=document.currentScript,o=document.createRange(),s=i.parentElement;let n=t.get(i);void 0===n&&(n=i.nextSibling,t.set(i,n));const c=document.createDocumentFragment();o.setStart(c,0),c.appendChild(o.createContextualFragment(e)),s.insertBefore(c,n)}}async R(){return new Promise(t=>{this.userActionTriggered?t():this.onFirstUserAction=t})}async L(){return new Promise(t=>{document.addEventListener("DOMContentLoaded",()=>{this.realDomReadyFired=!0,t()},{isRocket:!0})})}async j(){return this.realWindowLoadedFired?Promise.resolve():new Promise(t=>{window.addEventListener("load",t,{isRocket:!0})})}M(){this.pendingScripts=[];this.scriptsMutationObserver=new MutationObserver(t=>{for(const e of t)e.addedNodes.forEach(t=>{"SCRIPT"!==t.tagName||!t.src||t.noModule||t.isWPRocket||this.pendingScripts.push({script:t,promise:new Promise(e=>{const i=()=>{const i=this.pendingScripts.findIndex(e=>e.script===t);i>=0&&this.pendingScripts.splice(i,1),e()};t.addEventListener("load",i,{isRocket:!0}),t.addEventListener("error",i,{isRocket:!0}),setTimeout(i,1e3)})})})}),this.scriptsMutationObserver.observe(document,{childList:!0,subtree:!0})}async F(){await this.X(),this.pendingScripts.length?(await this.pendingScripts[0].promise,await this.F()):this.scriptsMutationObserver.disconnect()}D(){this.delayedScripts={normal:[],async:[],defer:[]},document.querySelectorAll("script[type$=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _(){await this.L();let t=[];document.querySelectorAll("script[type$=rocketlazyloadscript][data-rocket-src]").forEach(e=>{let i=e.getAttribute("data-rocket-src");if(i&&!i.startsWith("data:")){i.startsWith("//")&&(i=location.protocol+i);try{const o=new URL(i).origin;o!==location.origin&&t.push({src:o,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}catch(t){}}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this.Y(t,"preconnect")}async G(t){if(await this.K(),!0!==t.noModule||!("noModule"in HTMLScriptElement.prototype))return new Promise(e=>{let i;function o(){(i||t).setAttribute("data-rocket-status","executed"),e()}try{if(navigator.userAgent.includes("Firefox/")||""===navigator.vendor||this.CSPIssue)i=document.createElement("script"),[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),i.setAttribute(e,t.nodeValue))}),t.text&&(i.text=t.text),t.nonce&&(i.nonce=t.nonce),i.hasAttribute("src")?(i.addEventListener("load",o,{isRocket:!0}),i.addEventListener("error",()=>{i.setAttribute("data-rocket-status","failed-network"),e()},{isRocket:!0}),setTimeout(()=>{i.isConnected||e()},1)):(i.text=t.text,o()),i.isWPRocket=!0,t.parentNode.replaceChild(i,t);else{const i=t.getAttribute("data-rocket-type"),s=t.getAttribute("data-rocket-src");i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",o,{isRocket:!0}),t.addEventListener("error",i=>{this.CSPIssue&&i.target.src.startsWith("data:")?(console.log("WPRocket: CSP fallback activated"),t.removeAttribute("src"),this.G(t).then(e)):(t.setAttribute("data-rocket-status","failed-network"),e())},{isRocket:!0}),s?(t.fetchPriority="high",t.removeAttribute("data-rocket-src"),t.src=s):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}}catch(i){t.setAttribute("data-rocket-status","failed-transform"),e()}});t.setAttribute("data-rocket-status","skipped")}async C(t){const e=t.shift();return e?(e.isConnected&&await this.G(e),this.C(t)):Promise.resolve()}O(){this.Y([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}Y(t,e){this.trash=this.trash||[];let i=!0;var o=document.createDocumentFragment();t.forEach(t=>{const s=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(s&&!s.startsWith("data:")){const n=document.createElement("link");n.href=s,n.rel=e,"preconnect"!==e&&(n.as="script",n.fetchPriority=i?"high":"low"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),t.nonce&&(n.nonce=t.nonce),o.appendChild(n),this.trash.push(n),i=!1}}),document.head.appendChild(o)}W(){this.trash.forEach(t=>t.remove())}async T(){try{document.readyState="interactive"}catch(t){}this.fauxDomReadyFired=!0;try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(document,"DOMContentLoaded"),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this.K(),this.J(window,"DOMContentLoaded"),window.dispatchEvent(new Event("rocket-DOMContentLoaded"))}catch(t){console.error(t)}}async A(){try{document.readyState="complete"}catch(t){}try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(window,"load"),window.dispatchEvent(new Event("rocket-load")),await this.K(),window.rocketonload&&window.rocketonload(),await this.K(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this.K(),this.J(window,"pageshow");const t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this.K(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}catch(t){console.error(t)}}async K(){Date.now()-this.lastBreath>45&&(await this.X(),this.lastBreath=Date.now())}async X(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}B(t,e=window){return e===document&&"readystatechange"===t||(e===document&&"DOMContentLoaded"===t||(e===window&&"DOMContentLoaded"===t||(e===window&&"load"===t||e===window&&"pageshow"===t)))}static run(){(new RocketLazyLoadScripts).t()}}RocketLazyLoadScripts.run()})();
+</script>
+
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<link rel="alternate" href="https://vis.ua/ru/product/vesovoy-avtomobylerazghruzchyk/" hreflang="ru" />
+<link rel="alternate" href="https://vis.ua/product/vahovyy-avtomobilerozvantazhuvach/" hreflang="uk" />
+
+	<!-- This site is optimized with the Yoast SEO plugin v28.1 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>Ваговий автомобілерозвантажувач - vis.ua</title>
+<link data-rocket-prefetch href="https://analytics.tiktok.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://scripts.clarity.ms" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://widgets.binotel.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://www.clarity.ms" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://connect.facebook.net" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://www.googletagmanager.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://googleads.g.doubleclick.net" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://fonts.googleapis.com" rel="dns-prefetch">
+<link crossorigin data-rocket-preload as="font" href="https://vis.ua/wp-content/themes/vis/fonts/KFOlCnqEu92Fr1MmSU5fABc4AMP6lbBP.woff2" rel="preload">
+<link crossorigin data-rocket-preload as="font" href="https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2" rel="preload"><link rel="preload" data-rocket-preload as="image" href="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-13.png.webp" fetchpriority="high">
+	<meta name="description" content="Купити ваговий автомобілерозвантажувач від виробника. Італійська гідравліка, Захист від піднімання без блокування колес, високоточна електроніка, економія часу, грошей, та місця на підприємстві. 📞+38 (098) 999-11-00" />
+	<link rel="canonical" href="https://vis.ua/product/vahovyy-avtomobilerozvantazhuvach/" />
+	<meta property="og:locale" content="uk_UA" />
+	<meta property="og:locale:alternate" content="ru_RU" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Ваговий автомобілерозвантажувач - vis.ua" />
+	<meta property="og:description" content="Купити ваговий автомобілерозвантажувач від виробника. Італійська гідравліка, Захист від піднімання без блокування колес, високоточна електроніка, економія часу, грошей, та місця на підприємстві. 📞+38 (098) 999-11-00" />
+	<meta property="og:url" content="https://vis.ua/product/vahovyy-avtomobilerozvantazhuvach/" />
+	<meta property="og:site_name" content="Ваговимірювальні системи – ваги від виробника, м. Дніпро" />
+	<meta property="article:modified_time" content="2025-07-23T12:26:10+00:00" />
+	<meta property="og:image" content="https://vis.ua/wp-content/uploads/2023/07/ARH-12.png" />
+	<meta property="og:image:width" content="1202" />
+	<meta property="og:image:height" content="748" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:label1" content="Прибл. час читання" />
+	<meta name="twitter:data1" content="1 хвилина" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebPage","@id":"https:\/\/vis.ua\/product\/vahovyy-avtomobilerozvantazhuvach\/","url":"https:\/\/vis.ua\/product\/vahovyy-avtomobilerozvantazhuvach\/","name":"Ваговий автомобілерозвантажувач - vis.ua","isPartOf":{"@id":"https:\/\/vis.ua\/#website"},"primaryImageOfPage":{"@id":"https:\/\/vis.ua\/product\/vahovyy-avtomobilerozvantazhuvach\/#primaryimage"},"image":{"@id":"https:\/\/vis.ua\/product\/vahovyy-avtomobilerozvantazhuvach\/#primaryimage"},"thumbnailUrl":"https:\/\/vis.ua\/wp-content\/uploads\/2023\/07\/ARH-12.png","datePublished":"2023-07-19T14:42:46+00:00","dateModified":"2025-07-23T12:26:10+00:00","description":"Купити ваговий автомобілерозвантажувач від виробника. Італійська гідравліка, Захист від піднімання без блокування колес, високоточна електроніка, економія часу, грошей, та місця на підприємстві. 📞+38 (098) 999-11-00","inLanguage":"uk","potentialAction":[{"@type":"ReadAction","target":["https:\/\/vis.ua\/product\/vahovyy-avtomobilerozvantazhuvach\/"]}]},{"@type":"ImageObject","inLanguage":"uk","@id":"https:\/\/vis.ua\/product\/vahovyy-avtomobilerozvantazhuvach\/#primaryimage","url":"https:\/\/vis.ua\/wp-content\/uploads\/2023\/07\/ARH-12.png","contentUrl":"https:\/\/vis.ua\/wp-content\/uploads\/2023\/07\/ARH-12.png","width":1202,"height":748,"caption":"Автомобілерозвантажувач 3д"},{"@type":"WebSite","@id":"https:\/\/vis.ua\/#website","url":"https:\/\/vis.ua\/","name":"Ваговимірювальні системи – ваги від виробника, м. Дніпро","description":"Виробництво, продаж та сервісне обслуговування вагового обладнання – Компанія &#039;Ваговимірювальні  системи&#039;, Україна  +38 (067) 611-62-40","publisher":{"@id":"https:\/\/vis.ua\/#organization"},"alternateName":"vis.ua","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/vis.ua\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"uk"},{"@type":"Organization","@id":"https:\/\/vis.ua\/#organization","name":"ТОВ \"Компанія \"Ваговимірювальні системи\"","alternateName":"ВИС","url":"https:\/\/vis.ua\/","logo":{"@type":"ImageObject","inLanguage":"uk","@id":"https:\/\/vis.ua\/#\/schema\/logo\/image\/","url":"https:\/\/vis.ua\/wp-content\/uploads\/2023\/08\/logo_150_150.png","contentUrl":"https:\/\/vis.ua\/wp-content\/uploads\/2023\/08\/logo_150_150.png","width":150,"height":150,"caption":"ТОВ \"Компанія \"Ваговимірювальні системи\""},"image":{"@id":"https:\/\/vis.ua\/#\/schema\/logo\/image\/"}}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//webtracking-v01.bpmonline.com' />
+
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://vis.ua/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvis.ua%2Fproduct%2Fvahovyy-avtomobilerozvantazhuvach%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://vis.ua/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvis.ua%2Fproduct%2Fvahovyy-avtomobilerozvantazhuvach%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the block styles printed at wp_footer." }
+/*# sourceURL=wp-block-styles-placeholder-inline-css */
+</style>
+<style id="wp-global-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the global-styles printed at wp_footer." }
+/*# sourceURL=wp-global-styles-placeholder-inline-css */
+</style>
+<link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-bootstrap-css' href='https://vis.ua/wp-content/themes/vis/css/bootstrap.min.css?ver=7.0.2' media='all' />
+<noscript><link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-bootstrap-css' href='https://vis.ua/wp-content/themes/vis/css/bootstrap.min.css?ver=7.0.2' media='all' />
+</noscript><link data-minify="1" rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-slick-css' href='https://vis.ua/wp-content/cache/min/1/wp-content/themes/vis/css/slick.css?ver=1790329280' media='all' />
+<noscript><link data-minify="1" rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-slick-css' href='https://vis.ua/wp-content/cache/min/1/wp-content/themes/vis/css/slick.css?ver=1790329280' media='all' />
+</noscript><link data-minify="1" rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-slicktheme-css' href='https://vis.ua/wp-content/cache/min/1/wp-content/themes/vis/css/slick-theme.css?ver=1790329280' media='all' />
+<noscript><link data-minify="1" rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-slicktheme-css' href='https://vis.ua/wp-content/cache/min/1/wp-content/themes/vis/css/slick-theme.css?ver=1790329280' media='all' />
+</noscript><link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-fancy-css' href='https://vis.ua/wp-content/themes/vis/css/jquery.fancybox.min.css?ver=7.0.2' media='all' />
+<noscript><link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-fancy-css' href='https://vis.ua/wp-content/themes/vis/css/jquery.fancybox.min.css?ver=7.0.2' media='all' />
+</noscript><link data-minify="1" rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='style-main-css' href='https://vis.ua/wp-content/cache/min/1/wp-content/themes/vis/style.css?ver=1790329280' media='all' />
+<noscript><link data-minify="1" rel='stylesheet' id='style-main-css' href='https://vis.ua/wp-content/cache/min/1/wp-content/themes/vis/style.css?ver=1790329280' media='all' />
+</noscript><script type="text/rocketlazyloadscript" data-minify="1" id="track-cookies-bpmonline-js" data-rocket-src="https://vis.ua/wp-content/cache/min/1/JS/track-cookies.js?ver=1790329280" data-rocket-defer defer></script>
+<link rel="https://api.w.org/" href="https://vis.ua/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://vis.ua/wp-json/wp/v2/product/22771" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://vis.ua/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.0.6" />
+<link rel='shortlink' href='https://vis.ua/?p=22771' />
+<link rel="icon" href="https://vis.ua/wp-content/uploads/2018/01/cropped-logo_vis_favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://vis.ua/wp-content/uploads/2018/01/cropped-logo_vis_favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://vis.ua/wp-content/uploads/2018/01/cropped-logo_vis_favicon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://vis.ua/wp-content/uploads/2018/01/cropped-logo_vis_favicon-270x270.png" />
+<style id="wp-custom-css">
+.vis-call-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    height: 48px;
+    padding: 0 24px;
+
+    background: #0b5ea8 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 10px !important;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.vis-call-btn:hover {
+    background: #094a86 !important;
+}
+/* 1. ОТСТУП МЕЖДУ ПОЛЕМ И КНОПКОЙ */
+.form-block input[type="tel"] {
+    margin-bottom: 18px;
+}
+
+/* 2. ОТСТУП СВЕРХУ ПЕРЕД ВСЕМ БЛОКОМ */
+.callback-page {
+    margin-top: 20px;
+}
+
+/* если нет callback-page — запасной вариант */
+.form-block {
+    margin-top: 30px;
+}
+
+/* 3. ЗАГОЛОВОК КРАСИВЫЙ */
+.callback-title {
+    font-size: 30px;
+    font-weight: 500;
+    color: #004f8e; /* фирменный синий */
+    margin-bottom: 20px;
+}
+.callback-title {
+    margin-top: 20px;
+}
+</style>
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>	
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	
+	
+
+	
+		
+	
+<meta name="generator" content="WP Rocket 3.21.0.1" data-wpr-features="wpr_delay_js wpr_defer_js wpr_minify_js wpr_lazyload_images wpr_preconnect_external_domains wpr_auto_preload_fonts wpr_oci wpr_minify_css wpr_desktop" /></head>
+
+<body class="wp-singular product-template-default single single-product postid-22771 wp-theme-vis group-blog at-top">
+	
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXVCQPF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header  class="fixed-top">
+	<div class="navbar navbar-expand-xl justify-content-between align-items-center">
+		<div  class="container">
+		 <!-- fixed-top -->
+		 	
+		 	<a href="https://vis.ua/" class="logo-url">			 						<img class="logo" src="https://vis.ua/wp-content/uploads/2023/02/logo_vis.svg" alt="Ваговимірювальні системи – ваги від виробника, м. Дніпро" >
+								</a>			
+			
+			<button class="navbar-toggler order-xl-2 order-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<div class="navbar-toggler-icon">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</button>		
+			
+			
+			<div class="collapse navbar-collapse menu-area justify-content-center align-items-center" id="navbarNav">
+				<div class="d-block d-xl-none mob-menu">
+					<div class="header-search">
+						<form action="https://vis.ua/" method="get">
+	<input type="text" name="s" id="search" value="" placeholder="Я шукаю..."/>
+	<button type="submit">
+		<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 viewBox="0 0 271.5 208.36" style="enable-background:new 0 0 271.5 208.36;" xml:space="preserve" width="45">
+			<g>
+				<g>
+					<path fill="#fff" d="M43.52,80.12c2.46-39.51,36.2-69.32,75.66-66.85c39.46,2.46,69.28,36.24,66.83,75.71c-2.46,39.7-36.27,69.69-75.72,67.17						C70.64,153.62,41.03,119.9,43.52,80.12z M52.55,80.51c-2.37,34.54,23.44,64.19,57.91,66.56c34.33,2.35,64.02-23.45,66.41-57.73						c2.44-34.87-23.15-64.58-57.71-67.01C84.58,19.89,54.93,45.79,52.55,80.51z"/>
+					<path fill="#fff" d="M163.45,150.82c-0.35-0.71-0.62-1.49-1.07-2.13c-0.74-1.06-0.78-2.06,0.16-2.91c2.88-2.6,5.76-5.21,8.77-7.65						c0.54-0.44,2.06-0.47,2.5-0.04c0.88,0.87,1.75,1.05,2.85,1.06c2.22,0.03,4.03,1.02,5.48,2.67c10.36,11.82,20.74,23.62,31.07,35.47						c3.14,3.61,2.77,8.18-0.8,11.39c-1.7,1.53-3.42,3.05-5.17,4.53c-3.42,2.89-7.96,2.69-10.93-0.67c-10.53-11.92-21-23.9-31.47-35.87						C163.44,155.06,162.9,153.14,163.45,150.82z"/>
+				</g>
+			</g>
+		</svg>
+	</button>
+</form>					</div>
+					<div class="menu-title">Загальна інформація</div>
+					<nav>
+					<ul id="menu-main-menu" class="menu ms-auto main_menu navbar-nav flex-row"><li  id="menu-item-18712" class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-18712 nav-item"><a href="https://vis.ua/pro-nas/" class="nav-link"><div>Про нас</div></a></li>
+<li  id="menu-item-22035" class="d-none d-xl-block menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-22035 nav-item"><a href="https://vis.ua/catalog/" class="nav-link"><div>Каталог</div></a></li>
+<li  id="menu-item-18710" class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-18710 nav-item"><a href="https://vis.ua/our-works/" class="nav-link"><div>Об’єкти</div></a></li>
+<li  id="menu-item-18708" class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-18708 nav-item"><a href="https://vis.ua/otzyvy/" class="nav-link"><div>Відгуки</div></a></li>
+<li  id="menu-item-18841" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item nav-item-18841 nav-item"><a href="https://vis.ua/category/news/" class="nav-link"><div>Новини</div></a></li>
+<li  id="menu-item-18842" class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item nav-item-18842 nav-item"><a href="https://vis.ua/category/articles/" class="nav-link"><div>Статті</div></a></li>
+<li  id="menu-item-18709" class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-18709 nav-item"><a href="https://vis.ua/kontakta/" class="nav-link"><div>Контакти</div></a></li>
+</ul></nav>
+					<div class="mob-phonew-wrapper d-flex mt-3 mb-3 justify-content-center flex-column align-items-center">
+						<div>
+							<div class="phone-label red-phone-label d-xl-none d-block">Консультація / продаж</div>
+							<a href="tel:+380676116240" class="phone-btn btn">+38 067 611 62 40</a>
+						</div>
+												<div class="join-us-wrapper d-block">
+							<a href="#callback" class="callback-btn" data-fancybox>Замовити дзвінок</a>
+						</div>
+					</div>
+					<div class="menu-title"><a href="https://vis.ua/catalog/">Каталог</a></div>
+					<div class="catalog-mobmenu">
+													<div  class="">
+																	<a href="https://vis.ua/catalog/products/" class="popup-welcome-menu-item">
+										Ваги та вагове обладнання										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M15.3486 17.3931C15.4064 17.3176 15.4464 17.2509 15.4997 17.1976C17.4728 15.2223 19.4481 13.2481 21.4212 11.2728C21.5778 11.115 21.7445 10.995 21.98 11.0017C22.2478 11.0083 22.4444 11.1306 22.5655 11.3639C22.691 11.6061 22.6677 11.846 22.5077 12.0671C22.4555 12.1393 22.3877 12.2004 22.3244 12.2649C20.188 14.4013 18.0527 16.5377 15.9163 18.6741C15.4819 19.1085 15.162 19.1085 14.7298 18.6752C12.5745 16.5199 10.4192 14.3624 8.26061 12.2093C8.05174 12.0004 7.94509 11.7694 8.02841 11.4805C8.16728 10.9984 8.75721 10.8395 9.12939 11.1872C9.39713 11.4372 9.65155 11.7038 9.9104 11.9638C11.6646 13.718 13.4189 15.4711 15.1731 17.2254C15.2153 17.2676 15.2609 17.3087 15.3486 17.3931Z" fill="#666666"/>
+										</svg>
+									</a>
+																									<div  class="popup-subcats">
+																						<a href="https://vis.ua/catalog/avtomobylerazghruzchyky/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Автомобілерозвантажувачі</div>
+												</a>
+																							<a href="https://vis.ua/product/bunker-perevantazhuvach-zerna/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Бункер-перевантажувач зерна</div>
+												</a>
+																							<a href="https://vis.ua/catalog/01-car-scales/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Автомобільні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesyi-podkladnyie/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Автомобільні підкладні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vahy-dlia-mytnytsi/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги для митниці</div>
+												</a>
+																							<a href="https://vis.ua/product/wim-sistemy-dinamicheskogo-vzveshivaniya-avtomobilej/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">HS-WIM системи</div>
+												</a>
+																							<a href="https://vis.ua/catalog/02-carload-scales/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Вагонні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/bunkernye-vesovye-dozatory/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Бункерні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vagovi-dozatory/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Вагові дозатори</div>
+												</a>
+																							<a href="https://vis.ua/catalog/fasuvalne-obladnannya/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Фасувальне обладнання</div>
+												</a>
+																							<a href="https://vis.ua/catalog/balochnye-vesy-pod-yomkost/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Балкові ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/chekvejery/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Чеквеєри</div>
+												</a>
+																							<a href="https://vis.ua/product/02-vesyi-konveyernyie/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Конвеєрні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-dlya-pogryzchika/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги на навантажувач</div>
+												</a>
+																							<a href="https://vis.ua/catalog/04-vesyi-kranovyie-ukraina/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Кранові ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-iz-nerzhavejki/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги з нержавіючої сталі</div>
+												</a>
+																							<a href="https://vis.ua/catalog/platformennye-vesy/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Платформні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-nizkoprofilnye/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Низькопрофільні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/palletnye-vesy/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Палетні ваги</div>
+												</a>
+																							<a href="https://vis.ua/product/rolgangovye-vesy/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Рольгангові ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/rokla-s-vesami/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Рокла з вагами</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-tovarnye/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Товарні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-torgovye-elektronnye/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Торгівельні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-nastolnye-elektronnie/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Настільні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-fasovochnye/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги фасувальні</div>
+												</a>
+																							<a href="https://vis.ua/product/vahy-dlia-zvazhuvannia-konteyneriv/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги для зважування контейнерів</div>
+												</a>
+																							<a href="https://vis.ua/catalog/nestandartni-vahy/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Нестандартні ваги</div>
+												</a>
+																							<a href="https://vis.ua/catalog/05-vesy-laboratornyie-electronnye/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги лабораторні</div>
+												</a>
+																							<a href="https://vis.ua/catalog/analizatory-vlazhnosti/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Аналізатори вологи</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-mediczinskie/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги медичні</div>
+												</a>
+																							<a href="https://vis.ua/catalog/vesy-dlia-zhivotnyh/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги для тварин</div>
+												</a>
+																							<a href="https://vis.ua/catalog/trap-telega/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Трап-візок</div>
+												</a>
+																							<a href="https://vis.ua/catalog/monorelsovye-vesy/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Монорейкові ваги</div>
+												</a>
+																							<a href="https://vis.ua/product/11-giri-kalibrovochnye/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Гирі калібрувальні</div>
+												</a>
+																				</div>
+															</div>
+														<div  class="">
+																	<a href="https://vis.ua/catalog/komplektyushie-dlya-vesov/" class="popup-welcome-menu-item">
+										Комплектуючі										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M15.3486 17.3931C15.4064 17.3176 15.4464 17.2509 15.4997 17.1976C17.4728 15.2223 19.4481 13.2481 21.4212 11.2728C21.5778 11.115 21.7445 10.995 21.98 11.0017C22.2478 11.0083 22.4444 11.1306 22.5655 11.3639C22.691 11.6061 22.6677 11.846 22.5077 12.0671C22.4555 12.1393 22.3877 12.2004 22.3244 12.2649C20.188 14.4013 18.0527 16.5377 15.9163 18.6741C15.4819 19.1085 15.162 19.1085 14.7298 18.6752C12.5745 16.5199 10.4192 14.3624 8.26061 12.2093C8.05174 12.0004 7.94509 11.7694 8.02841 11.4805C8.16728 10.9984 8.75721 10.8395 9.12939 11.1872C9.39713 11.4372 9.65155 11.7038 9.9104 11.9638C11.6646 13.718 13.4189 15.4711 15.1731 17.2254C15.2153 17.2676 15.2609 17.3087 15.3486 17.3931Z" fill="#666666"/>
+										</svg>
+									</a>
+																									<div  class="popup-subcats">
+																						<a href="https://vis.ua/catalog/vesovye-terminaly/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Вагові термінали</div>
+												</a>
+																							<a href="https://vis.ua/catalog/tenzodatchiki/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Тензодатчики</div>
+												</a>
+																				</div>
+															</div>
+														<div  class="">
+																	<a href="https://vis.ua/services/" class="popup-welcome-menu-item">
+										Послуги										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M15.3486 17.3931C15.4064 17.3176 15.4464 17.2509 15.4997 17.1976C17.4728 15.2223 19.4481 13.2481 21.4212 11.2728C21.5778 11.115 21.7445 10.995 21.98 11.0017C22.2478 11.0083 22.4444 11.1306 22.5655 11.3639C22.691 11.6061 22.6677 11.846 22.5077 12.0671C22.4555 12.1393 22.3877 12.2004 22.3244 12.2649C20.188 14.4013 18.0527 16.5377 15.9163 18.6741C15.4819 19.1085 15.162 19.1085 14.7298 18.6752C12.5745 16.5199 10.4192 14.3624 8.26061 12.2093C8.05174 12.0004 7.94509 11.7694 8.02841 11.4805C8.16728 10.9984 8.75721 10.8395 9.12939 11.1872C9.39713 11.4372 9.65155 11.7038 9.9104 11.9638C11.6646 13.718 13.4189 15.4711 15.1731 17.2254C15.2153 17.2676 15.2609 17.3087 15.3486 17.3931Z" fill="#666666"/>
+										</svg>
+									</a>
+																									<div  class="popup-subcats">
+																						<a href="https://vis.ua/services/orenda-vah/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Оренда ваг</div>
+												</a>
+																							<a href="https://vis.ua/services/povirka-ta-kalibruvannia-vahovoho-obladnannia/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Повірка та калібрування</div>
+												</a>
+																							<a href="https://vis.ua/services/remont-vah/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ремонт ваг</div>
+												</a>
+																							<a href="https://vis.ua/services/tekhnichne-obsluhovuvannia-vah/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Технічне обслуговування ваг </div>
+												</a>
+																							<a href="https://vis.ua/services/modernizatsiia-vah/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Модернізація ваг</div>
+												</a>
+																				</div>
+															</div>
+														<div  class="">
+																	<a href="https://vis.ua/catalog/avtomatizacziya-vzveshivanij/" class="popup-welcome-menu-item">
+										Автоматизація зважування										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M15.3486 17.3931C15.4064 17.3176 15.4464 17.2509 15.4997 17.1976C17.4728 15.2223 19.4481 13.2481 21.4212 11.2728C21.5778 11.115 21.7445 10.995 21.98 11.0017C22.2478 11.0083 22.4444 11.1306 22.5655 11.3639C22.691 11.6061 22.6677 11.846 22.5077 12.0671C22.4555 12.1393 22.3877 12.2004 22.3244 12.2649C20.188 14.4013 18.0527 16.5377 15.9163 18.6741C15.4819 19.1085 15.162 19.1085 14.7298 18.6752C12.5745 16.5199 10.4192 14.3624 8.26061 12.2093C8.05174 12.0004 7.94509 11.7694 8.02841 11.4805C8.16728 10.9984 8.75721 10.8395 9.12939 11.1872C9.39713 11.4372 9.65155 11.7038 9.9104 11.9638C11.6646 13.718 13.4189 15.4711 15.1731 17.2254C15.2153 17.2676 15.2609 17.3087 15.3486 17.3931Z" fill="#666666"/>
+										</svg>
+									</a>
+																									<div  class="popup-subcats">
+																						<a href="https://vis.ua/catalog/avtomatizacziya-avtomobilnyh-vesov/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title"> Автоматизація автомобільних ваг</div>
+												</a>
+																							<a href="https://vis.ua/product/avtomatyzovana-systema-kontroliu-rukhu-produktsii-skrp/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Автоматизована система контролю руху продукції (СКРП)</div>
+												</a>
+																							<a href="https://vis.ua/product/tsilodobova-systema-videosposterezhennia-tssv-i-kontrolno-propuskna-systema-kps/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Цілодобова система відеоспостереження (ЦСВ) і контрольно-пропускна система (КПС)</div>
+												</a>
+																				</div>
+															</div>
+														<div  class="">
+																	<a href="https://vis.ua/catalog/prohramne-zabezpechennia-dlia-vah/" class="popup-welcome-menu-item">
+										Програмне забезпечення										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M15.3486 17.3931C15.4064 17.3176 15.4464 17.2509 15.4997 17.1976C17.4728 15.2223 19.4481 13.2481 21.4212 11.2728C21.5778 11.115 21.7445 10.995 21.98 11.0017C22.2478 11.0083 22.4444 11.1306 22.5655 11.3639C22.691 11.6061 22.6677 11.846 22.5077 12.0671C22.4555 12.1393 22.3877 12.2004 22.3244 12.2649C20.188 14.4013 18.0527 16.5377 15.9163 18.6741C15.4819 19.1085 15.162 19.1085 14.7298 18.6752C12.5745 16.5199 10.4192 14.3624 8.26061 12.2093C8.05174 12.0004 7.94509 11.7694 8.02841 11.4805C8.16728 10.9984 8.75721 10.8395 9.12939 11.1872C9.39713 11.4372 9.65155 11.7038 9.9104 11.9638C11.6646 13.718 13.4189 15.4711 15.1731 17.2254C15.2153 17.2676 15.2609 17.3087 15.3486 17.3931Z" fill="#666666"/>
+										</svg>
+									</a>
+																									<div  class="popup-subcats">
+																						<a href="https://vis.ua/product/13-programmnoe-obespechenie-arm/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Програмне забезпечення для автомобільних ваг АРМ</div>
+												</a>
+																							<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-avtomobilnykh-vah-arm-z-vkladkoiu-laboratoriia/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Програмне забезпечення для автомобільних ваг АРМ з вкладкою “Лабораторія”</div>
+												</a>
+																							<a href="https://vis.ua/product/khmarne-prohramne-zabezpechennia-dlia-avtomobilnykh-vah/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Хмарне програмне забезпечення для автомобільних ваг</div>
+												</a>
+																							<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vahonnykh-vah-arm/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Програмне забезпечення для вагонних ваг АРМ</div>
+												</a>
+																							<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-bunkernykh-vah-arm/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Програмне забезпечення для бункерних ваг АРМ</div>
+												</a>
+																							<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-konveiernykh-vah/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Програмне забезпечення для конвеєрних ваг АРМ</div>
+												</a>
+																							<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vah-na-frontalnyy-navantazhuvach/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Програмне забезпечення для ваг на фронтальний навантажувач</div>
+												</a>
+																							<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vah-v-skladskomu-obliku-ta-torhivli/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Програмне забезпечення для ваг в складському обліку та торгівлі</div>
+												</a>
+																				</div>
+															</div>
+														<div  class="">
+																	<a href="https://vis.ua/catalog/oborudovanie-dlia-avtomatizatsii-torgovli/" class="popup-welcome-menu-item">
+										Автоматизація торгівлі										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M15.3486 17.3931C15.4064 17.3176 15.4464 17.2509 15.4997 17.1976C17.4728 15.2223 19.4481 13.2481 21.4212 11.2728C21.5778 11.115 21.7445 10.995 21.98 11.0017C22.2478 11.0083 22.4444 11.1306 22.5655 11.3639C22.691 11.6061 22.6677 11.846 22.5077 12.0671C22.4555 12.1393 22.3877 12.2004 22.3244 12.2649C20.188 14.4013 18.0527 16.5377 15.9163 18.6741C15.4819 19.1085 15.162 19.1085 14.7298 18.6752C12.5745 16.5199 10.4192 14.3624 8.26061 12.2093C8.05174 12.0004 7.94509 11.7694 8.02841 11.4805C8.16728 10.9984 8.75721 10.8395 9.12939 11.1872C9.39713 11.4372 9.65155 11.7038 9.9104 11.9638C11.6646 13.718 13.4189 15.4711 15.1731 17.2254C15.2153 17.2676 15.2609 17.3087 15.3486 17.3931Z" fill="#666666"/>
+										</svg>
+									</a>
+																									<div  class="popup-subcats">
+																						<a href="https://vis.ua/catalog/pos-oborudovanie/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">POS-обладнання</div>
+												</a>
+																							<a href="https://vis.ua/catalog/kassovoe-oborudovanie/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Касове устаткування</div>
+												</a>
+																							<a href="https://vis.ua/catalog/printery-etiketok/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Принтери етикеток</div>
+												</a>
+																				</div>
+															</div>
+														<div  class="">
+																	<a href="https://vis.ua/catalog/rishennya/" class="popup-welcome-menu-item">
+										Рішення										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M15.3486 17.3931C15.4064 17.3176 15.4464 17.2509 15.4997 17.1976C17.4728 15.2223 19.4481 13.2481 21.4212 11.2728C21.5778 11.115 21.7445 10.995 21.98 11.0017C22.2478 11.0083 22.4444 11.1306 22.5655 11.3639C22.691 11.6061 22.6677 11.846 22.5077 12.0671C22.4555 12.1393 22.3877 12.2004 22.3244 12.2649C20.188 14.4013 18.0527 16.5377 15.9163 18.6741C15.4819 19.1085 15.162 19.1085 14.7298 18.6752C12.5745 16.5199 10.4192 14.3624 8.26061 12.2093C8.05174 12.0004 7.94509 11.7694 8.02841 11.4805C8.16728 10.9984 8.75721 10.8395 9.12939 11.1872C9.39713 11.4372 9.65155 11.7038 9.9104 11.9638C11.6646 13.718 13.4189 15.4711 15.1731 17.2254C15.2153 17.2676 15.2609 17.3087 15.3486 17.3931Z" fill="#666666"/>
+										</svg>
+									</a>
+																									<div  class="popup-subcats">
+																						<a href="https://vis.ua/product/vahy-konveierni-perevantazhuvach-ovochiv/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги на перевантажувач овочів</div>
+												</a>
+																							<a href="https://vis.ua/product/vahy-konveierni-na-drobarku/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги на дробарку</div>
+												</a>
+																							<a href="https://vis.ua/product/vahy-dlia-bunkera-perevantazhuvacha-zerna/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Ваги для бункера-перевантажувача зерна</div>
+												</a>
+																							<a href="https://vis.ua/product/rishennia-dlia-zvazhuvannia-konteyneriv/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Рішення для зважування контейнерів</div>
+												</a>
+																				</div>
+															</div>
+														<div  class="">
+																	<a href="https://vis.ua/usefull-information/" class="popup-welcome-menu-item">
+										Корисна інформація										<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M15.3486 17.3931C15.4064 17.3176 15.4464 17.2509 15.4997 17.1976C17.4728 15.2223 19.4481 13.2481 21.4212 11.2728C21.5778 11.115 21.7445 10.995 21.98 11.0017C22.2478 11.0083 22.4444 11.1306 22.5655 11.3639C22.691 11.6061 22.6677 11.846 22.5077 12.0671C22.4555 12.1393 22.3877 12.2004 22.3244 12.2649C20.188 14.4013 18.0527 16.5377 15.9163 18.6741C15.4819 19.1085 15.162 19.1085 14.7298 18.6752C12.5745 16.5199 10.4192 14.3624 8.26061 12.2093C8.05174 12.0004 7.94509 11.7694 8.02841 11.4805C8.16728 10.9984 8.75721 10.8395 9.12939 11.1872C9.39713 11.4372 9.65155 11.7038 9.9104 11.9638C11.6646 13.718 13.4189 15.4711 15.1731 17.2254C15.2153 17.2676 15.2609 17.3087 15.3486 17.3931Z" fill="#666666"/>
+										</svg>
+									</a>
+																									<div  class="popup-subcats">
+																						<a href="https://vis.ua/info/sertyfikaty/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Сертифікати</div>
+												</a>
+																							<a href="https://vis.ua/info/korysna-informatsiia-pro-tvaryn/" class="popup-catalog-menu_item">
+													<div class="popup-subitem-title">Корисна інформація про ваги для тварин</div>
+												</a>
+																				</div>
+															</div>
+												</div>
+				</div>
+				<div class="d-none d-xl-block">
+					<nav>
+						<ul id="menu-main-menu-1" class="menu ms-auto main_menu navbar-nav align-items-center flex-xl-row flex-column"><li  class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-18712 nav-item"><a href="https://vis.ua/pro-nas/" class="nav-link"><div>Про нас</div></a></li>
+<li  class="d-none d-xl-block menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-22035 nav-item"><a href="https://vis.ua/catalog/" class="nav-link"><div>Каталог</div></a></li>
+<li  class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-18710 nav-item"><a href="https://vis.ua/our-works/" class="nav-link"><div>Об’єкти</div></a></li>
+<li  class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-18708 nav-item"><a href="https://vis.ua/otzyvy/" class="nav-link"><div>Відгуки</div></a></li>
+<li  class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item nav-item-18841 nav-item"><a href="https://vis.ua/category/news/" class="nav-link"><div>Новини</div></a></li>
+<li  class="menu-item menu-item-type-taxonomy menu-item-object-category nav-item nav-item-18842 nav-item"><a href="https://vis.ua/category/articles/" class="nav-link"><div>Статті</div></a></li>
+<li  class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-18709 nav-item"><a href="https://vis.ua/kontakta/" class="nav-link"><div>Контакти</div></a></li>
+</ul>					</nav>
+				</div>
+				<div class="join-us-wrapper d-block d-xl-none d-xxl-block">
+					<a href="#callback" class="callback-btn" data-fancybox>Замовити дзвінок</a>
+				</div>
+			</div>
+			
+			<div class="phone-wrapper order-xl-3 order-2 d-flex flex-xl-column flex-row align-items-start">
+				<div>
+					<div class="phone-label red-phone-label d-md-block d-none">Консультація / продаж</div>
+					<a href="tel:+380676116240" class="d-md-block d-none phone-btn btn">+38 067 611 62 40</a>
+				</div>
+								
+<!--
+				<a href="mailto:sales@vis.ua" class="email-btn btn d-xl-none d-block">
+					<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" x="0px" y="0px"
+						 viewBox="0 0 120.36 120.86" style="enable-background:new 0 0 120.36 120.86;"  xml:space="preserve">
+				
+					<g>
+						<path fill="#215A8D"  d="M103.44,82.99c-2.4-2.47-4.81-4.92-7.2-7.4c-6.23-6.48-12.46-12.97-18.69-19.45c-0.21-0.22-0.4-0.44-0.69-0.75
+							c8.71-6.48,17.38-12.93,26.2-19.49c0.07,1.38,0.13,2.6,0.19,3.82c0.06,1.3,0.12,2.61,0.18,3.91
+							C103.44,56.75,103.44,69.87,103.44,82.99z"/>
+						<path fill="#215A8D" d="M16.92,37.29c0.07-0.2,0.14-0.4,0.19-0.6c0.06-0.21,0.11-0.43,0.19-0.76c8.74,6.5,17.43,12.96,26.17,19.46
+							c-2.89,3.01-5.71,5.95-8.53,8.89c-5.81,6.05-11.63,12.1-17.44,18.15c-0.19,0.19-0.39,0.37-0.58,0.55
+							C16.92,67.76,16.92,52.53,16.92,37.29z"/>
+						<path fill="#215A8D" d="M19.63,89.92c9.74-10.14,19.47-20.28,29.28-30.49c0.75,0.56,1.48,1.15,2.24,1.67
+							c1.71,1.16,3.35,2.53,5.18,3.39c3.14,1.48,6.3,1.12,9.25-0.81c1.73-1.13,3.37-2.43,5.05-3.65c0.26-0.19,0.52-0.37,0.81-0.58
+							c9.76,10.16,19.49,20.3,29.27,30.48c-1.77,2.1-3.84,3.29-6.31,3.6c-0.47,0.06-0.96,0.06-1.43,0.06c-21.86,0-43.71,0-65.57,0.01
+							c-2.9,0-5.41-1.01-7.49-3.33C19.83,90.19,19.76,90.09,19.63,89.92z"/>
+						<path fill="#215A8D" d="M99.57,29.95c-2.77,2.06-5.48,4.08-8.18,6.09c-9.32,6.93-18.65,13.84-27.95,20.81
+							c-2.25,1.69-4.31,1.68-6.56-0.01c-11.7-8.76-23.43-17.45-35.15-26.17c-0.3-0.23-0.6-0.46-0.95-0.73c2.04-1.85,4.31-2.5,6.8-2.5
+							c11.4,0.02,22.81,0.01,34.21,0.01c10.3,0,20.61,0.01,30.91-0.01C95.2,27.44,97.48,28.08,99.57,29.95z"/>
+					</g>
+					</svg>
+
+					sales@vis.ua				</a>
+-->
+			</div>
+			<div class="languages-wrapper order-xl-4 order-3">
+					<li class="lang-item lang-item-170 lang-item-ru lang-item-first"><a  lang="ru-RU" hreflang="ru-RU" href="https://vis.ua/ru/product/vesovoy-avtomobylerazghruzchyk/">Ru</a></li>
+	<li class="lang-item lang-item-196 lang-item-ua current-lang"><a  lang="uk" hreflang="uk" href="https://vis.ua/product/vahovyy-avtomobilerozvantazhuvach/">Ua</a></li>
+			</div>
+	
+		</div>	
+	</div>
+</header>
+<div  class="page-content">
+	<div  class="page-content-inner">
+		<div class="container">
+			<div class="row">
+									<div class="col-xl-3 col-lg-4 pe-lg-0 welcome-menu-col">
+						<div class="welcome-menu-head">
+							<div class="welcome-menu-title">
+								<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" x="0px" y="0px"
+									 viewBox="0 0 271.5 208.36" style="enable-background:new 0 0 271.5 208.36;" xml:space="preserve">
+									<style type="text/css">
+										.stwelcome1{fill:none;stroke:#273069;stroke-width:6;stroke-miterlimit:10;}
+										.stwelcome2{fill:#E52521;}
+									</style>
+									<path class="stwelcome1" d="M114.68,101.34H84.74c-8.66,0-15.68-7.02-15.68-15.68V55.72c0-8.66,7.02-15.68,15.68-15.68h29.94										c8.66,0,15.68,7.02,15.68,15.68v29.94C130.36,94.32,123.34,101.34,114.68,101.34z"/>
+									<path class="stwelcome1" d="M114.68,171.56H84.74c-8.66,0-15.68-7.02-15.68-15.68v-29.94c0-8.66,7.02-15.68,15.68-15.68h29.94										c8.66,0,15.68,7.02,15.68,15.68v29.94C130.36,164.54,123.34,171.56,114.68,171.56z"/>
+									<path class="stwelcome1" d="M184.66,171.56h-29.94c-8.66,0-15.68-7.02-15.68-15.68v-29.94c0-8.66,7.02-15.68,15.68-15.68h29.94										c8.66,0,15.68,7.02,15.68,15.68v29.94C200.35,164.54,193.33,171.56,184.66,171.56z"/>
+									<path class="stwelcome2" d="M197.85,80.64l-17.07,17.07c-6.12,6.12-16.05,6.12-22.18,0l-17.07-17.07c-6.12-6.12-6.12-16.05,0-22.18										L158.6,41.4c6.12-6.12,16.05-6.12,22.18,0l17.07,17.07C203.97,64.59,203.97,74.52,197.85,80.64z"/>
+								</svg>
+								<a href="https://vis.ua/catalog/">Каталог</a>							</div>
+						</div>
+						<div class="welcome-menu-wrapper d-flex flex-column">
+							<div class="welcome-menu-search">
+								<form action="https://vis.ua/" method="get">
+	<input type="text" name="s" id="search" value="" placeholder="Я шукаю..."/>
+	<button type="submit">
+		<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 viewBox="0 0 271.5 208.36" style="enable-background:new 0 0 271.5 208.36;" xml:space="preserve" width="45">
+			<g>
+				<g>
+					<path fill="#fff" d="M43.52,80.12c2.46-39.51,36.2-69.32,75.66-66.85c39.46,2.46,69.28,36.24,66.83,75.71c-2.46,39.7-36.27,69.69-75.72,67.17						C70.64,153.62,41.03,119.9,43.52,80.12z M52.55,80.51c-2.37,34.54,23.44,64.19,57.91,66.56c34.33,2.35,64.02-23.45,66.41-57.73						c2.44-34.87-23.15-64.58-57.71-67.01C84.58,19.89,54.93,45.79,52.55,80.51z"/>
+					<path fill="#fff" d="M163.45,150.82c-0.35-0.71-0.62-1.49-1.07-2.13c-0.74-1.06-0.78-2.06,0.16-2.91c2.88-2.6,5.76-5.21,8.77-7.65						c0.54-0.44,2.06-0.47,2.5-0.04c0.88,0.87,1.75,1.05,2.85,1.06c2.22,0.03,4.03,1.02,5.48,2.67c10.36,11.82,20.74,23.62,31.07,35.47						c3.14,3.61,2.77,8.18-0.8,11.39c-1.7,1.53-3.42,3.05-5.17,4.53c-3.42,2.89-7.96,2.69-10.93-0.67c-10.53-11.92-21-23.9-31.47-35.87						C163.44,155.06,162.9,153.14,163.45,150.82z"/>
+				</g>
+			</g>
+		</svg>
+	</button>
+</form>							</div>
+							<ul>
+																	<li class="">
+																					<a href="https://vis.ua/catalog/products/" class="welcome-menu-item">
+																									<img src="https://vis.ua/wp-content/uploads/2023/04/Vesi.svg" alt="Ваги та вагове обладнання">
+																								Ваги та вагове обладнання											</a>
+																															<div class="category-menu_cats">
+																										<a href="https://vis.ua/catalog/avtomobylerazghruzchyky/" class="catalog-menu_item">
+															<div class="subitem-title">Автомобілерозвантажувачі</div>
+														</a>
+																											<a href="https://vis.ua/product/bunker-perevantazhuvach-zerna/" class="catalog-menu_item">
+															<div class="subitem-title">Бункер-перевантажувач зерна</div>
+														</a>
+																											<a href="https://vis.ua/catalog/01-car-scales/" class="catalog-menu_item">
+															<div class="subitem-title">Автомобільні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesyi-podkladnyie/" class="catalog-menu_item">
+															<div class="subitem-title">Автомобільні підкладні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vahy-dlia-mytnytsi/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги для митниці</div>
+														</a>
+																											<a href="https://vis.ua/product/wim-sistemy-dinamicheskogo-vzveshivaniya-avtomobilej/" class="catalog-menu_item">
+															<div class="subitem-title">HS-WIM системи</div>
+														</a>
+																											<a href="https://vis.ua/catalog/02-carload-scales/" class="catalog-menu_item">
+															<div class="subitem-title">Вагонні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/bunkernye-vesovye-dozatory/" class="catalog-menu_item">
+															<div class="subitem-title">Бункерні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vagovi-dozatory/" class="catalog-menu_item">
+															<div class="subitem-title">Вагові дозатори</div>
+														</a>
+																											<a href="https://vis.ua/catalog/fasuvalne-obladnannya/" class="catalog-menu_item">
+															<div class="subitem-title">Фасувальне обладнання</div>
+														</a>
+																											<a href="https://vis.ua/catalog/balochnye-vesy-pod-yomkost/" class="catalog-menu_item">
+															<div class="subitem-title">Балкові ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/chekvejery/" class="catalog-menu_item">
+															<div class="subitem-title">Чеквеєри</div>
+														</a>
+																											<a href="https://vis.ua/product/02-vesyi-konveyernyie/" class="catalog-menu_item">
+															<div class="subitem-title">Конвеєрні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-dlya-pogryzchika/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги на навантажувач</div>
+														</a>
+																											<a href="https://vis.ua/catalog/04-vesyi-kranovyie-ukraina/" class="catalog-menu_item">
+															<div class="subitem-title">Кранові ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-iz-nerzhavejki/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги з нержавіючої сталі</div>
+														</a>
+																											<a href="https://vis.ua/catalog/platformennye-vesy/" class="catalog-menu_item">
+															<div class="subitem-title">Платформні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-nizkoprofilnye/" class="catalog-menu_item">
+															<div class="subitem-title">Низькопрофільні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/palletnye-vesy/" class="catalog-menu_item">
+															<div class="subitem-title">Палетні ваги</div>
+														</a>
+																											<a href="https://vis.ua/product/rolgangovye-vesy/" class="catalog-menu_item">
+															<div class="subitem-title">Рольгангові ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/rokla-s-vesami/" class="catalog-menu_item">
+															<div class="subitem-title">Рокла з вагами</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-tovarnye/" class="catalog-menu_item">
+															<div class="subitem-title">Товарні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-torgovye-elektronnye/" class="catalog-menu_item">
+															<div class="subitem-title">Торгівельні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-nastolnye-elektronnie/" class="catalog-menu_item">
+															<div class="subitem-title">Настільні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-fasovochnye/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги фасувальні</div>
+														</a>
+																											<a href="https://vis.ua/product/vahy-dlia-zvazhuvannia-konteyneriv/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги для зважування контейнерів</div>
+														</a>
+																											<a href="https://vis.ua/catalog/nestandartni-vahy/" class="catalog-menu_item">
+															<div class="subitem-title">Нестандартні ваги</div>
+														</a>
+																											<a href="https://vis.ua/catalog/05-vesy-laboratornyie-electronnye/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги лабораторні</div>
+														</a>
+																											<a href="https://vis.ua/catalog/analizatory-vlazhnosti/" class="catalog-menu_item">
+															<div class="subitem-title">Аналізатори вологи</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-mediczinskie/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги медичні</div>
+														</a>
+																											<a href="https://vis.ua/catalog/vesy-dlia-zhivotnyh/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги для тварин</div>
+														</a>
+																											<a href="https://vis.ua/catalog/trap-telega/" class="catalog-menu_item">
+															<div class="subitem-title">Трап-візок</div>
+														</a>
+																											<a href="https://vis.ua/catalog/monorelsovye-vesy/" class="catalog-menu_item">
+															<div class="subitem-title">Монорейкові ваги</div>
+														</a>
+																											<a href="https://vis.ua/product/11-giri-kalibrovochnye/" class="catalog-menu_item">
+															<div class="subitem-title">Гирі калібрувальні</div>
+														</a>
+																								</div>
+																			</li>
+																		<li class="">
+																					<a href="https://vis.ua/catalog/komplektyushie-dlya-vesov/" class="welcome-menu-item">
+																									<img src="https://vis.ua/wp-content/uploads/2023/02/parts.svg" alt="Комплектуючі">
+																								Комплектуючі											</a>
+																															<div class="category-menu_cats">
+																										<a href="https://vis.ua/catalog/vesovye-terminaly/" class="catalog-menu_item">
+															<div class="subitem-title">Вагові термінали</div>
+														</a>
+																											<a href="https://vis.ua/catalog/tenzodatchiki/" class="catalog-menu_item">
+															<div class="subitem-title">Тензодатчики</div>
+														</a>
+																								</div>
+																			</li>
+																		<li class="">
+																					<a href="https://vis.ua/services/" class="welcome-menu-item">
+																									<img src="https://vis.ua/wp-content/uploads/2023/02/services.svg" alt="Послуги">
+																								Послуги											</a>
+																															<div class="category-menu_cats">
+																										<a href="https://vis.ua/services/orenda-vah/" class="catalog-menu_item">
+															<div class="subitem-title">Оренда ваг</div>
+														</a>
+																											<a href="https://vis.ua/services/povirka-ta-kalibruvannia-vahovoho-obladnannia/" class="catalog-menu_item">
+															<div class="subitem-title">Повірка та калібрування</div>
+														</a>
+																											<a href="https://vis.ua/services/remont-vah/" class="catalog-menu_item">
+															<div class="subitem-title">Ремонт ваг</div>
+														</a>
+																											<a href="https://vis.ua/services/tekhnichne-obsluhovuvannia-vah/" class="catalog-menu_item">
+															<div class="subitem-title">Технічне обслуговування ваг </div>
+														</a>
+																											<a href="https://vis.ua/services/modernizatsiia-vah/" class="catalog-menu_item">
+															<div class="subitem-title">Модернізація ваг</div>
+														</a>
+																								</div>
+																			</li>
+																		<li class="">
+																					<a href="https://vis.ua/catalog/avtomatizacziya-vzveshivanij/" class="welcome-menu-item">
+																									<img src="https://vis.ua/wp-content/uploads/2023/02/automatize.svg" alt="Автоматизація зважування">
+																								Автоматизація зважування											</a>
+																															<div class="category-menu_cats">
+																										<a href="https://vis.ua/catalog/avtomatizacziya-avtomobilnyh-vesov/" class="catalog-menu_item">
+															<div class="subitem-title"> Автоматизація автомобільних ваг</div>
+														</a>
+																											<a href="https://vis.ua/product/avtomatyzovana-systema-kontroliu-rukhu-produktsii-skrp/" class="catalog-menu_item">
+															<div class="subitem-title">Автоматизована система контролю руху продукції (СКРП)</div>
+														</a>
+																											<a href="https://vis.ua/product/tsilodobova-systema-videosposterezhennia-tssv-i-kontrolno-propuskna-systema-kps/" class="catalog-menu_item">
+															<div class="subitem-title">Цілодобова система відеоспостереження (ЦСВ) і контрольно-пропускна система (КПС)</div>
+														</a>
+																								</div>
+																			</li>
+																		<li class="">
+																					<a href="https://vis.ua/catalog/prohramne-zabezpechennia-dlia-vah/" class="welcome-menu-item">
+																									<img src="https://vis.ua/wp-content/uploads/2023/02/software.svg" alt="Програмне забезпечення">
+																								Програмне забезпечення											</a>
+																															<div class="category-menu_cats">
+																										<a href="https://vis.ua/product/13-programmnoe-obespechenie-arm/" class="catalog-menu_item">
+															<div class="subitem-title">Програмне забезпечення для автомобільних ваг АРМ</div>
+														</a>
+																											<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-avtomobilnykh-vah-arm-z-vkladkoiu-laboratoriia/" class="catalog-menu_item">
+															<div class="subitem-title">Програмне забезпечення для автомобільних ваг АРМ з вкладкою “Лабораторія”</div>
+														</a>
+																											<a href="https://vis.ua/product/khmarne-prohramne-zabezpechennia-dlia-avtomobilnykh-vah/" class="catalog-menu_item">
+															<div class="subitem-title">Хмарне програмне забезпечення для автомобільних ваг</div>
+														</a>
+																											<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vahonnykh-vah-arm/" class="catalog-menu_item">
+															<div class="subitem-title">Програмне забезпечення для вагонних ваг АРМ</div>
+														</a>
+																											<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-bunkernykh-vah-arm/" class="catalog-menu_item">
+															<div class="subitem-title">Програмне забезпечення для бункерних ваг АРМ</div>
+														</a>
+																											<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-konveiernykh-vah/" class="catalog-menu_item">
+															<div class="subitem-title">Програмне забезпечення для конвеєрних ваг АРМ</div>
+														</a>
+																											<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vah-na-frontalnyy-navantazhuvach/" class="catalog-menu_item">
+															<div class="subitem-title">Програмне забезпечення для ваг на фронтальний навантажувач</div>
+														</a>
+																											<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vah-v-skladskomu-obliku-ta-torhivli/" class="catalog-menu_item">
+															<div class="subitem-title">Програмне забезпечення для ваг в складському обліку та торгівлі</div>
+														</a>
+																								</div>
+																			</li>
+																		<li class="">
+																					<a href="https://vis.ua/catalog/oborudovanie-dlia-avtomatizatsii-torgovli/" class="welcome-menu-item">
+																									<img src="https://vis.ua/wp-content/uploads/2023/07/Check.svg" alt="Автоматизація торгівлі">
+																								Автоматизація торгівлі											</a>
+																															<div class="category-menu_cats">
+																										<a href="https://vis.ua/catalog/pos-oborudovanie/" class="catalog-menu_item">
+															<div class="subitem-title">POS-обладнання</div>
+														</a>
+																											<a href="https://vis.ua/catalog/kassovoe-oborudovanie/" class="catalog-menu_item">
+															<div class="subitem-title">Касове устаткування</div>
+														</a>
+																											<a href="https://vis.ua/catalog/printery-etiketok/" class="catalog-menu_item">
+															<div class="subitem-title">Принтери етикеток</div>
+														</a>
+																								</div>
+																			</li>
+																		<li class="">
+																					<a href="https://vis.ua/catalog/rishennya/" class="welcome-menu-item">
+																									<img src="https://vis.ua/wp-content/uploads/2026/07/Idea.svg" alt="Рішення">
+																								Рішення											</a>
+																															<div class="category-menu_cats">
+																										<a href="https://vis.ua/product/vahy-konveierni-perevantazhuvach-ovochiv/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги на перевантажувач овочів</div>
+														</a>
+																											<a href="https://vis.ua/product/vahy-konveierni-na-drobarku/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги на дробарку</div>
+														</a>
+																											<a href="https://vis.ua/product/vahy-dlia-bunkera-perevantazhuvacha-zerna/" class="catalog-menu_item">
+															<div class="subitem-title">Ваги для бункера-перевантажувача зерна</div>
+														</a>
+																											<a href="https://vis.ua/product/rishennia-dlia-zvazhuvannia-konteyneriv/" class="catalog-menu_item">
+															<div class="subitem-title">Рішення для зважування контейнерів</div>
+														</a>
+																								</div>
+																			</li>
+																		<li class="">
+																					<a href="https://vis.ua/usefull-information/" class="welcome-menu-item">
+																									<img src="https://vis.ua/wp-content/uploads/2024/08/Info.svg" alt="Корисна інформація">
+																								Корисна інформація											</a>
+																															<div class="category-menu_cats">
+																										<a href="https://vis.ua/info/sertyfikaty/" class="catalog-menu_item">
+															<div class="subitem-title">Сертифікати</div>
+														</a>
+																											<a href="https://vis.ua/info/korysna-informatsiia-pro-tvaryn/" class="catalog-menu_item">
+															<div class="subitem-title">Корисна інформація про ваги для тварин</div>
+														</a>
+																								</div>
+																			</li>
+																</ul>
+						</div>
+					</div>
+					
+				<div class="col-xl-9 col-lg-8  ps-lg-0 taxonomy-content-col">
+					<div class="breadcrumbs-block">
+						<div id="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList"><span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="https://vis.ua/" itemprop="item"><span itemprop="name">Головна</span><meta itemprop="position" content="1"/></a></span><span class="delimiter">/</span><span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="https://vis.ua/catalog/" itemprop="item"><span itemprop="name">Каталог</span><meta itemprop="position" content="2"/></a></span><span class="delimiter">/</span><span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="https://vis.ua/catalog/products/" itemprop="item"><span itemprop="name">Ваги та вагове обладнання</span><meta itemprop="position" content="3"/></a></span><span class="delimiter">/</span><span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="https://vis.ua/catalog/avtomobylerazghruzchyky/" itemprop="item"><span itemprop="name">Автомобілерозвантажувачі</span><meta itemprop="position" content="4"/></a></span><span class="delimiter">/</span><span class="current-page breadcrumb_last" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Ваговий автомобілерозвантажувач</span><meta itemprop="position" content="5"/></span></div>					</div>
+					<div class="welcome-category-block">
+						<div class="product-title text-center">
+							<h1>Ваговий автомобілерозвантажувач</h1>
+						</div>
+																
+							<div class="product-slider h-100">
+																		<div class="product-slide">
+											<div class="welcome-slide-inner d-flex align-items-center flex-column justify-content-evenly">
+												<img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-13.png.webp" fetchpriority="high" alt="Автомобилеразгрузчик 3d">
+											</div>
+										</div>
+																			<div class="product-slide">
+											<div class="welcome-slide-inner d-flex align-items-center flex-column justify-content-evenly">
+												<img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/3457635753.jpg.webp" fetchpriority="high" alt="Автомобилеразгрузчик Компании &quot;ВИС&quot;">
+											</div>
+										</div>
+																</div>
+					
+											</div> <!-- welcome-category-block -->
+										<div class="about-product-content">
+				
+						<div class="about-product-menu d-flex flex-sm-row flex-column-reverse justify-content-between">
+							<div class="about-product-anchor-wrapper">
+																	<a href="#description>" class="anchor-btn active">Опис</a>
+																									<a href="#specs" class="anchor-btn">Характеристики</a>
+																															</div>
+							<a href="#order-form" class="blue-btn" data-fancybox>Замовити</a>
+						</div>
+						<div class="about-product-content-wrapper">
+															<div class="about-block" id="description">
+									<div class="about-block-inner">
+										<p>Гідравлічний ваговий автомобілерозвантажувач поєднує в собі функціонал відразу двох пристроїв: класичного фундаментного авторозвантажувача та автомобільних ваг. Він призначений для швидкого розвантаження зерна через задній борт автомобіля та причепа, з розчіпкою та без розчіпки, при цьому дозволяє зважувати автомобіль до та після розвантаження для максимально ефективного ведення обліку розвантаженої продукції та економії місця на підприємстві. Ціна вагового авторозвантажувача залежить від обраної довжини та вантажопідйомності, а також від бажаної точності зважування.</p>
+<h2><strong>Переваги</strong> вагового <strong>автомобілерозвантажувача виробництва </strong><strong>Компанії «</strong><strong>Ваговимірювальні системи» </strong></h2>
+<ul class="custom-ul">
+<li>Конструкція «рама в рамі» витримує великі навантаження і дозволяє поєднати у пристрої можливості авторозвантажувача та автомобільних ваг</li>
+<li>Ведення обліку розвантаженої продукції шляхом отримання та збереження ваги брутто та тари за один цикл розвантаження без необхідності заїзду на ваги перед та після розвантаження;</li>
+<li>Економія місця на підприємстві та коштів власника;</li>
+<li>Суттєве прискорення процесу розвантаження та ведення обліку;</li>
+<li>Спеціальна посилена конструкція упорів колеса з гідравлічним приводом виключає заклинювання упору при засміченні продукцією, що розвантажується;</li>
+<li>Гідравлічний привід упорів не потребує періодичного обслуговування.Таким чином, термін його служби у 3-4 разів більший, ніж у механічних упорів;</li>
+<li>Встановлення додаткових пар упорів дозволяє приймати будь-який тип автомобіля з напівпричепом;</li>
+<li>Можливість виготовлення конструкції з перемичкою між опорами гідроциліндрів або без неї з посиленням несучої здатності бічної конструкції, що дозволяє підібрати максимально відповідну конструкцію розвантажувача під ваш автомобільний парк</li>
+<li>Автоматизована система керування автомобілерозвантажувачем із вбудованим захистом дозволяє підіймання автомобіля тільки при піднятих та зафіксованих колісних упорах, що забезпечує безпеку експлуатації;</li>
+<li>Посилена конструкція платформи та опорних елементів в 1,5-2 рази продовжує термін служби авторозвантажувача. Ця конструкція також дозволяє зберегти цілісність та функціональність конструкції у разі перевантаження;</li>
+<li>Посилена конструкція бортів (опція) та збільшена їх висота дозволяє повністю виключити прокидання продукту з платформи.</li>
+<li>Автомобілерозвантажувачі виробництва нашої компанії потрапляють під програму державної допомоги аграрному сектору, завдяки чому ви можете отримати від держави компенсацію25% від вартості авторозвантажувача.</li>
+</ul>
+<h3>Опис гідравлічної маслостанції</h3>
+<ul>
+<li>Електродвигун 30 кВт Dinamic (Туреччина)<img fetchpriority="high" decoding="async" class="size-medium wp-image-28750 alignright" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" alt="" width="300" height="300" data-lazy-srcset="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/Maslostantsyia_-300x300.png.webp 300w,  https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/Maslostantsyia_-150x150.png.webp 150w,  https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/Maslostantsyia_.png.webp 332w" data-lazy-sizes="(max-width: 300px) 100vw, 300px" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/Maslostantsyia_-300x300.png.webp" /><noscript><img fetchpriority="high" decoding="async" class="size-medium wp-image-28750 alignright" src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/Maslostantsyia_-300x300.png.webp" alt="" width="300" height="300" srcset="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/Maslostantsyia_-300x300.png.webp 300w,  https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/Maslostantsyia_-150x150.png.webp 150w,  https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/Maslostantsyia_.png.webp 332w" sizes="(max-width: 300px) 100vw, 300px" /></noscript></li>
+<li>Насос здвоєний Viovil (Італія)</li>
+<li>Масловказівник візуальний з термометром MP Filtri (Італія)</li>
+<li>Клапани, манометри, гідророзподільники, фільтри, кран, дросель, муфти, та ін. &#8211; виробництво Італія</li>
+<li>Об&#8217;єм гідравлічного бака: 300-350 л</li>
+<li>Об&#8217;ємна витрата насоса Н: 60,0+15,0 л/хв</li>
+<li>Ступінь фільтрації 25 мкм</li>
+</ul>
+<h3>Опис гідравлічних циліндрів</h3>
+<ul>
+<li>Виготовлені в Італії за європейськими стандартами якості<img decoding="async" class="size-medium wp-image-28752 alignright" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20244%20300'%3E%3C/svg%3E" alt="" width="244" height="300" data-lazy-srcset="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/TSylyndr--244x300.png.webp 244w,  https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/TSylyndr-.png.webp 332w" data-lazy-sizes="(max-width: 244px) 100vw, 244px" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/TSylyndr--244x300.png.webp" /><noscript><img decoding="async" class="size-medium wp-image-28752 alignright" src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/TSylyndr--244x300.png.webp" alt="" width="244" height="300" srcset="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/TSylyndr--244x300.png.webp 244w,  https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/TSylyndr-.png.webp 332w" sizes="(max-width: 244px) 100vw, 244px" /></noscript></li>
+<li>Сталь вищої якості з хромуванням в процесі гальваніки згідно ISO 9227 та ISO 10289 &#8211; не піддаються корозії</li>
+<li>Немає потреби в прокачуванні повітря</li>
+<li>Ущільнення манжет &#8211; відсутність витоку масла мінімум на 20 000 циклів підйому</li>
+<li>Зменшений об&#8217;єм споживаного масла</li>
+<li>Діапазон робочих температур від -40 до +100°С</li>
+<li>Гарантія на циліндри &#8211; 12 місяців або 20 000 циклів, потім &#8211; заміна манжетів</li>
+</ul>
+									</div>
+								</div>
+																						<div class="about-block" id="specs">
+									<div class="section-title">Характеристики</div>
+									<div class="about-block-inner">
+										<table style="width: 100%;" width="100%">
+<tbody>
+<tr>
+<td width="65%">
+<p style="text-align: center; margin-bottom: 0;"><strong>Найменування параметра</strong></p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;"><strong>Значення</strong></p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Вантажопідйомність</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">40 / 60 / 80</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Довжина платформи, м</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">12 / 14 / 16 / 18 / 20 / 21</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Бічний борт для платформ довжиною, м</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">20 / 21</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Жолоб для платформ, м</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">20 / 21</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Кількість упорів, пар</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">1</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Механізм підйому упору колеса</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">гідравлічний</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Кут нахилу платформи, град.</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">38</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Привід електродвигуна, кВт</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">22 / 30 / 37</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Напруга живлення, В</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">380</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;"><strong>Ступінь захисту за ГОСТ 14254-80, не менше:</strong></p>
+</td>
+<td width="34%"></td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Шафа управління</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">IP56</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Маслостанція</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">IP55</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Спосіб управління</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">ручний</p>
+</td>
+</tr>
+<tr>
+<td width="65%">
+<p style="font-size: 16px; margin-bottom: 0px; text-align: left;">Термін служби обладнання, років, не менше</p>
+</td>
+<td width="34%">
+<p style="text-align: center; margin-bottom: 0;">10</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>Технічні характеристики вагової складової авторозвантажувача:</h2>
+<table width="100%">
+<tbody>
+<tr>
+<td width="43%">
+<p style="font-size: 16px; margin-bottom: 0;">Модифікація ваг</p>
+</td>
+<td colspan="2" width="56%">
+<p style="text-align: center; margin-bottom: 0;">80ВА-АГРО</p>
+</td>
+</tr>
+<tr>
+<td width="43%">
+<p style="font-size: 16px; margin-bottom: 0;">Максимальна вантажопідйомність, т</p>
+</td>
+<td colspan="2" width="56%">
+<p style="text-align: center; margin-bottom: 0;">80</p>
+</td>
+</tr>
+<tr>
+<td rowspan="2" width="43%">
+<p style="font-size: 16px; margin-bottom: 0;">Інтервали зважувань</p>
+</td>
+<td colspan="2" width="56%">
+<p style="text-align: center; margin-bottom: 0;">Двоінтервальні</p>
+</td>
+</tr>
+<tr>
+<td width="28%">
+<p style="text-align: center; margin-bottom: 0;">1-ий інтервал</p>
+</td>
+<td width="28%">
+<p style="text-align: center; margin-bottom: 0;">2-ий інтервал</p>
+</td>
+</tr>
+<tr>
+<td width="43%">
+<p style="font-size: 16px; margin-bottom: 0;">Найбільша границя зважування, Мах, т</p>
+</td>
+<td width="28%">
+<p style="text-align: center; margin-bottom: 0;">Мах<sub>1</sub> =60 т</p>
+</td>
+<td width="28%">
+<p style="text-align: center; margin-bottom: 0;">Мах<sub>2</sub> = 80 т</p>
+</td>
+</tr>
+<tr>
+<td width="43%">
+<p style="font-size: 16px; margin-bottom: 0;">Найменша границя зважування, Мin,</p>
+</td>
+<td colspan="2" width="56%">
+<p style="text-align: center; margin-bottom: 0;">0,4</p>
+</td>
+</tr>
+<tr>
+<td width="43%">
+<p style="font-size: 16px; margin-bottom: 0;">Ціна поділки = ціна повірочної поділки, кг</p>
+</td>
+<td width="28%">
+<p style="text-align: center; margin-bottom: 0;">d<sub>1</sub>=e<sub>1</sub>=20 кг</p>
+</td>
+<td width="28%">
+<p style="text-align: center; margin-bottom: 0;">d<sub>2</sub>=e<sub>2</sub>=50 кг</p>
+</td>
+</tr>
+<tr>
+<td width="43%">
+<p style="font-size: 16px; margin-bottom: 0;">Клас точності ваг згідно ДСТУ EN 45501:2017</p>
+</td>
+<td colspan="2" width="56%">
+<p style="text-align: center; margin-bottom: 0;">середній</p>
+</td>
+</tr>
+<tr>
+<td width="43%">
+<p style="font-size: 16px; margin-bottom: 0;">Межі допустимої похибки при контролі в експлуатації</p>
+</td>
+<td width="28%">
+<p style="text-align: center; margin-bottom: 0;">від Мin до 10 т: ± 20 кг</p>
+<p style="text-align: center; margin-bottom: 0;">від 10 т до 40 т: ± 40 кг</p>
+<p style="text-align: center; margin-bottom: 0;">від 40 т до 60 т: ± 60 кг</p>
+</td>
+<td width="28%">
+<p style="text-align: center; margin-bottom: 0;">від 60 т до 80 т: ± 100 кг</p>
+</td>
+</tr>
+</tbody>
+</table>
+									</div>
+								</div>
+																											</div>
+					</div>
+					
+				</div>
+			</div> <!-- .row -->
+			
+										<section class="related-products-section">
+					<div class="container">
+						<div class="section-title">
+							Також вас можуть зацікавити						</div>
+						<div class="row">
+															<div class="product-col col-md-3 col-sm-6">
+									<a href="https://vis.ua/product/01-avtomobilerazgruzchik/" class="product-inner">
+										<div class="product-thumb-wrapper">
+											<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Фундаментний автомобілерозвантажувач" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-3-300x187.png.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-3-300x187.png.webp" alt="Фундаментний автомобілерозвантажувач"></noscript>
+										</div>
+										<div class="product-inner-title">Фундаментний автомобілерозвантажувач</div>
+									</a>
+								</div>
+																<div class="product-col col-md-3 col-sm-6">
+									<a href="https://vis.ua/product/peresuvnyy-avtomobilerozvantazhuvach/" class="product-inner">
+										<div class="product-thumb-wrapper">
+											<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Пересувний автомобілерозвантажувач" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-15-300x187.png.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-15-300x187.png.webp" alt="Пересувний автомобілерозвантажувач"></noscript>
+										</div>
+										<div class="product-inner-title">Пересувний автомобілерозвантажувач</div>
+									</a>
+								</div>
+																<div class="product-col col-md-3 col-sm-6">
+									<a href="https://vis.ua/product/fundamentnyy-avtorozvantazhuvach-z-bichnym-rozvantazhenniam/" class="product-inner">
+										<div class="product-thumb-wrapper">
+											<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Фундаментний авторозвантажувач з бічним розвантаженням" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-14-300x187.png.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-14-300x187.png.webp" alt="Фундаментний авторозвантажувач з бічним розвантаженням"></noscript>
+										</div>
+										<div class="product-inner-title">Фундаментний авторозвантажувач з бічним розвантаженням</div>
+									</a>
+								</div>
+																<div class="product-col col-md-3 col-sm-6">
+									<a href="https://vis.ua/product/fundamentnyy-universalnyy-avtorozvantazhuvach/" class="product-inner">
+										<div class="product-thumb-wrapper">
+											<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Фундаментний універсальний авторозвантажувач" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-unyversaln-y-katehoryia-300x187.png.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-unyversaln-y-katehoryia-300x187.png.webp" alt="Фундаментний універсальний авторозвантажувач"></noscript>
+										</div>
+										<div class="product-inner-title">Фундаментний універсальний авторозвантажувач</div>
+									</a>
+								</div>
+																<div class="product-col col-md-3 col-sm-6">
+									<a href="https://vis.ua/product/bezfundamentnyy-avtomobilerozvantazhuvach/" class="product-inner">
+										<div class="product-thumb-wrapper">
+											<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Безфундаментний автомобілерозвантажувач" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-8-300x187.png.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/07/ARH-8-300x187.png.webp" alt="Безфундаментний автомобілерозвантажувач"></noscript>
+										</div>
+										<div class="product-inner-title">Безфундаментний автомобілерозвантажувач</div>
+									</a>
+								</div>
+																<div class="product-col col-md-3 col-sm-6">
+									<a href="https://vis.ua/product/bunker-perevantazhuvach-zerna/" class="product-inner">
+										<div class="product-thumb-wrapper">
+											<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Бункер-перевантажувач зерна" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/09/Perehruzchyk-300x198.png.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/09/Perehruzchyk-300x198.png.webp" alt="Бункер-перевантажувач зерна"></noscript>
+										</div>
+										<div class="product-inner-title">Бункер-перевантажувач зерна</div>
+									</a>
+								</div>
+														</div>
+					</div>
+				</section>
+						
+										<aside class="testimonials-section">
+					<div class="container">
+						<div class="section-title">
+							Відгуки						</div>
+						<div class="section-description">
+							<p>Відгуки наших клієнтів, що ґрунтуються на листах подяки</p>
+						</div>
+						<div class="testimonials-slider">
+																<div>
+										<div class="testimonial-inner">
+											<div class="row">
+																									<div class="col-md-4 testimonial-image-col">
+														<a class="testimonial-image-wrapper" href="https://vis.ua/wp-content/uploads/2024/08/Maynd-set-min-scaled.jpg" data-fancybox>
+															<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="ТОВ  «МАЙНД СЕТ»" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2024/08/Maynd-set-min-206x300.jpg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2024/08/Maynd-set-min-206x300.jpg.webp" alt="ТОВ  «МАЙНД СЕТ»"></noscript>
+														</a>
+													</div>
+													<div class="col-md-8 info-col">
+														<div class="testimonial-title">ТОВ  «МАЙНД СЕТ»</div>
+														<div class="testimonial-person">Кузнецова О.В.</div>
+														<div class="testimonial-position">Директор</div>
+														<div class="testimonial-text">ТОВ «МАЙНД СЕТ» хоче висловити подяку ТОВ «Компанія «Ваговимірювальні системи» за високу якість виконаного комплексу робіт з встановлення <a href="https://vis.ua/catalog/avtomobylerazghruzchyky/">Автомобілерозвантажувача</a> універсального гідравлічного для швидкого розвантаження автомобілів- зерновозів «80АРГ- 18».
+
+За час робити на об'єкті за адресою: м. Одеса, Одеська обл. співробітники Компанії виявила себе як високопрофесійні спеціалісти у своїй галузі.
+
+ТОВ «Компанія «Ваговимірювальні системи» є надійним і відповідальним партнером.
+
+Дякуємо Вам за виконану роботу і сподіваємося на подальшу співпрацю.</div>
+													</div>
+																							</div>
+										</div>
+									</div>
+																	<div>
+										<div class="testimonial-inner">
+											<div class="row">
+																									<div class="col-md-4 testimonial-image-col">
+														<a class="testimonial-image-wrapper" href="https://vis.ua/wp-content/uploads/2023/10/20230426_093228-min.png" data-fancybox>
+															<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="ПрАТ «Дунайсудноремонт»" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/10/20230426_093228-min-213x300.png.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/10/20230426_093228-min-213x300.png.webp" alt="ПрАТ «Дунайсудноремонт»"></noscript>
+														</a>
+													</div>
+													<div class="col-md-8 info-col">
+														<div class="testimonial-title">ПрАТ «Дунайсудноремонт»</div>
+														<div class="testimonial-person">Віктор Бузань</div>
+														<div class="testimonial-position">В.о. голови правління</div>
+														<div class="testimonial-text">ПрАТ «Дунайсудноремонт» хоче висловити подяку ТОВ «Компанія «Ваговимірювальні системи» за високу якість виконаного комплексу робіт з розробки та монтажу <a href="/catalog/avtomobylerazghruzchyky/">автомобілерозвантажувача універсального гідравлічного</a> для швидкого розвантаження автомобілів- зерновозів «8ОАРГ-18», згідно Договору поставки ВВС-К-18572 від 31.10.2022р.
+
+За час робити на об'єкті за адресою:м. Ізмаїл, Одеська обл. співробітники Компанії виявила себе як високопрофесійні спеціалісти у своїй галузі.
+
+ТОВ «Компанія «Ваговимірювальні системи» є надійним і відповідальним партнером.
+
+Дякуємо Вам за виконану роботу і сподіваємося на подальшу співпрацю.</div>
+													</div>
+																							</div>
+										</div>
+									</div>
+																	<div>
+										<div class="testimonial-inner">
+											<div class="row">
+																									<div class="col-md-4 testimonial-image-col">
+														<a class="testimonial-image-wrapper" href="https://vis.ua/wp-content/uploads/2023/12/Orlovka-min.jpg" data-fancybox>
+															<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="ТОВ «ПОРОМНИЙ КОМПЛЕКС ОРЛІВКА»" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/12/Orlovka-min-212x300.jpg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/12/Orlovka-min-212x300.jpg.webp" alt="ТОВ «ПОРОМНИЙ КОМПЛЕКС ОРЛІВКА»"></noscript>
+														</a>
+													</div>
+													<div class="col-md-8 info-col">
+														<div class="testimonial-title">ТОВ «ПОРОМНИЙ КОМПЛЕКС ОРЛІВКА»</div>
+														<div class="testimonial-person">Віктор ГОТКА</div>
+														<div class="testimonial-position">Генеральний директор</div>
+														<div class="testimonial-text">У рамках договору поставки № ВВС-К-23401 від 30.05.2023р. ТОВ «Компанія «Ваговимірювальні системи» було виготовлено та змонтоване <a href="/product/fundamentnyy-universalnyy-avtorozvantazhuvach/">Автомобілерозвантажувач універсальний гідравлічний</a> для швидкого розвантаження автомобілів-зерновозів «80АРГ-18»
+
+Даним листом хочемо висловити подяку Вашій Компанії за високу якість виконаного комплексу робіт за Договором.
+
+За час роботи на об'єкті за адресою: Одеська область, Ізмаїльський район, с.Орлівка вуд.Паромна дорога 1, співробітники Компанії виявила себе як високопрофесійні спеціалісти у свій галузі.
+
+ТОВ «Компанія «Ваговимірювальні системи» є надійним і відповідальним партнером.
+
+Сподіваємося на подальшу плідну співпрацю у майбутніх проектах.</div>
+													</div>
+																							</div>
+										</div>
+									</div>
+																	<div>
+										<div class="testimonial-inner">
+											<div class="row">
+																									<div class="col-md-4 testimonial-image-col">
+														<a class="testimonial-image-wrapper" href="https://vis.ua/wp-content/uploads/2025/03/Maynd-set-min.jpg" data-fancybox>
+															<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="ТОВ «МАЙНД СЕТ»" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2025/03/Maynd-set-min-210x300.jpg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2025/03/Maynd-set-min-210x300.jpg.webp" alt="ТОВ «МАЙНД СЕТ»"></noscript>
+														</a>
+													</div>
+													<div class="col-md-8 info-col">
+														<div class="testimonial-title">ТОВ «МАЙНД СЕТ»</div>
+														<div class="testimonial-person">Кузнецова О.В.</div>
+														<div class="testimonial-position">Директор</div>
+														<div class="testimonial-text">ТОВ «МАЙНД СЕТ» хоче висловити подяку ТОВ «Компанія «Ваговимірювальні системи» за високу якість виконаного комплексу робіт з встановлення <a href="/catalog/avtomobylerazghruzchyky/">Автомобілерозвантажувача</a> універсального гідравлічного для швидкого розвантаження автомобілів- зерновозів «80АРГ-18».
+
+За час робити на об'єкті за адресою: м. Одеса, Одеська обл. співробітники Компанії виявила себе як високопрофесійні спеціалісти у своїй галузі.
+
+ТОВ «Компанія «Ваговимірювальні системи» є надійним і відповідальним партнером.
+
+Дякуємо Вам за виконану роботу і сподіваємося на подальшу співпрацю.
+<div id="gtx-trans" style="position: absolute; left: 446px; top: 24px;">
+<div class="gtx-trans-icon"></div>
+</div></div>
+													</div>
+																							</div>
+										</div>
+									</div>
+																	<div>
+										<div class="testimonial-inner">
+											<div class="row">
+																									<div class="col-md-4 testimonial-image-col">
+														<a class="testimonial-image-wrapper" href="https://vis.ua/wp-content/uploads/2024/07/TOV-firma-Inter-Avtoservis.jpg" data-fancybox>
+															<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="ТОВ фірма «Інтер-Автосервіс»" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2024/07/TOV-firma-Inter-Avtoservis-203x300.jpg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2024/07/TOV-firma-Inter-Avtoservis-203x300.jpg.webp" alt="ТОВ фірма «Інтер-Автосервіс»"></noscript>
+														</a>
+													</div>
+													<div class="col-md-8 info-col">
+														<div class="testimonial-title">ТОВ фірма «Інтер-Автосервіс»</div>
+														<div class="testimonial-person">А.В.Карев</div>
+														<div class="testimonial-position">Директор ТОВ фірма «Інтер-Автосервіс»</div>
+														<div class="testimonial-text">У рамках договору поставки № ПДВ-К-25188 від 21.07.2023 р. було виготовлено та змонтоване <a href="/product/fundamentnyy-universalnyy-avtorozvantazhuvach/">Автомобілерозвантажувач універсальний гідравлічний</a> для швидкого розвантаження автомобілів-зерновозів «80АРГ-18».
+
+Даним листом хочемо висловити подяку Вам за високу якість виконаного комплексу робіт за Договором.
+
+За час робити на об'єкті за адресою: Одеська обл., м. Южне ваші співробітники виявили себе як високопрофесійні спеціалісти у своїй галузі.
+
+Ви є надійним і відповідальним партнером.
+
+Сподіваємося на подальшу плідну співпрацю у майбутніх проектах.</div>
+													</div>
+																							</div>
+										</div>
+									</div>
+																	<div>
+										<div class="testimonial-inner">
+											<div class="row">
+																									<div class="col-md-4 testimonial-image-col">
+														<a class="testimonial-image-wrapper" href="https://vis.ua/wp-content/uploads/2023/03/tandem-agro-vvs-k-15043-min-scaled.jpg" data-fancybox>
+															<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="ФГ «Тандем-Агро»" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/03/tandem-agro-vvs-k-15043-min-212x300.jpg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/03/tandem-agro-vvs-k-15043-min-212x300.jpg.webp" alt="ФГ «Тандем-Агро»"></noscript>
+														</a>
+													</div>
+													<div class="col-md-8 info-col">
+														<div class="testimonial-title">ФГ «Тандем-Агро»</div>
+														<div class="testimonial-person">І.Я. Грицишин</div>
+														<div class="testimonial-position">Голова ФГ «Тандем-Агро»</div>
+														<div class="testimonial-text">Фермерське господарство «Тандем-Агро» хоче висловити подяку ТОВ «Компанія «Ваговимірювальні .системи» за високу якість виконаного комплексу робіт з встановлення <a href="/catalog/avtomobylerazghruzchyky/">автомобілерозвантажувача універсального гідравлічного</a> для швидкого розвантаження автомобілів- зерновозів «60АРГ-12». За час робити на -об’єкті за адресою: с. Варварівка, Юр’ївський р-н, Дніпропетровська обл. співробітники Компанії виявила себе як високопрофесійні спеціалісти у своїй галузі. ТОВ «Компанія «Ваговимірювальні системи» є надійним і відповідальним партнером. Дякуємо Вам за виконану роботу і сподіваємося на подальшу співпрацю.</div>
+													</div>
+																							</div>
+										</div>
+									</div>
+														</div>
+					</div>
+				</aside>
+						
+				<aside class="certificates-section">
+		<div class="container">
+			<div class="section-title">
+				Наші патенти, сертифікати та ліцензії			</div>
+			<div class="certificates-slider">
+										<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2026/07/Vzr-vozashchyta-VA-VV-1str.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Vzr-vozashchyta-VA-VV-1str" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2026/07/Vzr-vozashchyta-VA-VV-1str-719x1024.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2026/07/Vzr-vozashchyta-VA-VV-1str-719x1024.jpeg.webp" alt="Vzr-vozashchyta-VA-VV-1str"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2026/07/sert-9001.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="sert-9001" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2026/07/sert-9001-722x1024.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2026/07/sert-9001-722x1024.jpeg.webp" alt="sert-9001"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2024/02/Avtomobilerozvantazhuvach-KOMPANIYA-VVS-UA.276.047.02-24.jpg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Автомобілерозвантажувач КОМПАНІЯ ВВС UA.276.047.02-24" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2024/02/Avtomobilerozvantazhuvach-KOMPANIYA-VVS-UA.276.047.02-24-724x1024.jpg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2024/02/Avtomobilerozvantazhuvach-KOMPANIYA-VVS-UA.276.047.02-24-724x1024.jpg.webp" alt="Автомобілерозвантажувач КОМПАНІЯ ВВС UA.276.047.02-24"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2023/02/certificate1.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="certificate1" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate1.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate1.jpeg.webp" alt="certificate1"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2023/02/certificate2.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="certificate2" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate2.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate2.jpeg.webp" alt="certificate2"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2023/02/certificate3.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="certificate3" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate3.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate3.jpeg.webp" alt="certificate3"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2023/02/certificate5.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="certificate5" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate5.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate5.jpeg.webp" alt="certificate5"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2023/02/certificate6.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="certificate6" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate6.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate6.jpeg.webp" alt="certificate6"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2023/02/certificate7.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="certificate7" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate7.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate7.jpeg.webp" alt="certificate7"></noscript>
+							</a>
+						</div>
+											<div>
+							<a class="certificate-wrapper" href="https://vis.ua/wp-content/uploads/2023/02/certificate8.jpeg" data-fancybox="certificate">
+								<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="certificate8" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate8.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/certificate8.jpeg.webp" alt="certificate8"></noscript>
+							</a>
+						</div>
+								</div>
+		</div>
+	</aside>
+			
+						<div class="order-form-section">
+				<div class="container">
+					<div class="section-title">
+						Замовлення та консультація					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/catalog_img_.jpeg.webp"><noscript><img src="https://vis.ua/wp-content/webp-express/webp-images/uploads/2023/02/catalog_img_.jpeg.webp" alt=""></noscript>
+						</div>
+						<div class="col-md-6">
+							<div class="form-wrapper">
+								
+<div class="wpcf7 no-js" id="wpcf7-f241-o1" lang="uk" dir="ltr" data-wpcf7-id="241">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/product/vahovyy-avtomobilerozvantazhuvach/#wpcf7-f241-o1" method="post" class="wpcf7-form init" aria-label="Контактна форма" novalidate="novalidate" data-status="init">
+<fieldset class="hidden-fields-container"><input type="hidden" name="_wpcf7" value="241" /><input type="hidden" name="_wpcf7_version" value="6.1.6" /><input type="hidden" name="_wpcf7_locale" value="uk" /><input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f241-o1" /><input type="hidden" name="_wpcf7_container_post" value="0" /><input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+</fieldset>
+<p><label><span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" autocomplete="name" aria-required="true" aria-invalid="false" placeholder="Ваше ім&#039;я*" value="" type="text" name="your-name" /></span></label>
+</p>
+<p><span class="wpcf7-form-control-wrap" data-name="your-phone"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel" aria-required="true" aria-invalid="false" placeholder="Ваш телефон*" value="" type="tel" name="your-phone" /></span>
+</p>
+<p><label><span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-text wpcf7-validates-as-email" autocomplete="email" aria-invalid="false" placeholder="Ваш email" value="" type="email" name="your-email" /></span></label>
+</p>
+<p><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="Зв&#039;язатися з нами" />
+</p><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+							</div>
+															<a href="https://vis.ua/wp-content/uploads/2025/11/nov-y_kataloh_obshchyy-2025.pdf" class="ordr_btn" target="_blank">Завантажити каталог</a>
+													</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<style>
+	.about-block ul.has-bg-image li {
+		line-height: normal;
+		background-size: 34px !important;
+		padding-left: 50px !important;
+		display: flex;
+		align-items: center;
+		min-height: 42px;
+		margin-bottom: 5px;
+	}
+	.about-block ul.has-bg-image li:before {
+		content: none;
+	}
+</style>
+<script type="text/rocketlazyloadscript">
+	document.addEventListener('DOMContentLoaded', function() {
+		document.querySelectorAll('ul').forEach(function(ul) {
+			var hasBgImage = Array.from(ul.querySelectorAll('li')).some(function(li) {
+				return li.style.backgroundImage && li.style.backgroundImage !== 'none';
+			});
+	
+			if (hasBgImage) {
+				ul.classList.add('has-bg-image');
+			}
+		});
+	});
+</script>
+
+ 
+
+
+	<div  id="catalog-popup" style="display: none;">
+		<div  class="popup-title"><a href="https://vis.ua/catalog/">Каталог</a></div>
+					<div class="">
+									<a href="https://vis.ua/catalog/products/" class="popup-welcome-menu-item">
+						Ваги та вагове обладнання					</a>
+													<div class="popup-subcats">
+														<a href="https://vis.ua/catalog/avtomobylerazghruzchyky/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Автомобілерозвантажувачі</div>
+								</a>
+															<a href="https://vis.ua/product/bunker-perevantazhuvach-zerna/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Бункер-перевантажувач зерна</div>
+								</a>
+															<a href="https://vis.ua/catalog/01-car-scales/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Автомобільні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesyi-podkladnyie/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Автомобільні підкладні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vahy-dlia-mytnytsi/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги для митниці</div>
+								</a>
+															<a href="https://vis.ua/product/wim-sistemy-dinamicheskogo-vzveshivaniya-avtomobilej/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">HS-WIM системи</div>
+								</a>
+															<a href="https://vis.ua/catalog/02-carload-scales/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Вагонні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/bunkernye-vesovye-dozatory/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Бункерні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vagovi-dozatory/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Вагові дозатори</div>
+								</a>
+															<a href="https://vis.ua/catalog/fasuvalne-obladnannya/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Фасувальне обладнання</div>
+								</a>
+															<a href="https://vis.ua/catalog/balochnye-vesy-pod-yomkost/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Балкові ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/chekvejery/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Чеквеєри</div>
+								</a>
+															<a href="https://vis.ua/product/02-vesyi-konveyernyie/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Конвеєрні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-dlya-pogryzchika/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги на навантажувач</div>
+								</a>
+															<a href="https://vis.ua/catalog/04-vesyi-kranovyie-ukraina/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Кранові ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-iz-nerzhavejki/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги з нержавіючої сталі</div>
+								</a>
+															<a href="https://vis.ua/catalog/platformennye-vesy/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Платформні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-nizkoprofilnye/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Низькопрофільні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/palletnye-vesy/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Палетні ваги</div>
+								</a>
+															<a href="https://vis.ua/product/rolgangovye-vesy/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Рольгангові ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/rokla-s-vesami/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Рокла з вагами</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-tovarnye/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Товарні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-torgovye-elektronnye/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Торгівельні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-nastolnye-elektronnie/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Настільні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-fasovochnye/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги фасувальні</div>
+								</a>
+															<a href="https://vis.ua/product/vahy-dlia-zvazhuvannia-konteyneriv/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги для зважування контейнерів</div>
+								</a>
+															<a href="https://vis.ua/catalog/nestandartni-vahy/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Нестандартні ваги</div>
+								</a>
+															<a href="https://vis.ua/catalog/05-vesy-laboratornyie-electronnye/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги лабораторні</div>
+								</a>
+															<a href="https://vis.ua/catalog/analizatory-vlazhnosti/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Аналізатори вологи</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-mediczinskie/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги медичні</div>
+								</a>
+															<a href="https://vis.ua/catalog/vesy-dlia-zhivotnyh/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги для тварин</div>
+								</a>
+															<a href="https://vis.ua/catalog/trap-telega/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Трап-візок</div>
+								</a>
+															<a href="https://vis.ua/catalog/monorelsovye-vesy/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Монорейкові ваги</div>
+								</a>
+															<a href="https://vis.ua/product/11-giri-kalibrovochnye/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Гирі калібрувальні</div>
+								</a>
+												</div>
+							</div>
+						<div class="">
+									<a href="https://vis.ua/catalog/komplektyushie-dlya-vesov/" class="popup-welcome-menu-item">
+						Комплектуючі					</a>
+													<div class="popup-subcats">
+														<a href="https://vis.ua/catalog/vesovye-terminaly/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Вагові термінали</div>
+								</a>
+															<a href="https://vis.ua/catalog/tenzodatchiki/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Тензодатчики</div>
+								</a>
+												</div>
+							</div>
+						<div class="">
+									<a href="https://vis.ua/services/" class="popup-welcome-menu-item">
+						Послуги					</a>
+													<div class="popup-subcats">
+														<a href="https://vis.ua/services/orenda-vah/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Оренда ваг</div>
+								</a>
+															<a href="https://vis.ua/services/povirka-ta-kalibruvannia-vahovoho-obladnannia/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Повірка та калібрування</div>
+								</a>
+															<a href="https://vis.ua/services/remont-vah/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ремонт ваг</div>
+								</a>
+															<a href="https://vis.ua/services/tekhnichne-obsluhovuvannia-vah/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Технічне обслуговування ваг </div>
+								</a>
+															<a href="https://vis.ua/services/modernizatsiia-vah/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Модернізація ваг</div>
+								</a>
+												</div>
+							</div>
+						<div class="">
+									<a href="https://vis.ua/catalog/avtomatizacziya-vzveshivanij/" class="popup-welcome-menu-item">
+						Автоматизація зважування					</a>
+													<div class="popup-subcats">
+														<a href="https://vis.ua/catalog/avtomatizacziya-avtomobilnyh-vesov/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title"> Автоматизація автомобільних ваг</div>
+								</a>
+															<a href="https://vis.ua/product/avtomatyzovana-systema-kontroliu-rukhu-produktsii-skrp/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Автоматизована система контролю руху продукції (СКРП)</div>
+								</a>
+															<a href="https://vis.ua/product/tsilodobova-systema-videosposterezhennia-tssv-i-kontrolno-propuskna-systema-kps/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Цілодобова система відеоспостереження (ЦСВ) і контрольно-пропускна система (КПС)</div>
+								</a>
+												</div>
+							</div>
+						<div class="">
+									<a href="https://vis.ua/catalog/prohramne-zabezpechennia-dlia-vah/" class="popup-welcome-menu-item">
+						Програмне забезпечення					</a>
+													<div class="popup-subcats">
+														<a href="https://vis.ua/product/13-programmnoe-obespechenie-arm/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Програмне забезпечення для автомобільних ваг АРМ</div>
+								</a>
+															<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-avtomobilnykh-vah-arm-z-vkladkoiu-laboratoriia/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Програмне забезпечення для автомобільних ваг АРМ з вкладкою “Лабораторія”</div>
+								</a>
+															<a href="https://vis.ua/product/khmarne-prohramne-zabezpechennia-dlia-avtomobilnykh-vah/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Хмарне програмне забезпечення для автомобільних ваг</div>
+								</a>
+															<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vahonnykh-vah-arm/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Програмне забезпечення для вагонних ваг АРМ</div>
+								</a>
+															<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-bunkernykh-vah-arm/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Програмне забезпечення для бункерних ваг АРМ</div>
+								</a>
+															<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-konveiernykh-vah/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Програмне забезпечення для конвеєрних ваг АРМ</div>
+								</a>
+															<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vah-na-frontalnyy-navantazhuvach/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Програмне забезпечення для ваг на фронтальний навантажувач</div>
+								</a>
+															<a href="https://vis.ua/product/prohramne-zabezpechennia-dlia-vah-v-skladskomu-obliku-ta-torhivli/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Програмне забезпечення для ваг в складському обліку та торгівлі</div>
+								</a>
+												</div>
+							</div>
+						<div class="">
+									<a href="https://vis.ua/catalog/oborudovanie-dlia-avtomatizatsii-torgovli/" class="popup-welcome-menu-item">
+						Автоматизація торгівлі					</a>
+													<div class="popup-subcats">
+														<a href="https://vis.ua/catalog/pos-oborudovanie/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">POS-обладнання</div>
+								</a>
+															<a href="https://vis.ua/catalog/kassovoe-oborudovanie/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Касове устаткування</div>
+								</a>
+															<a href="https://vis.ua/catalog/printery-etiketok/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Принтери етикеток</div>
+								</a>
+												</div>
+							</div>
+						<div class="">
+									<a href="https://vis.ua/catalog/rishennya/" class="popup-welcome-menu-item">
+						Рішення					</a>
+													<div class="popup-subcats">
+														<a href="https://vis.ua/product/vahy-konveierni-perevantazhuvach-ovochiv/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги на перевантажувач овочів</div>
+								</a>
+															<a href="https://vis.ua/product/vahy-konveierni-na-drobarku/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги на дробарку</div>
+								</a>
+															<a href="https://vis.ua/product/vahy-dlia-bunkera-perevantazhuvacha-zerna/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Ваги для бункера-перевантажувача зерна</div>
+								</a>
+															<a href="https://vis.ua/product/rishennia-dlia-zvazhuvannia-konteyneriv/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Рішення для зважування контейнерів</div>
+								</a>
+												</div>
+							</div>
+						<div class="">
+									<a href="https://vis.ua/usefull-information/" class="popup-welcome-menu-item">
+						Корисна інформація					</a>
+													<div class="popup-subcats">
+														<a href="https://vis.ua/info/sertyfikaty/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Сертифікати</div>
+								</a>
+															<a href="https://vis.ua/info/korysna-informatsiia-pro-tvaryn/" class="popup-catalog-menu_item">
+									<div class="popup-subitem-title">Корисна інформація про ваги для тварин</div>
+								</a>
+												</div>
+							</div>
+				</div>
+ 
+ 	<div  class="form-message" id="callback" style="display: none">
+	 	<div  class="contactform-wrapper">
+		 	
+<div  class="wpcf7 no-js" id="wpcf7-f14745-o2" lang="ru-RU" dir="ltr" data-wpcf7-id="14745">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/product/vahovyy-avtomobilerozvantazhuvach/#wpcf7-f14745-o2" method="post" class="wpcf7-form init" aria-label="Контактная форма" novalidate="novalidate" data-status="init">
+<fieldset class="hidden-fields-container"><input type="hidden" name="_wpcf7" value="14745" /><input type="hidden" name="_wpcf7_version" value="6.1.6" /><input type="hidden" name="_wpcf7_locale" value="ru_RU" /><input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f14745-o2" /><input type="hidden" name="_wpcf7_container_post" value="0" /><input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+</fieldset>
+<div class="form-block">
+	<p class="title"><br />
+Залиште свій номер телефону<br />
+Наш консультант зв’яжеться з вами найближчим часом
+	</p>
+	<p><span class="wpcf7-form-control-wrap" data-name="tel-349"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel" aria-required="true" aria-invalid="false" placeholder="+38 (0__) ___-__-__*" value="" type="tel" name="tel-349" /></span><br />
+<input class="wpcf7-form-control wpcf7-submit has-spinner vis-btn" type="submit" value="Замовити дзвінок" />
+	</p>
+</div>
+<div class="form-thx">
+</div><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+		</div>
+ 	</div>
+ 	<div  class="form-message" id="order-form" style="display: none">
+	 	<div  class="contactform-wrapper">
+		 	
+<div  class="wpcf7 no-js" id="wpcf7-f241-o3" lang="uk" dir="ltr" data-wpcf7-id="241">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/product/vahovyy-avtomobilerozvantazhuvach/#wpcf7-f241-o3" method="post" class="wpcf7-form init" aria-label="Контактна форма" novalidate="novalidate" data-status="init">
+<fieldset class="hidden-fields-container"><input type="hidden" name="_wpcf7" value="241" /><input type="hidden" name="_wpcf7_version" value="6.1.6" /><input type="hidden" name="_wpcf7_locale" value="uk" /><input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f241-o3" /><input type="hidden" name="_wpcf7_container_post" value="0" /><input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+</fieldset>
+<p><label><span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" autocomplete="name" aria-required="true" aria-invalid="false" placeholder="Ваше ім&#039;я*" value="" type="text" name="your-name" /></span></label>
+</p>
+<p><span class="wpcf7-form-control-wrap" data-name="your-phone"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel" aria-required="true" aria-invalid="false" placeholder="Ваш телефон*" value="" type="tel" name="your-phone" /></span>
+</p>
+<p><label><span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-text wpcf7-validates-as-email" autocomplete="email" aria-invalid="false" placeholder="Ваш email" value="" type="email" name="your-email" /></span></label>
+</p>
+<p><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="Зв&#039;язатися з нами" />
+</p><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+		</div>
+ 	</div>
+ 	<div  class="form-message" id="order-form-service" style="display: none">
+	 	<div  class="contactform-wrapper">
+		 	
+<div  class="wpcf7 no-js" id="wpcf7-f241-o4" lang="uk" dir="ltr" data-wpcf7-id="241">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/product/vahovyy-avtomobilerozvantazhuvach/#wpcf7-f241-o4" method="post" class="wpcf7-form init" aria-label="Контактна форма" novalidate="novalidate" data-status="init">
+<fieldset class="hidden-fields-container"><input type="hidden" name="_wpcf7" value="241" /><input type="hidden" name="_wpcf7_version" value="6.1.6" /><input type="hidden" name="_wpcf7_locale" value="uk" /><input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f241-o4" /><input type="hidden" name="_wpcf7_container_post" value="0" /><input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+</fieldset>
+<p><label><span class="wpcf7-form-control-wrap" data-name="your-name"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" autocomplete="name" aria-required="true" aria-invalid="false" placeholder="Ваше ім&#039;я*" value="" type="text" name="your-name" /></span></label>
+</p>
+<p><span class="wpcf7-form-control-wrap" data-name="your-phone"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel" aria-required="true" aria-invalid="false" placeholder="Ваш телефон*" value="" type="tel" name="your-phone" /></span>
+</p>
+<p><label><span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-text wpcf7-validates-as-email" autocomplete="email" aria-invalid="false" placeholder="Ваш email" value="" type="email" name="your-email" /></span></label>
+</p>
+<p><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="Зв&#039;язатися з нами" />
+</p><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+		</div>
+ 	</div>
+ 	
+		<footer class="footer-area" id="contact" >
+			<div  class="scrolltop"></div>
+			<div  class="footer-inner">
+				<div class="general-footer" >
+					<div class="container">
+						<div class="footer-row">
+							<div class="footer-col address-col">
+								<div id="text-5" class="widget widget_text"><div class="widgettitle">Адреса та график</div>			<div class="textwidget"><ul>
+<li class="location-icon footer-icon"><a href="https://www.google.com/maps/place/%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82+%D0%A1%D0%BB%D0%BE%D0%B1%D0%BE%D0%B6%D0%B0%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B9,+29,+%D0%94%D0%BD%D1%96%D0%BF%D1%80%D0%BE,+%D0%94%D0%BD%D1%96%D0%BF%D1%80%D0%BE%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+49000/@48.4983429,35.0651872,17z/data=!3m1!4b1!4m6!3m5!1s0x40d958796dab32c5:0x55029321bec6bee0!8m2!3d48.4983429!4d35.0673759!16s%2Fg%2F1vxfypks" target="_blank" rel="noopener">м.Дніпро, пр. Слобожанський 29</a></li>
+<li class="clock-icon footer-icon">пн-пт 8:00 &#8211; 17:00</li>
+<li class="service-icon footer-icon"><a href="https://vis.ua/service/01-servisnaya-sluzhba-goryachaya-liniya/">Сервісні центри по Україні</a></li>
+</ul>
+</div>
+		</div>																									<div class="widget social-menu">
+										<div class="widgettitle">Соціальні мережі</div>
+										<div class="socials-wrapper d-flex flex-row">
+												<a href="https://www.facebook.com/vesyvis/" class="footer-social-btn" target="_blank"><?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;fill:#215A8D;}
+	.st1{display:none;}
+	.st2{display:inline;fill:url(#SVGID_1_);}
+	.st3{display:inline;}
+	.st4{fill:#FFFFFF;}
+	.st5{display:inline;fill:#E63033;}
+	.st6{display:inline;fill:#FFFFFF;}
+	.st7{fill:#2773B9;}
+</style>
+<path class="st0" d="M260.68,481.02c-25.77,0.67-51.04-2.38-75.79-9.79c-27.93-8.37-53.3-21.72-76.15-39.68	c-23.7-18.63-42.77-41.34-57.65-67.6c-12.62-22.26-20.94-46.05-25.82-71.07c-3.88-19.89-4.5-40.17-2.87-60.18	c3.62-44.33,18.8-84.58,45.92-120.17c30.15-39.56,68.98-66.62,116.4-81.29c14.83-4.59,30.06-7.26,45.61-8.69	c12.77-1.17,25.57-1.5,38.18-0.54c39.64,3.01,76.45,15.26,109.54,37.56c51.93,35.01,84.67,83.3,98.28,144.4	c2.68,12.06,3.79,24.39,4.39,36.81c2.2,45.28-8.25,87.37-31.05,126.37c-25.48,43.6-61.74,75.18-108.01,95.31	c-4.5,1.96-9.08,3.71-13.63,5.57c-0.01-44.51-0.01-89.02-0.01-133.53c0-2.53-0.84-5.26,3.63-5.24c13.35,0.04,26.7-0.33,40.06-0.54	c3.75-0.06,8.06,2.33,11.1-0.15c3.03-2.47,1.79-7.12,2.31-10.82c2.26-16.16,4.31-32.36,6.59-48.52c0.55-3.91-0.56-5.15-4.64-5.11	c-18.27,0.2-36.54,0.02-54.81,0.13c-3.07,0.02-4.38-0.63-4.33-4.08c0.2-13.78-0.15-27.57,0.21-41.35	c0.18-6.79,1.69-13.44,6.84-18.62c6.9-6.93,15.81-7.75,24.77-7.98c10.29-0.27,20.59-0.12,30.89-0.05c2.68,0.02,4.27-0.3,4.24-3.69	c-0.14-17.44-0.08-34.88-0.02-52.31c0.01-2.16-0.48-3.45-2.95-3.52c-22.45-0.64-44.9-4.13-67.33-0.07	c-16.87,3.05-31.56,10.21-43.21,23.11c-13.01,14.4-18.43,31.75-19.91,50.65c-1.39,17.73-0.63,35.5-0.61,53.26	c0,3.92-1.26,4.71-4.82,4.67c-15.28-0.16-30.56,0-45.84-0.14c-3.38-0.03-4.46,1.01-4.8,4.48c-0.51,5.13,0.05,10.17,0.1,15.25	c0.1,12.12,0.03,24.25,0.03,36.37c0,8.48,0,8.36,8.28,8.5c14.26,0.24,28.53-0.58,42.79,0.42c3.62,0.25,4.24,1.64,4.23,4.87	C260.7,383.03,260.71,432.02,260.68,481.02z"/>
+<g class="st1">
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="47.86" y1="80.0772" x2="493.8406" y2="456.7505">
+		<stop  offset="1.104800e-03" style="stop-color:#FFE088"/>
+		<stop  offset="0.2094" style="stop-color:#FAB744"/>
+		<stop  offset="0.3765" style="stop-color:#EA5578"/>
+		<stop  offset="0.5238" style="stop-color:#E93E8F"/>
+		<stop  offset="0.7394" style="stop-color:#7C4997"/>
+		<stop  offset="1" style="stop-color:#4F53A0"/>
+	</linearGradient>
+	<circle class="st2" cx="256.78" cy="256.53" r="223.03"/>
+	<g class="st3">
+		<g>
+			<path class="st4" d="M326.01,172.16c-8.47,0-15.33,6.86-15.33,15.33c0,8.47,6.86,15.33,15.33,15.33				c8.47,0,15.33-6.86,15.33-15.33C341.34,179.02,334.48,172.16,326.01,172.16z"/>
+			<path class="st4" d="M257.85,191.82c-35.51,0-64.4,28.89-64.4,64.4c0,35.51,28.89,64.4,64.4,64.4s64.4-28.89,64.4-64.4				C322.25,220.7,293.36,191.82,257.85,191.82z M257.85,297.47c-22.75,0-41.25-18.51-41.25-41.25c0-22.75,18.51-41.25,41.25-41.25				c22.75,0,41.25,18.5,41.25,41.25C299.1,278.96,280.6,297.47,257.85,297.47z"/>
+			<path class="st4" d="M308.98,386.97h-104.4c-43.31,0-78.55-35.24-78.55-78.55V204.01c0-43.31,35.24-78.55,78.55-78.55h104.4				c43.31,0,78.55,35.24,78.55,78.55v104.41C387.53,351.73,352.29,386.97,308.98,386.97z M204.57,150.07				c-29.75,0-53.95,24.2-53.95,53.95v104.41c0,29.75,24.2,53.95,53.95,53.95h104.4c29.75,0,53.95-24.2,53.95-53.95V204.01				c0-29.75-24.2-53.95-53.95-53.95H204.57z"/>
+		</g>
+	</g>
+</g>
+<g class="st1">
+	<circle class="st5" cx="258.09" cy="256.18" r="222.93"/>
+	<path class="st6" d="M377.44,224.33c0-29.56-23.97-53.53-53.53-53.53H187.02c-29.56,0-53.53,23.97-53.53,53.53v63.7		c0,29.57,23.97,53.53,53.53,53.53h136.89c29.56,0,53.53-23.97,53.53-53.53V224.33z M296.94,260.95l-61.38,30.37		c-2.41,1.3-10.58-0.44-10.58-3.18v-62.34c0-2.77,8.24-4.51,10.65-3.14l58.76,31.97C296.84,256.04,299.43,259.6,296.94,260.95z"/>
+</g>
+<g>
+	<g>
+		<path class="st7" d="M481.38,256.53c0-123.18-99.86-223.03-223.03-223.03S35.31,133.35,35.31,256.53			c0,111.32,81.56,203.59,188.19,220.32V321h-56.63v-64.47h56.63v-49.14c0-55.9,33.3-86.77,84.24-86.77			c24.4,0,49.93,4.36,49.93,4.36v54.89h-28.13c-27.71,0-36.35,17.19-36.35,34.83v41.84h61.86L345.16,321h-51.97v155.85			C399.82,460.12,481.38,367.85,481.38,256.53z"/>
+		<path class="st4" d="M345.16,321l9.89-64.47h-61.86v-41.84c0-17.64,8.64-34.83,36.35-34.83h28.13v-54.89			c0,0-25.52-4.36-49.93-4.36c-50.95,0-84.24,30.88-84.24,86.77v49.14h-56.63V321h56.63v155.85c11.35,1.78,22.99,2.71,34.85,2.71			s23.49-0.93,34.85-2.71V321H345.16z"/>
+	</g>
+</g>
+</svg>
+</a><a href="https://www.youtube.com/channel/UCoj_FkPQcHxPcs91t_DpfUQ" class="footer-social-btn" target="_blank"><?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;fill:#215A8D;}
+	.st1{display:none;}
+	.st2{display:inline;fill:url(#SVGID_1_);}
+	.st3{display:inline;}
+	.st4{fill:#FFFFFF;}
+	.st5{fill:#E63033;}
+</style>
+<path class="st0" d="M260.68,481.02c-25.77,0.67-51.04-2.38-75.79-9.79c-27.93-8.37-53.3-21.72-76.15-39.68	c-23.7-18.63-42.77-41.34-57.65-67.6c-12.62-22.26-20.94-46.05-25.82-71.07c-3.88-19.89-4.5-40.17-2.87-60.18	c3.62-44.33,18.8-84.58,45.92-120.17c30.15-39.56,68.98-66.62,116.4-81.29c14.83-4.59,30.06-7.26,45.61-8.69	c12.77-1.17,25.57-1.5,38.18-0.54c39.64,3.01,76.45,15.26,109.54,37.56c51.93,35.01,84.67,83.3,98.28,144.4	c2.68,12.06,3.79,24.39,4.39,36.81c2.2,45.28-8.25,87.37-31.05,126.37c-25.48,43.6-61.74,75.18-108.01,95.31	c-4.5,1.96-9.08,3.71-13.63,5.57c-0.01-44.51-0.01-89.02-0.01-133.53c0-2.53-0.84-5.26,3.63-5.24c13.35,0.04,26.7-0.33,40.06-0.54	c3.75-0.06,8.06,2.33,11.1-0.15c3.03-2.47,1.79-7.12,2.31-10.82c2.26-16.16,4.31-32.36,6.59-48.52c0.55-3.91-0.56-5.15-4.64-5.11	c-18.27,0.2-36.54,0.02-54.81,0.13c-3.07,0.02-4.38-0.63-4.33-4.08c0.2-13.78-0.15-27.57,0.21-41.35	c0.18-6.79,1.69-13.44,6.84-18.62c6.9-6.93,15.81-7.75,24.77-7.98c10.29-0.27,20.59-0.12,30.89-0.05c2.68,0.02,4.27-0.3,4.24-3.69	c-0.14-17.44-0.08-34.88-0.02-52.31c0.01-2.16-0.48-3.45-2.95-3.52c-22.45-0.64-44.9-4.13-67.33-0.07	c-16.87,3.05-31.56,10.21-43.21,23.11c-13.01,14.4-18.43,31.75-19.91,50.65c-1.39,17.73-0.63,35.5-0.61,53.26	c0,3.92-1.26,4.71-4.82,4.67c-15.28-0.16-30.56,0-45.84-0.14c-3.38-0.03-4.46,1.01-4.8,4.48c-0.51,5.13,0.05,10.17,0.1,15.25	c0.1,12.12,0.03,24.25,0.03,36.37c0,8.48,0,8.36,8.28,8.5c14.26,0.24,28.53-0.58,42.79,0.42c3.62,0.25,4.24,1.64,4.23,4.87	C260.7,383.03,260.71,432.02,260.68,481.02z"/>
+<g class="st1">
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="47.86" y1="80.0772" x2="493.8406" y2="456.7505">
+		<stop  offset="1.104800e-03" style="stop-color:#FFE088"/>
+		<stop  offset="0.2094" style="stop-color:#FAB744"/>
+		<stop  offset="0.3765" style="stop-color:#EA5578"/>
+		<stop  offset="0.5238" style="stop-color:#E93E8F"/>
+		<stop  offset="0.7394" style="stop-color:#7C4997"/>
+		<stop  offset="1" style="stop-color:#4F53A0"/>
+	</linearGradient>
+	<circle class="st2" cx="256.78" cy="256.53" r="223.03"/>
+	<g class="st3">
+		<g>
+			<path class="st4" d="M326.01,172.16c-8.47,0-15.33,6.86-15.33,15.33c0,8.47,6.86,15.33,15.33,15.33				c8.47,0,15.33-6.86,15.33-15.33C341.34,179.02,334.48,172.16,326.01,172.16z"/>
+			<path class="st4" d="M257.85,191.82c-35.51,0-64.4,28.89-64.4,64.4c0,35.51,28.89,64.4,64.4,64.4s64.4-28.89,64.4-64.4				C322.25,220.7,293.36,191.82,257.85,191.82z M257.85,297.47c-22.75,0-41.25-18.51-41.25-41.25c0-22.75,18.51-41.25,41.25-41.25				c22.75,0,41.25,18.5,41.25,41.25C299.1,278.96,280.6,297.47,257.85,297.47z"/>
+			<path class="st4" d="M308.98,386.97h-104.4c-43.31,0-78.55-35.24-78.55-78.55V204.01c0-43.31,35.24-78.55,78.55-78.55h104.4				c43.31,0,78.55,35.24,78.55,78.55v104.41C387.53,351.73,352.29,386.97,308.98,386.97z M204.57,150.07				c-29.75,0-53.95,24.2-53.95,53.95v104.41c0,29.75,24.2,53.95,53.95,53.95h104.4c29.75,0,53.95-24.2,53.95-53.95V204.01				c0-29.75-24.2-53.95-53.95-53.95H204.57z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<circle class="st5" cx="258.09" cy="256.18" r="222.93"/>
+	<path class="st4" d="M377.44,224.33c0-29.56-23.97-53.53-53.53-53.53H187.02c-29.56,0-53.53,23.97-53.53,53.53v63.7		c0,29.57,23.97,53.53,53.53,53.53h136.89c29.56,0,53.53-23.97,53.53-53.53V224.33z M296.94,260.95l-61.38,30.37		c-2.41,1.3-10.58-0.44-10.58-3.18v-62.34c0-2.77,8.24-4.51,10.65-3.14l58.76,31.97C296.84,256.04,299.43,259.6,296.94,260.95z"/>
+</g>
+</svg>
+</a><a href="https://www.instagram.com/vagy.vis/" class="footer-social-btn" target="_blank"><?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;fill:#215A8D;}
+	.st1{display:none;}
+	.st2{display:inline;fill:#E32D27;}
+	.st3{fill:url(#SVGID_1_);}
+	.st4{fill:#FFFFFF;}
+</style>
+<path class="st0" d="M260.68,481.02c-25.77,0.67-51.04-2.38-75.79-9.79c-27.93-8.37-53.3-21.72-76.15-39.68	c-23.7-18.63-42.77-41.34-57.65-67.6c-12.62-22.26-20.94-46.05-25.82-71.07c-3.88-19.89-4.5-40.17-2.87-60.18	c3.62-44.33,18.8-84.58,45.92-120.17c30.15-39.56,68.98-66.62,116.4-81.29c14.83-4.59,30.06-7.26,45.61-8.69	c12.77-1.17,25.57-1.5,38.18-0.54c39.64,3.01,76.45,15.26,109.54,37.56c51.93,35.01,84.67,83.3,98.28,144.4	c2.68,12.06,3.79,24.39,4.39,36.81c2.2,45.28-8.25,87.37-31.05,126.37c-25.48,43.6-61.74,75.18-108.01,95.31	c-4.5,1.96-9.08,3.71-13.63,5.57c-0.01-44.51-0.01-89.02-0.01-133.53c0-2.53-0.84-5.26,3.63-5.24c13.35,0.04,26.7-0.33,40.06-0.54	c3.75-0.06,8.06,2.33,11.1-0.15c3.03-2.47,1.79-7.12,2.31-10.82c2.26-16.16,4.31-32.36,6.59-48.52c0.55-3.91-0.56-5.15-4.64-5.11	c-18.27,0.2-36.54,0.02-54.81,0.13c-3.07,0.02-4.38-0.63-4.33-4.08c0.2-13.78-0.15-27.57,0.21-41.35	c0.18-6.79,1.69-13.44,6.84-18.62c6.9-6.93,15.81-7.75,24.77-7.98c10.29-0.27,20.59-0.12,30.89-0.05c2.68,0.02,4.27-0.3,4.24-3.69	c-0.14-17.44-0.08-34.88-0.02-52.31c0.01-2.16-0.48-3.45-2.95-3.52c-22.45-0.64-44.9-4.13-67.33-0.07	c-16.87,3.05-31.56,10.21-43.21,23.11c-13.01,14.4-18.43,31.75-19.91,50.65c-1.39,17.73-0.63,35.5-0.61,53.26	c0,3.92-1.26,4.71-4.82,4.67c-15.28-0.16-30.56,0-45.84-0.14c-3.38-0.03-4.46,1.01-4.8,4.48c-0.51,5.13,0.05,10.17,0.1,15.25	c0.1,12.12,0.03,24.25,0.03,36.37c0,8.48,0,8.36,8.28,8.5c14.26,0.24,28.53-0.58,42.79,0.42c3.62,0.25,4.24,1.64,4.23,4.87	C260.7,383.03,260.71,432.02,260.68,481.02z"/>
+<g class="st1">
+	<path class="st2" d="M211.08,198.23c-0.01,33.15,0.03,66.3-0.06,99.45c-0.01,3.51,1.24,2.72,3.31,1.65		c16.22-8.46,32.48-16.86,48.72-25.28c16.24-8.41,32.47-16.83,49.21-25.51c-33.76-17.62-67.07-35.02-100.94-52.7		C211.2,197,211.09,197.61,211.08,198.23z"/>
+	<path class="st2" d="M251.28,21.55C124.4,21.55,21.55,124.4,21.55,251.28S124.4,481.01,251.28,481.01s229.73-102.86,229.73-229.73		S378.16,21.55,251.28,21.55z M396.5,297.14c-0.72,7.64-1.77,15.24-3.6,22.7c-4.69,19.12-18.66,29.49-40.43,31.46		c-45.19,4.08-90.46,3.06-135.72,3.02c-24.07-0.02-48.12-1-72.05-3.73c-18.67-2.13-31.64-14.11-35.53-32.57		c-3.53-16.76-4.53-33.75-4.61-50.81c-0.1-20.55-0.56-41.11,1.47-61.61c0.74-7.51,1.77-14.98,3.49-22.33		c4.56-19.35,18.47-30.05,39.99-31.98c33.87-3.04,67.81-3.3,101.76-3.17c27.58-0.08,55.17-0.17,82.7,1.71		c9.21,0.63,18.47,1.15,27.56,2.6c17.23,2.76,28.98,15.92,32.57,35.31c2.43,13.09,3.52,26.31,3.71,39.57		C398.15,250.61,398.68,273.9,396.5,297.14z"/>
+</g>
+<g>
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="47.86" y1="80.0772" x2="493.8406" y2="456.7505">
+		<stop  offset="1.104800e-03" style="stop-color:#FFE088"/>
+		<stop  offset="0.2094" style="stop-color:#FAB744"/>
+		<stop  offset="0.3765" style="stop-color:#EA5578"/>
+		<stop  offset="0.5238" style="stop-color:#E93E8F"/>
+		<stop  offset="0.7394" style="stop-color:#7C4997"/>
+		<stop  offset="1" style="stop-color:#4F53A0"/>
+	</linearGradient>
+	<circle class="st3" cx="256.78" cy="256.53" r="223.03"/>
+	<g>
+		<g>
+			<path class="st4" d="M326.01,172.16c-8.47,0-15.33,6.86-15.33,15.33c0,8.47,6.86,15.33,15.33,15.33				c8.47,0,15.33-6.86,15.33-15.33C341.34,179.02,334.48,172.16,326.01,172.16z"/>
+			<path class="st4" d="M257.85,191.82c-35.51,0-64.4,28.89-64.4,64.4c0,35.51,28.89,64.4,64.4,64.4s64.4-28.89,64.4-64.4				C322.25,220.7,293.36,191.82,257.85,191.82z M257.85,297.47c-22.75,0-41.25-18.51-41.25-41.25c0-22.75,18.51-41.25,41.25-41.25				c22.75,0,41.25,18.5,41.25,41.25C299.1,278.96,280.6,297.47,257.85,297.47z"/>
+			<path class="st4" d="M308.98,386.97h-104.4c-43.31,0-78.55-35.24-78.55-78.55V204.01c0-43.31,35.24-78.55,78.55-78.55h104.4				c43.31,0,78.55,35.24,78.55,78.55v104.41C387.53,351.73,352.29,386.97,308.98,386.97z M204.57,150.07				c-29.75,0-53.95,24.2-53.95,53.95v104.41c0,29.75,24.2,53.95,53.95,53.95h104.4c29.75,0,53.95-24.2,53.95-53.95V204.01				c0-29.75-24.2-53.95-53.95-53.95H204.57z"/>
+		</g>
+	</g>
+</g>
+</svg>
+</a>										</div>
+									</div>
+															</div>
+							<div class="col-divider"></div>
+							<nav class="footer-col menu-col">
+								<div id="nav_menu-29" class="widget widget_nav_menu"><div class="widgettitle">Ваги</div><div class="menu-footer-menu-ua-vahy-container"><ul id="menu-footer-menu-ua-vahy" class="menu"><li id="menu-item-29094" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29094 nav-item"><a href="/catalog/01-car-scales/" class="nav-link">Автомобільні</a></li>
+<li id="menu-item-29095" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29095 nav-item"><a href="/catalog/bunkernye-vesovye-dozatory/" class="nav-link">Бункерні</a></li>
+<li id="menu-item-29096" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29096 nav-item"><a href="/catalog/04-vesyi-kranovyie-ukraina/" class="nav-link">Кранові</a></li>
+<li id="menu-item-29097" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29097 nav-item"><a href="/catalog/platformennye-vesy/" class="nav-link">Платформні</a></li>
+<li id="menu-item-29098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29098 nav-item"><a href="/catalog/05-vesy-laboratornyie-electronnye/" class="nav-link">Лабораторні</a></li>
+</ul></div></div>							</nav>
+							<div class="col-divider"></div>
+							<div class="footer-col menu-col">
+								<div id="nav_menu-31" class="widget widget_nav_menu"><div class="widgettitle">Послуги</div><div class="menu-footer-menu-ua-posluhy-container"><ul id="menu-footer-menu-ua-posluhy" class="menu"><li id="menu-item-37896" class="menu-item menu-item-type-taxonomy menu-item-object-product_cats menu-item-37896 nav-item"><a href="https://vis.ua/catalog/avtomatizacziya-vzveshivanij/" class="nav-link">Автоматизація</a></li>
+<li id="menu-item-37906" class="menu-item menu-item-type-taxonomy menu-item-object-service_cats menu-item-37906 nav-item"><a href="https://vis.ua/services/remont-vah/" class="nav-link">Ремонт ваг</a></li>
+<li id="menu-item-37897" class="menu-item menu-item-type-taxonomy menu-item-object-service_cats menu-item-37897 nav-item"><a href="https://vis.ua/services/povirka-ta-kalibruvannia-vahovoho-obladnannia/" class="nav-link">Повірка</a></li>
+<li id="menu-item-37907" class="menu-item menu-item-type-taxonomy menu-item-object-service_cats menu-item-37907 nav-item"><a href="https://vis.ua/services/modernizatsiia-vah/" class="nav-link">Модернізація ваг</a></li>
+<li id="menu-item-37908" class="menu-item menu-item-type-taxonomy menu-item-object-service_cats menu-item-37908 nav-item"><a href="https://vis.ua/services/orenda-vah/" class="nav-link">Оренда ваг</a></li>
+</ul></div></div>							</div>
+							<div class="col-divider"></div>
+							<div class="footer-col contact-col">
+								<div id="text-8" class="widget widget_text"><div class="widgettitle">Зв’яжіться з нами</div>			<div class="textwidget"><p>Ви можете написати нам лист <a href="mailto:sales@vis.ua">sales@vis.ua</a> або  зателефонувати за номером</p>
+<p><a href="tel:+380676116240">+38 067 611 62 40</a></p>
+</div>
+		</div>							</div>
+							
+							
+							
+						</div>
+					</div>
+				</div>
+				<div  class="footer-divider"></div>
+				<div  class="sub-footer">
+					<div class="container">
+						<div class="copyright text-end">
+														vis.ua©2026. All right reserved						</div>
+					</div>
+				</div>
+				
+				
+
+			</div>
+			
+		</footer>
+
+	<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/vis/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+        <script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+            var mapping = [];
+                        for(var index in mapping){
+                $( 'input[Name='+mapping[index].key+']' ).val(mapping[index].value);
+            }
+        });</script>
+		<script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+(function() {
+				var expirationDate = new Date();
+				expirationDate.setTime( expirationDate.getTime() + 31536000 * 1000 );
+				document.cookie = "pll_language=ua; expires=" + expirationDate.toUTCString() + "; path=/; secure; SameSite=Lax";
+			}());
+
+</script>
+<script type="text/rocketlazyloadscript" id="jquery-js" defer data-rocket-src="https://vis.ua/wp-content/themes/vis/js/jquery-3.6.1.min.js?ver=3.6.1"></script>
+<script type="text/rocketlazyloadscript" id="script-bootstrap-js" defer data-rocket-src="https://vis.ua/wp-content/themes/vis/js/bootstrap.min.js?ver=7.0.2"></script>
+<script type="text/rocketlazyloadscript" id="script-slick-js" defer data-rocket-src="https://vis.ua/wp-content/themes/vis/js/slick.min.js?ver=7.0.2"></script>
+<script type="text/rocketlazyloadscript" id="script-revealator-js" defer data-rocket-src="https://vis.ua/wp-content/themes/vis/js/fm.revealator.jquery.min.js?ver=7.0.2"></script>
+<script type="text/rocketlazyloadscript" id="script-fancy-js" defer data-rocket-src="https://vis.ua/wp-content/themes/vis/js/jquery.fancybox.min.js?ver=7.0.2"></script>
+<script id="script-custom-js-extra">
+var loadmore_params = {"ajaxurl":"https://vis.ua/wp-admin/admin-ajax.php"};
+//# sourceURL=script-custom-js-extra
+</script>
+<script type="text/rocketlazyloadscript" data-minify="1" id="script-custom-js" defer data-rocket-src="https://vis.ua/wp-content/cache/min/1/wp-content/themes/vis/js/scripts.js?ver=1790329280"></script>
+<script type="text/rocketlazyloadscript" id="wp-hooks-js" data-rocket-src="https://vis.ua/wp-includes/js/dist/hooks.min.js?ver=7496969728ca0f95732d"></script>
+<script type="text/rocketlazyloadscript" id="wp-i18n-js" data-rocket-src="https://vis.ua/wp-includes/js/dist/i18n.min.js?ver=781d11515ad3d91786ec"></script>
+<script type="text/rocketlazyloadscript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script type="text/rocketlazyloadscript" data-minify="1" id="swv-js" data-rocket-src="https://vis.ua/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=1790329280" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="contact-form-7-js-translations">
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "contact-form-7", {"translation-revision-date":"2025-12-27 13:54:22+0000","generator":"GlotPress\/4.0.3","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural-forms":"nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);","lang":"uk_UA"},"This contact form is placed in the wrong place.":["\u0426\u044f \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u043d\u0430 \u0444\u043e\u0440\u043c\u0430 \u0440\u043e\u0437\u043c\u0456\u0449\u0435\u043d\u0430 \u0432 \u043d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e\u043c\u0443 \u043c\u0456\u0441\u0446\u0456."],"Error:":["\u041f\u043e\u043c\u0438\u043b\u043a\u0430:"]}},"comment":{"reference":"includes\/js\/index.js"}} );
+//# sourceURL=contact-form-7-js-translations
+</script>
+<script type="text/rocketlazyloadscript" id="contact-form-7-js-before">
+var wpcf7 = {
+    "api": {
+        "root": "https:\/\/vis.ua\/wp-json\/",
+        "namespace": "contact-form-7\/v1"
+    },
+    "cached": 1
+};
+//# sourceURL=contact-form-7-js-before
+</script>
+<script type="text/rocketlazyloadscript" data-minify="1" id="contact-form-7-js" data-rocket-src="https://vis.ua/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1790329280" data-rocket-defer defer></script>
+	<script type="text/rocketlazyloadscript" data-no-optimize="1">
+		(function() {
+			var gtmLoaded = false;
+	
+			function loadGTM() {
+				if (gtmLoaded) return;
+				gtmLoaded = true;
+	
+				(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+				})(window,document,'script','dataLayer','GTM-TXVCQPF');
+			}
+	
+			['mousemove','touchstart','scroll','keydown'].forEach(function(evt) {
+				window.addEventListener(evt, loadGTM, { once: true, passive: true });
+			});
+			setTimeout(loadGTM, 5500);
+		})();
+	</script>
+	<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://vis.ua/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script>	<style>
+		.video-container {
+			position: relative;
+			width: 100%;
+			aspect-ratio: 16/9;
+			overflow: hidden;
+			max-width: 700px;
+			margin-top: 40px;
+			margin-bottom: 40px;
+		}
+		
+		.video-container iframe {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
+		.footer-row {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			row-gap: 50px;
+		}
+		.footer-row > * {
+			flex: 0 0 auto;
+		}
+		.col-divider {
+			border-left: 2px solid #D9D9D999;
+			margin: 0 20px;
+		}
+		footer .contact-col .widget {
+			background-color: #E4F3FC;
+			padding: 40px 35px;
+			border-radius: 25px;
+			max-width: 365px;
+		}
+		
+		footer .contact-col .widget a[href^="mailto:"] {
+			color: #004D93;
+		}
+		footer .contact-col .widget a[href^="tel:"] {
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #004D93;
+			border-radius: 14px;
+			padding: 20px;
+			margin-top: 36px;
+		}
+		
+		@media (max-width: 990px) {
+			.col-divider {
+				display: none;
+			}
+			.footer-row > * {
+				flex: 0 0 100%;
+			}
+			.footer-row > .menu-col {
+				order: 1;
+				flex: 0 0 50%;
+			}
+			.contact-col {
+				order: 3;
+			}
+			
+			.address-col {
+				order: 4;
+			}
+			.footer-row .widget.widget_text, .footer-row .widget.widget_nav_menu, .first-col .textwidget ul, .footer-row .widget *:not(.widgettitle) {
+				margin: unset;
+			}
+			.footer-row .widget ul li {
+				margin-bottom: 16px !important;
+			}
+			.social-menu {
+				margin-top: 50px;
+			}
+		}
+		
+	</style>
+	<script type="text/rocketlazyloadscript">
+	document.addEventListener('DOMContentLoaded', function() {
+		document.querySelectorAll('.about-block-inner iframe').forEach(function(iframe) {
+			if (iframe.closest('.video-container')) {
+				return;
+			}
+	
+			var wrapper = document.createElement('div');
+			wrapper.className = 'video-container';
+	
+			iframe.parentNode.insertBefore(wrapper, iframe);
+			wrapper.appendChild(iframe);
+		});
+	});
+	</script>
+	
+		
+	
+	
+	</body>
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->

@@ -1,0 +1,38 @@
+{
+  "id": "rec_14d165d6",
+  "subject": "Норма: ВНТП 05-88 (хлібоприймальні підприємства й елеватори)",
+  "kind": "norm",
+  "claim": {
+    "name": "dryer_bins_by_capacity",
+    "value": {
+      "50 пл.т/ч": {
+        "operative_t": 400,
+        "accumulation_t": 5000
+      },
+      "100 пл.т/ч": {
+        "operative_t": 800,
+        "accumulation_t": 10000
+      },
+      "25-32 пл.т/ч": {
+        "operative_t": 250,
+        "accumulation_t": 3000
+      }
+    },
+    "unit": "t",
+    "qualifier": "табл. Т-7.5: оперативна / накопичувальна ємність на одну сушарку"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://library.nadzor-info.ru/doc/141097",
+    "path": "inbox/raw/web/library.nadzor-info.ru/doc141097.html",
+    "page": null,
+    "quote": "Вместимость накопительной емкости принимать из расчета работы зерносушилок не менее 3-х суток",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "ВНТП 05-88 — союзна відомча норма 1988 р. Прямо чинною в Україні не є, але на неї посилаються українські виробники (KMZ, стаття про хопери) як на «Норми технологічного проектування». Сучасного українського ВНТП для елеваторів не знайдено. ",
+  "seen_in": []
+}

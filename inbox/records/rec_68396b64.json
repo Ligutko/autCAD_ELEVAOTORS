@@ -1,0 +1,25 @@
+{
+  "id": "rec_68396b64",
+  "subject": "Аналог: елеватор с. Біловод (Сумська обл.), ОВНС 69-17 (EIB)",
+  "kind": "attribute",
+  "claim": {
+    "name": "control_room",
+    "value": "керування технологічними операціями дистанційне, централізоване, з операторської; лабораторія з автоваговою і пробовідбірником",
+    "unit": "",
+    "qualifier": "де керування і лабораторія"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.eib.org/attachments/registers/86543276.pdf",
+    "path": "inbox/raw/web/eib.org/eib_86543276.pdf",
+    "page": null,
+    "quote": "Управління  технологічними операціями дистанційне, централізоване і здійснюється з операторської.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

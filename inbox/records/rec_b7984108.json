@@ -1,0 +1,33 @@
+{
+  "id": "rec_b7984108",
+  "subject": "Силоси «2», «3» Ø≈8,55 (існуючі)",
+  "kind": "dimension",
+  "claim": {
+    "name": "height_volume_estimate",
+    "value": {
+      "eave_h_m": [
+        10.9,
+        11.8
+      ],
+      "V_m3_at_11_52": 661,
+      "t_wheat": 496,
+      "type": "плоскодонні, ≈12–13 кілець по 0,91 м"
+    },
+    "unit": "m",
+    "qualifier": "висота стінки, об'єм за оцінкою 11,52 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "http://silopro.com/doc/flat_bottom_silo_technical.pdf",
+    "path": "inbox/raw/web/silopro.com/flat_bottom_silo_technical.pdf",
+    "page": null,
+    "quote": "SP-082312 8,23 12 10,92 13,30 623",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "V = π·8,55²/4 × 11,52 = 661 м³ ≈ 496 т пшениці (0,75 т/м³). Аналоги: SiloPro Ø8,23 12 кілець — карниз 10,92, повна висота 13,30, 623 м³; Ø9,14 — 774 м³. Висота 11,52 з попередньої оцінки лежить між 12 і 13 кільцями, тобто реалістична. Плоске дно — за ознаками креслення: кільце анкерів R 4,69 (20 шт., по одному на ребро) і коло цоколя R 5,09, опор-«ніжок» конусного силоса немає; T2 виходить із центра силоса «2» — центральний випуск у підлоговий конвеєр.",
+  "seen_in": []
+}

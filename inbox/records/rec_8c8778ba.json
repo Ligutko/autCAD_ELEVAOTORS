@@ -1,0 +1,30 @@
+{
+  "id": "rec_8c8778ba",
+  "subject": "Аналог Лубнимаш: елеватор ТОВ «Карлівське СГП «ЛОС» (Полтавська обл.)",
+  "kind": "dimension",
+  "claim": {
+    "name": "dryer_daily_output",
+    "value": {
+      "moisture_upto_18_t_day": 1000,
+      "moisture_22_23_t_day": 500
+    },
+    "unit": "t/day",
+    "qualifier": "фактична добова продуктивність сушарки 50 т/год за словами експлуатанта"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/novosti/sushypro100-yakisne-elevatorne-obladnannya-yak-osnova-efektyvnosti-pidpryyemstva/",
+    "path": "inbox/raw/web/lubnymash.com/post_sushypro100.html",
+    "page": null,
+    "quote": "Якщо зерно має вологість до 18%, то за добу можна висушити 1 тис. т, а коли вологість складає 22-23% — 500 т/добу",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_3682028d"
+  ],
+  "notes": "1000 т/добу ≈ 42 т/год за 24 год при до 18 %; для 17→14 % це нижче за теоретичну межу 100 т/год з картки-розрахунку — отже реальна межа ближча до 50–60 т/год (конфлікт з верхньою межею оцінки).",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_d8863d86",
+  "subject": "Норма-аналог: NFPA 61 (переказ Grain Journal, 2021)",
+  "kind": "norm",
+  "claim": {
+    "name": "leg_monitoring",
+    "value": "кожна норія — датчик швидкості, що вимикає привод і дає тривогу при сповільненні до 80 %; внутрішні норії — температура підшипників голови, хвоста, натяжного барабана і схід стрічки; бункери під норіями без переливу — датчик верхнього рівня",
+    "unit": "",
+    "qualifier": "моніторинг норій (NFPA 61 9.3.14.1.x)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.grainjournal.com/article/231844/bucket-elevator-safety-venting-isolation-and-suppression-prevent-combustible-dust-explosions",
+    "path": "inbox/raw/web/grainjournal.com/bucket-elevator-safety.html",
+    "page": null,
+    "quote": "Each leg shall be provided with a speed sensor device that will cut off the power to the drive motor and actuate an alarm in the event the leg belt slows to 80% (9.3.14.1.5).",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

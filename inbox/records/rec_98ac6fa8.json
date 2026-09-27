@@ -1,0 +1,69 @@
+{
+  "id": "rec_98ac6fa8",
+  "subject": "Плоскодонні силоси SiloPro (TR), Ø 8,23 і 9,14 м",
+  "kind": "dimension",
+  "claim": {
+    "name": "height_volume_by_rings",
+    "value": {
+      "SP-0823": {
+        "ring_m": 0.91,
+        "rings": [
+          8,
+          19
+        ],
+        "eave_m": [
+          7.28,
+          17.29
+        ],
+        "overall_m": [
+          9.66,
+          19.67
+        ],
+        "V_m3": [
+          429,
+          961
+        ]
+      },
+      "SP-0914": {
+        "eave_m": [
+          7.28,
+          17.29
+        ],
+        "overall_m": [
+          9.92,
+          19.93
+        ],
+        "V_m3": [
+          535,
+          1192
+        ]
+      },
+      "SP-082312": {
+        "eave_m": 10.92,
+        "overall_m": 13.3,
+        "V_m3": 623
+      },
+      "SP-091412": {
+        "eave_m": 10.92,
+        "overall_m": 13.56,
+        "V_m3": 774
+      }
+    },
+    "unit": "mixed",
+    "qualifier": "висота карниза, повна висота й об'єм за кількістю кілець"
+  },
+  "source": {
+    "origin": "web",
+    "url": "http://silopro.com/doc/flat_bottom_silo_technical.pdf",
+    "path": "inbox/raw/web/silopro.com/flat_bottom_silo_technical.pdf",
+    "page": null,
+    "quote": "SP-082312 8,23 12 10,92 13,30 623",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Ø 8,23 (27 ft) і 9,14 (30 ft) — найближчі стандартні діаметри до 8,55 у рядах, кратних футу (MySilo: 8,25 / 9,16). Кільце 0,91 м.",
+  "seen_in": []
+}

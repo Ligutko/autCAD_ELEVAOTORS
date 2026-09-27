@@ -1,0 +1,25 @@
+{
+  "id": "rec_661777f6",
+  "subject": "Норма: ДБН В.2.5-74:2013 Водопостачання. Зовнішні мережі та споруди",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_reservoirs",
+    "value": "не менше двох резервуарів, у кожному 50 % пожежного об'єму; радіус обслуговування 200 м (з пожежним автомобілем) або 100–150 м (мотопомпи)",
+    "unit": "",
+    "qualifier": "п. 13.3.3–13.3.4"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.poproekty.com.ua/wp-content/uploads/2021/04/DBN-V.2.5-74-2013-Vodopostachannya.-Zovnishni-merezhi-ta-sporudi.-Osnovni-polozhennya-proektuvannya.pdf",
+    "path": "inbox/raw/web/poproekty.com.ua/DBN-V.2.5-74-2013.pdf",
+    "page": null,
+    "quote": "Кількість пожежних резервуарів або водойм повинна бути не менше двох, при цьому в кожному з них слід зберігати 50 % обсягу води на пожежогасіння.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

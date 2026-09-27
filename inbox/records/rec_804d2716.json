@@ -1,0 +1,30 @@
+{
+  "id": "rec_804d2716",
+  "subject": "Норма: ДСТУ Б В.2.5-38:2008 Улаштування блискавкозахисту (IEC 62305:2006, NEQ)",
+  "kind": "norm",
+  "claim": {
+    "name": "down_conductor_spacing",
+    "value": {
+      "I": 10,
+      "II": 15,
+      "III": 20,
+      "IV": 25
+    },
+    "unit": "m",
+    "qualifier": "табл. 9: середня відстань між струмовідводами за рівнем захисту; пояси біля землі і через 20 м по висоті"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dnaop.com/html/43923_3.html",
+    "path": "inbox/raw/web/dnaop.com/dstu_b_v2.5-38_2008_p_3.html",
+    "page": null,
+    "quote": "Рівень захисту Середня відстань, м І 10 IІ 15 IIІ 20 IV 25",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для силоса Ø22 (периметр 69 м) при рівні II — ≥ 5 струмовідводів (derived: 69/15 = 4,6); роль струмовідводів виконує сама стінка силоса, якщо вона електрично неперервна.",
+  "seen_in": []
+}

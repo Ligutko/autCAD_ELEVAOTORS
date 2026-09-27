@@ -1,0 +1,31 @@
+{
+  "id": "rec_5834f0cb",
+  "subject": "Аналог Лубнимаш: елеватор ТОВ «Карлівське СГП «ЛОС» (Полтавська обл.)",
+  "kind": "attribute",
+  "claim": {
+    "name": "dryer_vs_transport",
+    "value": {
+      "dryer_t_h": 50,
+      "dryer_moisture_upto_pct": 18,
+      "transport_t_h": 100,
+      "storage_t": 69000,
+      "silos": "11 × 5800 т + 1 × 4266 т"
+    },
+    "unit": "t/h",
+    "qualifier": "співвідношення сушарки й транспорту на збудованому об'єкті Лубнимаш"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/novosti/sushypro100-yakisne-elevatorne-obladnannya-yak-osnova-efektyvnosti-pidpryyemstva/",
+    "path": "inbox/raw/web/lubnymash.com/post_sushypro100.html",
+    "page": null,
+    "quote": "Встановлена шахтна зерносушарка здатна обробляти до 50 т/год за вологості зерна до 18%, а транспортне обладнання забезпечує продуктивність 100 т/год.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Найближчий знайдений аналог нашого класу: той самий виробник, та сама область, транспорт 100 т/год, сушарка 50 т/год (газ). Сховище 69 тис. т — удвічі більше за наше.",
+  "seen_in": []
+}

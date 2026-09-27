@@ -1,0 +1,30 @@
+{
+  "id": "rec_3682028d",
+  "subject": "Зерносушарка Лубнимаш СШ-50.М3",
+  "kind": "dimension",
+  "claim": {
+    "name": "capacity_wheat_17_14_estimate",
+    "value": [
+      75,
+      100
+    ],
+    "unit": "t/h",
+    "qualifier": "пшениця 17→14 % (у таблиці виробника немає)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "з 24% до 14% [ т/год. ] 14 16 20 27 32 42 54 64 96 128",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_8c8778ba"
+  ],
+  "notes": "Метод: однакова кількість випареної води. Вода на 1 т вологого зерна: 20→14 — 6/86 = 0,070 т; 17→14 — 3/86 = 0,035 т; отже верхня межа 50 × 2 = 100 т/год. Перевірка методу таблицею Лубнимаш: 24→14 проти 20→14 дає 0,60 за методом і 32/50 = 0,64 у таблиці. Нижня межа 75 т/год — judgment: при малому знятті вологи лімітує час охолодження і пропускна здатність випуску; до того ж норія подачі 100 т/год.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_393e4e21",
+  "subject": "4B Watchdog Elite: система моніторингу норії",
+  "kind": "attribute",
+  "claim": {
+    "name": "touchswitch_head_position",
+    "value": "на голові — трохи вище осі вала з боку вивантаження, між 9 і 3 годинами, ближче до 3; парою навпроти на лівій і правій стінці; на башмаку — на висхідній гілці в найвищому положенні натяжного вала",
+    "unit": "",
+    "qualifier": "де ставити датчики сходу"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.go4b.com/usa/technical-support/product-manuals/watchdog/watchdog-installation-guide.pdf",
+    "path": "inbox/raw/web/go4b.com/watchdog-installation-guide.pdf",
+    "page": 15,
+    "quote": "TOUCHSWITCH MUST BE INSTALLED ABOVE THE HEAD SHAFT BETWEEN THE 9 O’CLOCK AND 3 O’CLOCK POSITION AND AS CLOSE TO THE 3 O’CLOCK AS POSSIBLE.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "с. 15",
+  "seen_in": []
+}

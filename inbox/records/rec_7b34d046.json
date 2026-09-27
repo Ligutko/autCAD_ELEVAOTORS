@@ -1,0 +1,28 @@
+{
+  "id": "rec_7b34d046",
+  "subject": "Зерносушарка шахтна Лубнимаш У13-СШ",
+  "kind": "dimension",
+  "claim": {
+    "name": "model_range",
+    "value": [
+      20,
+      200
+    ],
+    "unit": "t/h",
+    "qualifier": "модельний ряд, пшениця 20→14 %"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "Модельний ряд: 20 – 200 тонн на годину по зерну пшениці при зменшенні вологи з 20% до 14%",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Той самий виробник, що й обладнання нової черги. Шахтна (колонна з коробами) сушарка з лінійним газовим пальником MAXON.",
+  "seen_in": []
+}

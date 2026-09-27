@@ -1,0 +1,25 @@
+{
+  "id": "rec_b2fae433",
+  "subject": "Норма: НПАОП 15.0-1.01-17 (z1288-17)",
+  "kind": "norm",
+  "claim": {
+    "name": "cable_shafts",
+    "value": "у шахтах для кабелів заборонено ставити норії, аспіраційні труби, самопливи й інше обладнання",
+    "unit": "",
+    "qualifier": "кабельні траси"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.rada.gov.ua/laws/show/z1288-17",
+    "path": "inbox/raw/web/zakon.rada.gov.ua/z1288-17_print.html",
+    "page": null,
+    "quote": "У шахтах для прокладки кабелів забороняється встановлювати норії, аспіраційні труби, проходи самопливів та інше транспортне або технологічне устаткування.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

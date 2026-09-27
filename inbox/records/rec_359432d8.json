@@ -1,0 +1,25 @@
+{
+  "id": "rec_359432d8",
+  "subject": "Норма-аналог: NFPA 61 (переказ Grain Journal, 2021)",
+  "kind": "dimension",
+  "claim": {
+    "name": "outdoor_leg_vents",
+    "value": "зовнішні норії: панелі через ≤ 20 ft (6,1 м) уздовж труби, перша на 8–12 ft від землі, парами з боків по ≥ 2/3 перерізу кожна; голова — 5 ft² на 100 ft³ об'єму голови; спрацювання 0,5–1 psi",
+    "unit": "",
+    "qualifier": "вентиляція зовнішніх норій"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.grainjournal.com/article/231844/bucket-elevator-safety-venting-isolation-and-suppression-prevent-combustible-dust-explosions",
+    "path": "inbox/raw/web/grainjournal.com/bucket-elevator-safety.html",
+    "page": null,
+    "quote": "The vent size should be five square feet per 100 cubic feet of head section volume.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Переказ стандарту журналом, не сам NFPA 61. Перерахунок: 5 ft² / 100 ft³ = 0,05 ft⁻¹ = 0,164 м² на 1 м³ об'єму голови (derived). Частини нижче рівня землі не вентилюються.",
+  "seen_in": []
+}

@@ -1,0 +1,40 @@
+{
+  "id": "rec_4f4528e1",
+  "subject": "Баштові сушарки змішаного потоку Mecmar (IT): серії RT / RM / RG",
+  "kind": "dimension",
+  "claim": {
+    "name": "series",
+    "value": {
+      "RT": {
+        "D_m": 2.5,
+        "RT 275/12 corn -5%": "292 t/24h"
+      },
+      "RM": {
+        "D_m": 3.5,
+        "H_max_m": 24,
+        "RM 400/21 corn -5%": "646 t/24h"
+      },
+      "RG": {
+        "D_m": 5.3,
+        "RG 800/22 corn -5%": "1224 t/24h",
+        "RG 800/22 corn -15%": "639 t/24h"
+      }
+    },
+    "unit": "mixed",
+    "qualifier": "діаметр башти і добова продуктивність (кукурудза, зняття 5 / 10 / 15 %)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.mecmargroup.com/en/catalogo/tower_dryers-1",
+    "path": "inbox/raw/web/mecmargroup.com/tower_dryers.html",
+    "page": null,
+    "quote": "RG 800/22 1224 2880",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "RG 800/22: 1224 т/добу ≈ 51 т/год при знятті 5 % — аналог під лінію 50 т/год у круглій башті Ø5,3 м. Висоту RG на сторінці не знайдено.",
+  "seen_in": []
+}

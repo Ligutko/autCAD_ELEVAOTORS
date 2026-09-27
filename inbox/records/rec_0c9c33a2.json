@@ -1,0 +1,25 @@
+{
+  "id": "rec_0c9c33a2",
+  "subject": "АСУТП сушіння Лубнимаш",
+  "kind": "attribute",
+  "claim": {
+    "name": "dryer_automation",
+    "value": "сенсорна панель з мнемосхемою; блокування пуску/зупинки при порушенні процесу; керування газовим пальником і вентиляторами; контроль рівня в бункері над сушаркою з автодовантаженням; температура агента; вологість на вході й виході",
+    "unit": "",
+    "qualifier": "функції автоматики сушарки"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/asu/asutp-sushinnya-zerna/",
+    "path": "inbox/raw/web/lubnymash.com/page_asutp-sushinnya.html",
+    "page": null,
+    "quote": "Контроль рівня зерна в бункері над сушаркою.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

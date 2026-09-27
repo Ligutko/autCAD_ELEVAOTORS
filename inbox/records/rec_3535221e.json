@@ -1,0 +1,25 @@
+{
+  "id": "rec_3535221e",
+  "subject": "Оперативні хопери вологого зерна (KMZ Industries, практика)",
+  "kind": "norm",
+  "claim": {
+    "name": "moisture_removal_per_pass",
+    "value": "5–6 % за один прохід (кукурудза), до 10 % при достатньому агенті",
+    "unit": "",
+    "qualifier": "рекомендоване зняття вологи за прохід"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/elevators/tehnichne-osnashhennja-elevatora-jak-viznachiti-kilkist-operativnih-nakopichuvalnih-hoperiv-ta-ih-mistkist",
+    "path": "inbox/raw/web/kmzindustries.ua/hoppers_article.html",
+    "page": null,
+    "quote": "рекомендовано знімання вологи 5-6% за один прохід",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

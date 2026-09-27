@@ -1,0 +1,99 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "c22RZzGNfAEcGsJh6ZqDrYnO6tw",
+  "regionCode": "UA",
+  "pageInfo": {
+    "totalResults": 2,
+    "resultsPerPage": 2
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "pywnfa-b0ViBmtgX6jEfb2H1VdY",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "tzYGytx60Ys"
+      },
+      "snippet": {
+        "publishedAt": "2020-12-11T15:05:26Z",
+        "channelId": "UC2RvGq2VrsyOT8Ke-ftHgqw",
+        "title": "Шахтні зерносушарки У13-СШ ЛУБНИМАШ",
+        "description": "Більше інформації https://www.lubnymash.com Для зв'язку з менеджером телефонуйте безкоштовно 0 (800) 40-50-80 з усіх ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/tzYGytx60Ys/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/tzYGytx60Ys/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/tzYGytx60Ys/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/tzYGytx60Ys/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/tzYGytx60Ys/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "ЛУБНИМАШ: елеваторне обладнання від виробника",
+        "liveBroadcastContent": "none",
+        "publishTime": "2020-12-11T15:05:26Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "FXcteSH5I-7Re-jwx39koi-i0so",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "XmIPwk4ETh4"
+      },
+      "snippet": {
+        "publishedAt": "2019-03-13T11:33:24Z",
+        "channelId": "UC2RvGq2VrsyOT8Ke-ftHgqw",
+        "title": "LUBNYMASH",
+        "description": "Більше інформації https://www.lubnymash.com Для зв'язку з менеджером телефонуйте безкоштовно з усіх номерів України ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/XmIPwk4ETh4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/XmIPwk4ETh4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/XmIPwk4ETh4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/XmIPwk4ETh4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/XmIPwk4ETh4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "ЛУБНИМАШ: елеваторне обладнання від виробника",
+        "liveBroadcastContent": "none",
+        "publishTime": "2019-03-13T11:33:24Z"
+      }
+    }
+  ]
+}

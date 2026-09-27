@@ -1,0 +1,28 @@
+{
+  "id": "rec_6c92404e",
+  "subject": "Автомобільні ваги для елеватора (KMZ Industries)",
+  "kind": "dimension",
+  "claim": {
+    "name": "straight_approach_min",
+    "value": [
+      50,
+      60
+    ],
+    "unit": "m",
+    "qualifier": "прямолінійна ділянка для заїзду / з'їзду на ваги"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/news/elevator-vesy-reshenie-pod-klyuch",
+    "path": "inbox/raw/web/kmzindustries.ua/elevator_vesy.html",
+    "page": null,
+    "quote": "довжина прямолінійного ділянки повинна бути не менше 50-60 м",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Ваги естакадного типу 6–24 м, до 100 т, на з/б фундаментних плитах на піщано-гравійній подушці.",
+  "seen_in": []
+}

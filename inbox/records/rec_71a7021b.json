@@ -1,0 +1,33 @@
+{
+  "id": "rec_71a7021b",
+  "subject": "Зерносушарка ДСП-32-от (шахтна, СНД)",
+  "kind": "dimension",
+  "claim": {
+    "name": "capacity_and_dimensions",
+    "value": {
+      "wheat_20_14_t_h": 32,
+      "LxWxH_with_furnace_mm": [
+        15500,
+        8300,
+        18724
+      ],
+      "mass_kg": 32600
+    },
+    "unit": "mixed",
+    "qualifier": "пшениця 20→14 %, габарит з топкою"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://studfile.net/preview/10958859/page:3/",
+    "path": "inbox/raw/web/studfile.net/dsp32ot_page3.html",
+    "page": null,
+    "quote": "Производительность по пшенице при снижении влажности с 20 до 14 %, т/ч 32",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Навчальний довідник (studfile). Габарит у тексті злитий: «15 500830018 724» = 15 500 × 8 300 × 18 724 мм, маса 32 600 кг. Класична шахтна прямоточна двошахтна сушарка з окремою топкою на рідкому паливі/газі; досі стоїть на багатьох старих ХПП України.",
+  "seen_in": []
+}

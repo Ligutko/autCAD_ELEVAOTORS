@@ -1,0 +1,25 @@
+{
+  "id": "rec_63f696ef",
+  "subject": "Норма: ДБН В.2.2-8-98 Підприємства, будівлі і споруди по зберіганню та переробці зерна",
+  "kind": "norm",
+  "claim": {
+    "name": "blowout_area_min",
+    "value": 0.03,
+    "unit": "m2/m3",
+    "qualifier": "легкоскидні конструкції приміщень категорії Б, робочих будівель, над- і підсилосних поверхів — за розрахунком, інакше ≥ 0,03 м² на 1 м³ (п. 3.2)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://mininfra.gov.ua/storage/app/sites/1/uploaded-files/61-dbn-v22-8-98-pidprijemstva-budivli-i-sporudi-po.pdf",
+    "path": "inbox/raw/web/mininfra.gov.ua/dbn_v2.2-8-98.pdf",
+    "page": null,
+    "quote": "При відсутності розрахункових даних площу легкоскидних конструкцій слід приймати не менше 0,03 м2 на 1 м3 вибухонебезпечного приміщення.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Статус чинності ДБН В.2.2-8-98 на 2026 р. не перевірено. ",
+  "seen_in": []
+}

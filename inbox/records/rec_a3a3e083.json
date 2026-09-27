@@ -1,0 +1,25 @@
+{
+  "id": "rec_a3a3e083",
+  "subject": "Аналог: елеваторний комплекс ТОВ «ЛАН-ОІЛ» (ОВД 2024)",
+  "kind": "attribute",
+  "claim": {
+    "name": "site_composition",
+    "value": "візирувальна лабораторія з автомобільними вагами, КПП, приймальний пристрій з автотранспорту з електрощитовою, зерносушарка, ТП з електрощитовою, бункер відпуску на авто, підземні й транспортерні галереї",
+    "unit": "",
+    "qualifier": "склад елеваторної частини"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kremenets.te.gov.ua/storage/app/sites/35/uploaded-files/1-zvit-z-ovd-tov-lan-oil-bioetanol.pdf",
+    "path": "inbox/raw/web/kremenets.te.gov.ua/lan-oil_ovd.pdf",
+    "page": null,
+    "quote": "Лабораторія візирувальна з автомобільними вагами",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Лабораторія суміщена з вагами й КПП на в'їзді; електрощитова при приймальному пристрої окремо від ТП.",
+  "seen_in": []
+}

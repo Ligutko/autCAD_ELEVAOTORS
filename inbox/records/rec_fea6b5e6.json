@@ -1,0 +1,25 @@
+{
+  "id": "rec_fea6b5e6",
+  "subject": "Норма-аналог: NFPA 61 (Fike application profile EAP 1008)",
+  "kind": "norm",
+  "claim": {
+    "name": "head_vent_ratio",
+    "value": "5 ft² на 100 ft³ об'єму голови; вентиляційні панелі на трубі через ≤ 20 ft, з обох боків, по 2/3 перерізу",
+    "unit": "",
+    "qualifier": "друге незалежне джерело того ж правила"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://fire-protection.com.au/wp-content/uploads/2021/11/EAP-1008-Bucket-Elevators.pdf",
+    "path": "inbox/raw/web/fire-protection.com.au/EAP-1008-Bucket-Elevators.pdf",
+    "page": null,
+    "quote": "The head must also be vented with an area of 5 ft2 (square feet) for every 100 ft3 (cubic feet) of head volume.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

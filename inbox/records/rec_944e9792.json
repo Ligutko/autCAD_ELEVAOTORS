@@ -1,0 +1,25 @@
+{
+  "id": "rec_944e9792",
+  "subject": "Норма: ДБН В.2.5-74:2013 Водопостачання. Зовнішні мережі та споруди",
+  "kind": "norm",
+  "claim": {
+    "name": "hydrant_placement",
+    "value": "гідранти вздовж доріг ≤ 2,5 м від краю проїзду, ≥ 5 м від стін; кожну будівлю — від ≥ 2 гідрантів при витраті ≥ 15 л/с",
+    "unit": "",
+    "qualifier": "п. 12.16"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.poproekty.com.ua/wp-content/uploads/2021/04/DBN-V.2.5-74-2013-Vodopostachannya.-Zovnishni-merezhi-ta-sporudi.-Osnovni-polozhennya-proektuvannya.pdf",
+    "path": "inbox/raw/web/poproekty.com.ua/DBN-V.2.5-74-2013.pdf",
+    "page": null,
+    "quote": "Пожежні гідранти слід передбачати уздовж вулиць та автомобільних доріг на відстані не більше ніж 2,5 м від краю проїзної частини, але не ближче ніж 5 м від стін будівлі",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

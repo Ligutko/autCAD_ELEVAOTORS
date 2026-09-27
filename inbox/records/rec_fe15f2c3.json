@@ -1,0 +1,28 @@
+{
+  "id": "rec_fe15f2c3",
+  "subject": "Зерносушарка Лубнимаш У13-СШ",
+  "kind": "dimension",
+  "claim": {
+    "name": "capacity_wheat_24_14_by_model",
+    "value": {
+      "СШ-50.М3": 32,
+      "СШ-100.М3": 64
+    },
+    "unit": "t/h",
+    "qualifier": "пшениця 24→14 %"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "з 24% до 14% [ т/год. ] 14 16 20 27 32 42 54 64 96 128",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

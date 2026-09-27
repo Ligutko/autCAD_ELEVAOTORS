@@ -1,0 +1,74 @@
+{
+  "id": "rec_ebcee151",
+  "subject": "Силоси з конусним дном Лубнимаш У13-МСВУ.КД",
+  "kind": "dimension",
+  "claim": {
+    "name": "hopper_table",
+    "value": {
+      "МСВУ 82К.хх.45": {
+        "D_mm": 8250,
+        "cone_deg": 45,
+        "V_m3": [
+          368,
+          1107
+        ],
+        "H_mm": [
+          11866,
+          25690
+        ],
+        "tiers": [
+          4,
+          16
+        ]
+      },
+      "МСВУ 92К.хх.45": {
+        "D_mm": 9167,
+        "V_m3": [
+          458,
+          1370
+        ],
+        "H_mm": [
+          12776,
+          26600
+        ]
+      },
+      "МСВУ 92К.хх.60": {
+        "V_m3": [
+          518,
+          1436
+        ],
+        "H_mm": [
+          16304,
+          30128
+        ]
+      },
+      "МСВУ 110К.хх.45": {
+        "D_mm": 11000,
+        "V_m3": [
+          907,
+          2000
+        ],
+        "H_mm": [
+          16520,
+          28040
+        ]
+      }
+    },
+    "unit": "mixed",
+    "qualifier": "діаметр, кут конуса, об'єм, висота, яруси"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/zberigannya/u13-msvu-kd/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-msvu-kd.html",
+    "page": null,
+    "quote": "МСВУ 82К.хх.45.В12 8250 45 368-1 107 295-886 11 866-25 690 4 – 16",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Той самий виробник. Кути конуса 45° і 60°; для вологого зерна кукурудзи/соняшника частіше беруть 60° (judgment, перевірити). Місткість Лубнимаш 10–2123 м³.",
+  "seen_in": []
+}

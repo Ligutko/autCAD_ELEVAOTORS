@@ -1,0 +1,37 @@
+{
+  "id": "rec_759a3d17",
+  "subject": "КТП для елеватора (розрахунок)",
+  "kind": "dimension",
+  "claim": {
+    "name": "transformer_sizing",
+    "value": {
+      "P_installed_kW": 839,
+      "Kc": [
+        0.45,
+        0.75
+      ],
+      "cos_phi": 0.75,
+      "S_calc_kVA": [
+        503,
+        839
+      ],
+      "recommend": "2КТП 2×630 кВА 10/0,4 кВ"
+    },
+    "unit": "kVA",
+    "qualifier": "P_уст ≈ 547 (нова черга) + 97 (сушарка СШ-50.М3) + 150 (існуюча приймальна частина, judgment) + 15 (аспірація, judgment) + 30 (освітлення, лабораторія, ваги, judgment) ≈ 839 кВт; S = P·Kc / cosφ"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://mininfra.gov.ua/storage/app/sites/1/uploaded-files/61-dbn-v22-8-98-pidprijemstva-budivli-i-sporudi-po.pdf",
+    "path": "inbox/raw/web/mininfra.gov.ua/dbn_v2.2-8-98.pdf",
+    "page": null,
+    "quote": "Елеватори 0,45-0,75 0,75 5000",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Kc і cosφ — ДБН В.2.2-8-98 табл. 5; категорія II (п. 7.1) → два трансформатори з взаємним резервом (judgment). Аерація працює довго й одночасно (264 кВт), тож Kc ближче до верхньої межі. Аналог: Біловод, 1 черга 1670 кВт (більший об'єкт). Діапазон реалістичних рішень: 1×1000 кВА або 2×630 кВА.",
+  "seen_in": []
+}

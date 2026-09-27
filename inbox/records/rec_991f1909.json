@@ -1,0 +1,29 @@
+{
+  "id": "rec_991f1909",
+  "subject": "Оперативні хопери вологого зерна (KMZ Industries, практика)",
+  "kind": "norm",
+  "claim": {
+    "name": "wet_hoppers_min_per_line",
+    "value": {
+      "count_min": 2,
+      "each_hours_min": 8,
+      "each_hours_better": 24
+    },
+    "unit": "pcs / h",
+    "qualifier": "мінімум ємностей вологого зерна перед сушаркою на одну приймальну лінію"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/elevators/tehnichne-osnashhennja-elevatora-jak-viznachiti-kilkist-operativnih-nakopichuvalnih-hoperiv-ta-ih-mistkist",
+    "path": "inbox/raw/web/kmzindustries.ua/hoppers_article.html",
+    "page": null,
+    "quote": "На одну приймальну лінію перед сушаркою мінімально потрібно встановити щонайменше дві оперативні ємності для вологого зерна з об’ємом, який повинен забезпечити безперебійну роботу зерносушарки не менше 8-ми годин (краще 24 години) кожен",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Автор — Р. Штельмах, KMZ Industries (український виробник елеваторного обладнання). Два хопери — через заборону одночасного завантаження й вивантаження металевого силоса (Наказ № 1504, п. 31).",
+  "seen_in": []
+}

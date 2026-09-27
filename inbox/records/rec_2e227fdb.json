@@ -1,0 +1,34 @@
+{
+  "id": "rec_2e227fdb",
+  "subject": "Пробовідбірник зерна автоматичний ПГ-2.10.180 (Інновінпром, Україна)",
+  "kind": "dimension",
+  "claim": {
+    "name": "reach_height",
+    "value": {
+      "radius_mm": [
+        720,
+        5350
+      ],
+      "rotation_deg": 180,
+      "max_height_mm": 8000,
+      "probe_stroke_mm": 3300,
+      "kW": 4.2
+    },
+    "unit": "mm",
+    "qualifier": "радіус дії, кут, висота, хід зонда"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://download.innovinnprom.com/promo/C%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0%20%D0%B2%D1%96%D0%B4%D0%B1%D0%BE%D1%80%D1%83%20%D0%BF%D1%80%D0%BE%D0%B1%20%D0%B7%D0%B5%D1%80%D0%BD%D0%B0/Avto/%D0%9F%D1%80%D0%BE%D0%B1%D0%BE%D0%B2%D1%96%D0%B4%D0%B1%D1%96%D1%80%D0%BD%D0%B8%D0%BA%20%D0%9A%D0%95%20(UA).pdf",
+    "path": "inbox/raw/web/download.innovinnprom.com/innovinnprom_PG-2.10.180_KE_UA.pdf",
+    "page": 4,
+    "quote": "Радіус дії, мм від 720 до 5350 Кут повороту, град 180",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Керівництво з експлуатації АЕАТ.013.01.00.000 КЕ, с. 4. Максимальна висота пробовідбірника 8000 мм; маса 550 кг + опора 350 кг. basis sourced — для саме цього виробу; для нашого об'єкта це аналог.",
+  "seen_in": []
+}

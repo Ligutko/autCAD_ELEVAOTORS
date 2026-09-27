@@ -1,0 +1,28 @@
+{
+  "id": "rec_8e63ccec",
+  "subject": "Зерносушарка Лубнимаш СШ-50 на твердому паливі",
+  "kind": "dimension",
+  "claim": {
+    "name": "solid_fuel_burner_MW",
+    "value": [
+      7.5,
+      8.0
+    ],
+    "unit": "MW",
+    "qualifier": "потрібна потужність твердопаливного теплогенератора під СШ-50 (газовий пальник 5,8 МВт + 20–30 %)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/novosti/pidvodne-kaminnya-pry-vybori-zernosusharky/",
+    "path": "inbox/raw/web/lubnymash.com/post_pidvodne-kaminnya.html",
+    "page": null,
+    "quote": "Наприклад: на СШ-50 ставимо 5.8 МВт, то плюс 30%. Отримуємо, що твердопаливний пальник повинен бути не меншим за 7,5-8 МВт.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Той самий виробник. Сушарка працює на розрідженні; температура агента для кукурудзи 110–150 °C (там само).",
+  "seen_in": []
+}

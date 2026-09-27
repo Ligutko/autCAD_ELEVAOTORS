@@ -1,0 +1,25 @@
+{
+  "id": "rec_e0f9ccc0",
+  "subject": "Автомобілерозвантажувачі (Гідромаркет, огляд)",
+  "kind": "attribute",
+  "claim": {
+    "name": "tilt_and_mass",
+    "value": "підйом 30–35°, задні розвантажувачі для 60–80 т, окремі — автопоїзди до 120 т і 24 м",
+    "unit": "",
+    "qualifier": "огляд типів"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://hydromarket.com.ua/ua/a407589-vybor-avtomobilerazgruzchika-kakie.html",
+    "path": "inbox/raw/web/hydromarket.com.ua/vybor_avtomobilerazgruzchika.html",
+    "page": null,
+    "quote": "Автомобилеопрокидыватель може здійснювати підйом до 30-35 градусів кута нахилу.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "",
+  "seen_in": []
+}

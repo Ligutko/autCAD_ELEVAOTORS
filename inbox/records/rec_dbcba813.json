@@ -1,0 +1,40 @@
+{
+  "id": "rec_dbcba813",
+  "subject": "Силоси з плоским дном Лубнимаш У13-МСВУ",
+  "kind": "dimension",
+  "claim": {
+    "name": "smallest_flat_silo",
+    "value": {
+      "model": "МСВУ.92.хх.В12",
+      "D_mm": 9167,
+      "V_m3": [
+        356,
+        1268
+      ],
+      "H_mm": [
+        7356,
+        21180
+      ],
+      "tiers": [
+        4,
+        16
+      ]
+    },
+    "unit": "mixed",
+    "qualifier": "найменший плоскодонний силос у ряду"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/zberigannya/u13-msvu-pd/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-msvu-pd.html",
+    "page": null,
+    "quote": "МСВУ.92.хх.В12 9,2 9 167 356 – 1 268 285 – 1 015 7 356 – 21 180 4 – 16",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Ряд Лубнимаш кратний 0,917 м: 8,25 є лише в конусних (82К), 8,55 м немає. Отже, силоси «2», «3» Ø≈8,55 — найімовірніше не Лубнимаш або з іншим кроком листа.",
+  "seen_in": []
+}

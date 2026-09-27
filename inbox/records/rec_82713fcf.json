@@ -1,0 +1,25 @@
+{
+  "id": "rec_82713fcf",
+  "subject": "Оперативні хопери вологого зерна (KMZ Industries, практика)",
+  "kind": "norm",
+  "claim": {
+    "name": "no_simultaneous_fill_empty",
+    "value": "не допускається одночасно завантажувати й вивантажувати металевий силос (Наказ МЕРТ № 1504 від 20.09.2017, п. 31)",
+    "unit": "",
+    "qualifier": "правило охорони праці, переказ у статті"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://kmzindustries.ua/elevators/tehnichne-osnashhennja-elevatora-jak-viznachiti-kilkist-operativnih-nakopichuvalnih-hoperiv-ta-ih-mistkist",
+    "path": "inbox/raw/web/kmzindustries.ua/hoppers_article.html",
+    "page": null,
+    "quote": "Не допускається одночасне проведення операцій із завантаження зерна в металевий силос та його вивантаження з ємності",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цитата в статті KMZ; першоджерело (Правила охорони праці… зі зберігання та переробки зерна, НПАОП) окремо не завантажено.",
+  "seen_in": []
+}

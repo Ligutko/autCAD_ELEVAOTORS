@@ -1,0 +1,7 @@
+{
+  "url": "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=15&q=елеватор під ключ зерносушарка автоваги силоси 100 т/год",
+  "retrieved_at": "2026-09-27",
+  "sha256": "78a253ee0ea43ed50f1774583925f1352066794e4f6ba9c4dc8468c5be72271c",
+  "bytes": 189,
+  "note": "ключ API вилучено з url"
+}

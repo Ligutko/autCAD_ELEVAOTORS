@@ -1,0 +1,7 @@
+{
+  "url": "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=15&q=Лубнимаш елеватор сушарка СШ-50",
+  "retrieved_at": "2026-09-27",
+  "sha256": "b987aadd78422a0c286edbacd1d3dda778c508724384c46ac989ef89dce413f5",
+  "bytes": 3407,
+  "note": "ключ API вилучено з url"
+}

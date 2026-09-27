@@ -1,0 +1,33 @@
+{
+  "id": "rec_0e3d2268",
+  "subject": "Норма: ДБН В.2.5-74:2013 Водопостачання. Зовнішні мережі та споруди",
+  "kind": "norm",
+  "claim": {
+    "name": "fire_flow_table5_IandII_ABV",
+    "value": {
+      "<=3": 10,
+      "3-5": 10,
+      "5-20": 15,
+      "20-50": 20,
+      "50-200": 30,
+      "200-400": 35,
+      "400-600": 40
+    },
+    "unit": "l/s",
+    "qualifier": "табл. 5: витрата на зовнішнє пожежогасіння виробничих будівель I–II ступеня, кат. А, Б, В, за об'ємом будівлі, тис. м³"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.poproekty.com.ua/wp-content/uploads/2021/04/DBN-V.2.5-74-2013-Vodopostachannya.-Zovnishni-merezhi-ta-sporudi.-Osnovni-polozhennya-proektuvannya.pdf",
+    "path": "inbox/raw/web/poproekty.com.ua/DBN-V.2.5-74-2013.pdf",
+    "page": null,
+    "quote": "I і II А, Б, В 10 10 15 20 30 35 40",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Рядок таблиці прочитано з текстового шару PDF; заголовок: «до 3 включ. від 3 до 5 … від 400 до 600». Категорію силосів (Б або В) визначає НАПБ Б.03.002 — не перевірено.",
+  "seen_in": []
+}

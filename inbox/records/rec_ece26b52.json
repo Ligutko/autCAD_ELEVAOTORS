@@ -1,0 +1,33 @@
+{
+  "id": "rec_ece26b52",
+  "subject": "Модульна лабораторія зерна (БлокМодуль)",
+  "kind": "dimension",
+  "claim": {
+    "name": "size",
+    "value": {
+      "LxWxH_m": [
+        9,
+        9,
+        2.5
+      ],
+      "area_m2": 81,
+      "modules": "3 × 9 × 3 × 2.5 м"
+    },
+    "unit": "m",
+    "qualifier": "габарит і площа"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://blockmodul.com.ua/ua/project/modulna-laboratoriya-9h9m-dlya-tov-shhedrot-zemli/",
+    "path": "inbox/raw/web/blockmodul.com.ua/lab_9x9.html",
+    "page": null,
+    "quote": "габаритні розміри Д / Ш / В, 9 * 9 * 2.5м, площа 81м2",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Цей екземпляр — для цукрового заводу (контроль зерна); за текстом, аналогічну лабораторію 2012 р. поставлено для обслуговування елеватора («Квадрат Індастріз»).",
+  "seen_in": []
+}

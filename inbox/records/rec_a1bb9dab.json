@@ -1,0 +1,35 @@
+{
+  "id": "rec_a1bb9dab",
+  "subject": "Пробовідбірник Ecotec STANDART 270 (Україна)",
+  "kind": "dimension",
+  "claim": {
+    "name": "reach_height",
+    "value": {
+      "support_h_mm": 4200,
+      "boom_m": [
+        2.42,
+        4.42
+      ],
+      "zone_m": 8.8,
+      "probe_m": 2.7,
+      "lab_distance_std_m": 30,
+      "lab_distance_max_m": 100
+    },
+    "unit": "m",
+    "qualifier": "одноопорний, телескопічна стріла, зона відбору, відстань до лабораторії"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://sampler-ecotec.com/en/automatic-sampler-ecotec-standart-270/",
+    "path": "inbox/raw/web/sampler-ecotec.com/ecotec_standart_270.html",
+    "page": null,
+    "quote": "Одноопорна конструкція висотою 4200 мм над рівнем фундаменту.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Стандартна поставка — пневмотраса 30 м до лабораторії, опція до 100 м.",
+  "seen_in": []
+}

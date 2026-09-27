@@ -1,0 +1,37 @@
+{
+  "id": "rec_eda294e3",
+  "subject": "Зерносушарка STRAHL 1600–3000 FR",
+  "kind": "dimension",
+  "claim": {
+    "name": "dimensions_and_capacity",
+    "value": {
+      "3000 FR": {
+        "L": 7.6,
+        "W": 2.8,
+        "H": 16.75,
+        "wheat_20_15_wet_t_h": 29.3,
+        "column_m3": 54.7
+      },
+      "1600 FR": {
+        "H": 10.75,
+        "wheat_20_15_wet_t_h": 15.6
+      }
+    },
+    "unit": "m, t/h",
+    "qualifier": "довжина × ширина × висота, пшениця 20→15 % (сирого)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tehagrokom.ru/catalog/files/strahl/Strahl_fr_proizvoditelnost.pdf",
+    "path": "inbox/raw/web/tehagrokom.ru/Strahl_fr_proizvoditelnost.pdf",
+    "page": null,
+    "quote": "ПШЕНИЦА 20% - 15%  Te=90°C",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Італійська баштова сушарка змішаного потоку з рециркуляцією. Таблиця: довжина 7 600 для всіх, ширина 2 800, висота 10 750 / 12 250 / 14 250 / 16 750; вихід сирого 15,6 / 19,5 / 24,4 / 29,3 т/год. Аналог показує, що одна колона 30 т/год — висота ≈17 м; для 50–60 т/год треба 2 колони або більша модель (5000–10000 FR, таблиці не знайдено).",
+  "seen_in": []
+}

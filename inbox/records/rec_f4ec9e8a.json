@@ -1,0 +1,30 @@
+{
+  "id": "rec_f4ec9e8a",
+  "subject": "Теплогенератори на біопаливі для зерносушарок (Інтек-Захід, Україна)",
+  "kind": "dimension",
+  "claim": {
+    "name": "power_range_MW",
+    "value": [
+      1.0,
+      1.4,
+      2.5,
+      4.3
+    ],
+    "unit": "MW",
+    "qualifier": "ряд потужностей; паливо — щепа, тирса, відходи зерноочистки, пелети до 40 мм"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://intekzahid.com.ua/article/view/teplogeneratori-do-zernosusharok-vid-kompanii-intek-zahid/",
+    "path": "inbox/raw/web/intekzahid.com.ua/teplogeneratori.html",
+    "page": null,
+    "quote": "потужністю 1 МВт, 1.4 МВт, 2.5 МВт, 4.3 МВт",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для СШ-50 (пальник 5,8 МВт газ) на біомасі знадобилося б 2 × 2,5–4,3 МВт або спецзамовлення (derived).",
+  "seen_in": []
+}

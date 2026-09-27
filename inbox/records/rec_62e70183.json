@@ -1,0 +1,32 @@
+{
+  "id": "rec_62e70183",
+  "subject": "Норма: ДБН В.2.2-8-98 Підприємства, будівлі і споруди по зберіганню та переробці зерна",
+  "kind": "norm",
+  "claim": {
+    "name": "demand_factor_elevators",
+    "value": {
+      "Kc": [
+        0.45,
+        0.75
+      ],
+      "cos_phi": 0.75,
+      "Tmax_h": 5000
+    },
+    "unit": "—",
+    "qualifier": "табл. 5: коефіцієнт попиту, коефіцієнт потужності, річне число годин максимуму для елеваторів (на шинах 0,4 кВ ТП)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://mininfra.gov.ua/storage/app/sites/1/uploaded-files/61-dbn-v22-8-98-pidprijemstva-budivli-i-sporudi-po.pdf",
+    "path": "inbox/raw/web/mininfra.gov.ua/dbn_v2.2-8-98.pdf",
+    "page": null,
+    "quote": "Елеватори 0,45-0,75 0,75 5000",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Статус чинності ДБН В.2.2-8-98 на 2026 р. не перевірено. ",
+  "seen_in": []
+}

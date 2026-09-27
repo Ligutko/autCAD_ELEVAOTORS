@@ -1,0 +1,34 @@
+{
+  "id": "rec_2f6b4c03",
+  "subject": "Плоскодонні силоси MySilo (TR): ряд діаметрів",
+  "kind": "dimension",
+  "claim": {
+    "name": "diameter_series_m",
+    "value": [
+      4.58,
+      5.5,
+      6.41,
+      7.33,
+      8.25,
+      9.16,
+      10.08,
+      11.0
+    ],
+    "unit": "m",
+    "qualifier": "ряд діаметрів (футові моделі 15…36 ft)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.mysilo.com/dosyalar/kapasite-tablolari/mysilo-flat-bottom-silo-capacities-table-800.pdf",
+    "path": "inbox/raw/web/mysilo.com/mysilo-flat-bottom-silo-capacities-table-800.pdf",
+    "page": null,
+    "quote": "4,58 5,5 6,41 7,33 8,25 9,16 10,08 11",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Жоден ряд (MySilo, SiloPro, Лубнимаш, KMZ, Symaga 8,40/9,20) не має 8,55 м. Symaga ряд — зі сторінки пошуку, не з документа.",
+  "seen_in": []
+}

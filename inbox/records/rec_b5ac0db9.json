@@ -1,0 +1,38 @@
+{
+  "id": "rec_b5ac0db9",
+  "subject": "Зерносушарка Лубнимаш У13-СШ",
+  "kind": "dimension",
+  "claim": {
+    "name": "power_burner_volume",
+    "value": {
+      "СШ-50.М3": {
+        "kW": 97,
+        "burner_MW": 5.8,
+        "column_m3": 112,
+        "air_k_m3h": 146
+      },
+      "СШ-100.М3": {
+        "kW": 193,
+        "burner_MW": 11.6,
+        "column_m3": 224,
+        "air_k_m3h": 292
+      }
+    },
+    "unit": "mixed",
+    "qualifier": "встановлена потужність, пальник MAXON, об'єм шахти, агент сушіння"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "Встановлена потужність, не більше [ кВт/г ] 50 60 63 82 97 121 163 193 289 386 Лінійний газовий пальник MAXON Потужність [ МВт ] 2 2,6 3 4,8 5,8 6,5 9,6 11,6 17,4 23,2",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Об'єм шахти: «Об`єм [ м³ ] 52 59 67 100 112 142 200 224 335 447»; агент: «65 76 87 117 146 160 190 292 438 584» тис. м³/год. Газ: 1,1–1,2 м³ на %·т.",
+  "seen_in": []
+}
