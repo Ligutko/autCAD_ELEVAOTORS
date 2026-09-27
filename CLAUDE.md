@@ -1,9 +1,9 @@
 # CLAUDE.md
 
 > **3D-світ елеватора (поточна робота, з 2026-09-24).**
-> Почни з `obsidian_handoff/wiki/projects/Elevator 3D World/00 Handoff.md`: там стан, як запускати, правила і наступний крок. Далі читай:
-> - `08 Expertise 2026-09-24..26.md` у тій самій папці — метод і факти, заміряні з креслення;
-> - `OBJECT_SCOPE.md` — повний склад об'єкта і що бракує.
+> Почни з `obsidian_handoff/wiki/projects/Elevator 3D World/00 Handoff.md`, розділ «Новому агенту»: там стан, порядок читання, правила й наступний крок (W1 → 7C). Далі читай:
+> - `05 Lessons and Pitfalls.md` і `12`–`14 Expertise` у тій самій папці (граф процесу, шар `designed`, добудова); `08 Expertise` — метод і факти креслення;
+> - `OBJECT_SCOPE.md` — повний склад об'єкта і що бракує; `research/design/*.md` — проєктні записки відсутніх вузлів.
 >
 > Код — `world/`, дані з креслення — `world/site/SITE.json`, заміри — `research/tunnel_k4.md`. Перед комітом мають пройти всі `world/build/check_*.py`: `python world/build/check_all.py`.
 >
