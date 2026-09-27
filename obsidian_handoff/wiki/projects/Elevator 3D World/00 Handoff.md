@@ -30,6 +30,7 @@ tags: [handoff, start-here]
 | E аспірація: бункери 8.1/8.2 за кресленням, установки й повітроводи (judgment), дві знахідки | ✅ | `aspiration.py` | `check_aspiration.py` (з перетинами на сітках) |
 | Граф процесу 7A: 33 вузли, 42 ребра, 82 маршрути, засувки зі схеми арк. 1; реєстр обладнання 546.88 кВт | ✅ | `process.py` | `check_process.py` |
 | 7B шар designed: ваги, сушарка в будівлі «4», вологі силоси «2», «3», датчики НПАОП, блокування, КТП, пожежна вода — записки `research/design/` | ✅ дані, 3D — фаза 5 | `process.py` | `check_process.py`, `check_design.py` |
+| 5A сушильний контур у 3D: сушарка в будівлі «4», T3, T5 з галереєю й опорами, спуски | ✅ | `drying.py` | `check_drying.py` |
 | W1 оточення | ✗ (перед роликом 7C) | — | — |
 
 Повний склад з позначками ✅ ◐ ✗ — `OBJECT_SCOPE.md` у корені.
@@ -57,7 +58,7 @@ tags: [handoff, start-here]
 ```
 python world/build/check_all.py                             # усі перевірки одним запуском, підсумок; обов'язково перед комітом
 B="/c/Program Files/Blender Foundation/Blender 4.5/blender.exe"
-"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration aeration silo_interior silo_roof foundation receiving process design
+"$B" --background --python world/build/check_tower.py      # перевірки: noria tower tunnel distribution gallery aspiration aeration silo_interior silo_roof foundation receiving process design drying
 "$B" --background --python world/build/site.py             # фінальні кадри → world/out/site/
 "$B" --python world/build/site.py -- --no-render           # відкрити сцену в GUI і літати
 ```

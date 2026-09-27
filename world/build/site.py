@@ -151,6 +151,8 @@ def main():
         "site_drone.png": c.camera("CAM_DRONE", (70, -70, 55), (-8, 12, 10), lens=28),
         "site_ground.png": c.camera("CAM_GROUND", (28, -16, c.ground_z() + 1.7), (-2, 8, 16), lens=20),
         "site_receiving.png": c.camera("CAM_RECV", (38.0, 22.0, 42.0), (-6.0, 57.0, 6.0), lens=24),
+        "site_drying.png": c.camera("CAM_DRYING", (26.0, 30.0, 30.0), (-8.0, 54.0, 12.0), lens=24),
+        "site_wet_silos.png": c.camera("CAM_WET", (-38.0, 78.0, 32.0), (-6.0, 53.0, 13.0), lens=24),
         "site_truck_pit.png": c.camera("CAM_TRUCK", (19.0, 62.2, c.ground_z() + 1.7), (0.0, 63.4, 4.0), lens=22),
         "site_tunnel_exit.png": c.camera("CAM_EXIT", (-56.5, 9.5, c.ground_z() + 1.7), (-51.1, 2.8, -1.2), lens=24),
         "site_gallery_walk.png": c.camera("CAM_WALK", (-3.5, 0.4, 24.9), (-30, 0.2, 23.6), lens=20),

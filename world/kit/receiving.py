@@ -114,12 +114,15 @@ def spouts(r=None, site=None):
             split = np.array([j["T10"]["x"], o["y"], o["splitter_z"]])
             out.append(("T10->splitter_7", p0, split, j["spout_mm"]))
             for br in o["branches"]:
-                out.append((f"splitter_7->{br['to']}", split, np.array([j["T10"]["x"], *br["end"]]), j["spout_mm"]))
+                out.append((f"splitter_7->{br['to']}", split, np.array([br.get("end_x", j["T10"]["x"]), *br["end"]]), j["spout_mm"]))
     a, b = gp["from"], gp["to"]
     out.append(("node_1->gravity_pipe", np.array([x_p, gp["node_1"][0], gp["node_1"][1]]), np.array([x_p, *a]), gp["d_mm"]))
     out.append(("gravity_pipe->separator", np.array([x_p, *a]), np.array([x_p, *b]), gp["d_mm"]))
     sh = r["cleaning_tower"]["bin_Sh1_to_tower"]
     out.append(("Sh1->tower_pit", np.array([sh["x"], *sh["from"]]), np.array([sh["x"], *sh["to"]]), gp["d_mm"]))
+    if "drying_geom" in site.get("designed", {}):                      # phase 5A: drying loop (designed)
+        from . import drying
+        out += drying.spouts(site)
     return out
 
 
@@ -319,7 +322,12 @@ def build(r=None, site=None):
     parts.update(build_norias(r))
     parts.update(build_pit_and_shed(r))
     parts.update(build_old_silos(r))
-    parts.update(build_building_4(r))
+    site = site or _site()
+    if "drying_geom" in site.get("designed", {}):                      # building «4» = the dryer's base (phase 5A)
+        from . import drying
+        parts.update(drying.build(site))
+    else:
+        parts.update(build_building_4(r))
     parts.update(build_cleaning_tower(r))
     parts["conveyors"] = ("galv", False, c.merge_parts([_conveyor(cv) for cv in r["conveyors"]]))
     parts["spouts"] = ("galv", False, c.merge_parts([_spout_mesh(p0, p1, s) for _, p0, p1, s in spouts(r, site)]))

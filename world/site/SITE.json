@@ -745,7 +745,7 @@
                 "to": "T5",
                 "end": [
                   53.7,
-                  22.0
+                  21.85
                 ]
               },
               {
@@ -753,13 +753,13 @@
                 "to": "T3",
                 "end": [
                   53.9,
-                  19.4
-                ]
+                  20.05
+                ], "end_x": 1.0
               }
             ]
           }
         ],
-        "src": "derived p.4, p.5 (rec_ec92d4b3); splitter z judgment; T3 and T5 are not drawn beyond their spout ends"
+        "src": "derived p.4, p.5 (rec_ec92d4b3); splitter z judgment; T3 and T5 are not drawn beyond their spout ends; ends set on the designed casing tops T5 21.85 / T3 20.05 (drawn ≈22.0 and ≈19.4…20.8), 2026-09-27"
       },
       "spout_mm": 300,
       "gallery_end_y": 51.406
@@ -1087,6 +1087,7 @@
     ]
   },
   "designed": {
+    "drying_geom": {"note": "research/design/drying_loop.md", "dryer_centre": [8.35, 53.65], "dryer_long_axis": "Y", "enclosure_eave": 6.0, "T3": {"y": 53.9, "x": [0.6, 8.35], "z_bot": 19.55, "w": 0.4, "h": 0.5, "drive_side": -1, "bridge": {"x": [4.3, 9.75], "deck_z": 19.45, "w": 1.0}, "posts_x": [7.7, 9.0]}, "T5": {"y": 53.7, "x": [-0.15, -20.65], "z_bot": 21.35, "w": 0.4, "h": 0.5, "drive_side": 1, "gallery": {"x": [-2.15, -26.2], "deck_z": 21.25, "y": [53.2, 54.8], "truss_h": 1.5}, "trestles": [{"x": -14.15, "hx": 0.45, "y": [52.9, 55.1]}, {"x": -26.2, "hx": 0.4, "y": [52.9, 55.1]}]}, "spout_ends": {"H2->T3": 3.1, "H3->T3": 2.0, "H4->T5": -0.602}, "src": "judgment by the tower frame: T3 under the east-face diagonals (>= 20.46 at y 53.9) and over the +19.4 girt; T5 over the west-face diagonals (<= 21.02 at y 53.7) and under the +22.0 girt; trestles in the gaps between the plinths of silos «2», «3»"},
     "status": "7B 2026-09-27: параметри добудови для кітів фази 5; кожен вузол має проєктну записку research/design/*.md",
     "dryer": {"note": "research/design/drying_loop.md", "building": "building_4", "size": [7.6, 2.8, 16.75], "t_h_wet": 29.3, "fans_kw": [22.0, 11.0], "burner_kw": 2270, "wet_bins": ["OS2", "OS3"], "src": "rec_eda294e3 (STRAHL 3000 FR, 4mod, wheat 20->15)"},
     "wet_bins": {"note": "research/design/drying_loop.md", "silos": ["OS2", "OS3"], "volume_m3_each": 661, "bulk_t_m3": 0.75, "min_hours": 8, "src": "volume rec_b7984108; 8 h ВНТП 05-88 п. 7.10 rec_d98f51e1; 2 bins НПАОП rec_82713fcf"},
