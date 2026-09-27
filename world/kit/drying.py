@@ -263,17 +263,20 @@ def build_t5(site=None):
             "t5_ladder": ("galv", False, c.merge_parts(stiles + rungs + cage)), "t5_landing": ("grating", False, c.merge_parts(landing + rest))}
 
 
+WET_FAN_OFFSET = 0.9                  # fan pad centre beyond the plinth (judgment)
+
+
 def build_wet_fans(site=None):
-    """One aeration fan per wet silo (ВНТП п. 7.11: wet grain kept with active ventilation), on the side
-    away from the tower (-Y), on a pad by the plinth (judgment)."""
+    """One aeration fan per wet silo (ВНТП п. 7.11: wet grain kept with active ventilation), on the north
+    side (+Y): the south side is the truck lane under Ш1 (site plan), a pad by the plinth (judgment)."""
     site = site or _site()
     gz = c.ground_z()
     fans, pads = [], []
     for s in site["receiving"]["old_silos"]:
-        x, y = s["x"], s["y"] - s["plinth_r"] - 0.9
+        x, y = s["x"], s["y"] + s["plinth_r"] + WET_FAN_OFFSET
         pads.append(c.box((x - 0.7, y - 0.6, gz), (x + 0.7, y + 0.6, gz + 0.15)))
         fans.append(c.cylinder(0.45, gz + 0.15, gz + 1.0, steps=24, center=(x, y)))
-        fans.append(st.member((x, y + 0.3, gz + 0.6), (x, s["y"] - s["plinth_r"] - 0.005, gz + 0.6),
+        fans.append(st.member((x, y - 0.3, gz + 0.6), (x, s["y"] + s["plinth_r"] + 0.005, gz + 0.6),
                               np.array([(-0.2, -0.2), (0.2, -0.2), (0.2, 0.2), (-0.2, 0.2)])))
     return {"wet_fans": ("motor", False, c.merge_parts(fans)), "wet_fan_pads": ("concrete", False, c.merge_parts(pads))}
 

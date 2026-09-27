@@ -126,6 +126,13 @@ def assemble(quick=False):
         holes += [(p["x"][0] - w, p["y"][0] - w, p["x"][1] + w, p["y"][1] + w),
                   (tp["inner_x"][0] - tp["wall_t"], tp["inner_y"][0] - tp["wall_t"], tp["inner_x"][1] + tp["wall_t"], tp["inner_y"][1] + tp["wall_t"])]
 
+    if "site_plan" in site.get("designed", {}):             # phase 5B/5C: roads, scales, АПК, КПП, КТП, fire water
+        from kit import site_plan as spl
+        col = bpy.data.collections.new("SITE_PLAN")
+        scene.collection.children.link(col)
+        for k, (mat, smooth, (v, f)) in spl.build(site).items():
+            c.mesh_from_arrays(f"SITE_PLAN_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
+
     asp_measure = {}
     if "aspiration" in site:
         col = bpy.data.collections.new("ASPIRATION")
@@ -153,6 +160,8 @@ def main():
         "site_receiving.png": c.camera("CAM_RECV", (38.0, 22.0, 42.0), (-6.0, 57.0, 6.0), lens=24),
         "site_drying.png": c.camera("CAM_DRYING", (26.0, 30.0, 30.0), (-8.0, 54.0, 12.0), lens=24),
         "site_wet_silos.png": c.camera("CAM_WET", (-38.0, 78.0, 32.0), (-6.0, 53.0, 13.0), lens=24),
+        "site_plan_top.png": c.camera("CAM_PLAN", (40.0, -40.0, 120.0), (25.0, 40.0, 0.0), lens=24),
+        "site_scales.png": c.camera("CAM_SCALES", (58.0, 80.0, 9.0), (36.0, 63.0, 1.5), lens=24),
         "site_truck_pit.png": c.camera("CAM_TRUCK", (19.0, 62.2, c.ground_z() + 1.7), (0.0, 63.4, 4.0), lens=22),
         "site_tunnel_exit.png": c.camera("CAM_EXIT", (-56.5, 9.5, c.ground_z() + 1.7), (-51.1, 2.8, -1.2), lens=24),
         "site_gallery_walk.png": c.camera("CAM_WALK", (-3.5, 0.4, 24.9), (-30, 0.2, 23.6), lens=20),
