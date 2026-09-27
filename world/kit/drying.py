@@ -241,9 +241,16 @@ def build_t5(site=None):
                 braces.append(st.member((ax, ay, za + 0.05), (bx, by, zb - 0.05), st.L50))
                 braces.append(st.member((bx, by, za + 0.05), (ax, ay, zb - 0.05), st.L50))
         braces.append(st.member((cx - hx - 0.1, (ya + yb) / 2, top), (cx + hx + 0.1, (ya + yb) / 2, top), st.HEA200))
-    rail = []
-    toe = []
-    for yy, pts in ((yb, [(xs[0], yb), (xs[1], yb)]), (ya, [(xs[0], ya), (xs[1], ya)])):
+    # access: caged ladder on the south face of trestle A up to a landing at the deck (ISO 14122-4, <= 6 m flights)
+    from . import aspiration as asp
+    ta = g["trestles"][0]
+    ly = ta["y"][0] - 0.1
+    stiles, rungs, cage, rest, lrails, ltoes = asp._caged_ladder(ta["x"], ly, -1, gz + 0.3, dz, 6.0)
+    landing = [st.grating_panel(ta["x"] - 0.8, ly - 0.9, ta["x"] + 0.8, ya, dz)]
+    lr, lt = st.guard_rail([(ta["x"] - 0.8, ya), (ta["x"] - 0.8, ly - 0.9), (ta["x"] + 0.8, ly - 0.9), (ta["x"] + 0.8, ya)], dz)
+    rail = [lr] + lrails
+    toe = [lt] + ltoes
+    for yy, pts in ((yb, [(xs[0], yb), (xs[1], yb)]), (ya, [(xs[0], ya), (ta["x"] - 0.8, ya)]), (ya, [(ta["x"] + 0.8, ya), (xs[1], ya)])):
         r_, t_ = st.guard_rail(pts, dz)
         rail.append(r_)
         toe.append(t_)
@@ -252,7 +259,8 @@ def build_t5(site=None):
             "t5_deck": ("grating", False, c.merge_parts(deck)), "t5_truss": ("galv", False, c.merge_parts(chords + webs)),
             "t5_rails": ("yellow", False, c.merge_parts(rail)), "t5_toes": ("yellow", False, c.merge_parts(toe)),
             "t5_trestle_legs": ("galv", False, c.merge_parts(legs)), "t5_trestle_braces": ("galv", False, c.merge_parts(braces)),
-            "t5_trestle_feet": ("concrete", False, c.merge_parts(feet))}
+            "t5_trestle_feet": ("concrete", False, c.merge_parts(feet)),
+            "t5_ladder": ("galv", False, c.merge_parts(stiles + rungs + cage)), "t5_landing": ("grating", False, c.merge_parts(landing + rest))}
 
 
 def build_wet_fans(site=None):

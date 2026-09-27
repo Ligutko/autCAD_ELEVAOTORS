@@ -40,7 +40,7 @@ from kit import receiving as rc  # noqa: E402
 TOL = 0.03
 NEW = ["t5_casing", "t5_deck", "t5_truss", "t5_trestle_legs", "t5_trestle_braces", "t5_trestle_feet", "t3_casing",
        "t3_bridge_deck", "t3_bridge_frame", "t3_drive", "t5_drive", "dryer_column", "dryer_legs", "dryer_hopper", "dryer_fans",
-       "dryer_ladder", "dryer_enclosure", "dryer_enclosure_roof", "dryer_platform", "wet_fans"]
+       "dryer_ladder", "dryer_enclosure", "dryer_enclosure_roof", "dryer_platform", "wet_fans", "t5_ladder", "t5_landing"]
 OLD = ["frame", "bracing", "decks", "noria_legs", "noria_heads", "noria_drives", "noria_boots", "old_silo_walls",
        "old_silo_roofs", "old_silo_plinths", "conveyors", "ct_room", "ct_columns", "ct_floor", "shed_columns", "shed_roof"]
 # pairs that touch by design: the casing on its own deck / bridge, the column in its own enclosure roof opening
@@ -51,7 +51,8 @@ TOUCH = {("t3_casing", "t3_bridge_deck"), ("t5_casing", "t5_deck"), ("t3_bridge_
          ("dryer_platform", "dryer_column"), ("dryer_ladder", "dryer_platform"), ("dryer_fans", "dryer_column"),
          ("t3_bridge_frame", "dryer_hopper"), ("t3_drive", "t3_casing"), ("t5_drive", "t5_casing"),
          ("dryer_legs", "dryer_enclosure"), ("dryer_ladder", "dryer_column"),
-         ("dryer_enclosure", "dryer_enclosure_roof")}
+         ("dryer_enclosure", "dryer_enclosure_roof"), ("t5_ladder", "t5_landing"), ("t5_landing", "t5_deck"),
+         ("t5_landing", "t5_truss"), ("t5_ladder", "t5_trestle_braces"), ("t5_landing", "t5_trestle_braces")}
 
 
 def _bvh(data):
@@ -109,6 +110,8 @@ def checks(site):
                 for s in r["old_silos"]:
                     worst = min(worst, math.hypot(px - s["x"], py - s["y"]) - s["plinth_r"] - dr.TRESTLE_FOOT)   # footing edge
     out.append(("T5 trestles clear of the old silo plinths (>= 0.1 m, foot included)", worst >= 0.1, f"min {worst:.2f} m"))
+    lad = "t5_ladder" in rc.build(r, site) and "t5_landing" in rc.build(r, site)
+    out.append(("T5 gallery has an access: caged ladder on trestle A to a landing at the deck (ISO 14122-4)", lad, f"{lad}"))
     if worst < 0.3:
         out.append(("trestle clearance under 0.3 m: WARN", True, f"{worst:.2f} m"))
 
