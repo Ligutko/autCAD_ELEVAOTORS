@@ -1,5 +1,5 @@
 {
-  "build_seconds": 1.9,
+  "build_seconds": 2.5,
   "silos": 6,
   "towers": [
     "H5",
@@ -12,7 +12,7 @@
     "G_H5_H6",
     "G_H14_H5"
   ],
-  "silo_vertices": 2808072,
+  "silo_vertices": 2813184,
   "aspiration": {
     "A": {
       "serves": [
