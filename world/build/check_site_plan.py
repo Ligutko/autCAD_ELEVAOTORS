@@ -17,10 +17,11 @@ line). Norm checks (research/site_plan_norms.md): lanes >= 4.5 m (СНиП та�
 12.5 / 5.3 m (96/53/EC), clear height >= 4.5 (WARN < 5.0), scales straights >= 12 m (NIST), КТП >= 6 m from silos
 (WARN < 12), fire water pier >= 10 m from buildings, fire access to every silo, no loose road ends.
 
+Service spurs: a 2.55 x 3.8 m trailer box driven to each dust bin centre clears the bin meshes (BVH).
 Road surface: the outer corner of every bend is paved (rays down on the built mesh), the surface seen from above
 faces up and no face lies within 1 mm of another (coplanar overlaps render black).
 
-Broken variants that must fail: roads without the corner fill, scales in on the pit ramp, sampler post 7 m off the lane, hydrant 1 m from
+Broken variants that must fail: a 4.3 m trailer under the bin gate, roads without the corner fill, scales in on the pit ramp, sampler post 7 m off the lane, hydrant 1 m from
 the pit shed, U-turn centre at x -18 (through the plinth of silo «3»), out lane on y 44.0 (off Ш1, on the tower footings).
 
 Run:
@@ -153,6 +154,39 @@ def checks(site):
                 f"trestle {worst_t:.2f} m, buildings {worst_b:.2f} m"))
     out += norm_checks(site)
     out += surface_checks(site)
+    out += spur_checks(site)
+    return out
+
+
+TRAILER = (2.55, 3.8)                 # dust trailer width (road-train judgment above) and height under the bin gate (judgment)
+
+
+def spur_checks(site, trailer=TRAILER):
+    """A trailer box driven along each service spur up to its dust bin centre clears every mesh of that bin
+    (frame, bracing, ladder, cage, gate), built by kit/aspiration.build_bin."""
+    from mathutils import Vector
+    from mathutils.bvhtree import BVHTree
+    from kit import aspiration as asp
+    out = []
+    g = c.ground_z()
+    hits = []
+    for ln in spl.spec(site)["lanes"]:
+        if not ln.get("to_bin"):
+            continue
+        b = next(bb for bb in site["aspiration"]["dust_bins"] if bb["id"] == ln["to_bin"])
+        parts = [p for p in asp.build_bin(b, b["center"][1] + 1.0).values() if p is not None]
+        v, f = c.merge_parts(parts)
+        bvh = BVHTree.FromPolygons([Vector(q) for q in v], [tuple(int(i) for i in q) for blk in f for q in blk])
+        (x0, y0), (x1, y1) = ln["pts"][0], ln["pts"][-1]
+        hw = trailer[0] / 2
+        lo = (min(x0, x1) - (hw if x0 == x1 else 0), min(y0, y1) - (hw if y0 == y1 else 0), g + 0.3)
+        hi = (max(x0, x1) + (hw if x0 == x1 else 0), max(y0, y1) + (hw if y0 == y1 else 0), g + trailer[1])
+        bv, bf = c.box(lo, hi)
+        box = BVHTree.FromPolygons([Vector(q) for q in bv], [tuple(int(i) for i in q) for q in bf])
+        if box.overlap(bvh):
+            hits.append((ln["id"], b["id"]))
+    out.append((f"a {trailer[0]} x {trailer[1]} m trailer drives along each service spur under its dust bin without touching it",
+                not hits, f"clash {hits}"))
     return out
 
 
@@ -322,6 +356,10 @@ def run(site):
             if ln["id"] == "uturn":
                 ln["arc"]["r"] = (63.25 - 44.0) / 2
                 ln["arc"]["c"][1] = (63.25 + 44.0) / 2
+
+    tall = [n for n, ok, _ in spur_checks(site, trailer=(TRAILER[0], 4.3)) if not ok]
+    ok_all &= bool(tall)
+    print(f"{'PASS' if tall else 'FAIL'}  broken variant must be rejected — a 4.3 m trailer under the bin gate: failed {tall}", flush=True)
 
     joins = spl.corner_joins
     spl.corner_joins = lambda sp: []                                     # the ribbons alone leave the outer corners open

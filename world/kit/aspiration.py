@@ -93,9 +93,10 @@ def _caged_ladder(x, y, out, z0, z1, max_flight):
 
 
 def build_bin(b, riser_y, max_flight=6.0):
-    """Dust bin on four legs: prism, hopper, gate ТЗА-400 underneath, roof rail and a caged ladder on
-    the face away from the incoming main. Low bracing only on the long faces, so a trailer can drive
-    in through the short faces under the gate."""
+    """Dust bin on four legs: prism, hopper, gate ТЗА-400 underneath, roof rail and a caged ladder.
+    The dust trailer backs in along its service spur (Y, site_plan spur_81 / spur_82) through the long faces, so the
+    low bracing and the ladder go on the short faces (X); W1c 2026-09-28: a trailer box driven along the spurs hit the
+    old long-face bracing and the ladder (check_site_plan)."""
     cx, cy = b["center"]
     fx, fy = b["frame"]
     s = b["bin"][0] / 2
@@ -107,7 +108,7 @@ def build_bin(b, riser_y, max_flight=6.0):
     corners = [(-1, -1), (1, -1), (1, 1), (-1, 1)]
     for (ax, ay), (bx, by) in zip(corners, corners[1:] + corners[:1]):
         frame.append(st.member((cx + ax * fx / 2, cy + ay * fy / 2, z1 - 0.1), (cx + bx * fx / 2, cy + by * fy / 2, z1 - 0.1), st.shs(0.12)))
-        if ay == by:                                               # long faces (along X)
+        if ax == bx:                                               # short faces (along Y): the trailer passes the long ones
             frame.append(st.member((cx + ax * fx / 2, cy + ay * fy / 2, 1.2), (cx + bx * fx / 2, cy + by * fy / 2, 1.2), st.shs(0.12)))
             frame.append(st.member((cx + ax * fx / 2, cy + ay * fy / 2, 1.2), (cx + bx * fx / 2, cy + by * fy / 2, z1 - 0.1), st.L75))
     shell.append(c.box((cx - s, cy - s, z1), (cx + s, cy + s, z2)))
@@ -118,16 +119,28 @@ def build_bin(b, riser_y, max_flight=6.0):
     shell.append((v, f))
     gate.append(c.box((cx - 0.3, cy - 0.28, z0 - 0.25), (cx + 0.3, cy + 0.28, z0)))
     gate.append(c.box((cx + 0.3, cy - 0.07, z0 - 0.2), (cx + 0.75, cy + 0.07, z0 - 0.05)))
-    away = -side_towards(b, riser_y)                              # ladder face: away from the main
-    lx = cx + 0.5
-    stiles, rungs, cage, rest, rails, toes = _caged_ladder(lx, cy + away * fy / 2, away, c.ground_z(), z2, max_flight)
+    # ladder on the east short face: built in a frame turned by -90 degrees (local u = y - cy, v = cx - x),
+    # where that face is a long one at v = -fx/2, then turned back
+    away = -1.0
+    lu = 0.5
+    stiles, rungs, cage, rest, rails, toes = _caged_ladder(lu, away * fx / 2, away, c.ground_z(), z2, max_flight)
     k = max(1, math.ceil(z2 / max_flight - 1e-9))
-    x_top = lx + (0.35 if (k - 1) % 2 else -0.35)                 # the last flight comes out here
-    yl, yo, e = cy + away * (s - 0.05), cy - away * (s - 0.05), s - 0.05
-    ring = [(x_top + 0.4, yl), (cx + e, yl), (cx + e, yo), (cx - e, yo), (cx - e, yl), (x_top - 0.4, yl)]
+    u_top = lu + (0.35 if (k - 1) % 2 else -0.35)                 # the last flight comes out here
+    yl, yo, e = away * (s - 0.05), -away * (s - 0.05), s - 0.05
+    ring = [(u_top + 0.4, yl), (e, yl), (e, yo), (-e, yo), (-e, yl), (u_top - 0.4, yl)]
     tube, toe = st.guard_rail(ring, z2)                           # open at the ladder exit
     rails.append(tube)
     toes.append(toe)
+
+    def turn(parts):
+        out = []
+        for v, f in parts:
+            v = np.asarray(v, float).copy()
+            u, w = v[:, 0].copy(), v[:, 1].copy()
+            v[:, 0], v[:, 1] = cx - w, cy + u
+            out.append((v, f))
+        return out
+    stiles, rungs, cage, rest, rails, toes = (turn(p) for p in (stiles, rungs, cage, rest, rails, toes))
     return {"bin_frame": c.merge_parts(frame), "bin_shell": c.merge_parts(shell), "bin_gate": c.merge_parts(gate),
             "ladder": c.merge_parts(stiles + cage), "ladder_rungs": c.merge_parts(rungs),
             "bin_rest": c.merge_parts(rest) if rest else None, "bin_rails": c.merge_parts(rails), "bin_toes": c.merge_parts(toes)}

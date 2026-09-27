@@ -1,0 +1,31 @@
+{
+  "id": "rec_19445615",
+  "subject": "Норма: ДБН В.2.5-28:2018 — обмеження світлового забруднення, зона A2 (табл. 8.11)",
+  "kind": "norm",
+  "claim": {
+    "name": "obtrusive_light_A2",
+    "value": {
+      "E_vertical_pre_curfew_lx": 5,
+      "E_vertical_curfew_lx": 1,
+      "I_pre_curfew_cd": 7500,
+      "I_curfew_cd": 500,
+      "ULR_pct": 5
+    },
+    "unit": "",
+    "qualifier": "A2 — погано освітлені ділянки: промислові або сільські житлові; сила світла в потенційно сліпучому напрямку"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.isu.net.ua/sites/default/files/normdocs/dbn_v_2.5-28_2018.pdf",
+    "path": "inbox/raw/web/zakon.isu.net.ua/dbn_v_2.5-28_2018.pdf",
+    "page": 29,
+    "quote": "А2 5 1 7500 500 5 5 400",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Ділянка — поле біля с. Слободо-Петрівка, тому A2. У моделі перевіряється ULR і сила світла до горизонту (0..-10°); вертикальна освітленість вікон сусідів не рахувалась — житла поруч у моделі немає. Друкована с. 25.",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_a4698cea",
+  "subject": "Норма: ДБН В.2.5-28:2018 — коефіцієнт експлуатації освітлювальної установки (п. 8.3.7)",
+  "kind": "norm",
+  "claim": {
+    "name": "maintenance_factor",
+    "value": 0.67,
+    "unit": "",
+    "qualifier": "за не менше 4 чисток на рік (металургія, хімія, гірництво...) і не менше 2 — для інших об'єктів"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.isu.net.ua/sites/default/files/normdocs/dbn_v_2.5-28_2018.pdf",
+    "path": "inbox/raw/web/zakon.isu.net.ua/dbn_v_2.5-28_2018.pdf",
+    "page": 29,
+    "quote": "При проектуванні ОУ коефіцієнт експлуатації приймають 0,67",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Елеватор — запилене виробництво (зерновий пил): у записці прийнято 0.67 з 4 чистками на рік (judgment щодо кількості чисток). Друкована с. 25.",
+  "seen_in": []
+}

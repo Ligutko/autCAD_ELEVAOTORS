@@ -1,0 +1,37 @@
+{
+  "id": "rec_e4844ba2",
+  "subject": "LEDVANCE FLOODLIGHT PERFORMANCE DALI ASYM 55x110 50 W 4000 K BK (4058075760530) — прожектори під бункерами пилу",
+  "kind": "dimension",
+  "claim": {
+    "name": "floodlight_50w",
+    "value": {
+      "lm": 6300,
+      "W": 50,
+      "beam_deg": [
+        55,
+        110
+      ],
+      "size_mm": [
+        314,
+        240,
+        63
+      ]
+    },
+    "unit": "",
+    "qualifier": "сторінка товару any-lamp з файлами IES / LDT виробника"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.any-lamp.com/ledvance-led-floodlight-performance-50w-6300lm-55x110d-840-cool-white-ip66-dali-dimmable-asymmetrical-4058075760530",
+    "path": "inbox/raw/web/any-lamp.com/ledvance_50w_page.html",
+    "page": null,
+    "quote": "Ledvance LED Floodlight Performance 50W 6300lm 55x110D - 840 Cool White",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "IES (LEDVANCE_FL_PFM_50W_ASYM_DALI_4058075760530.ies, LEDVANCE GmbH 2024) інтегрується в 6 307 лм; у цьому файлі напрям викиду — C 90° (у 200 Вт — C 0°); нормовані криві збігаються з 200 Вт після повороту на 90°: та сама лінза.",
+  "seen_in": []
+}

@@ -8,6 +8,7 @@ Run:
 """
 
 import json
+import math
 import sys
 import time
 from pathlib import Path
@@ -152,6 +153,13 @@ def assemble(quick=False):
                   "fence": c.mat_painted("SITE_FENCE_RAL6005", (0.02, 0.09, 0.05), 0.45, grime=0.15)})   # polymer-coated mesh, judgment
         for k, (mat, smooth, (v, f)) in env.build(site).items():
             c.mesh_from_arrays(f"ENV_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
+        if "lighting" in site["designed"]["environment"]:     # W1c: floodlight masts and building-mounted floodlights
+            from kit import lighting as lt
+            col = bpy.data.collections.new("LIGHTING")
+            scene.collection.children.link(col)
+            m["lamp_glass"] = c.mat_painted("SITE_LAMP_GLASS", (0.55, 0.57, 0.6), 0.05, grime=0.0)
+            for k, (mat, smooth, (v, f)) in lt.build(site).items():
+                c.mesh_from_arrays(f"LIGHT_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
     else:
         v, f = tun.ground_cells(2000, holes)
         c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
@@ -160,10 +168,50 @@ def assemble(quick=False):
     return scene, site, build_s, silo_measure, asp_measure
 
 
+def night(scene, site):
+    """Night preset: a flat late-twilight sky, the sun off, every floodlight lit from its IES file
+    (the same photometry as check_lighting), glowing glass, exposure opened for ~10-200 lx scenes."""
+    from kit import lighting as lt
+    nt = scene.world.node_tree
+    bg = next(n for n in nt.nodes if n.type == "BACKGROUND")
+    for ln in list(bg.inputs["Color"].links):                           # the physical sky is black under the horizon:
+        nt.links.remove(ln)                                               # a flat late-twilight blue instead (judgment)
+    bg.inputs["Color"].default_value = (0.004, 0.008, 0.02, 1.0)
+    bg.inputs["Strength"].default_value = 1.0
+    for ob in scene.objects:
+        if ob.type == "LIGHT" and ob.data.type == "SUN":
+            ob.hide_render = True
+    col = bpy.data.collections.new("LAMPS")
+    scene.collection.children.link(col)
+    lt.add_lamps(site, collection=col)
+    glass = bpy.data.materials.get("SITE_LAMP_GLASS")
+    if glass:
+        b = next(n for n in glass.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+        b.inputs["Emission Color"].default_value = (1.0, 0.93, 0.85, 1.0)
+        b.inputs["Emission Strength"].default_value = 40.0
+    scene.view_settings.exposure = 3.8
+
+
 def main():
     quick = "--quick" in sys.argv
     OUT.mkdir(parents=True, exist_ok=True)
     scene, site, build_s, silo_measure, asp_measure = assemble(quick)
+    if "--night" in sys.argv:
+        night(scene, site)
+        g = c.ground_z()
+        cams = {"night_drone.png": c.camera("CAM_N_DRONE", (70, -70, 55), (-8, 12, 10), lens=28),
+                "night_scales.png": c.camera("CAM_N_SCALES", (58.0, 80.0, 9.0), (36.0, 63.0, 1.5), lens=24),
+                "night_gate.png": c.camera("CAM_N_GATE", (124, 36, 6), (104, 56, 1.0), lens=26),
+                "night_pit.png": c.camera("CAM_N_PIT", (19.0, 62.2, g + 1.7), (0.0, 63.4, 4.0), lens=22),
+                "night_ring.png": c.camera("CAM_N_RING", (-70, -32, 14), (-30, 0, 2), lens=24)}
+        only = [a.split("=", 1)[1] for a in sys.argv if a.startswith("--only=")]
+        for name, cam in cams.items():
+            if only and name not in only:
+                continue
+            t = time.time()
+            c.render(scene, cam, OUT / name)
+            print("rendered", name, round(time.time() - t, 1), "s", flush=True)
+        return
 
     cams = {
         "site_drone.png": c.camera("CAM_DRONE", (70, -70, 55), (-8, 12, 10), lens=28),

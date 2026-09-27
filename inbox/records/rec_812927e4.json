@@ -1,0 +1,39 @@
+{
+  "id": "rec_812927e4",
+  "subject": "LEDVANCE FLOODLIGHT PERFORMANCE ASYM 55x110 200 W 4000 K BK (4058075353565) — прожектор щогл",
+  "kind": "dimension",
+  "claim": {
+    "name": "floodlight_200w",
+    "value": {
+      "lm": 26400,
+      "W": 200,
+      "beam_deg": [
+        55,
+        110
+      ],
+      "size_mm": [
+        494,
+        395,
+        87
+      ],
+      "mass_kg": 6.3,
+      "IP": 66
+    },
+    "unit": "",
+    "qualifier": "паспорт виробника, с. 3–4; фотометрія IES у тій самій папці"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.any-lamp.com/ledvance-led-floodlight-performance-black-200w-26400lm-55x110d-840-cool-white-ip66-asymmetrical-4058075353565",
+    "path": "inbox/raw/web/any-lamp.com/LEDVANCE_FL_PFM_200W_ASYM_4058075353565_datasheet.pdf",
+    "page": 3,
+    "quote": "Luminous flux 26400 lm",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Файл IES (LEDVANCE_FL_PFM_200W_ASYM_4058075353565.ies) інтегрується в 26 399 лм; пік 15 132 кд при C 0°, γ 48°; симетричний відносно площини C0–C180. Габарит — с. 4.",
+  "seen_in": []
+}

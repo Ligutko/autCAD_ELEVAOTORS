@@ -1,0 +1,32 @@
+{
+  "id": "rec_c891639a",
+  "subject": "Норма: ДБН В.2.5-28:2018 — освітленість навколишньої зони (табл. 8.8)",
+  "kind": "norm",
+  "claim": {
+    "name": "surrounding_zone_illuminance",
+    "value": {
+      ">=500": 100,
+      "300": 75,
+      "200": 50,
+      "150": 30,
+      "50-100": 20,
+      "<50": null
+    },
+    "unit": "lx",
+    "qualifier": "освітленість навколишньої зони залежно від освітленості об'єкта"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.isu.net.ua/sites/default/files/normdocs/dbn_v_2.5-28_2018.pdf",
+    "path": "inbox/raw/web/zakon.isu.net.ua/dbn_v_2.5-28_2018.pdf",
+    "page": 28,
+    "quote": "Таблиця 8.8 - Значення освітленості навколишньої зони в залежності від освітленості об’єкта",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для ваг 200 лк навколишня зона — 50 лк; у моделі зона = прямі ділянки по 12 м до і після ваг (rec_7f0c2c19). Друкована с. 24.",
+  "seen_in": []
+}
