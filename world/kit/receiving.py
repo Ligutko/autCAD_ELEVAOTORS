@@ -195,17 +195,29 @@ def build_tower(r=None, site=None):
             "pit_cover": ("concrete", False, c.merge_parts(cover))}
 
 
-def build_norias(r=None):
+def build_norias(r=None, by_node=False):
+    """Legs, boots, heads, drives of H1-H4, merged by kind, or one set per noria with by_node
+    ("noria_legs_h1", ...: the scene highlights one process node, routes.py)."""
     r = r or spec()
-    legs, boots, heads, drives = [], [], [], []
+    look = {"legs": ("galv", []), "boots": ("galv_old", []), "heads": ("galv", []), "drives": ("motor", [])}
+    out = {}
     for n in r["norias"]:
         bx = noria_boxes(n, r)
-        legs += [_b(bx["leg_a"]), _b(bx["leg_b"])]
-        boots.append(_b(bx["boot"]))
-        heads.append(_b(bx["head"]))
-        drives.append(_b(bx["drive"]))
-    return {"noria_legs": ("galv", False, c.merge_parts(legs)), "noria_boots": ("galv_old", False, c.merge_parts(boots)),
-            "noria_heads": ("galv", False, c.merge_parts(heads)), "noria_drives": ("motor", False, c.merge_parts(drives))}
+        mine = {"legs": [_b(bx["leg_a"]), _b(bx["leg_b"])], "boots": [_b(bx["boot"])],
+                "heads": [_b(bx["head"])], "drives": [_b(bx["drive"])]}
+        for k, v in mine.items():
+            if by_node:
+                out[f"noria_{k}_{n['id'].lower()}"] = (look[k][0], False, c.merge_parts(v))
+            else:
+                look[k][1].extend(v)
+    if not by_node:
+        out = {f"noria_{k}": (mat, False, c.merge_parts(v)) for k, (mat, v) in look.items()}
+    return out
+
+
+def spout_key(name):
+    """Part key of one tie-in spout with by_node: 'H1->T7@53.37' -> 'spout_h1_to_t7_at_53_37'."""
+    return "spout_" + name.lower().replace("->", "_to_").replace("@", "_at_").replace(".", "_")
 
 
 def build_pit_and_shed(r=None):
@@ -314,12 +326,14 @@ def build_cleaning_tower(r=None):
             "ct_room": ("galv", False, c.merge_parts(room)), "ct_bin_Sh1": ("galv_old", False, c.merge_parts(bin_))}
 
 
-def build(r=None, site=None):
-    """{name: (material key, smooth, (verts, faces))} of the whole receiving block, site frame."""
+def build(r=None, site=None, by_node=False):
+    """{name: (material key, smooth, (verts, faces))} of the whole receiving block, site frame.
+    by_node: norias, conveyors and tie-in spouts one part each (process nodes for routes.py);
+    default: merged by kind, as the checks read them."""
     r = r or spec()
     parts = {}
     parts.update(build_tower(r, site))
-    parts.update(build_norias(r))
+    parts.update(build_norias(r, by_node))
     parts.update(build_pit_and_shed(r))
     parts.update(build_old_silos(r))
     site = site or _site()
@@ -329,6 +343,12 @@ def build(r=None, site=None):
     else:
         parts.update(build_building_4(r))
     parts.update(build_cleaning_tower(r))
+    if by_node:
+        for cv in r["conveyors"]:
+            parts[f"conveyor_{cv['id'].lower()}"] = ("galv", False, _conveyor(cv))
+        for name, p0, p1, s in spouts(r, site):
+            parts[spout_key(name)] = ("galv", False, _spout_mesh(p0, p1, s))
+        return parts
     parts["conveyors"] = ("galv", False, c.merge_parts([_conveyor(cv) for cv in r["conveyors"]]))
     parts["spouts"] = ("galv", False, c.merge_parts([_spout_mesh(p0, p1, s) for _, p0, p1, s in spouts(r, site)]))
     return parts

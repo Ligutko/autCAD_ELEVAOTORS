@@ -53,7 +53,7 @@ def add_parts(prefix, parts, m, collection):
         "conv_flanges": ("galv_old", False), "conv_drive": ("dark", False), "conv_motor": ("motor", "quads"),
     }
     for key, (v, f) in parts.items():
-        mat, smooth = mat_for[key]
+        mat, smooth = mat_for[key if key in mat_for else key.split("_", 1)[1]]    # "t7_conv_casing" -> "conv_casing"
         c.mesh_from_arrays(f"{prefix}_{key.upper()}", v, f, m[mat], smooth=smooth, collection=collection)
 
 
@@ -104,7 +104,7 @@ def assemble(quick=False):
     for b in site["bridges"]:
         col = bpy.data.collections.new(b["id"])
         scene.collection.children.link(col)
-        add_parts(b["id"], gal.bridge(b), m, col)
+        add_parts(b["id"], gal.bridge(b, by_conveyor=True), m, col)       # one object per conveyor: routes.py
 
     holes = []
     for t in tunnels:
@@ -120,7 +120,7 @@ def assemble(quick=False):
     if "tower" in site.get("receiving", {}):                # existing receiving block, simplified (phase 4)
         col = bpy.data.collections.new("RECEIVING")
         scene.collection.children.link(col)
-        for k, (mat, smooth, (v, f)) in rcv.build(site["receiving"], site).items():
+        for k, (mat, smooth, (v, f)) in rcv.build(site["receiving"], site, by_node=True).items():
             c.mesh_from_arrays(f"RECEIVING_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
         r = site["receiving"]
         p, w = r["pit"], r["pit"]["wall_t"]

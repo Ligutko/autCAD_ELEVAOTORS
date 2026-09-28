@@ -109,10 +109,29 @@ def fit_checks(site):
     return out
 
 
+def _bvh(data):
+    from mathutils.bvhtree import BVHTree
+    v, f = data
+    polys = [tuple(int(i) for i in row) for block in (f if isinstance(f, list) else [f]) for row in np.asarray(block)]
+    return BVHTree.FromPolygons([tuple(p) for p in np.asarray(v, float)], polys)
+
+
+def drop_checks(site):
+    """Silo drop spouts clear of the gallery beams (meshes). Found in 7C: the EST cross-beam step put a
+    beam on every drop; the opening is now framed (gallery.DROP_OPENING_HALF)."""
+    out = []
+    g = site["silo_top_galleries"]
+    for line in g["lines"]:
+        parts = gal.silo_row_gallery(g, line)
+        hits = _bvh(parts["spouts"]).overlap(_bvh(parts["heavy"]))
+        out.append((f"{line['id']} silo drops clear of the gallery beams", not hits, f"{len(hits)} crossing face pairs"))
+    return out
+
+
 def main():
     site = json.loads((ROOT / "site" / "SITE.json").read_text(encoding="utf-8"))
     ok_all = True
-    for name, ok, info in conveyor_checks(site) + spout_checks(site) + fit_checks(site):
+    for name, ok, info in conveyor_checks(site) + spout_checks(site) + fit_checks(site) + drop_checks(site):
         ok_all &= ok
         print(f"{'PASS' if ok else 'FAIL'}  {name}: {info}", flush=True)
     bad = copy.deepcopy(site)
@@ -120,6 +139,11 @@ def main():
     failed = [n for n, ok, _ in conveyor_checks(bad) if not ok]
     ok_all &= bool(failed)
     print(f"{'PASS' if failed else 'FAIL'}  T8 head moved 0.6 m must be rejected: failed {failed}", flush=True)
+    keep, gal.DROP_OPENING_HALF = gal.DROP_OPENING_HALF, 0.0      # no framed opening: a beam on every drop
+    failed = [n for n, ok, _ in drop_checks(site) if not ok]
+    gal.DROP_OPENING_HALF = keep
+    ok_all &= bool(failed)
+    print(f"{'PASS' if failed else 'FAIL'}  cross beams on the drops (no framed opening) must be rejected: failed {failed}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)
     sys.exit(0 if ok_all else 1)
 

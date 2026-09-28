@@ -14,6 +14,9 @@ from . import steel as st
 CONV_SECTION = 2.0          # EST: bolted casing sections
 CONV_END = 0.30             # EST: casing beyond the pulley axis at head and tail
 CROSS_BEAM_STEP = 1.5       # EST: cross beams under the gallery deck
+# judgment (7C, 2026-09-28): the step put a cross beam exactly on every silo drop (24 m = 16 x 1.5),
+# the □300 spout ran through it. The opening is framed instead: spout half 0.15 + 0.05 clear + beam half 0.04
+DROP_OPENING_HALF = 0.24
 BRIDGE_PANEL = 2.4          # EST: bridge truss panel (not dimensioned on the drawing)
 
 
@@ -65,7 +68,13 @@ def silo_row_gallery(g, line):
     for yy in (ya, yb):                                             # two edge box beams
         heavy.append(c.box((x0, yy - 0.08, bz0), (x1, yy + 0.08, bz1)))
     for x in np.arange(x0, x1 + 1e-6, CROSS_BEAM_STEP):
+        if any(abs(x - dx) < DROP_OPENING_HALF for dx in line["drops_x"]):
+            continue                                                # the silo drop passes here: no beam
         heavy.append(c.box((x - 0.04, ya, bz1 - 0.12), (x + 0.04, yb, bz1)))
+    for dx in line["drops_x"]:                                      # trimmer beams frame the drop opening
+        for s in (-1.0, 1.0):
+            xt = dx + s * DROP_OPENING_HALF
+            heavy.append(c.box((xt - 0.04, ya, bz1 - 0.12), (xt + 0.04, yb, bz1)))
     deck.append(st.grating_panel(x0, ya, x1, yb, dz))
     pf = g["platforms_at_silo_centre"]
     for dx in line["drops_x"]:
@@ -103,9 +112,11 @@ def silo_row_gallery(g, line):
             **{"conv_" + k: v for k, v in conv.items()}}
 
 
-def bridge(b):
+def bridge(b, by_conveyor=False):
     """Truss bridge between towers along Y: horizontal deck, two side trusses below it, rails,
-    and its conveyors side by side, each with its own measured tail and head (sloped ~1.5 deg)."""
+    and its conveyors side by side, each with its own measured tail and head (sloped ~1.5 deg).
+    by_conveyor: one part per conveyor ("t7_conv_casing", ...) instead of both merged ("conv_casing"),
+    so the scene can highlight one process node (routes.py, phase 7C)."""
     xa, xb = b["x"]
     ya, yb = b["y"]
     top, bot, tb = b["deck_top_z"], b["deck_bot_z"], b["truss_bottom_z"]
@@ -144,7 +155,11 @@ def bridge(b):
     merged = {"heavy": c.merge_parts(heavy), "light": c.merge_parts(light), "deck": c.merge_parts(deck),
               "rails": c.merge_parts(rails), "toes": c.merge_parts(toes)}
     for key in ("casing", "flanges", "drive", "motor"):
-        merged["conv_" + key] = c.merge_parts([cv[key] for cv in convs])
+        if by_conveyor:
+            for spec, cv in zip(b["conveyors"], convs):
+                merged[f"{spec['id'].lower()}_conv_{key}"] = cv[key]
+        else:
+            merged["conv_" + key] = c.merge_parts([cv[key] for cv in convs])
     return merged
 
 
