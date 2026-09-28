@@ -175,6 +175,16 @@ def assemble(quick=False):
             trees = bpy.data.collections.new("TREES")
             scene.collection.children.link(trees)
             ls.build_trees(site, trees, m)
+        if "scale" in site["designed"]["environment"]:        # W1e: trucks and workers for scale
+            from kit import figures as fg
+            col = bpy.data.collections.new("FIGURES")
+            scene.collection.children.link(col)
+            m.update({"truck_cab": c.mat_painted("SITE_TRUCK_CAB", (0.45, 0.02, 0.02), 0.35, grime=0.2),
+                      "tarp": c.mat_painted("SITE_TARP", (0.06, 0.12, 0.08), 0.8, grime=0.3), "rubber": c.mat_rubber("SITE_TYRES"),
+                      "hivis": c.mat_painted("SITE_HIVIS", (0.9, 0.45, 0.02), 0.6, grime=0.1),
+                      "skin": c.mat_painted("SITE_SKIN", (0.55, 0.38, 0.28), 0.6, grime=0.0)})
+            for k, (mat, smooth, (v, f)) in fg.build(site).items():
+                c.mesh_from_arrays(f"FIG_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
     else:
         v, f = tun.ground_cells(2000, holes)
         c.mesh_from_arrays("GROUND", v, f, c.mat_ground())

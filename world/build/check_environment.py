@@ -23,7 +23,11 @@ W1d FAIL: every gate lane runs on to the public road; shelterbelts 3-6 rows, 7.5
 main belts <= 600 m apart, auxiliary <= 2000 m (WWF-Україна); fields do not overlap each other, the plot, the public
 road or the approaches; no tree on a road, a field or the plot. FINDING: nearest belt to the fence (no norm found).
 
-Broken variants that must fail: the out gate lane without an approach, a belt of 8 rows, a main belt removed, a field
+W1e FAIL: trucks within their carriageway, 0.5 m under the Ш1 outlet, clear of structures; workers off structures
+and carriageways.
+
+Broken variants that must fail: a truck sticking out through the gate, a worker inside the КТП, the out gate lane
+without an approach, a belt of 8 rows, a main belt removed, a field
 over the plot, fence on the fire road shoulder, gate 4.0 m, fence 2.4 m, a leaf rolling over the
 wicket, apron 1.0 m, shoulder 0.5 m, shoulders that ignore structures, shoulders 5 cm over the ground
 (over the roads), shoulder faces turned down, all strips on one level.
@@ -422,8 +426,49 @@ def surroundings_checks(site):
     return out
 
 
+def scale_checks(site):
+    """Trucks stand within their carriageway (the narrow lane under Ш1 too), clear the bin outlet, touch no structure;
+    workers stand off structures and carriageways."""
+    from kit import figures as fg
+    out = []
+    sp = spl.spec(site)
+    ob = env.obstacles(site)
+    road = c.ground_z() + sp["road_z_over_ground"]
+    bad = []
+    for t in fg.spec(site)["trucks"]:
+        x0, y0, x1, y1, z0, z1 = fg.truck_box(site, t)
+        ln = spl.lane(sp, t["lane"])
+        yl = ln["pts"][0][1]
+        xs_l = sorted(q[0] for q in ln["pts"])
+        for x in np.arange(x0, x1 + 1e-6, 0.25):
+            hw = spl.lane_width(ln, x) / 2
+            if not (xs_l[0] - 1e-6 <= x <= xs_l[1] + 1e-6) or y0 < yl - hw - 1e-6 or y1 > yl + hw + 1e-6:
+                bad.append((t["what"], "off its carriageway at x", round(float(x), 2)))
+                break
+        for name, k, gm in ob:
+            corners = [(x0, y0), (x1, y0), (x1, y1), (x0, y1), ((x0 + x1) / 2, y0), ((x0 + x1) / 2, y1)]
+            if any(spl.footprint_dist(q, k, gm) < 0 for q in corners):
+                bad.append((t["what"], "on", name))
+        b = site["receiving"]["cleaning_tower"]["bin_Sh1"]
+        if x0 < max(b["x"]) and min(b["x"]) < x1 and abs(yl - b["outlet"][0]) < 3 and z1 > b["outlet"][1] - 0.5:
+            bad.append((t["what"], "under Ш1 top", round(z1 - road, 2)))
+    out.append(("trucks within their carriageway, 0.5 m under the Ш1 outlet, clear of structures", not bad, f"{bad}"))
+    pbad = []
+    frames = [(ln["id"], *env.lane_frame(ln, 0.25)) for ln in sp["lanes"]]
+    for x, y, _ in fg.spec(site)["people"]:
+        if any(spl.footprint_dist((x, y), k, gm) < 0.3 for _, k, gm in ob):
+            pbad.append(((x, y), "structure"))
+        for lid, pts, _, hw in frames:
+            if np.min(np.hypot(pts[:, 0] - x, pts[:, 1] - y) - hw) < 0.3:
+                pbad.append(((x, y), lid))
+    out.append(("workers stand off structures and carriageways", not pbad, f"{pbad}"))
+    return out
+
+
 def checks(site, ob_kit=None):
     out = shoulder_checks(site, ob_kit) + ground_checks(site)
+    if "scale" in env.spec(site):
+        out += scale_checks(site)
     if "surroundings" in env.spec(site):
         out += surroundings_checks(site)
     e = env.spec(site)
@@ -490,7 +535,15 @@ def run(site):
         s["designed"]["environment"]["surroundings"]["fields"][0]["rect"] = [-60.0, -20.0, 100.0, 70.0]
         return None
 
-    variants = [("the out gate lane without an approach", v_no_app, "runs on to the public road"), ("a belt of 8 rows", v_rows, "3-6 rows"),
+    def v_truck(s):
+        s["designed"]["environment"]["scale"]["trucks"][0]["x_front"] = 100.0
+        return None
+    def v_person(s):
+        s["designed"]["environment"]["scale"]["people"][0] = [26.0, 29.0, 0]
+        return None
+
+    variants = [("a truck sticking out through the gate", v_truck, "within their carriageway"), ("a worker inside the КТП", v_person, "workers stand"),
+                ("the out gate lane without an approach", v_no_app, "runs on to the public road"), ("a belt of 8 rows", v_rows, "3-6 rows"),
                 ("main belt at y 680 removed (1120 m gap)", v_spacing, "600 m apart"), ("a field laid over the plot", v_field, "fields do not overlap"),
                 ("fence west side at x -61.5 (on the fire road shoulder)", v_fence_w, "1.5 m from every road"),
                 ("gate 4.0 m", v_gate, "gate >= 4.5"), ("fence 2.4 m high", v_tall, "1.6-2.0"),
