@@ -1,0 +1,43 @@
+{
+  "id": "rec_52fcb60b",
+  "subject": "Аналог: склад і біометрія полезахисних лісосмуг центральної України (Ткачук, Панкова, «Вісник НУВГП»)",
+  "kind": "analog",
+  "claim": {
+    "name": "field_belt_biometry",
+    "value": {
+      "height_m": [
+        13,
+        18
+      ],
+      "rows": [
+        3,
+        8
+      ],
+      "rows_mode": 4,
+      "row_gap_m": [
+        1.5,
+        3.0
+      ],
+      "tree_gap_m": [
+        1.0,
+        2.5
+      ]
+    },
+    "unit": "m",
+    "qualifier": "22 обстежені смуги; основні — висота 13–18 м, найчастіше 4-рядні"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://journals.uran.ua/bnusing/article/view/253095",
+    "path": "inbox/raw/web/journals.uran.ua/bnusing_253095_253082.pdf",
+    "page": null,
+    "quote": "Висота всіх досліджуваних основних поле- захисних лісосмуг варіювала від 13 до 18 м.",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session (files fetched by elevator-researcher)"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Таблиця статті: відстань між рядами 1,5–3 м, у ряду 1–2,5 м; ширина 8–26 м. Цитата з текстового шару PDF (з переносом «поле- захисних»).",
+  "seen_in": []
+}

@@ -19,7 +19,12 @@ W1b FAIL: the fence encloses every structure, hydrant and road; >= 1.5 m from ev
 round every structure of the stage and the designed buildings, rays down (ДСТУ-Н Б В.1.1-44 п. 12.8.3), WARN under 2.0
 (ДБН В.1.1-5, loess).
 
-Broken variants that must fail: fence on the fire road shoulder, gate 4.0 m, fence 2.4 m, a leaf rolling over the
+W1d FAIL: every gate lane runs on to the public road; shelterbelts 3-6 rows, 7.5-15 m wide (КМУ 650-2020 п. 5);
+main belts <= 600 m apart, auxiliary <= 2000 m (WWF-Україна); fields do not overlap each other, the plot, the public
+road or the approaches; no tree on a road, a field or the plot. FINDING: nearest belt to the fence (no norm found).
+
+Broken variants that must fail: the out gate lane without an approach, a belt of 8 rows, a main belt removed, a field
+over the plot, fence on the fire road shoulder, gate 4.0 m, fence 2.4 m, a leaf rolling over the
 wicket, apron 1.0 m, shoulder 0.5 m, shoulders that ignore structures, shoulders 5 cm over the ground
 (over the roads), shoulder faces turned down, all strips on one level.
 
@@ -28,6 +33,7 @@ Run:
 """
 
 import copy
+import math
 import json
 import sys
 from pathlib import Path
@@ -338,8 +344,88 @@ def apron_checks(site):
     return out
 
 
+BELT_ROWS, BELT_WIDTH = (3, 6), (7.5, 15.0)      # КМУ 650-2020 п. 5 (rec_61aecf23)
+BELT_MAIN, BELT_AUX = 600.0, 2000.0             # WWF-Україна, typical chernozem / loam (rec_beca0ea0)
+BELT_EDGE = 1.5                                 # закрайка, judgment
+PLOT_MARGIN = 20.0                              # fields and trees keep off the fenced plot (judgment)
+
+
+def surroundings_checks(site):
+    from kit import landscape as ls
+    out = []
+    su = ls.spec(site)
+    sp = spl.spec(site)
+    fe = env.spec(site)["fence"]
+    x0, y0, x1, y1 = fe["rect"]
+    pr = su["public_road"]
+    gates = [op for op in env.openings(site) if op[3] == "gate"]
+    app = {lid: (a, b) for lid, a, b, _ in ls.approach_lanes(site)}
+    bad = []
+    for op in gates:
+        lid = op[4]["lane"]
+        ln = spl.lane(sp, lid)
+        end = max(ln["pts"], key=lambda q: q[0])
+        if lid not in app:
+            bad.append((lid, "no approach"))
+            continue
+        a, b = app[lid]
+        if math.dist(a, end) > 0.05 or abs(b[0] - (pr["x"] - pr["w"] / 2)) > 0.05 or not (pr["y"][0] < b[1] < pr["y"][1]):
+            bad.append((lid, a, b))
+    out.append(("every gate lane runs on to the public road (approach continuous at both ends)", not bad and bool(gates), f"bad {bad}"))
+
+    wbad = []
+    for k, b in enumerate(su["belts"]):
+        w = (b["rows"] - 1) * b["row_gap"] + 2 * BELT_EDGE
+        if not (BELT_ROWS[0] <= b["rows"] <= BELT_ROWS[1] and BELT_WIDTH[0] - 1e-6 <= w <= BELT_WIDTH[1] + 1e-6):
+            wbad.append((k, b["rows"], round(w, 2)))
+    out.append(("shelterbelts 3-6 rows, 7.5-15 m wide (КМУ 650-2020 п. 5)", not wbad, f"bad {wbad}"))
+
+    def spacing(kind, axis):
+        cs = sorted({b["pts"][0][1 - axis] for b in su["belts"] if b.get("kind") == kind})
+        return max((q - p for p, q in zip(cs, cs[1:])), default=0.0), cs
+    gm, ym = spacing("main", 0)
+    ga, xa = spacing("auxiliary", 1)
+    out.append(("main belts <= 600 m apart, auxiliary <= 2000 m (WWF-Україна, typical chernozem)", gm <= BELT_MAIN + 1e-6 and ga <= BELT_AUX + 1e-6,
+                f"main largest gap {gm:.0f} m, auxiliary {ga:.0f} m"))
+
+    rects = [f["rect"] for f in su["fields"]]
+    over = []
+    road = (pr["x"] - pr["w"] / 2 - pr["shoulder"], pr["y"][0], pr["x"] + pr["w"] / 2 + pr["shoulder"], pr["y"][1])
+    plot = (x0 - PLOT_MARGIN, y0 - PLOT_MARGIN, x1 + PLOT_MARGIN, y1 + PLOT_MARGIN)
+    hit = lambda r, q: r[0] < q[2] and q[0] < r[2] and r[1] < q[3] and q[1] < r[3]
+    for i, r in enumerate(rects):
+        for j in range(i + 1, len(rects)):
+            if hit(r, rects[j]):
+                over.append(("fields", i, j))
+        if hit(r, road):
+            over.append(("public road", i))
+        if hit(r, plot):
+            over.append(("plot", i))
+        for lid, (a, b) in app.items():
+            if hit(r, (min(a[0], b[0]), a[1] - 3.5, max(a[0], b[0]), a[1] + 3.5)):
+                over.append(("approach", i))
+    out.append(("fields do not overlap each other, the plot (+20 m), the public road or the approaches", not over, f"{over[:5]}"))
+
+    trees = np.array([(x, y) for x, y, *_ in ls.tree_positions(site)])
+    bad_t = {}
+    for name, r in [("public road", road), ("plot", plot)] + [(f"approach {lid}", (min(a[0], b[0]), a[1] - 3.5, max(a[0], b[0]), a[1] + 3.5))
+                                                              for lid, (a, b) in app.items()] + [("field", r) for r in rects]:
+        n = int(np.sum((trees[:, 0] > r[0]) & (trees[:, 0] < r[2]) & (trees[:, 1] > r[1]) & (trees[:, 1] < r[3])))
+        if n:
+            bad_t[name] = bad_t.get(name, 0) + n
+    out.append(("no tree stands on a road, a field or the plot", not bad_t, f"{len(trees)} trees, bad {bad_t}"))
+
+    near = min(min(abs(b["pts"][0][1] - y) for y in (y0, y1)) if b.get("kind") == "main" else min(abs(b["pts"][0][0] - x) for x in (x0, x1))
+               for b in su["belts"]) - ((su["belts"][0]["rows"] - 1) * su["belts"][0]["row_gap"] / 2)
+    out.append(("nearest shelterbelt tree row to the fence: FINDING", True,
+                f"{near:.1f} m; no fire-distance norm from a field belt to production buildings found (Правила пожежної безпеки дають 25 м лише для місць для багать)"))
+    return out
+
+
 def checks(site, ob_kit=None):
     out = shoulder_checks(site, ob_kit) + ground_checks(site)
+    if "surroundings" in env.spec(site):
+        out += surroundings_checks(site)
     e = env.spec(site)
     if "fence" in e:
         out += fence_checks(site)
@@ -390,7 +476,23 @@ def run(site):
         s["designed"]["environment"]["aprons"]["w"] = 1.0
         return None
 
-    variants = [("fence west side at x -61.5 (on the fire road shoulder)", v_fence_w, "1.5 m from every road"),
+    def v_no_app(s):
+        s["designed"]["environment"]["surroundings"]["approach"]["lanes"] = ["in"]
+        return None
+    def v_rows(s):
+        s["designed"]["environment"]["surroundings"]["belts"][0]["rows"] = 8
+        return None
+    def v_spacing(s):
+        su = s["designed"]["environment"]["surroundings"]
+        su["belts"] = [b for b in su["belts"] if not (b.get("kind") == "main" and b["pts"][0][1] == 680.0)]
+        return None
+    def v_field(s):
+        s["designed"]["environment"]["surroundings"]["fields"][0]["rect"] = [-60.0, -20.0, 100.0, 70.0]
+        return None
+
+    variants = [("the out gate lane without an approach", v_no_app, "runs on to the public road"), ("a belt of 8 rows", v_rows, "3-6 rows"),
+                ("main belt at y 680 removed (1120 m gap)", v_spacing, "600 m apart"), ("a field laid over the plot", v_field, "fields do not overlap"),
+                ("fence west side at x -61.5 (on the fire road shoulder)", v_fence_w, "1.5 m from every road"),
                 ("gate 4.0 m", v_gate, "gate >= 4.5"), ("fence 2.4 m high", v_tall, "1.6-2.0"),
                 ("in gate rolls south over the wicket", v_roll, "roll back"), ("apron 1.0 m", v_apron, "hard apron"),
                 ("shoulder 0.5 m", v_narrow, "shoulder where free"), ("shoulders ignore structures", v_through, "inside a structure"),

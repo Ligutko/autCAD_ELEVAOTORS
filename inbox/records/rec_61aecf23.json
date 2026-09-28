@@ -1,0 +1,34 @@
+{
+  "id": "rec_61aecf23",
+  "subject": "Норма: Правила утримання полезахисних лісових смуг (Постанова КМУ № 650 від 2020) — ширина й кількість рядів",
+  "kind": "norm",
+  "claim": {
+    "name": "field_belt_width_rows",
+    "value": {
+      "rows": [
+        3,
+        6
+      ],
+      "width_m": [
+        7.5,
+        15.0
+      ]
+    },
+    "unit": "m",
+    "qualifier": "п. 5: поздовжні й поперечні смуги по межах полів у рівнинних умовах; п. 6: ширина = сума міжрядь + дві закрайки"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://zakon.rada.gov.ua/laws/show/650-2020-%D0%BF/print",
+    "path": "inbox/raw/web/zakon.rada.gov.ua/650-2020-p_print.html",
+    "page": null,
+    "quote": "з трьох - шести рядів шириною від 7,5 до 15 метрів",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session (files fetched by elevator-researcher)"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "URL відновлено за назвою документа (650-2020-п); сторінку зберіг дослідник.",
+  "seen_in": []
+}

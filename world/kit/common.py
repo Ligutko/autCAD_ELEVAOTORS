@@ -473,6 +473,112 @@ def mat_concrete_yard(name="CONCRETE_YARD", tint=(0.44, 0.43, 0.40)):
     return mat
 
 
+def mat_asphalt(name="ASPHALT"):
+    """Worn asphalt of a rural public road with a faded centre line band left to the texture noise."""
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nodes, links = mat.node_tree.nodes, mat.node_tree.links
+    bsdf = _bsdf(mat)
+    tex = _node(nodes, "ShaderNodeTexCoord", (-900, 0))
+    grain = _node(nodes, "ShaderNodeTexNoise", (-700, 150), Scale=45.0, Detail=10.0)
+    patch = _node(nodes, "ShaderNodeTexNoise", (-700, -100), Scale=0.25, Detail=4.0)
+    for n in (grain, patch):
+        links.new(tex.outputs["Object"], n.inputs["Vector"])
+    mix = _node(nodes, "ShaderNodeMix", (-400, 100))
+    mix.data_type = "RGBA"
+    mix.inputs[6].default_value = (0.055, 0.055, 0.058, 1.0)
+    mix.inputs[7].default_value = (0.11, 0.105, 0.10, 1.0)                    # patched, sun-bleached
+    links.new(patch.outputs["Fac"], mix.inputs["Factor"])
+    links.new(mix.outputs[2], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = 0.85
+    bump = _node(nodes, "ShaderNodeBump", (-300, -250), Strength=0.3, Distance=0.004)
+    links.new(grain.outputs["Fac"], bump.inputs["Height"])
+    links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    return mat
+
+
+def mat_field(name, crop, row_m=0.7, along="Y"):
+    """Crop field seen from 20-1500 m: rows `row_m` apart running along `along`, crop colours with patchy growth.
+    crop: 'stubble' (winter wheat after harvest), 'sunflower' (flowering), 'corn' (tasselling)."""
+    colours = {"stubble": ((0.42, 0.33, 0.16), (0.30, 0.23, 0.11), (0.20, 0.15, 0.08)),
+               "sunflower": ((0.45, 0.34, 0.02), (0.07, 0.12, 0.02), (0.05, 0.08, 0.02)),
+               "corn": ((0.06, 0.13, 0.03), (0.04, 0.09, 0.02), (0.10, 0.12, 0.05))}[crop]
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nodes, links = mat.node_tree.nodes, mat.node_tree.links
+    bsdf = _bsdf(mat)
+    tex = _node(nodes, "ShaderNodeTexCoord", (-1200, 0))
+    sep = _node(nodes, "ShaderNodeSeparateXYZ", (-1000, 200))
+    links.new(tex.outputs["Object"], sep.inputs[0])
+    across = _node(nodes, "ShaderNodeMath", (-800, 200))                        # coordinate across the rows, in rows
+    across.operation = "DIVIDE"
+    across.inputs[1].default_value = row_m
+    links.new(sep.outputs["X" if along == "Y" else "Y"], across.inputs[0])
+    wave = _node(nodes, "ShaderNodeMath", (-600, 200))
+    wave.operation = "PINGPONG"
+    wave.inputs[1].default_value = 0.5
+    links.new(across.outputs[0], wave.inputs[0])
+    rows = _node(nodes, "ShaderNodeMapRange", (-400, 200), **{"From Min": 0.1, "From Max": 0.4})   # 1 on the row, 0 between
+    links.new(wave.outputs[0], rows.inputs["Value"])
+    patch = _node(nodes, "ShaderNodeTexNoise", (-800, -150), Scale=0.02, Detail=5.0, Roughness=0.6)
+    links.new(tex.outputs["Object"], patch.inputs["Vector"])
+    crop_c = _node(nodes, "ShaderNodeMix", (-200, 100))
+    crop_c.data_type = "RGBA"
+    crop_c.inputs[6].default_value = (*colours[1], 1.0)
+    crop_c.inputs[7].default_value = (*colours[0], 1.0)
+    links.new(patch.outputs["Fac"], crop_c.inputs["Factor"])
+    soil = _node(nodes, "ShaderNodeMix", (0, 150))
+    soil.data_type = "RGBA"
+    links.new(rows.outputs["Result"], soil.inputs["Factor"])
+    soil.inputs[6].default_value = (*colours[2], 1.0)                          # soil / straw between the rows
+    links.new(crop_c.outputs[2], soil.inputs[7])
+    links.new(soil.outputs[2], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = 0.95
+    bsdf.inputs["Specular IOR Level"].default_value = 0.1
+    bump = _node(nodes, "ShaderNodeBump", (0, -250), Strength=0.4, Distance=0.05)
+    links.new(rows.outputs["Result"], bump.inputs["Height"])
+    links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    return mat
+
+
+def mat_leaves(name="LEAVES"):
+    """Broadleaf canopy (oak, ash, maple in July): a different green per tree (Object Info random), leaf clusters
+    ~0.25 m on a 15 m tree (object space of a unit-height prototype) with their own tone and relief."""
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nodes, links = mat.node_tree.nodes, mat.node_tree.links
+    bsdf = _bsdf(mat)
+    info = _node(nodes, "ShaderNodeObjectInfo", (-1100, 300))
+    ramp = _node(nodes, "ShaderNodeValToRGB", (-850, 300))
+    ramp.color_ramp.elements[0].color = (0.022, 0.055, 0.014, 1.0)
+    ramp.color_ramp.elements[1].color = (0.075, 0.105, 0.03, 1.0)
+    links.new(info.outputs["Random"], ramp.inputs["Fac"])
+    tex = _node(nodes, "ShaderNodeTexCoord", (-1100, -100))
+    cluster = _node(nodes, "ShaderNodeTexVoronoi", (-850, -100), Scale=70.0)
+    links.new(tex.outputs["Object"], cluster.inputs["Vector"])
+    fine = _node(nodes, "ShaderNodeTexNoise", (-850, -350), Scale=220.0, Detail=4.0)
+    links.new(tex.outputs["Object"], fine.inputs["Vector"])
+    tone = _node(nodes, "ShaderNodeMapRange", (-600, -100), **{"To Min": 0.55, "To Max": 1.3})
+    links.new(cluster.outputs["Color"], tone.inputs["Value"])
+    shade = _node(nodes, "ShaderNodeMix", (-350, 150))
+    shade.data_type = "RGBA"
+    shade.blend_type = "MULTIPLY"
+    shade.inputs["Factor"].default_value = 1.0
+    links.new(ramp.outputs["Color"], shade.inputs[6])
+    links.new(tone.outputs["Result"], shade.inputs[7])
+    links.new(shade.outputs[2], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = 0.75
+    bsdf.inputs["Subsurface Weight"].default_value = 0.15
+    height = _node(nodes, "ShaderNodeMath", (-600, -300))
+    height.operation = "ADD"
+    links.new(cluster.outputs["Distance"], height.inputs[0])
+    links.new(fine.outputs["Fac"], height.inputs[1])
+    bump = _node(nodes, "ShaderNodeBump", (-350, -250), Strength=1.0, Distance=0.004)
+    links.new(height.outputs[0], bump.inputs["Height"])
+    links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    return mat
+
+
 def mat_rubber(name="RUBBER"):
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True

@@ -1,0 +1,40 @@
+{
+  "id": "rec_f21e4735",
+  "subject": "Аналог: 5-рядна полезахисна смуга з дуба й липи (УкрНДІЛГА, 2025)",
+  "kind": "analog",
+  "claim": {
+    "name": "oak_belt_example",
+    "value": {
+      "rows": 5,
+      "planting_m": [
+        2.5,
+        0.7
+      ],
+      "design_width_m": 12.5,
+      "crown_width_m": [
+        21,
+        25
+      ],
+      "species": [
+        "дуб звичайний",
+        "липа дрібнолиста"
+      ]
+    },
+    "unit": "m",
+    "qualifier": "обстеження полезахисних смуг, передмістя Вінниці"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://uriffm.org.ua/uk/news_710.html",
+    "path": "inbox/raw/web/uriffm.org.ua/news_710.html",
+    "page": null,
+    "quote": "Схема розміщення садивних місць — 2,5×0,7 м",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session (files fetched by elevator-researcher)"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Зі збереженням 15 % дерев і розростанням узлісь фактична ширина 21–25 м проти проєктних 12,5 м.",
+  "seen_in": []
+}

@@ -160,6 +160,21 @@ def assemble(quick=False):
             m["lamp_glass"] = c.mat_painted("SITE_LAMP_GLASS", (0.55, 0.57, 0.6), 0.05, grime=0.0)
             for k, (mat, smooth, (v, f)) in lt.build(site).items():
                 c.mesh_from_arrays(f"LIGHT_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
+        if "surroundings" in site["designed"]["environment"]:  # W1d: public road, approaches, fields, shelterbelts
+            from kit import landscape as ls
+            col = bpy.data.collections.new("SURROUNDINGS")
+            scene.collection.children.link(col)
+            m.update({"asphalt": c.mat_asphalt("SITE_ASPHALT"), "bark": c.mat_painted("SITE_BARK", (0.09, 0.075, 0.06), 0.9, grime=0.2),
+                      "leaves": c.mat_leaves("SITE_LEAVES")})
+            for k, (mat, smooth, (v, f)) in ls.build(site).items():
+                if mat not in m:                                   # crop_<crop>_<row direction>
+                    _, crop, along = mat.split("_")
+                    rows = site["designed"]["environment"]["surroundings"]["row_m"][crop]
+                    m[mat] = c.mat_field(f"SITE_{mat.upper()}", crop, row_m=rows, along=along)
+                c.mesh_from_arrays(f"ENV_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
+            trees = bpy.data.collections.new("TREES")
+            scene.collection.children.link(trees)
+            ls.build_trees(site, trees, m)
     else:
         v, f = tun.ground_cells(2000, holes)
         c.mesh_from_arrays("GROUND", v, f, c.mat_ground())

@@ -1,0 +1,28 @@
+{
+  "id": "rec_beca0ea0",
+  "subject": "Рекомендація: відстань між полезахисними лісосмугами (WWF-Україна, природоорієнтовані рішення)",
+  "kind": "norm",
+  "claim": {
+    "name": "field_belt_spacing",
+    "value": {
+      "main_typical_chernozem_m": 600,
+      "auxiliary_loam_m": 2000
+    },
+    "unit": "m",
+    "qualifier": "основні (поздовжні) смуги на вилугуваних, типових і опідзолених чорноземах — до 600 м; поперечні на суглинках — до 2000 м"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://nbs.wwf.ua/polezakhysni_smuhy",
+    "path": "inbox/raw/web/nbs.wwf.ua/polezakhysni_smuhy.html",
+    "page": null,
+    "quote": "на вилугуваних типових і опідзолених чорноземах – до 600 м",
+    "retrieved_at": "2026-09-28",
+    "extractor": "claude-main-session (files fetched by elevator-researcher)"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Рекомендація (не ДБН). Полтавщина — типові чорноземи Лісостепу. Друга частина цитати на сторінці: «Між поперечними (допоміжними) смугами на суглинкових ґрунтах відстань має бути до 2000 м».",
+  "seen_in": []
+}
