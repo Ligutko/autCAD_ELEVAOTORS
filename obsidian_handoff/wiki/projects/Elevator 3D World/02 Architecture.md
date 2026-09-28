@@ -1,6 +1,6 @@
 ---
 type: architecture
-updated: 2026-09-26
+updated: 2026-09-28
 tags: [code, blender]
 ---
 # 02 Architecture
@@ -22,8 +22,20 @@ world/
     aspiration.py     E бункери пилу, установки, повітроводи (WIP) → [[E Aspiration]]
     silo_interior.py  K5 нутро силоса          → [[K5 Silo Interior]]
     cameras.py        D1 рухи камери           → [[D1 D3 Cameras and Reels]]
+    foundation.py     фундамент-кільце, підошва, анкери, земля −0.45 (ground_z)
+    receiving.py      існуючий блок H1–H4 спрощено, яма, очисна вежа, Ш1, стики T7/T10
+    process.py        граф процесу (чистий Python): маршрути, потік, засувки, пуск/зупинка, вузьке місце
+    drying.py         сушарка в будівлі «4», T3, T5, спуски (шар designed)
+    site_plan.py      генплан руху: смуги, ваги, АПК, КПП, КТП, пожежне кільце, гідранти; стрічки доріг
+    environment.py    W1: земля з дірками, двір, узбіччя, огорожа й ворота, відмостки
+    photometry.py     W1: читання IES LM-63, I(C, γ), потік
+    lighting.py       W1: щогли й прожектори, освітленість з тінями, лампи Cycles з IES
+    landscape.py      W1: дорога загального користування, під'їзди, поля, лісосмуги (екземпляри дерев)
+    figures.py        W1: зерновози й люди для масштабу
   build/              сцени: k1_silo, k2_tower, k2b_noria, k4_tunnel, k5_interior, site (assemble()), reel
-                      перевірки: check_noria, check_tower, check_tunnel, check_distribution, check_gallery, check_aspiration
+                      перевірки (17): check_{noria,tower,tunnel,distribution,gallery,aspiration,aeration,silo_interior,silo_roof,
+                      foundation,receiving,process,design,drying,site_plan,environment,lighting}; check_all.py запускає всі
+                      render_awake.ps1 — довгий рендер без сну ПК; site.py -- --night — нічні кадри
   reels/*.json        специфікації роликів
   out/<вузол>/        кадри, README (параметр — значення — джерело), measure.json
 ```
@@ -34,5 +46,6 @@ world/
 - Знімні частини (кришки голови/башмака) — окремі об'єкти для розрізів.
 - Розріз: `cut=(nx, ny)` у `silo.build` / `silo_interior.build` прибирає половину до камери, великі грані й n-кутники ріжуться точно.
 - Підписи: `common.labels()` → колекція `LABELS_<id>`; `face_labels(cam)` ставить їх на екрані без перетинів і ховає закриті; `render_with_labels` рендерить їх другим проходом поверх кадру.
-- Рендер: Cycles, AgX, небо Nishita + сонце; `--quick` для чернеток.
+- Рендер: Cycles, AgX, небо Nishita + сонце; `--quick` для чернеток (у `world/out/site/w1_draft/`, не поверх фіналів); `--night` — прожектори з IES.
+- Шари даних у SITE.json: `drawn` (креслення), `existing` (існуючий блок), `designed` (наш проєкт із записками `research/design/*.md`).
 - Перевірки `check_*.py`: геометрія з кіту порівнюється з кресленням і специфікацією; у кожній є навмисно зламаний варіант, який мусить впасти. Усі мають пройти до коміту.
