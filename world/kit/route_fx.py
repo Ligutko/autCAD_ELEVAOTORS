@@ -160,7 +160,8 @@ def set_fx(dim, glow):
 
 # ------------------------------------------------------------------ flow overlay
 
-SEEN_IN_CASING = 0.45       # m: a path this close behind the first surface is inside a casing, drawn as seen
+SEEN_IN_CASING = 0.9        # m along the ray: a path this close behind the first surface is inside a casing, drawn as
+                            # seen (casing half 0.25-0.35 at a 20-35° view: 0.45-0.9 m); ground over T9 1.86 m, silo 11 m
 SILO_PROXY = (11.0, 15.0, 21.4)   # m, wall radius, eave z, peak z over the silo base (SILO_WALL / SILO_ROOF boxes)
 # thin members do not hide a conveyor or a pipe behind them (and would chop the line into flicker)
 THIN = ("RAILS", "RUNGS", "STILES", "CAGE", "TOES", "TOE_BOARDS", "BRACING", "LADDER", "FENCE", "HANDWHEELS",

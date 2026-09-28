@@ -1,0 +1,453 @@
+{
+  "name": "reel_02_grain_path",
+  "note": "7C marketing reel, scenario agreed with the user 2026-09-28: full cycle, ~60 s, 16:9, day. Numbers: 100 t/h and H5 tubes 33 m spec p.8; S1 6381 m3 catalogue МСВУ 220; pit grating 8 x 6 m SITE receiving.pit; scales 24 x 3 m SITE designed.site_plan; 42 nodes / 207 routes / 173 register items kit/process.py",
+  "format": "16:9",
+  "fps": 24,
+  "samples": 96,
+  "device": "GPU",
+  "cycle": "full_cycle",
+  "props": [
+    {
+      "kind": "truck",
+      "lane": "in",
+      "over": "pit"
+    },
+    {
+      "kind": "tunnel_lights"
+    }
+  ],
+  "caption_pos": "bottom",
+  "hook": "Шлях зерна",
+  "hook_sub": "від автомобіля до силосу — і назад",
+  "hook_seconds": 4.5,
+  "shots": [
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "orbit",
+      "seconds": 5,
+      "lens": 26,
+      "fx": {
+        "dim": [
+          0.0,
+          0.33
+        ],
+        "glow": [
+          0.0,
+          2.5
+        ]
+      },
+      "flow": null,
+      "args": {
+        "target": [
+          5,
+          35,
+          8
+        ],
+        "radius": 115,
+        "height": 72,
+        "start_deg": -75,
+        "sweep_deg": 22
+      },
+      "caption": "",
+      "sub": ""
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "dolly",
+      "seconds": 5,
+      "lens": 28,
+      "flow": {
+        "A": [
+          "START",
+          "SCALES_IN:end"
+        ]
+      },
+      "args": {
+        "from": [
+          104,
+          54,
+          16
+        ],
+        "to": [
+          66,
+          55,
+          14
+        ],
+        "look_from": [
+          84,
+          63.25,
+          1.5
+        ],
+        "look_to": [
+          44,
+          63.25,
+          1.5
+        ]
+      },
+      "caption": "Ваги на в'їзді",
+      "sub": "автоваги 24 × 3 м · пробовідбірник · лабораторія"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "keys",
+      "seconds": 5,
+      "lens": 26,
+      "flow": {
+        "A": [
+          "SCALES_IN:end",
+          "T1:end"
+        ]
+      },
+      "args": {
+        "points": [
+          [
+            24,
+            58,
+            6.5
+          ],
+          [
+            18,
+            60,
+            5
+          ]
+        ],
+        "looks": [
+          [
+            1.1,
+            63,
+            1.0
+          ],
+          [
+            1.1,
+            62,
+            0.0
+          ]
+        ]
+      },
+      "caption": "Завальна яма → конвеєр T1",
+      "sub": "решітка 8 × 6 м · дві лійки під ямою"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "keys",
+      "seconds": 6,
+      "lens": 24,
+      "flow": {
+        "A": [
+          "T1:end",
+          "SH1:end"
+        ]
+      },
+      "args": {
+        "points": [
+          [
+            18,
+            40,
+            5
+          ],
+          [
+            18,
+            40,
+            34
+          ]
+        ],
+        "looks": [
+          [
+            1,
+            54,
+            2
+          ],
+          [
+            0,
+            50,
+            28
+          ]
+        ]
+      },
+      "caption": "Норія H1 → очищення",
+      "sub": "сепаратор і бункер Ш1 · 100 т/год"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "orbit",
+      "seconds": 6,
+      "lens": 24,
+      "flow": {
+        "A": [
+          "SH1:end",
+          "H3->T7:end"
+        ]
+      },
+      "args": {
+        "target": [
+          1,
+          52,
+          26
+        ],
+        "radius": 20,
+        "height": 38,
+        "start_deg": -20,
+        "sweep_deg": 40
+      },
+      "caption": "Норія H3 → галерея T7",
+      "sub": "нагору до +33 і вниз на міст +25.6"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "dolly",
+      "seconds": 6,
+      "lens": 24,
+      "flow": {
+        "A": [
+          "H3->T7:end",
+          "T7:end"
+        ]
+      },
+      "args": {
+        "from": [
+          3.5,
+          50,
+          29
+        ],
+        "to": [
+          3.5,
+          31,
+          29
+        ],
+        "look_from": [
+          -0.6,
+          44,
+          25.8
+        ],
+        "look_to": [
+          -0.6,
+          25,
+          25
+        ]
+      },
+      "caption": "Галерея T7 · +25.6",
+      "sub": "ланцюговий конвеєр ТЦС-320, 30.5 м"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "keys",
+      "seconds": 6,
+      "lens": 24,
+      "flow": {
+        "A": [
+          "T7:end",
+          "END"
+        ]
+      },
+      "args": {
+        "points": [
+          [
+            2,
+            18,
+            31
+          ],
+          [
+            -20,
+            17,
+            31
+          ],
+          [
+            -36,
+            14,
+            29
+          ]
+        ],
+        "looks": [
+          [
+            -5,
+            25.5,
+            24
+          ],
+          [
+            -28,
+            25.5,
+            23.5
+          ],
+          [
+            -38.5,
+            25.5,
+            21
+          ]
+        ]
+      },
+      "caption": "Естакада T8 → силос S1",
+      "sub": "МСВУ 220 · Ø 22 м · 6 381 м³"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "dolly",
+      "seconds": 6,
+      "lens": 20,
+      "fx": {
+        "dim": 0.0,
+        "glow": 0.8
+      },
+      "flow": {
+        "B": [
+          "START",
+          "T9:end"
+        ]
+      },
+      "args": {
+        "from": [
+          -42,
+          24.7,
+          -0.85
+        ],
+        "to": [
+          -10,
+          24.7,
+          -0.85
+        ],
+        "look_from": [
+          -36,
+          25.35,
+          -1.05
+        ],
+        "look_to": [
+          -4,
+          25.35,
+          -1.05
+        ]
+      },
+      "caption": "Тунель T9 під силосами",
+      "sub": "стрічковий ТЛ-50К · засувка під S1 відкрита"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "keys",
+      "seconds": 6,
+      "lens": 24,
+      "flow": {
+        "B": [
+          "T9:end",
+          "H5:end"
+        ]
+      },
+      "args": {
+        "points": [
+          [
+            9,
+            17,
+            3
+          ],
+          [
+            9,
+            18,
+            33
+          ]
+        ],
+        "looks": [
+          [
+            0.6,
+            26.9,
+            1
+          ],
+          [
+            0.6,
+            26.5,
+            31
+          ]
+        ]
+      },
+      "caption": "Норія H5 · У13-УН175",
+      "sub": "33 м труб · 100 т/год на відмітку +31"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "keys",
+      "seconds": 5,
+      "lens": 24,
+      "flow": {
+        "B": [
+          "H5:end",
+          "SH1->TRUCK_OUT:end"
+        ]
+      },
+      "args": {
+        "points": [
+          [
+            12,
+            30,
+            36
+          ],
+          [
+            14,
+            38,
+            24
+          ]
+        ],
+        "looks": [
+          [
+            0,
+            40,
+            26
+          ],
+          [
+            -1.5,
+            46,
+            6
+          ]
+        ]
+      },
+      "caption": "T10 → очищення → автомобіль",
+      "sub": "відвантаження з S1 через сепаратор і Ш1"
+    },
+    {
+      "scene": "site",
+      "state": "route",
+      "move": "keys",
+      "seconds": 4,
+      "lens": 26,
+      "flow": {
+        "B": [
+          "SH1->TRUCK_OUT:end",
+          "END"
+        ]
+      },
+      "args": {
+        "points": [
+          [
+            40,
+            10,
+            30
+          ],
+          [
+            70,
+            -40,
+            70
+          ]
+        ],
+        "looks": [
+          [
+            0,
+            40,
+            5
+          ],
+          [
+            5,
+            30,
+            5
+          ]
+        ]
+      },
+      "caption": "Модель 1:1 з креслення",
+      "sub": "граф процесу: 42 вузли · 207 маршрутів · 173 позиції обладнання"
+    }
+  ]
+}

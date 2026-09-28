@@ -16,6 +16,10 @@ FAIL in the assembled scene (stage B, routes.NODE_OBJECTS / EDGE_OBJECTS):
   H5: the path goes up the leg where the kit draws grain in the buckets (<= 0.25 m of H5_NORIA_GRAIN);
   every highlighted object is on the path, or bolted to a part of its node that is;
   rays along drawn / designed legs cross nothing but the cycle's own equipment and pierced slabs.
+FAIL stage C (kit/route_fx.py): every material on a highlighted object carries ROUTE_FX; x-ray from over
+  S1: T8 on the open gallery seen >= 95 %, T9 under ground <= 5 %, the fill inside S1 <= 10 %.
+FAIL stage D (world/reels/reel_02_grain_path.json, every frame at 12 fps): the camera keeps >= 0.3 m from
+  every surface, is never inside a silo (black frame), sees >= 1 m ahead.
 FINDING (the existing simplified block and judgment connectors, not model errors):
   gaps and gentle falls where one side is existing or judgment geometry; the judgment legs by length;
   existing / judgment legs through foreign objects.
@@ -400,13 +404,53 @@ def fx_checks(site, skip_material=None, no_silo_proxy=False):
     return out
 
 
+# ================================================================== stage D: the reel's cameras
+REEL = ROOT / "reels" / "reel_02_grain_path.json"
+CAM_CLEAR = 0.3          # m, camera to the nearest surface (no clipping into a member)
+VIEW_CLEAR = 1.0         # m of free view straight ahead (not staring into a wall)
+SILO_R = 11.2            # m, wall 11.01 + the stiffeners: a camera inside renders black (K1 lesson)
+
+
+def reel_checks(site, spec=None, fps=12):
+    import importlib.util
+    from mathutils import Vector
+    S = scene()
+    if "all" not in S:
+        from kit import route_fx
+        S["all"] = route_fx.scene_bvh(S["scene"])
+    tree, face_owner = S["all"]
+    rspec = importlib.util.spec_from_file_location("world_build_reel", ROOT / "build" / "reel.py")
+    rl = importlib.util.module_from_spec(rspec)
+    rspec.loader.exec_module(rl)
+    spec = spec or json.loads(REEL.read_text(encoding="utf-8"))
+    frames = rl.shot_frames(spec, fps)
+    near, silo, view = {}, {}, {}
+    for i, loc, look in frames:
+        p = Vector(loc)
+        _, _, idx, dist = tree.find_nearest(p)
+        if dist is not None and dist < CAM_CLEAR:
+            near.setdefault(i + 1, (face_owner[idx], round(dist, 2)))
+        for s in site["silos"]:
+            if np.hypot(p.x - s["x"], p.y - s["y"]) < SILO_R and s["z"] <= p.z <= s["z"] + 22.0:
+                silo.setdefault(i + 1, s["id"])
+        d = Vector(look) - p
+        hit = tree.ray_cast(p, d.normalized(), VIEW_CLEAR)
+        if hit[0] is not None:
+            view.setdefault(i + 1, face_owner[hit[2]])
+    n = len(frames)
+    return [(f"reel cameras keep >= {CAM_CLEAR} m from every surface ({n} frames at {fps} fps)", not near,
+             f"too close in shots {near}" if near else "ok"),
+            ("reel cameras are never inside a silo (a black frame)", not silo, f"inside in shots {silo}" if silo else "ok"),
+            (f"reel cameras see >= {VIEW_CLEAR} m ahead", not view, f"blocked in shots {view}" if view else "ok")]
+
+
 def main():
     run(json.loads((ROOT / "site" / "SITE.json").read_text(encoding="utf-8")))
 
 
 def run(site):
     ok_all = True
-    for name, ok, info in checks(site) + scene_checks(site) + fx_checks(site):
+    for name, ok, info in checks(site) + scene_checks(site) + fx_checks(site) + reel_checks(site):
         ok_all &= ok
         print(f"{'PASS' if ok else 'FAIL'}  {name}: {info}", flush=True)
 
@@ -464,6 +508,13 @@ def run(site):
         hit = any(rule in n for n in failed)
         ok_all &= hit
         print(f"{'PASS' if hit else 'FAIL'}  broken variant must be rejected by its own rule — {name}: failed {failed}", flush=True)
+    bad = json.loads(REEL.read_text(encoding="utf-8"))
+    shot = next(s for s in bad["shots"] if s["move"] == "keys" and "S1" in s.get("caption", ""))
+    shot["args"]["points"][-1] = [-38.5, 25.5, 12.0]                 # the T8 -> S1 flight ends inside S1
+    failed = [n for n, ok, _ in reel_checks(site, bad) if not ok]
+    hit = any("inside a silo" in n for n in failed)
+    ok_all &= hit
+    print(f"{'PASS' if hit else 'FAIL'}  broken variant must be rejected by its own rule — reel camera flies into S1: failed {failed}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)
     sys.exit(0 if ok_all else 1)
 

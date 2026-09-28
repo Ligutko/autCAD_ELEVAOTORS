@@ -43,6 +43,26 @@ def crane(xy, z0, z1, look, frames):
     return [((xy[0], xy[1], z0 + (z1 - z0) * ease(k / max(frames - 1, 1))), look) for k in range(frames)]
 
 
+def _catmull(pts, u):
+    """Point at u in [0, 1] on a centripetal-free (uniform) Catmull-Rom spline through pts."""
+    pts = [np.asarray(p, float) for p in pts]
+    if len(pts) == 1:
+        return pts[0]
+    ext = [2 * pts[0] - pts[1]] + pts + [2 * pts[-1] - pts[-2]]
+    n = len(pts) - 1
+    x = min(max(u, 0.0), 1.0) * n
+    i = min(int(x), n - 1)
+    t = x - i
+    p0, p1, p2, p3 = ext[i], ext[i + 1], ext[i + 2], ext[i + 3]
+    return 0.5 * (2 * p1 + (p2 - p0) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (3 * p1 - p0 - 3 * p2 + p3) * t ** 3)
+
+
+def keys(points, looks, frames):
+    """Fly through key positions, looking at key targets, both on smooth splines, eased in and out."""
+    return [(tuple(_catmull(points, ease(k / max(frames - 1, 1)))), tuple(_catmull(looks, ease(k / max(frames - 1, 1)))))
+            for k in range(frames)]
+
+
 def walk(points, fps, eye=EYE, speed=WALK_SPEED, look_ahead=3.0, bob=0.015):
     """First-person walk along a polyline at eye height (points are floor positions x, y, z).
     Constant speed, gentle head bob, looks `look_ahead` metres down the path."""
