@@ -10,11 +10,11 @@ Set-Location (Split-Path (Split-Path $PSScriptRoot))
 try {
     foreach ($s in $Scenes) {
         "== $s $(Get-Date -Format HH:mm)"
-        $extra = @()
-        if ($Quick) { $extra += "--quick" }
-        if ($Extra) { $extra += ($Extra -split " ") }
-        if ($extra.Count) { $extra = @("--") + $extra }
-        & $B --background --python "world/build/$s.py" @extra 2>&1 | ForEach-Object { "$_" } | Where-Object { $_ -match "^rendered|Error|Traceback" }
+        $sceneArgs = @()                     # not $extra: PowerShell names are case-insensitive, $extra IS the [string]$Extra
+        if ($Quick) { $sceneArgs += "--quick" }
+        if ($Extra) { $sceneArgs += ($Extra -split " ") }
+        if ($sceneArgs.Count) { $sceneArgs = @("--") + $sceneArgs }
+        & $B --background --python "world/build/$s.py" @sceneArgs 2>&1 | ForEach-Object { "$_" } | Where-Object { $_ -match "^rendered|Error|Traceback" }
     }
 } finally {
     [void][Win.Power]::SetThreadExecutionState([uint32]"0x80000000")
