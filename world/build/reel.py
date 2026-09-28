@@ -81,6 +81,9 @@ def use_gpu(scene):
                 d.use = d.type == kind
             scene.cycles.device = "GPU"
             scene.render.use_persistent_data = True
+            if kind == "OPTIX":                     # measured 2026-09-28: default denoiser (OIDN, CPU)
+                scene.cycles.denoiser = "OPTIX"      # costs ~5-6 s/frame more than the OptiX GPU denoiser
+                scene.cycles.denoising_use_gpu = True
             return kind
     return "CPU"
 
