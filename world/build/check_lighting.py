@@ -151,7 +151,7 @@ def scene_blocker(site):
     verts, polys, base = [], [], 0
     for inst in dg.object_instances:
         ob = inst.object
-        if ob.type != "MESH" or ob.name.startswith(("ENV_", "SITE_PLAN_ROADS", "GROUND", "LIGHT_", "TREE_")):   # trees stand >= 31 m off the fence
+        if ob.type != "MESH" or ob.name.startswith(("ENV_", "SITE_PLAN_ROADS", "GROUND", "LIGHT_", "TREE_", "FIG_")):   # trees >= 31 m off; figures are for scale: norms hold on the empty surface
             continue
         me = ob.to_mesh()
         mw = np.array(inst.matrix_world)
