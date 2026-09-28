@@ -311,11 +311,14 @@ def scene_checks(site, nmap=None, emap=None, leg_patch=None):
     out.append((f"every highlighted object is on the path or bolted to a part of its node that is (box +{NEAR_BOX} m)", not far,
                 f"off the path: {sorted(set(far))}" if far else f"{n_lit} object links"))
 
-    # rays along the path: what it passes through besides the cycle's own equipment and slabs it pierces
-    depsgraph = bpy.context.evaluated_depsgraph_get()
+    # rays along the path: what it passes through besides the cycle's own equipment and slabs it pierces.
+    # One BVH of the rendered scene with an owner per face (route_fx.scene_bvh; a silo is its proxy, owned
+    # by its instance empty), built once: scene.ray_cast walks 55 000 tree instances per ray.
+    if "all" not in S:
+        from kit import route_fx
+        S["all"] = route_fx.scene_bvh(S["scene"])
+    tree, face_owner = S["all"]
     ok_names = {n for o in owners for n in objs_of(o)[0]}
-    inst_at = {tuple(np.round(o.matrix_world.translation, 2)): o.name     # a silo is an instance: rays report the
-               for o in S["objs"].values() if o.type == "EMPTY" and o.instance_collection}   # prototype part, the matrix says which silo
     crossed = {}
     for lg in legs_all:
         if lg.basis == "judgment" or lg.kind not in ("convey", "lift", "fall"):
@@ -325,13 +328,13 @@ def scene_checks(site, nmap=None, emap=None, leg_patch=None):
             left = dvec.length
             dvec.normalize()
             while left > 1e-3:
-                hit, loc, _, _, ob, mat = S["scene"].ray_cast(depsgraph, o, dvec, distance=left)
-                if not hit:
+                loc, _, idx, dist = tree.ray_cast(o, dvec, left)
+                if loc is None:
                     break
-                name = inst_at.get(tuple(np.round(mat.translation, 2)), ob.name)
-                if name not in ok_names and (name in inst_at.values() or rendered(ob)) and not any(k in name for k in PASS_THROUGH):
+                name = face_owner[idx]
+                if name not in ok_names and not any(k in name for k in PASS_THROUGH):
                     crossed.setdefault((lg.basis in SOLID), {}).setdefault(name, set()).add(lg.owner)
-                step = (loc - o).length + 0.01
+                step = dist + 0.01
                 o, left = o + dvec * step, left - step
 
     def fmt(d):
@@ -342,13 +345,68 @@ def scene_checks(site, nmap=None, emap=None, leg_patch=None):
     return out + [(n, True, i) for n, i in findings]
 
 
+# ================================================================== stage C: highlight and x-ray overlay
+XRAY_CAM = ((-38.5, 5.0, 60.0), (-38.5, 25.5, 12.0))   # over S1, looking down the row: T8 in the open,
+                                                       # T9 under ground, the fill inside S1
+
+
+def fx_checks(site, skip_material=None, no_silo_proxy=False):
+    from kit import common as c
+    from kit import route_fx as fx
+    S = scene()
+    sc = S["scene"]
+    legs_all = [lg for _, lgs in R.cycle_legs(CYCLE, site) for lg in lgs]
+    names = R.highlight_names(list(S["objs"]), legs_all)
+    if "wrapped" not in S:
+        S["wrapped"] = fx.wrap_materials()
+    fx.highlight(sc, names)
+    out = []
+    bare = set()
+    for n in names:
+        o = S["objs"][n]
+        mats = [o.data.materials[i] for i in range(len(o.data.materials))] if o.type == "MESH" else \
+               [m for ob in o.instance_collection.objects if ob.type == "MESH" for m in ob.data.materials]
+        for m in mats:
+            if m is None or not m.get("route_fx") or (skip_material and m.name == skip_material):
+                bare.add(m.name if m else "<none>")
+    out.append(("every material on a highlighted object carries ROUTE_FX (it can glow)", not bare,
+                f"without: {sorted(bare)}" if bare else f"{len(names)} objects, {S['wrapped']} materials wrapped"))
+
+    key = "ov_noproxy" if no_silo_proxy else "ov"
+    if key not in S:
+        keep = fx.SILO_PROXY
+        if no_silo_proxy:
+            fx.SILO_PROXY = (0.01, 0.01, 0.02)
+        S[key] = fx.FlowOverlay(sc, [R.polyline(lgs)[0] for _, lgs in R.cycle_legs(CYCLE, site)])
+        fx.SILO_PROXY = keep
+    ov = S[key]
+    sc.render.resolution_x, sc.render.resolution_y, sc.render.resolution_percentage = 1920, 1080, 50
+    cam = c.camera("CHECK_XRAY_CAM", XRAY_CAM[0], XRAY_CAM[1], lens=24)
+    bpy.context.view_layer.update()
+
+    def seen_share(owner, keep=lambda p: True):
+        lg = next(lg for lg in legs_all if lg.owner == owner)
+        pts = [p for p in samples(lg.pts, 0.5) if keep(p)]
+        pr = ov.project(cam, np.array(pts))
+        inview = [p for p in pr if p[2] and 0 <= p[0] <= 960 and 0 <= p[1] <= 540]
+        return (sum(p[3] for p in inview) / len(inview)) if inview else None, len(inview)
+
+    # T8 on the open gallery: west of the H5 tower frame (x < -3), where only thin rails stand in front
+    t8, t9, s1 = seen_share("T8", lambda p: p[0] < -3.0), seen_share("T9"), seen_share("S1")
+    ok = t8[0] is not None and t8[0] >= 0.95 and t9[0] is not None and t9[0] <= 0.05 and s1[0] is not None and s1[0] <= 0.1
+    out.append(("x-ray from over S1: T8 on the open gallery is seen, T9 under ground and the fill inside S1 are hidden", ok,
+                f"seen T8 {t8[0]:.0%} of {t8[1]}, T9 {t9[0]:.0%} of {t9[1]}, S1 {s1[0]:.0%} of {s1[1]}"
+                if None not in (t8[0], t9[0], s1[0]) else f"out of view: T8 {t8}, T9 {t9}, S1 {s1}"))
+    return out
+
+
 def main():
     run(json.loads((ROOT / "site" / "SITE.json").read_text(encoding="utf-8")))
 
 
 def run(site):
     ok_all = True
-    for name, ok, info in checks(site) + scene_checks(site):
+    for name, ok, info in checks(site) + scene_checks(site) + fx_checks(site):
         ok_all &= ok
         print(f"{'PASS' if ok else 'FAIL'}  {name}: {info}", flush=True)
 
@@ -396,6 +454,13 @@ def run(site):
                       ("T8 -> S1 drop onto the gallery edge beam", dict(leg_patch=drop_on_beam), "cross no foreign object")]
     for name, kw, rule in scene_variants:
         failed = [n for n, ok, _ in scene_checks(site, **kw) if not ok]
+        hit = any(rule in n for n in failed)
+        ok_all &= hit
+        print(f"{'PASS' if hit else 'FAIL'}  broken variant must be rejected by its own rule — {name}: failed {failed}", flush=True)
+    fx_variants = [("a galvanised material left unwrapped", dict(skip_material="SITE_GALV"), "carries ROUTE_FX"),
+                   ("x-ray without the silo proxies", dict(no_silo_proxy=True), "x-ray")]
+    for name, kw, rule in fx_variants:
+        failed = [n for n, ok, _ in fx_checks(site, **kw) if not ok]
         hit = any(rule in n for n in failed)
         ok_all &= hit
         print(f"{'PASS' if hit else 'FAIL'}  broken variant must be rejected by its own rule — {name}: failed {failed}", flush=True)
