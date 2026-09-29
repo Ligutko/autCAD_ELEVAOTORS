@@ -13,7 +13,7 @@ import urllib.request
 import bpy
 
 ARGS = sys.argv[sys.argv.index("--") + 1:]
-OUT, SCEN, SPEED = ARGS[0], ARGS[1], float(ARGS[2])
+OUT, SCEN, SPEED = os.path.abspath(ARGS[0]), ARGS[1], float(ARGS[2])   # screenshot_area ignores the cwd for relative paths
 XRAY = "--xray" in ARGS
 WORLD = "D:/autocad project/world"
 PORT = 8799
@@ -106,13 +106,13 @@ def steps():
     for cam in ("CAM_DRONE", "CAM_DRYING", "CAM_TRUCK", "CAM_WALK"):
         scene.camera = bpy.data.objects[cam]
         t = time.perf_counter()
-        last = draw(5)
+        prev = draw(5)                                              # not `last`: poll() closes over it
         while True:
             yield 0.05
             cur = draw(5)
-            if time.perf_counter() - t > 6 and abs(cur - last) < 0.15 * last:
+            if time.perf_counter() - t > 6 and abs(cur - prev) < 0.15 * prev:
                 break
-            last = cur
+            prev = cur
             if time.perf_counter() - t > 60:
                 break
         per = draw(20)
@@ -141,7 +141,7 @@ def tick():
         g = sorted(p["gaps"][5:]) or [0]
         res["poll_summary"] = {"updates": p["n"], "apply_avg_ms": round(p["apply_ms"] / p["n"], 1), "apply_max_ms": round(p["apply_max_ms"]),
                                "gap_median_ms": g[len(g) // 2], "gap_p95_ms": g[int(len(g) * 0.95)]}
-        p.pop("gaps")
+        p["gaps"] = p["gaps"][-5:]                                   # kept short; poll() still appends until Blender quits
     with open(os.path.join(OUT, "gui_probe.json"), "w", encoding="utf-8") as f:
         json.dump(res, f, indent=1)
     srv.terminate()

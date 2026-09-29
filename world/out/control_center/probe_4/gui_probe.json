@@ -1,0 +1,48 @@
+{
+ "runs": [
+  {
+   "view": "CAM_DRONE",
+   "frame_ms": 5.9,
+   "fps": 170.5,
+   "sim_t": 31320.0
+  },
+  {
+   "view": "CAM_DRYING",
+   "frame_ms": 9.2,
+   "fps": 108.4,
+   "sim_t": 36545.0
+  },
+  {
+   "view": "CAM_TRUCK",
+   "frame_ms": 1.4,
+   "fps": 691.9,
+   "sim_t": 41939.0
+  },
+  {
+   "view": "CAM_WALK",
+   "frame_ms": 9.8,
+   "fps": 102.4,
+   "sim_t": 49211.0
+  }
+ ],
+ "build_s": 26.3,
+ "poll": {
+  "n": 343,
+  "apply_ms": 12593.882200162625,
+  "apply_max_ms": 81.07620000373572,
+  "gaps": [
+   219,
+   201,
+   215,
+   218,
+   225
+  ]
+ },
+ "poll_summary": {
+  "updates": 343,
+  "apply_avg_ms": 36.7,
+  "apply_max_ms": 81,
+  "gap_median_ms": 203,
+  "gap_p95_ms": 290
+ }
+}

@@ -7,8 +7,8 @@
   split_old_silos           the old silos «2», «3» share one merged mesh per part kind: cut into OS2 / OS3 parts
   object_map(scene, site)   process node -> Blender objects, all 42 nodes (routes.NODE_OBJECTS extended); nodes
                             with no body of their own are in NO_BODY with the reason
-  wrap_materials()          LIVE_FX before every material output: emission of the object's `live_rgb` at the
-                            strength `live_on` (object attributes, so one material serves every object)
+  wrap_materials()          LIVE_FX before every material output: the surface mixed towards the emission of the
+                            object's `live_rgb` by the share `live_on` (object attributes, so one material serves every object)
   flow_curves(scene, site)  a thin tube along the grain path of every edge (routes.edge_legs) and every mover,
                             hidden until grain moves there; owners the kits give no path for are reported
   grain_heaps(scene, site)  per silo a level body and the repose cone, sized from the mass
@@ -38,9 +38,11 @@ ON, RGB = "live_on", "live_rgb"
 AMBER = (1.0, 0.38, 0.02)
 BLUE = (0.15, 0.45, 1.0)
 RED = (1.0, 0.03, 0.03)
-# strengths seen in the EEVEE viewport in daylight (probe 2026-09-29: 2.0 was barely visible on galvanised steel)
-GLOW = {"run": (AMBER, 6.0), "starting": (BLUE, 6.0), "stopping": (BLUE, 6.0), "fault": (RED, 10.0), "trip": (RED, 10.0),
-        "open": (AMBER, 8.0), "opening": (BLUE, 8.0), "closing": (BLUE, 8.0)}
+# object attribute live_on = share of the colour in the surface (0..1); emission strength inside the group is fixed.
+# 2026-09-29: emission added at strength 6-10 washed amber to peach on galvanised steel under AgX.
+EM_STRENGTH = 2.0
+GLOW = {"run": (AMBER, 0.75), "starting": (BLUE, 0.75), "stopping": (BLUE, 0.75), "fault": (RED, 0.85), "trip": (RED, 0.85),
+        "open": (AMBER, 0.8), "opening": (BLUE, 0.8), "closing": (BLUE, 0.8)}
 
 # Nodes with no body of their own in the model (the flow line shows them) — the reason is part of the contract.
 NO_BODY = {
@@ -255,11 +257,12 @@ def _group():
     col.attribute_type, col.attribute_name = "OBJECT", RGB
     em = n.new("ShaderNodeEmission")
     ln(col.outputs["Color"], em.inputs["Color"])
-    ln(on.outputs["Fac"], em.inputs["Strength"])
-    add = n.new("ShaderNodeAddShader")
-    ln(gi.outputs["Shader"], add.inputs[0])
-    ln(em.outputs[0], add.inputs[1])
-    ln(add.outputs[0], go.inputs["Shader"])
+    em.inputs["Strength"].default_value = EM_STRENGTH
+    mix = n.new("ShaderNodeMixShader")                 # mix towards the colour, not add: adding to a bright surface goes white under AgX
+    ln(on.outputs["Fac"], mix.inputs["Fac"])
+    ln(gi.outputs["Shader"], mix.inputs[1])
+    ln(em.outputs[0], mix.inputs[2])
+    ln(mix.outputs[0], go.inputs["Shader"])
     return g
 
 
