@@ -1,5 +1,5 @@
 """Phase 5A. Drying loop (designed layer, research/design/drying_loop.md): tower dryer of the STRAHL
-3000 FR class in building «4», T3 from the receiving tower onto the dryer, T5 from the tower over the
+3000 FR class in building «4» (after the GCS p.2 section: exhaust chamber, column, hot-air chamber), T3 from the receiving tower onto the dryer, T5 from the tower over the
 wet silos «2», «3» on a truss gallery with two trestles, and the spouts that close the loop:
 H2 / H3 -> T3, H4 -> T5, T3 -> dryer, dryer -> T4, T5 -> wet silos, T2 / T6 -> H2, T4 -> H3.
 
@@ -16,7 +16,9 @@ from . import gallery as gal
 from . import steel as st
 
 SPOUT_MM = 300                      # as the drawn spouts (SITE receiving.joints.spout_mm)
-MODULE_H = 1.2                      # dryer column module seams (STRAHL FR: stacked modules, EST pitch)
+RIB_STEP = 0.75                     # EST: vertical stiffener pitch on the dryer panels (photos show ribs, no pitch given)
+LOUVRE_STEP = 0.12                  # EST: louvre blade pitch
+SCREW_KW = 4.0                      # EST: wet-grain screw drive on the column ridge (not in the STRAHL tables)
 TRESTLE_FOOT = 0.25                 # half size of a trestle leg footing (EST)
 
 
@@ -91,7 +93,8 @@ def spouts(site=None):
         out.append((name, p0, np.array([xe, y, conv_top(cid, site)]), SPOUT_MM))
     (x0, y0, x1, y1) = dryer_rect(site)
     head3 = conv_axis("T3", site)[1]
-    out.append(("T3->dryer", head3 - [0, 0, g["T3"]["h"] / 2], np.array([head3[0], (y0 + y1) / 2, dryer_top(site) + 0.05]), SPOUT_MM))
+    q = inlet_point(site)                                  # the wet-grain screw on the column ridge
+    out.append(("T3->dryer", head3 - [0, 0, g["T3"]["h"] / 2], np.array([head3[0], q[1], q[2] + 0.05]), SPOUT_MM))
     t4 = next(cv for cv in r["conveyors"] if cv["id"] == "T4")
     out.append(("dryer->T4", np.array([head3[0], t4["y"], 0.9]), np.array([head3[0], t4["y"], t4["z"] + 0.40]), SPOUT_MM))
     t5_bot = g["T5"]["z_bot"]
@@ -117,15 +120,86 @@ def _spout(p0, p1, size_mm):
     return st.member(p0, p1, np.array([(-h, -h), (h, -h), (h, h), (-h, h)]), up=up)
 
 
+def section(site=None):
+    """Zones of the dryer along its long side and the heights (SITE designed.dryer.section, GCS p.2 scaled):
+    {"exhaust" | "column" | "hot": (y_a, y_b), "z": {...}, "x": (x0, x1), "north": exhaust at the north end}."""
+    site = site or _site()
+    sec = site["designed"]["dryer"]["section"]
+    x0, y0, x1, y1 = dryer_rect(site)
+    a = sec["along_long_m"]
+    k = (y1 - y0) / (a["exhaust"] + a["column"] + a["hot"])      # 1.0 when the three add up to the length
+    north = sec["exhaust_end"] == "N"
+    if north:
+        ex, co, ho = (y1 - a["exhaust"] * k, y1), (y0 + a["hot"] * k, y1 - a["exhaust"] * k), (y0, y0 + a["hot"] * k)
+    else:
+        ex, co, ho = (y0, y0 + a["exhaust"] * k), (y0 + a["exhaust"] * k, y1 - a["hot"] * k), (y1 - a["hot"] * k, y1)
+    return {"exhaust": ex, "column": co, "hot": ho, "z": sec["z_m"], "x": (x0, x1), "north": north}
+
+
+def inlet_point(site=None):
+    """Top of the wet-grain screw trough on the column ridge, where T3 drops (A25 in GCS p.2)."""
+    site = site or _site()
+    s = section(site)
+    return np.array([conv_axis("T3", site)[1][0], sum(s["column"]) / 2, s["z"]["inlet_top"]])
+
+
+def column_roof_z(y, site=None):
+    """Gable roof of the column (ridge along X on the column centre line)."""
+    s = section(site)
+    ya, yb = s["column"]
+    t = min(abs(y - (ya + yb) / 2) / ((yb - ya) / 2), 1.0)
+    return s["z"]["column_ridge"] - t * (s["z"]["column_ridge"] - s["z"]["column_eave"])
+
+
+def _ribs(axis, fixed, span, z0, z1, out):
+    """Vertical hat stiffeners (EST pitch RIB_STEP) on a flat face: axis "x" = face x = fixed spanning y."""
+    parts = []
+    n = max(2, int((span[1] - span[0]) / RIB_STEP))
+    lo, hi = sorted((fixed, fixed + out * 0.05))
+    for k in range(1, n):
+        u = span[0] + (span[1] - span[0]) * k / n
+        if axis == "x":
+            parts.append(c.box((lo, u - 0.04, z0), (hi, u + 0.04, z1)))
+        else:
+            parts.append(c.box((u - 0.04, lo, z0), (u + 0.04, hi, z1)))
+    return parts
+
+
+def _louvres(axis, fixed, span, z0, z1, out):
+    """Louvre panel standing out of a face: a frame and blades inclined down and out."""
+    parts = []
+    for z in np.arange(z0 + 0.08, z1 - 0.04, LOUVRE_STEP):
+        a, b = (fixed, fixed + out * 0.09)
+        if axis == "x":
+            v = np.array([(a, span[0], z), (a, span[1], z), (b, span[1], z - 0.07), (b, span[0], z - 0.07)])
+        else:
+            v = np.array([(span[0], a, z), (span[1], a, z), (span[1], b, z - 0.07), (span[0], b, z - 0.07)])
+        parts.append((v, np.array([(0, 1, 2, 3)])))
+    lo, hi = sorted((fixed, fixed + out * 0.1))
+    if axis == "x":
+        parts += [c.box((lo, span[0], z0), (hi, span[0] + 0.05, z1)), c.box((lo, span[1] - 0.05, z0), (hi, span[1], z1)),
+                  c.box((lo, span[0], z1 - 0.05), (hi, span[1], z1)), c.box((lo, span[0], z0), (hi, span[1], z0 + 0.05))]
+    else:
+        parts += [c.box((span[0], lo, z0), (span[0] + 0.05, hi, z1)), c.box((span[1] - 0.05, lo, z0), (span[1], hi, z1)),
+                  c.box((span[0], lo, z1 - 0.05), (span[1], hi, z1)), c.box((span[0], lo, z0), (span[1], hi, z0 + 0.05))]
+    return parts
+
+
 def build_dryer(site=None):
+    """Tower dryer of the STRAHL FR type after the GCS p.2 section. Along its long side: the exhaust chamber (top
+    fan 22 kW on its roof, the 11 kW recirculation fan stays inside), the grain column (gable roof with the
+    wet-grain screw on the ridge, discharge base over T4, cold-air louvres low on its sides) and the hot-air
+    chamber (linear gas burner at the bottom behind louvres, gas train). Building «4» stays the drawn base
+    enclosure with an air-intake louvre on the burner end."""
     site = site or _site()
     b4, g = site["receiving"]["building_4"], geom(site)
     (bx0, bx1), (by0, by1) = b4["outer_x"], b4["outer_y"]
     x0, y0, x1, y1 = dryer_rect(site)
-    top = dryer_top(site)
+    s = section(site)
+    z = s["z"]
+    sec = site["designed"]["dryer"]["section"]
     gz, eave = c.ground_z(), g["enclosure_eave"]
     pad = [c.box((bx0 - 0.3, by0 - 0.3, gz), (bx1 + 0.3, by1 + 0.3, 0.0))]
-    # base enclosure = the drawn building «4»: four walls to the eave, roof with the column through it
     w = 0.05
     t4 = next(cv for cv in site["receiving"]["conveyors"] if cv["id"] == "T4")
     oy0, oy1, oz = t4["y"] - 0.5, t4["y"] + 0.5, t4["z"] + 1.0          # T4 enters through the west wall
@@ -136,39 +210,116 @@ def build_dryer(site=None):
             c.box((x1 + 0.05, by0 - 0.2, eave), (bx1 + 0.2, by1 + 0.2, eave + 0.2)),
             c.box((x0 - 0.05, by0 - 0.2, eave), (x1 + 0.05, y0 - 0.05, eave + 0.2)),
             c.box((x0 - 0.05, y1 + 0.05, eave), (x1 + 0.05, by1 + 0.2, eave + 0.2))]
-    body_top = top - 1.6                                      # wet-grain hopper on top of the column
-    base, outlet = 1.6, 0.9                                   # discharge section on legs; T4 runs under it
-    column = [c.box((x0, y0, base), (x1, y1, body_top))]
-    cxm = (x0 + x1) / 2
-    lv = np.array([(x0, y0, base), (x1, y0, base), (x1, y1, base), (x0, y1, base),
-                   (cxm - 0.2, t4["y"] - 0.2, outlet), (cxm + 0.2, t4["y"] - 0.2, outlet),
-                   (cxm + 0.2, t4["y"] + 0.2, outlet), (cxm - 0.2, t4["y"] + 0.2, outlet)])
+    (ea, eb), (ca, cb), (ha, hb) = s["exhaust"], s["column"], s["hot"]
+    cxm, ym = (x0 + x1) / 2, (ca + cb) / 2
+    hot_end, hs = (y0, -1) if s["north"] else (y1, 1)          # the burner end face and its outward direction
+
+    chambers = [c.box((x0, ea, 0.0), (x1, eb, z["chamber_roof"])), c.box((x0, ha, 0.0), (x1, hb, z["chamber_roof"]))]
+    # discharge base: sheet walls around the dry-grain hopper, open on both sides where T4 passes under the column
+    tw = t4["w"] / 2 + 0.25
+    zt = t4["z"] + 0.9
+    column = [c.box((x0, ca, z["base_top"]), (x1, cb, z["column_eave"]))]
+    for xa, xb in ((x0, x0 + w), (x1 - w, x1)):
+        column += [c.box((xa, ca, 0.0), (xb, t4["y"] - tw, z["base_top"])), c.box((xa, t4["y"] + tw, 0.0), (xb, cb, z["base_top"])),
+                   c.box((xa, t4["y"] - tw, zt), (xb, t4["y"] + tw, z["base_top"]))]
+    lv = np.array([(x0 + w, ca, z["base_top"]), (x1 - w, ca, z["base_top"]), (x1 - w, cb, z["base_top"]), (x0 + w, cb, z["base_top"]),
+                   (cxm - 0.2, t4["y"] - 0.2, 0.9), (cxm + 0.2, t4["y"] - 0.2, 0.9), (cxm + 0.2, t4["y"] + 0.2, 0.9), (cxm - 0.2, t4["y"] + 0.2, 0.9)])
     column.append((lv, np.array([(0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7), (7, 6, 5, 4)])))
-    legs = [st.member((x, y, 0.0), (x, y, base), st.SHS_150, up=(1, 0, 0)) for x in (x0 + 0.1, x1 - 0.1) for y in (y0 + 0.1, y1 - 0.1)]
-    seams = []
-    for z in np.arange(base + MODULE_H, body_top - 0.3, MODULE_H):
-        seams.append(c.box((x0 - 0.04, y0 - 0.04, z - 0.03), (x1 + 0.04, y1 + 0.04, z + 0.03)))
-    hv = np.array([(x0, y0, body_top), (x1, y0, body_top), (x1, y1, body_top), (x0, y1, body_top),
-                   (x0 + 0.6, y0 + 1.2, top), (x1 - 0.6, y0 + 1.2, top), (x1 - 0.6, y1 - 1.2, top), (x0 + 0.6, y1 - 1.2, top)])
-    hopper = [(hv, np.array([(0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7), (4, 5, 6, 7)]))]
-    # exhaust and recirculation fans on the west face above the enclosure roof (STRAHL FR: 1 + 1)
-    fans, motors = [], []
-    for k, (yc, d_) in enumerate(((y0 + 2.0, 1.4), (y1 - 2.0, 1.1))):
-        zc = eave + 2.2 + k * 0.4
-        fans.append(st.rod((x0, yc, zc), (x0 - 0.9, yc, zc), d_ / 2, 32))
-        motors.append(st.rod((x0 - 0.9, yc, zc), (x0 - 1.4, yc, zc), 0.22, 20))
-    # top platform, rails and a caged ladder on the south face from the enclosure roof
-    plat = [st.grating_panel(x0 - 0.4, y0 - 0.4, x1 + 0.4, y0 + 0.9, body_top)]
-    rail, toe = st.guard_rail([(x0 - 0.4, y0 + 0.9), (x0 - 0.4, y0 - 0.4), (x1 + 0.4, y0 - 0.4), (x1 + 0.4, y0 + 0.9)], body_top)
+
+    # column top: gable roof, ridge along X (A22), wet-grain screw trough on the ridge (A25) with its drive
+    rv = np.array([(x0 - 0.05, ca, z["column_eave"]), (x1 + 0.05, ca, z["column_eave"]), (x1 + 0.05, ym, z["column_ridge"]),
+                   (x0 - 0.05, ym, z["column_ridge"]), (x1 + 0.05, cb, z["column_eave"]), (x0 - 0.05, cb, z["column_eave"])])
+    hopper = [(rv, [np.array([(0, 1, 2, 3), (3, 2, 4, 5)]), np.array([(0, 3, 5), (1, 4, 2)])])]
+    tx0, tx1 = x0 + 0.45, x1 - 0.1
+    hopper.append(c.box((tx0, ym - 0.175, z["column_ridge"] - 0.05), (tx1, ym + 0.175, z["inlet_top"])))
+    hopper += [c.box((xx, ym - 0.22, z["column_ridge"] - 0.25), (xx + 0.06, ym + 0.22, z["column_ridge"] - 0.02)) for xx in (tx0 + 0.2, tx1 - 0.26)]
+    from . import components as comp
+    m = comp.iec_motor(SCREW_KW)
+    de = float(np.asarray(m["parts"]["endshield_de"][0])[:, 0].max())
+    mv = []
+    for v, f in (p for n, p in m["parts"].items() if n != "feet"):
+        v = np.array(v, float) - (de, 0.0, m["dims"]["H"])
+        v[:, 0], v[:, 1] = -v[:, 0], -v[:, 1]                           # shaft towards +X, into the trough end
+        mv.append((v + (tx0, ym, z["column_ridge"] + 0.12), f))
+    screw_motor = c.merge_parts(mv)
+
+    # stiffeners above the building «4» roof and flashing bands at the roof edges
+    ribs = []
+    zr0 = eave + 0.2
+    for (ya, yb), top in (((ea, eb), z["chamber_roof"]), ((ha, hb), z["chamber_roof"]), ((ca, cb), z["column_eave"])):
+        ribs += _ribs("x", x0, (ya, yb), zr0, top, -1) + _ribs("x", x1, (ya, yb), zr0, top, 1)
+    for yf, sg in ((y0, -1), (y1, 1)):
+        ribs += _ribs("y", yf, (x0, x1), zr0, z["chamber_roof"], sg)
+    for ya, yb in ((ea, eb), (ha, hb)):
+        ribs.append(c.box((x0 - 0.06, min(ya, yb) - (0.06 if ya == y0 else 0.0), z["chamber_roof"] - 0.12),
+                          (x1 + 0.06, max(ya, yb) + (0.06 if yb == y1 else 0.0), z["chamber_roof"])))
+    ribs.append(c.box((x0 - 0.06, ca, z["column_eave"] - 0.12), (x1 + 0.06, cb, z["column_eave"])))
+
+    # louvres: burner intake A19 on the hot end and the last metres of its sides; cold-air intake A16 low on the
+    # column sides; building «4» air intake on the same end wall (judgment: the burner breathes inside the building)
+    lb = sec["burner_louvre_from_end_m"]
+    band = (hot_end, hot_end + lb) if hs < 0 else (hot_end - lb, hot_end)
+    louv = _louvres("y", hot_end, (x0 + 0.1, x1 - 0.1), 0.1, z["base_top"], hs)
+    for xf, sg in ((x0, -1), (x1, 1)):
+        louv += _louvres("x", xf, (band[0] + 0.05, band[1] - 0.05), 0.1, z["base_top"], sg)
+        louv += _louvres("x", xf, (ca + 0.15, cb - 0.15), z["base_top"] + 0.2, z["base_top"] + 1.8, sg)
+    wall_y = by0 if hs < 0 else by1
+    louv += _louvres("y", wall_y, (x0 - 0.6, x1 + 0.6), 3.4, 5.4, hs)
+
+    # top fan unit on the exhaust roof: A14 dust louvres, A12 casing over the Ø1000 rotor, A15 rain louvres and cap
+    side, off = sec["fan_unit_m"]["side"], sec["fan_unit_m"]["from_end"]
+    fy1 = y1 - off if s["north"] else y0 + off + side
+    fy0 = fy1 - side
+    fx0, fx1 = cxm - side / 2, cxm + side / 2
+    fyc = (fy0 + fy1) / 2
+    zr = z["chamber_roof"]
+    fan = [c.box((fx0 - 0.05, fy0 - 0.05, zr), (fx1 + 0.05, fy1 + 0.05, zr + 0.12)),
+           c.box((fx0 + 0.03, fy0 + 0.03, zr + 0.12), (fx1 - 0.03, fy1 - 0.03, z["fan_louvre_top"]))]
+    for yy, sg in ((fy0, -1), (fy1, 1)):
+        fan += _louvres("y", yy, (fx0, fx1), zr + 0.12, z["fan_louvre_top"], sg)
+    for xx, sg in ((fx0, -1), (fx1, 1)):
+        fan += _louvres("x", xx, (fy0, fy1), zr + 0.12, z["fan_louvre_top"], sg)
+    zmid = (z["fan_louvre_top"] + z["fan_casing_top"]) / 2               # two casing sections with a joint ring
+    fan.append(c.cylinder(side / 2, z["fan_louvre_top"], zmid, steps=40, center=(cxm, fyc)))
+    fan.append(c.cylinder(side / 2, zmid, z["fan_casing_top"], steps=40, center=(cxm, fyc)))
+    for zf in (z["fan_louvre_top"] + 0.03, zmid, z["fan_casing_top"] - 0.03):
+        fan.append(c.cylinder(side / 2 + 0.04, zf - 0.03, zf + 0.03, steps=40, center=(cxm, fyc)))
+    top = dryer_top(site)
+    fan.append(c.box((fx0 - 0.08, fy0 - 0.08, z["fan_casing_top"]), (fx1 + 0.08, fy1 + 0.08, z["fan_casing_top"] + 0.06)))
+    for yy, sg in ((fy0 - 0.08, -1), (fy1 + 0.08, 1)):
+        fan += _louvres("y", yy, (fx0 - 0.08, fx1 + 0.08), z["fan_casing_top"] + 0.06, top - 0.05, sg)
+    fan.append(c.box((fx0 - 0.15, fy0 - 0.15, top - 0.05), (fx1 + 0.15, fy1 + 0.15, top)))
+    fan.append(st.rod((fx1, fyc, z["fan_casing_top"] - 0.3), (fx1 + 0.25, fyc, z["fan_casing_top"] - 0.3), 0.05, 12))   # motor cooling tube (GCS p.5)
+
+    # gas train to the linear burner A1, inside building «4»: yellow pipe and a valve cabinet (EST sizes)
+    gy = (ha + hb) / 2
+    gas = [st.rod((x0 - 0.35, gy, 0.0), (x0 - 0.35, gy, z["burner"]), 0.045, 12),
+           st.rod((x0 - 0.35, gy, z["burner"]), (x0, gy, z["burner"]), 0.045, 12),
+           c.box((x0 - 0.55, gy - 0.3, 1.2), (x0 - 0.2, gy + 0.3, 1.9))]
+    # two doors low on the exhaust chamber sides (GCS p.7)
+    yd = (ea + eb) / 2
+    doors = [c.box((x0 - 0.03, yd - 0.4, 0.1), (x0, yd + 0.4, 2.1)), c.box((x1, yd - 0.4, 0.1), (x1 + 0.03, yd + 0.4, 2.1))]
+
+    # chamber roofs: gratings with guard rails (A23), open towards the column; caged ladder on the burner end from
+    # the building «4» roof (ISO 14122-4 flights <= 6 m)
+    plat = [st.grating_panel(x0, ea, x1, eb, zr), st.grating_panel(x0, ha, x1, hb, zr)]
+    rails, toes = [], []
+    for (ya, yb) in ((ea, eb), (ha, hb)):
+        inner, outer = (ya, yb) if abs(yb - y1) < 1e-6 else (yb, ya)          # the rail stays open towards the column
+        r, t = st.guard_rail([(x0, inner), (x0, outer), (x1, outer), (x1, inner)], zr)
+        rails.append(r)
+        toes.append(t)
     from . import aspiration as asp
-    stiles, rungs, cage, rest, rails, toes = asp._caged_ladder((x0 + x1) / 2, y0 - 0.05, -1, eave + 0.2, body_top, 6.0)
+    stiles, rungs, cage, rest, lrails, ltoes = asp._caged_ladder(cxm, hot_end + hs * 0.05, hs, eave + 0.2, zr, 6.0)
     return {"dryer_pad": ("concrete", False, c.merge_parts(pad)),
             "dryer_enclosure": ("galv_old", False, c.merge_parts(shell)), "dryer_enclosure_roof": ("galv_old", False, c.merge_parts(roof)),
-            "dryer_column": ("galv", False, c.merge_parts(column)), "dryer_legs": ("galv_old", False, c.merge_parts(legs)), "dryer_seams": ("galv_old", False, c.merge_parts(seams)),
-            "dryer_hopper": ("galv", False, c.merge_parts(hopper)), "dryer_fans": ("galv", True, c.merge_parts(fans)),
-            "dryer_fan_motors": ("motor", True, c.merge_parts(motors)),
+            "dryer_chambers": ("galv", False, c.merge_parts(chambers)), "dryer_column": ("galv", False, c.merge_parts(column)),
+            "dryer_ribs": ("galv_old", False, c.merge_parts(ribs)), "dryer_louvres": ("galv_old", False, c.merge_parts(louv)),
+            "dryer_hopper": ("galv", False, c.merge_parts(hopper)), "dryer_screw_motor": ("motor", True, screw_motor),
+            "dryer_fans": ("galv", False, c.merge_parts(fan)), "dryer_gas": ("yellow", True, c.merge_parts(gas)),
+            "dryer_doors": ("dark", False, c.merge_parts(doors)),
             "dryer_platform": ("grating", False, c.merge_parts(plat + rest)),
-            "dryer_rails": ("yellow", False, c.merge_parts([rail] + rails)), "dryer_toes": ("yellow", False, c.merge_parts([toe] + toes)),
+            "dryer_rails": ("yellow", False, c.merge_parts(rails + lrails)), "dryer_toes": ("yellow", False, c.merge_parts(toes + ltoes)),
             "dryer_ladder": ("galv", False, c.merge_parts(stiles + rungs + cage))}
 
 
@@ -183,8 +334,8 @@ def build_t3(site=None):
     hx = conv_axis("T3", site)[1][0]                          # hole for the spout onto the dryer
     deck = [st.grating_panel(bx0, y - hw, hx - 0.3, y + hw, dz), st.grating_panel(hx + 0.3, y - hw, bx1, y + hw, dz)]
     frame = [st.member((bx0, y + s * hw, dz - 0.1), (bx1, y + s * hw, dz - 0.1), st.UPN160) for s in (-1, 1)]
-    top = dryer_top(site)
-    frame += [st.member((x, y + s * hw, top), (x, y + s * hw, dz - 0.18), st.SHS_100, up=(1, 0, 0)) for x in g["posts_x"] for s in (-1, 1)]
+    frame += [st.member((x, y + s * hw, column_roof_z(y + s * hw, site)), (x, y + s * hw, dz - 0.18), st.SHS_100, up=(1, 0, 0))
+              for x in g["posts_x"] for s in (-1, 1)]               # posts stand on the column gable roof
     rail, toe = st.guard_rail([(bx0, y + hw), (bx1, y + hw), (bx1, y - hw)], dz)
     return {"t3_casing": ("galv", False, p["casing"]), "t3_flanges": ("galv_old", False, p["flanges"]),
             "t3_drive": ("motor", False, p["drive"]), "t3_motor": ("motor", True, p["motor"]),

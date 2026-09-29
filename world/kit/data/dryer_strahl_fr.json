@@ -1,0 +1,332 @@
+{
+  "model": "STRAHL 3000 FR",
+  "variant": "4 modules",
+  "length_unit": "mm",
+  "note": "Аналог класу. Числа лише з джерел. Друга машина «3000 FR» на 6 модулів (ширина 4100, висота 12250) сюди не входить.",
+  "envelope": {
+    "length_mm": {
+      "v": 7600,
+      "src": "research/design/dryer/sources/Strahl_fr_proizvoditelnost.pdf с. 1; Strahl_Depliant_Serie-FR_eng.pdf (B = 7,6 м)",
+      "basis": "sourced",
+      "note": "Довжина габариту машини"
+    },
+    "width_mm": {
+      "v": 2800,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1; буклет 2026 (A = 2,80 м)",
+      "basis": "sourced",
+      "note": "Ширина габариту. Частка зернової колони і бічних камер не розбита"
+    },
+    "height_mm": {
+      "v": 16750,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1; буклет 2026 (H = 16,75 м)",
+      "basis": "sourced",
+      "note": "Повна висота 4-модульної 3000 FR"
+    },
+    "modules": {
+      "v": 4,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1; буклет 2026",
+      "basis": "sourced",
+      "note": "Висота одного модуля в мм не дана"
+    },
+    "sections": {
+      "v": 25,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": "25 на 4 модулі не ділиться націло; крок секції з ряду 1600–3000 FR не сходиться"
+    },
+    "grain_volume_m3": {
+      "v": 54.7,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": "Буклет 2026 округлює місткість до 55 м³"
+    },
+    "holding_capacity_t_at_750_kg_m3": {
+      "v": 41.0,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": "Буклет 2026: 41 т"
+    },
+    "empty_mass_kg": {
+      "v": 23510,
+      "src": "https://xn--e1alid.xn--p1ai/agricultural-products/1139/362c1c42-92f5-453a-90ec-c85b3166149b",
+      "basis": "sourced",
+      "note": "Картка дилера з тими самими 4 модулями / 25 секціями / 7600×2800×16750. У заводській таблиці маси немає"
+    }
+  },
+  "capacity_wheat_20_to_15_Te90C": {
+    "wet_t_h": {
+      "v": 29.3,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1, рядок ПШЕНИЦА 20% - 15%",
+      "basis": "sourced",
+      "note": "Сире зерно. Сухе в тій самій клітинці 24,4 т/год. Підписи фото 3000 FR у каталозі 2022 округлюють до 30 т/год"
+    },
+    "dry_t_h": {
+      "v": 24.4,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": "Вихід сухого при 20→15 %"
+    }
+  },
+  "air": {
+    "exhaust_fans_n": {
+      "v": 1,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1; буклет 2026",
+      "basis": "sourced",
+      "note": "Верхній, усмоктування, бік протилежний пальнику"
+    },
+    "exhaust_fan_kW": {
+      "v": 22.0,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1; буклет 2026",
+      "basis": "sourced",
+      "note": "Базова комплектація, не версія з цикловентиляторами"
+    },
+    "exhaust_airflow_m3_h": {
+      "v": 51380,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": ""
+    },
+    "recovery_fans_n": {
+      "v": 1,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1; буклет 2026",
+      "basis": "sourced",
+      "note": "Унизу боку викиду"
+    },
+    "recovery_fan_kW": {
+      "v": 11,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1; буклет 2026 (7 кВт лише у 1600 FR)",
+      "basis": "sourced",
+      "note": ""
+    },
+    "recovery_airflow_m3_h": {
+      "v": 27670,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": ""
+    },
+    "cyclofan_alternative_n": {
+      "v": 2,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1, рядок «Версия с цикловентиляторами»",
+      "basis": "sourced",
+      "note": "Інша комплектація того ж 3000 FR"
+    },
+    "cyclofan_alternative_kW_each": {
+      "v": 15,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": "Не замінює базові 22 + 11, доки не вибрана ця версія"
+    },
+    "fan_rotor_diameter_mm": {
+      "v": 1000,
+      "src": "sources/strahl_data1_gcs_konstrukcia.pdf с. 4",
+      "basis": "sourced",
+      "note": "Осьовий, прямий привід, для типу FR у цьому описі. Буклет 2026 діаметр не повторює; пізні комплектації дилерів пишуть «зміщений потік»"
+    },
+    "fan_housing_insulation_mm": {
+      "v": 80,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 5",
+      "basis": "sourced",
+      "note": "Мінеральна вата на внутрішніх стінах корпусу вентилятора"
+    },
+    "nominal_thermal_power_kW": {
+      "v": 2270,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1 (також 1950 × 1000 ккал/год як максимум тієї таблиці); буклет 2026 як nominal",
+      "basis": "sourced",
+      "note": "Стара таблиця називає 2270 кВт максимумом. Буклет 2026 розділяє номінал 2270 і максимум пальника 2440"
+    },
+    "max_burner_thermal_power_kW_brochure_2026": {
+      "v": 2440,
+      "src": "Strahl_Depliant_Serie-FR_eng.pdf, рядок Max. burner thermal power, 3000 FR / 4 modules",
+      "basis": "sourced",
+      "note": "Немає в таблиці tehagrokom"
+    },
+    "compressed_air_Nl_min": {
+      "v": 25,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": "Пневмопривід заслінок"
+    },
+    "compressed_air_bar": {
+      "v": 6,
+      "src": "Strahl_fr_proizvoditelnost.pdf с. 1",
+      "basis": "sourced",
+      "note": ""
+    },
+    "hot_duct_insulation_mm": {
+      "v": 50,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 3; каталог 2022 с. 5 і 7 (вся шахта 50 мм)",
+      "basis": "sourced",
+      "note": "GCS: 50 мм у сендвічі каналів гарячого повітря. Каталог 2022: вся шахта 50 мм"
+    },
+    "inlet_side_flip_every_mm": {
+      "v": 3000,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 9",
+      "basis": "sourced",
+      "note": "Бік входу каналу міняється кожні 3 м по висоті колони. Опис типу FR"
+    },
+    "duct_airflow_m3_h": {
+      "v": 70,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 9",
+      "basis": "sourced",
+      "note": "На один канал, опис типу FR, не розкладка 3000 FR"
+    },
+    "duct_inlet_area_m2": {
+      "v": 0.37,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 9",
+      "basis": "sourced",
+      "note": "Площа входу повітря в зерно одного каналу. У мм не переводилось: джерело дає м²"
+    },
+    "duct_exit_velocity_cm_s": {
+      "v": 5.2,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 9",
+      "basis": "sourced",
+      "note": "Наслідкова швидкість у тому ж абзаці"
+    },
+    "bolts_per_duct": {
+      "v": 8,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 3",
+      "basis": "sourced",
+      "note": "Канал до панелей колони"
+    },
+    "recovery_air_temp_C_low": {
+      "v": 40,
+      "src": "https://strahlrus.ru/ ; каталог 2022 с. 4",
+      "basis": "sourced",
+      "note": "Нижня межа діапазону повітря рециркуляції з нижньої частини шахти"
+    },
+    "recovery_air_temp_C_high": {
+      "v": 60,
+      "src": "https://strahlrus.ru/ ; каталог 2022 с. 4",
+      "basis": "sourced",
+      "note": "Верхня межа того ж діапазону"
+    },
+    "dust_emission_mg_Nm3_max": {
+      "v": 20,
+      "src": "картка 3000 FR поле.рф (< 20 Мг/Nm3); каталог 2022 (нижче 20 мг/м³)",
+      "basis": "sourced",
+      "note": "Поріг, не виміряне значення конкретної машини"
+    },
+    "sound_pressure_dB_card": {
+      "v": 55,
+      "src": "картка 3000 FR поле.рф, «< 55»",
+      "basis": "sourced",
+      "note": "Картка саме 3000 FR. Каталог 2022 і strahlrus пишуть не вище 50 дБ для серії"
+    },
+    "sound_pressure_dB_catalog": {
+      "v": 50,
+      "src": "sources/Strahl_katalog_2022_strahlrus.pdf с. 5; https://strahlrus.ru/",
+      "basis": "sourced",
+      "note": "Серія, не рядок таблиці 3000 FR. Конфлікт із карткою < 55 дБ лишається"
+    }
+  },
+  "service": {
+    "side_platform_pitch_mm": {
+      "v": 2500,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 7",
+      "basis": "sourced",
+      "note": "Майданчики обабіч колони, крок по висоті"
+    },
+    "lower_doors_n": {
+      "v": 2,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 7",
+      "basis": "sourced",
+      "note": "Доступ у нижню частину"
+    },
+    "discharge_stroke_s_low": {
+      "v": 0.5,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 6",
+      "basis": "sourced",
+      "note": "Хід качающихся заслінок, один пневмоциліндр"
+    },
+    "discharge_stroke_s_high": {
+      "v": 1.0,
+      "src": "strahl_data1_gcs_konstrukcia.pdf с. 6",
+      "basis": "sourced",
+      "note": "Верхня межа того ж ходу"
+    },
+    "control_access_levels": {
+      "v": 3,
+      "src": "каталог 2022, підпис сенсорної панелі, sources/kat2022_p4.png",
+      "basis": "sourced",
+      "note": "Рівні доступу пульта. Габарит шафи не дано"
+    }
+  },
+  "analog_lubnymash_ssh30m2": {
+    "length_mm": {
+      "v": 11500,
+      "src": "https://lubnymash.com/u13-ssh",
+      "basis": "analog",
+      "note": "СШ-30.М2, пшениця 20→14 % 30 т/год. Інший габарит, не підставляти замість 3000 FR"
+    },
+    "width_mm": {
+      "v": 4455,
+      "src": "https://lubnymash.com/u13-ssh",
+      "basis": "analog",
+      "note": ""
+    },
+    "height_mm": {
+      "v": 22550,
+      "src": "https://lubnymash.com/u13-ssh",
+      "basis": "analog",
+      "note": ""
+    },
+    "shaft_volume_m3": {
+      "v": 67,
+      "src": "https://lubnymash.com/u13-ssh",
+      "basis": "analog",
+      "note": ""
+    },
+    "burner_MW": {
+      "v": 3,
+      "src": "https://lubnymash.com/u13-ssh",
+      "basis": "analog",
+      "note": "Лінійний пальник MAXON"
+    },
+    "installed_power_kW_max": {
+      "v": 63,
+      "src": "https://lubnymash.com/u13-ssh",
+      "basis": "analog",
+      "note": "Не більше"
+    },
+    "drying_air_thousand_m3_h_max": {
+      "v": 87,
+      "src": "https://lubnymash.com/u13-ssh",
+      "basis": "analog",
+      "note": "Таблиця: 87 тис. м³/год"
+    },
+    "grain_temp_sensors_drying_n": {
+      "v": 3,
+      "src": "https://lubnymash.com/u13-ssh, вузол 11",
+      "basis": "analog",
+      "note": "Ще 3 у наступній зоні (вузол 15) і 1 біля охолодження (вузол 26). У STRAHL кількість не задана"
+    }
+  },
+  "not_found": [
+    "module_height_mm",
+    "section_height_mm",
+    "leg_height_mm",
+    "leg_count",
+    "grain_column_width_mm_inside_2800",
+    "duct_roof_width_mm",
+    "duct_roof_height_mm",
+    "duct_pitch_vertical_mm",
+    "duct_pitch_in_row_mm",
+    "ducts_per_row",
+    "guillotine_channel_count",
+    "wet_hopper_volume_m3",
+    "wet_hopper_level_sensor_count",
+    "roof_pitch",
+    "inspection_hatch_count",
+    "explosion_vent",
+    "dry_riser_or_sprinkler",
+    "sampler",
+    "grain_temperature_sensor_count",
+    "control_cabinet_size_mm",
+    "paint_ral",
+    "stiffener_pitch_mm",
+    "module_bolt_size",
+    "fan_diameter_mm_in_2026_brochure",
+    "cooling_zone_height_mm",
+    "rest_zone_height_mm"
+  ]
+}
