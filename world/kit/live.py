@@ -1,7 +1,7 @@
 """Control center, module L: the live scene — the Blender model follows the simulator state
 (CONTROL_CENTER_SPEC.md §6). The kits are not changed: everything here works on the assembled scene.
 
-  split_gates(scene, site)  the merged gate meshes (T9_GATES, H5_DIST_GATES, T8_GATES, ...) cut into their loose
+  split_gates(scene, site)  tunnel gate objects by opening, and the merged gate meshes (H5_DIST_GATES, T8_GATES, ...) cut into their loose
                             parts; each part gets the id of its gate by plan position, looked up only among the
                             gates of its own family (tunnel openings, splitter branches, gallery drops — SITE)
   split_old_silos           the old silos «2», «3» share one merged mesh per part kind: cut into OS2 / OS3 parts
@@ -27,6 +27,7 @@ import math
 import bmesh
 import bpy
 import numpy as np
+from mathutils import Vector
 
 from . import process as pr
 from . import routes as R
@@ -67,13 +68,14 @@ MORE_OBJECTS = {
 }
 # merged mesh -> the family of gates it may hold (a gallery drop over a silo centre is never the silo gate)
 MERGED_GATES = {
-    "T9_GATES": "tunnel:T9", "T13_GATES": "tunnel:T13", "T16_GATES": "tunnel:T16",
-    "T9_GATE_MOTORS": "tunnel:T9", "T13_GATE_MOTORS": "tunnel:T13", "T16_GATE_MOTORS": "tunnel:T16",
     "H5_DIST_GATES": "dist:H5", "H6_DIST_GATES": "dist:H6", "H5_DIST_GATE_MOTORS": "dist:H5", "H6_DIST_GATE_MOTORS": "dist:H6",
     "T8_GATES": "gallery:T8", "T12_GATES": "gallery:T12", "T15_GATES": "gallery:T15",
 }
 MERGED_OLD_SILOS = ("RECEIVING_OLD_SILO_WALLS", "RECEIVING_OLD_SILO_ROOFS", "RECEIVING_OLD_SILO_PLINTHS", "RECEIVING_OLD_SILO_CHAIRS")
 MAX_D = 0.05         # m in plan: every part must lie on an expected centre of a part of its gate (kit geometry)
+TUNNEL_GATE_D = 0.9  # m in plan: a tunnel gate object (tunnel.build: <T>_GATE_<nn>_<group>) belongs to the opening
+                     # whose centre is this close; the drive and handwheel reach ~0.7 m out, the openings are 3.25 m apart
+PTS_PER_PLACE = {"tunnel": 1, "dist": 2, "gallery": 2}   # gate_points centres per opening / branch / drop
 
 
 # ------------------------------------------------------------------ splitting merged meshes
@@ -82,9 +84,9 @@ def gate_points(site):
     """{family: {"gates" | "motors": {gate id: [(x, y) plan centres]}}} (family = the values of MERGED_GATES).
     The centres are where the kits put each loose part of a gate (the offsets below are the kits' own sizes, so
     a kit change shows up as unassigned parts in check_live):
-      tunnel   tunnel.build_gate_stacks: ТЗА and ТЗР boxes on the opening (x, row), the rack housing at
-               x + s/2 + 0.325, the motor at (x + s/2 + 0.45, row + 0.19); the opening under the silo centre is
-               <silo>.c, the others <silo>.s (SITE silo_gates);
+      tunnel   the opening centre (x, row) only: tunnel.build makes one object per group and opening
+               (<T>_GATE_<nn>_BODY / _MOTOR / _HANDWHEELS / _DARK), assigned by plan distance (TUNNEL_GATE_D);
+               the opening under the silo centre is <silo>.c, the others <silo>.s (SITE silo_gates);
       splitter distribution.build: the gate box on the branch, the housing at +0.425 in x, the motor at
                (+0.52, +0.17); the gate is the one of the edge whose spout starts at that branch (SITE distribution);
       gallery  gallery.silo_row_gallery: the gate box on the drop over the silo, the housing at +0.425 in x."""
@@ -103,10 +105,7 @@ def gate_points(site):
             sid = min(feeders, key=lambda e: abs(silos[e["from"]]["x"] - x))["from"]
             e = by_edge[(sid, t["conveyor"]["id"])]
             gid = e["gates"][0] if abs(silos[sid]["x"] - x) < 0.3 else e["alt_gates"][0]
-            h = size / 2
             put(fam, "gates", gid, (x, y))
-            put(fam, "gates", gid, (x + h + 0.325, y))
-            put(fam, "motors", gid, (x + h + 0.45, y + 0.19))
     for d in site.get("distribution", []):
         fam = f"dist:{d['tower']}"
         for spl in d["splitters"]:
@@ -212,6 +211,20 @@ def split_gates(scene, site):
                 by_gate.setdefault(gid, []).append(o)
             else:
                 loose.append((o.name, dist))
+    for t in site.get("tunnels", []):                    # tunnel gates are already one object per group and opening
+        pts = [(gid, np.array(p)) for gid, ps in fam.get(f"tunnel:{t['conveyor']['id']}", {}).get("gates", {}).items() for p in ps]
+        objs = [o for o in scene.objects if o.name.startswith(f"{t['id']}_GATE_") and o.type == "MESH"]
+        for o in objs:
+            mw = o.matrix_world
+            bb = [mw @ Vector(v) for v in o.bound_box]
+            cxy = np.array([sum(v.x for v in bb) / 8, sum(v.y for v in bb) / 8])
+            gid, d = min(((g, float(np.hypot(*(cxy - p)))) for g, p in pts), key=lambda gd: gd[1], default=(None, None))
+            if gid and d <= TUNNEL_GATE_D:
+                by_gate.setdefault(gid, []).append(o)
+                o["part_of"] = gid
+            else:
+                loose.append((o.name, d))
+        count[f"{t['id']}_GATE_*"] = (len(objs), len(objs))
     return by_gate, loose, count
 
 

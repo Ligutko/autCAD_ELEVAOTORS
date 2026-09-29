@@ -263,25 +263,50 @@ def build_conveyor(site, t, inlet):
     return merged, measure
 
 
-def build_gate_stacks(site, t):
-    """Per opening: sleeve through the slab, electric gate ТЗА (rack + 0.18 kW motor), manual gate ТЗР
-    (handwheel), spout into the conveyor inlet. Heights from SITE.json silo_gates.stack_z."""
+# gate kit part -> the object group of one tunnel opening (one material per group; live.py glows a gate by these)
+GATE_GROUPS = {"body": "body", "flanges": "body", "bolts": "body", "blade": "body", "frame": "body", "screw": "body", "shaft": "body",
+               "motor": "motor", "gearbox": "motor", "handwheel": "handwheels", "pinion": "handwheels",
+               "indicator": "handwheels", "switches": "dark", "rack": "dark"}
+
+
+def walkway_side(site, t):
+    """+1 when the wider walkway is on +Y of the row axis, else -1: drives and handwheels face it."""
+    _, y0, _, y1, _, _ = inner_box(site, t)
+    return 1 if (y1 - t["row_y"]) > (t["row_y"] - y0) else -1
+
+
+def gate_stack_parts(site, t):
+    """[(x, size, {group: mesh})] per loading opening: ТЗА (gates.gate_tza) on top of ТЗР (gates.gate_tzr), both
+    closed, blade travel along the row, drive and handwheel towards the wider walkway. Heights from SITE.json
+    silo_gates.stack_z (the kit body heights are the same numbers, check_gates)."""
+    from . import gates as gk
     sz = site["silo_gates"]["stack_z"]
     y = t["row_y"]
-    parts = {"sleeves": [], "gates": [], "gate_motors": [], "handwheels": [], "spouts": []}
+    side = walkway_side(site, t)
+    out = []
+    for x, s in _gate_positions(site, t):
+        mm = int(round(s * 1000))
+        groups = {}
+        for res, top in ((gk.gate_tza(mm, 0.0, side), sz["tza"][0]), (gk.gate_tzr(mm, 0.0, side), sz["tzr"][0])):
+            for name, (v, f) in res["parts"].items():
+                groups.setdefault(GATE_GROUPS[name], []).append((np.asarray(v, float) + (x, y, top), f))
+        out.append((x, s, {k: c.merge_parts(v) for k, v in groups.items()}))
+    return out
+
+
+def build_gate_stacks(site, t):
+    """Per opening: sleeve through the slab, electric gate ТЗА, manual gate ТЗР, spout into the conveyor inlet,
+    merged by group over the whole row (checks and renders use these; tunnel.build makes one object per opening)."""
+    sz = site["silo_gates"]["stack_z"]
+    y = t["row_y"]
+    parts = {"sleeves": [], "spouts": []}
     for x, s in _gate_positions(site, t):
         h = s / 2
         parts["sleeves"].append(c.box((x - h - 0.01, y - h - 0.01, sz["sleeve"][1]), (x + h + 0.01, y + h + 0.01, sz["sleeve"][0] - 0.02)))
-        za0, za1 = sz["tza"][1], sz["tza"][0]
-        parts["gates"].append(c.box((x - h - 0.1, y - h - 0.06, za0), (x + h + 0.1, y + h + 0.06, za1)))
-        parts["gates"].append(c.box((x + h + 0.1, y - 0.08, za0 + 0.06), (x + h + 0.55, y + 0.08, za1 - 0.06)))   # rack housing
-        parts["gate_motors"].append(st.rod((x + h + 0.45, y + 0.08, za0 + 0.125), (x + h + 0.45, y + 0.30, za0 + 0.125), 0.06, 16))
-        zr0, zr1 = sz["tzr"][1], sz["tzr"][0]
-        parts["gates"].append(c.box((x - h - 0.1, y - h - 0.06, zr0), (x + h + 0.1, y + h + 0.06, zr1)))
-        zw = (zr0 + zr1) / 2
-        parts["handwheels"].append(st.rod((x, y - h - 0.06, zw), (x, y - h - 0.25, zw), 0.012, 8))
-        parts["handwheels"].append(st.rod((x, y - h - 0.25, zw), (x, y - h - 0.27, zw), 0.15, 24))
-        parts["spouts"].append(c.box((x - h, y - h, sz["spout_bottom"] + 0.02), (x + h, y + h, zr0)))
+        parts["spouts"].append(c.box((x - h, y - h, sz["spout_bottom"] + 0.02), (x + h, y + h, sz["tzr"][1])))
+    for _, _, groups in gate_stack_parts(site, t):
+        for k, data in groups.items():
+            parts.setdefault("gate_" + k, []).append(data)
     return {k: c.merge_parts(v) for k, v in parts.items()}
 
 
@@ -368,9 +393,12 @@ def build(site, t, collection=None, materials=None, roof_holes=()):
     for k, data in conv.items():
         add("conv_" + k, data, look[k], smooth="quads" if k in ("idlers", "pulleys", "motor") else False)
     stacks = build_gate_stacks(site, t)
-    look_g = {"sleeves": galv, "gates": red, "gate_motors": motor, "handwheels": dark, "spouts": galv}
-    for k, data in stacks.items():
-        add(k, data, look_g[k], smooth="quads" if k in ("gate_motors", "handwheels") else False)
+    add("sleeves", stacks["sleeves"], galv)
+    add("spouts", stacks["spouts"], galv)
+    look_g = {"body": galv, "motor": motor, "handwheels": red, "dark": dark}
+    for i, (_, _, groups) in enumerate(gate_stack_parts(site, t)):          # one object per group and opening: live.py
+        for k, data in groups.items():
+            add(f"gate_{i:02d}_{k}", data, look_g[k], smooth="quads" if k in ("motor", "handwheels") else False)
     lamps, tray, lamp_pts = build_services(site, t)
     add("lamps", lamps, lamp_mat)
     add("cable_tray", tray, galv)
