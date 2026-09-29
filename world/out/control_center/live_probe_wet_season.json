@@ -1,0 +1,29 @@
+{
+ "runs": [
+  {
+   "view": "CAM_DRONE",
+   "frame_ms": 45.4,
+   "fps": 22.0,
+   "sim_t": 30523.0
+  },
+  {
+   "view": "CAM_DRYING",
+   "frame_ms": 41.0,
+   "fps": 24.4,
+   "sim_t": 36460.0
+  },
+  {
+   "view": "CAM_TRUCK",
+   "frame_ms": 41.8,
+   "fps": 23.9,
+   "sim_t": 42413.0
+  },
+  {
+   "view": "CAM_WALK",
+   "frame_ms": 40.8,
+   "fps": 24.5,
+   "sim_t": 48713.0
+  }
+ ],
+ "build_s": 26.1
+}

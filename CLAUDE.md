@@ -7,6 +7,8 @@
 >
 > Код — `world/`, дані з креслення — `world/site/SITE.json`, заміри — `research/tunnel_k4.md`. Перед комітом мають пройти всі `world/build/check_*.py`: `python world/build/check_all.py`.
 >
+> **Центр керування (з 2026-09-29):** симулятор процесу, веб-пульт і жива сцена — `CONTROL_CENTER_SPEC.md`, код `world/sim/`, `world/panel/`, `world/kit/live.py`; підсумок — `17 Expertise 2026-09-29 control center.md` у тій самій вікі-папці.
+>
 > Розділи нижче про AutoCAD описують попередній 2D-етап; його `config_*.json` для 3D не використовувати.
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
