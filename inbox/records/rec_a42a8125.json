@@ -1,0 +1,30 @@
+{
+  "id": "rec_a42a8125",
+  "subject": "Rockwell Process HMI Style Guide — стан засувки (клапана)",
+  "kind": "spec",
+  "claim": {
+    "name": "hmi_valve_state_colors",
+    "value": {
+      "closed": "#808080 сірий",
+      "open": "#F0F0F0 майже білий",
+      "stopped_midway": "#93C2E4 світло-блакитний",
+      "opening_closing": "половина #F0F0F0, половина #808080"
+    },
+    "unit": "hex RGB",
+    "qualifier": "заливка символу засувки за станом"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://literature.rockwellautomation.com/idc/groups/literature/documents/wp/proces-wp023_-en-p.pdf",
+    "path": "inbox/raw/web/literature.rockwellautomation.com/proces-wp023_-en-p.pdf",
+    "page": 24,
+    "quote": "Dynamic Valve objects use the following color scheme: Element State Color Color Name Definition Closed Gray R128 G128 B128 #808080 Open Off White R240 G240 B240 #F0F0F0 Stopped Light Blue R147 G194 B228 #93C2E4",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для станів засувки SITE.json closed / opening / open / closing / fault: closed — сірий, open — світлий, opening/closing — наполовину, fault — чорний фон (с. 20).",
+  "seen_in": []
+}

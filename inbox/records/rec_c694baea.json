@@ -1,0 +1,31 @@
+{
+  "id": "rec_c694baea",
+  "subject": "Автомобілерозвантажувачі (навчальний текст «Приемные устройства для автомобильного транспорта»)",
+  "kind": "timing",
+  "claim": {
+    "name": "unloader_unload_time",
+    "value": {
+      "single": [
+        3,
+        5
+      ],
+      "with_two_trailers_max": 10
+    },
+    "unit": "min",
+    "qualifier": "час розвантаження одного автомобіля на автомобілерозвантажувачі"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dieselloc.ru/emkosti-dlia-sypuchih-gruzov/priemnye-ustroistva-dlya-avtomobilnogo-transporta.html",
+    "path": "inbox/raw/web/dieselloc.ru/priemnye-ustroistva-dlya-avtomobilnogo-transporta.html",
+    "page": null,
+    "quote": "Время разгрузки составляет 3…5 мин (с двумя прицепами — до 10 мин).",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Текст підручника, розміщений на стороньому сайті (dieselloc.ru); автор/видання не вказані — надійність середня. Для проїзної ями без розвантажувача (наш випадок) — самоскид розвантажується сам, див. rec_d0a04530.",
+  "seen_in": []
+}

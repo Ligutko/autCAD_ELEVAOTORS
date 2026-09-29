@@ -1,0 +1,57 @@
+{
+ "id": "ship_out",
+ "title": "Відвантаження з S1 і мертва зона",
+ "description": "S1 з 2000 т: S1 -> T9 -> H5 -> T10 -> сепаратор 5 -> Ш1 -> авто. Спершу центральний отвір, коли самоплив зупиниться — бічні, потім зачисний шнек. Розрахунок (кут обвалення 34°, EN 1991-4): центральний отвір віддає ≈ 600 т і лишає ≈ 1 400 т; бічні — ще ≈ 500 т, лишають ≈ 890 т (мертва зона плоского дна); шнек 60 т/год (EST) — ≈ 15 год.",
+ "until_s": 104400,
+ "events": [
+  {
+   "t_s": 0,
+   "cmd": {
+    "op": "store",
+    "id": "S1",
+    "mass": 2000,
+    "moisture": 14
+   }
+  },
+  {
+   "t_s": 0,
+   "cmd": {
+    "op": "truck_out",
+    "count": 80
+   }
+  },
+  {
+   "t_s": 0,
+   "cmd": {
+    "op": "route",
+    "id": "S1 -> T9 -> H5 -> T10 -> GRAVITY_PIPE -> SEP5 -> SH1 -> TRUCK_OUT -> SCALES_OUT -> TRUCK_EXIT",
+    "action": "start"
+   }
+  },
+  {
+   "t_s": 25200,
+   "cmd": {
+    "op": "gate",
+    "id": "S1.s",
+    "action": "open"
+   }
+  },
+  {
+   "t_s": 45000.0,
+   "cmd": {
+    "op": "sweep",
+    "id": "S1",
+    "action": "start"
+   }
+  },
+  {
+   "t_s": 100800,
+   "cmd": {
+    "op": "route",
+    "id": "S1 -> T9 -> H5 -> T10 -> GRAVITY_PIPE -> SEP5 -> SH1 -> TRUCK_OUT -> SCALES_OUT -> TRUCK_EXIT",
+    "action": "stop"
+   }
+  }
+ ],
+ "expect": []
+}

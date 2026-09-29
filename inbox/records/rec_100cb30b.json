@@ -1,0 +1,28 @@
+{
+  "id": "rec_100cb30b",
+  "subject": "Пристрій плавного пуску для конвеєра (ABB Softstarter Handbook)",
+  "kind": "timing",
+  "claim": {
+    "name": "softstarter_conveyor_settings",
+    "value": {
+      "start_ramp": 10,
+      "stop_ramp": 0
+    },
+    "unit": "s",
+    "qualifier": "рекомендовані базові уставки для стрічкового конвеєра"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://library.e.abb.com/public/6b4e1a3530814df0c12579bb0030e58b/1SFC132060M0201.pdf",
+    "path": "inbox/raw/web/library.e.abb.com/1SFC132060M0201_softstarter_handbook.pdf",
+    "page": 42,
+    "quote": "Recommended basic settings: Start ramp: 10 sec. Stop ramp: 0 sec. (If fragile material use 10 seconds)",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Друкована с. 36. Зупинка без рампи (0 с) — вибіг визначає механіка, а не пускач. Та сама уставка 10 с в узагальненій таблиці налаштувань (Conveyor belt 10 / Off, друкована с. 57 PDF-стор. 63).",
+  "seen_in": []
+}

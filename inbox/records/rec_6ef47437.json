@@ -1,0 +1,25 @@
+{
+  "id": "rec_6ef47437",
+  "subject": "Сушарки безперервні поперечнопотокові (OMAFRA, Онтаріо)",
+  "kind": "spec",
+  "claim": {
+    "name": "specific_heat_crossflow",
+    "value": 6420,
+    "unit": "kJ/kg",
+    "qualifier": "860 000 кДж на 134 кг води (кукурудза 25→15 %, 1 т сухого)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.ontario.ca/page/reducing-energy-use-grain-dryers",
+    "path": "inbox/raw/web/ontario.ca/reducing-energy-use-grain-dryers.html",
+    "page": null,
+    "quote": "A continuous cross-flow dryer uses 860,000 kJ of energy (34 L of propane) to evaporate this much water.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "860 000 / 134 = 6 418 кДж/кг. Поперечнопотокова без рециркуляції — гірший клас, ніж баштова змішаного потоку з рециркуляцією повітря (STRAHL). Урядова методичка, авторитетне джерело.",
+  "seen_in": []
+}

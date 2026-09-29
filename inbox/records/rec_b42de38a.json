@@ -1,0 +1,24 @@
+{
+  "id": "rec_b42de38a",
+  "subject": "Існуючий приймальний блок: H2, T1, T2, T4, T6, сепаратор 5",
+  "kind": "gap",
+  "claim": {
+    "name": "capacity_in_project_docs",
+    "value": null,
+    "unit": "t/h",
+    "qualifier": "продуктивність і тип у документах об’єкта"
+  },
+  "source": {
+    "origin": "local",
+    "path": "research/receiving.md",
+    "page": null,
+    "quote": "Для старого блоку продуктивність у PDF не вказана, крім заголовків «H1 / H3 / H4 100 т/год» на арк. 1. H2 на арк. 1 немає.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Перевірено 2026-09-29: OCR арк. 1 (inbox/raw/ocr/page_01.txt) — «100 т/год» лише біля H1, H3, H4 і нових ліній; специфікації арк. 8–12 містять тільки нове обладнання (норії 100 т/год 22 кВт, ТЦС 100 т/год, ТЛ-50К). Моделей і т/год для H2, T1, T2, T4, T6, сепаратора 5 немає ніде. Значення — аналоги rec_b7fed678, rec_b8f55adc, rec_baeeb94b, rec_bd9508a5 і оцінка rec_c54d213d.",
+  "seen_in": []
+}

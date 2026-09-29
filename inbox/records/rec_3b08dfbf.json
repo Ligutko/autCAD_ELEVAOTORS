@@ -1,0 +1,31 @@
+{
+  "id": "rec_3b08dfbf",
+  "subject": "Зерносушарка STRAHL 3000 FR (4 модулі)",
+  "kind": "capacity",
+  "claim": {
+    "name": "capacity_corn_table",
+    "value": {
+      "35→15": 8.9,
+      "32→14": 9.7,
+      "28→14": 12.0,
+      "24→14": 13.9,
+      "20→14": 17.2
+    },
+    "unit": "t/h",
+    "qualifier": "кукурудза, вихід сирого зерна, колонка 3000 FR; температура агента 125 / 125 / 125 / 115 / 100 °C"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tehagrokom.ru/catalog/files/strahl/Strahl_fr_proizvoditelnost.pdf",
+    "path": "inbox/raw/web/tehagrokom.ru/Strahl_fr_proizvoditelnost.pdf",
+    "page": 1,
+    "quote": "КУКУРУЗА 20% - 14% Te=100°C Выход (сырого) т/час 9,2 11,5 14,4 17,2",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Та сама таблиця, що rec_eda294e3 (пшениця 20→15: 29,3). Для кукурудзи рядки внутрішньо узгоджені з балансом сухої речовини (вихід сухого = сирий × (100−w1)/(100−w2) з точністю 0,1 т/год). Для пшениці таблиця дає лише 20→15 — інші режими пшениці див. планові тонни rec_4dab5da1. Дані виробника «indicative», зовнішнє повітря 15 °C, 70 %.",
+  "seen_in": []
+}

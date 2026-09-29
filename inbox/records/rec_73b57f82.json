@@ -1,0 +1,27 @@
+{
+  "id": "rec_73b57f82",
+  "subject": "Зерносушарка STRAHL 3000 FR — пшениця 20→15 %",
+  "kind": "capacity",
+  "claim": {
+    "name": "dry_output_wheat_20_15",
+    "value": 24.4,
+    "unit": "t/h",
+    "qualifier": "вихід сухого зерна за таблицею виробника"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tehagrokom.ru/catalog/files/strahl/Strahl_fr_proizvoditelnost.pdf",
+    "path": "inbox/raw/web/tehagrokom.ru/Strahl_fr_proizvoditelnost.pdf",
+    "page": 1,
+    "quote": "ПШЕНИЦА 20% - 15% Te=90°C Выход (сырого) т/час 15,6 19,5 24,4 29,3 Выход (сухого) т/час 13,0 16,3 20,4 24,4",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_7641011c"
+  ],
+  "notes": "Число з таблиці, але воно не сходиться з балансом сухої речовини: 29,3 × 80/85 = 27,58 т/год (rec_7641011c). У всіх рядках пшениці сухий = сирий × 0,833 (≈ 1/1,2) — схоже на помилку таблиці; рядки кукурудзи й сої з балансом сходяться. Рядок соняшнику повністю повторює кукурудзу 28→14 — ще одна ознака помилок. Перевірено рендером сторінки.",
+  "seen_in": []
+}

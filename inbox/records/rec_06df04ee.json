@@ -1,0 +1,29 @@
+{
+  "id": "rec_06df04ee",
+  "subject": "Засувка з електроприводом У8-ТЭА-15/16/18 (аналог ТЕА Лубнимаш)",
+  "kind": "timing",
+  "claim": {
+    "name": "opening_time",
+    "value": {
+      "У8-ТЭА-15 (300×300)": 6,
+      "У8-ТЭА-16 (200×200)": 6,
+      "У8-ТЭА-18 (350×350)": 6
+    },
+    "unit": "s",
+    "qualifier": "час відкриття засувки, привод 0,25 кВт"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://td-elo.ru/product/zadvizhka_s_elektroprivodom_u8_tea_16",
+    "path": "inbox/raw/web/td-elo.ru/zadvizhka_s_elektroprivodom_u8_tea_16.html",
+    "page": null,
+    "quote": "Время открытия задвижки, с 6 6 6 Мощность привода, кВт 0,25 0,25 0,25",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Рейкова засувка з мотор-редуктором і шестернею на рейці, та сама схема, що в ТЕА Лубнимаша (серія «ТЭА», переріз 300–350 мм). Відрізняється двигуном 0,25 кВт проти 0,18 кВт: час ходу задає передаточне число, а не потужність, тож це не робить аналог непридатним. Та сама таблиця (6 с для всіх трьох) є в іншого постачальника: inbox/raw/web/skess.ru/zadvizhki-s-elektroprivodom-tipa-tea-ez.html — ймовірно, спільне джерело даних, тому це один аналог, а не два.",
+  "seen_in": []
+}

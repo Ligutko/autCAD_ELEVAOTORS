@@ -1,0 +1,30 @@
+{
+  "id": "rec_cc413ecd",
+  "subject": "Автомобілерозвантажувачі — час підйому й опускання платформи",
+  "kind": "timing",
+  "claim": {
+    "name": "unloader_tilt_times",
+    "value": {
+      "tilt_10t": 30,
+      "tilt_15t": 40,
+      "tilt_30t": 60,
+      "lower": 25
+    },
+    "unit": "s",
+    "qualifier": "поворот і опускання платформи"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://dieselloc.ru/emkosti-dlia-sypuchih-gruzov/priemnye-ustroistva-dlya-avtomobilnogo-transporta.html",
+    "path": "inbox/raw/web/dieselloc.ru/priemnye-ustroistva-dlya-avtomobilnogo-transporta.html",
+    "page": null,
+    "quote": "Собственно поворот платформы автомобилеразгрузчика при его грузоподъемности 10, 15, 30 т осуществляется соответственно в течение 30, 40, 60 с, а опускание — примерно одинаково у всех: около 25 с.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Показує, що сам нахил — хвилина, решта часу розвантаження (3–5 хв) — витікання зерна і маневри. Для самоскида з власним гідроциліндром порядок той самий (judgment).",
+  "seen_in": []
+}

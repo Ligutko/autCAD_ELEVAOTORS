@@ -1,0 +1,27 @@
+{
+  "id": "rec_83e4121b",
+  "subject": "Сушарка класу STRAHL 3000 FR — газ, пшениця 20→15 % при 29,3 т/год",
+  "kind": "spec",
+  "claim": {
+    "name": "gas_flow_wheat_20_15_derived",
+    "value": 170,
+    "unit": "m3/h",
+    "qualifier": "діапазон 161–176"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "Середні витрати газу [ м³/%т ] 1,1 – 1,2",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_79e9c5d4"
+  ],
+  "notes": "Формула: газ = q_%т × G_сир × Δw = 1,16 (STRAHL, кукурудза, rec_6ef3a229) × 29,3 × 5 = 170 м³/год; з Лубнимашем 1,1–1,2 (rec_6e398b14) — 161–176. Тепло ≈ 170 × 35,6 МДж = 6,0 ГДж/год ≈ 1,7 МВт, у межах пальника 2,27 МВт. Суперечить табличним 104 м³/год (rec_79e9c5d4).",
+  "seen_in": []
+}

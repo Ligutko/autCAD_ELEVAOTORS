@@ -1,0 +1,25 @@
+{
+  "id": "rec_8e03f5cf",
+  "subject": "Зерносушарка STRAHL FR — пуск",
+  "kind": "timing",
+  "claim": {
+    "name": "prestart_purge",
+    "value": 3,
+    "unit": "min",
+    "qualifier": "продування вентиляторами перед увімкненням установки"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tehagrokom.ru/catalog/files/strahl/STRAHL_FR_tehopisanie.pdf",
+    "path": "inbox/raw/web/tehagrokom.ru/STRAHL_FR_tehopisanie.pdf",
+    "page": 12,
+    "quote": "запускаются вентиляторы (электрический двигатель находится снаружи, он имеет сертификат ATEX II-3D), которые очищают внутренние части сушильной башни, через 3 минуты включается сама установка.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Друкована с. 20/21 опису (оцінка ризиків ATEX). Для симулятора: команда «пуск сушарки» → вентилятори 3 хв → пальник. Окремо НПАОП вимагає, щоб пуск сушарки починався після завантаження бункера зерном (z1288-17).",
+  "seen_in": []
+}

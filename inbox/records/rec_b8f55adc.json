@@ -1,0 +1,28 @@
+{
+  "id": "rec_b8f55adc",
+  "subject": "Сепаратори Лубнимаш (У13-АСК, У13-СПВ) — зниження продуктивності",
+  "kind": "rule",
+  "claim": {
+    "name": "separator_derating",
+    "value": {
+      "per_1pct_trash_above_4": -2,
+      "per_1pct_moisture_above_14": -5
+    },
+    "unit": "% продуктивності",
+    "qualifier": "поправка на засміченість і вологість вихідного зерна"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/ochyshhennya/u13-ask/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ask.html",
+    "page": null,
+    "quote": "* при ɣ=0,75 т/м³, волога 14%, склад домішок до 4% ** при збільшенні вищевказаних норм засміченості та вологості вихідного матеріалу, технічна продуктивність комплексу зменшується на 2% на кожний відсоток збільшення засміченості та на 5% на кожний процент збільшення вологості.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Та сама примітка на сторінці У13-СПВ (inbox/raw/web/lubnymash.com/page_u13-spv.html). Для інших культур, крім пшениці, продуктивність теж менша (без числа).",
+  "seen_in": []
+}

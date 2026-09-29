@@ -1,0 +1,27 @@
+{
+  "id": "rec_7641011c",
+  "subject": "Сушарка класу STRAHL 3000 FR — вихід сухого при 29,3 т/год пшениці 20→15 %",
+  "kind": "capacity",
+  "claim": {
+    "name": "dry_output_mass_balance",
+    "value": 27.58,
+    "unit": "t/h",
+    "qualifier": "вихід = вхід × (100 − w1)/(100 − w2); вода 1,72 т/год"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tehagrokom.ru/catalog/files/strahl/Strahl_fr_proizvoditelnost.pdf",
+    "path": "inbox/raw/web/tehagrokom.ru/Strahl_fr_proizvoditelnost.pdf",
+    "page": 1,
+    "quote": "ПШЕНИЦА 20% - 15% Te=90°C Выход (сырого) т/час 15,6 19,5 24,4 29,3 Выход (сухого) т/час 13,0 16,3 20,4 24,4",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_73b57f82"
+  ],
+  "notes": "Формула балансу сухої речовини; таке саме число вже в специфікації (розд. 3.1). Суперечить табличному 24,4 (rec_73b57f82). Фізично правильним є баланс; табличне число записане, бо воно в джерелі.",
+  "seen_in": []
+}

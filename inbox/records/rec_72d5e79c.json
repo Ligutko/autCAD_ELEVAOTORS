@@ -1,0 +1,27 @@
+{
+  "id": "rec_72d5e79c",
+  "subject": "Сушарки безперервні змішаного потоку (OMAFRA) — питома витрата тепла",
+  "kind": "spec",
+  "claim": {
+    "name": "specific_heat_mixedflow",
+    "value": 4500,
+    "unit": "kJ/kg",
+    "qualifier": "≈ 6 420 × 0,7"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.ontario.ca/page/reducing-energy-use-grain-dryers",
+    "path": "inbox/raw/web/ontario.ca/reducing-energy-use-grain-dryers.html",
+    "page": null,
+    "quote": "A continuous mixed-flow dryer uses about 30% less energy, on average, than a continuous cross-flow dryer",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_6ef3a229"
+  ],
+  "notes": "Формула: 6 418 кДж/кг (rec_6ef47437) × (1 − 0,30) ≈ 4 490 кДж/кг. Це середнє для змішаного потоку без уточнення рециркуляції; STRAHL з рециркуляцією повітря за власною таблицею дає ≈ 3 300–3 500 (rec_6ef3a229). Розбіжність — клас сушарки; для симулятора брати 3 500 (STRAHL) або 4 500 (консервативно) — вибір за людиною.",
+  "seen_in": []
+}

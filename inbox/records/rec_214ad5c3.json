@@ -1,0 +1,28 @@
+{
+  "id": "rec_214ad5c3",
+  "subject": "Siemens Milltronics MFA 4p: реле контролю руху",
+  "kind": "timing",
+  "claim": {
+    "name": "start_delay_range",
+    "value": [
+      0,
+      60
+    ],
+    "unit": "s",
+    "qualifier": "регульована затримка контролю після пуску"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://cache.industry.siemens.com/dl/files/176/109751176/att_931691/v1/Milltronics_MFA_4p_en-US.pdf",
+    "path": "inbox/raw/web/cache.industry.siemens.com/Milltronics_MFA_4p_en-US.pdf",
+    "page": 44,
+    "quote": "The MFA 4p has a 0 to 60 second time delay feature, allowing the monitored device to accelerate to normal running speed before monitoring begins.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Заводського значення немає: у процедурі калібрування затримку ставлять потенціометром «так, щоб обладнання встигло вийти на нормальну швидкість». Широкий діапазон підтверджує, що час розгону залежить від механізму.",
+  "seen_in": []
+}

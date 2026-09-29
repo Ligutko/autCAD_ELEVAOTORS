@@ -1,0 +1,28 @@
+{
+  "id": "rec_d35ed5ac",
+  "subject": "Платформні автомобілерозвантажувачі Bruks Siwertell (проїзні)",
+  "kind": "timing",
+  "claim": {
+    "name": "truck_cycle_time",
+    "value": [
+      8,
+      9
+    ],
+    "unit": "min",
+    "qualifier": "середній інтервал між автомобілями, включно з заїздом, нахилом і виїздом"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://bruks-siwertell.com/truck-unloading",
+    "path": "inbox/raw/web/bruks-siwertell.com/truck-unloading.html",
+    "page": null,
+    "quote": "The average time between trucks is eight to nine minutes, making this process slightly faster as the driver does not need to reverse a trailer into place.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Для задньоходових платформ — «usually less than ten minutes». Це цикл потоку машин, а не лише висипання. Bruks працює здебільшого з біомасою/трісою, для зерна — аналог циклу.",
+  "seen_in": []
+}

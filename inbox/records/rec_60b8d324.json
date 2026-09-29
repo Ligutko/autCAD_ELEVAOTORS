@@ -1,0 +1,36 @@
+{
+  "id": "rec_60b8d324",
+  "subject": "Зерносушарки Лубнимаш У13-СШ (ряд 20–200 т/год)",
+  "kind": "capacity",
+  "claim": {
+    "name": "grain_column_volume",
+    "value": {
+      "СШ-20.М2": 52,
+      "СШ-25.М2": 59,
+      "СШ-30.М2": 67,
+      "СШ-40.М3": 100,
+      "СШ-50.М3": 112,
+      "СШ-65.М3": 142,
+      "СШ-80.М3": 200,
+      "СШ-100.М3": 224,
+      "СШ-150.М3": 335,
+      "СШ-200.М3": 447
+    },
+    "unit": "m3",
+    "qualifier": "місткість зернової шахти"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "Місткість зернової шахти Об`єм [ м³ ] 52 59 67 100 112 142 200 224 335 447",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Другий аналог для часу перебування (перший — STRAHL, rec_5635e7c3). Продуктивність СШ-50 — 50 т/год пшениці 20→14 (rec_bf998440).",
+  "seen_in": []
+}

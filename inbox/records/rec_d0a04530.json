@@ -1,0 +1,28 @@
+{
+  "id": "rec_d0a04530",
+  "subject": "Самоскидні напівпричепи 30–35 т (дилерський блог tral-diler.ru)",
+  "kind": "timing",
+  "claim": {
+    "name": "tipper_unload_time",
+    "value": [
+      5,
+      10
+    ],
+    "unit": "min",
+    "qualifier": "розвантаження нахилом кузова назад або вбік"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tral-diler.ru/news/tpost/mlrb83o821-polupritsep-dlya-zerna-samosval-ili-zern",
+    "path": "inbox/raw/web/tral-diler.ru/polupritsep-dlya-zerna-samosval-ili-zern.html",
+    "page": null,
+    "quote": "Разгрузка происходит за 5−10 минут путём наклона кузова назад или вбок.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Джерело низької надійності (блог дилера, без методики). Там же друге формулювання «Гидравлика поднимает кузов за 5–10 минут». Вантажопідйомність у тексті — 30–35 т, тобто наш клас 25–40 т.",
+  "seen_in": []
+}

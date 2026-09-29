@@ -1,0 +1,25 @@
+{
+  "id": "rec_431b07d2",
+  "subject": "Облік сушіння в планових тоннах (Метод. рекомендації Мінсільгоспу РФ № 5 від 20.01.2005, п. 198)",
+  "kind": "formula",
+  "claim": {
+    "name": "planned_ton_formula",
+    "value": "Q_пл = Q_1 × K_в × K_к",
+    "unit": "t",
+    "qualifier": "Q_1 — маса сирого зерна, що надійшло в сушарку; K_в — за вологістю до і після; K_к — за культурою і призначенням"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_63961/f23071f0f1450a9537f57a65c10dceac47b2096f/",
+    "path": "inbox/raw/web/consultant.ru/minselhoz_2005_n5_sushka.html",
+    "page": null,
+    "quote": "Пересчет массы просушенного зерна в плановые единицы (тонны) для всех типов зерносушилок осуществляют по формуле (4)",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Документ утратив чинність, але формула й посилання на додаток і табл. 7 Інструкції 9-3-82 — стандартна практика СНД. Для симулятора: продуктивність у фізичних тоннах = П_пл / (K_в × K_к).",
+  "seen_in": []
+}

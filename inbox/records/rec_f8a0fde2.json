@@ -1,0 +1,31 @@
+{
+  "id": "rec_f8a0fde2",
+  "subject": "Rockwell Process HMI Style Guide — кольори пріоритетів тривог",
+  "kind": "spec",
+  "claim": {
+    "name": "hmi_alarm_priority_colors",
+    "value": {
+      "urgent": "#E22028 червоний",
+      "high": "#EC8629 помаранчевий",
+      "medium": "#F5E11B жовтий",
+      "low": "#916AAD пурпуровий",
+      "fault_bg": "#000000 чорний"
+    },
+    "unit": "hex RGB",
+    "qualifier": "чотири рівні пріоритету тривоги"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://literature.rockwellautomation.com/idc/groups/literature/documents/wp/proces-wp023_-en-p.pdf",
+    "path": "inbox/raw/web/literature.rockwellautomation.com/proces-wp023_-en-p.pdf",
+    "page": 20,
+    "quote": "High Priority Alarm Orange R236 G134 B041 #EC8629 High Priority Alarm Foreground White R255 G255 B255 #FFFFFF Urgent Priority Alarm Red R226 G032 B040 #E22028",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Пріоритети Low / Medium / High / Urgent. Там же (с. 18): «if using red for Priority 1 alarms, then do not use red to represent a running pump»; «Live data: Use less intense and cool colors such as dark blue or dark green». Для нашого пульта: trip → Urgent (червоний), alarm → High або Medium.",
+  "seen_in": []
+}

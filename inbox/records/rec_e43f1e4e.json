@@ -1,0 +1,25 @@
+{
+  "id": "rec_e43f1e4e",
+  "subject": "High Performance HMI (Hollifield) — стан обладнання",
+  "kind": "rule",
+  "claim": {
+    "name": "hmi_equipment_state",
+    "value": "не червоний/зелений; стан — яскравістю заливки + слово стану поруч",
+    "unit": "",
+    "qualifier": "як показувати «працює / стоїть»"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.idc-online.com/technical_references/pdfs/electronic_engineering/The_high_performance.pdf",
+    "path": "inbox/raw/web/idc-online.com/The_high_performance.pdf",
+    "page": 3,
+    "quote": "Brightness coding is a better practice—imagine that a light bulb is inside the pump. A status word is placed next to the equipment to ensure clarity.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Попереднє речення: «The most common and worst color principle violation is the red (off)—green (on) equipment paradigm.» Червоний — колір тривоги, «вимкнено» — нормальний стан, тож червоним не показується.",
+  "seen_in": []
+}

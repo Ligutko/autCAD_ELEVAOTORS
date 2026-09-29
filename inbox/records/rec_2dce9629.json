@@ -1,0 +1,29 @@
+{
+  "id": "rec_2dce9629",
+  "subject": "Симулятор: час розгону і затримки пуску (норії, конвеєри)",
+  "kind": "judgment",
+  "claim": {
+    "name": "start_timing_sim",
+    "value": {
+      "accel_DOL": 3,
+      "accel_softstart": 10,
+      "speed_check_inhibit": 10,
+      "horn_before_route_start": 15
+    },
+    "unit": "s",
+    "qualifier": "пропоновані параметри params.json (EST)"
+  },
+  "source": {
+    "origin": "none",
+    "path": "",
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Логіка: прямий пуск нормального механізму 2–4 с (ABB, rec_0ea8fa40) → 3 с; якщо на об’єкті м’який пуск — рампа 10 с (rec_100cb30b). Реле швидкості не контролює перші 10 с (4B, rec_11eab5b6; у специфікації вже interlocks.speed 10 с). Сирена перед пуском 15–20 с (НПАОП, rec_231c58dc) → 15 с один раз на маршрут. Наступний механізм маршруту стартує, коли попередній вийшов на швидкість (після розгону), тобто інтервал ≈ 3 с (DOL) … 10 с (м’який пуск). Діапазон, у якому це реалістично: розгін 2–10 с, інтервал між пусками 3–15 с.",
+  "seen_in": []
+}

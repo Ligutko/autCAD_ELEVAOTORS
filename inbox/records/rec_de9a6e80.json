@@ -1,0 +1,25 @@
+{
+  "id": "rec_de9a6e80",
+  "subject": "High Performance HMI (B. Hollifield, PAS, «The high performance HMI», InTech)",
+  "kind": "rule",
+  "claim": {
+    "name": "hmi_color_principle",
+    "value": "сірий фон і приглушені кольори; яскраві — лише для ненормального; кольори тривог — лише для тривог",
+    "unit": "",
+    "qualifier": "принцип палітри"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.idc-online.com/technical_references/pdfs/electronic_engineering/The_high_performance.pdf",
+    "path": "inbox/raw/web/idc-online.com/The_high_performance.pdf",
+    "page": 4,
+    "quote": "Alarm colors are not used for non-alarm purposes. Bright colors are used to draw attention to abnormal situations, not show normal ones. A gray background and muted colors minimize screen glare and reflection, facilitating a brightly lit control room.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Hollifield — співавтор «The High Performance HMI Handbook» (Hollifield, Oliver, Nimmo, Habibi) і член комітету ISA-101. Там же: «A color palette and the proper uses of each color are determined in advance. HPHMI is not either eliminating color or just converting graphics to grayscale.» Самого ANSI/ISA-101.01-2015 у відкритому доступі немає.",
+  "seen_in": []
+}

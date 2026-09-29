@@ -1,0 +1,34 @@
+{
+  "id": "rec_9d4ad397",
+  "subject": "Норма: EN 1991-4:2006 (Eurocode 1, силоси), дод. E, табл. E.1 — пшениця",
+  "kind": "norm",
+  "claim": {
+    "name": "wheat_angle_of_repose",
+    "value": {
+      "phi_r_repose": 34,
+      "phi_im_internal_friction": 30,
+      "unit_weight_kN_m3": [
+        7.5,
+        9.0
+      ]
+    },
+    "unit": "deg",
+    "qualifier": "кут природного укосу φr і кут внутрішнього тертя пшениці (розрахункові значення)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.phd.eng.br/wp-content/uploads/2015/12/en.1991.4.2006.pdf",
+    "path": "inbox/raw/web/phd.eng.br/en.1991.4.2006.pdf",
+    "page": 101,
+    "quote": "Wheat (j 7,5 9,0 34 30",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_a104798c"
+  ],
+  "notes": "PDF — скан з OCR; «(j» — зноска біля слова Wheat. Значення розрахункові (для навантажень), тобто консервативні; для насипання вони більші за лабораторні 24–26° (rec_a104798c) і польову медіану 22,2° для пшениці HRW (Bhadra та ін., не збережено). Для розрахунку залишку після витікання 34° доречний.",
+  "seen_in": []
+}

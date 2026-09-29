@@ -1,0 +1,27 @@
+{
+  "id": "rec_5dae2a91",
+  "subject": "Сушарка класу STRAHL 3000 FR — час перебування пшениці 20→15 %",
+  "kind": "timing",
+  "claim": {
+    "name": "residence_time_wheat_20_15",
+    "value": 1.4,
+    "unit": "h",
+    "qualifier": "τ = маса зерна в сушарці / витрата; ≈ 84 хв"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tehagrokom.ru/catalog/files/strahl/Strahl_fr_proizvoditelnost.pdf",
+    "path": "inbox/raw/web/tehagrokom.ru/Strahl_fr_proizvoditelnost.pdf",
+    "page": 1,
+    "quote": "Емкость (при 750 kg/m³) Ton 23,9 28,0 33,6 41,0",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_5965f3f4"
+  ],
+  "notes": "τ = 41,0 т (rec_5635e7c3) / 29,3 т/год (rec_eda294e3) = 1,40 год; якщо брати середню витрату (29,3 + 27,58)/2 — 1,44 год. Для кукурудзи тією ж формулою: 20→14 — 2,4 год, 35→15 — 4,6 год, що узгоджується з 2,5–4 год з опису (rec_5965f3f4). Для симулятора: перша суха маса виходить через ≈ 1,4 год після початку подачі пшениці 20 %; у ядрі τ = 41 т / поточна витрата.",
+  "seen_in": []
+}

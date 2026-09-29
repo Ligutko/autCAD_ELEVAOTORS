@@ -1,0 +1,28 @@
+{
+  "id": "rec_6e398b14",
+  "subject": "Зерносушарки Лубнимаш У13-СШ (газовий пальник MAXON)",
+  "kind": "spec",
+  "claim": {
+    "name": "gas_per_pct_ton",
+    "value": [
+      1.1,
+      1.2
+    ],
+    "unit": "m3/(%·t)",
+    "qualifier": "середні витрати газу на тонно-відсоток знятої вологи"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "Середні витрати газу [ м³/%т ] 1,1 – 1,2",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Тонно-відсоток — 1 т зерна × 1 % зниження вологості. Для пшениці 20→15 при 29,3 т/год: 1,1…1,2 × 29,3 × 5 = 161…176 м³/год (rec_83e4121b).",
+  "seen_in": []
+}

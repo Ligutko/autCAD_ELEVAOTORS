@@ -1,0 +1,27 @@
+{
+  "id": "rec_9006305c",
+  "subject": "Плоскодонні металеві силоси великого діаметра (журнал «Хранение и переработка зерна», 28.01.2020)",
+  "kind": "capacity",
+  "claim": {
+    "name": "residual_after_gravity",
+    "value": ">25",
+    "unit": "% місткості",
+    "qualifier": "залишок після самопливу через центральний і бічні отвори, до зачисного транспортера"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://web.archive.org/web/20200904080809/http://hipzmag.com/tehnologii/vygruzka-zerna-iz-silosov-zachistka-ostatochnoj-osypi-hranimogo-produkta/",
+    "path": "inbox/raw/web/hipzmag.com/vygruzka-zerna-iz-silosov_wayback.html",
+    "page": null,
+    "quote": "После самотечной выгрузки зерна на нижний транспортер через центральное выгрузное отверстие и дополнительные боковые, в силосе еще остается очень большое количество зерна (более 25% от вместимости силоса)",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_94b89ff8"
+  ],
+  "notes": "Стаття про зачисні транспортери; число загальне для «одного з великих силосів», без діаметра і схеми отворів. Сайт hipzmag.com 2026-09-29 не резолвиться; збережено копію Wayback Machine від 2020-09-04 (url у meta). Там же: розвантаження повного силоса не через центральний отвір заборонене виробниками (перекіс). Розрахунок для МСВУ 220 дає менше (rec_94b89ff8).",
+  "seen_in": []
+}

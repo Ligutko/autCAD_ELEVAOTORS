@@ -1,0 +1,34 @@
+{
+ "id": "receive_s1",
+ "title": "Приймання сухого зерна в силос S1",
+ "description": "10 авто по 30 т сухої пшениці 14 %: ваги в'їзду -> яма -> T1 -> H1 -> вузол «1» -> сепаратор 5 -> Ш1 -> H3 -> T7 -> T8 -> S1 (маршрут повного циклу ролика 7C). Пуск маршруту проти потоку, нормальна зупинка за потоком.",
+ "until_s": 14400,
+ "events": [
+  {
+   "t_s": 0,
+   "cmd": {
+    "op": "truck_in",
+    "count": 10,
+    "mass": 30,
+    "moisture": 14
+   }
+  },
+  {
+   "t_s": 0,
+   "cmd": {
+    "op": "route",
+    "id": "TRUCK_IN -> SCALES_IN -> PIT -> T1 -> H1 -> NODE_1 -> GRAVITY_PIPE -> SEP5 -> SH1 -> TOWER_PIT -> H3 -> T7 -> T8 -> S1",
+    "action": "start"
+   }
+  },
+  {
+   "t_s": 12600.0,
+   "cmd": {
+    "op": "route",
+    "id": "TRUCK_IN -> SCALES_IN -> PIT -> T1 -> H1 -> NODE_1 -> GRAVITY_PIPE -> SEP5 -> SH1 -> TOWER_PIT -> H3 -> T7 -> T8 -> S1",
+    "action": "stop"
+   }
+  }
+ ],
+ "expect": []
+}

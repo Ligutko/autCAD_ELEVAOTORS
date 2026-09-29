@@ -1,0 +1,47 @@
+{
+  "id": "rec_0ea8fa40",
+  "subject": "Асинхронний двигун з механізмом (ABB Softstarter Handbook 1SFC132060M0201)",
+  "kind": "timing",
+  "claim": {
+    "name": "approx_starting_time",
+    "value": {
+      "DOL_no_load": [
+        0.2,
+        0.5
+      ],
+      "DOL_normal_start": [
+        2,
+        4
+      ],
+      "star_delta_normal": [
+        3,
+        6
+      ],
+      "softstarter_ramp10_normal": 6,
+      "DOL_heavy_duty": [
+        6,
+        8
+      ],
+      "softstarter_heavy_duty": [
+        8,
+        12
+      ]
+    },
+    "unit": "s",
+    "qualifier": "орієнтовний час розгону до номінальної швидкості за способом пуску"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://library.e.abb.com/public/6b4e1a3530814df0c12579bb0030e58b/1SFC132060M0201.pdf",
+    "path": "inbox/raw/web/library.e.abb.com/1SFC132060M0201_softstarter_handbook.pdf",
+    "page": 17,
+    "quote": "Motor connected to application with small flywheel (normal start) 2 – 4 sec 3 – 6 sec 6 sec",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Таблиця «Approximate starting times», друкована с. 11. «Normal start» — мала інерція, приклади: насоси, компресори, короткі стрічкові конвеєри; «heavy duty» — вентилятори, дробарки, довгі стрічки. Ланцюгові конвеєри ТЦС і норії 100 т/год — нормальний пуск (мала інерція, момент навантаження близький до номінального). Спосіб пуску двигунів на об’єкті (прямий, м’який, ЧП) у документах не вказано.",
+  "seen_in": []
+}

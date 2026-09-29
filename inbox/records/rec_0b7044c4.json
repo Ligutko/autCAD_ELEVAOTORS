@@ -1,0 +1,33 @@
+{
+  "id": "rec_0b7044c4",
+  "subject": "Засувки ТЗА-300 / ТЗА-350 / ТЗА-400 (ТЕА-300, ТЕА-04М, ТЕА-05М) — час ходу для симулятора",
+  "kind": "timing",
+  "claim": {
+    "name": "stroke_time_sim",
+    "value": {
+      "ТЕА-300 (□300)": 6,
+      "ТЕА-04М (□350)": 6,
+      "ТЕА-05М (□400)": 7,
+      "range": [
+        5,
+        10
+      ]
+    },
+    "unit": "s",
+    "qualifier": "час повного ходу відкриття або закриття"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://td-elo.ru/product/zadvizhka_s_elektroprivodom_u8_tea_16",
+    "path": "inbox/raw/web/td-elo.ru/zadvizhka_s_elektroprivodom_u8_tea_16.html",
+    "page": null,
+    "quote": "Время открытия задвижки, с 6 6 6",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Формула: t = хід / швидкість рейки. Швидкість з аналога У8-ТЭА-18: 350 мм за 6 с ≈ 58 мм/с (rec_06df04ee). Хід = отвір (judgment 5.1 специфікації): 300 → 5,2 с; 350 → 6,0 с; 400 → 6,9 с; округлено вгору до 6 / 6 / 7 с. Верхня межа 10 с — з ЭЗР (rec_08803f54). Для сценаріїв показу брати 6/6/7 с; перевірку блокувань варто прогнати й з 10 с, щоб не прив’язатись до оптимістичного значення.",
+  "seen_in": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "rec_b7fed678",
+  "subject": "Сепаратор зерна ротаційний Лубнимаш У13-АСК",
+  "kind": "capacity",
+  "claim": {
+    "name": "separator_capacity",
+    "value": {
+      "АСК": 100,
+      "АСК-01": 200
+    },
+    "unit": "t/h",
+    "qualifier": "технічна продуктивність по пшениці (γ 0,75 т/м³, вологість 14 %, домішки ≤ 4 %)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/ochyshhennya/u13-ask/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ask.html",
+    "page": null,
+    "quote": "АСК АСК-01 АСК-02 Технічна продуктивність для зерна пшениці* [ т/г ] 100** 200**",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Аналог класу для сепаратора 5 (модель на об’єкті невідома). У АСК-02 значення продуктивності в таблиці нема (порожня клітинка). Потужність АСК 27,5 кВт. Інший ряд Лубнимаша — У13-СПВ, 200 т/год (попереднє очищення).",
+  "seen_in": []
+}

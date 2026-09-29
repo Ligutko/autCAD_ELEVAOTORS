@@ -1,0 +1,30 @@
+{
+  "id": "rec_f02fd415",
+  "subject": "Rockwell Automation Process HMI Style Guide (PROCES-WP023, узгоджений з ANSI/ISA-101.01)",
+  "kind": "spec",
+  "claim": {
+    "name": "hmi_background_and_lines",
+    "value": {
+      "background": "#E0E0E0",
+      "process_lines_and_equipment_border": "#A0A0A4",
+      "grouping_box": "#E8E8E8",
+      "title_text": "#3F3F3F"
+    },
+    "unit": "hex RGB",
+    "qualifier": "фон, лінії процесу, контури обладнання"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://literature.rockwellautomation.com/idc/groups/literature/documents/wp/proces-wp023_-en-p.pdf",
+    "path": "inbox/raw/web/literature.rockwellautomation.com/proces-wp023_-en-p.pdf",
+    "page": 19,
+    "quote": "Display Background (no tabs) Light Gray 224 R224 G224 B224 #E0E0E0",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Статичне обладнання — контур #A0A0A4, заливка кольором фону; уникати градієнтів, 3D, анімацій (с. 24). Кольори — корпоративна палітра Rockwell, не норма ISA; ISA-101 вимагає лише визначеної палітри і принципів.",
+  "seen_in": []
+}

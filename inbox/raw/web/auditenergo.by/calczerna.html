@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Перевод массы зерна в плановые тонны: калькулятор | Аудитэнерго</title>
+    <meta name="description" content="Расчет плановых тонн при сушке зерна с учетом начальной и конечной влажности, культуры и назначения зерна.">
+    <link rel="canonical" href="https://auditenergo.by/calczerna.html">
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Перевод массы зерна в плановые тонны: калькулятор | Аудитэнерго">
+    <meta property="og:description" content="Расчет плановых тонн при сушке зерна с учетом начальной и конечной влажности, культуры и назначения зерна.">
+    <meta property="og:url" content="https://auditenergo.by/calczerna.html">
+    <meta property="og:site_name" content="Аудитэнерго">
+    <meta property="og:image" content="https://auditenergo.by/img/logo.png">
+    <meta property="og:image:alt" content="Аудитэнерго">
+    <meta name="twitter:card" content="summary">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://auditenergo.by/calczerna.html#webpage",
+          "url": "https://auditenergo.by/calczerna.html",
+          "name": "Перевод массы зерна в плановые тонны: калькулятор",
+          "description": "Расчет плановых тонн при сушке зерна с учетом начальной и конечной влажности, культуры и назначения зерна.",
+          "inLanguage": "ru-RU",
+          "isPartOf": {
+            "@id": "https://auditenergo.by/#website"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/a0145964ac.js" crossorigin="anonymous"></script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode
+                .insertBefore(k, a)
+        })
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(44257619, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/44257619" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+    <!-- <header class="header">
+        <div class="header-container">
+    
+            <div class="nav-container">
+                <div class="logo-container">
+                    <a href="/"><img src="../img/logo.png" alt="" class="logo-nav"></a>
+                </div>
+                <ul>
+                    <li class="haver">
+                        <div class="li-menu">
+                            <a href="/raschet-norm-rashoda-ter.html">Расчет норм расхода ТЭР</a>
+                            <a href="/normi-voda.html">Расчет норм водопотребления водоотведения</a>
+                            <a href="/gidrav-teplo.html">Гидравлический расчет теплосетей</a>
+                            <a href="/teplovizionnoe-obsledovanie.html">Тепловизионное обследование</a>
+                            <a href="/podgotovka-dokumentov.html">Подготовка комплекта документов
+                                и согласование норм расхода ТЭР</a>
+                            <a href="/aerodinamic-vent.html">Aэродинамические испытания вентсистем</a>
+                            <a href="/raschet-teplovyh-nagruzok.html">Расчет тепловых нагрузок</a>
+                            <a href="/chemclean.html">Химическая очистка котлов и теплообменников</a>
+                            <a href="/gidropnevm-otoplen.html">Гидропневматическая промывка отопления</a>
+                            <a href="/programdevelop.html">Разработка приложений для ПК</a></div><a href="/services.html" id="fortrans">Наши услуги<i class="fas fa-caret-up"  id ="trans2"style="color: gray;"></i></a>
+    
+                    </li>
+                    <li class="second-haver">
+                        <div class="li-menu-second">
+                            <a href="/normirovanie-ter.html">Нормирование ТЭР</a>
+                            <a href="/energosberezhenie.html">Энергоаудит</a>
+                            <a href="/energeticheskaya-otchetnost.html">Энергетическая отчетность</a>
+                            <a href="/referencedata.html">Справочные данные</a>
+                        </div><button type="button" class="menu-trigger" id="fortrans-info" aria-haspopup="true">Информация<i class="fas fa-caret-up" id="trans-info" style="color: gray;"></i></button></li>
+                    <li class="second-haver">
+                        <div class="li-menu-second">
+                            <a href="/onlinecalc.html">Онлайн расчеты</a>
+                            <a href="/programs.html">Приложения для ПК</a>
+                            <a href="/methods.html">Методики расчетов</a>
+                            <a href="/calc_ter_tut.html">Калькулятор ТУТ</a>
+                        </div><button type="button" class="menu-trigger" id="fortrans-dev" aria-haspopup="true">Наши разработки<i class="fas fa-caret-up" id="trans-dev" style="color: gray;"></i></button></li>
+                    <a href="/about.html">
+                        <li>О компании</li>
+                    </a>
+                    <a href="/contacts.html">
+                        <li>Контакты</li>
+                    </a>
+                    <a href="/onlinecalc.html"><button class="online__calc qwq " style="width:130px"><img src="../img/calculator1.png" alt="" class="calc-icon"><p style="
+                        margin-left: 10px;
+                    "> Онлайн расчёты</p></button></a>
+                    <a href="/programs.html"><button class="online__calc qwq " style="width:130px"><img src="../img/phone.png" alt="" class="calc-icon"><p style="
+                        margin-left: 10px;
+                    "> Приложения</p></button></a>    
+                   
+                </ul>
+            </div>
+        
+    
+        </div>
+    
+        <h1>Выгодные решения в области энергосбережения и нормирования ТЭР</h1>
+        
+        <div class="nav-container-mobile">
+            <div class="right-container">
+                <div class="phone"><i class="fas fa-mobile-alt" style="color: green;"></i>
+                    <div class="text-header-container">
+                        <p><a href="tel: +375296540591" class="bold">+375-29-654-05-91</a></p>
+                        <p class="fax"><a href="tel:80232255860">Факс: 8-0232-25-58-60</a></p>
+                    </div>
+                </div>
+        
+            </div>
+            <input type="checkbox" name="navigation-mobile" id="navigation">
+            <label for="navigation" class="nav-mobile"><i class="fas fa-bars"></i><p>Главное меню</p> </label>
+    
+            <input type="checkbox" id="a3" name="menu">
+            <input type="checkbox" id="a2" name="menu">
+            <input type="checkbox" id="a1" name="menu" value="hello">
+            <div class="modal-nav-container">
+    
+                <label for="a1" class="nav-label fortrans chak"><i class="fas fa-chevron-right transoform"></i><p>Наши услуги</p> </label>
+                <div class="nav-container-div">
+                    <a href="/raschet-norm-rashoda-ter.html">Расчет норм расхода ТЭР</a>
+                    <a href="/normi-voda.html">Расчет норм водопотребления водоотведения</a>
+                    <a href="/gidrav-teplo.html">Гидравлический расчёт теплосетей</a>
+                    <a href="/teplovizionnoe-obsledovanie.html">Тепловизионное обследование</a>
+                    <a href="/podgotovka-dokumentov.html">Подготовка комплекта документов и согласование норм расхода ТЭР</a>
+                    <a href="/aerodinamic-vent.html">Аэродинамические испытания вентсистем</a>
+                    <a href="/raschet-teplovyh-nagruzok.html">Расчёт тепловых нагрузок</a>
+                    <a href="/chemclean.html">Химическая очистка котлов и теплообменников</a>
+                    <a href="/gidropnevm-otoplen.html">Гидропневатическая промывка отопления</a>
+                    <a href="/programdevelop.html">Разработка приложений для ПК</a>
+                </div>
+                <label for="a2" class="nav-label"><i class="fas fa-chevron-right"></i><p>Информация</p> </label>
+                <div class="nav-container-div-second">
+                    <a href="/normirovanie-ter.html">Нормирование ТЭР</a>
+                    <a href="/energosberezhenie.html">Энергосбережение</a>
+                    <a href="/energeticheskaya-otchetnost.html">Энергетическая отчетность</a>
+                    <a href="/referencedata.html">Справочные данные</a>
+                </div>
+                <label for="a3" class="nav-label"><i class="fas fa-chevron-right"></i><p>Наши разработки</p> </label>
+                <div class="nav-container-div-third">
+                    <a href="/onlinecalc.html">Онлайн расчеты</a>
+                    <a href="/programs.html">Приложения для ПК</a>
+                    <a href="/methods.html">Методики расчетов</a>
+                    <a href="/calc_ter_tut.html">Калькулятор ТУТ</a>
+
+                </div>
+                
+                <label for="a4" class="nav-label"> <a href="/about.html"><p>О компании </p></a> </label>
+                
+                <label for="a5" class="nav-label">  <a href="/contacts.html"><p>Контакты</p></a></label>
+            </div>
+        </div>
+    
+        <script src="/js/main.js" async defer></script>
+    </header> -->
+    <!-- Header -->
+    <div data-src="../../HeaderFooter/header.html"></div> 
+    
+    <div class="line"></div>
+
+    <section class="calculation__zerno">
+
+        <h1>Расчет массы просушенного зерна в плановые единицы (плановые тонны), пл.тн в зависимости от влажности,
+            культуры, и назначения зерна </h1>
+        <p class="desc-main">Масса просушенного зерна в плановом исчислении (в плановых единицах)
+            <em><strong>М<sub>ПЛ</sub></strong></em>, пл.тн рассчитывается для всех типов сушилок по формуле</p>
+        <div class="formula_tut tuttoje">
+            <p><strong><em>М<sub>пл</sub> =
+                    </em></strong><strong><em>М</em></strong><strong><em><sub>ф</sub></em></strong>
+                <strong><em>×</em></strong><strong><em>
+                    </em></strong><strong><em>К</em></strong><strong><em><sub>К</sub></em></strong>
+                <strong><em>×</em></strong><strong><em> К<sub>В</sub></em></strong><strong></strong></p>
+            <p>&#8195</p>
+            <!-- Кнопка активации Модальное окно-->
+        </div>
+
+        <table class="description">
+            <tbody>
+                <tr>
+                    <td width="33">где</td>
+                    <td width="62"><em><strong>М<sub>Ф</sub></strong> </em><em></em> –</td>
+                    <td>масса сырого зерна, поступившего в сушилку, в физическом исчислении, тн;</td>
+                </tr>
+                <tr>
+                    <td width="33"></td>
+                    <td width="62"><em><strong>К<sub>К</sub></strong> </em><em></em> –</td>
+                    <td>коэффициент пересчета массы просушенного зерна в плановые в зависимости от культуры и назначения
+                        зерна;</td>
+                </tr>
+                <tr>
+                    <td width="33"></td>
+                    <td width="62"><em><strong>К<sub>В</sub></strong> </em><em></em> –</td>
+                    <td>коэффициент пересчета массы просушенного зерна в плановые в зависимости от влажности зерна до и
+                        после сушки.</td>
+                </tr>
+            </tbody>
+        </table>
+        </table>
+        <div class="this__container">
+
+            <table id="items">
+                <thead>
+                    <tr>
+                        <td>Культура и назначение зерна</td>
+                        <td>Влажность зерна до сушки, %</td>
+                        <td>Влажность зерна после сушки, %</td>
+                        <td width="60">К <sub>В</sub></td>
+                        <td width="60">К <sub>К</sub></td>
+                        <td width="120">М<sub>Ф</sub>, тн</td>
+                        <td>М<sub>ПЛ</sub>, пл.тн</td>
+                    </tr>
+
+                </thead>
+
+                <tfoot>
+                    <td colspan="6">Итого:</td>
+                    <td class="final_summ">0</td>
+
+                </tfoot>
+            </table>
+
+            <button class="button_add__row" onclick="addRow();">Добавить строку</button>
+
+        </div>
+
+    </section>
+
+   <!--  <footer class="footer">
+        <div class="footer-container">
+            <div class="left-footer">
+                <div class="logo-container">
+                    <img src="../img/logo-foo.png" alt="" class="logo-footer">
+
+                </div>
+                <p class="oo">ООО «Консалтинговая компания «Аудитэнерго»</p>
+                <div class="phone-footer">
+                    <p> <strong>A1: &nbsp;&nbsp;&nbsp;&nbsp;</strong> <a href="tel:+">+375 29 654 05 91</a></p>
+                </div>
+
+                <p class="last"> <strong>МТС: &nbsp;</strong> <a href="tel:+">+375 29 530 48 97</a></p>
+                <p class="last"> <strong>Email: &nbsp;&nbsp;&nbsp;</strong> <a href="tel:+">info@auditenergo.by</a></p>
+                <p>246029, Гомель, ул. Братьев Лизюковых, 14а, 2-18</p>
+            </div>
+            <div class="right-footer">
+                <h3>Наши услуги</h3>
+            <div class="right-footer-container">
+                <div class="service-card">
+
+                    <ul>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/raschet-norm-rashoda-ter.html">Расчет норм расхода ТЭР</a></li>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/normi-voda.html">Расчет норм водопотребления водоотведения</a></li>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/gidrav-teplo.html">Гидравлический расчет теплосетей</a></li>
+
+                    </ul>
+                </div>
+                <div class="service-card">
+
+                    <ul>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/teplovizionnoe-obsledovanie.html">Тепловизионное обследование</a></li>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/aerodinamic-vent.html">Aэродинамические испытания вентсистем</a></li>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/podgotovka-dokumentov.html">Подготовка комплекта документов и согласование норм расхода ТЭР</a></li>
+
+                    </ul>
+                </div>
+                <div class="service-card">
+
+                    <ul>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/raschet-teplovyh-nagruzok.html">Расчет тепловых нагрузок</a></li>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/chemclean.html">Химическая очистка котлов и теплообменников</a></li>
+                        <li>
+                            <div class="ball"></div>
+                            <a href="/gidropnevm-otoplen.html">Гидропневматическая промывка отопления</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="right-footer-container">
+                <div class="service-card">
+                    <h3>Наши разработки</h3>
+                    <ul>
+                        <li>
+                            <div class="ball"></div><a href="/onlinecalc.html">Онлайн расчёты</a></li>
+
+                        <li>
+                            <div class="ball"></div><a href="/programs.html">Приложения для ПК</a></li>
+
+                        <li>
+                            <div class="ball"></div><a href="/methods.html">Методики расчётов</a></li>
+                        <li>
+                            <div class="ball"></div><a href="/calc_ter_tut.html">Калькулятор ТУТ</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Нормирование ТЭР</h3>
+                    <ul>
+                        <li>
+                            <div class="ball"></div><a href="/normirovanie-ter.html#law">Законодательство</a>
+                        </li>
+                        <li>
+                            <div class="ball"></div><a href="/normirovanie-ter.html#blanks">Бланки, формы</a>
+                        </li>
+                        <li>
+                            <div class="ball"></div><a href="/normirovanie-ter.html#blanks">Примеры документов</a>
+                        </li>
+                    </ul>
+                </div>
+             
+                <div class="service-card">
+                    <h3>Энергетическая отчетность</h3>
+                    <ul>
+                        <li>
+                            <div class="ball"></div><a href="/energeticheskaya-otchetnost.html#svedenya">Сведения о
+                                    нормах расхода ТЭР на производство продукции</a>
+                        </li>
+                        <li>
+                            <div class="ball"></div><a href="/energeticheskaya-otchetnost.html#12tek">12-ТЭК</a>
+                        </li>
+                                               <li>
+                            <div class="ball"></div><a href="/energeticheskaya-otchetnost.html#4ensb">4-Энергосбережение</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </footer> -->
+
+    <!-- Footer  -->
+    <div data-src="../HeaderFooter/footer.html"></div>
+    <script src="/js/includeHTML.js"></script>
+    <script src="js/main.js " async defer></script>
+    <script src="js/calczerna.js " async defer></script>
+</body>
+
+</html>

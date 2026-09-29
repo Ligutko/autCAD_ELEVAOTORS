@@ -1,0 +1,25 @@
+{
+  "id": "rec_d8429bc0",
+  "subject": "ВНТП 05-88, табл. Т-5.2 — час на один автомобіль",
+  "kind": "timing",
+  "claim": {
+    "name": "unloader_time_per_truck",
+    "value": 4.8,
+    "unit": "min",
+    "qualifier": "для 20-тонного автомобіля при технічній продуктивності 250 т/год"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://library.nadzor-info.ru/doc/141097",
+    "path": "inbox/raw/web/library.nadzor-info.ru/doc141097.html",
+    "page": null,
+    "quote": "АВС-30, АВС-50м-1 БПФШ-2, БПФШ-3м, У15-УРАГ с АВС-30 130 160 185 205 220 230 240 250",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Формула: t = 20 т / 250 т/год × 60 = 4,8 хв (для 220 т/год — 5,5 хв). Технічна продуктивність розвантажувача за ВНТП включає цикл на машину (rec_98401f1e). Узгоджується з 3–5 хв підручника (rec_c694baea).",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_47da51ce",
+  "subject": "Планова тонна сушіння (визначення)",
+  "kind": "definition",
+  "claim": {
+    "name": "planned_ton",
+    "value": "1 т продовольчої пшениці, 20 → 14 %",
+    "unit": "",
+    "qualifier": "базова одиниця паспортної продуктивності шахтних сушарок"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://studfile.net/preview/2865193/page:2/",
+    "path": "inbox/raw/web/studfile.net/2865193_page2.html",
+    "page": null,
+    "quote": "Одна плановая тонна соответствует 1т просушенного зерна пшеницы продовольственного назначения с хорошей клейковиной при снижении влажности зерна с 20% до 14%",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Навчальний посібник на studfile («Общая методика расчета зерносушильных установок»). Узгоджується з Кв(20→14) = 1,00 у rec_3b7a46d5.",
+  "seen_in": []
+}

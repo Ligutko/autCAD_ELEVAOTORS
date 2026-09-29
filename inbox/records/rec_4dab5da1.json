@@ -1,0 +1,34 @@
+{
+  "id": "rec_4dab5da1",
+  "subject": "Сушарка класу STRAHL 3000 FR — продуктивність за інших режимів (через планові тонни)",
+  "kind": "capacity",
+  "claim": {
+    "name": "capacity_other_regimes",
+    "value": {
+      "plan_t_h": 25.5,
+      "wheat_20_15": 29.3,
+      "wheat_18_14": 31.9,
+      "wheat_20_14": 25.5,
+      "wheat_22_14": 21.2,
+      "wheat_24_14": 17.5,
+      "corn_feed_20_14": 16.6,
+      "corn_feed_24_14": 11.3
+    },
+    "unit": "t/h",
+    "qualifier": "вхід сирого зерна; plan_t_h — планові т/год"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.auditenergo.by/js/calczerna.js",
+    "path": "inbox/raw/web/auditenergo.by/calczerna.js",
+    "page": null,
+    "quote": "} else if (firstPerc == 0.2 && secondPerc == 0.15) { document.querySelector(`.fouth-${id}`).innerHTML = 0.87;",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "П_пл = 29,3 × Кв(20→15) 0,87 × Кк(пшениця) 1,0 = 25,5 пл. т/год (rec_eda294e3, rec_3b7a46d5, rec_3bbd33f6). Фізична = 25,5 / (Кв × Кк): 18→14: 25,5/0,80; 20→14: /1,00; 22→14: /1,20; 24→14: /1,46; кукурудза кормова 20→14: /(1,00 × 1,54); 24→14: /(1,46 × 1,54). Перевірка таблицею STRAHL для кукурудзи (rec_3b08dfbf): 20→14 — 16,6 проти 17,2 (−4 %), 24→14 — 11,3 проти 13,9 (−19 %), 28→14 — 8,8 проти 12,0 (−27 %): метод планових тонн консервативний при великому зніманні вологи. Перевірка таблицею Лубнимаш СШ-50: 24→14 / 20→14 = 0,64 проти 1/1,46 = 0,68. Для пшениці точність ±10 % (judgment).",
+  "seen_in": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "rec_f9bccee4",
+  "subject": "Rockwell Process HMI Style Guide — стан двигуна",
+  "kind": "spec",
+  "claim": {
+    "name": "hmi_motor_state_colors",
+    "value": {
+      "stopped": "#808080 сірий",
+      "running": "#F0F0F0 майже білий",
+      "starting_stopping": "#93C2E4 світло-блакитний",
+      "out_of_service": "#808080"
+    },
+    "unit": "hex RGB",
+    "qualifier": "заливка символу двигуна за станом"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://literature.rockwellautomation.com/idc/groups/literature/documents/wp/proces-wp023_-en-p.pdf",
+    "path": "inbox/raw/web/literature.rockwellautomation.com/proces-wp023_-en-p.pdf",
+    "page": 24,
+    "quote": "Dynamic Motor objects use the following color scheme: Element State Color Color Name Definition Off/De-energized/Idle/Stopped Gray R128 G128 B128 #808080 On/Energized/Running Off White R240 G240 B240 #F0F0F0",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Узгоджується з Hollifield: «працює» — світліший (яскравіший) символ, «стоїть» — темно-сірий, перехідні стани — світло-блакитний; тривога — окремим індикатором поруч, а не кольором символу. Відповідає станам SITE.json off / starting / run / stopping / fault (fault — чорний фон #000000, с. 20).",
+  "seen_in": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "rec_5965f3f4",
+  "subject": "Зерносушарка STRAHL FR (технічний опис)",
+  "kind": "timing",
+  "claim": {
+    "name": "drying_process_time",
+    "value": [
+      2.5,
+      4
+    ],
+    "unit": "h",
+    "qualifier": "тривалість процесу сушіння (нагрів, зневоднення, охолодження)"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tehagrokom.ru/catalog/files/strahl/STRAHL_FR_tehopisanie.pdf",
+    "path": "inbox/raw/web/tehagrokom.ru/STRAHL_FR_tehopisanie.pdf",
+    "page": 9,
+    "quote": "Процесс сушки проходит примерно от 2,5 до 4 часов, во время этого периода зерновые проходят обогрев и быструю последующую дегидратацию, после чего - охлаждение.",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_5dae2a91"
+  ],
+  "notes": "Розділ «Тепловой шок», друкована с. 9/21; текст про кукурудзу. Суперечить часу 1,4 год для пшениці 20→15 при номінальній продуктивності (rec_5dae2a91). Ймовірне пояснення: 2,5–4 год — для кукурудзи з великим зніманням вологи (41 т / 8,9…17,2 т/год = 2,4…4,6 год), а не для пшениці. Вибір — за людиною.",
+  "seen_in": []
+}

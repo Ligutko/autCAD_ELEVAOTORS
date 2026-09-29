@@ -1,0 +1,33 @@
+{
+  "id": "rec_de8423a6",
+  "subject": "Симулятор: розвантаження самоскида 25–40 т у проїзну яму",
+  "kind": "judgment",
+  "claim": {
+    "name": "truck_dump_sim",
+    "value": {
+      "approach_s": 60,
+      "dump_min": 5,
+      "dump_range_min": [
+        3,
+        10
+      ],
+      "exit_s": 60,
+      "weigh_min": 3
+    },
+    "unit": "mixed",
+    "qualifier": "пропоновані параметри params.json (EST)"
+  },
+  "source": {
+    "origin": "none",
+    "path": "",
+    "page": null,
+    "quote": "",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "judgment",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Логіка: висипання самоскида 5 хв (між 3–5 хв для розвантажувача з підручника, rec_c694baea, і 5–10 хв з дилерського блогу, rec_d0a04530); заїзд і виїзд з ями по ≈ 1 хв (judgment); зважування брутто + тара 3 хв (ВНТП п. 4.8, rec_4d61694b). Потік із самоскида в яму = m / t_висипання (40 т за 5 хв = 480 т/год) — яма 63 т це приймає; T1 забирає 100 т/год (rec_d8e1dcc9). Діапазон реалістичний: 3–10 хв на висипання.",
+  "seen_in": []
+}

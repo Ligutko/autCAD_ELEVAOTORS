@@ -1,0 +1,25 @@
+{
+  "id": "rec_11eab5b6",
+  "subject": "4B Watchdog Elite: система моніторингу норії",
+  "kind": "timing",
+  "claim": {
+    "name": "startup_delay_default",
+    "value": 10,
+    "unit": "s",
+    "qualifier": "заводська уставка затримки контролю швидкості після пуску"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.go4b.com/usa/technical-support/product-manuals/watchdog/watchdog-installation-guide.pdf",
+    "path": "inbox/raw/web/go4b.com/watchdog-installation-guide.pdf",
+    "page": 9,
+    "quote": "Start Up Delay Seconds 10",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Уточнює rec_b538c386: там комбінована картка з цитатою лише про відсотки недошвидкості; тут цитата саме на 10 с. У цей час контролюється прискорення: якщо норія не розганяється (завал), дає стоп. Отже 10 с — верхня межа часу розгону, яку закладає виробник датчика.",
+  "seen_in": []
+}

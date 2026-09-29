@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" charset="utf-8" />
+<title>Задвижка с электроприводом У8-ТЭА-16</title>
+<meta name="description" content='Задвижка с электроприводом У8-ТЭА-16' />
+<meta name="keywords" content='Задвижка с электроприводом У8-ТЭА-16' />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-viewport-checker/1.8.7/jquery.viewportchecker.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//td-elo.ru/engine/jquery.mb.YTPlayer.min.js"></script>
+<script type="text/javascript" src="//td-elo.ru/engine/scripts.js"></script>
+<script src="//td-elo.ru/engine/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+
+<!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />-->
+<link href="//td-elo.ru/view/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//td-elo.ru/view/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//td-elo.ru/view/css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//td-elo.ru/view/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//td-elo.ru/view/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//td-elo.ru/view/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//td-elo.ru/view/css/animate.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//td-elo.ru/view/css/owl.carousel.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+
+</head>
+<body  class="btn-rounded scroll-assist">
+
+
+<script>
+    $(document).ready(function(){
+        get_count_cart(); 
+        get_list_cart();
+        resize_blocks();
+        
+        /*$('#phone_new_pas').inputmask("+7 (999) 999-99-99", {"clearMaskOnLostFocus" : false, "showMaskOnHover" : false});
+        $('#phone_log').inputmask("+7 (999) 999-99-99", {"clearMaskOnLostFocus" : false, "showMaskOnHover" : false});
+        $('#phone_reg').inputmask("+7 (999) 999-99-99", {"clearMaskOnLostFocus" : false, "showMaskOnHover" : false});
+        $("#phone_form").on('focus', function(){
+	   	    $('#phone_form').inputmask("+7 (999) 999-99-99", {"clearMaskOnLostFocus" : false, "showMaskOnHover" : false});
+		});*/
+        
+
+   	    $('#phone_new_pas').mask("+7 (999) 999-99-99",{placeholder:" +7 (___) ___-__-__"});
+
+   	    $('#phone_log').mask("+7 (999) 999-99-99",{placeholder:" +7 (___) ___-__-__"});
+
+   	    $('#phone_reg').mask("+7 (999) 999-99-99",{placeholder:" +7 (___) ___-__-__"});
+
+   	    $('#phone_form').mask("+7 (999) 999-99-99",{placeholder:" +7 (___) ___-__-__"});
+
+                            
+        $(window).resize(function() {
+           resize_blocks();
+        });
+
+        $('.search_main').on("keydown",function() {
+            if (event.keyCode == 13) {
+                $('#search_form_main').submit();
+            }
+        });
+
+        $.validate({
+            form : '#login_step_1',
+            borderColorOnError : '#ff0000',
+            addValidClassOnAll : true,
+            onError : function($form) {
+                
+            },
+            onSuccess : function($form) {
+                auth_form();
+                return false;
+            }
+        });
+         
+        $.validate({
+            form : '#login_step_2',
+            borderColorOnError : '#ff0000',
+            addValidClassOnAll : true,
+            onError : function($form) {
+                
+            },
+            onSuccess : function($form) {
+                restore_pass();
+                return false;
+            }
+        });
+                 
+        $.validate({
+            form : '#login_step_3',
+            borderColorOnError : '#ff0000',
+            addValidClassOnAll : true,
+            onError : function($form) {
+                
+            },
+            onSuccess : function($form) {
+                register_form();
+                return false;
+            }
+        }); 
+        $.validate({
+            form : '#mes_send_form',
+            borderColorOnError : '#ff0000',
+            addValidClassOnAll : true,
+            onError : function($form) {
+            },
+            onSuccess : function($form) {
+                send_mail_func();
+                return false;
+            }
+        });
+        
+        $(".checkbox_agree").on('click', function(){
+            if($(".checkbox_agree").val()==0){
+                $(".checkbox_agree").val(1);
+                $("#register_form_submit").attr('disabled', false);
+                $("#info_block").html('');
+            }else{
+                $(".checkbox_agree").val(0);
+                $("#register_form_submit").attr('disabled', true);
+                $("#info_block").html('Для регистрации необходимо согласиться на использование личных данных.');
+            }
+        });
+        
+        $("body").on('click','.remove-link',function () {
+            elem = $(this);
+            product_id = elem.parent().find('.cart_product_id').val();
+            $.post("/service.php",{
+                type: "delete_product",
+                product_id:  product_id,
+            },
+    	    function(data){
+    	        if (data!='error' && data!='empty_cart'){ 
+    	        }else if(data=='empty_cart'){
+    	           $(".number").text('');
+                   
+    	           $(".cart_num").removeClass('label number')
+    	        }
+                get_list_cart();
+                get_count_cart();
+                get_cart_order();
+            });
+        });
+
+    }); 
+     
+    function resize_blocks(){
+        if ($(window).width() < 1250 && $(window).width() > 990) {
+            $('.logo').attr("src","//td-elo.ru/view/images/content/gear_main.svg");
+        }
+        if ($(window).width() > 1250) {
+            $('.logo').attr("src","//td-elo.ru/view/images/content/logo.svg");
+        }
+        
+    }
+        
+   function register_form(){
+        if($(".checkbox_agree").val()==0){
+            $("#info_block").html('Для регистрации необходимо согласиться на использование личных данных.');
+        }else{
+    		$("#register_form_submit").attr('disabled', true);
+            $.post("/service.php",{
+    			type: "register_user",
+                name_reg: $("#name_reg").val(),
+                phone_reg: $("#phone_reg").val(),
+                email_reg: $("#email_reg").val(), 
+                inn_reg: $("#inn_reg").val(),                        
+    		},
+    		function(data){
+        	   	if (data.response == "ok"){
+                    $('#login_step_3').hide();
+                    $("#info_block").html(data.message);
+                    $("#auth_form").fadeIn().delay(30000).fadeOut('slow', function() {
+                        top.location.href="//td-elo.ru/profile";
+                    });                
+        	   	}
+                else{
+                    $("#register_form_submit").attr('disabled', false);
+                    $("#info_block").html(data.message);
+                }
+    	 	}, "json");
+       }
+
+    }
+    
+    function auth_form(){
+        $("#auth_form_submit").attr('disabled', true);
+        $.post("/service.php",{
+			type: "auth_user",
+            phone: $("#phone_log").val(),
+            pass: $("#password_log").val(),
+		},
+		function(data){
+    	   	if (data.response == "ok"){
+                $('#login_step_1').hide();
+                $("#info_block").html(data.message);
+                $("#auth_form").fadeIn().delay(500).fadeOut('slow', function() {
+                    top.location.href="//td-elo.ru/profile";
+                });                
+    	   	}
+            else{
+                $("#auth_form_submit").attr('disabled', false);
+                $("#info_block").html(data.message);
+            }
+	 	}, "json");
+    }
+    
+    function restore_pass(){
+        $("#res_pass_submit").attr('disabled', true);
+        $.post("/service.php",{
+			type: "restore_pass",
+            phone: $("#phone_new_pas").val(),
+		},
+		function(data){
+	   	   if (data.response == "ok"){
+	   	        $('#login_step_2').hide();
+                $("#info_block").html("Новый пароль выслан вам в СМС");
+                $("#auth_form_div").delay(500).fadeOut('slow', function() {
+                    top.location.href="//td-elo.ru";
+                });
+    	   	}
+            else{
+                $("#info_block").html("Пользователь с таким номером телефона не найден");
+                $("#res_pass_submit").attr('disabled', false);
+            }
+	 	}, "json");
+    }  
+    
+    function send_mail_func(){
+        $(".send_bt_form").attr('disabled', true);
+        name = $('#name_form').val();
+        phone = $('#phone_form').val();
+        
+        $.post("/service.php",{
+    		type: "send_mail",
+            name: name,
+            phone : phone,
+    	},
+    	function(data){
+    	   if(data.response=='ok'){
+	         $(".send_bt_form").attr('disabled', false);
+             $(".modal-body").hide();
+    	     $(".info_form").html('Сообщение отправлено. Наши специалисты свяжутся с Вами в ближайшее время.');
+         }  
+     	}, "json");
+    }
+    
+    function get_count_cart(){      
+        $.post("/service.php",{
+			type: "get_count_cart",
+		},
+		function(data){
+            if (data > 0){
+                $(".cart_num").addClass('label number')
+                $(".number").text(data);
+            }
+	 	});
+    }
+    
+    function get_list_cart(){       
+        $.post("/service.php",{
+            type: "get_list_cart",
+        },
+        function(data){
+            $(".cart_widget").html(data);
+        });
+    }
+            
+    function get_cart_order(){
+        $.post("/service.php",{
+			type: "get_cart_order",
+		},
+		function(data){
+    	   	$(".table_block").html(data);
+            get_list_cart();
+	 	});
+    }
+
+</script>
+
+    <div class="modal fade text-center" tabindex="-1" role="dialog" id="auth_form">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close close-modal"></i></span></button>
+            </div>   
+            <div class="text-center modal-title mt-40"> 
+                <h2 class="section-title form_title">Войти в личный кабинет</h2> 
+                <span class="section-subtitle form_subtitle">Для просмотра заказов необходимо авторизоваться</span> 
+            </div> 
+            <div class="modal-body">
+        	  <form class="row" action="" method="POST" class="has-validation-callback login_step_1" id="login_step_1">
+        		<div class="col-md-12">
+        			<div class="form-group">
+        				<label for="phone_log">Телефон</label>
+        				<input type="text" data-validation="required" data-validation-error-msg="Это поле обязательно для заполнения"  class="form-control" name="phone_log" id="phone_log">
+        			</div>
+        			<div class="form-group">
+        				<label for="password_log">Пароль</label>
+        				<input type="password"  data-validation="required" data-validation-error-msg="Это поле обязательно для заполнения"  name="password_log" class="form-control" id="password_log">
+        			</div>
+                   <button type="submit" class="btn_form" id="auth_form_submit">Войти</button>
+        		</div> 
+                <div class="text-center"><a href="javascript:void(0);" onclick="$('#login_step_1').hide();$('#login_step_2').show();$('.form_title').html('Восстановление пароля');$('.form_subtitle').html('Для восстановление пароля укажите свой номер телефона');$('#info_block').html('');">Забыли пароль?</a></div>
+                <div class="text-center"><a href="javascript:void(0);" onclick="$('#login_step_1').hide();$('#login_step_3').show(); $('.form_title').html('Регистрация');$('.form_subtitle').html('Для просмотра заказов необходимо зарегистрироваться');$('#info_block').html('');">Регистрация</a></div>
+              </form>
+              <form class="row" action="" method="POST" class="has-validation-callback login_step_2" id="login_step_2">
+        		<div class="col-md-12">
+        			<div class="form-group">
+        				<label for="phone_new_pas">Введите ваш номер телефона</label>
+        				<input type="text" data-validation="required" data-validation-error-msg="Это поле обязательно для заполнения"  class="form-control" name="phone_new_pas" id="phone_new_pas">
+        			</div>
+                   <button type="submit" class="btn_form" id="res_form_submit">Востановить</button>
+        		</div>
+                <div class="text-center"><a href="javascript:void(0);" onclick="$('#login_step_2').hide();$('#login_step_1').show();$('.form_title').html('Войти в личный кабинет');$('.form_subtitle').html('Для просмотра заказов необходимо авторизоваться');$('#info_block').html('');">Я вспомнил свой пароль</a></div>
+              </form>
+              <form class="row" action="" method="POST" class="has-validation-callback login_step_1" id="login_step_3">
+        		<div class="col-md-12">
+                    <div class="form-group">
+        				<label for="name_reg">Наименование организации*</label>
+        				<input type="text" data-validation="required" data-validation-error-msg="Это поле обязательно для заполнения"  class="form-control" name="name_reg" id="name_reg">
+        			</div>
+                    <div class="form-group">
+        				<label for="inn_reg">ИНН*</label>
+        				<input type="text" data-validation="required" data-validation-error-msg="Это поле обязательно для заполнения"  class="form-control" name="inn_reg" id="inn_reg">
+        			</div>
+        			<div class="form-group">
+        				<label for="phone_reg">Телефон*</label>
+        				<input type="text" data-validation="required" data-validation-error-msg="Это поле обязательно для заполнения"  class="form-control" name="phone_reg" id="phone_reg">
+        			</div>
+                    <div class="form-group">
+        				<label for="email_reg">Email</label>
+        				<input type="email" data-validation="email" data-validation-error-msg="Ошибка в электронном адресе"  class="form-control" name="email_reg" id="email_reg">
+        			</div>
+                    <div class="form-group">
+                        <label class="sc">
+                            <input class="checkbox_agree" type="checkbox" value="0"><span>  Я согласен на использование моих личных данных</span>
+                        </label>
+                    </div>
+                   <button type="submit" class="btn_form" id="register_form_submit">Зарегистрироваться</button>
+        		</div> 
+                <div class="text-center"><a href="javascript:void(0);" onclick="$('#login_step_3').hide();$('#login_step_1').show(); $('.form_title').html('Войти в личный кабинет');$('#info_block').html('');$('.form_subtitle').html('Для просмотра заказов необходимо авторизоваться');">Авторизация</a></div>
+              </form>
+              <div class="info_block" id="info_block"></div>          
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="mes_form">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">      
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close close-modal"></i></span></button>
+          </div>
+          <header class="text-center mt-40"> 
+              <div class="row">
+              <div class="col-md-12">
+                <div class="header-block">
+                  <h2>Контактная форма</h2>
+                  <span>Оставьте свое сообщение и наш специалист с вами свяжется</span></div>
+                </div>  
+              </div>
+          </header>  
+          <div class="info_form"></div>   
+          <div class="modal-body">
+            <form id="mes_send_form" action="#" method="POST">
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="name_form">Ваше имя</label>
+                        <input id="name_form" type="text"  data-validation="required" data-validation-error-msg="Это поле обязательно для заполнения" name="widget-contact-form-name" class="form-control required name" placeholder="Имя">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="phone_form">Телефон</label>
+                        <input id='phone_form' type="text" data-validation="required" data-validation-error-msg="Это поле обязательно для заполнения" name="widget-contact-form-subject" class="form-control required">
+                    </div>
+                </div>
+                <input type="text" class="hidden" id="widget-contact-form-antispam" name="widget-contact-form-antispam" value="" />
+                <button class="btn_form" type="submit" id="form-submit">Отправить сообщение</button>
+            </form> 
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-container">
+        <a id="top"></a>
+        <nav>
+            <div class="nav-utility">
+                <div class="module hidden-xs  hidden-md left">
+                    <span class="uppercase hidden-xs bold">Интернет-магазин оборудования</span>
+                </div>
+    
+                <div class="module xs-left right">
+                    <a  href="tel:+7(961)301-99-77   +7(961)301-77-99"><span class="uppercase phone_header bold mr20">+7(961)301-99-77   +7(961)301-77-99</span></a>
+                     <a class="uppercase purple bold mr20 hidden-xs" data-toggle="modal" data-target="#mes_form"  href="javascript:void(0);">Заказать звонок</a>
+                                            <a class="btn btn-sm hidden-xs" onclick="$('#login_step_1').hide();$('#login_step_2').hide();$('#login_step_3').show(); $('.form_title').html('Регистрация');$('.form_subtitle').html('Для просмотра заказов необходимо зарегистрироваться');" data-toggle="modal" data-target="#auth_form"  href="javascript:void(0);">Регистрация</a>
+                        <a class="btn btn-sm btn-filled hidden-xs" data-toggle="modal"  onclick="$('#login_step_2').hide();$('#login_step_3').hide();$('#login_step_1').show();$('.form_title').html('Войти в личный кабинет');$('.form_subtitle').html('Для просмотра заказов необходимо авторизоваться');" data-target="#auth_form" href="javascript:void(0);">Авторизация</a>
+                                                           
+                                    </div>
+            </div>
+            <div class="nav-bar">
+                <div class="module left">
+                    <a href="//td-elo.ru">
+                        <img class="logo logo-dark" alt="Элеваторное оборудование" src="//td-elo.ru/view/images/content/logo.svg" />
+                    </a>
+                </div>
+                <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
+                    <i class="ti-menu"></i>
+                </div>
+                <div class="module-group right">
+                    <div class="module left">
+                        <ul class="menu">
+                            <li ><a href="//td-elo.ru/category">Каталог продукции</a></li>
+                            <li ><a href="//td-elo.ru/blogs">Акции</a></li>
+                            <li ><a href="//td-elo.ru/about">О компании</a></li>
+                            <li style="margin-right: 0;"><a href="//td-elo.ru/contacts">Контакты</a></li>
+                                                           <a class="hidden-lg hidden-md li-class"  onclick="$('#login_step_1').hide();$('#login_step_2').hide();$('#login_step_3').show(); $('.form_title').html('Регистрация');$('.form_subtitle').html('Для просмотра заказов необходимо зарегистрироваться');" data-toggle="modal" data-target="#auth_form"  href="javascript:void(0);">Регистрация</a>
+                                 
+                                 
+                                                    </ul>
+                    </div>
+                    <div class="module widget-handle search-widget-handle hidden-xs left">
+                        <div class="search">
+                            <i class="ti-search"></i>
+                            <span class="title">Поиск</span>
+                        </div>
+                        <div class="function search_form">
+                            <form class="search_form_main" id="search_form_main" method="post" action="//td-elo.ru/catalog">
+                                <input name="search" class="mb0 search_main" type="text" placeholder="Введите название товара" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="module widget-handle cart-widget-handle left">
+                        <div class="cart">
+                            <i class="ti-shopping-cart-full"></i>
+                            <span class="cart_num"></span>
+                            <span class="title hidden-xs">Корзина</span>
+                        </div>
+                        <div class="function">
+                            <div class="cart_widget widget"> 
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+<script>
+	$(document).ready(function(){
+	   get_count_cart();
+       $("body").find("table").addClass( "table table-striped table-bordered" );
+       $(".tab_li:first").addClass('active');
+       
+        $(".tab-content").find('table').wrapAll("<div class='resp_table '></div>");
+    }); 
+
+    function add_to_basket(){
+        $.post("/service.php",{
+			type: "add_to_basket",
+            product_id: "132",
+            count: $("#amount").val(),
+		},
+		function(data){
+		    $('.cart-button-con').css('display','inline-block');
+    	   	get_list_cart();
+            get_count_cart();
+	 	});
+    }
+    
+    //function plus_amount(){
+      //  $("#amount").val(parseInt($("#amount").val())+1);
+   // }
+    
+    //function minus_amount(){
+      //  $("#amount").val(parseInt($("#amount").val())-1);
+        //if ($("#amount").val() < 1){
+          //  $("#amount").val(1);
+        //}
+   // }
+    
+   // function onchange_amount(){
+     //   $("#amount").val(parseInt($("#amount").val()));
+       // if ($("#amount").val() < 1){
+         //   $("#amount").val(1);
+        //}   
+    //}
+</script>
+
+<div class="main-container single-product">
+    <section class="page-title page-title-4 bg-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="uppercase small_h1 mb0">Задвижка с электроприводом У8-ТЭА-16</h1>
+                </div>
+                <div class="col-md-6 text-right">
+                    <ol class="breadcrumb breadcrumb-2">
+                        <li>
+                            <a href="//td-elo.ru/catalog">КАТАЛОГ ПРОДУКЦИИ</a>
+                        </li>
+                                                    <li><a href="//td-elo.ru/catalog/oborudovanie">Оборудование</a></li>
+                            <li><a href="//td-elo.ru/catalog/zadvizhki">Задвижки</a></li>
+                            <li><a href="//td-elo.ru/catalog/zadvizhki_s_elektroprivodom_tea_ez">Задвижки с электроприводом ТЭА, ЭЗ</a></li>
+                                                
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+            <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="product-single">
+                            <div class="row mb24 mb-xs-48">                          
+                                 <div class="col-md-5 col-sm-6 gallery-holder">
+            						<div class="product-image-slider">
+        								<div class="row product">
+        									<div class="col-md-12 col-xs-12 single-product-wrapper">
+                                              <div class="product-images-wrapper">
+                                                  <div class="images electro-gallery">
+                                                                                                          <div class="thumbnails-single owl-carousel mb15">
+                                                            <a href="//td-elo.ru/view/images/products/132/132.jpg" data-lightbox="true" title="Задвижка с электроприводом У8-ТЭА-16"><img alt="Задвижка с электроприводом У8-ТЭА-16" src="//td-elo.ru/view/images/products/132/132.jpg" /></a>
+                                                                                                                                                                                                <a href="//td-elo.ru/view/images/products/132/zadvizhka_s_elektroprivodom_tea.jpg" data-lightbox="true" title="Задвижка-с-электроприводом-ТЭА">
+                                                                        <img alt="Задвижка-с-электроприводом-ТЭА" src="//td-elo.ru/view/images/products/132/zadvizhka_s_elektroprivodom_tea.jpg" />
+                                                                    </a>
+                                                                                                                                                                                                                                                                                                                </div>
+                                                        <div class="thumbnails-all columns-4 owl-carousel">
+                                                             <img alt="Задвижка с электроприводом У8-ТЭА-16" src="//td-elo.ru/view/images/products/132/132.jpg" />
+                                                                                                                             <img alt="Задвижка-с-электроприводом-ТЭА" src="//td-elo.ru/view/images/products/132/zadvizhka_s_elektroprivodom_tea.jpg" />
+                                                                                                                                                                                                                                                                                                                </div>
+                                                    </div>
+                                                </div>
+        									</div>
+        								</div>
+            						</div>
+            					</div>
+                                <div class="col-sm-6">
+                                    <div class="description">
+                                        <h2 class="uppercase prod_name">Задвижка с электроприводом У8-ТЭА-16</h2>
+                                        <div class="mb32 mb-xs-24">
+                                                                                            <span class="display-block mb16 extra_bold price fs16 color_black">75 000</span>
+                                                                                    </div>
+                                         <div class="mb32 mb-xs-24">
+                                             <form class="add-to-cart">
+                                                 <input type="number" size="4" class="input-text qty text" value="1" id="amount" name="" max="999" min="1" step="1">
+                                                 <input class="btn btn_form" type="button" onclick="add_to_basket()" value="Добавить в корзину" />
+                                                 <a href="//td-elo.ru/checkout" id="con_132"class="cart-button-con btn btn_form">
+            										Оформить заказ
+            									</a>
+                                            </form>
+                                        </div>
+                                                                                    <h4>Назначение</h4>
+                                            <p>Предназначены для регулирования выпуска зерна из силосов, бункеров и оборудования. Применяют на элеваторах, зерноскладах, портах, мельницах, хлебокомбинатах.</p>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                            <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="tabbed-content text-tabs">
+                                            <ul class="tabs">
+                                                                                                    <li class="tab_li">
+                                                        <div class="tab-title">
+                                                            <span>Устройство</span>
+                                                        </div>
+                                                        <div class="tab-content">
+                                                            <p>Основными узлами являются корпус механизма заслонки и электропривод. Корпус сварен из листовой стали, в средней части имеет прорезь и направляющие для заслонки. К торцевым частям корпуса приварены фланцы из уголковой стали. Механизм задвижки включает в себя: заслонку с рейками, вал привода заслонки с шестернями и соединительной муфтой. Механизм заслонки приводится в движение от мотор-редуктора производства Италии, мощностью 0,25 кВт. Задвижки выпускаются двух типов: тип А - оба отверстия квадратного сечения, тип Б - одно отверстие квадратного сечения, другое круглого сечения.</p>
+                                                        </div>
+                                                    </li>
+                                                                                                                                                    <li class="tab_li">
+                                                        <div class="tab-title">
+                                                            <span>Гарантии</span>
+                                                        </div>
+                                                        <div class="tab-content">
+                                                            <p>Все типы задвижек изготавливают в соответствии с ТУ и требованиями Госгортехнадзора, а также в соответствии с международными стандартами на данную продукцию. Завод изготавливает и поставляет запасные части и комплектующие ко всем видам электрозадвижек, осуществляет гарантийный и послегарантийный ремонт.</p>
+                                                        </div>
+                                                    </li>
+                                                                                                                                                    <li class="tab_li">
+                                                        <div class="tab-title">
+                                                            <span>Принцип работы</span>
+                                                        </div>
+                                                        <div class="tab-content">
+                                                            <p>При поступлении команды на открытие или закрытие задвижки срабатывает электродвигатель, который через редуктор передает крутящий момент валу привода с шестернями. При вращении шестерен, рейки находящиеся с ними в зацеплении, двигаются вместе с заслонкой, открывая либо закрывая задвижку. При установке заслонки в нужное положение срабатывает индуктивный датчик выключения задвижки.</p>
+
+<p><strong>Задвижки с электроприводом типа ТЭА</strong></p>
+
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="7" cellspacing="0" style="width:656px">
+	<tbody>
+		<tr>
+			<td>
+			<p><span style="font-size:14px"><strong>Технические характеристики</strong></span></p>
+			</td>
+			<td>
+			<h2><span style="font-size:14px"><strong>У8-ТЭА-15</strong></span></h2>
+			</td>
+			<td>
+			<h2><span style="font-size:14px"><strong>У8-ТЭА-16</strong></span></h2>
+			</td>
+			<td>
+			<p><span style="font-size:14px"><strong>У8-ТЭА-18</strong></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Сечение отверстий, мм</p>
+			</td>
+			<td>
+			<p>300х300</p>
+			</td>
+			<td>
+			<p>200х200</p>
+			</td>
+			<td>
+			<p>350х350</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Время открытия задвижки, с</p>
+			</td>
+			<td>
+			<p>6</p>
+			</td>
+			<td>
+			<p>6</p>
+			</td>
+			<td>
+			<p>6</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Мощность привода, кВт</p>
+			</td>
+			<td>
+			<p>0,25</p>
+			</td>
+			<td>
+			<p>0,25</p>
+			</td>
+			<td>
+			<p>0,25</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Масса, кг</p>
+			</td>
+			<td>
+			<p>52</p>
+			</td>
+			<td>
+			<p>44</p>
+			</td>
+			<td>
+			<p>55</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+                                                        </div>
+                                                    </li>
+                                                                                                                                                    <li class="tab_li">
+                                                        <div class="tab-title">
+                                                            <span>Преимущества</span>
+                                                        </div>
+                                                        <div class="tab-content">
+                                                            <p>Преимуществом задвижек ТЭА является, применение импортных мотор-редукторов, современных индуктивных датчиков, муфты предельного момента (предотвращающей привод от поломки в случаи заклинивания заслонки)</p>
+                                                        </div>
+                                                    </li>
+                                                                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                                     </div>
+                    </div>
+                    <div class="col-md-3 hidden-sm">
+                        <div class="widget">
+                            <h6 class="title">Документы, cертификаты</h6>
+                            <hr>
+                            <ul class="cart-overview">
+                                                                       
+                                                                                                           <li>
+                                            <a  target="_blank" href="//td-elo.ru/view/images/products/132/zadvizhka_s_elektroprivodom_tea.pdf">
+                                                <div class="row">
+                                                    <div class="col-md-3 col-xs-3">
+                                                                                                                   <img src='//td-elo.ru/view/images/content/pdf.svg' />
+                                                            
+                                                    </div>
+                                                    <div class="col-md-9 col-xs-9">
+                                                        <div class="description">
+                                                            <h5 class="mb0">Задвижка с электроприводом ТЭА</h5>
+                                                            <span class="display-block mb16 extra_bold uppercase color_black">pdf</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        
+                                                            </ul>
+                        </div>
+                        <div class="widget">
+                            <h6 class="title">Заказ и оплата</h6>
+                            <hr>
+                            <p>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem antium doloremque laudantium, totam rem aperiam, eaque ipsa quae.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pt0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="uppercase mb80 mb-xs-40">Товары в данной категории</h4>
+                    </div>
+                </div>
+                <div class="row">
+                                            <div class="col-md-3 col-sm-4">
+                            <div class="image-tile outer-title text-center pt10">
+                                                                <a href="//td-elo.ru/product/zadvizhka_s_elektroprivodom_u8_tea_15">
+                                    <div class="product_img">
+                                        <img alt="Задвижка с электроприводом У8-ТЭА-15" class="background product-thumb" src="//td-elo.ru/view/images/products/39/39.jpg" />
+                                    </div>
+                                </a>
+                                <div class="title">
+                                    <a href="//td-elo.ru/product/zadvizhka_s_elektroprivodom_u8_tea_15">
+                                                                                    <span class="display-block  mt5 extra_bold price fs16 color_black">77 000</span>
+                                                                                <h5 class="mb0 semibold mt10">Задвижка с электроприводом У8-ТЭА-15</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                                           <div class="col-md-3 col-sm-4">
+                            <div class="image-tile outer-title text-center pt10">
+                                                                <a href="//td-elo.ru/product/zadvizhka_s_elektroprivodom_ez_300h600">
+                                    <div class="product_img">
+                                        <img alt="Задвижка с электроприводом ЭЗ-300х600" class="background product-thumb" src="//td-elo.ru/view/images/products/40/40.jpg" />
+                                    </div>
+                                </a>
+                                <div class="title">
+                                    <a href="//td-elo.ru/product/zadvizhka_s_elektroprivodom_ez_300h600">
+                                                                                    <span class="display-block  mt5 extra_bold price fs16 color_black">75 000</span>
+                                                                                <h5 class="mb0 semibold mt10">Задвижка с электроприводом ЭЗ-300х600</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                                           <div class="col-md-3 col-sm-4">
+                            <div class="image-tile outer-title text-center pt10">
+                                                                <a href="//td-elo.ru/product/zadvizhki_k_konveyeram_tipa_ez_400h600">
+                                    <div class="product_img">
+                                        <img alt="Задвижки к конвейерам типа ЭЗ-400х600" class="background product-thumb" src="//td-elo.ru/view/images/products/41/41.jpg" />
+                                    </div>
+                                </a>
+                                <div class="title">
+                                    <a href="//td-elo.ru/product/zadvizhki_k_konveyeram_tipa_ez_400h600">
+                                                                                    <span class="display-block  mt5 extra_bold price fs16 color_black">78 000</span>
+                                                                                <h5 class="mb0 semibold mt10">Задвижки к конвейерам типа ЭЗ-400х600</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                                           <div class="col-md-3 col-sm-4">
+                            <div class="image-tile outer-title text-center pt10">
+                                                                <a href="//td-elo.ru/product/zadvizhki_k_konveyeram_tipa_ez_500h900">
+                                    <div class="product_img">
+                                        <img alt="Задвижки к конвейерам типа ЭЗ-500х900" class="background product-thumb" src="//td-elo.ru/view/images/products/42/42.jpg" />
+                                    </div>
+                                </a>
+                                <div class="title">
+                                    <a href="//td-elo.ru/product/zadvizhki_k_konveyeram_tipa_ez_500h900">
+                                                                                    <span class="display-block  mt5 extra_bold price fs16 color_black">83 000</span>
+                                                                                <h5 class="mb0 semibold mt10">Задвижки к конвейерам типа ЭЗ-500х900</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="pt96 pb0 pt-xs-48 pb-xs-48">
+        <div class="container">
+            <div class="row mb48 mb-xs-32">
+                <div class="col-md-5 text-right text-left-xs">
+                    <h2 class="uppercase bold italic">Интернет-магазин<br> элеваторного оборудования</h2>
+                </div>
+                <div class="col-md-2 hidden-sm hidden-xs text-center pt16">
+                    <a href="//td-elo.ru">
+                        <img class="gear" alt="Элеваторное оборудование" src="//td-elo.ru/view/images/content/gear.svg" />
+                    </a>
+                </div>
+                <div class="col-md-5 col-sm-6">
+                     <p>Информационный блок</p>
+                    <h5 class="mb8">Отдел продаж: <a class="" href="tel:+7(961)301-99-77   +7(961)301-77-99">+7(961)301-99-77   +7(961)301-77-99</a></h5>
+                    <h5 class="mb8">Email: <a class="" href="/cdn-cgi/l/email-protection#b7ded9d1d8f7c3d39ad2dbd899c5c2"><span class="__cf_email__" data-cfemail="ec85828a83ac9888c1898083c29e99">[email&#160;protected]</span></a></h5>
+                    <a target="_blank" href="//td-elo.ru/privacy_policy.html">Политика конфиденциальности</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center">
+                    <p class="fade-1-4"><a class="justmilk" href="http://justmilk.ru" target="_blank">Создание сайта — студия «Джаст Милк»</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--<footer class="footer-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                     <a href="//td-elo.ru">
+                        <img alt="Logo" class="logo" src="//td-elo.ru/view/images/content/logo.svg" />
+                     </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h6 class="title">Контакты</h6>
+                        <hr>
+                        <ul class="recent-posts">
+                                                            <li>
+                                    <a href="#"><span class="extra_bold">Отдел маркетинга</span></a><br />
+                                    <a href="#"><span class="phone_footer">+7(961)301-99-77</span></a>
+                                </li>
+                                                            <li>
+                                    <a href="#"><span class="extra_bold">отдел продаж</span></a><br />
+                                    <a href="#"><span class="phone_footer">+7(961)301-77-99</span></a>
+                                </li>
+                                
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h6 class="title">Новости компании</h6>
+                        <hr>
+                        <ul class="recent-posts">
+                                  
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h6 class="title">Новое оборудование</h6>
+                        <hr>
+                        <ul class="recent-posts new_product">
+                            <li><a href="#" target="_blank"> <img alt="" height="80" width="80" src="//td-elo.ru/view/images/content/main_back.jpg"></a></li>
+                            <li><a href="#" target="_blank"> <img alt="" height="80" width="80" src="//td-elo.ru/view/images/content/main_back.jpg"></a></li>
+                            <li><a href="#" target="_blank"> <img alt="" height="80" width="80" src="//td-elo.ru/view/images/content/main_back.jpg"></a></li>
+                            <li><a href="#" target="_blank"> <img alt="" height="80" width="80" src="//td-elo.ru/view/images/content/main_back.jpg"></a></li>
+                        </ul>
+                    </div>
+                </div>            
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="sub">&copy; Copyright 2016 - Medium Rare</span>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-sm fade-half back-to-top inner-link" href="#top">наверх</a>
+    </footer>-->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="//td-elo.ru/engine/flickr.js"></script>
+<script type="text/javascript" src="//td-elo.ru/engine/bootstrap.min.js"></script>
+<script type="text/javascript" src="//td-elo.ru/engine/flexslider.min.js"></script>
+<script type="text/javascript" src="//td-elo.ru/engine/lightbox.min.js"></script>
+<script type="text/javascript" src="//td-elo.ru/engine/masonry.min.js"></script>
+<script type="text/javascript" src="//td-elo.ru/engine/smooth-scroll.min.js"></script>
+<script type="text/javascript" src="//td-elo.ru/engine/parallax.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+<script src="//td-elo.ru/engine/inputmask/jquery.inputmask.js" type="text/javascript"></script>
+<script src="//td-elo.ru/engine/inputmask/jquery.inputmask.regex.extensions.js" type="text/javascript"></script>
+<!-- Yandex.Metrika counter -->
+
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter44915305 = new Ya.Metrika({
+                    id:44915305,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+
+<noscript><div><img src="https://mc.yandex.ru/watch/44915305" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</body>
+</html>

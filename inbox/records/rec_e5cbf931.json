@@ -1,0 +1,25 @@
+{
+  "id": "rec_e5cbf931",
+  "subject": "High Performance HMI (Hollifield) — показ тривоги",
+  "kind": "rule",
+  "claim": {
+    "name": "hmi_alarm_indicator",
+    "value": "окремий індикатор тривоги з надлишковим кодуванням: форма + колір + текст (пріоритет)",
+    "unit": "",
+    "qualifier": "як показувати тривогу"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.idc-online.com/technical_references/pdfs/electronic_engineering/The_high_performance.pdf",
+    "path": "inbox/raw/web/idc-online.com/The_high_performance.pdf",
+    "page": 3,
+    "quote": "Alarms are commonly indicated by simply changing the color of a process value or its background, a poor practice. Alarm conditions should be shown by a redundantly coded",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Речення продовжується на наступній сторінці: «(shape, color, text) element indicating the alarm’s presence and priority. A click on the alarm indicator can call up its rationalization information.»",
+  "seen_in": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "rec_04ec20e4",
+  "subject": "У13-ТЕА-04М / ТЕА-05М / ТЕА-300 (засувки ТЗА-350 / 400 / 300, 0,18 кВт)",
+  "kind": "gap",
+  "claim": {
+    "name": "stroke_time_published",
+    "value": null,
+    "unit": "s",
+    "qualifier": "час повного ходу засувки у джерелах Лубнимаша"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/samoplynne-obladnannya/u13-tzr-t%d1%8da/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-tzr-tea.html",
+    "page": null,
+    "quote": "Товщина засувки [мм] 3 Висота корпусу [мм] 250 150 Потужність двигуна [кВт] 0,18",
+    "retrieved_at": "2026-09-24T20:57:34Z",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "sourced",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Лубнимаш не публікує час ходу засувок ТЕА: у таблиці на сайті є лише прохідний переріз, рейсмус, товщина, висота корпусу і потужність 0,18 кВт; у каталозі 2025.1, с. 27 (таблиця ТЗР/ТЕА/УЗП/ЗМП) — так само, перевірено рендером сторінки 2026-09-29. Замість цього — аналоги rec_06df04ee, rec_08803f54 і розрахунок rec_0b7044c4.",
+  "seen_in": []
+}

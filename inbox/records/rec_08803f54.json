@@ -1,0 +1,28 @@
+{
+  "id": "rec_08803f54",
+  "subject": "Засувка рейкова з електроприводом ЭЗР (Агро-Союз, аналог ТЕА)",
+  "kind": "timing",
+  "claim": {
+    "name": "open_close_time",
+    "value": [
+      6,
+      10
+    ],
+    "unit": "s",
+    "qualifier": "час відкриття/закриття заслінки, переріз □200…□450, привод 0,25–0,37 кВт"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://agro-drom.ru/zadvizhka-reechnaya/zadvizhka-reechnaya-s-ehlektroprivodom/",
+    "path": "inbox/raw/web/agro-drom.ru/zadvizhka-reechnaya-s-ehlektroprivodom.html",
+    "page": null,
+    "quote": "Время открытия/закрытия заслонки, сек Мощность, кВт Цена, руб ЭЗР от 200х200 до 450х450 6-10 0,25-0,37",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Другий незалежний аналог рейкової засувки з мотор-редуктором. Діапазон 6–10 с на весь ряд перерізів; верхня межа — для більших перерізів.",
+  "seen_in": []
+}

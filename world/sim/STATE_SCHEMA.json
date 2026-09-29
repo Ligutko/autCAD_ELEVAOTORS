@@ -1,0 +1,372 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Elevator control center state",
+ "description": "One JSON the panel, live Blender and later a game engine read (CONTROL_CENTER_SPEC.md 0.3). Masses in t, rates in t/h, time in simulated s.",
+ "type": "object",
+ "required": [
+  "t_s",
+  "speed",
+  "paused",
+  "scenario",
+  "motors",
+  "gates",
+  "edges",
+  "stores",
+  "dryer",
+  "sensors",
+  "alarms",
+  "events",
+  "routes",
+  "totals",
+  "power_kw"
+ ],
+ "additionalProperties": false,
+ "properties": {
+  "t_s": {
+   "type": "number",
+   "minimum": 0
+  },
+  "speed": {
+   "type": "number",
+   "exclusiveMinimum": 0
+  },
+  "paused": {
+   "type": "boolean"
+  },
+  "scenario": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "motors": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "required": [
+     "state",
+     "load_t_h",
+     "transit_t",
+     "backlog_t",
+     "kw"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "state": {
+      "enum": [
+       "off",
+       "starting",
+       "run",
+       "stopping",
+       "fault"
+      ]
+     },
+     "load_t_h": {
+      "type": "number",
+      "minimum": 0
+     },
+     "transit_t": {
+      "type": "number",
+      "minimum": 0
+     },
+     "backlog_t": {
+      "type": "number",
+      "minimum": 0
+     },
+     "kw": {
+      "type": [
+       "number",
+       "null"
+      ]
+     }
+    }
+   }
+  },
+  "gates": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "required": [
+     "state",
+     "pos"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "state": {
+      "enum": [
+       "closed",
+       "opening",
+       "open",
+       "closing",
+       "fault"
+      ]
+     },
+     "pos": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+     }
+    }
+   }
+  },
+  "edges": {
+   "type": "object",
+   "description": "key 'A->B', only edges with grain moving this step",
+   "additionalProperties": {
+    "type": "object",
+    "required": [
+     "t_h"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "t_h": {
+      "type": "number",
+      "minimum": 0
+     }
+    }
+   }
+  },
+  "stores": {
+   "type": "object",
+   "description": "silos, wet silos, the pit, bin Ш1, the truck under loading",
+   "additionalProperties": {
+    "type": "object",
+    "required": [
+     "mass_t",
+     "cap_t",
+     "fill",
+     "moisture_pct",
+     "temp_c"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "mass_t": {
+      "type": "number",
+      "minimum": 0
+     },
+     "cap_t": {
+      "type": "number",
+      "exclusiveMinimum": 0
+     },
+     "fill": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+     },
+     "moisture_pct": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "temp_c": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "sweep": {
+      "enum": [
+       "off",
+       "run"
+      ]
+     },
+     "fans": {
+      "enum": [
+       "off",
+       "run"
+      ]
+     },
+     "feed_t_h": {
+      "type": "number",
+      "exclusiveMinimum": 0
+     }
+    }
+   }
+  },
+  "dryer": {
+   "type": "object",
+   "required": [
+    "state",
+    "in_t_h",
+    "out_t_h",
+    "water_t_h",
+    "bin_t",
+    "column_t",
+    "w_in",
+    "w_out"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "state": {
+     "enum": [
+      "off",
+      "run"
+     ]
+    },
+    "in_t_h": {
+     "type": "number",
+     "minimum": 0
+    },
+    "out_t_h": {
+     "type": "number",
+     "minimum": 0
+    },
+    "water_t_h": {
+     "type": "number",
+     "minimum": 0
+    },
+    "bin_t": {
+     "type": "number",
+     "minimum": 0
+    },
+    "column_t": {
+     "type": "number",
+     "minimum": 0
+    },
+    "w_in": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "w_out": {
+     "type": "number"
+    },
+    "gas_m3_h": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   }
+  },
+  "sensors": {
+   "type": "object",
+   "additionalProperties": {
+    "enum": [
+     "ok",
+     "alarm",
+     "trip",
+     "fault"
+    ]
+   }
+  },
+  "alarms": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "level",
+     "t_s",
+     "text"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "level": {
+      "enum": [
+       "alarm",
+       "trip"
+      ]
+     },
+     "t_s": {
+      "type": "number"
+     },
+     "text": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "events": {
+   "type": "array",
+   "description": "the latest events, newest last",
+   "items": {
+    "type": "object",
+    "required": [
+     "t_s",
+     "kind",
+     "text"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "t_s": {
+      "type": "number"
+     },
+     "kind": {
+      "type": "string"
+     },
+     "text": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "routes": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "nodes",
+     "state"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "nodes": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "state": {
+      "enum": [
+       "starting",
+       "run",
+       "stopping"
+      ]
+     }
+    }
+   }
+  },
+  "totals": {
+   "type": "object",
+   "required": [
+    "received_t",
+    "shipped_t",
+    "evaporated_t",
+    "stored_t",
+    "transit_t"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "received_t": {
+     "type": "number"
+    },
+    "shipped_t": {
+     "type": "number"
+    },
+    "evaporated_t": {
+     "type": "number"
+    },
+    "stored_t": {
+     "type": "number"
+    },
+    "transit_t": {
+     "type": "number"
+    }
+   }
+  },
+  "power_kw": {
+   "type": "number",
+   "minimum": 0
+  }
+ }
+}

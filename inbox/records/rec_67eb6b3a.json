@@ -1,0 +1,25 @@
+{
+  "id": "rec_67eb6b3a",
+  "subject": "Зерносушарка Лубнимаш У13-СШ-50.М3 — час перебування",
+  "kind": "timing",
+  "claim": {
+    "name": "residence_time_wheat_20_14",
+    "value": 1.7,
+    "unit": "h",
+    "qualifier": "τ = об’єм шахти × 0,75 т/м³ / продуктивність"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://lubnymash.com/katalog/sushinnya/u13-ssh/",
+    "path": "inbox/raw/web/lubnymash.com/page_u13-ssh.html",
+    "page": null,
+    "quote": "Місткість зернової шахти Об`єм [ м³ ] 52 59 67 100 112 142 200 224 335 447",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "derived",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "τ = 112 м³ × 0,75 т/м³ / 50 т/год = 1,68 год (rec_60b8d324, rec_bf998440). Узгоджується за порядком з 1,4 год для STRAHL 3000 FR (rec_5dae2a91): для шахтних/баштових сушарок на пшениці τ ≈ 1,4–1,7 год.",
+  "seen_in": []
+}

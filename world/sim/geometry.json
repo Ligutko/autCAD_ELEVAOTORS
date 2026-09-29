@@ -1,0 +1,160 @@
+{
+ "generated_by": "world/sim/derive_geometry.py",
+ "movers": {
+  "H1": {
+   "kind": "noria",
+   "lift_m": 39.725,
+   "z_boot": -4.715,
+   "z_head": 35.01,
+   "basis": "derived",
+   "src": "routes.receiving_noria_points (receiving.noria_boxes centres)"
+  },
+  "H2": {
+   "kind": "noria",
+   "lift_m": 28.67,
+   "z_boot": -4.715,
+   "z_head": 23.955,
+   "basis": "derived",
+   "src": "routes.receiving_noria_points (receiving.noria_boxes centres)"
+  },
+  "H3": {
+   "kind": "noria",
+   "lift_m": 39.175,
+   "z_boot": -4.715,
+   "z_head": 34.46,
+   "basis": "derived",
+   "src": "routes.receiving_noria_points (receiving.noria_boxes centres)"
+  },
+  "H4": {
+   "kind": "noria",
+   "lift_m": 33.17,
+   "z_boot": -4.715,
+   "z_head": 28.455,
+   "basis": "derived",
+   "src": "routes.receiving_noria_points (receiving.noria_boxes centres)"
+  },
+  "H5": {
+   "kind": "noria",
+   "lift_m": 34.89,
+   "z_boot": -3.605,
+   "z_head": 31.285,
+   "basis": "derived",
+   "src": "routes.tower_noria_points (noria_n100.BeltPath)"
+  },
+  "H6": {
+   "kind": "noria",
+   "lift_m": 34.39,
+   "z_boot": -4.005,
+   "z_head": 30.385,
+   "basis": "derived",
+   "src": "routes.tower_noria_points (noria_n100.BeltPath)"
+  },
+  "T1": {
+   "kind": "conveyor",
+   "run_m": 10.367,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T10": {
+   "kind": "conveyor_chain",
+   "run_m": 29.006,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T11": {
+   "kind": "conveyor_chain",
+   "run_m": 25.95,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T12": {
+   "kind": "conveyor_chain",
+   "run_m": 37.0,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T13": {
+   "kind": "conveyor_belt",
+   "run_m": 48.7,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T14": {
+   "kind": "conveyor_chain",
+   "run_m": 23.509,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T15": {
+   "kind": "conveyor_chain",
+   "run_m": 39.0,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T16": {
+   "kind": "conveyor_belt",
+   "run_m": 48.7,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T2": {
+   "kind": "conveyor",
+   "run_m": 12.296,
+   "basis": "judgment",
+   "src": "SITE receiving.conveyors x span (plan conveyor, z not on the drawing)"
+  },
+  "T3": {
+   "kind": "conveyor",
+   "run_m": 7.75,
+   "basis": "designed",
+   "src": "drying.conv_axis (SITE designed.drying_geom)"
+  },
+  "T4": {
+   "kind": "conveyor",
+   "run_m": 8.594,
+   "basis": "judgment",
+   "src": "SITE receiving.conveyors x span (plan conveyor, z not on the drawing)"
+  },
+  "T5": {
+   "kind": "conveyor",
+   "run_m": 20.5,
+   "basis": "designed",
+   "src": "drying.conv_axis (SITE designed.drying_geom)"
+  },
+  "T6": {
+   "kind": "conveyor",
+   "run_m": 22.194,
+   "basis": "judgment",
+   "src": "SITE receiving.conveyors x span (plan conveyor, z not on the drawing)"
+  },
+  "T7": {
+   "kind": "conveyor_chain",
+   "run_m": 30.502,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T8": {
+   "kind": "conveyor_chain",
+   "run_m": 39.5,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  },
+  "T9": {
+   "kind": "conveyor_belt",
+   "run_m": 49.5,
+   "basis": "derived",
+   "src": "routes.conveyor_axis"
+  }
+ },
+ "silo": {
+  "r_in_m": 10.9905,
+  "wall_top_m": 14.976,
+  "repose_deg": 27.0,
+  "floor_z": 0.6,
+  "cone_m3": 708.3,
+  "heap_full_m3": 6391.4,
+  "spec_volume_m3": 6381,
+  "heap_vs_spec_pct": 0.16,
+  "src": "silo_interior.R_IN / REPOSE (STD 25-28 deg), silo_msvu220.WALL_TOP (LUB 13 x 1.152), heap as silo_interior.build_grain draws it"
+ }
+}

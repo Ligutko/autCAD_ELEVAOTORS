@@ -1,0 +1,27 @@
+{
+  "id": "rec_79e9c5d4",
+  "subject": "Зерносушарка STRAHL 3000 FR — газ, пшениця 20→15 %",
+  "kind": "spec",
+  "claim": {
+    "name": "gas_flow_wheat_20_15",
+    "value": 104,
+    "unit": "m3/h",
+    "qualifier": "природний газ 8 500 ккал/м³, за таблицею виробника"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://tehagrokom.ru/catalog/files/strahl/Strahl_fr_proizvoditelnost.pdf",
+    "path": "inbox/raw/web/tehagrokom.ru/Strahl_fr_proizvoditelnost.pdf",
+    "page": 1,
+    "quote": "Выход (сухого) т/час 13,0 16,3 20,4 24,4 Потребление газа за час m³/час 66 69 87 104",
+    "retrieved_at": "2026-09-27",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [
+    "rec_83e4121b"
+  ],
+  "notes": "Перевірка: 104 × 8 500 × 4,1868 = 3,70 ГДж/год на 1 724 кг/год води = 2 150 кДж/кг — менше за теплоту пароутворення (≈ 2 350–2 400 кДж/кг), фізично неможливо без рекуперації поза сушаркою. Крім того, 104/24,4 = 4,3 м³/т — «відносна витрата» пшениці рахована на сухий, а не на сирий вихід, всупереч примітці таблиці. Рядок пшениці ненадійний; див. rec_83e4121b.",
+  "seen_in": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "rec_13d5c817",
+  "subject": "4B Watchdog Mk2: монітор норії",
+  "kind": "timing",
+  "claim": {
+    "name": "startup_delay_choices",
+    "value": [
+      5,
+      15,
+      30
+    ],
+    "unit": "s",
+    "qualifier": "вибір затримки контролю після пуску перемикачами"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.go4b.com/usa/technical-support/product-manuals/watchdog/mk2-manual.pdf",
+    "path": "inbox/raw/web/go4b.com/mk2-manual.pdf",
+    "page": 4,
+    "quote": "Start-Up Delay 5 Sees. Start-Up Delay 15 Sees. Start-Up Delay 30 Sees.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "«Sees.» — помилка розпізнавання «Secs.» у PDF. На с. 27 пояснення: «This is the time delay after starting the motor, during which the ALARM and STOP relays remain energised, to allow the machine to reach normal speed.» Найменша уставка 5 с — отже виробник очікує розгону норії до кількох секунд.",
+  "seen_in": []
+}

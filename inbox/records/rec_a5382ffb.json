@@ -1,0 +1,25 @@
+{
+  "id": "rec_a5382ffb",
+  "subject": "Плоскодонні силоси Brock — порядок вивантаження",
+  "kind": "rule",
+  "claim": {
+    "name": "unload_sequence",
+    "value": "центральний отвір, доки низ воронки не дійде до підлоги; далі проміжні отвори по одному, від центру до стіни",
+    "unit": "",
+    "qualifier": "правило вивантаження через центральний і проміжні отвори"
+  },
+  "source": {
+    "origin": "web",
+    "url": "https://www.brockgrain.com/blog/grain-bin-unloading-part-1/",
+    "path": "inbox/raw/web/brockgrain.com/grain-bin-unloading-part-1.html",
+    "page": null,
+    "quote": "Unload from the center sump only until the bottom of the grain cone reaches the floor. Open intermediate sumps one at a time moving from the inner to the outer bin.",
+    "retrieved_at": "2026-09-29",
+    "extractor": "elevator-researcher"
+  },
+  "basis": "analog",
+  "status": "unverified",
+  "conflict_with": [],
+  "notes": "Підтверджує judgment 7A (process.judgment: спершу S*.c, бічні — після). Для 6 бічних отворів МСВУ в ряд: відкривати ±3,25, потім ±6,5, потім ±9,75 м (симетрично парами — judgment, у Brock про пари не сказано).",
+  "seen_in": []
+}
