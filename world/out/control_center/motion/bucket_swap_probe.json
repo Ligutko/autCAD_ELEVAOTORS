@@ -1,0 +1,40 @@
+{
+ "about": "Experiment 2026-09-29, GUI Blender 4.5, EEVEE Next, RTX 5070 Ti, viewport 1920 x 962, scene of build/live.py, ship_out state (H5 running). Question: can the buckets of H5 be shown turning in the live scene. Script was a throw-away (the bucket-swap code was removed from kit/live.py after these numbers), the numbers are what it printed.",
+ "visibility_of_buckets": {
+  "closed_head_cover": "buckets are inside the leg casings and the head hood: not visible from any camera (head_cutaway_1p8m_cover_on.png)",
+  "cover_removed": "the ring of buckets round the head pulley is seen from the front of the head (head_cutaway_*_cover_off.png)",
+  "bucket_pitch_H5_m": 0.21,
+  "pitch_in_pixels_1920px": {
+   "1.8 m (lens 17)": 107.0,
+   "5.8 m (lens 24)": 46.4,
+   "24.8 m (lens 24)": 10.8
+  },
+  "recording_cameras": "distance to H5 30-125 m and the covers are on: see recon_visibility.json"
+ },
+ "cost_of_turning_them": {
+  "how": "8 prebuilt phases of the bucket + grain mesh (pitch / 8 apart), ob.data swapped 30 times a second for a running noria (python cost of a swap 0.07 ms)",
+  "frame_gap_ms_camera_at_head_cutaway": {
+   "overlay only, no swap": {
+    "median": 30.8,
+    "p95": 31.6,
+    "note": "paced by the 30 ms redraw timer"
+   },
+   "mesh swap 30 Hz": {
+    "median": 107.2,
+    "p95": 121.3,
+    "frames_in_5_s": 48
+   },
+   "mesh swap 30 Hz, shadows off": {
+    "median": 59.3,
+    "p95": 68.6
+   }
+  },
+  "frame_gap_ms_camera_drying_buckets_out_of_view": {
+   "mesh swap 30 Hz": {
+    "median": 58.6,
+    "p95": 113.9
+   }
+  },
+  "reading": "every change of the scene makes EEVEE render the frame from scratch (shadows about half of it); a static frame is 5-15 ms, so bucket meshes turning cost 59-107 ms per frame, also out of view. Rejected; the belt is shown by the packets."
+ }
+}

@@ -2,10 +2,12 @@
 
 Run (first the server, then Blender with a window):
     python world/sim/server.py --scenario receive_s1
-    blender --python world/build/live.py -- [--url http://127.0.0.1:8765] [--xray] [--full-trees]   (--full-trees keeps the 55 k tree objects: slow)
+    blender --python world/build/live.py -- [--url http://127.0.0.1:8765] [--xray] [--full-trees] [--no-motion]   (--full-trees keeps the 55 k tree objects: slow)
 The scene is built fresh from the kits (the saved site.blend can be older than the kits), the live layer is
 added (kit/live.py), the viewport switches to EEVEE in the drone camera, and a timer reads /state 5 times a second
-and applies only what changed. --xray hides the silo walls so the grain heaps are seen.
+and applies only what changed. --xray hides the silo walls so the grain heaps are seen. The grain packets running
+along the flow lines are a viewport overlay (kit/live_motion.py) redrawn ~30 times a second while something moves;
+--no-motion leaves them out.
 """
 
 import importlib.util
@@ -21,6 +23,7 @@ WORLD = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(WORLD))
 
 from kit import live as lv  # noqa: E402
+from kit import live_motion as mo  # noqa: E402
 from sim import core  # noqa: E402
 
 ARGS = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
@@ -47,6 +50,9 @@ def build(xray=False, full_trees=False):
         for o in scene.objects:
             if o.name in {s["id"] for s in site["silos"]}:
                 o.hide_viewport = True                    # the instanced silo shell; the heaps stay
+    for o in scene.objects:
+        if o.name.startswith("LBL_"):                     # drawing labels: hidden only in renders by site.py, black lines in the viewport
+            o.hide_viewport = True
     cams = cameras()
     scene.camera = cams["CAM_DRONE"]
     scene.render.engine = "BLENDER_EEVEE_NEXT"
@@ -82,6 +88,12 @@ def view_camera(scene, cam="CAM_DRONE"):
 def main():
     scene, site, live = build("--xray" in ARGS, "--full-trees" in ARGS)
     state = {"errors": 0}
+    if "--no-motion" not in ARGS:                     # grain packets along the flow lines (kit/live_motion.py)
+        try:
+            live.overlay = mo.Overlay(live.motion)
+            live.overlay.install()
+        except Exception as e:                        # noqa: BLE001  a GPU without the polyline shader: the scene works without
+            print("live: no grain packets:", e, flush=True)
 
     def poll():
         try:

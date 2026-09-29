@@ -14,6 +14,7 @@
   grain_heaps(scene, site)  per silo a level body and the repose cone, sized from the mass
   trees_merge(scene)        the 55 k tree instances as a few merged low-poly meshes (viewport speed)
   Live.apply(state)         the state contract (world/sim/STATE_SCHEMA.json) onto the objects, only what changed
+  Live.motion               the grain packets along the flow lines (live_motion.py), drawn as a viewport overlay
 
 The real gate plate is inside its casing, so an open gate is shown by the colour of its body, not by motion.
 Colours follow the panel: running = amber (the route colour of 7C), starting / stopping = light blue,
@@ -349,31 +350,36 @@ def mover_path(site, n):
     return np.array([a, b], float)
 
 
-def flow_paths(site):
-    """({owner: [point arrays]}, {owner: reason}) — edges by routes.edge_legs, movers by mover_path."""
+def flow_paths(site, with_kinds=False):
+    """({owner: [point arrays]}, {owner: reason}) — edges by routes.edge_legs, movers by mover_path.
+    with_kinds: also {owner: [leg kind]} (routes.Leg.kind: drive | fall | ...; a mover is "mover")."""
     g = pr.Graph(site)
-    paths, fails = {}, {}
+    paths, fails, kinds = {}, {}, {}
     for e in g.edges:
         key = f"{e['from']}->{e['to']}"
         try:
-            paths[key] = [np.asarray(lg.pts, float) for lg in R.edge_legs(site, e, None)]
+            legs = R.edge_legs(site, e, None)
+            paths[key] = [np.asarray(lg.pts, float) for lg in legs]
+            kinds[key] = [lg.kind for lg in legs]
         except Exception as ex:                                  # noqa: BLE001  reported by check_live
             fails[key] = f"{type(ex).__name__}: {ex}"
     for n, v in g.nodes.items():
         if v["kind"] in pr.MOVERS:
             try:
                 paths[n] = [mover_path(site, n)]
+                kinds[n] = ["mover"]
             except Exception as ex:                              # noqa: BLE001
                 fails[n] = f"{type(ex).__name__}: {ex}"
-    return paths, fails
+    return (paths, fails, kinds) if with_kinds else (paths, fails)
 
 
-def flow_curves(scene, site, radius=0.09):
+def flow_curves(scene, site, radius=0.09, paths=None, fails=None):
     col = bpy.data.collections.get("LIVE_FLOW") or bpy.data.collections.new("LIVE_FLOW")
     if col.name not in scene.collection.children:
         scene.collection.children.link(col)
     mat = flow_material()
-    paths, fails = flow_paths(site)
+    if paths is None:
+        paths, fails = flow_paths(site)
     out = {}
     for owner, plist in paths.items():
         objs = []
@@ -533,14 +539,33 @@ def trees_merge(scene, ratio=0.06, chunks=16):
 NEVER = object()          # "not applied yet": differs from every state, also from None (= off)
 
 
+def motor_key(m, v, trip):
+    """The look of a motor: fault (state or a trip alarm of its own), else its state, None when off."""
+    return "fault" if m in trip or v["state"] == "fault" else (v["state"] if v["state"] != "off" else None)
+
+
+def moving_owners(st):
+    """Owners whose grain moves in state `st`: a mover that RUNS (not starting, stopping, off, faulted or tripped)
+    and carries grain, and every edge with t/h > 0. Everything else stands."""
+    trip = {a["id"].split(".")[0] for a in st.get("alarms", []) if a["level"] == "trip"}
+    out = {m for m, v in st["motors"].items() if motor_key(m, v, trip) == "run" and v["load_t_h"] > 0}
+    out |= {e for e, v in st["edges"].items() if v["t_h"] > 0}
+    return out
+
+
 class Live:
-    def __init__(self, scene, site, rho):
+    def __init__(self, scene, site, rho, speeds=None):
         self.scene, self.site, self.rho = scene, site, rho
         bpy.context.view_layer.update()               # once: matrix_world of objects moved by .location (the towers)
         self.gates, self.gate_loose, self.gate_count = split_gates(scene, site)
         self.old_silo_count = split_old_silos(scene, site)
         self.nodes = object_map(scene, site)
-        self.flows, self.flow_fails = flow_curves(scene, site)
+        from . import live_motion as mo
+        paths, fails, kinds = flow_paths(site, with_kinds=True)
+        self.flows, self.flow_fails = flow_curves(scene, site, paths=paths, fails=fails)
+        # grain packets along the flow lines (live_motion.py): a truck on its lane is not grain, it does not move
+        self.paths, self.static = paths, {o for o, ks in kinds.items() if ks and all(k == "drive" for k in ks)}
+        self.motion = mo.Motion(paths, speeds if speeds is not None else mo.mover_speeds(), self.static)
         self.heaps = grain_heaps(scene, site)
         self.base_z = {s["id"]: s["z"] + silo.FLOOR_Z for s in site["silos"]}
         self.wrapped = wrap_materials()
@@ -554,7 +579,7 @@ class Live:
         k = 0
         trip = {a["id"].split(".")[0] for a in st.get("alarms", []) if a["level"] == "trip"}
         for m, v in st["motors"].items():
-            key = "fault" if m in trip or v["state"] == "fault" else (v["state"] if v["state"] != "off" else None)
+            key = motor_key(m, v, trip)
             if self.last.get(("m", m), NEVER) != key:
                 k += set_glow(self.objs(m), key)
                 self.last[("m", m)] = key
@@ -576,6 +601,8 @@ class Live:
                     o.hide_viewport = o.hide_render = not show
                 k += len(objs)
                 self.last[("f", owner)] = show
+        self.motion.set_active(moving_owners(st))
+        self.motion.set_paused(st.get("paused", False))
         for sid, pair in self.heaps.items():
             m = round(st["stores"].get(sid, {}).get("mass_t", 0.0), 1)
             if self.last.get(("s", sid), NEVER) != m:

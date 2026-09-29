@@ -5,6 +5,10 @@
 Builds the site once (quick), adds the live layer (kit/live.py) and checks it against numbers taken here
 independently of it: SITE positions, the process graph, the heap volume of the mass, the derived geometry.
 Every rule is a function of its inputs, so each broken variant feeds a broken input without a rebuild.
+Motion (kit/live_motion.py, phase 8 minimum): the grain packets are checked as the frames of a 30 Hz redraw show them —
+speed of the pattern against the source of each mover, which owners move for which state, the vertices against the
+paths, the cost of one step. The viewport drawing itself needs a window: build/live_probe.py and
+build/live_motion_shots.py (two screenshots, the shift of the pattern measured on the pixels).
 """
 
 import importlib.util
@@ -16,11 +20,14 @@ from pathlib import Path
 
 import bmesh
 import bpy  # noqa: I001
+import numpy as np
 
 WORLD = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(WORLD))
 
 from kit import live as lv  # noqa: E402
+from kit import live_motion as mo  # noqa: E402
+from kit import noria_n100 as nn  # noqa: E402
 from kit import process as pr  # noqa: E402
 from sim import core  # noqa: E402
 from sim.control import Plant  # noqa: E402
@@ -208,6 +215,182 @@ def r_trees(scene, merged, locs):
                 f"{len(merged)} merged meshes, {sum(len(o.data.polygons) for o in merged)} faces")
 
 
+# ------------------------------------------------------------------ motion: grain packets along the flow lines
+
+def expected_speed(site, n):
+    """m/s of mover n from its sources, not from the simulator: the LUB table of the two detailed norias
+    (noria_n100.MODELS), params.json belt_speed_m_s by kind for the others."""
+    kind, layer = G.nodes[n]["kind"], G.nodes[n].get("layer")
+    b = P["belt_speed_m_s"]
+    if kind == "noria":
+        t = next((t for t in site["noria_towers"] if t["id"] == n), None)
+        return nn.MODELS[t["noria_model"]]["belt_speed"] if t else b["noria_existing"]["value"]
+    if kind in ("conveyor_belt", "conveyor_chain"):
+        return b[kind]["value"]
+    return (b["conveyor_designed"] if layer == "designed" else b["conveyor_existing"])["value"]
+
+
+def nearest_arc(pts, s, x):
+    """(arc length of the point of the polyline nearest to x, its distance): plain vector geometry, none of Motion's code."""
+    a, b = pts[:-1], pts[1:]
+    ab = b - a
+    t = np.clip(((x - a) * ab).sum(1) / np.maximum((ab * ab).sum(1), 1e-12), 0.0, 1.0)
+    d = np.linalg.norm(a + ab * t[:, None] - x, axis=1)
+    i = int(d.argmin())
+    return float(s[i] + t[i] * np.linalg.norm(ab[i])), float(d[i])
+
+
+def measured_speed(motion, owner, hz=30.0, frames=31, t0=0.37):
+    """Speed of the drawn pattern of `owner` in frames: follow one packet head over `frames` frames at `hz` (a
+    viewport redraw rate) through the 3D points motion.dashes() returns, project them on the path, fit arc against time."""
+    leg = max((i for i, lg in enumerate(motion.legs) if lg[0] == owner), key=lambda i: motion.legs[i][3])
+    _, pts, s, L, _ = motion.legs[leg]
+    motion.set_active({owner})
+    ts = t0 + np.arange(frames) / hz
+    heads = []
+    for t in ts:
+        li, _, _, p = motion.dashes(t)
+        heads.append(sorted(nearest_arc(pts, s, x)[0] for x in p[li == leg][:, -1, :]))
+    motion.set_active(())
+    cur = min(heads[0], key=lambda a: abs(a - 0.3 * L))
+    arcs = [cur]
+    for h in heads[1:]:
+        step = [a - arcs[-1] for a in h if -1e-6 <= a - arcs[-1] < 0.5]
+        if not step:
+            return None
+        arcs.append(arcs[-1] + min(step))
+    return float(np.polyfit(ts, arcs, 1)[0])
+
+
+def r_motion_speed(live, site, motion=None, tol=0.015):
+    """Every mover's packets run at the speed of its source (H5 2.87, H6 2.40 m/s of the LUB table, belts 2.4, chains
+    0.6-0.75), seen in the frames of a 30 Hz redraw, within 1.5 %; the edges run at the EST picture speed."""
+    motion = motion or live.motion
+    bad, rows = [], []
+    for n in sorted(x for x, v in G.nodes.items() if v["kind"] in pr.MOVERS and x in motion.owners):
+        want, got = expected_speed(site, n), measured_speed(motion, n)
+        rows.append(f"{n} {got:.3f}" if got else f"{n} lost")
+        if got is None or abs(got - want) > tol * want:
+            bad.append((n, want, None if got is None else round(got, 3)))
+    e = next(o for o in sorted(motion.owners) if "->" in o)
+    got_e = measured_speed(motion, e)
+    if got_e is None or abs(got_e - mo.EDGE_SPEED["value"]) > tol * mo.EDGE_SPEED["value"]:
+        bad.append((e, mo.EDGE_SPEED["value"], got_e))
+    detail = ", ".join(rows)
+    return not bad, (f"off the source: {bad}" if bad else f"measured in 30 Hz frames, m/s: {detail}; edges {got_e:.2f} = the "
+                     f"{mo.EDGE_SPEED['basis']} picture speed {mo.EDGE_SPEED['value']} (no source); H5 2.87 / H6 2.40 = noria_n100.MODELS")
+
+
+def st_with(base, run=(), load=100.0, edges=(), state="run", alarms=()):
+    st = json.loads(json.dumps(base))
+    for m in run:
+        st["motors"][m]["state"] = state
+        st["motors"][m]["load_t_h"] = load
+    for e in edges:
+        st["edges"][e] = {"t_h": 100.0}
+    st["alarms"] = [{"id": a, "level": "trip", "t_s": 0.0, "text": "test"} for a in alarms]
+    return st
+
+
+def r_motion_state(live, moving=lv.moving_owners):
+    """Only a mover that RUNS and carries grain, and an edge with t/h > 0, has moving packets; off / starting / stopping /
+    faulted / tripped / unloaded movers and edges without flow stand; a truck lane is not grain."""
+    base = Plant().state()
+    route = ("S1->T9", "T9->H5", "H5->T10")
+    inter = live.motion.owners
+    fails = []
+
+    def active_for(st):
+        live.motion.set_active(moving(st))
+        return set(live.motion.active)
+
+    def drawn(t=0.5):
+        li = live.motion.dashes(t)[0]
+        return {live.motion.owner_of_leg[i] for i in set(li.tolist())}
+
+    want = ({"H5", "T9", "T10"} | set(route)) & inter
+    got = active_for(st_with(base, run=("H5", "T9", "T10"), edges=route))
+    if got != want or drawn() != want:
+        fails.append(("route running", sorted(got ^ want)))
+    for state in ("off", "starting", "stopping", "fault"):
+        got = active_for(st_with(base, run=("H5", "T9", "T10"), edges=route, state=state))
+        if got & {"H5", "T9", "T10"} or drawn() & {"H5", "T9", "T10"}:
+            fails.append((f"motors {state}", sorted(got & {"H5", "T9", "T10"})))
+    if "H5" in active_for(st_with(base, run=("H5",), edges=route, alarms=("H5.plug",))):
+        fails.append(("H5 running with its own trip alarm", "moves"))
+    got = active_for(st_with(base, run=("H5", "T9"), load=0.0))
+    if got & {"H5", "T9"}:
+        fails.append(("running without grain", sorted(got)))
+    got = active_for(st_with(base))
+    if got or drawn():
+        fails.append(("nothing runs", sorted(got)))
+    lane = "TRUCK_IN->SCALES_IN"
+    active_for(st_with(base, edges=(lane,)))
+    if lane in inter:
+        fails.append(("a truck lane has packets", lane))
+    live.motion.set_active(())
+    return not fails, (fails if fails else f"route H5/T9/T10 + 3 edges move ({len(want)} owners); off, starting, stopping, fault, "
+                       f"a trip alarm, no load, no flow and a truck lane stand still")
+
+
+def r_motion_pause(live, clock=mo.Overlay.clock):
+    """A paused simulator stops the packets where they are (the motion clock stands still, the set of moving owners stays)
+    and they go on from there when it resumes."""
+    ov = mo.Overlay(live.motion)
+    base = Plant().state()
+    running = st_with(base, run=("H5", "T9"), edges=("S1->T9",))
+    paused = dict(running, paused=True)
+    live.apply(running)
+    t1 = clock(ov, 10.0)
+    t2 = clock(ov, 10.5)
+    live.apply(paused)
+    frozen = clock(ov, 11.5)
+    still_moving = set(live.motion.active) == {"H5", "T9", "S1->T9"} & live.motion.owners
+    live.apply(dict(running, paused=False))
+    t4 = clock(ov, 12.0)
+    ok = abs((t2 - t1) - 0.5) < 1e-9 and abs(frozen - t2) < 1e-9 and abs((t4 - frozen) - 0.5) < 1e-9 and still_moving         and live.motion.paused is False
+    live.motion.set_active(())
+    live.last.clear()
+    return ok, (f"running 0.5 s -> {t2 - t1:.2f} s of motion; paused 1.0 s -> {frozen - t2:.2f} s (packets stay, the moving set is kept: "
+                f"{still_moving}); resumed 0.5 s -> {t4 - frozen:.2f} s")
+
+
+def r_motion_path(live, motion=None, times=(0.0, 0.31, 1.7, 5.03, 100.3), tol=0.002):
+    """Every drawn vertex lies on its own owner's path (2 mm), on every frame, and every long-enough path carries packets."""
+    motion = motion or live.motion
+    motion.set_active(set(motion.owners))
+    worst, n_pts, bare = 0.0, 0, set()
+    for t in times:
+        li, tail, head, p = motion.dashes(t)
+        n_pts += p.shape[0] * p.shape[1]
+        for i, ptl in zip(li, p):
+            _, pts, s, _, _ = live.motion.legs[i]                # the truth: the model's paths
+            for x in ptl:
+                worst = max(worst, nearest_arc(pts, s, x)[1])
+        seen = {int(i) for i in li}
+        bare |= {live.motion.owner_of_leg[i] for i, lg in enumerate(live.motion.legs) if lg[3] > mo.SPACING_M and i not in seen}
+    motion.set_active(())
+    ok = worst <= tol and not bare and n_pts > 1000
+    return ok, (f"{n_pts} vertices, worst distance to the own path {worst * 1000:.1f} mm (≤ {tol * 1000:.0f}); paths longer than "
+                f"{mo.SPACING_M} m with no packet: {sorted(bare)[:4]}")
+
+
+def r_motion_cost(live, motion=None, budget_ms=3.0):
+    """One animation step (every dash of every moving owner) is a small part of a 30 Hz frame."""
+    motion = motion or live.motion
+    motion.set_active(set(motion.owners))
+    times = []
+    for k in range(300):
+        c = time.perf_counter()
+        motion.points(0.37 + 0.01 * k)
+        times.append((time.perf_counter() - c) * 1000)
+    n = len(motion.points(1.0))
+    motion.set_active(())
+    avg = sum(times) / len(times)
+    return avg < budget_ms and max(times) < 5 * budget_ms, (f"all {len(motion.owners)} owners moving: {avg:.2f} ms per step "
+            f"(≤ {budget_ms}), worst {max(times):.1f} ms, {n // 2} segments; one 30 Hz frame is 33 ms")
+
+
 GEOM_SILO = None
 MERGED, LOCS = [], []
 
@@ -235,6 +418,11 @@ def main():
         ("state updates are cheap", lambda: r_speed(live)),
         ("after a whole scenario the glow still follows the state", lambda: r_glow(live, scene)),
         ("trees merged for the viewport, none lost", lambda: r_trees(scene, MERGED, LOCS)),
+        ("grain packets run at the speed of their source", lambda: r_motion_speed(live, site)),
+        ("packets move only for running loaded movers and flowing edges", lambda: r_motion_state(live)),
+        ("a paused simulator stops the packets in place", lambda: r_motion_pause(live)),
+        ("packets stay on their own paths, every frame", lambda: r_motion_path(live)),
+        ("one animation step is cheap", lambda: r_motion_cost(live)),
     ]
     ok_all = True
     for name, fn in rules:
@@ -315,6 +503,51 @@ def main():
     ok, info = r_trees(scene, lost, LOCS)
     ok_v &= not ok
     print(f"{'PASS' if not ok else 'FAIL'}  broken variant must be rejected — the easternmost chunk of trees lost -> {'failed' if not ok else 'passed'} ({str(info)[:140]})", flush=True)
+
+    # ---- motion: each broken variant feeds a wrong input to its own rule
+    def variant(name, fn):
+        nonlocal ok_v
+        try:
+            ok, info = fn()
+        except Exception as e:                           # noqa: BLE001
+            ok, info = False, f"crash {type(e).__name__}: {e}"
+        ok_v &= not ok
+        print(f"{'PASS' if not ok else 'FAIL'}  broken variant must be rejected — {name} -> {'failed' if not ok else 'passed'} ({str(info)[:140]})", flush=True)
+
+    sp = dict(live.motion.speeds)
+    fast = {k: v * 1.1 for k, v in sp.items()}
+    wrong_h5 = dict(sp, H5=sp["H6"])
+    chain_as_belt = {k: (2.4 if G.nodes[k]["kind"] == "conveyor_chain" else v) for k, v in sp.items()}
+    variant("H5 packets at the H6 speed (2.40 instead of 2.87)", lambda: r_motion_speed(live, site, motion=mo.Motion(live.paths, wrong_h5, live.static)))
+    variant("every packet 10 % too fast", lambda: r_motion_speed(live, site, motion=mo.Motion(live.paths, fast, live.static)))
+    variant("chain conveyors at the belt speed", lambda: r_motion_speed(live, site, motion=mo.Motion(live.paths, chain_as_belt, live.static)))
+
+    def by_load_only(st):                                # the tube rule: any load moves, whatever the motor does
+        return {m for m, v in st["motors"].items() if v["load_t_h"] > 0} | {e for e, v in st["edges"].items() if v["t_h"] > 0}
+
+    def by_state_only(st):                               # a trip alarm of its own is not looked at
+        return {m for m, v in st["motors"].items() if v["state"] == "run" and v["load_t_h"] > 0} | {e for e, v in st["edges"].items() if v["t_h"] > 0}
+
+    def no_load_check(st):                               # a running empty belt shows grain (the rest of the rule as it is)
+        trip = {a["id"].split(".")[0] for a in st.get("alarms", []) if a["level"] == "trip"}
+        return {m for m, v in st["motors"].items() if lv.motor_key(m, v, trip) == "run"} | {e for e, v in st["edges"].items() if v["t_h"] > 0}
+
+    variant("packets by load only (a stopped motor still moves)", lambda: r_motion_state(live, moving=by_load_only))
+    variant("packets ignore the trip alarm", lambda: r_motion_state(live, moving=by_state_only))
+    variant("packets on a running empty belt", lambda: r_motion_state(live, moving=no_load_check))
+    variant("every line moves, flow or not", lambda: r_motion_state(live, moving=lambda st: set(live.motion.owners)))
+    lifted = {o: [p + np.array([0.0, 0.0, 0.5]) for p in pl] for o, pl in live.paths.items()}
+    variant("the motion clock ignores the pause", lambda: r_motion_pause(live, clock=lambda ov, now: (setattr(ov, "_t", ov._t + (now - ov._prev if ov._prev is not None else 0.0)), setattr(ov, "_prev", now), ov._t)[2]))
+    variant("packets 0.5 m off their paths", lambda: r_motion_path(live, motion=mo.Motion(lifted, sp, live.static)))
+    slow = mo.Motion(live.paths, sp, live.static)
+    real_points = slow.points
+
+    def slow_points(t):
+        time.sleep(0.006)
+        return real_points(t)
+    slow.points = slow_points
+    variant("6 ms extra per animation step", lambda: r_motion_cost(live, motion=slow))
+    live.motion.set_active(())
 
     print("RESULT", "ALL PASS" if ok_all and ok_v else "FAILED", flush=True)
     sys.exit(0 if ok_all and ok_v else 1)
