@@ -1,0 +1,177 @@
+{
+  "одиниці": "мм, якщо в note не сказано інше",
+  "зона_22_пост": {
+    "виріб": {"v": "R.STAHL 8150/5-0176-0116-091-3311-C2425 арт.285432", "basis": "sourced", "src": "research/design/control_posts/sources/stahl_8150_estop_285432.pdf"},
+    "зони": {"v": [1, 2, 21, 22], "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "ex_пил": {"v": "Ex tb IIIC T80 °C Db", "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "ширина_мм": {"v": 116.5, "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "висота_мм": {"v": 176.5, "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "глибина_мм": {"v": 91, "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "матеріал": {"v": "нержавка 1.4404 AISI 316L шліфована", "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "ral": {"v": null, "basis": null, "src": "NOT_FOUND", "note": "у листі фарби немає"},
+    "ip": {"v": 66, "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "грибок": {"v": "червоний maintained, rotating arrow, контакт NC/NC", "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "діаметр_грибка_мм": {"v": null, "basis": null, "src": "NOT_FOUND", "note": "у листі Jumbo без міліметрів"},
+    "вводів_шт": {"v": 1, "basis": "sourced", "src": "stahl_8150_estop_285432.pdf", "note": "CMP-737D M25–NPT 3/4\""},
+    "кріплення_отвір": {"v": "M8", "basis": "sourced", "src": "stahl_8150_estop_285432.pdf", "note": "підпис на кресленні; крок отворів окремо не виписаний"},
+    "гвинт_кришки": {"v": "M6", "basis": "sourced", "src": "stahl_8150_estop_285432.pdf"},
+    "момент_кришки_Нм": {"v": 4.5, "basis": "sourced", "src": "stahl_8150_estop_285432.pdf", "note": "не мм"}
+  },
+  "пвк": {
+    "виріб": {"v": "ПВК-15/25/35", "basis": "sourced", "src": "research/design/control_posts/sources/pvk_15_25_35_unibelus.pdf"},
+    "ex_у_цьому_pdf": {"v": "2ExedIICT6", "basis": "sourced", "src": "pvk_15_25_35_unibelus.pdf", "note": "маркування пилу Ex tb у цьому PDF немає"},
+    "габарит_мм": {"v": null, "basis": null, "src": "NOT_FOUND"},
+    "ip": {"v": 66, "basis": "sourced", "src": "pvk_15_25_35_unibelus.pdf", "note": "ГОСТ 14254-80"},
+    "маса_не_більше_кг": {"v": {"ПВК-15": 0.6, "ПВК-25": 1.0, "ПВК-35": 1.4}, "basis": "sourced", "src": "pvk_15_25_35_unibelus.pdf", "note": "не мм"},
+    "штовхачів": {"v": [1, 2, 3], "basis": "sourced", "src": "pvk_15_25_35_unibelus.pdf"},
+    "стоп": {"v": "грибок із самофіксацією", "basis": "sourced", "src": "pvk_15_25_35_unibelus.pdf"},
+    "ввід_за_замовчуванням": {"v": "ВК-12", "basis": "sourced", "src": "pvk_15_25_35_unibelus.pdf"},
+    "приклад_вводу": {"v": "M25", "basis": "sourced", "src": "pvk_15_25_35_unibelus.pdf", "note": "ПВК-35-(Л-3-М25)х1(В)-У1"}
+  },
+  "пост_не_ex": {
+    "xapg39704": {
+      "ширина_мм": {"v": 80, "basis": "sourced", "src": "https://media.province-electric.com/schneider_synd_rework/2024q1/documents/ba91a8476635939841b51123984dc178e27e1529.pdf", "note": "CAD overall width"},
+      "висота_мм": {"v": 175, "basis": "sourced", "src": "той самий лист XAPG39704"},
+      "глибина_мм": {"v": 51.5, "basis": "sourced", "src": "той самий лист XAPG39704"},
+      "матеріал": {"v": "цинковий сплав", "basis": "sourced", "src": "той самий лист"},
+      "ral": {"v": 7032, "basis": "sourced", "src": "той самий лист", "note": "сірий"},
+      "отворів_22_мм": {"v": 4, "basis": "sourced", "src": "той самий лист"},
+      "вводів": {"v": "1 x 3/4 NPT", "basis": "sourced", "src": "той самий лист"},
+      "ip": {"v": 65, "basis": "sourced", "src": "той самий лист"},
+      "ex_зона_22": {"v": false, "basis": "sourced", "src": "той самий лист", "note": "маркування Ex у листі немає"}
+    },
+    "xapk11": {
+      "ширина_мм": {"v": 80, "basis": "sourced", "src": "https://province-electric.com/products/empty-control-station-harmony-xap-xb2-sl-zinc-alloy-yellow-m20-undrilled-80x80x51-5mm-ul-culus-schneider-electric-4"},
+      "висота_мм": {"v": 80, "basis": "sourced", "src": "та сама картка XAPK11"},
+      "глибина_мм": {"v": 51.5, "basis": "sourced", "src": "та сама картка"},
+      "корисна_глибина_мм": {"v": 49, "basis": "sourced", "src": "та сама картка"},
+      "ral": {"v": 1004, "basis": "sourced", "src": "та сама картка", "note": "жовті кришка і корпус, під аварійний стоп"},
+      "вводи_м20_шт": {"v": 2, "basis": "sourced", "src": "та сама картка"},
+      "ex_зона_22": {"v": false, "basis": "judgment", "src": "та сама картка", "note": "у картці немає Ex"}
+    },
+    "пку15_21_141_54_у2": {
+      "L_мм": {"v": 260, "basis": "sourced", "src": "research/design/control_posts/sources/pku15_elektrotehnik.pdf", "note": "таблиця 3; яка вісь вертикальна, текстовий шар не підписав"},
+      "B_мм": {"v": 90, "basis": "sourced", "src": "pku15_elektrotehnik.pdf"},
+      "H_мм": {"v": 80, "basis": "sourced", "src": "pku15_elektrotehnik.pdf"},
+      "елементів": {"v": 4, "basis": "sourced", "src": "pku15_elektrotehnik.pdf"},
+      "отвір_апарата_мм": {"v": 30, "basis": "sourced", "src": "pku15_elektrotehnik.pdf"},
+      "сальник": {"v": "MG 25", "basis": "sourced", "src": "pku15_elektrotehnik.pdf"},
+      "матеріал": {"v": "метал", "basis": "sourced", "src": "pku15_elektrotehnik.pdf"},
+      "ip": {"v": 54, "basis": "sourced", "src": "pku15_elektrotehnik.pdf", "note": "у таблиці 1 також є IP40"},
+      "зона_22": {"v": false, "basis": "sourced", "src": "pku15_elektrotehnik.pdf", "note": "середовище невзрывоопасная, без струмопровідного пилу"}
+    }
+  },
+  "кнопки_кольори": {
+    "норма": {"v": "IEC 60204-1 §10.2.1", "basis": "sourced", "src": "https://www.se.com/pl/pl/faqs/FAQ000268658/"},
+    "пуск_перевага": {"v": "білий", "basis": "sourced", "src": "FAQ000268658", "note": "також сірий, чорний, зелений; червоний заборонений"},
+    "стоп_перевага": {"v": "чорний", "basis": "sourced", "src": "FAQ000268658", "note": "також сірий, білий; зелений заборонений"},
+    "аварійна": {"v": "червоний грибок, жовте тло якщо тло є", "basis": "sourced", "src": "FAQ000268658"},
+    "грибок_xb5as8442": {
+      "діаметр_мм": {"v": 40, "basis": "sourced", "src": "research/design/control_posts/sources/schneider_xb5as8442.pdf"},
+      "висота_мм": {"v": 43, "basis": "sourced", "src": "schneider_xb5as8442.pdf"},
+      "ширина_мм": {"v": 40, "basis": "sourced", "src": "schneider_xb5as8442.pdf"},
+      "глибина_мм": {"v": 82, "basis": "sourced", "src": "schneider_xb5as8442.pdf"},
+      "посадка_мм": {"v": 22, "basis": "sourced", "src": "schneider_xb5as8442.pdf"},
+      "скидання": {"v": "поворот", "basis": "sourced", "src": "schneider_xb5as8442.pdf"},
+      "напис_на_головці": {"v": null, "basis": "sourced", "src": "schneider_xb5as8442.pdf", "note": "unmarked"}
+    },
+    "ключ_місцеве_дистанційне_мм": {"v": null, "basis": null, "src": "NOT_FOUND"}
+  },
+  "висота_органів_мм": {
+    "мінімум_над_рівнем_обслуговування": {"v": 600, "basis": "sourced", "src": "https://www.normsplash.com/Samples/BSI/133758643/BS-EN-60204-1-2018-en-2.pdf", "note": "IEC 60204-1:2016 §10.1.2, ручні органи"},
+    "верх_аварійного_стопа": {"v": null, "basis": null, "src": "NOT_FOUND", "note": "§10.7.1 лише readily accessible; 1,7 м у нормі — рекомендація для рукоятки вимкнення живлення, не для грибка"},
+    "стійка_труба_мм": {"v": null, "basis": null, "src": "NOT_FOUND"}
+  },
+  "трос_zq900": {
+    "виріб": {"v": "Schmersal ZQ 900", "basis": "sourced", "src": "research/design/control_posts/sources/schmersal_zq900_manual.pdf"},
+    "ширина_мм": {"v": 71.5, "basis": "sourced", "src": "schmersal_zq900_manual.pdf", "note": "креслення Dimensions"},
+    "висота_мін_мм": {"v": 220, "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "висота_макс_мм": {"v": 236, "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "план_другий_мм": {"v": 97, "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "крок_отворів_мм": {"v": [40, 48], "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "отвір_кріплення_мм": {"v": 6.5, "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "вводи": {"v": "3 x M20", "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "кабель_сальника_мм": {"v": [6, 12], "basis": "sourced", "src": "schmersal_zq900_manual.pdf", "note": "сальник 103006011"},
+    "ip": {"v": "IP65 і IP67; -N з грибком IP65", "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "трос_оболонка_мм": {"v": 5, "basis": "sourced", "src": "schmersal_zq900_manual.pdf", "note": "червоний ПВХ"},
+    "трос_осердя_мм": {"v": 3, "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "довжина_макс_мм": {"v": 75000, "basis": "sourced", "src": "schmersal_zq900_manual.pdf", "note": "менше при великому перепаді температури"},
+    "опора_не_рідше_мм": {"v": 3000, "basis": "sourced", "src": "schmersal_zq900_manual.pdf", "note": "якщо трос довший за 10000 мм"},
+    "поріг_опор_мм": {"v": 10000, "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "зусилля_Н": {"v": [200, 125], "basis": "sourced", "src": "schmersal_zq900_manual.pdf", "note": "перпендикуляр; у дужках значення, яке інструкція ставить поруч з EN 620. Не мм"},
+    "відхилення_мм": {"v": [400, 300], "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "скидання": {"v": "синя кнопка", "basis": "sourced", "src": "schmersal_zq900_manual.pdf"},
+    "висота_над_настилом_мм": {"v": null, "basis": null, "src": "NOT_FOUND"},
+    "ктв_kiepe_lifeline_мм": {"v": null, "basis": null, "src": "NOT_FOUND"}
+  },
+  "en620_вторинний_переказ": {
+    "кнопка_не_далі_мм": {"v": 10000, "basis": "analog", "src": "https://www.linkedin.com/pulse/stopping-your-conveyor-emergency-do-you-know-law-martin-pillar", "note": "цитата BS EN 620:2002+A1:2010; сторінку норми не відкрито"},
+    "висота_пристрою_мм": {"v": [600, 1700], "basis": "analog", "src": "той самий переказ", "note": "не фіксувати в моделі як sourced"}
+  },
+  "шафа": {
+    "rittal_vx25_8807": {
+      "ширина_мм": {"v": 800, "basis": "sourced", "src": "research/design/control_posts/sources/rittal_vx25_8807_800x2000x600.pdf"},
+      "висота_мм": {"v": 2000, "basis": "sourced", "src": "rittal_vx25_8807_800x2000x600.pdf"},
+      "глибина_мм": {"v": 600, "basis": "sourced", "src": "rittal_vx25_8807_800x2000x600.pdf"},
+      "ral": {"v": 7035, "basis": "sourced", "src": "rittal_vx25_8807_800x2000x600.pdf"},
+      "двері_мм": {"v": 2.0, "basis": "sourced", "src": "rittal_vx25_8807_800x2000x600.pdf", "note": "товщина листа; одні двері, завіс справа"},
+      "каркас_мм": {"v": 1.5, "basis": "sourced", "src": "rittal_vx25_8807_800x2000x600.pdf", "note": "товщина"},
+      "монтажна_панель_мм": {"v": [699, 1896], "basis": "sourced", "src": "rittal_vx25_8807_800x2000x600.pdf"},
+      "ip": {"v": 66, "basis": "sourced", "src": "rittal_vx25_8807_800x2000x600.pdf"}
+    },
+    "abb_mns_mcc_us": {
+      "ширина_стандарт_мм": {"v": 500, "basis": "sourced", "src": "https://library.e.abb.com/public/99a65b8b5e4a4387b271c1306920e407/2TDA090000P0001_REVB.pdf"},
+      "висота_стандарт_мм": {"v": 2300, "basis": "sourced", "src": "2TDA090000P0001"},
+      "висота_компакт_мм": {"v": 2200, "basis": "sourced", "src": "2TDA090000P0001"},
+      "глибина_стандарт_мм": {"v": 500, "basis": "sourced", "src": "2TDA090000P0001"},
+      "ширини_опція_мм": {"v": [600, 700, 800, 900, 1000, 1200], "basis": "sourced", "src": "2TDA090000P0001"}
+    },
+    "abb_mns_30": {
+      "висота_мм": {"v": [2200, 2300], "basis": "sourced", "src": "research/design/control_posts/sources/abb_mns30_catalogue_2022.pdf", "note": "рекомендовані"},
+      "ширина_мм": {"v": [400, 600, 800, 1000, 1200], "basis": "sourced", "src": "abb_mns30_catalogue_2022.pdf"},
+      "глибина_мм": {"v": [800, 1000, 1200], "basis": "sourced", "src": "abb_mns30_catalogue_2022.pdf"},
+      "сітка_E_мм": {"v": 25, "basis": "sourced", "src": "abb_mns30_catalogue_2022.pdf"},
+      "модулів_8E4_макс": {"v": 36, "basis": "sourced", "src": "abb_mns30_catalogue_2022.pdf", "note": "найменший модуль у відсіку; не кількість фідерів 11–22 кВт"}
+    },
+    "секцій_на_70_двигунів": {"v": null, "basis": null, "src": "NOT_FOUND"},
+    "iek_800x2000x600": {"v": null, "basis": null, "src": "NOT_FOUND"},
+    "hmi_tp1200_comfort": {
+      "фасад_мм": {"v": [330, 241], "basis": "sourced", "src": "https://support.industry.siemens.com/cs/mdm/49752044?c=44564105483&lc=en-US", "note": "analog для дверей шафи ПЛК, не виріб об'єкта"},
+      "виріз_мм": {"v": [310, 221], "basis": "sourced", "src": "той самий гід"},
+      "глибина_мм": {"v": 63, "basis": "sourced", "src": "той самий гід"},
+      "активне_поле_мм": {"v": [261.1, 163.2], "basis": "sourced", "src": "https://baa.vn/document/simatic-hmi-series-siemens-tam-hmi-tieu-chuan-than-thien-nguoi-dung-8061-catalog1.pdf", "note": "картка 6AV2124-0MC01-0AX0"},
+      "basis_для_обєкта": {"v": "analog", "basis": "analog", "src": "research/design/control_posts/control_posts_anatomy.md"}
+    }
+  },
+  "прохід_пуэ_4_1_23": {
+    "ширина_мм": {"v": 800, "basis": "analog", "src": "https://www.elec.ru/library/direction/pue/glava-4-1.html", "note": "ПУЭ-7 п. 4.1.23; український текст ПУЕ не відкривався"},
+    "висота_мм": {"v": 1900, "basis": "analog", "src": "той самий пункт"},
+    "місцеве_звуження_мм": {"v": 600, "basis": "analog", "src": "той самий пункт"},
+    "до_голих_частин_до_7м_мм": {"v": 1000, "basis": "analog", "src": "той самий пункт", "note": "нижче 660 В; довжина щита до 7000 мм"},
+    "до_голих_частин_понад_7м_мм": {"v": 1200, "basis": "analog", "src": "той самий пункт"},
+    "два_виходи_якщо_щит_довший_мм": {"v": 7000, "basis": "analog", "src": "той самий пункт"}
+  },
+  "колона_xvu": {
+    "ex": {"v": false, "basis": "sourced", "src": "https://ch.rs-online.com/web/p/signalsaulen-module/8812845", "note": "XVUC21M: Zulassung für Gefahrenbereiche Nein; у зону 22 не ставити"},
+    "база_xvuc21b_діаметр_мм": {"v": 60, "basis": "sourced", "src": "research/design/control_posts/sources/schneider_xvuc21b.pdf"},
+    "база_довжина_мм": {"v": 77, "basis": "sourced", "src": "schneider_xvuc21b.pdf"},
+    "світло_xvuc29_довжина_мм": {"v": 50, "basis": "sourced", "src": "https://www.farnell.com/datasheets/2811629.pdf"},
+    "зумер_дБ_на_1м": {"v": [70, 85], "basis": "sourced", "src": "https://media.distributordatasolutions.com/228/schneider_synd_json/1caf94b81e066ac973cb0db561401c6bf78ee626.pdf", "note": "XVUC9S; не мм"},
+    "зумер_довжина_мм": {"v": null, "basis": null, "src": "NOT_FOUND"},
+    "труба_мм": {"v": [210, 385], "basis": "sourced", "src": "той самий каталог XVU, Mounting"},
+    "порядок_зверху": {"v": ["червоний", "жовтий", "синій", "зелений", "білий"], "basis": "sourced", "src": "BS EN 60204-1:2018 зразок, таблиця 4 і речення про indicating towers"},
+    "пауза_перед_пуском_с": {"v": null, "basis": null, "src": "NOT_FOUND", "note": "IEC 60204-1 AMD1 §9.2.3.2 вимагає розглянути сигнал, секунд не дає"}
+  },
+  "лампи_дверей": {
+    "червоний": {"v": "аварія", "basis": "sourced", "src": "BS EN 60204-1:2018 зразок, таблиця 4"},
+    "жовтий": {"v": "ненормальний стан", "basis": "sourced", "src": "та сама таблиця"},
+    "синій": {"v": "обов'язкова дія", "basis": "sourced", "src": "та сама таблиця"},
+    "зелений": {"v": "норма", "basis": "sourced", "src": "та сама таблиця"},
+    "білий": {"v": "нейтральний", "basis": "sourced", "src": "та сама таблиця"},
+    "діаметр_лінзи_мм": {"v": null, "basis": null, "src": "NOT_FOUND"},
+    "кількість": {"v": null, "basis": null, "src": "NOT_FOUND"}
+  },
+  "табличка": {
+    "приклад_напису": {"v": "Н5", "basis": "judgment", "src": "реєстр норій у завданні T8a", "note": "розмір таблички NOT_FOUND; норма вимагає маркувати функцію органа, не шифр норії"}
+  }
+}
