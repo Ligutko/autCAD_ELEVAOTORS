@@ -551,4 +551,9 @@ class Plant:
                        "evaporated_t": round(T["evaporated_t"], 4), "stored_t": round(s.stored(), 4),
                        "transit_t": round(s.transit(), 4)},
             "power_kw": round(power, 2),
+            "trucks": {"in_queue": len(s.trucks_in),
+                       "in_now": None if s.truck_in is None else {"phase": s.truck_in["phase"], "left_t": round(s.truck_in["lot"][0], 3)},
+                       "out_queue": s.trucks_out,
+                       "out_now": None if s.truck_out is None else {"load_t": round(s.truck_out["lot"][0], 3), "cap_t": s.truck_out["cap"]}},
+            "dryer_bin_cap_t": s.dryer["bin_cap"],
         }

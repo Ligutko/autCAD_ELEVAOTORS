@@ -32,6 +32,7 @@ def run(path):
 
 
 def main():
+    sys.stdout.reconfigure(errors="replace")     # a FAIL line with a symbol the console code page lacks must not crash the summary
     ap = argparse.ArgumentParser()
     ap.add_argument("--jobs", type=int, default=3)
     ap.add_argument("--only", default="")

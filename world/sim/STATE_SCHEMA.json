@@ -18,7 +18,9 @@
   "events",
   "routes",
   "totals",
-  "power_kw"
+  "power_kw",
+  "trucks",
+  "dryer_bin_cap_t"
  ],
  "additionalProperties": false,
  "properties": {
@@ -367,6 +369,74 @@
   "power_kw": {
    "type": "number",
    "minimum": 0
+  },
+  "trucks": {
+   "type": "object",
+   "required": [
+    "in_queue",
+    "in_now",
+    "out_queue",
+    "out_now"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "in_queue": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "out_queue": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "in_now": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "required": [
+      "phase",
+      "left_t"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "phase": {
+       "enum": [
+        "weigh",
+        "unload"
+       ]
+      },
+      "left_t": {
+       "type": "number",
+       "minimum": 0
+      }
+     }
+    },
+    "out_now": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "required": [
+      "load_t",
+      "cap_t"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "load_t": {
+       "type": "number",
+       "minimum": 0
+      },
+      "cap_t": {
+       "type": "number",
+       "exclusiveMinimum": 0
+      }
+     }
+    }
+   }
+  },
+  "dryer_bin_cap_t": {
+   "type": "number",
+   "exclusiveMinimum": 0
   }
  }
 }

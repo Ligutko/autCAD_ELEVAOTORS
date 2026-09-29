@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Елеватор — центр керування</title>
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<header>
+  <div class="title">
+    <b>Елеватор · центр керування</b>
+    <span class="sub">симуляція процесу, не цифровий двійник</span>
+  </div>
+  <div class="clock">
+    <span id="clock">доба 1 · 00:00:00</span>
+    <span id="speeds"></span>
+    <button id="pause" title="пауза">❚❚</button>
+  </div>
+  <div class="scn">
+    <select id="scenario"><option value="">— вільний режим —</option></select>
+    <button id="load">Запустити</button>
+  </div>
+  <div class="totals" id="totals"></div>
+</header>
+<main>
+  <section id="mnemo-wrap"><div id="mnemo-host"></div>
+    <div id="legend">
+      <span><i class="sw run"></i>працює</span><span><i class="sw off"></i>стоїть</span><span><i class="sw tr"></i>пуск / зупинка</span>
+      <span><i class="sw gate-o"></i>засувка відкрита</span><span><i class="sw gate-c"></i>закрита</span>
+      <span><i class="ln on"></i>іде зерно</span><span><i class="pr p1">1</i>аварія</span><span><i class="pr p2">2</i>тривога</span>
+      <span class="est">≈ — оцінка (EST / аналог / judgment), джерела: world/sim/params.json</span>
+    </div>
+  </section>
+  <aside>
+    <div class="card" id="obj"><h3>Об'єкт</h3><div class="hint">клік на механізм, силос або засувку</div></div>
+    <div class="card" id="alarms"><h3>Тривоги <button id="reset" class="small">Скинути</button></h3><ul></ul></div>
+    <div class="card" id="routes"><h3>Маршрути</h3>
+      <div class="chips" id="cats"></div>
+      <ul id="active"></ul>
+      <ul id="rlist"></ul>
+    </div>
+    <div class="card" id="journal"><h3>Журнал</h3><ul></ul></div>
+  </aside>
+</main>
+<div id="toast"></div>
+<script src="panel.js"></script>
+</body>
+</html>
