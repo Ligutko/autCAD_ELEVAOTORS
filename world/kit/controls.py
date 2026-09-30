@@ -76,9 +76,10 @@ def ex_estop_post(side=-1):
                                      "est": ["висота центру 1.2 м", "стійка DN40", "грибок Ø40 з аркуша Schneider (analog)"]}}
 
 
-def pull_cord(p0, p1, side=-1):
+def pull_cord(p0, p1, side=-1, mount=(0.0, 0.0, 0.12)):
     """ZQ 900 at p0 (floor-level point at the start of the run), red rope at ROPE_Z to p1, eye supports <= 3 m,
-    tension spring and anchor at p1. The switch hangs on a bracket, its reset button faces `side` (Y)."""
+    tension spring and anchor at p1. The switch hangs on a bracket, its reset button faces `side` (Y).
+    mount: vector from the rope to the structure the supports are bolted to (default: 0.12 m up)."""
     p0, p1 = np.asarray(p0, float), np.asarray(p1, float)
     w, hmax, dp = _mm("трос_zq900", "ширина_мм"), _mm("трос_zq900", "висота_макс_мм"), _mm("трос_zq900", "план_другий_мм")
     a, b = p0 + (0, 0, ROPE_Z), p1 + (0, 0, ROPE_Z)
@@ -94,8 +95,8 @@ def pull_cord(p0, p1, side=-1):
     eyes = []
     for k in range(1, n_sup + 1):
         q = a + (b - a) * k / (n_sup + 1)
-        eyes.append(st.rod(q - (0, 0, 0.004), q - (0, 0, 0.12), 0.004, 6))
-        eyes.append(st.rod(q + (0, -0.012, 0), q + (0, 0.012, 0), 0.006, 8))
+        eyes.append(st.rod(q, q + np.asarray(mount, float), 0.004, 6))                  # bracket to the structure
+        eyes.append(st.rod(q - d * 0.012, q + d * 0.012, 0.007, 8))                     # eye around the rope
     eyes.append(st.rod(b, b + d * 0.2, 0.012, 10))                                     # tension spring
     eyes.append(c.box(b + d * 0.2 - (0.02, 0.04, 0.04), b + d * 0.2 + (0.02, 0.04, 0.04)))  # anchor
     parts["supports"] = c.merge_parts(eyes)

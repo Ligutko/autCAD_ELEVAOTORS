@@ -311,8 +311,8 @@ def build_gate_stacks(site, t):
 
 
 CONTROL_END_GAP = 0.6         # EST: E-stop station this far into the tunnel from the tower pit face
-CONTROL_WALL_GAP = 0.25       # EST: station stand this far off the walkway wall
-ROPE_OFF = 0.15               # EST: rope this far out of the casing side, on the walkway side
+CONTROL_WALL_GAP = 0.20       # EST: station centre this far off the walkway wall (stand plate 25 mm off it)
+ROPE_OFF = 0.08               # EST: rope this far out of the casing side, on brackets bolted to the casing
 
 
 def build_controls(site, t, conv=None):
@@ -342,7 +342,7 @@ def build_controls(site, t, conv=None):
     ry = y + side * (float(np.abs(cas[:, 1] - y).max()) + ROPE_OFF)
     ra = np.array([pit_end + inward * 1.2, ry, fz])
     rb = np.array([x0 + 1.0 if pit_end == x1 else x1 - 1.0, ry, fz])     # 1 m short of the far (tail) end wall
-    cord = ctl.pull_cord(ra, rb, side=side)
+    cord = ctl.pull_cord(ra, rb, side=side, mount=(0.0, -side * (ROPE_OFF - 0.005), 0.0))   # brackets to the casing
     for name, part in cord["parts"].items():
         put({"rope": "estop_red", "reset": "estop_blue", "switch": "cord_switch"}.get(name, "estop"), part, 0.0, 0.0, 0.0)
     info = {"post_xy": (px, py), "post_side": -side, "drive_x": drive_x, "rope": (ra, rb), "rope_run": cord["dims"]["run"],
