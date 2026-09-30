@@ -1,0 +1,69 @@
+Репозиторій: https://github.com/microsoft/Microsoft-Rocketbox
+Ліцензія: MIT. Повний текст — ../LICENSE.txt (копія LICENSE.md, Copyright (c) 2020 Microsoft).
+Гілка завантаження: master.
+Коміт master на момент завантаження: 0943055db6ec570bcef9f2c8b41c9e5467c808f9 (2022-10-02, Update README.md).
+Останній коміт, що змінював файли цього аватара: 1d730633ba6a8f5da90da85c28284fe2f485566f (2022-06-14T22:01:32Z, cleaning repo).
+Каталог: Assets/Avatars/Professions/Construction_Male_03/
+
+FBX без facial blendshapes (легша версія з теки Export):
+- файл: Export/Construction_Male_03.fbx
+- розмір: 629920 байт
+- git blob: cd8e28acb2fe5af5483b1f83ddb3db90f56ea36d
+- сторінка: https://github.com/microsoft/Microsoft-Rocketbox/blob/1d730633ba6a8f5da90da85c28284fe2f485566f/Assets/Avatars/Professions/Construction_Male_03/Export/Construction_Male_03.fbx
+- raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Export/Construction_Male_03.fbx
+- полігони: 9376 трикутників (єдиний PolygonVertexIndex у бінарному FBX; у README репозиторію числа на аватар не наведені)
+- скелет: так, 1 Skin, 80 Cluster
+
+Текстури, на які посилається цей FBX, і які збережено (імена збігаються з рядками всередині FBX):
+- Textures/m102_body_color.tga
+  розмір: 12582956 байт
+  git blob: 72ab212168030695e77020e209435527bb132ddb
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_body_color.tga
+- Textures/m102_body_normal.tga
+  розмір: 12582956 байт
+  git blob: 19dc379747f29c8667c2023a30b01e60c59c9c59
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_body_normal.tga
+- Textures/m102_head_color.tga
+  розмір: 12582956 байт
+  git blob: 98a6141e24e4653b8046d3d35b3f5e4a225d896a
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_head_color.tga
+- Textures/m102_head_normal.tga
+  розмір: 12582956 байт
+  git blob: 10b2931c94de5bf24231e1d6de1754a4660c8eab
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_head_normal.tga
+- Textures/m102_helmet_color.tga
+  розмір: 6291500 байт
+  git blob: 3f51f17cc0b7f783993b132463a17391fecd04e2
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_helmet_color.tga
+- Textures/m102_helmet_normal.tga
+  розмір: 6291500 байт
+  git blob: e6fbf3bca4bdfac0bca8ed36763022018e139461
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_helmet_normal.tga
+- Textures/m102_helmet_specular.tga
+  розмір: 6291500 байт
+  git blob: 554bf36dde5117ec1d1c46913366e3ea25dee7d3
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_helmet_specular.tga
+- Textures/m102_tools_color.tga
+  розмір: 3145772 байт
+  git blob: ae5872a6808aa115c84aff5a5d8859ac7bedab6f
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_tools_color.tga
+- Textures/m102_tools_normal.tga
+  розмір: 3145772 байт
+  git blob: 748260cd9aadd421032675eb92842564e9377935
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_tools_normal.tga
+- Textures/m102_tools_specular.tga
+  розмір: 3145772 байт
+  git blob: 866feabb559058b391bb90fe95f890c8e3fd0e75
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_tools_specular.tga
+
+Не завантажено:
+- Export/Construction_Male_03_facial.fbx — 2086576 байт, blob 8191b8a5504792757d25c384e2d02e4fdb1b5192
+  сторінка: https://github.com/microsoft/Microsoft-Rocketbox/blob/1d730633ba6a8f5da90da85c28284fe2f485566f/Assets/Avatars/Professions/Construction_Male_03/Export/Construction_Male_03_facial.fbx
+  причина: є легша версія без facial blendshapes; скелет уже в базовому FBX.
+- specular-карти нижче FBX теж згадує, але разом із рештою файлів аватар перевищує ліміт 80 000 000 байт (повний набір був би більший за 80 МБ). Узято color, normal, opacity і дрібніші specular, які ще вміщаються. Разом збережено 79273560 байт.
+- Textures/m102_body_specular.tga — 12582956 байт, blob f74180bdb87f4133fb9b5bb90bdfa214cac16bea
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_body_specular.tga
+- Textures/m102_head_specular.tga — 12582956 байт, blob 470f53412895383b99f640b5034b73c149ce2355
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Male_03/Textures/m102_head_specular.tga
+
+Шляхи текстур усередині FBX лишилися як у вихідному експорті (temp\Humans\...\textures\). Файли лежать у теці Textures/ під тими самими іменами.

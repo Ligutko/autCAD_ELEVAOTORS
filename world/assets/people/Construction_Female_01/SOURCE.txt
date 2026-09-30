@@ -1,0 +1,57 @@
+Репозиторій: https://github.com/microsoft/Microsoft-Rocketbox
+Ліцензія: MIT. Повний текст — ../LICENSE.txt (копія LICENSE.md, Copyright (c) 2020 Microsoft).
+Гілка завантаження: master.
+Коміт master на момент завантаження: 0943055db6ec570bcef9f2c8b41c9e5467c808f9 (2022-10-02, Update README.md).
+Останній коміт, що змінював файли цього аватара: 1d730633ba6a8f5da90da85c28284fe2f485566f (2022-06-14T22:01:32Z, cleaning repo).
+Каталог: Assets/Avatars/Professions/Construction_Female_01/
+
+FBX без facial blendshapes (легша версія з теки Export):
+- файл: Export/Construction_Female_01.fbx
+- розмір: 603248 байт
+- git blob: 93f554c55a7ef294c5d274b0430d6f6384022ca3
+- сторінка: https://github.com/microsoft/Microsoft-Rocketbox/blob/1d730633ba6a8f5da90da85c28284fe2f485566f/Assets/Avatars/Professions/Construction_Female_01/Export/Construction_Female_01.fbx
+- raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Export/Construction_Female_01.fbx
+- полігони: 8662 трикутників (єдиний PolygonVertexIndex у бінарному FBX; у README репозиторію числа на аватар не наведені)
+- скелет: так, 1 Skin, 80 Cluster
+
+Текстури, на які посилається цей FBX, і які збережено (імена збігаються з рядками всередині FBX):
+- Textures/f101_body_color.tga
+  розмір: 12582956 байт
+  git blob: 50d49e1d549ba369d1a69964b584b7d1c83248f3
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_body_color.tga
+- Textures/f101_body_normal.tga
+  розмір: 12582956 байт
+  git blob: d3e15ba111891084bf97dad9ce2ca7849b969d55
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_body_normal.tga
+- Textures/f101_head_color.tga
+  розмір: 12582956 байт
+  git blob: 79c9c380b8496a3a839ba9fe6900c23d57413599
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_head_color.tga
+- Textures/f101_head_normal.tga
+  розмір: 12582956 байт
+  git blob: beff555687695944e60ba5c2a1e0f3bcf6f2af08
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_head_normal.tga
+- Textures/f101_helmet_color.tga
+  розмір: 6291500 байт
+  git blob: 3f51f17cc0b7f783993b132463a17391fecd04e2
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_helmet_color.tga
+- Textures/f101_helmet_normal.tga
+  розмір: 6291500 байт
+  git blob: e6fbf3bca4bdfac0bca8ed36763022018e139461
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_helmet_normal.tga
+- Textures/f101_helmet_specular.tga
+  розмір: 6291500 байт
+  git blob: 554bf36dde5117ec1d1c46913366e3ea25dee7d3
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_helmet_specular.tga
+
+Не завантажено:
+- Export/Construction_Female_01_facial.fbx — 2095760 байт, blob e957165aa3e6c1c9041b9177c695e4cd83a3e1cc
+  сторінка: https://github.com/microsoft/Microsoft-Rocketbox/blob/1d730633ba6a8f5da90da85c28284fe2f485566f/Assets/Avatars/Professions/Construction_Female_01/Export/Construction_Female_01_facial.fbx
+  причина: є легша версія без facial blendshapes; скелет уже в базовому FBX.
+- specular-карти нижче FBX теж згадує, але разом із рештою файлів аватар перевищує ліміт 80 000 000 байт (повний набір був би більший за 80 МБ). Узято color, normal, opacity і дрібніші specular, які ще вміщаються. Разом збережено 69809572 байт.
+- Textures/f101_body_specular.tga — 12582956 байт, blob ba42009a9b295e9b31c4be8ed17e23b475932c22
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_body_specular.tga
+- Textures/f101_head_specular.tga — 12582956 байт, blob 22741d31db973c96f94630a1b946126bc82672da
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Construction_Female_01/Textures/f101_head_specular.tga
+
+Шляхи текстур усередині FBX лишилися як у вихідному експорті (temp\Humans\...\textures\). Файли лежать у теці Textures/ під тими самими іменами.

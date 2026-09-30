@@ -1,0 +1,49 @@
+Репозиторій: https://github.com/microsoft/Microsoft-Rocketbox
+Ліцензія: MIT. Повний текст — ../LICENSE.txt (копія LICENSE.md, Copyright (c) 2020 Microsoft).
+Гілка завантаження: master.
+Коміт master на момент завантаження: 0943055db6ec570bcef9f2c8b41c9e5467c808f9 (2022-10-02, Update README.md).
+Останній коміт, що змінював файли цього аватара: 1d730633ba6a8f5da90da85c28284fe2f485566f (2022-06-14T22:01:32Z, cleaning repo).
+Каталог: Assets/Avatars/Professions/Delivery_Male_01/
+
+FBX без facial blendshapes (легша версія з теки Export):
+- файл: Export/Delivery_Male_01.fbx
+- розмір: 511312 байт
+- git blob: b1d9677ab745d09b6807f12422db8dece3532dba
+- сторінка: https://github.com/microsoft/Microsoft-Rocketbox/blob/1d730633ba6a8f5da90da85c28284fe2f485566f/Assets/Avatars/Professions/Delivery_Male_01/Export/Delivery_Male_01.fbx
+- raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Delivery_Male_01/Export/Delivery_Male_01.fbx
+- полігони: 6800 трикутників (єдиний PolygonVertexIndex у бінарному FBX; у README репозиторію числа на аватар не наведені)
+- скелет: так, 1 Skin, 81 Cluster
+
+Текстури, на які посилається цей FBX, і які збережено (імена збігаються з рядками всередині FBX):
+- Textures/m112_body_color.tga
+  розмір: 12582956 байт
+  git blob: a2453085d7c7050948e3b5a80a080f1c3ae329b2
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Delivery_Male_01/Textures/m112_body_color.tga
+- Textures/m112_body_normal.tga
+  розмір: 12582956 байт
+  git blob: d3fad9f6d29474e4173bd2e2215d838f891b084f
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Delivery_Male_01/Textures/m112_body_normal.tga
+- Textures/m112_body_specular.tga
+  розмір: 12582956 байт
+  git blob: cf076816d3cb4e3f3ba59d49a70b778430c766e2
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Delivery_Male_01/Textures/m112_body_specular.tga
+- Textures/m112_head_color.tga
+  розмір: 12582956 байт
+  git blob: 5e6ef334c1a4af3f8670201d35c0edf7d34725e2
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Delivery_Male_01/Textures/m112_head_color.tga
+- Textures/m112_head_normal.tga
+  розмір: 12582956 байт
+  git blob: 058e2dddab9027559cc0f025c669b8a0ea263d88
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Delivery_Male_01/Textures/m112_head_normal.tga
+- Textures/m112_head_specular.tga
+  розмір: 12582956 байт
+  git blob: be520f8c0709dc34f25978c4077448cdc5631440
+  raw: https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/master/Assets/Avatars/Professions/Delivery_Male_01/Textures/m112_head_specular.tga
+
+Не завантажено:
+- Export/Delivery_Male_01_facial.fbx — 1804448 байт, blob 533da80312bcfc2943e20f8960d0b3481e6bffa4
+  сторінка: https://github.com/microsoft/Microsoft-Rocketbox/blob/1d730633ba6a8f5da90da85c28284fe2f485566f/Assets/Avatars/Professions/Delivery_Male_01/Export/Delivery_Male_01_facial.fbx
+  причина: є легша версія без facial blendshapes; скелет уже в базовому FBX.
+- жодна текстура, на яку посилається базовий FBX, не пропущена. Повний набір FBX+Textures = 76009048 байт, ліміт 80 000 000 байт.
+
+Шляхи текстур усередині FBX лишилися як у вихідному експорті (temp\Humans\...\textures\). Файли лежать у теці Textures/ під тими самими іменами.

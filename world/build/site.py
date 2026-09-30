@@ -187,8 +187,14 @@ def assemble(quick=False):
                       "tarp": c.mat_painted("SITE_TARP", (0.06, 0.12, 0.08), 0.8, grime=0.3), "rubber": c.mat_rubber("SITE_TYRES"),
                       "hivis": c.mat_painted("SITE_HIVIS", (0.9, 0.45, 0.02), 0.6, grime=0.1),
                       "skin": c.mat_painted("SITE_SKIN", (0.55, 0.38, 0.28), 0.6, grime=0.0)})
+            from kit import people as pp
+            real_people = pp.ASSETS.exists()
             for k, (mat, smooth, (v, f)) in fg.build(site).items():
+                if real_people and k.startswith("person_"):
+                    continue                                   # Rocketbox avatars instead of the box workers
                 c.mesh_from_arrays(f"FIG_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
+            if real_people:
+                pp.place(site, col)
     else:
         v, f = tun.ground_cells(2000, holes)
         c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
