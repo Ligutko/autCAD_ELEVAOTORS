@@ -34,6 +34,8 @@ sys.path.insert(0, str(ROOT))
 
 from kit import controls as k  # noqa: E402
 from kit import tunnel as tun  # noqa: E402
+from kit import noria_tower as tw  # noqa: E402
+import math  # noqa: E402
 from mathutils.bvhtree import BVHTree  # noqa: E402
 
 DATA = json.loads((ROOT / "kit" / "data" / "control_posts.json").read_text(encoding="utf-8"))
@@ -165,10 +167,62 @@ def placement(site, tamper=None):
     return out
 
 
+def tower_placement(site, place=None):
+    """Noria E-stop stations on the real tower meshes (tower frame): on the top platform 0.8-2.0 m from the motor,
+    facing it, mushroom in reach over the deck, not over the leg or ladder openings, no clash with the frame,
+    platforms, guard rails, ladders or the noria itself."""
+    out = []
+    orig = tw.estop_place
+    if place:
+        tw.estop_place = place
+    try:
+        for spec in site["noria_towers"]:
+            x, y, z, ang = tw.estop_place(spec)
+            parts, _, _, anchors = tw.build_noria(spec)
+            fr = tw.noria_frame(spec)
+            mv = fr(np.asarray(parts["motor"][0], float))
+            mc = (mv.min(0) + mv.max(0)) / 2
+            d = math.hypot(x - mc[0], y - mc[1])
+            st_parts = tw.build_estop(spec)
+            red = np.asarray(st_parts["estop_red"][0], float)
+            zm = red[:, 2].mean() - z
+            faces = math.hypot(*(red[:, :2].mean(0) - mc[:2])) < d
+            holes = [tw._bbox(tw.leg_footprints(spec), tw.HOLE_MARGIN), tw.access_rect(spec)]
+            over = any(h[0] < x < h[2] and h[1] < y < h[3] for h in holes)
+            ok = tw.ESTOP_NEAR[0] <= d <= tw.ESTOP_NEAR[1] and z == max(spec["levels_z"]) and REACH[0] <= zm <= REACH[1] and faces and not over
+            out.append((f"tower_{spec['id']}", ok, f"{spec['id']}: {d:.2f} m from the motor on +{z}, mushroom {zm:.2f} m, faces it {faces}, over a hole {over}"))
+            levels = sorted(spec["levels_z"])
+            hx, hy = spec["size"][0] / 2, spec["size"][1] / 2
+            heavy, light = tw.build_frame(spec["top_z"], levels, hx, hy, spec["noria_axis"][0] - spec["x"])
+            stiles, rungs, cage, rest, rrails, rtoes, zs, _ = tw.build_access(spec, levels, spec["top_z"], spec["pit"]["cover_top_z"])
+            lx0, ly0, lx1, ly1 = tw.access_rect(spec)
+            obs = {"frame": heavy, "bracing": light, "ladder": c_merge([stiles, rungs, cage, rest]),
+                   "platforms": tw.build_platforms(levels, spec["top_z"], hx, hy, [holes[0], (lx0 + 0.2, ly0 + 0.1, lx1 - 0.2, ly1 - 0.1)]),
+                   "rails": tw.build_guards(zs, hx, hy)[0]}
+            for k2, data in parts.items():
+                if data is not None:
+                    obs["noria_" + k2] = (fr(np.asarray(data[0], float)), data[1])
+            hits = []
+            for hk, (hv, hf) in st_parts.items():
+                hb = _bvh((np.asarray(hv, float) + (0, 0, 0.002), hf))        # the stand plate rests on the deck
+                for ok_, ov in obs.items():
+                    if len(np.asarray(ov[0])) and hb.overlap(_bvh(ov)):
+                        hits.append(f"{hk} x {ok_}")
+            out.append((f"tower_clash_{spec['id']}", not hits, f"{spec['id']}: {hits[:5] or 'clean'}"))
+    finally:
+        tw.estop_place = orig
+    return out
+
+
+def c_merge(items):
+    from kit import common as cm
+    return cm.merge_parts([i for i in items if len(np.asarray(i[0]))])
+
+
 def main():
     sys.stdout.reconfigure(errors="replace")
     ok_all = True
-    base = checks(build()) + placement(SITE)
+    base = checks(build()) + placement(SITE) + tower_placement(SITE)
     for rid, ok, info in base:
         ok_all &= ok
         print(f"{'PASS' if ok else 'FAIL'}  {rid}: {info}", flush=True)
@@ -234,6 +288,16 @@ def main():
         v[sel, 1] = t["row_y"]
         return dict(hands, estop_red=(v, f)), info
 
+    def in_hole(spec):
+        h = tw._bbox(tw.leg_footprints(spec), tw.HOLE_MARGIN)
+        x, y, z, ang = tw.__dict__["_orig_place"](spec)
+        return ((h[0] + h[2]) / 2, (h[1] + h[3]) / 2, z, ang) if spec["id"] == "H6" else (x, y, z, ang)
+
+    tw._orig_place = tw.estop_place
+    got = {r for r, ok, _ in checks(build()) + placement(SITE) + tower_placement(SITE, in_hole) if not ok}
+    seen = {"tower_H6", "tower_clash_H6"} & got and not (got - base_fail - {"tower_H6", "tower_clash_H6"})
+    ok_all &= bool(seen)
+    print(f"{'EXPECTED FAIL' if seen else 'FAIL  variant'} пост H6 в отворі труб норії -> {'OK' if seen else sorted(got)}", flush=True)
     for rid, title, tamper in (("post_T13", "пост T13 за 6 м від приводу", far_post),
                                ("clash_T9", "трос T9 усередині кожуха", rope_in_casing)):
         got = {r for r, ok, _ in checks(build()) + placement(SITE, tamper) if not ok}

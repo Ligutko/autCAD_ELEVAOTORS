@@ -247,6 +247,52 @@ def build_pit(spec, hole, openings=(), deck_hole=None, cover_holes=()):
     return c.merge_parts(walls), c.merge_parts(deck + cover)
 
 
+ESTOP_CLEAR = 0.30        # EST: station footprint this far from holes, the drive, the head and the platform edge
+ESTOP_NEAR = (0.8, 2.0)   # judgment: station 0.8-2.0 m from the motor axis, in sight and reach of it
+
+
+def estop_place(spec):
+    """(x, y, z, facing angle) of the Ex E-stop station of the noria drive on the top platform, tower frame: the
+    nearest free spot 0.8-2.0 m from the motor that clears the leg and ladder holes, the drive, the head and the
+    platform edge by ESTOP_CLEAR; the station faces the motor."""
+    parts, _, _, _ = build_noria(spec)
+    fr = noria_frame(spec)
+    mv = fr(np.asarray(parts["motor"][0], float))
+    mc = (mv.min(0) + mv.max(0)) / 2
+    z = max(lv for lv in spec["levels_z"] if lv <= mv[:, 2].min())
+    hx, hy = spec["size"][0] / 2, spec["size"][1] / 2
+    rects = [_bbox(leg_footprints(spec), HOLE_MARGIN), access_rect(spec)]
+    for k in ("motor", "drive", "head", "head_cover"):
+        v = fr(np.asarray(parts[k][0], float))
+        rects.append((v[:, 0].min(), v[:, 1].min(), v[:, 0].max(), v[:, 1].max()))
+    best = None
+    for x in np.arange(-hx + ESTOP_CLEAR, hx - ESTOP_CLEAR + 1e-9, 0.05):
+        for y in np.arange(-hy + ESTOP_CLEAR, hy - ESTOP_CLEAR + 1e-9, 0.05):
+            d = math.hypot(x - mc[0], y - mc[1])
+            if not ESTOP_NEAR[0] <= d <= ESTOP_NEAR[1]:
+                continue
+            if any(r[0] - ESTOP_CLEAR < x < r[2] + ESTOP_CLEAR and r[1] - ESTOP_CLEAR < y < r[3] + ESTOP_CLEAR for r in rects):
+                continue
+            if best is None or d < best[0]:
+                best = (d, x, y)
+    if best is None:
+        raise ValueError(f"{spec['id']}: no free spot for the E-stop station on the +{z} platform")
+    _, x, y = best
+    ang = math.atan2(mc[1] - y, mc[0] - x) + math.pi / 2           # the station faces -Y by default
+    return float(x), float(y), float(z), ang
+
+
+def build_estop(spec):
+    """{group: mesh} of the E-stop station (kit/controls.py) at estop_place, tower frame."""
+    from . import controls as ctl
+    x, y, z, ang = estop_place(spec)
+    out = {}
+    for name, (v, f) in ctl.ex_estop_post(-1)["parts"].items():
+        key = "estop_red" if name == "mushroom" else ("estop_tag" if name == "plate" else "estop")
+        out.setdefault(key, []).append((c.transform(np.asarray(v, float), ang, (x, y, z)), f))
+    return {k: c.merge_parts(v) for k, v in out.items()}
+
+
 def build(spec, collection=None, materials=None, openings=(), distribution=None, cover_holes=()):
     top_z = spec["top_z"]
     pit_z = spec["pit_z"]
@@ -317,6 +363,9 @@ def build(spec, collection=None, materials=None, openings=(), distribution=None,
         look_d = {"splitters": (galv, False), "gates": (red, False), "gate_motors": (motor, "quads"), "spouts": (galv, False)}
         for key, data in dparts.items():
             add("dist_" + key, data, *look_d[key])
+    red_e = m.get("red") or c.mat_painted("ESTOP_RED", (0.7, 0.04, 0.03), 0.35, grime=0.0)
+    for key, data in build_estop(spec).items():
+        add(key, data, {"estop": galv, "estop_red": red_e, "estop_tag": yellow}[key], smooth="quads" if key == "estop_red" else False)
     label_objs = c.labels([(text, tuple(frame(p))) for text, p in labels], tag, collection)
     leg_hole, deck_hole = pit_holes(spec, anchors)
     pit_walls, pit_slabs = build_pit(spec, leg_hole, openings, deck_hole, cover_holes)

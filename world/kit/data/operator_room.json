@@ -1,0 +1,120 @@
+{
+  "unit": "mm",
+  "basis": ["sourced", "analog", "judgment"],
+  "note": "Лише числа з SITE.json, норм і каталогів, відкритих у T7a. v = null і src = NOT_FOUND — числа немає. ДСанПіН 3.3.2.007-98 скасований 08.04.2025; міліметри п. 4 лишаються в таблиці як текст документа. Картки inbox не чіпав.",
+  "room": {
+    "x_мм": {"v": [34000, 47500], "basis": "sourced", "src": "D:\\autocad project\\world\\site\\SITE.json designed.site_plan.apk.x", "note": "корпус АПК цілком"},
+    "y_мм": {"v": [67500, 76500], "basis": "sourced", "src": "SITE.json apk.y"},
+    "h_мм": {"v": 3200, "basis": "sourced", "src": "SITE.json apk.h"},
+    "операторська_в_плані_мм": {"v": [4500, 9000], "basis": "sourced", "src": "SITE.json apk.rooms: операторська ваг і SCADA 4.5 × 9", "note": "4.5 м уздовж X, 9.0 м уздовж Y; який торець корпусу — NOT_FOUND"},
+    "площа_м2": {"v": 40.5, "basis": "judgment", "src": "4.5 × 9.0 з apk.rooms"},
+    "об'єм_м3": {"v": 129.6, "basis": "judgment", "src": "40.5 × 3.2"},
+    "вісь_смуги_вїзду_y_мм": {"v": 63250, "basis": "sourced", "src": "SITE.json designed.site_plan.lanes id in"},
+    "південна_стіна_від_осі_смуги_мм": {"v": 4250, "basis": "judgment", "src": "67500 − 63250"},
+    "площа_аналога_м2": {"v": [35, 40], "basis": "analog", "src": "https://studfile.net/preview/19332742/page:6/ Артимович, диспетчерська елеватора"}
+  },
+  "console_dacobas": {
+    "висота_стільниці_мм": {"v": 750, "basis": "sourced", "src": "research/design/operator_room/sources/knuerr_dacobas_advanced_en.pdf с. 6", "note": "Worktop height is always 750 mm"},
+    "товщина_стільниці_мм": {"v": 30, "basis": "sourced", "src": "той самий PDF, с. 10 і 12"},
+    "знижена_полиця_мм": {"v": 19, "basis": "sourced", "src": "той самий PDF, с. 12", "note": "lowered monitor level"},
+    "глибина_тумби_мм": {"v": [1050, 1200], "basis": "sourced", "src": "той самий PDF, с. 3 і 11"},
+    "ширина_рами_мм": {"v": 1230, "basis": "sourced", "src": "той самий PDF, с. 11, basic frame W1230"},
+    "дві_рами_мм": {"v": 2490, "basis": "sourced", "src": "той самий PDF, с. 6: W1+W2+30mm (2490mm)"},
+    "стільниця_макс_мм": {"v": 3600, "basis": "sourced", "src": "той самий PDF, с. 8"},
+    "підйом_низ_дисплея_мм": {"v": 680, "basis": "sourced", "src": "research/design/operator_room/sources/knuerr_consoles_height_manual.pdf с. 13", "note": "заводський показ 68 см у нижній точці; фактична висота залежить від товщини стільниці"},
+    "пк_макс_ВШГ_мм": {"v": [485, 235, 465], "basis": "sourced", "src": "Dacobas PDF с. 22, CPU-Tray HWD", "note": "вантаж 15 кг"},
+    "для_цієї_кімнати": {"v": {"рам": 1, "глибина": 1050, "висота": 750}, "basis": "judgment", "src": "одна рама W1230 і тумба 1050 вміщуються в 4500 × 9000; 1200 мм глибше з'їдає коротку стіну"}
+  },
+  "console_winsted": {
+    "envision_габарит_ВШГ_мм": {
+      "v": {"h": 1019, "w": [1067, 1524, 2134], "d": 1108},
+      "basis": "sourced",
+      "src": "https://opendeye.com/images/stories/docs/EnVision%20Brochure.pdf",
+      "note": "40-1/8 × 42/60/84 × 43-5/8 дюйма. 1019 — висота виробу в таблиці, не висота стільниці"
+    },
+    "envision_моніторів_на_місце": {"v": 2, "basis": "sourced", "src": "та сама брошура: 6 кріплень на 3 місця"},
+    "impulse_висота_стільниці_мм": {"v": [762, 1168], "basis": "sourced", "src": "https://user-35215390377.cld.bz/Winsted-Catalog-2015-20161", "note": "30–46 дюймів, мм надруковані в каталозі"}
+  },
+  "console_technoconsole": {
+    "висота_регулювання_мм": {"v": [680, 1250], "basis": "sourced", "src": "https://technoconsole.ru/catalog/dispetcherskie-pulty/"},
+    "cmptn03_02_мм": {"v": [1240, 1100, 750], "basis": "sourced", "src": "https://technoconsole.ru/catalog/dispetcherskie-pulty-premium-m/", "note": "третя цифра з позначкою h; порядок двох перших сайт не підписує"},
+    "два_місця_мм": {"v": [4720, 1750, 750], "basis": "sourced", "src": "той самий каталог, комплекс 4720×1750×750/1210h", "note": "1210 — друга висота в підписі. 4720 вміщується на стіну 9000 і не вміщується на стіну 4500"},
+    "ніша_ніг_мм": {"v": 600, "basis": "sourced", "src": "https://www.krug2000.ru/publications/2550.html", "note": "ширина і глибина не менше 600"},
+    "дистанція_екрана_мм": {"v": [500, 750], "basis": "sourced", "src": "https://www.krug2000.ru/publications/2550.html"}
+  },
+  "console_evans": {
+    "висота_мм": {"v": null, "basis": null, "src": "NOT_FOUND", "note": "Response: sit/stand, 2–4 місця, колона 1200–2500 Н. https://www.evansonline.com/response-sit-stand-consoles-for-your-control-room"},
+    "глибина_мм": {"v": null, "basis": null, "src": "NOT_FOUND"}
+  },
+  "стіл_вдт_дсанпін": {
+    "висота_мм": {"v": [680, 800], "basis": "sourced", "src": "ДСанПіН 3.3.2.007-98 п. 4.6 https://dnaop.com/html/31667_2.html", "note": "документ скасований 08.04.2025, розпорядження 317-р"},
+    "ширина_мм": {"v": [600, 1400], "basis": "sourced", "src": "п. 4.6, рекомендований діапазон"},
+    "глибина_мм": {"v": [800, 1000], "basis": "sourced", "src": "п. 4.6"},
+    "ноги_В_мм": {"v": 600, "basis": "sourced", "src": "п. 4.7, не менше"},
+    "ноги_Ш_мм": {"v": 500, "basis": "sourced", "src": "п. 4.7, не менше"},
+    "ноги_глибина_коліна_мм": {"v": 450, "basis": "sourced", "src": "п. 4.7, не менше"},
+    "ноги_глибина_ступня_мм": {"v": 650, "basis": "sourced", "src": "п. 4.7, не менше"},
+    "стіл_вагаря_мм": {"v": {"w": 1400, "d": 800, "h": 750}, "basis": "judgment", "src": "кінці діапазону п. 4.6; h = 750 з Dacobas, усередині 680–800"}
+  },
+  "chair": {
+    "сидіння_висота_дсанпін_мм": {"v": [400, 500], "basis": "sourced", "src": "ДСанПіН п. 4.9"},
+    "сидіння_ШГ_мін_мм": {"v": 400, "basis": "sourced", "src": "п. 4.9, ширина і глибина не менше"},
+    "rh_secure24_висота_мм": {"v": [400, 520], "basis": "sourced", "src": "https://www.posturite.co.uk/media/pdf-downloads/furniture-projects/24-hour-seating-brochure.pdf", "note": "нижчий із трьох газліфтів; інші 440–590 і 490–640"},
+    "rh_secure24_сидіння_Ш_мм": {"v": 410, "basis": "sourced", "src": "та сама брошура"},
+    "rh_secure24_сидіння_Г_мм": {"v": [435, 575], "basis": "sourced", "src": "та сама брошура"},
+    "rh_secure24_спинка_ШВ_мм": {"v": [481, 829], "basis": "sourced", "src": "та сама брошура"},
+    "підставка_ніг_ШГ_мм": {"v": [300, 400], "basis": "sourced", "src": "ДСанПіН п. 4.13, не менше; хід висоти до 150, бортик 10"}
+  },
+  "monitor_desk": {
+    "модель": {"v": "Dell P2422H", "basis": "analog", "src": "research/design/operator_room/sources/dell_p2422h_datasheet.pdf", "note": "аркуш v1 04/2021; на елеваторі цю модель бачив лише на кадрі сушарки"},
+    "діагональ_мм": {"v": 604.7, "basis": "sourced", "src": "аркуш Dell, Diagonal Viewing Size 604.70 mm"},
+    "активне_ШВ_мм": {"v": [527.04, 296.46], "basis": "sourced", "src": "аркуш Dell"},
+    "зі_стійкою_ШВГ_мм": {"v": [537.8, 496.11, 179.57], "basis": "sourced", "src": "аркуш Dell"},
+    "хід_стійки_мм": {"v": 150, "basis": "sourced", "src": "аркуш Dell"},
+    "vesa_мм": {"v": [100, 100], "basis": "sourced", "src": "аркуш Dell"},
+    "кількість_на_місце_scada": {"v": 2, "basis": "analog", "src": "Winsted EnVision, 6 кріплень на 3 місця"},
+    "дистанція_очей_мм": {"v": 700, "basis": "sourced", "src": "ISO 11064-4:2013, перегляд https://standards.iteh.ai/catalog/standards/sist/bd05c277-9ddd-4803-8597-d303de48924b/sist-en-iso-11064-4-2014 ; ДСанПіН п. 4.14 дає 600–700"}
+  },
+  "video_wall_55": {
+    "панель": {"v": "LG 55VH7E", "basis": "analog", "src": "research/design/operator_room/sources/lg_55vh7e_spec.pdf", "note": "на відкритих фото елеваторів цієї сесії відеостіни 2×2 немає"},
+    "ШВГ_мм": {"v": [1211.4, 682.2, 86.5], "basis": "sourced", "src": "специфікація LG 55VH7E"},
+    "рамка_мм": {"v": 0.9, "basis": "sourced", "src": "та сама специфікація; стик 1.8 мм"},
+    "vesa_мм": {"v": [600, 400], "basis": "sourced", "src": "та сама специфікація"},
+    "маса_кг": {"v": 18.6, "basis": "sourced", "src": "та сама специфікація"},
+    "два_на_два_ШВ_мм": {"v": [2422.8, 1364.4], "basis": "judgment", "src": "2 × 1211.4 і 2 × 682.2; рамка вже в габариті панелі"},
+    "низ_від_підлоги_мм": {"v": null, "basis": null, "src": "NOT_FOUND"},
+    "мін_дистанція_цілої_стіни_мм": {"v": 1211, "basis": "judgment", "src": "половина більшого боку 2422.8 за витягом ISO 11064-3 у https://www.osti.gov/servlets/purl/1644018/"}
+  },
+  "ergonomics": {
+    "лінія_погляду_нижче_горизонту_град": {"v": 15, "basis": "sourced", "src": "ISO 11064-4:2004 https://standards.iteh.ai/catalog/standards/sist/051d7ec4-6bbe-40d6-8c05-3b401c5dbfaf/sist-en-iso-11064-4-2004"},
+    "основна_зона_вертикаль_град": {"v": 40, "basis": "sourced", "src": "той самий перегляд ISO 11064-4:2004; вище і нижче лінії погляду"},
+    "основна_зона_горизонталь_град": {"v": 35, "basis": "sourced", "src": "той самий перегляд; ліворуч і праворуч"},
+    "дистанція_мін_мм": {"v": 500, "basis": "sourced", "src": "ISO 11064-4, більше 500 мм"},
+    "дистанція_рекомендована_мм": {"v": 700, "basis": "sourced", "src": "ISO 11064-4, 700 мм і більше"},
+    "між_бічними_гранями_мм": {"v": 1200, "basis": "sourced", "src": "ДСанПіН п. 4.4"},
+    "тил_до_екрана_мм": {"v": 2500, "basis": "sourced", "src": "ДСанПіН п. 4.4"},
+    "клавіатура_від_краю_мм": {"v": [100, 300], "basis": "sourced", "src": "ДСанПіН п. 4.16"},
+    "освітленість_документів_лк": {"v": [300, 500], "basis": "sourced", "src": "ДСанПіН п. 3.2.3"},
+    "освітленість_екрана_макс_лк": {"v": 300, "basis": "sourced", "src": "ДСанПіН п. 3.2.3"},
+    "стіл_оператора_дбн_лк": {"v": 300, "basis": "sourced", "src": "ДБН В.2.5-28:2018 табл. Д.2 п. 27а, рядок стіл оператора, https://nvfi.biz/=1/norms/00-DBN/2018%20ДБН%20В.2.5-28%20Природне%20і%20штучне%20освітлення.pdf", "note": "число стоїть після двох прочерків; шапка колонки у витягу не відтворена"},
+    "пульт_1_5м_лк": {"v": 150, "basis": "sourced", "src": "той самий рядок, площина Г, В – 1,5"},
+    "зад_щита_лк": {"v": 50, "basis": "sourced", "src": "той самий рядок, задня сторона щита"}
+  },
+  "rittal_ts8": {
+    "ШВГ_мм": {"v": [800, 2000, 600], "basis": "analog", "src": "https://www.audin.fr/pdf/documentations/rittal/_catalogue33/01_coffrets_et_armoires_electriques/hb33_23-263.pdf", "note": "у цю операторську не ставиться: MCC біля веж, research/design/power_control.md"},
+    "монтажна_панель_ШВ_мм": {"v": [699, 1896], "basis": "analog", "src": "той самий каталог, для 800 × 2000"}
+  },
+  "not_found": [
+    "торець корпусу, де саме смуга 4.5 м",
+    "розмір вікна і висота підвіконня",
+    "низ відеостіни або лампового щита від підлоги",
+    "габарит лампового щита",
+    "каталогові мм Evans Response",
+    "зовнішня висота Dell P2422H без стійки",
+    "габарит принтера талонів",
+    "габарит шафи документів",
+    "типорозмір кондиціонера",
+    "градуси мікроклімату з таблиці ГОСТ 12.1.005-88",
+    "місце серверної стійки в цій кімнаті"
+  ]
+}

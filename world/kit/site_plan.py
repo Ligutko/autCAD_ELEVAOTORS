@@ -268,7 +268,11 @@ def build_buildings(site=None):
         walls.append(c.box((x[0], y[0], g), (x[1], y[1], g + h)))
         roofs.append(c.box((x[0] - 0.2, y[0] - 0.2, g + h), (x[1] + 0.2, y[1] + 0.2, g + h + 0.15)))
 
-    block(sp["apk"]["x"], sp["apk"]["y"], sp["apk"]["h"])
+    from . import operator_room as opr
+    rx0 = opr.layout(site)["room"][0]
+    block((sp["apk"]["x"][0], rx0), sp["apk"]["y"], sp["apk"]["h"])      # lab part stays a closed block
+    roofs.append(c.box((rx0, sp["apk"]["y"][0] - 0.2, g + sp["apk"]["h"]), (sp["apk"]["x"][1] + 0.2, sp["apk"]["y"][1] + 0.2,
+                                                                         g + sp["apk"]["h"] + 0.15)))
     k = sp["gate"]["kpp"]
     block(k["x"], k["y"], k["h"])
     t = sp["ktp"]
@@ -291,9 +295,11 @@ def build_buildings(site=None):
     zb = sp["sampler_boom_z"] + g
     sam = [st.rod((px, py, g), (px, py, zb + 0.4), 0.2, 20), st.member((px, py, zb), (qx, qy, zb), st.SHS_150),
            st.rod((qx, qy, zb), (qx, qy, zb - 1.6), 0.06, 12)]
-    return {"buildings": ("concrete", False, c.merge_parts(walls)), "building_roofs": ("galv_old", False, c.merge_parts(roofs)),
+    out = {"buildings": ("concrete", False, c.merge_parts(walls)), "building_roofs": ("galv_old", False, c.merge_parts(roofs)),
             "building_doors": ("dark", False, c.merge_parts(doors)), "barriers": ("red", False, c.merge_parts(barr)),
             "sampler": ("yellow", False, c.merge_parts(sam))}
+    out.update(opr.build(site))
+    return out
 
 
 def build_services(site=None):

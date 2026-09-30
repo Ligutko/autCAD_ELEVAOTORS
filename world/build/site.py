@@ -42,6 +42,9 @@ def materials():
         "concrete": c.mat_concrete("SITE_CONCRETE"),
         "red": c.mat_painted("SITE_GATE_RED", (0.55, 0.06, 0.04), 0.45, grime=0.3),
         "green": c.mat_painted("SITE_SIGNAL_GREEN", (0.05, 0.55, 0.1), 0.35, grime=0.0),
+        "white": c.mat_painted("SITE_WALL_WHITE", (0.82, 0.82, 0.80), 0.6, grime=0.05),
+        "screen": c.mat_painted("SITE_SCREEN", (0.02, 0.03, 0.05), 0.08, grime=0.0),
+        "lamp": c.mat_painted("SITE_LAMP", (0.95, 0.95, 0.92), 0.3, grime=0.0),
         "road": c.mat_concrete_yard("SITE_ROAD", tint=(0.36, 0.35, 0.33)),   # concrete B25 drives (rec_6360894e), tyre-worn
     }
 
