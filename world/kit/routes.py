@@ -33,7 +33,7 @@ from . import noria_tower as ntw
 from . import process as pr
 from . import receiving as rc
 
-TRUCK_Z = 2.3              # judgment: flow line on a truck at trailer mid-height (body 0.98-3.53, figures.py)
+TRUCK_Z = 2.3              # judgment: flow line on a truck at trailer mid-height (body 1.25-3.49, kit/trucks.py)
 TRUCK_STOP = {"PIT": None, "TRUCK_OUT": None}     # stops are taken from SITE (pit outlet, Ш1 outlet)
 SILO_FLOOR_OVER_BASE = 0.30  # judgment: grain line drawn 0.3 m over the silo floor
 

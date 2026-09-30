@@ -1,6 +1,8 @@
-"""Phase W1e. Figures for scale (decision 2026-09-24: people only for scale): grain road trains (a 4x2 tractor with a
-tipping grain semitrailer) inside the legal envelope of Directive 96/53/EC (16.50 x 2.55 x 4.00 m, rec_e52d1398), wheels
-of the МАЗ-5440 tyre 315/80R22.5 (d 1.076 m, izh-maz.ru manual), shapes by judgment; workers 1.75 m in hi-vis vests.
+"""Phase W1e. Figures for scale (decision 2026-09-24): grain road trains and workers.
+
+Trucks (2026-09-30): the DAF XF FT 4x2 + Schmitz S.KI 24 SG 9.6 AK rig of kit/trucks.py, built to the makers'
+sheets (research/design/trucks/truck_anatomy.md); each truck on the list gets its own paint variant and load.
+Workers: the Rocketbox avatars of kit/people.py replace the box workers below when the assets are present.
 
 Site frame. Data: SITE.json `designed.environment.scale`: trucks by lane and x (heading along the lane's run),
 people by position.
@@ -12,11 +14,15 @@ import numpy as np
 
 from . import common as c
 from . import site_plan as spl
+from . import trucks as tr
 
-LENGTH, WIDTH, HEIGHT = 16.5, 2.55, 4.0          # 96/53/EC Annex I 1.1-1.3 (articulated vehicle)
-WHEEL_D = 0.0254 * 22.5 + 2 * 0.80 * 0.315       # 315/80R22.5: 1.076 m
-TRACTOR_L, CAB_H = 6.0, 3.85                     # judgment: 4x2 tractor under the 4.0 m limit
-TRAILER_L, BODY_H = 13.4, 3.6                    # judgment: grain tipper, top of the sides
+LIMIT_LENGTH, LIMIT_WIDTH, LIMIT_HEIGHT = 16.5, 2.55, 4.0    # 96/53/EC Annex I 1.1-1.3 (articulated vehicle)
+_RIG = tr.rig(0.0)["dims"]
+LENGTH, HEIGHT = _RIG["length"], _RIG["height"]             # the real rig: 14.18 x 3.98 m
+WIDTH = 2 * _RIG["half_width_no_mirrors"]
+FRONT_X = _RIG["front_x"]                                   # rig frame: the kingpin at 0, the bumper at +4.57
+BODY_MID_BACK = FRONT_X - (tr.BODY_REAR_X + tr.BODY_FRONT_TOP) / 2    # bumper -> middle of the body, along the run
+LOAD = {"in": 0.9, "out": 0.6}                              # judgment: loaded in, half-loaded while filling under Ш1
 PERSON_H = 1.75                                  # judgment: adult worker
 
 
@@ -52,53 +58,26 @@ def truck_box(site, t):
     return (xs[0], y - WIDTH / 2, xs[1], y + WIDTH / 2, z, z + HEIGHT)
 
 
-def build_truck(site, t):
+def build_truck(site, t, tip_deg=0.0, variant=0):
+    """{rig part: mesh} of one truck in the site frame: the rig's bumper at t['x_front'], facing the lane's run."""
     x, y, sgn, z = truck_pose(site, t)
-    parts = {"cab": [], "glass": [], "trailer": [], "tarp": [], "wheels": [], "chassis": []}
-    L = lambda a, b: sorted((x - sgn * a, x - sgn * b))
-    hw = WIDTH / 2
-    r = WHEEL_D / 2
-    # tractor: cab over the front axle with a raked windscreen and a roof fairing, bumper, chassis
-    X = lambda a: x - sgn * a                                    # distance back from the front bumper
-    zs = [z + 1.1, z + 2.35, z + 3.35, z + CAB_H]
-    prof = [(0.05, zs[0]), (0.0, zs[1]), (0.25, zs[2]), (0.55, zs[2] + 0.05), (1.3, zs[3]), (2.3, zs[3]), (2.3, zs[0])]
-    n = len(prof)
-    v = np.array([(X(a), y + s * hw, zz) for s in (-1, 1) for a, zz in prof])
-    f = [tuple(range(n)), tuple(range(2 * n - 1, n - 1, -1))] + [(i, (i + 1) % n, n + (i + 1) % n, n + i) for i in range(n)]
-    parts["cab"].append((v, [np.array([q]) for q in f]))
-    wv = np.array([(X(0.02), y + s * (hw - 0.12), zz) for s, zz in ((-1, zs[1] + 0.1), (1, zs[1] + 0.1), (1, zs[2] - 0.08), (-1, zs[2] - 0.08))])
-    wv[2:, 0] = X(0.23)
-    parts["glass"].append((wv, np.array([(0, 1, 2, 3)])))        # windscreen on the raked face
-    for s in (-1, 1):                                            # side windows
-        xa, xb = L(0.35, 1.2)
-        parts["glass"].append(c.box((xa, y + s * hw - 0.01, zs[1] + 0.15), (xb, y + s * hw + 0.01, zs[2] - 0.1)))
-    xa, xb = L(-0.1, 0.2)
-    parts["chassis"].append(c.box((xa, y - hw + 0.05, z + 0.45), (xb, y + hw - 0.05, z + 1.05)))   # bumper
-    xa, xb = L(0.0, TRACTOR_L)
-    parts["chassis"].append(c.box((xa, y - 0.5, z + 0.8), (xb, y + 0.5, z + 1.2)))
-    # trailer: kingpin over the tractor's rear axle, tipping body with ribs
-    t0 = TRACTOR_L - 1.6
-    xa, xb = L(t0, t0 + TRAILER_L)
-    parts["chassis"].append(c.box((xa, y - 1.0, z + 1.1), (xb, y + 1.0, z + 1.4)))
-    parts["trailer"].append(c.box((xa, y - hw, z + 1.4), (xb, y + hw, z + BODY_H)))
-    for k in range(9):
-        xr = t0 + 0.4 + k * (TRAILER_L - 0.8) / 8
-        xa2, xb2 = L(xr, xr + 0.08)
-        for s in (-1, 1):
-            parts["chassis"].append(c.box((xa2, y + s * hw - (0.03 if s > 0 else 0), z + 1.4), (xb2, y + s * hw + (0.03 if s < 0 else 0), z + BODY_H)))
-    xa, xb = L(t0 + 0.1, t0 + TRAILER_L - 0.1)
-    parts["tarp"].append(c.box((xa, y - hw + 0.05, z + BODY_H), (xb, y + hw - 0.05, z + BODY_H + 0.05)))
-    # wheels: tractor front + drive, trailer triple axle
-    axles = [1.4, TRACTOR_L - 1.9] + [t0 + TRAILER_L - k for k in (1.3, 2.61, 3.92)]
-    for ax in axles:
-        xc = x - sgn * ax
-        for s in (-1, 1):
-            yc = y + s * (hw - 0.3)
-            v, f = c.cylinder(r, -0.15, 0.15, steps=20)
-            v = v[:, [0, 2, 1]]                                     # axis along y
-            v = v + np.array([xc, yc, z + r])
-            parts["wheels"].append((v, f))
-    return {k: c.merge_parts(v) for k, v in parts.items() if v}
+    r = tr.rig(tip_deg, load=t.get("load", LOAD.get(t["lane"], 0.0)), variant=variant)
+    out = {}
+    for k, (v, f) in r["parts"].items():
+        v = np.asarray(v, float)
+        w = np.column_stack([x + sgn * (v[:, 0] - FRONT_X), y + sgn * v[:, 1], z + v[:, 2]])
+        out[k] = (w, f)                                          # a half turn (sgn -1) keeps the handedness
+    return out
+
+
+def part_material(part, variant):
+    """Site material key of a rig part (the cab paint by variant)."""
+    if part == "tractor_cab":
+        return "truck_cab_" + tr.CAB_COLOURS[variant % len(tr.CAB_COLOURS)]
+    return "truck_" + part.split("_", 1)[1]
+
+
+SMOOTH = {"tractor_tyres", "trailer_tyres", "tractor_rims", "trailer_rims", "tractor_tank", "trailer_cylinder", "trailer_tarp"}
 
 
 def build_person(p):
@@ -117,12 +96,41 @@ def build(site=None):
     site = site or _site()
     sc = spec(site)
     parts = {}
-    for t in sc["trucks"]:
-        for k, v in build_truck(site, t).items():
-            parts.setdefault(f"truck_{k}", []).append(v)
+    for i, t in enumerate(sc["trucks"]):
+        for k, v in build_truck(site, t, variant=i).items():
+            parts.setdefault((part_material(k, i), k in SMOOTH), []).append(v)
     for p in sc["people"]:
         for k, v in build_person(p).items():
             parts.setdefault(f"person_{k}", []).append(v)
-    mat = {"truck_cab": "truck_cab", "truck_glass": "dark", "truck_trailer": "galv_old", "truck_tarp": "tarp", "truck_wheels": "rubber",
-           "truck_chassis": "dark", "person_legs": "dark", "person_vest": "hivis", "person_skin": "skin", "person_helmet": "hivis"}
-    return {k: (mat[k], False, c.merge_parts(v)) for k, v in parts.items()}
+    mat = {"person_legs": "dark", "person_vest": "hivis", "person_skin": "skin", "person_helmet": "hivis"}
+    out = {}
+    for key, v in parts.items():
+        if isinstance(key, tuple):
+            m, smooth = key
+            out[m] = (m, "quads" if smooth else False, c.merge_parts(v))
+        else:
+            out[key] = (mat[key], False, c.merge_parts(v))
+    return out
+
+
+def truck_materials(c_):
+    """Materials for the rig parts (site.py adds them to its material dict)."""
+    m = {f"truck_cab_{name}": c_.mat_painted(f"SITE_TRUCK_CAB_{name.upper()}", col, 0.3, grime=0.15)
+         for name, col in zip(tr.CAB_COLOURS, ((0.82, 0.83, 0.84), (0.55, 0.03, 0.02), (0.04, 0.12, 0.35)))}
+    m.update({"truck_glass": c_.mat_painted("SITE_TRUCK_GLASS", (0.02, 0.03, 0.04), 0.05, grime=0.0),
+              "truck_grille": c_.mat_painted("SITE_TRUCK_GRILLE", (0.03, 0.03, 0.03), 0.4, grime=0.05),
+              "truck_trim": c_.mat_painted("SITE_TRUCK_TRIM", (0.08, 0.08, 0.09), 0.5, grime=0.2),
+              "truck_lamps": c_.mat_painted("SITE_TRUCK_LAMPS", (0.9, 0.9, 0.85), 0.1, grime=0.0),
+              "truck_chassis": c_.mat_painted("SITE_TRUCK_CHASSIS", (0.04, 0.04, 0.04), 0.5, grime=0.4),
+              "truck_tank": c_.mat_galvanized("SITE_TRUCK_ALU", age=0.2),
+              "truck_tyres": c_.mat_rubber("SITE_TRUCK_TYRES"),
+              "truck_rims": c_.mat_painted("SITE_TRUCK_RIMS", (0.62, 0.63, 0.65), 0.35, grime=0.3),
+              "truck_fifth_wheel": c_.mat_painted("SITE_TRUCK_FW", (0.05, 0.05, 0.05), 0.6, grime=0.4),
+              "truck_body": c_.mat_galvanized("SITE_TRUCK_BODY", age=0.35),
+              "truck_body_trim": c_.mat_galvanized("SITE_TRUCK_BODY_TRIM", age=0.55),
+              "truck_door": c_.mat_galvanized("SITE_TRUCK_DOOR", age=0.45),
+              "truck_tarp": c_.mat_painted("SITE_TRUCK_TARP", (0.10, 0.12, 0.12), 0.8, grime=0.3),
+              "truck_grain": c_.mat_painted("SITE_TRUCK_GRAIN", (0.62, 0.46, 0.22), 0.85, grime=0.1),
+              "truck_cylinder": c_.mat_painted("SITE_TRUCK_CYL", (0.80, 0.80, 0.82), 0.15, grime=0.05),
+              "truck_frame": c_.mat_painted("SITE_TRUCK_FRAME", (0.12, 0.12, 0.13), 0.5, grime=0.35)})
+    return m

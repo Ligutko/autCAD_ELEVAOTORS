@@ -135,18 +135,17 @@ def add_props(scene, props):
     made = []
     for p in props:
         if p["kind"] == "truck":
-            src = {k: scene.objects[f"FIG_TRUCK_{k.upper()}"].data.materials[0] for k in ("cab", "glass", "trailer", "tarp", "wheels", "chassis")}
             t = {"lane": p["lane"], "x_front": p.get("x_front", 0.0)}
             dz = 0.0
-            if p.get("over") == "pit":                         # trailer centre over the pit outlet, on the +0.100 drive
+            if p.get("over") == "pit":                         # the body centre over the pit outlet, on the +0.100 drive
                 pit = site["receiving"]["pit"]
-                t0 = fg.TRACTOR_L - 1.6
                 _, _, sgn, z = fg.truck_pose(site, t)
-                t["x_front"] = pit["outlets"][0][0] + sgn * (t0 + fg.TRAILER_L / 2)
+                t["x_front"] = pit["outlets"][0][0] + sgn * fg.BODY_MID_BACK
                 dz = pit["deck_z"] - fg.truck_pose(site, t)[3]
             for k, (v, f) in fg.build_truck(site, t).items():
+                mat = scene.objects[f"FIG_{fg.part_material(k, 0).upper()}"].data.materials[0]
                 v = np.asarray(v, float) + (0.0, 0.0, dz)
-                made.append(c.mesh_from_arrays(f"PROP_TRUCK_{k.upper()}", v, f, src[k]))
+                made.append(c.mesh_from_arrays(f"PROP_TRUCK_{k.upper()}", v, f, mat, smooth="quads" if k in fg.SMOOTH else False))
         elif p["kind"] == "tunnel_lights":
             from kit import tunnel as tun
             for t in site["tunnels"]:
