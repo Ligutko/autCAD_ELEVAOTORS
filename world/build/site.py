@@ -41,6 +41,7 @@ def materials():
         "motor": c.mat_painted("SITE_MOTOR_BLUE", (0.05, 0.16, 0.35), 0.35),
         "concrete": c.mat_concrete("SITE_CONCRETE"),
         "red": c.mat_painted("SITE_GATE_RED", (0.55, 0.06, 0.04), 0.45, grime=0.3),
+        "green": c.mat_painted("SITE_SIGNAL_GREEN", (0.05, 0.55, 0.1), 0.35, grime=0.0),
         "road": c.mat_concrete_yard("SITE_ROAD", tint=(0.36, 0.35, 0.33)),   # concrete B25 drives (rec_6360894e), tyre-worn
     }
 

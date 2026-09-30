@@ -295,7 +295,8 @@ def edge_legs(site, e, p_prev):
     if k == "t1_pit":
         p = site["receiving"]["pit"]
         ox, oy = p["outlets"][0]                         # gate 6.24 = the first outlet (judgment)
-        return [Leg(name, "fall", np.array([(ox, oy, p["deck_z"]), (ox, oy, p["floor_z"] + 1.0)]), basis,
+        from . import receiving as recv
+        return [Leg(name, "fall", np.array([(ox, oy, p["deck_z"]), (ox, oy, recv.outlet_z(p, oy, site["receiving"]))]), basis,
                     {"judgment": "gate 6.24 on the first pit outlet"})]
     if k == "t1_boot":
         tail, head, _, hh = conveyor_axis(site, "T1")

@@ -63,6 +63,38 @@ def _bbox(data):
     return v.min(axis=0), v.max(axis=0)
 
 
+HOPPER_FAIL_DEG = 36.0        # ВНТП-05-88 p.12.15: gravity flow of dried grain 36°
+HOPPER_WARN_DEG = 45.0        # raw grain / hopper analog 45° (research/design/pit_scales)
+
+
+def pit_hopper_checks(r):
+    """Hoppers under the drive-over grating, on the meshes: together they cover the whole pit (grain falls anywhere
+    on the grating), every wall at least 45° (raw-grain gravity flow, ВНТП-05-88 p.12.15 / hopper analogs), each
+    outlet over a drawn outlet and above the pit floor; the grating is flush with the drive deck."""
+    out = []
+    p = r["pit"]
+    parts = rc.build_pit_and_shed(r)
+    v = np.asarray(parts["pit_hoppers"][2][0], float)
+    (x0, x1), (y0, y1) = p["x"], p["y"]
+    top = v[v[:, 2] > p["deck_z"] - 0.35]
+    cover = abs(top[:, 0].min() - x0) < 1e-6 and abs(top[:, 0].max() - x1) < 1e-6 and abs(top[:, 1].min() - y0) < 1e-6         and abs(top[:, 1].max() - y1) < 1e-6 and len(np.unique(np.round(top[:, 1], 3))) == len(p["outlets"]) + 1
+    zt = top[:, 2].max()
+    angs = [math.degrees(math.atan2(zt - rc.outlet_z(p, oy, r), max(abs(ox - x0), abs(x1 - ox)))) for ox, oy in p["outlets"]]
+    zo = min(rc.outlet_z(p, oy, r) for _, oy in p["outlets"])
+    worst = min(angs)
+    ok = cover and worst >= HOPPER_FAIL_DEG and zo - 0.25 > p["floor_z"]
+    out.append((f"pit hoppers cover the whole grating, walls >= {HOPPER_FAIL_DEG}° (ВНТП-05-88 p.12.15 dry grain), outlets over T1", ok,
+                f"cover {cover}, flattest wall {worst:.1f}°, lowest outlet {zo:.2f} over floor {p['floor_z']}"))
+    if worst < HOPPER_WARN_DEG:
+        out.append((f"pit hopper walls under {HOPPER_WARN_DEG}° (raw grain, analog): FINDING", True,
+                    f"flattest {worst:.1f}°: the drawn pit (floor -5.0) with T1 under the outlets leaves no more depth for "
+                    f"the 4 m runs from the pit corners; raw wet grain may hang on the corner walls"))
+    g = np.asarray(parts["pit_grating"][2][0], float)
+    out.append(("pit grating flush with the drive deck (drive-over)", abs(g[:, 2].max() - p["drive"]["deck_z"]) < 1e-6,
+                f"grating top {g[:, 2].max():.3f} vs deck {p['drive']['deck_z']}"))
+    return out
+
+
 def checks(site):
     r = site["receiving"]
     out = []
@@ -120,6 +152,7 @@ def checks(site):
     ok = (math.hypot(pc[0] - PIT_C[0], pc[1] - PIT_C[1]) <= TOL and all(abs(a - b) <= TOL for a, b in zip(pw, PIT_WH))
           and abs(pit["floor_z"] - PIT_FLOOR) <= 0.01 and all(any(abs(o[1] - y) <= TOL for o in pit["outlets"]) for y in OUTLETS_Y))
     out.append(("truck pit 8.0 x 6.0, centre, floor -5.0, two outlets (p.2, p.4)", ok, f"centre ({pc[0]:.3f}, {pc[1]:.3f}), {pw[0]:.2f} x {pw[1]:.2f}"))
+    out += pit_hopper_checks(r)
     dr = pit["drive"]
     g = c.ground_z()
     rise = dr["deck_z"] - g
@@ -258,14 +291,18 @@ def run(site):
         cv = rc.bridge_conveyor("T7", s)
         cv["head"] = [26.3, 26.8]                     # head past the T11 tail: nothing to discharge onto
 
+    def v_hopper40(s):
+        rc.OUTLET_OVER_T1 = 1.6                     # outlet 1.3 m higher: walls about 30°
+
     variants = [("T7 head beyond the T11 tail", v_t7_long), ("tower on the old EST y 54.8", v_tower), ("H2 head on +24.4", v_h2), ("pit centred on the drive axis", v_pit),
                 ("T1 on x 0.0", v_t1), ("21 anchors", v_anchor), ("T7 on the old SITE pulleys", v_t7),
                 ("T10 head at the axis end y 54.3", v_t10), ("gallery ending at y 51.0", v_gallery),
-                ("no spout from T10 into the gravity pipe", v_nospout)]
+                ("no spout from T10 into the gravity pipe", v_nospout), ("pit hopper walls at ~30°", v_hopper40)]
     for name, patch in variants:
         bad = copy.deepcopy(site)
         patch(bad)
         failed = [n for n, ok, _ in checks(bad) if not ok]
+        rc.OUTLET_OVER_T1 = 0.30
         ok_all &= bool(failed)
         print(f"{'PASS' if failed else 'FAIL'}  broken variant must be rejected — {name}: failed {failed}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)

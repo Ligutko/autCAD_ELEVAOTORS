@@ -97,6 +97,8 @@ def checks(site):
     if short:
         out.append(("straight approach to a scales under 50 m (KMZ): WARN", True, f"{short}"))
 
+    out += scales_checks(site)
+
     (px, py), _ = spl.sampler_geometry(sp)
     y_in = lanes["in"]["pts"][0][1]
     near, far = abs(py - y_in) - TRUCK_W / 2, abs(py - y_in) + TRUCK_W / 2
@@ -327,6 +329,41 @@ def main():
     run(json.loads((ROOT / "site" / "SITE.json").read_text(encoding="utf-8")))
 
 
+SCALE_SHEET = {"len": 24.0, "w": 3.0, "modules": 4, "module_h": 0.25}        # Тензо-М ВА-80-24-4 (brochure pdf_28 p.15)
+DECK_H = (0.25, 0.35)          # deck over the road: ВА 250 mm, Техноваги 300-350 mm
+RAMP_MIN = 3.5                 # Техноваги: 3.5-4 m ramp at 300-350 mm
+
+
+def scales_checks(site):
+    """Scales measured on the kit meshes against the ВА-80-24-4 sheet, the Техноваги heights and ramps, and where
+    the driver sees the display (left of travel, past the exit end, facing the cab)."""
+    out = []
+    sp = site["designed"]["site_plan"]
+    parts = spl.build_roads(site)
+    dv = np.asarray(parts["scale_decks"][2][0], float)
+    g = c.ground_z() + sp["road_z_over_ground"]
+    for key in ("scales_in", "scales_out"):
+        x0, y0, x1, y1 = spl.scales_box(sp, key)
+        mine = dv[(dv[:, 0] >= x0 - 1e-6) & (dv[:, 0] <= x1 + 1e-6) & (dv[:, 1] >= y0 - 1e-6) & (dv[:, 1] <= y1 + 1e-6)]
+        xs = np.unique(np.round(mine[:, 0], 3))
+        modules = (len(xs) - 2) // 2 + 1                               # 2 x-planes per joint, plus the two ends
+        L, W, H = mine[:, 0].ptp(), mine[:, 1].ptp(), mine[:, 2].max() - g
+        ok = abs(L - SCALE_SHEET["len"]) < 1e-3 and abs(W - SCALE_SHEET["w"]) < 1e-3 and modules == SCALE_SHEET["modules"]             and DECK_H[0] - 1e-6 <= H <= DECK_H[1] + 1e-6 and sp[key]["ramp"] >= RAMP_MIN
+        out.append((f"{key}: 24 x 3 m of four 6 m modules (ВА-80-24-4), deck 0.25-0.35 m, ramp >= 3.5 m (Техноваги)", ok,
+                    f"{L:.2f} x {W:.2f} m, {modules} modules, deck {H:.2f} m, ramp {sp[key]['ramp']}"))
+        ld = spl.lane(sp, sp[key]["lane"])["pts"]
+        tx = np.sign(ld[1][0] - ld[0][0])
+        rv = np.asarray(parts["scale_red"][2][0], float)
+        near = rv[np.abs(rv[:, 1] - (y0 + y1) / 2) < 3.0]
+        exit_x = x1 if tx > 0 else x0
+        digits = near[(np.sign(near[:, 0] - exit_x) == tx) & (near[:, 2] > 2.0)]
+        left = (digits[:, 1].mean() - (y0 + y1) / 2) * (1 if tx > 0 else -1) > 0 if len(digits) else False
+        faces_cab = len(digits) and (digits[:, 0].mean() - exit_x) * tx > 0
+        out.append((f"{key}: display past the exit end, left of travel (the driver's side), facing the cab", bool(left and faces_cab),
+                    f"{len(digits)} digit vertices, left {left}"))
+    return out
+
+
 def run(site):
     ok_all = True
     for name, ok, info in checks(site):
@@ -369,12 +406,18 @@ def run(site):
     ok_all &= hit
     print(f"{'PASS' if hit else 'FAIL'}  broken variant must be rejected — roads without the corner fill: failed {failed}", flush=True)
 
-    variants = [("scales in on the pit ramp", v_scales), ("sampler post 7 m off the lane", v_sampler),
+    def v_modules(s):
+        spl.SCALE_MODULES = 3
+    def v_ramp(s):
+        s["designed"]["site_plan"]["scales_out"]["ramp"] = 2.5
+
+    variants = [("scales of three modules", v_modules), ("ramp 2.5 m", v_ramp), ("scales in on the pit ramp", v_scales), ("sampler post 7 m off the lane", v_sampler),
                 ("hydrant 1 m from the pit shed", v_hydrant), ("U-turn centre at x -18 (through silo «3»)", v_uturn), ("out lane on y 44.0", v_lane)]
     for name, patch in variants:
         bad = copy.deepcopy(site)
         patch(bad)
         failed = [n for n, ok, _ in checks(bad) if not ok]
+        spl.SCALE_MODULES = 4
         ok_all &= bool(failed)
         print(f"{'PASS' if failed else 'FAIL'}  broken variant must be rejected — {name}: failed {failed}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)

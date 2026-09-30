@@ -220,6 +220,25 @@ def spout_key(name):
     return "spout_" + name.lower().replace("->", "_to_").replace("@", "_at_").replace(".", "_")
 
 
+PIT_BEAMS = 4                       # EST: cross beams under the grating (section NOT_FOUND)
+PIT_OUTLET = 0.4                    # EST: hopper outlet square (as the drawn outlet marks)
+OUTLET_OVER_T1 = 0.30               # EST: outlet + its gate over the T1 casing top (the spout lands on T1)
+
+
+def t1_top(y, r=None):
+    """Top of the sloped T1 casing at plan y (centreline z_ends + half the 0.40 casing)."""
+    r = r or spec()
+    cv = next(c_ for c_ in r["conveyors"] if c_["id"] == "T1")
+    (ya, yb), (za, zb) = cv["y"], cv["z_ends"]
+    return za + (zb - za) * (y - ya) / (yb - ya) + 0.20
+
+
+def outlet_z(p, oy=None, r=None):
+    """Hopper outlet level over T1 (drawn under both outlets): the outlet sits on T1, not a slope target."""
+    oy = p["outlets"][0][1] if oy is None else oy
+    return t1_top(oy, r) + OUTLET_OVER_T1
+
+
 def build_pit_and_shed(r=None):
     r = r or spec()
     p, g = r["pit"], c.ground_z()
@@ -235,13 +254,19 @@ def build_pit_and_shed(r=None):
     conc += [c.box((ch["x"][0] - 0.25, ty1, p["floor_z"] + 0.5), (ch["x"][0], y0 - w, 0.0)),
              c.box((ch["x"][1], ty1, p["floor_z"] + 0.5), (ch["x"][1] + 0.25, y0 - w, 0.0)),
              c.box((ch["x"][0] - 0.25, ty1, -0.25), (ch["x"][1] + 0.25, y0 - w, 0.0))]
-    grate = [c.box((x0, y0, p["deck_z"] - 0.05), (x1, y1, p["deck_z"]))]
+    # drive-over grating flush with the drive deck on cross beams (bar pitch NOT_FOUND: the grating material only)
+    grate = [st.grating_panel(x0, y0, x1, y1, p["deck_z"], depth=0.1)]
+    beams = [st.member((xb, y0, p["deck_z"] - 0.2), (xb, y1, p["deck_z"] - 0.2), st.i_beam(0.2, 0.1, 0.0056, 0.0085))
+             for xb in np.linspace(x0, x1, PIT_BEAMS + 2)[1:-1]]
     hoppers = []
-    for ox, oy in p["outlets"]:                                        # two hoppers under the grating (judgment slopes)
-        top = [(x0, oy - 1.0), (x1, oy - 1.0), (x1, oy + 1.0), (x0, oy + 1.0)]
-        v = np.array([(x, y, p["deck_z"] - 0.1) for x, y in top] + [(ox - 0.2, oy - 0.2, p["floor_z"] + 1.0), (ox + 0.2, oy - 0.2, p["floor_z"] + 1.0),
-                                                                     (ox + 0.2, oy + 0.2, p["floor_z"] + 1.0), (ox - 0.2, oy + 0.2, p["floor_z"] + 1.0)])
+    ys = sorted(oy for _, oy in p["outlets"])
+    cuts = [y0] + [(a + b) / 2 for a, b in zip(ys, ys[1:])] + [y1]    # one hopper per outlet, together the whole pit
+    for (ox, oy), ya, yb in zip(sorted(p["outlets"], key=lambda o: o[1]), cuts, cuts[1:]):
+        zt, zo, h = p["deck_z"] - 0.3, outlet_z(p, oy, r), PIT_OUTLET / 2
+        v = np.array([(x0, ya, zt), (x1, ya, zt), (x1, yb, zt), (x0, yb, zt),
+                      (ox - h, oy - h, zo), (ox + h, oy - h, zo), (ox + h, oy + h, zo), (ox - h, oy + h, zo)])
         hoppers.append((v, np.array([(0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)])))
+        hoppers.append(c.box((ox - h - 0.05, oy - h - 0.05, zo - 0.25), (ox + h + 0.05, oy + h + 0.05, zo)))   # outlet + gate
     d = p["drive"]
     (dy0, dy1), (dx0, dx1), (fx0, fx1) = d["y"], d["x"], d["flat_x"]
     z = d["deck_z"]
@@ -266,6 +291,7 @@ def build_pit_and_shed(r=None):
     posts = [c.box((x - 0.6, y - 0.6, g), (x + 0.6, y + 0.6, g + 0.3)) for x, y in p["outer_posts"]]
     posts += [st.member((x, y, g + 0.3), (x, y, g + 1.2), st.SHS_200, up=(1, 0, 0)) for x, y in p["outer_posts"]]
     return {"pit_concrete": ("concrete", False, c.merge_parts(conc)), "pit_grating": ("grating", False, c.merge_parts(grate)),
+            "pit_beams": ("galv_old", False, c.merge_parts(beams)),
             "pit_hoppers": ("galv_old", False, c.merge_parts(hoppers)), "drive": ("concrete", False, c.merge_parts(road)),
             "shed_columns": ("galv_old", False, c.merge_parts(cols)), "shed_walls": ("galv", False, c.merge_parts(walls)),
             "shed_roof": ("galv_old", False, c.merge_parts(roof)), "outer_posts": ("concrete", False, c.merge_parts(posts))}

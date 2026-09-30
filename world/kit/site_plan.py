@@ -122,6 +122,13 @@ def footprint_dist(p, kind, gm):
     return math.hypot(dx, dy) if dx or dy else -min(p[0] - x0, x1 - p[0], p[1] - y0, y1 - p[1])
 
 
+SCALE_MODULES = 4                   # Тензо-М ВА-80-24-4: four modules (research/design/pit_scales)
+SCALE_MODULE_H = 0.25               # ВА module 3 x 6 x 0.25 m
+SCALE_CURB = 0.10                   # EST: wheel guide 100 x 100 (height NOT_FOUND in the sheets)
+SCALE_BOARD_Z = 2.6                 # EST: display centre at a truck driver's eye (post height NOT_FOUND)
+SCALE_LIGHT_Z = 3.0                 # EST: traffic light centre
+
+
 def scales_box(sp, key):
     s = sp[key]
     y = lane(sp, s["lane"])["pts"][0][1]
@@ -200,19 +207,48 @@ def build_roads(site=None):
     hs = sp["fire_tanks"].get("hardstand")                           # fire engine pier by the tanks
     if hs:
         roads.append(c.box((hs[0], hs[1], z - 0.02), (hs[2], hs[3], z)))
-    # scales: steel platform +0.35 over the road with a concrete ramp each end (естакадні, rec_767b01b7)
-    decks, ramps = [], []
+    # scales: 80 t, 24 x 3 m of four 6 m modules (Тензо-М ВА-80-24-4, research/design/pit_scales), deck +0.35 over
+    # the road (Техноваги 300-350 mm) on column load cells, a concrete ramp each end (естакадні, rec_767b01b7)
+    decks, ramps, cells, curbs, poles, board, red, green = [], [], [], [], [], [], [], []
     g = c.ground_z() + sp["road_z_over_ground"]
     for key in ("scales_in", "scales_out"):
         x0, y0, x1, y1 = scales_box(sp, key)
         top = g + 0.35
-        decks.append(c.box((x0, y0, g), (x1, y1, top)))
+        n = SCALE_MODULES
+        L = (x1 - x0) / n
+        for i in range(n):                                           # modules with a 20 mm joint, 0.25 m deep
+            a0, a1 = x0 + i * L + (0.01 if i else 0.0), x0 + (i + 1) * L - (0.01 if i < n - 1 else 0.0)
+            decks.append(c.box((a0, y0, top - SCALE_MODULE_H), (a1, y1, top)))
+            for yy in (y0 + 0.35, y1 - 0.35):                        # load cells under the module ends (EST places)
+                for xx in ((a0 + 0.4, a1 - 0.4) if i in (0, n - 1) else (a1 - 0.4,)):
+                    cells.append(c.cylinder(0.06, g, top - SCALE_MODULE_H, steps=12, center=(xx, yy)))
+        for yy in (y0, y1 - SCALE_CURB):                            # wheel guides along both edges
+            curbs.append(c.box((x0, yy, top), (x1, yy + SCALE_CURB, top + SCALE_CURB)))
+        ld = lane(sp, sp[key]["lane"])["pts"]
+        tx = np.sign(ld[1][0] - ld[0][0])                           # travel along X; the driver sits on the left
+        left = 1.0 if tx > 0 else -1.0
+        yd = (y1 + 1.0) if left > 0 else (y0 - 1.0)
+        xe, xs = (x1, x0) if tx > 0 else (x0, x1)                   # exit / entry end of the platform
+        xd = xe + tx * 1.5
+        poles.append(st.rod((xd, yd, g), (xd, yd, SCALE_BOARD_Z + 0.35), 0.05, 12))
+        board.append(c.box((xd - 0.06, yd - 0.45, SCALE_BOARD_Z - 0.2), (xd + 0.06, yd + 0.45, SCALE_BOARD_Z + 0.2)))
+        for k in range(6):                                          # six digits, 115 mm (Техноваги board), facing the cab
+            yk = yd - 0.33 + k * 0.13
+            red.append(c.box((xd - tx * 0.065, yk - 0.035, SCALE_BOARD_Z - 0.06), (xd - tx * 0.07, yk + 0.035, SCALE_BOARD_Z + 0.055)))
+        xl = xs - tx * 1.5                                          # traffic light before the entry end
+        poles.append(st.rod((xl, yd, g), (xl, yd, SCALE_LIGHT_Z + 0.4), 0.05, 12))
+        board.append(c.box((xl - 0.1, yd - 0.15, SCALE_LIGHT_Z - 0.35), (xl + 0.1, yd + 0.15, SCALE_LIGHT_Z + 0.35)))
+        for zz, lst in ((SCALE_LIGHT_Z + 0.17, red), (SCALE_LIGHT_Z - 0.17, green)):
+            lst.append(st.rod((xl - tx * 0.1, yd, zz), (xl - tx * 0.13, yd, zz), 0.1, 20))
         r = sp[key]["ramp"]
         for xa, xb, za, zb in ((x0 - r, x0, g, top), (x1, x1 + r, top, g)):
             v = np.array([(xa, y0, za), (xb, y0, zb), (xb, y1, zb), (xa, y1, za), (xa, y0, g), (xb, y0, g), (xb, y1, g), (xa, y1, g)])
             ramps.append((v, np.array([(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)])))
     return {"roads": ("road", False, c.merge_parts(roads)), "scale_decks": ("galv_old", False, c.merge_parts(decks)),
-            "scale_ramps": ("concrete", False, c.merge_parts(ramps))}
+            "scale_ramps": ("concrete", False, c.merge_parts(ramps)), "scale_cells": ("dark", False, c.merge_parts(cells)),
+            "scale_curbs": ("yellow", False, c.merge_parts(curbs)), "scale_poles": ("galv", True, c.merge_parts(poles)),
+            "scale_boards": ("dark", False, c.merge_parts(board)), "scale_red": ("red", True, c.merge_parts(red)),
+            "scale_green": ("green", True, c.merge_parts(green))}
 
 
 def sampler_geometry(sp):
