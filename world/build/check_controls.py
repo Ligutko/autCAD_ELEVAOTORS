@@ -11,6 +11,10 @@ FAIL:
 - stack light: base Ø60, tier 50 mm, red on top (EN 60204-1 order);
 - no NaN, indices in range.
 
+Upper conveyors (gallery.build_controls): T8 / T12 / T15 on the silo-top galleries and T7 / T10 / T11 / T14 on the
+bridges get a rail-mounted station (outside the walkway rail, only the mushroom over the walkway) 0.6-4.0 m from the
+drive and a rope-pull along the walkway side of the casing; broken variants: T12 station inside the rail, T7 station
+6 m farther, T15 rope in the casing.
 Placement in the tunnels (tunnel.build_controls): the station within 3.5 m of the conveyor drive, on the walkway,
 mushroom 0.6-1.7 m over the tunnel floor; rope <= 75 m with supports <= 3 m, reaching the ends of the run; no
 clash with the tunnel concrete, conveyor, gate stacks, lamps and tray (BVH on the real meshes).
@@ -35,6 +39,7 @@ sys.path.insert(0, str(ROOT))
 from kit import controls as k  # noqa: E402
 from kit import tunnel as tun  # noqa: E402
 from kit import noria_tower as tw  # noqa: E402
+from kit import gallery as gal  # noqa: E402
 import math  # noqa: E402
 from mathutils.bvhtree import BVHTree  # noqa: E402
 
@@ -214,6 +219,57 @@ def tower_placement(site, place=None):
     return out
 
 
+def upper_placement(site, tamper=None):
+    """Hands of the gallery (T8, T12, T15) and bridge (T7, T10, T11, T14) conveyors on the real meshes: the station on
+    the outside of the walkway rail (the walkways are 0.7-0.8 m, a floor stand would pinch them), 0.6-4.0 m from the
+    drive, the mushroom in reach and at most 0.1 m over the walkway; the rope on the walkway side of the casing, in
+    reach over the deck, <= 75 m, supports <= 3 m, covering the run over the deck; nothing cuts the gallery or bridge."""
+    out = []
+    for cid in gal.upper_conveyors(site):
+        hands, info = gal.build_controls(site, cid)
+        if tamper:
+            hands, info = tamper(cid, hands, info)
+        lay = info["layout"]
+        n, (p0, u, _) = lay["n"], lay["rail"]
+        x, y, z = info["post"]
+        d = math.hypot(x - lay["drive"][0], y - lay["drive"][1])
+        out_of_rail = float(np.dot(np.array([x, y]) - p0, n))           # box centre outside the rail axis
+        red = np.asarray(hands["estop_red"][0], float)
+        mush = red[red[:, 2] > z + 1.0]
+        mush = mush[np.abs(mush[:, 2] - (z + info["mushroom_z"])) < 0.05]
+        over = -float((np.dot(mush[:, :2] - p0, n)).min()) if len(mush) else 9.0
+        zm = info["mushroom_z"]
+        ok = gal.ESTOP_NEAR[0] <= d <= gal.ESTOP_NEAR[1] and 0.0 < out_of_rail < 0.1 and REACH[0] <= zm <= REACH[1] and over <= 0.1
+        out.append((f"upper_post_{cid}", ok, f"{cid}: station {d:.2f} m from the drive, {out_of_rail:+.3f} m outside the rail, "
+                    f"mushroom {zm:.2f} m over the deck, {over:.3f} m over the walkway"))
+        a, b = info["rope"]
+        k2 = lay["along"]
+        cas = lay["casing"]
+        run_lo, run_hi = max(lay["deck_span"][0], cas[k2]), min(lay["deck_span"][1], cas[k2 + 2])
+        lo, hi = sorted((a[k2], b[k2]))
+        side_ok = all(float(np.dot(p[:2] - lay["head"][:2], n)) > lay["w"] / 2 for p in (a, b))
+        heights = [p[2] - lay["deck_z"] for p in (a, b)]
+        gap = info["rope_run"] / (info["rope_supports"] + 1)
+        slack = END_SLACK + gal.ROPE_DRIVE_GAP
+        ok = (info["rope_run"] <= 75.0 and gap <= SUPPORT + 1e-9 and side_ok and all(REACH[0] <= h <= REACH[1] for h in heights)
+              and lo - run_lo <= slack + 1e-6 and run_hi - hi <= slack + 1e-6)
+        out.append((f"upper_rope_{cid}", ok, f"{cid}: rope {info['rope_run']:.1f} m, supports every {gap:.2f} m, walkway side {side_ok}, "
+                    f"{heights[0]:.2f}-{heights[1]:.2f} m over the deck, covers {lo:.1f}..{hi:.1f} of {run_lo:.1f}..{run_hi:.1f}"))
+        if lay["kind"] == "gallery":
+            line = next(l for l in site["silo_top_galleries"]["lines"] if l["id"] == cid)
+            obs = gal.silo_row_gallery(site["silo_top_galleries"], line)
+        else:
+            obs = gal.bridge(next(b for b in site["bridges"] if b["id"] == lay["host"]), by_conveyor=True)
+        hits = []
+        for hk, hv in hands.items():
+            hb = _bvh(hv)
+            for ok_, ov in obs.items():
+                if len(np.asarray(ov[0])) and hb.overlap(_bvh(ov)):
+                    hits.append(f"{hk} x {ok_}")
+        out.append((f"upper_clash_{cid}", not hits, f"{cid}: {hits[:5] or 'clean'}"))
+    return out
+
+
 def c_merge(items):
     from kit import common as cm
     return cm.merge_parts([i for i in items if len(np.asarray(i[0]))])
@@ -222,7 +278,7 @@ def c_merge(items):
 def main():
     sys.stdout.reconfigure(errors="replace")
     ok_all = True
-    base = checks(build()) + placement(SITE) + tower_placement(SITE)
+    base = checks(build()) + placement(SITE) + tower_placement(SITE) + upper_placement(SITE)
     for rid, ok, info in base:
         ok_all &= ok
         print(f"{'PASS' if ok else 'FAIL'}  {rid}: {info}", flush=True)
@@ -301,6 +357,37 @@ def main():
     for rid, title, tamper in (("post_T13", "пост T13 за 6 м від приводу", far_post),
                                ("clash_T9", "трос T9 усередині кожуха", rope_in_casing)):
         got = {r for r, ok, _ in checks(build()) + placement(SITE, tamper) if not ok}
+        seen = rid in got and not (got - base_fail - {rid})
+        ok_all &= seen
+        print(f"{'EXPECTED FAIL' if seen else 'FAIL  variant'} {title} -> {'OK' if seen else sorted(got)}", flush=True)
+    def inside_rail(cid, hands, info):
+        if cid != "T12":
+            return hands, info
+        x, y, z = info["post"]
+        n = info["layout"]["n"]
+        return hands, dict(info, post=(x - n[0] * 0.3, y - n[1] * 0.3, z))
+
+    def far_upper(cid, hands, info):
+        if cid != "T7":
+            return hands, info
+        x, y, z = info["post"]
+        return hands, dict(info, post=(x, y + 6.0, z))
+
+    def rope_in_upper_casing(cid, hands, info):
+        if cid != "T15":
+            return hands, info
+        v, f = hands["estop_red"]
+        v = np.asarray(v, float).copy()
+        a, b = info["rope"]
+        lay = info["layout"]
+        sel = np.abs(v[:, 2] - a[2]) < 0.01
+        v[sel, 1] = lay["head"][1]
+        return dict(hands, estop_red=(v, f)), info
+
+    for rid, title, tamper in (("upper_post_T12", "пост T12 на настилі всередині поручня", inside_rail),
+                               ("upper_post_T7", "пост T7 за 6 м далі від приводу", far_upper),
+                               ("upper_clash_T15", "трос T15 усередині кожуха", rope_in_upper_casing)):
+        got = {r for r, ok, _ in upper_placement(SITE, tamper) if not ok}
         seen = rid in got and not (got - base_fail - {rid})
         ok_all &= seen
         print(f"{'EXPECTED FAIL' if seen else 'FAIL  variant'} {title} -> {'OK' if seen else sorted(got)}", flush=True)

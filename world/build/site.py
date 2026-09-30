@@ -55,6 +55,8 @@ def add_parts(prefix, parts, m, collection):
         "rails": ("yellow", "quads"), "toes": ("yellow", False), "posts": ("galv", False),
         "spouts": ("galv", "quads"), "gates": ("dark", False), "conv_casing": ("galv", False),
         "conv_flanges": ("galv_old", False), "conv_drive": ("dark", False), "conv_motor": ("motor", "quads"),
+        "estop": ("galv", False), "estop_red": ("red", "quads"), "estop_tag": ("yellow", False),
+        "estop_blue": ("motor", "quads"), "cord_switch": ("yellow", False),
     }
     for key, (v, f) in parts.items():
         mat, smooth = mat_for[key if key in mat_for else key.split("_", 1)[1]]    # "t7_conv_casing" -> "conv_casing"
@@ -104,11 +106,15 @@ def assemble(quick=False):
         col = bpy.data.collections.new("GALLERY_" + line["id"])
         scene.collection.children.link(col)
         add_parts(line["id"], gal.silo_row_gallery(g, line), m, col)
+        add_parts(line["id"], gal.build_controls(site, line["id"])[0], m, col)      # hands: E-stop, rope-pull
 
     for b in site["bridges"]:
         col = bpy.data.collections.new(b["id"])
         scene.collection.children.link(col)
         add_parts(b["id"], gal.bridge(b, by_conveyor=True), m, col)       # one object per conveyor: routes.py
+        for cv in b["conveyors"]:
+            hands, _ = gal.build_controls(site, cv["id"])
+            add_parts(b["id"], {f"{cv['id'].lower()}_{k}": v for k, v in hands.items()}, m, col)
 
     holes = []
     for t in tunnels:
