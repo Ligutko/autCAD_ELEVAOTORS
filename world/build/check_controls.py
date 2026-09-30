@@ -11,8 +11,13 @@ FAIL:
 - stack light: base Ø60, tier 50 mm, red on top (EN 60204-1 order);
 - no NaN, indices in range.
 
+Placement in the tunnels (tunnel.build_controls): the station within 3.5 m of the conveyor drive, on the walkway,
+mushroom 0.6-1.7 m over the tunnel floor; rope <= 75 m with supports <= 3 m, reaching the ends of the run; no
+clash with the tunnel concrete, conveyor, gate stacks, lamps and tray (BVH on the real meshes).
+
 Broken variants, each must fail its own rule: station centre at 0.4 m, station turned to the wrong side,
-supports every 4 m, an 80 m rope, a 900 mm cabinet, green on top of the stack light.
+supports every 4 m, an 80 m rope, a 900 mm cabinet, green on top of the stack light, the T13 station 6 m from
+its drive, the T9 rope inside the casing.
 
 Run:
     blender --background --python world/build/check_controls.py
@@ -28,6 +33,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from kit import controls as k  # noqa: E402
+from kit import tunnel as tun  # noqa: E402
+from mathutils.bvhtree import BVHTree  # noqa: E402
 
 DATA = json.loads((ROOT / "kit" / "data" / "control_posts.json").read_text(encoding="utf-8"))
 REACH = [v / 1000 for v in DATA["en620_вторинний_переказ"]["висота_пристрою_мм"]["v"]]      # 0.6-1.7 m
@@ -107,10 +114,61 @@ def checks(r):
     return out
 
 
+SITE = json.loads((ROOT / "site" / "SITE.json").read_text(encoding="utf-8"))
+NEAR_DRIVE = 3.5          # judgment: the E-stop station within sight and reach of the drive (m in plan)
+END_SLACK = 1.5           # the rope reaches within 1.5 m of each end of the conveyor run in the tunnel
+
+
+def _bvh(data):
+    v, f = data
+    polys = [tuple(int(i) for i in row) for b in (f if isinstance(f, list) else [f]) for row in np.asarray(b)]
+    return BVHTree.FromPolygons([tuple(p) for p in np.asarray(v, float)], polys)
+
+
+def placement(site, tamper=None):
+    """Tunnel hands on the real tunnel meshes: station by the drive on the walkway, mushroom in reach over the tunnel
+    floor, rope along the run (<= 75 m, supports <= 3 m), nothing cuts concrete, conveyor, gate stacks or services."""
+    out = []
+    for t in site["tunnels"]:
+        conv, _ = tun.build_conveyor(site, t, tun.boot_inlet(site, t))
+        hands, info = tun.build_controls(site, t, conv)
+        if tamper:
+            hands, info = tamper(t, hands, info)
+        x0, y0, x1, y1, fz, cz = tun.inner_box(site, t)
+        cas = np.asarray(conv["casing"][0], float)
+        px, py = info["post_xy"]
+        d = abs(px - info["drive_x"])
+        on_walk = (y0 < py < cas[:, 1].min()) or (cas[:, 1].max() < py < y1)
+        zm = info["mushroom_z"] - fz
+        out.append((f"post_{t['id']}", d <= NEAR_DRIVE and on_walk and REACH[0] <= zm <= REACH[1],
+                    f"{t['id']}: station {d:.2f} m from the drive, on the walkway {on_walk}, mushroom {zm:.2f} m over the floor"))
+        ra, rb = info["rope"]
+        lo, hi = sorted((ra[0], rb[0]))
+        run_lo, run_hi = max(cas[:, 0].min(), x0), min(cas[:, 0].max(), x1)
+        gap = info["rope_run"] / (info["rope_supports"] + 1)
+        out.append((f"rope_{t['id']}", info["rope_run"] <= 75.0 and gap <= SUPPORT + 1e-9 and lo - run_lo <= END_SLACK + 1e-6
+                    and run_hi - hi <= END_SLACK + 1.2 + 1e-6,
+                    f"{t['id']}: rope {info['rope_run']:.1f} m, supports every {gap:.2f} m, covers {lo:.1f}..{hi:.1f} of {run_lo:.1f}..{run_hi:.1f}"))
+        obs = {"civil": tun.build_civil(site, t)}
+        obs.update({f"conv_{k2}": v for k2, v in conv.items()})
+        obs.update({f"stack_{k2}": v for k2, v in tun.build_gate_stacks(site, t).items()})
+        lamps, tray, _ = tun.build_services(site, t)
+        obs.update({"lamps": lamps, "tray": tray})
+        hits = []
+        for hk, hv in hands.items():
+            v, f = hv                                  # the stand plate rests on the floor: test it 2 mm up, deeper
+            hb = _bvh((np.asarray(v, float) + (0, 0, 0.002), f))   # penetration still shows
+            for ok_, ov in obs.items():
+                if len(np.asarray(ov[0])) and hb.overlap(_bvh(ov)):
+                    hits.append(f"{hk} x {ok_}")
+        out.append((f"clash_{t['id']}", not hits, f"{t['id']}: {hits[:5] or 'clean'}"))
+    return out
+
+
 def main():
     sys.stdout.reconfigure(errors="replace")
     ok_all = True
-    base = checks(build())
+    base = checks(build()) + placement(SITE)
     for rid, ok, info in base:
         ok_all &= ok
         print(f"{'PASS' if ok else 'FAIL'}  {rid}: {info}", flush=True)
@@ -150,17 +208,38 @@ def main():
                 ("cabinet", "шафа 900 мм", lambda: build({"cabinet": wide})),
                 ("column", "зелений нагорі колони", lambda: build({"column": green_top})))
     for rid, title, make in variants:
-        got = {r for r, ok, _ in checks(make()) if not ok}
+        got = {r for r, ok, _ in checks(make()) + placement(SITE) if not ok}
         seen = rid in got and not (got - base_fail - {rid})
         ok_all &= seen
         print(f"{'EXPECTED FAIL' if seen else 'FAIL  variant'} {title} -> {'OK' if seen else sorted(got)}", flush=True)
     rmax = k.ROPE_MAX
     k.ROPE_MAX = 100.0
-    got = {r for r, ok, _ in checks(build()) if not ok}
+    got = {r for r, ok, _ in checks(build()) + placement(SITE) if not ok}
     k.ROPE_MAX = rmax
     seen = "rope_max" in got and not (got - base_fail - {"rope_max"})
     ok_all &= seen
     print(f"{'EXPECTED FAIL' if seen else 'FAIL  variant'} трос 80 м прийнято -> {'OK' if seen else sorted(got)}", flush=True)
+
+    def far_post(t, hands, info):
+        if t["id"] != "T13":
+            return hands, info
+        return hands, dict(info, post_xy=(info["post_xy"][0] + 6.0 * (1 if info["post_xy"][0] < info["drive_x"] else -1), info["post_xy"][1]))
+
+    def rope_in_casing(t, hands, info):
+        if t["id"] != "T9":
+            return hands, info
+        v, f = hands["estop_red"]
+        v = np.asarray(v, float).copy()
+        sel = np.abs(v[:, 2] - (info["floor_z"] + k.ROPE_Z)) < 0.01
+        v[sel, 1] = t["row_y"]
+        return dict(hands, estop_red=(v, f)), info
+
+    for rid, title, tamper in (("post_T13", "пост T13 за 6 м від приводу", far_post),
+                               ("clash_T9", "трос T9 усередині кожуха", rope_in_casing)):
+        got = {r for r, ok, _ in checks(build()) + placement(SITE, tamper) if not ok}
+        seen = rid in got and not (got - base_fail - {rid})
+        ok_all &= seen
+        print(f"{'EXPECTED FAIL' if seen else 'FAIL  variant'} {title} -> {'OK' if seen else sorted(got)}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)
     sys.exit(0 if ok_all else 1)
 

@@ -310,6 +310,46 @@ def build_gate_stacks(site, t):
     return {k: c.merge_parts(v) for k, v in parts.items()}
 
 
+CONTROL_END_GAP = 0.6         # EST: E-stop station this far into the tunnel from the tower pit face
+CONTROL_WALL_GAP = 0.25       # EST: station stand this far off the walkway wall
+ROPE_OFF = 0.15               # EST: rope this far out of the casing side, on the walkway side
+
+
+def build_controls(site, t, conv=None):
+    """Hands in the tunnel (kit/controls.py): the Ex E-stop station of the conveyor drive at the pit end of the
+    walkway, facing the conveyor, and the ZQ 900 rope-pull switch with its rope along the walkway side of the casing
+    from the drive end to the tail. Returns ({group: mesh}, info)."""
+    from . import controls as ctl
+    x0, y0, x1, y1, fz, _ = inner_box(site, t)
+    y = t["row_y"]
+    side = walkway_side(site, t)
+    conv = conv or build_conveyor(site, t, boot_inlet(site, t))[0]
+    cas = np.asarray(conv["casing"][0], float)
+    drive_x = float(np.asarray(conv["motor"][0], float)[:, 0].mean())
+    pit_end = x1 if abs(drive_x - x1) < abs(drive_x - x0) else x0
+    inward = -1 if pit_end == x1 else 1
+    wall = y1 if side > 0 else y0
+    px, py = pit_end + inward * CONTROL_END_GAP, wall - side * CONTROL_WALL_GAP
+    post = ctl.ex_estop_post(-side)                                   # the mushroom faces the conveyor
+    groups = {}
+
+    def put(key, part, dx, dy, dz):
+        v, f = part
+        groups.setdefault(key, []).append((np.asarray(v, float) + (dx, dy, dz), f))
+
+    for name, part in post["parts"].items():
+        put("estop_red" if name == "mushroom" else ("estop_tag" if name == "plate" else "estop"), part, px, py, fz)
+    ry = y + side * (float(np.abs(cas[:, 1] - y).max()) + ROPE_OFF)
+    ra = np.array([pit_end + inward * 1.2, ry, fz])
+    rb = np.array([x0 + 1.0 if pit_end == x1 else x1 - 1.0, ry, fz])     # 1 m short of the far (tail) end wall
+    cord = ctl.pull_cord(ra, rb, side=side)
+    for name, part in cord["parts"].items():
+        put({"rope": "estop_red", "reset": "estop_blue", "switch": "cord_switch"}.get(name, "estop"), part, 0.0, 0.0, 0.0)
+    info = {"post_xy": (px, py), "post_side": -side, "drive_x": drive_x, "rope": (ra, rb), "rope_run": cord["dims"]["run"],
+            "rope_supports": cord["dims"]["supports"], "floor_z": fz, "mushroom_z": post["dims"]["centre_z"] + fz + 0.02}
+    return {k: c.merge_parts(v) for k, v in groups.items()}, info
+
+
 def build_services(site, t):
     """Ceiling lamps over the walkway and a cable tray on the wall (EST)."""
     x0, y0, x1, y1, fz, cz = inner_box(site, t)
@@ -399,6 +439,12 @@ def build(site, t, collection=None, materials=None, roof_holes=()):
     for i, (_, _, groups) in enumerate(gate_stack_parts(site, t)):          # one object per group and opening: live.py
         for k, data in groups.items():
             add(f"gate_{i:02d}_{k}", data, look_g[k], smooth="quads" if k in ("motor", "handwheels") else False)
+    hands, _ = build_controls(site, t, conv)
+    look_h = {"estop": galv, "estop_red": red, "estop_tag": m.get("yellow") or c.mat_painted("TAG_YELLOW", (0.85, 0.65, 0.02), 0.4, grime=0.1),
+              "estop_blue": m.get("blue") or c.mat_painted("RESET_BLUE", (0.03, 0.12, 0.55), 0.35, grime=0.0),
+              "cord_switch": m.get("yellow") or c.mat_painted("SWITCH_YELLOW", (0.85, 0.65, 0.02), 0.4, grime=0.1)}
+    for k, data in hands.items():
+        add(k, data, look_h[k], smooth="quads" if k in ("estop_red", "estop_blue") else False)
     lamps, tray, lamp_pts = build_services(site, t)
     add("lamps", lamps, lamp_mat)
     add("cable_tray", tray, galv)
