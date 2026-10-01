@@ -76,8 +76,8 @@ def r_nodes(node_map):
                 f"({', '.join(lv.NO_BODY)}); only the two scales share the scale decks")
 
 
-PARTS_PER = {"tunnel": 4, "dist": 3, "gallery": 2}   # objects per opening / branch / drop, as the kits build them:
-                                                    # tunnel: BODY + MOTOR + HANDWHEELS + DARK groups (ТЗА over ТЗР);
+PARTS_PER = {"tunnel": 5, "dist": 3, "gallery": 2}   # objects per opening / branch / drop, as the kits build them:
+                                                    # tunnel: BODY + BLADE + MOTOR + HANDWHEELS + DARK groups (ТЗА over ТЗР);
                                                     # splitter: gate + housing + motor; gallery: gate + housing
 
 
@@ -112,7 +112,7 @@ def r_gates(scene, site, by_gate, loose, count):
     unmod = sorted(set(G.gates()) - set(expect))
     ok = not counts and not loose and not lost and not wrong
     return ok, (f"parts {list(counts.items())[:4]} loose {loose[:3]} lost {lost} wrong {wrong[:3]}" if not ok else
-                f"{len(by_gate)} gates cut out whole ({sum(got.values())} parts = 4 groups per tunnel opening, 3 per splitter branch, "
+                f"{len(by_gate)} gates cut out whole ({sum(got.values())} parts = 5 groups per tunnel opening, 3 per splitter branch, "
                 f"2 per gallery drop; vertices kept); silo gates under their silos; {len(unmod)} gates of the graph have no "
                 f"body in the model: {', '.join(unmod)}")
 

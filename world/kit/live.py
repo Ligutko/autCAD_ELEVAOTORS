@@ -85,7 +85,7 @@ def gate_points(site):
     The centres are where the kits put each loose part of a gate (the offsets below are the kits' own sizes, so
     a kit change shows up as unassigned parts in check_live):
       tunnel   the opening centre (x, row) only: tunnel.build makes one object per group and opening
-               (<T>_GATE_<nn>_BODY / _MOTOR / _HANDWHEELS / _DARK), assigned by plan distance (TUNNEL_GATE_D);
+               (<T>_GATE_<nn>_BODY / _BLADE / _MOTOR / _HANDWHEELS / _DARK), assigned by plan distance (TUNNEL_GATE_D);
                the opening under the silo centre is <silo>.c, the others <silo>.s (SITE silo_gates);
       splitter distribution.build: the gate box on the branch, the housing at +0.425 in x, the motor at
                (+0.52, +0.17); the gate is the one of the edge whose spout starts at that branch (SITE distribution);
