@@ -4,7 +4,7 @@
   "sources": {
     "pasport": "Ventinform MSK, Pasport VR 280-46, research/design/components/sources/VR-280-46-pasport.pdf",
     "catalogue": "Ventinform, Katalog produkcii VR 280-46, research/design/components/sources/vr_280-46.pdf, p.7",
-    "extract": "research/design/components/sources/VR_280-46_no5_extract.md"
+    "extract": "research/design/components/sources/VR-280-46_no5_extract.md"
   },
   "size": {"v": 5, "src": "pasport p.4 table 1, row VR 280-46-5", "basis": "sourced", "note": "Size No.5 chosen by the task brief."},
   "execution": {"v": 1, "src": "pasport p.4 fig.1 and table 1", "basis": "sourced", "note": "Frame mounted, direct drive on the motor shaft."},
