@@ -28,6 +28,19 @@
 Зламані варіанти вентилятора: спіраль зі спадним радіусом, мотор на 30 мм вище осі, лапа на 10 мм над рамою,
 рама крізь патрубок, фланці входу і виходу +4/5 %, корпус ширший на 4 %, мотор зсунуто на 50 мм, вироджена грань.
 
+Насадний мотор-редуктор KA..T (shaft_gearmotor, data/gearmotor_ka.json), 5,5 / 11 / 15 / 18,5 кВт, з вершин:
+- gm_size: кВт → KA67/132S, KA97/160M, KA97/160L, KA97/180M (літерали тут), фланець B5 для рами є в даних;
+- gm_case: Q, QB, L2, H, SA, B, A, FK корпусу = дані ±5 мм;
+- gm_axes: вісь виходу по Y через 0, вісь двигуна по X на z = -DB (центри фланця і кожуха вентилятора) ±2 мм;
+- gm_hollow: отвір U, маточина UF, довжина EH = дані ±5 мм;
+- gm_flange: фланець двигуна торкається вхідного фланця редуктора (0 ± 2 мм), P = дані ±5 мм;
+- gm_arm: плита тяги на дні корпусу (0 ± 2 мм), чотири отвори під плитою, вухо в (FC, -O) і R ±5 мм;
+- gm_support: накладка опори на площині стінки кожуха (0 ± 2 мм), перекриває стінку ≥ 50 мм, палець співвісний з вухом ±2 мм;
+- gm_clash: двигун × тяга, двигун/корпус/тяга/підшипник × опора — без перетинів (BVH);
+- gm_mesh: індекси, NaN, вироджені грані.
+Зламані варіанти: 15 кВт → KA67 у копії таблиці, корпус ширший на 4 %, двигун на 30 мм вище, отвір +15 %,
+двигун на 10 мм від фланця, тяга на 10 мм нижче дна, накладка на 20 мм від стінки, стійка крізь тягу в корпус, вироджена грань.
+
 Запуск:
     blender --background --python world/build/check_components.py
 Код виходу 1, якщо будь-який випадок провалено.
@@ -606,6 +619,165 @@ FAN_VARIANTS = (
 )
 
 
+# ---------------------------------------------------------------- насадний мотор-редуктор KA..T
+
+GM_TOL = 0.005
+GM_TOL_AXIS = 0.002
+GM_TOL_GAP = 0.002
+GM_OVERLAP = 0.05           # накладка опори на стінку кожуха, м (pad_over у даних = 80 мм)
+GM_WALL_Z = (-0.255, 0.255)  # стінка кожуха ТЦС-320 ±0,255 м від осі (casing_z у SITE.json)
+# Літерали, вписані тут окремо від JSON: кВт → типорозмір KA і рама двигуна.
+GM_EXPECT = {5.5: ("KA67", "132S"), 11.0: ("KA97", "160M"), 15.0: ("KA97", "160L"), 18.5: ("KA97", "180M")}
+
+
+def _gm_data():
+    return json.loads(comp.GM_DATA.read_text(encoding="utf-8"))
+
+
+def _gm_build(data, faults, kw):
+    return comp.shaft_gearmotor(kw, wall_z=GM_WALL_Z, data=data, faults=faults)
+
+
+def _mid(v, k):
+    return 0.5 * (float(v[:, k].max()) + float(v[:, k].min()))
+
+
+def evaluate_gm(data, faults=None, mutate=None):
+    """Список (rule_id, ok, label, info) для shaft_gearmotor; усі чотири кВт. Геометрію міряємо з вершин, розміри — з JSON."""
+    faults = faults or None
+    bad = {k: [] for k in ("gm_size", "gm_case", "gm_axes", "gm_hollow", "gm_flange", "gm_arm", "gm_support", "gm_clash", "gm_mesh")}
+    seen = {}
+    for kw, (want_size, want_frame) in GM_EXPECT.items():
+        item = _gm_build(data, faults, kw)
+        if mutate:
+            mutate(item)
+        p, sub, d = item["parts"], item["sub"], item["dims"]
+        tag = f"{kw:g} кВт"
+        # gm_size
+        if d["size"] != want_size or d["motor_frame"] != want_frame or want_frame not in data["motor_flange"]:
+            bad["gm_size"].append(f"{tag}: {d['size']}/{d['motor_frame']}")
+        row = data["sizes"][d["size"]]
+        mm = lambda *k: _fan_mm(row, *k)  # noqa: E731
+        A, B, DB, EA, FE, FH, FJ, FK = (mm(k) for k in ("A", "B", "DB", "EA", "FE", "FH", "FJ", "FK"))
+        Q, QB, L2, SA, H = (mm(k) for k in ("Q", "QB", "L2", "SA", "H"))
+        # gm_case
+        cv = _verts(p["case"])
+        hous = cv[cv[:, 0] < FK - 0.002]
+        bot = cv[np.abs(cv[:, 2] - cv[:, 2].min()) < 1e-6]
+        got = {"Q": float(cv[:, 0].max() - cv[:, 0].min()), "QB": float(-cv[:, 0].min()), "L2": float(cv[:, 0].max()),
+               "H": float(cv[:, 2].max() - cv[:, 2].min()), "SA": float(-cv[:, 2].min()),
+               "B": float(hous[:, 1].max() - hous[:, 1].min()), "A": float(bot[:, 0].max() - bot[:, 0].min()), "FK": float(bot[:, 0].max())}
+        want = {"Q": Q, "QB": QB, "L2": L2, "H": H, "SA": SA, "B": B, "A": A, "FK": FK}
+        bad["gm_case"] += [f"{tag} {k} {got[k] * 1000:.1f}≠{want[k] * 1000:.1f}" for k in got if abs(got[k] - want[k]) > GM_TOL]
+        seen.setdefault("case", f"{d['size']}: " + ", ".join(f"{k} {got[k] * 1000:.0f}" for k in got))
+        # gm_axes: вихід = вісь порожнистого вала (Y через 0), двигун = центри фланця і кожуха вентилятора (y=0, z=-DB)
+        hv = _verts(p["hollow_shaft"])
+        out_x, out_z = _mid(hv, 0), _mid(hv, 2)
+        along_y = float(np.ptp(hv[:, 1])) > float(np.ptp(hv[:, 0]))
+        axes = []
+        for name in ("flange", "fan_cover"):
+            mv = np.asarray(item["motor_parts"][name][0], float)
+            axes.append((name, _mid(mv, 1), _mid(mv, 2)))
+        off = [f"{n} y {y * 1000:.1f} z {z * 1000:.1f}" for n, y, z in axes if abs(y) > GM_TOL_AXIS or abs(z + DB) > GM_TOL_AXIS]
+        if abs(out_x) > GM_TOL_AXIS or abs(out_z) > GM_TOL_AXIS or not along_y or off:
+            bad["gm_axes"].append(f"{tag}: вихід ({out_x * 1000:.1f}, {out_z * 1000:.1f}) по Y {along_y}; двигун {off or 'ok'}; DB {DB * 1000:.1f}")
+        # gm_hollow
+        r = np.hypot(hv[:, 0] - out_x, hv[:, 2] - out_z)
+        hol = {"U": 2.0 * float(r.min()), "UF": 2.0 * float(r.max()), "EH": float(np.ptp(hv[:, 1]))}
+        want_h = {"U": mm("U"), "UF": mm("UF"), "EH": 2.0 * EA}
+        bad["gm_hollow"] += [f"{tag} {k} {hol[k] * 1000:.1f}≠{want_h[k] * 1000:.1f}" for k in hol if abs(hol[k] - want_h[k]) > GM_TOL]
+        # gm_flange: фланець двигуна торкається вхідного фланця редуктора, P = дані
+        mt = _verts(p["motor"])
+        gap = float(mt[:, 0].min()) - float(cv[:, 0].max())
+        fv = np.asarray(sub["flange"][0], float)
+        # P — навколо власного центра фланця: де лежить вісь, міряє gm_axes
+        P_got = 2.0 * float(np.hypot(fv[:, 1] - _mid(fv, 1), fv[:, 2] - _mid(fv, 2)).max())
+        P_want = _fan_mm(data["motor_flange"][d["motor_frame"]], "P")
+        if abs(gap) > GM_TOL_GAP or abs(P_got - P_want) > GM_TOL:
+            bad["gm_flange"].append(f"{tag}: зазор {gap * 1000:.2f} мм, P {P_got * 1000:.1f}/{P_want * 1000:.0f}")
+        seen.setdefault("flange", f"зазор {gap * 1000:.2f} мм, P {P_got * 1000:.1f}")
+        # gm_arm: плита тяги під дном корпусу (0 ± 2 мм), отвори під плитою, вухо в (FC, -O), радіус R
+        arm = row["arm"]
+        FC, O, R = _fan_mm(arm, "FC"), _fan_mm(arm, "O"), _fan_mm(arm, "R")
+        pl = np.asarray(sub["plate"][0], float)
+        g_arm = -SA - float(pl[:, 2].max())
+        bolt_r = _fan_mm(row, "MC_d") / 2.0
+        holes = [(FK - A + FH + dx, sy * FE / 2.0) for dx in (0.0, FJ) for sy in (-1.0, 1.0)]
+        out_h = [h for h in holes if not (pl[:, 0].min() <= h[0] - bolt_r and h[0] + bolt_r <= pl[:, 0].max()
+                                          and pl[:, 1].min() <= h[1] - bolt_r and h[1] + bolt_r <= pl[:, 1].max())]
+        bv = np.asarray(sub["eye_boss"][0], float)
+        ex, ez, er = _mid(bv, 0), _mid(bv, 2), 0.5 * float(np.ptp(bv[:, 2]))
+        if abs(g_arm) > GM_TOL_GAP or out_h or abs(ex - FC) > GM_TOL or abs(ez + O) > GM_TOL or abs(er - R) > GM_TOL:
+            bad["gm_arm"].append(f"{tag}: зазор плити {g_arm * 1000:.2f} мм, отвори поза плитою {len(out_h)}, "
+                                 f"вухо ({ex * 1000:.1f}, {ez * 1000:.1f}) / ({FC * 1000:.0f}, {-O * 1000:.0f}), R {er * 1000:.1f}")
+        seen.setdefault("arm", f"зазор {g_arm * 1000:.2f} мм, вухо ({ex * 1000:.1f}, {ez * 1000:.1f}), R {er * 1000:.1f}")
+        # gm_support: накладка на площині стінки (0 ± 2 мм), перекриває стінку, палець співвісний з вухом
+        wall_y = -(EA + _fan_mm(data["est"], "wall_gap"))
+        pad = np.asarray(sub["pad"][0], float)
+        pad_gap = float(pad[:, 1].min()) - wall_y
+        over = min(float(pad[:, 2].max()), GM_WALL_Z[1]) - max(float(pad[:, 2].min()), GM_WALL_Z[0])
+        pv = np.asarray(sub["pin"][0], float)
+        px, pz = _mid(pv, 0), _mid(pv, 2)
+        pin_y = float(np.ptp(pv[:, 1])) > float(np.ptp(pv[:, 0]))
+        if abs(pad_gap) > GM_TOL_GAP or over < GM_OVERLAP or abs(px - ex) > GM_TOL_AXIS or abs(pz - ez) > GM_TOL_AXIS or not pin_y:
+            bad["gm_support"].append(f"{tag}: накладка від стінки {pad_gap * 1000:.2f} мм, перекриття {over * 1000:.0f} мм, "
+                                     f"палець Δx {abs(px - ex) * 1000:.2f} Δz {abs(pz - ez) * 1000:.2f} мм, по Y {pin_y}")
+        seen.setdefault("support", f"накладка {pad_gap * 1000:.2f} мм від стінки, перекриття {over * 1000:.0f} мм, палець Δz {abs(pz - ez) * 1000:.2f} мм")
+        # gm_clash
+        pairs = (("motor", p["motor"], "torque_arm", p["torque_arm"]), ("motor", p["motor"], "опора", sub["support_body"]),
+                 ("case", p["case"], "опора", sub["support_body"]), ("torque_arm", p["torque_arm"], "опора", sub["support_body"]),
+                 ("bearing", p["bearing"], "опора", sub["support_body"]))
+        bad["gm_clash"] += [f"{tag} {a}×{b}" for a, pa, b, pb in pairs if _bvh_pair(pa, pb)]
+        # gm_mesh
+        for name, part in p.items():
+            verts = _verts(part)
+            if not np.isfinite(verts).all():
+                bad["gm_mesh"].append(f"{tag} {name} NaN")
+            for face in _iter_faces(part[1]):
+                if face.size and (int(face.min()) < 0 or int(face.max()) >= len(verts)):
+                    bad["gm_mesh"].append(f"{tag} {name} індекс")
+                    break
+                if face.size and _face_area(verts, face) < DEGEN_M2:
+                    bad["gm_mesh"].append(f"{tag} {name} вироджена")
+                    break
+        seen.setdefault("faces", [])
+        seen["faces"].append(item["dims"]["faces"])
+    labels = {
+        "gm_size": ("кВт → KA і рама двигуна", "5,5→KA67/132S, 11→KA97/160M, 15→KA97/160L, 18,5→KA97/180M"),
+        "gm_case": ("корпус редуктора Q, QB, L2, H, SA, B, A, FK", "допуск 5 мм; " + seen.get("case", "")),
+        "gm_axes": ("осі: вихід по Y через 0, двигун по X на z = -DB", "допуск 2 мм"),
+        "gm_hollow": ("порожнистий вал U, UF, EH", "допуск 5 мм"),
+        "gm_flange": ("двигун торкається вхідного фланця, P фланця B5", "допуск 2 / 5 мм; " + seen.get("flange", "")),
+        "gm_arm": ("реактивна тяга кріпиться до дна корпусу, вухо в (FC, -O)", "допуск 2 / 5 мм; " + seen.get("arm", "")),
+        "gm_support": ("опора тяги на стінці кожуха, палець у вусі", "допуск 2 мм, перекриття ≥ 50 мм; " + seen.get("support", "")),
+        "gm_clash": ("двигун, тяга, корпус, підшипник не перетинають опору", "BVH, 5 пар × 4 кВт"),
+        "gm_mesh": ("сітка мотор-редуктора без вироджених граней", f"граней {seen.get('faces')}"),
+    }
+    return [(rid, not bad[rid], labels[rid][0], f"{labels[rid][1]}; {bad[rid][:4] or 'ok'}") for rid in bad]
+
+
+def _gm_degenerate(item):
+    verts, faces = item["parts"]["bolts"]
+    verts = np.asarray(verts, float).reshape(-1, 3)
+    n = len(verts)
+    verts = np.vstack([verts, verts[:1], verts[:1], verts[:1]])
+    blocks = faces if isinstance(faces, list) else [faces]
+    item["parts"]["bolts"] = (verts, list(blocks) + [np.array([[n, n + 1, n + 2]], np.int64)])
+
+
+GM_VARIANTS = (
+    ("gm_size", "15 кВт → KA67 у копії таблиці", "size", None, None),
+    ("gm_case", "корпус ширший вздовж вала на 4 %", None, {"case_w_scale": 1.04}, None),
+    ("gm_axes", "двигун на 30 мм вище осі входу", None, {"motor_dz": 0.03}, None),
+    ("gm_hollow", "отвір порожнистого вала більший на 15 %", None, {"bore_scale": 1.15}, None),
+    ("gm_flange", "двигун відсунуто від фланця на 10 мм", None, {"motor_dx": 0.01}, None),
+    ("gm_arm", "реактивна тяга на 10 мм нижче дна корпусу", None, {"arm_dz": -0.01}, None),
+    ("gm_support", "накладка опори на 20 мм не доходить до стінки", None, {"wall_dy": 0.02}, None),
+    ("gm_clash", "стійка від опори вгору крізь тягу в корпус", None, {"support_clash": True}, None),
+    ("gm_mesh", "у болтах вироджена грань", None, None, _gm_degenerate),
+)
+
+
 def _failed(rows):
     return {rid for rid, ok, _label, _info in rows if not ok}
 
@@ -678,7 +850,32 @@ def main():
         else:
             print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
 
+    gm_data = _gm_data()
+    gm_base = evaluate_gm(gm_data)
+    gm_fail = _failed(gm_base)
+    for rid, ok, label, info in gm_base:
+        ok_all &= ok
+        print(f"{'PASS' if ok else 'FAIL'}  {label}: {info}", flush=True)
+    gm_caught = 0
+    for rid, title, which, faults, mutate in GM_VARIANTS:
+        data = gm_data
+        if which == "size":
+            data = copy.deepcopy(gm_data)
+            data["kw_to_size"]["15"]["size"] = "KA67"
+        got_rows = evaluate_gm(data, faults, mutate)
+        got = _failed(got_rows)
+        extra = got - gm_fail - {rid}
+        info = next(i for r, _ok, _l, i in got_rows if r == rid)
+        seen = rid in got and not extra
+        gm_caught += bool(seen)
+        ok_all &= seen
+        if seen:
+            print(f"EXPECTED FAIL {title} -> OK ({rid})", flush=True)
+        else:
+            print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
+
     print(f"CASES {atomic} base + {len(variants)} broken, caught {caught}/{len(variants)}", flush=True)
+    print(f"GEARMOTOR {len(gm_base)} rules + {len(GM_VARIANTS)} broken, caught {gm_caught}/{len(GM_VARIANTS)}", flush=True)
     print(f"FAN {len(fan_base)} rules + {len(FAN_VARIANTS)} broken, caught {fan_caught}/{len(FAN_VARIANTS)}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)
     sys.exit(0 if ok_all else 1)
