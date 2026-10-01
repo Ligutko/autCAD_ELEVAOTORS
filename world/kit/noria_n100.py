@@ -20,6 +20,7 @@ import math
 import numpy as np
 
 from . import common as c
+from . import components as comp
 from . import steel as st
 
 PULLEY_R = 0.375
@@ -408,8 +409,9 @@ def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
     """Stack the elevator bottom-up: pit (drawing) -> boot -> legs of tube_len (spec "Нтруб",
     PDF p.8 note 1: noria heights are given by the tubes) -> head.
 
-    top_z (tower top platform, drawing) is not used to place anything: it is the independent
-    check. Raises ValueError when the head base misses the top platform.
+    top_z (tower top platform, drawing) does not place the elevator: it is the independent
+    check (and the floor the drive's torque-arm stand stands on). Raises ValueError when the head
+    base misses the top platform.
     model: key of MODELS; feed: "return" (inlet on the down leg, local +X) or "working" (up leg, -X).
     Returns dict of parts (verts, faces) keyed by role, plus label anchors and measure.
     """
@@ -460,32 +462,52 @@ def build(top_z, pit_z, tube_len, model, feed, phase=0.0):
     parts["pulley_lagging"] = lag
     parts["shafts"] = shaft
 
-    # ---- drive: shaft-mounted reducer, 22 kW motor, torque arm, backstop, bearings
-    gy = BELT_Y - 0.62                                   # drive on the -Y side, cutaway side stays clear
-    drive = [c.box((CX - 0.24, gy - 0.40, z_head - 0.30), (CX + 0.24, gy + 0.02, z_head + 0.26))]
-    drive.append(st.member((CX + 0.1, gy - 0.2, z_head - 0.3), (CX + 0.1, gy - 0.2, leg_z1 - 0.3), st.shs(0.06)))
-    my = gy - 0.19
-    motor = [st.rod((CX + 0.24, my, z_head - 0.05), (CX + 0.95, my, z_head - 0.05), 0.18, 32)]
-    fins = []
-    for k in range(24):                                   # longitudinal cooling ribs of a TEFC motor
-        a = 2 * math.pi * k / 24
-        mid = np.array([0.0, my + 0.195 * math.cos(a), z_head - 0.05 + 0.195 * math.sin(a)])
-        fins.append(st.member((CX + 0.30, mid[1], mid[2]), (CX + 0.90, mid[1], mid[2]),
-                              np.array([(-0.003, -0.02), (0.003, -0.02), (0.003, 0.02), (-0.003, 0.02)]),
-                              up=(0.0, math.cos(a), math.sin(a))))
-    fins.append(c.box((CX + 0.45, my - 0.11, z_head + 0.12), (CX + 0.70, my + 0.11, z_head + 0.22)))   # terminal box
-    cover = [st.rod((CX + 0.95, my, z_head - 0.05), (CX + 1.10, my, z_head - 0.05), 0.16, 32)]
+    # ---- drive: Dodge TA6307H25 shaft-mount reducer on the head shaft (-Y side, the cutaway side stays clear), 22 kW
+    # IEC motor on the TA6307MM plate above it, V-belts under a guard, TA6307RA torque arm down to a stand on the top
+    # platform (components.shaft_mount_reducer; Dodge is a class analog, not the customer's unit). The motor on the
+    # plate is 0.40-0.81 m over the shaft and the hood crown 0.75 m, so the reducer goes out along the shaft until the
+    # motor's fan end clears the head side by hood_clear.
+    hood_clear = 0.05                                  # judgment
+    pulley_rpm = 60 * mdl["belt_speed"] / (math.pi * 2 * PULLEY_R)
+    red = comp.shaft_mount_reducer(MOTOR_KW, output_rpm=pulley_rpm, floor_z=top_z - z_head, bore=2 * SHAFT_R)
+    rd = red["dims"]
+    y_red = BELT_Y - hy - hood_clear - rd["motor_y"][1]    # split plane of the reducer case
+
+    def put(piece):
+        return np.asarray(piece[0], float) + (CX, y_red, z_head), piece[1]
+
+    drive = [put(p) for k, p in red["parts"].items() if k != "motor"]
+    y_hub0, y_hub1 = y_red + rd["hub_y"][0], y_red + rd["hub_y"][1]
+    drive.append(st.rod((CX, BELT_Y - 0.62, z_head), (CX, y_hub0 - 0.004, z_head), SHAFT_R, 24))      # shaft through the bore
+    drive.append(st.rod((CX, y_hub0 - 0.016, z_head), (CX, y_hub0 - 0.004, z_head), 0.055, 24))       # shaft end plate
+    for k in range(2):
+        bx = CX + (-0.025 if k else 0.025)
+        drive.append(st.rod((bx, y_hub0 - 0.024, z_head), (bx, y_hub0 - 0.016, z_head), 0.009, 6))
+    # split guard over the bare shaft between the bearing and the hub (EST, ISO 14120 fixed guard)
+    drive.append(comp._ring_y(y_hub1 + 0.004, BELT_Y - 0.42 - 0.066, 0.080, 0.083, CX, z_head, 32))
+    labels.append((f"Привід {MOTOR_KW} кВт: насадний редуктор TA6307H, пасова передача", (CX, y_red, z_head + rd["motor_axis"][1] + 0.25)))
+    p2 = rd["pin_bracket"]
+    labels.append(("Реактивна штанга на стійку", (CX + p2[0], y_red, z_head + p2[1])))
     backstop = [st.rod((CX, BELT_Y + 0.50, z_head), (CX, BELT_Y + 0.62, z_head), 0.13, 24)]
-    labels.append((f"Привід {MOTOR_KW} кВт: мотор-редуктор на валу", (CX + 0.6, my, z_head + 0.22)))
     labels.append(("Стопор зворотного ходу", (CX, BELT_Y + 0.62, z_head + 0.13)))
     bearings, bsensors = [], []
     for y in (BELT_Y - 0.42, BELT_Y + 0.42):
         b, s = _bearing(y, z_head)
         bearings += b
         bsensors += s
+        # seat for the plummer block: shelf off the housing side wall with two gussets (EST)
+        sg = 1.0 if y > BELT_Y else -1.0
+        wall, edge = BELT_Y + sg * hy, y + sg * 0.09
+        z_sh = z_head - 0.112
+        ya, yb = sorted((wall, edge))
+        bearings.append(c.box((CX - 0.21, ya, z_sh - 0.016), (CX + 0.21, yb, z_sh)))
+        for gx in (CX - 0.17, CX + 0.17):
+            tri = [(wall, z_sh - 0.016), (edge, z_sh - 0.016), (wall, z_sh - 0.20)]
+            gv = np.array([[x, yy, zz] for x in (gx - 0.005, gx + 0.005) for yy, zz in tri])
+            bearings.append((gv, [np.array([[0, 2, 1], [3, 4, 5]]), np.array([[0, 1, 4, 3], [1, 2, 5, 4], [2, 0, 3, 5]])]))
     labels.append(("Датчик температури підшипника", (CX, BELT_Y + 0.42, z_head + 0.13)))
     parts["drive"] = c.merge_parts(drive + backstop + bearings)
-    parts["motor"] = c.merge_parts(motor + fins + cover)
+    parts["motor"] = put(red["parts"]["motor"])
 
     # ---- boot: housing, wing pulley, take-up screws, inlet, clean-out doors
     bx0 = LEG_CENTRES_X[0] - sx / 2 - 0.10

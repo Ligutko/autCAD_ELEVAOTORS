@@ -84,7 +84,9 @@ else:
         lo.location = loc
         scene.collection.objects.link(lo)
     if what == "reducer":
-        cam = c.camera("CAM", (mc[0] - 1.55, mc[1] - 1.55, zt + 1.45), (mc[0] + 0.05, mc[1] + 0.05, zt + 0.95), lens=30)
+        cam = c.camera("CAM", (mc[0] - 2.0, mc[1] - 1.9, zt + 1.75), (mc[0] + 0.1, mc[1] - 0.3, zt + 1.18), lens=24)
+    elif what == "reducer2":
+        cam = c.camera("CAM", (mc[0] - 1.6, mc[1] + 1.3, zt + 1.6), (mc[0] + 0.1, mc[1] - 0.25, zt + 1.0), lens=26)
     elif what == "back":
         cam = c.camera("CAM", (mc[0] - 1.3, mc[1] + 1.8, zt + 1.3), (mc[0] + 0.1, mc[1] - 0.2, zt + 0.8), lens=28)
     else:
