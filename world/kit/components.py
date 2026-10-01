@@ -736,7 +736,7 @@ def _spiral_r(theta_deg, r0, k, dip=0.0):
     th = np.asarray(theta_deg, float)
     r = r0 + k * th
     if dip:
-        bump = np.where((th > 100.0) & (th < 170.0), np.sin(np.pi * (th - 100.0) / 70.0) ** 2, 0.0)
+        bump = np.where((th > 105.0) & (th < 122.0), np.sin(np.pi * (th - 105.0) / 17.0) ** 2, 0.0)
         r = r - dip * bump
     return r
 
@@ -962,7 +962,7 @@ def radial_fan(kw, size=None, hand="R", outlet_deg=0, *, detail="full", data=Non
     n_small = 8 if lod else 16
 
     axis_z = _fv(table, "frame", "h")
-    w = _fv(table, "housing", "axial_width")
+    w = _fv(table, "housing", "axial_width") * float(faults.get("housing_w_scale", 1.0))
     t = _fv(table, "housing", "sheet_t")
     wheel_r = _fv(table, "wheel_d") / 2.0
     inlet_od, inlet_flange_od = _fv(table, "inlet", "D"), _fv(table, "inlet", "D1")
@@ -1008,8 +1008,9 @@ def radial_fan(kw, size=None, hand="R", outlet_deg=0, *, detail="full", data=Non
     neck_w = _sweep_yz(outer_wall, -w / 2.0, w / 2.0, t, +1)
     neck_n = _sweep_yz(inner_wall, -w / 2.0, w / 2.0, t, -1)
     fl_t = o["flange_t"]
-    y0f, y1f = o["y_lo"], o["y_lo"] + o["A1"]
-    xf = o["A2"] / 2.0
+    fscale = float(faults.get("outlet_flange_scale", 1.0))
+    y0f, y1f = o["y_lo"], o["y_lo"] + o["A1"] * fscale
+    xf = o["A2"] / 2.0 * fscale
     ring_in_y = (y_end, spiral[0, 0])
     xin = w / 2.0
     z0f, z1f = o["H"] - fl_t, o["H"]
@@ -1026,7 +1027,7 @@ def radial_fan(kw, size=None, hand="R", outlet_deg=0, *, detail="full", data=Non
     tube_r = inlet_od / 2.0
     cone_x0 = -w / 2.0 - 0.028
     inlet = c.merge_parts([
-        _ring_x(x_face, x_face + inlet_t, tube_r - 0.003, inlet_flange_od / 2.0, n_ring),
+        _ring_x(x_face, x_face + inlet_t, tube_r - 0.003, inlet_flange_od / 2.0 * float(faults.get("inlet_flange_scale", 1.0)), n_ring),
         _shell_x(x_face + inlet_t, cone_x0, tube_r, tube_r, 0.003, n_ring),
         _shell_x(cone_x0, -w / 2.0, tube_r, throat_r, 0.003, n_ring),
     ])
