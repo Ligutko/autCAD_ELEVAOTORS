@@ -200,6 +200,11 @@ def assemble(quick=False):
                 c.mesh_from_arrays(f"FIG_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
             if real_people:
                 pp.place(site, col)
+            from kit import unloading as unl                    # a tipper unloading into the receiving pit
+            parts, _ = unl.build(site, variant=1)
+            for k, (v, f) in parts.items():
+                mat = "truck_grain" if k.startswith("grain_") else fg.part_material(k, 1)
+                c.mesh_from_arrays(f"FIG_UNLOAD_{k.upper()}", v, f, m[mat], smooth="quads" if k in fg.SMOOTH else False, collection=col)
     else:
         v, f = tun.ground_cells(2000, holes)
         c.mesh_from_arrays("GROUND", v, f, c.mat_ground())
@@ -262,6 +267,8 @@ def main():
         "site_plan_top.png": c.camera("CAM_PLAN", (40.0, -40.0, 120.0), (25.0, 40.0, 0.0), lens=24),
         "site_scales.png": c.camera("CAM_SCALES", (58.0, 80.0, 9.0), (36.0, 63.0, 1.5), lens=24),
         "site_truck_pit.png": c.camera("CAM_TRUCK", (19.0, 62.2, c.ground_z() + 1.7), (0.0, 63.4, 4.0), lens=22),
+        "site_unloading.png": c.camera("CAM_UNLOAD", (4.6, 61.0, 1.7), (-1.5, 63.6, 3.2), lens=18),
+        "site_unloading_west.png": c.camera("CAM_UNLOAD_W", (-24.0, 57.5, 3.0), (-7.0, 63.3, 3.6), lens=26),
         "site_tunnel_exit.png": c.camera("CAM_EXIT", (-56.5, 9.5, c.ground_z() + 1.7), (-51.1, 2.8, -1.2), lens=24),
         "site_gallery_walk.png": c.camera("CAM_WALK", (-3.5, 0.4, 24.9), (-30, 0.2, 23.6), lens=20),
         "site_bridge.png": c.camera("CAM_BRIDGE", (9, 12.7, 17), (0, 12.7, 24.5), lens=24),

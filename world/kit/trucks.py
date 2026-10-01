@@ -340,7 +340,7 @@ def body_corner_top_front(deg):
     return _tip(np.array([[BODY_FRONT_TOP, 0.0, HA_TR]]), deg)[0]
 
 
-def trailer(tip_deg=0.0, load=0.0, variant=0):
+def trailer(tip_deg=0.0, load=0.0, variant=0, door_open=None):
     """Schmitz S.KI 24 SG 9.6 AK: chassis with gooseneck, three axles, the tipping body, cylinder, combi door."""
     P = {k: [] for k in ("body", "body_trim", "tarp", "grain", "cylinder", "frame", "tyres", "rims", "trim", "lamps", "door")}
     hw = TR_W / 2
@@ -402,11 +402,13 @@ def trailer(tip_deg=0.0, load=0.0, variant=0):
     # door hangs from the top rear hinge: at a tip it stays plumb (pendulum), swung out of the body end
     hinge_top = np.array([[BODY_REAR_X, 0.0, dz1]])
     ht = _tip(hinge_top, tip_deg)[0]
-    swing = 0.0 if tip_deg <= 0 else min(0.35, 0.02 * tip_deg)
+    th = math.radians(door_open if door_open is not None else (0.0 if tip_deg <= 0 else 4.0))   # grain pushes it out
+    ct, sn = math.cos(th), math.sin(th)
     for v, f in door:
         v = np.asarray(v, float).copy()
-        v[:, 2] += ht[2] - dz1
-        v[:, 0] += ht[0] - swing * (dz1 - v[:, 2]) / (dz1 - dz0)
+        dx, dz = v[:, 0].copy(), v[:, 2] - dz1                     # about the top hinge, plumb when shut
+        v[:, 0] = ht[0] + dx * ct + dz * sn
+        v[:, 2] = ht[2] - dx * sn + dz * ct
         P["door"].append((v, f))
     for key, items in (("body", body), ("body_trim", trim), ("tarp", tarp), ("grain", grain)):
         for v, f in items:
@@ -478,12 +480,12 @@ def trailer(tip_deg=0.0, load=0.0, variant=0):
 
 # ------------------------------------------------------------------ the rig
 
-def rig(tip_deg=0.0, load=0.0, variant=0):
+def rig(tip_deg=0.0, load=0.0, variant=0, door_open=None):
     """Tractor + trailer coupled at the kingpin. Parts keep their names; 'cab' carries the variant colour."""
     if not 0.0 <= tip_deg <= TIP_MAX + 1e-9:
         raise ValueError(f"tip {tip_deg} deg outside 0..{TIP_MAX}")
     parts = {f"tractor_{k}": v for k, v in tractor(variant).items()}
-    parts.update({f"trailer_{k}": v for k, v in trailer(tip_deg, load, variant).items()})
+    parts.update({f"trailer_{k}": v for k, v in trailer(tip_deg, load, variant, door_open).items()})
     v_all = np.concatenate([np.asarray(v, float) for v, _ in parts.values()])
     dims = {"front_x": float(v_all[:, 0].max()), "rear_x": float(v_all[:, 0].min()), "half_width_no_mirrors": TR_W / 2,
             "width_with_mirrors": float(v_all[:, 1].max() - v_all[:, 1].min()), "height": float(v_all[:, 2].max()),
