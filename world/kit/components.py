@@ -1267,6 +1267,13 @@ def _case_profile(QB, top, SA, FK, A, steps):
     return _hull2(pts)
 
 
+def _mirror_z(piece):
+    v = np.asarray(piece[0], float).reshape(-1, 3).copy()
+    v[:, 2] = -v[:, 2]
+    blocks = piece[1] if isinstance(piece[1], list) else [piece[1]]
+    return v, [np.asarray(b)[:, ::-1] for b in blocks if len(b)]
+
+
 def place_frame(parts, origin, ex, ey, up=(0.0, 0.0, 1.0)):
     """Put local parts into the site: local X -> ex, local Y -> ey, local Z -> `up` made square to both.
     When (ex, ey, up) is left-handed the mesh is mirrored and its faces are reversed. Returns {name: (verts, faces)}."""
@@ -1297,18 +1304,29 @@ def gm_size(kw, data=None):
     return name, table["sizes"][name]
 
 
-def shaft_gearmotor(kw, *, size=None, wall_gap=None, wall_z=(-0.25, 0.25), detail="full", data=None,
+def shaft_gearmotor(kw, *, size=None, arm="down", wall_gap=None, wall_z=(-0.25, 0.25), detail="full", data=None,
                     motor_table=None, faults=None):
     """Shaft-mounted helical-bevel gearmotor KA..T: case, covers, ribs, hollow shaft with dust cap, torque arm with
     its rubber-bushed eye, clevis bracket to the casing wall, flange bearing and shaft stub on the wall, IEC motor
     (B5 flange, no feet). Local frame in the comment above; metres.
 
     `wall_gap`: casing wall to the inner hub end (default data est.wall_gap). `wall_z`: (low, high) z of that wall
-    in the local frame; the clevis pad overlaps it from below. `data`, `motor_table`, `faults` inject the check's
-    broken cases. Returns {"parts", "dims", "motor_parts", "sub"}; "sub" holds the pieces the checks measure.
+    in the local frame; the clevis pad overlaps it from below (arm "down") or from above (arm "up").
+    `arm="up"`: the unit turned upside down about the motor axis (the hollow shaft is a through bore, so it is
+    driven from -Y either way; B-side arm keeps the bushing on the casing side): the case, arm and clevis are the
+    "down" build mirrored in z, the motor axis sits DB above the output axis and the motor itself stays upright
+    (terminal box on top). Used where nothing may hang under the casing (decks, drop gates). No breather then
+    (it would sit on the new bottom; NOT_FOUND where SEW puts it for that position).
+    `data`, `motor_table`, `faults` inject the check's broken cases.
+    Returns {"parts", "dims", "motor_parts", "sub"}; "sub" holds the pieces the checks measure.
     """
     if detail not in ("full", "lod"):
         raise ValueError("detail must be full or lod")
+    if arm not in ("down", "up"):
+        raise ValueError("arm must be down or up")
+    up_arm = arm == "up"
+    if up_arm:
+        wall_z = (-wall_z[1], -wall_z[0])
     faults = faults or {}
     table = _gm_table(data)
     if size is None:
@@ -1385,7 +1403,8 @@ def shaft_gearmotor(kw, *, size=None, wall_gap=None, wall_z=(-0.25, 0.25), detai
     cap = _ring_y(EA, EA + 0.008, 0.0005, UF / 2.0 + 0.003, 0.0, 0.0, n_ring)
     covers.append(cap)
     covers.append(_rod_y(EA + 0.008, EA + 0.014, 0.35 * U, 0.0, 0.0, n_small))
-    covers.append(st.rod((0.6 * FK, 0.0, top), (0.6 * FK, 0.0, top + 0.022), 0.012, n_small))
+    if not up_arm:
+        covers.append(st.rod((0.6 * FK, 0.0, top), (0.6 * FK, 0.0, top + 0.022), 0.012, n_small))
     covers = c.merge_parts(covers)
 
     # ---------------- hollow shaft (bore U, hub UF, length 2 EA)
@@ -1484,7 +1503,7 @@ def shaft_gearmotor(kw, *, size=None, wall_gap=None, wall_z=(-0.25, 0.25), detai
     m_parts = {k: v for k, v in mot["parts"].items() if k not in ("feet", "shaft")}
     m_parts["flange"] = c.merge_parts([p for p in flange if p is not None])
     x0 = L2 + shoulder + float(faults.get("motor_dx", 0.0))
-    dz = -DB - mH + float(faults.get("motor_dz", 0.0))
+    dz = (DB if up_arm else -DB) - mH + float(faults.get("motor_dz", 0.0))
 
     def put_motor(piece):
         v = np.asarray(piece[0], float).reshape(-1, 3).copy()
@@ -1499,16 +1518,25 @@ def shaft_gearmotor(kw, *, size=None, wall_gap=None, wall_z=(-0.25, 0.25), detai
     bolt_parts = [b for b in bolts if b is not None]
     bolts_m = c.merge_parts(bolt_parts)
     built = {"case": case, "ribs": ribs, "covers": covers, "hollow_shaft": hollow, "torque_arm": torque_arm,
-             "support": support_all, "bearing": bearing, "bolts": bolts_m, "motor": motor}
+             "support": support_all, "bearing": bearing, "bolts": bolts_m}
+    sub = {"plate": plate, "eye_boss": boss, "pin": pin, "pad": pad, "support_body": body}
+    sign = 1.0
+    if up_arm:
+        sign = -1.0
+        built = {k: _mirror_z(v) for k, v in built.items()}
+        sub = {k: _mirror_z(v) for k, v in sub.items()}
+        wall_z = (-wall_z[1], -wall_z[0])
+    built["motor"] = motor
+    sub["flange"] = motor_parts["flange"]
     bb_min = np.min([np.asarray(p[0]).min(axis=0) for p in built.values()], axis=0)
     bb_max = np.max([np.asarray(p[0]).max(axis=0) for p in built.values()], axis=0)
     dims = {
         "size": size, "kw": float(kw), "motor_frame": frame, "flange": fl["flange"],
-        "out_axis": [0.0, 0.0], "motor_axis": [0.0, -DB], "flange_x": L2, "eye": [float(eye[0]), float(eye[1])],
-        "eye_y": y_c, "wall_y": wall_y, "wall_z": [float(wall_z[0]), float(wall_z[1])], "pad_top": pad_top,
-        "z_base": z_base - cheek_t, "holes": holes, "hub_y": [-EA, EA],
+        "arm": arm, "out_axis": [0.0, 0.0], "motor_axis": [0.0, -sign * DB], "flange_x": L2,
+        "eye": [float(eye[0]), sign * float(eye[1])], "eye_y": y_c, "wall_y": wall_y,
+        "wall_z": [float(wall_z[0]), float(wall_z[1])], "pad_edge": sign * pad_top,
+        "clevis_end": sign * (z_base - cheek_t), "holes": holes, "hub_y": [-EA, EA],
         "bbox": {"min": bb_min.tolist(), "max": bb_max.tolist()},
         "faces": sum(_count_faces(p[1]) for p in built.values()),
     }
-    sub = {"plate": plate, "eye_boss": boss, "pin": pin, "pad": pad, "support_body": body, "flange": motor_parts["flange"]}
     return {"parts": built, "dims": dims, "motor_parts": motor_parts, "sub": sub}

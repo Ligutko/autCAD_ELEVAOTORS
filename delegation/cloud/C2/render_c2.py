@@ -37,7 +37,7 @@ if gpu:
         d.use = d.type == "OPTIX"
     scene.cycles.device = "GPU"
 
-paint = c.mat_painted("GM_PAINT", (0.36, 0.40, 0.42), 0.38, grime=0.25)
+paint = c.mat_painted("GM_PAINT", (0.20, 0.23, 0.24), 0.4)          # site.py "dark" (conv_drive)
 dark = c.mat_painted("GM_DARK", (0.16, 0.17, 0.18), 0.45)
 blue = c.mat_painted("GM_MOTOR", (0.05, 0.16, 0.35), 0.35)
 galv = c.mat_galvanized("GM_GALV", age=0.4, spangle_scale=60.0)
@@ -82,10 +82,10 @@ elif what in ("drive", "gallery"):
     ground(14.5)
     hx, y, z = line["head_x"], line["row_y"], sum(g["conveyor"]["casing_z"]) / 2
     if what == "drive":
-        cam = c.camera("CAM", (hx - 1.7, y + 1.55, z + 0.55), (hx - 0.35, y + 0.42, z - 0.12), lens=32)
+        cam = c.camera("CAM", (hx - 0.75, y + 1.72, z + 0.5), (hx + 0.2, y + 0.4, z - 0.15), lens=30)
     else:
         px, py, pz = info["post"]
-        cam = c.camera("CAM", (hx - 4.6, y + 0.75, z + 1.05), (hx - 0.6, y + 0.3, z - 0.15), lens=24)
+        cam = c.camera("CAM", (hx + 3.3, y + 0.62, pz + 1.7), (0.5 * (px + hx), 0.5 * (py + y + 0.45), pz + 0.55), lens=26)
 else:
     from kit import tunnel as tun  # noqa: E402
     t = next(t for t in site["tunnels"] if t["id"] == "T13")
@@ -96,7 +96,7 @@ else:
     ground(t["floor_z"])
     cv = t["conveyor"]
     dx, y = cv["drive_x"], t["row_y"]
-    cam = c.camera("CAM", (dx - 2.2, y + 1.15, -0.9), (dx - 0.3, y + 0.45, -1.45), lens=26)
+    cam = c.camera("CAM", (dx - 1.0, y + 1.35, -1.25), (dx - 0.15, y + 0.5, -1.5), lens=26)
     sun = bpy.data.lights.new("L", "POINT")
     sun.energy = 300
     lo = bpy.data.objects.new("L", sun)

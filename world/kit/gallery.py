@@ -31,15 +31,23 @@ def _frame(p0, p1):
     return p0, d, s, length
 
 
-def conveyor(tail, head, width, height, drive_side=1.0):
+def conveyor(tail, head, width, height, drive_side=1.0, kw=None):
     """Chain conveyor casing between the tail and head pulley axes (x, y, z of the axis).
 
-    The casing runs CONV_END beyond each axis; drive (reducer + motor) sits at the head on the
-    `drive_side` of the run. Returns parts dict.
+    The casing runs CONV_END beyond each axis. The drive is a shaft-mounted gearmotor KA..T
+    (components.shaft_gearmotor) on the head sprocket shaft, on the `drive_side` of the run: hollow shaft on the
+    shaft stub out of the head box wall, motor along the casing toward the tail, torque arm UP to a clevis
+    bolted to the head box wall over its top edge. Returns parts dict ("drive": gear unit, torque arm,
+    clevis, bearing, bolts; "motor": the IEC motor on its B5 flange).
     """
+    from . import components as comp
+    head_grow = 0.06            # EST: head box wider than the casing by this much each side
+    # judgment (C2, 2026-10-01): the gallery and bridge callers pass no kW, so the drive is drawn for 15 kW
+    # (T8, T12, T15; SITE.json equipment). The 11 kW lines (T7, T10, T11, T14) would get a 160M motor, 44 mm shorter.
+    drive_kw = 15.0
     tail, head = np.asarray(tail, float), np.asarray(head, float)
     o, d, s, length = _frame(tail, head)
-    casing, flanges, drive, motor = [], [], [], []
+    casing, flanges = [], []
     hw, hh = width / 2, height / 2
     prof = np.array([(-hw, -hh), (hw, -hh), (hw, hh), (-hw, hh)])
     casing.append(st.member(o - d * CONV_END, o + d * (length + CONV_END), prof, up=(0, 0, 1)))
@@ -47,13 +55,19 @@ def conveyor(tail, head, width, height, drive_side=1.0):
         flanges.append(st.member(o + d * (t - 0.012), o + d * (t + 0.012),
                                  np.array([(-hw - 0.04, -hh - 0.04), (hw + 0.04, -hh - 0.04),
                                            (hw + 0.04, hh + 0.03), (-hw - 0.04, hh + 0.03)]), up=(0, 0, 1)))
-    for at, grow in ((o + d * length, 0.06), (o, 0.04)):           # head and tail boxes
+    for at, grow in ((o + d * length, head_grow), (o, 0.04)):      # head and tail boxes
         casing.append(st.member(at - d * 0.25, at + d * 0.25, prof * (1 + grow / hw), up=(0, 0, 1)))
-    gb = o + d * length + s * drive_side * (hw + 0.25)
-    drive.append(c.box(tuple(gb - [0.18, 0.18, 0.22]), tuple(gb + [0.18, 0.18, 0.22])))
-    motor.append(st.rod(gb + [0, 0, 0.3], gb + [0, 0, 0.3] - d * 0.6, 0.15, 20))
+    # the head box wall is the drive's casing wall: hw and hh grow by the same factor
+    k = 1 + head_grow / hw
+    # judgment (C2): arm up. Down, the clevis hangs 0.41 m under the axis: into the T3/T5 decks (casing 0.1 m over
+    # them, drying.py) and onto the drop gate under every gallery head (drops_x at the head, gallery.silo_row_gallery)
+    gm = comp.shaft_gearmotor(drive_kw if kw is None else kw, arm="up", wall_z=(-hh * k, hh * k))
+    wall_gap = -gm["dims"]["wall_y"]                                # case mid plane from the head box wall
+    out = s * drive_side
+    placed = comp.place_frame(gm["parts"], o + d * length + out * (hw * k + wall_gap), -d, out)
+    drive = [v for name, v in placed.items() if name != "motor"]
     return {"casing": c.merge_parts(casing), "flanges": c.merge_parts(flanges),
-            "drive": c.merge_parts(drive), "motor": c.merge_parts(motor)}
+            "drive": c.merge_parts(drive), "motor": placed["motor"]}
 
 
 def silo_row_gallery(g, line):
@@ -155,6 +169,9 @@ def bridge(b, by_conveyor=False):
             tail = (cv["x"], cv["y"][1], cv["axis_z"])
             head = (cv["x"], cv["y"][0], cv["axis_z"])
         side = 1.0 if cv["x"] > (xa + xb) / 2 else -1.0
+        # C2 (2026-10-01): conveyor() puts drive_side +1 on cross(Z, run) = -X for a run to +Y, so T14 and T10 had their
+        # drives on the inner side; the KA gearmotor there cut the T11 casing and the T7 flanges. Outer side for all.
+        side *= math.copysign(1.0, tail[1] - head[1])
         convs.append(conveyor(tail, head, w, h, drive_side=side))
     merged = {"heavy": c.merge_parts(heavy), "light": c.merge_parts(light), "deck": c.merge_parts(deck),
               "rails": c.merge_parts(rails), "toes": c.merge_parts(toes)}

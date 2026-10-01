@@ -28,7 +28,8 @@
 Зламані варіанти вентилятора: спіраль зі спадним радіусом, мотор на 30 мм вище осі, лапа на 10 мм над рамою,
 рама крізь патрубок, фланці входу і виходу +4/5 %, корпус ширший на 4 %, мотор зсунуто на 50 мм, вироджена грань.
 
-Насадний мотор-редуктор KA..T (shaft_gearmotor, data/gearmotor_ka.json), 5,5 / 11 / 15 / 18,5 кВт, з вершин:
+Насадний мотор-редуктор KA..T (shaft_gearmotor, data/gearmotor_ka.json), 5,5 / 11 / 15 / 18,5 кВт, тяга вниз і вгору
+(варіант "up" дзеркалиться назад по z і міряється тими самими правилами), з вершин:
 - gm_size: кВт → KA67/132S, KA97/160M, KA97/160L, KA97/180M (літерали тут), фланець B5 для рами є в даних;
 - gm_case: Q, QB, L2, H, SA, B, A, FK корпусу = дані ±5 мм;
 - gm_axes: вісь виходу по Y через 0, вісь двигуна по X на z = -DB (центри фланця і кожуха вентилятора) ±2 мм;
@@ -634,8 +635,19 @@ def _gm_data():
     return json.loads(comp.GM_DATA.read_text(encoding="utf-8"))
 
 
-def _gm_build(data, faults, kw):
-    return comp.shaft_gearmotor(kw, wall_z=GM_WALL_Z, data=data, faults=faults)
+def _gm_flip(piece):
+    v = np.asarray(piece[0], float).reshape(-1, 3).copy()
+    v[:, 2] = -v[:, 2]
+    return v, piece[1]
+
+
+def _gm_build(data, faults, kw, arm="down"):
+    """Збірка; варіант arm="up" дзеркалимо назад по z (двигун теж), щоб міряти тими самими правилами."""
+    item = comp.shaft_gearmotor(kw, arm=arm, wall_z=GM_WALL_Z, data=data, faults=faults)
+    if arm == "up":
+        for key in ("parts", "sub", "motor_parts"):
+            item[key] = {k: _gm_flip(v) for k, v in item[key].items()}
+    return item
 
 
 def _mid(v, k):
@@ -647,12 +659,13 @@ def evaluate_gm(data, faults=None, mutate=None):
     faults = faults or None
     bad = {k: [] for k in ("gm_size", "gm_case", "gm_axes", "gm_hollow", "gm_flange", "gm_arm", "gm_support", "gm_clash", "gm_mesh")}
     seen = {}
-    for kw, (want_size, want_frame) in GM_EXPECT.items():
-        item = _gm_build(data, faults, kw)
+    cases = [(kw, ws, wf, arm) for kw, (ws, wf) in GM_EXPECT.items() for arm in ("down", "up")]
+    for kw, want_size, want_frame, arm in cases:
+        item = _gm_build(data, faults, kw, arm)
         if mutate:
             mutate(item)
         p, sub, d = item["parts"], item["sub"], item["dims"]
-        tag = f"{kw:g} кВт"
+        tag = f"{kw:g} кВт {arm}"
         # gm_size
         if d["size"] != want_size or d["motor_frame"] != want_frame or want_frame not in data["motor_flange"]:
             bad["gm_size"].append(f"{tag}: {d['size']}/{d['motor_frame']}")
@@ -750,7 +763,7 @@ def evaluate_gm(data, faults=None, mutate=None):
         "gm_flange": ("двигун торкається вхідного фланця, P фланця B5", "допуск 2 / 5 мм; " + seen.get("flange", "")),
         "gm_arm": ("реактивна тяга кріпиться до дна корпусу, вухо в (FC, -O)", "допуск 2 / 5 мм; " + seen.get("arm", "")),
         "gm_support": ("опора тяги на стінці кожуха, палець у вусі", "допуск 2 мм, перекриття ≥ 50 мм; " + seen.get("support", "")),
-        "gm_clash": ("двигун, тяга, корпус, підшипник не перетинають опору", "BVH, 5 пар × 4 кВт"),
+        "gm_clash": ("двигун, тяга, корпус, підшипник не перетинають опору", "BVH, 5 пар × 4 кВт × тяга вниз/вгору"),
         "gm_mesh": ("сітка мотор-редуктора без вироджених граней", f"граней {seen.get('faces')}"),
     }
     return [(rid, not bad[rid], labels[rid][0], f"{labels[rid][1]}; {bad[rid][:4] or 'ok'}") for rid in bad]

@@ -212,10 +212,17 @@ def build_conveyor(site, t, inlet):
                                        (xp, y + BELT_W / 2 + 0.05, zb - PULLEY_R + 0.05), PULLEY_R, 32))
         parts["pulleys"].append(st.rod((xp, y - hw - 0.08, zb - PULLEY_R + 0.05), (xp, y + hw + 0.08, zb - PULLEY_R + 0.05), 0.03, 12))
     zs = zb - PULLEY_R + 0.05
-    parts["drive"].append(c.box((drive - 0.16, y + hw + 0.08, zs - 0.18), (drive + 0.16, y + hw + 0.36, zs + 0.18)))
     back = -1 if east else 1
-    parts["motor"].append(st.rod((drive, y + hw + 0.22, zs + 0.34), (drive + back * 0.42, y + hw + 0.22, zs + 0.34), 0.11, 24))
-    parts["drive"].append(c.box((drive - 0.12, y + hw + 0.1, zs + 0.18), (drive + 0.12, y + hw + 0.34, zs + 0.24)))
+    # C2: shaft-mounted gearmotor KA..T (components.shaft_gearmotor) on the drive pulley shaft, +Y side. The wall it
+    # hangs off is the discharge hood side (hw + 0.05, z0 - 0.25 .. z1 + 0.1, below); motor along the casing toward
+    # the tail, torque arm down to a clevis on the hood wall. kW from SITE.json equipment (T9, T13, T16: 5.5 -> KA67).
+    from . import components as comp
+    kw = next((it["kw"] for it in site.get("equipment", {}).get("items", []) if it["id"] == cv["id"] and it["kind"] == "motor"), 5.5)
+    hood_w = hw + 0.05
+    gm = comp.shaft_gearmotor(kw, wall_z=(z0 - 0.25 - zs, z1 + 0.1 - zs))
+    placed = comp.place_frame(gm["parts"], (drive, y + hood_w - gm["dims"]["wall_y"], zs), (back, 0.0, 0.0), (0.0, 1.0, 0.0))
+    parts["motor"].append(placed.pop("motor"))
+    parts["drive"].extend(placed.values())
     for s in (-1, 1):                                            # screw take-up at the tail
         parts["drive"].append(st.rod((tail + back * 0.05, y + s * (hw + 0.05), zs), (tail + back * 0.55, y + s * (hw + 0.05), zs), 0.012, 8))
 
