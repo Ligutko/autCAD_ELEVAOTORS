@@ -1097,11 +1097,12 @@ def radial_fan(kw, size=None, hand="R", outlet_deg=0, *, detail="full", data=Non
     plate_t = _fv(table, "frame", "plate_t")
     x_r0 = -(C2 - C_) - 0.04
     x_r1 = max(C_, foot_x1) + 0.04
-    y_rail = C1 / 2.0 + rail_b / 2.0
+    # Webs inboard, flanges outboard: the anchor holes (C1 apart) sit in the open bottom flanges.
+    y_rail = C1 / 2.0 - rail_b / 2.0
     chan = st.channel(rail_h, rail_b, rail_tw, rail_tf)
     frame_parts = [
-        st.member((x_r0, y_rail, rail_h / 2.0), (x_r1, y_rail, rail_h / 2.0), chan),
-        st.member((x_r0, -y_rail, rail_h / 2.0), (x_r1, -y_rail, rail_h / 2.0), chan, roll=np.pi),
+        st.member((x_r0, y_rail, rail_h / 2.0), (x_r1, y_rail, rail_h / 2.0), chan, roll=np.pi),
+        st.member((x_r0, -y_rail, rail_h / 2.0), (x_r1, -y_rail, rail_h / 2.0), chan),
     ]
     cross_x = [x_r0 + 0.05, 0.5 * (foot_x0 + foot_x1) - 0.12, 0.5 * (foot_x0 + foot_x1) + 0.12, x_r1 - 0.05]
     for xc in cross_x:
@@ -1163,7 +1164,12 @@ def radial_fan(kw, size=None, hand="R", outlet_deg=0, *, detail="full", data=Non
              "bolts": bolts, "wheel": wheel, "stool": stool}
     bb_min = np.min([np.asarray(p[0]).min(axis=0) for p in built.values()], axis=0)
     bb_max = np.max([np.asarray(p[0]).max(axis=0) for p in built.values()], axis=0)
+    flange_top = np.asarray(outlet[0], float)
+    flange_top = flange_top[flange_top[:, 2] >= flange_top[:, 2].max() - 1e-9]
     dims = {
+        "outlet": {"y": 0.5 * float(flange_top[:, 1].max() + flange_top[:, 1].min()), "z": float(flange_top[:, 2].max()),
+                   "neck": o["A"], "flange_y": float(flange_top[:, 1].max() - flange_top[:, 1].min()),
+                   "flange_x": float(flange_top[:, 0].max() - flange_top[:, 0].min())},
         "size": FAN_SIZE, "hand": hand, "outlet_deg": outlet_deg, "kw": float(kw),
         "motor_frame": mot["dims"]["frame"], "axis_z": axis_z, "wheel_d": 2.0 * wheel_r,
         "housing_w": w, "inlet_face_x": x_face, "length": float(np.asarray(motor[0])[:, 0].max()) - x_face,

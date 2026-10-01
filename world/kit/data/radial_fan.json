@@ -17,7 +17,7 @@
     "H": {"v": 340, "src": "pasport p.5 table Pr 0, row 5", "basis": "sourced", "note": "Outlet flange plane above the shaft axis at Pr 0 deg."},
     "r90": {"v": 379, "src": "pasport p.5 table Pr 0, b", "basis": "sourced", "note": "Spiral radius 90 deg from the tongue (right side)."},
     "r180": {"v": 440, "src": "pasport p.5 table Pr 90, b (the same radius seen after the 90 deg turn)", "basis": "sourced", "note": "Spiral radius 180 deg from the tongue (bottom). Pr 90 b=440 and Pr 270 b=440 agree."},
-    "r270": {"v": 500, "src": "pasport p.5: (B - b) = 529 at Pr 0 minus (A1 - A)/2 = 29", "basis": "analog", "note": "Spiral radius where it enters the neck (left side). 529 is the outlet flange edge, the neck wall is 29 mm inside it. The steps 379 -> 440 -> 500 are 61 and 60 mm per 90 deg, i.e. an Archimedean spiral r = 319 + 0.667*theta(deg); this is the only reading under which the three numbers are linear."},
+    "r270": {"v": 500, "src": "pasport p.5: (B - b) = 529 at Pr 0 minus (A1 - A)/2 = 29", "basis": "analog", "note": "Spiral radius where it enters the neck (left side). 529 is the outlet flange edge, the neck wall is 29 mm inside it. The steps 379 -> 440 -> 500 are 61 and 60 mm per 90 deg, i.e. close to an Archimedean spiral (the fit in components._fit_spiral gives r = 315 + 0.683*theta(deg) mm for the extents); this is the only reading under which the three numbers are almost linear."},
     "positions": {
       "v": {
         "0": {"B": 908, "b": 379, "H": 340},
