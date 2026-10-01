@@ -138,7 +138,7 @@ def gate_tza(size, open_fraction=0.0, side=1):
             body.append(c.box((x - 0.003, min(y, y + sy * 0.03), -h + FLANGE_T), (x + 0.003, max(y, y + sy * 0.03), -FLANGE_T)))
     # blade pocket on -X: a flat sheet box the blade slides into
     zb = -h / 2
-    px0 = -w - travel + 0.03
+    px0 = -(s / 2 + 0.01 + travel) - 0.01 - WALL   # the open blade end + 10 mm, then the end wall (was 32 mm short, C4)
     body += [c.box((px0, -s / 2 - 0.03, zb - POCKET_H / 2), (-w, s / 2 + 0.03, zb - POCKET_H / 2 + WALL)),
              c.box((px0, -s / 2 - 0.03, zb + POCKET_H / 2 - WALL), (-w, s / 2 + 0.03, zb + POCKET_H / 2)),
              c.box((px0, -s / 2 - 0.03, zb - POCKET_H / 2), (px0 + WALL, s / 2 + 0.03, zb + POCKET_H / 2)),
