@@ -42,6 +42,19 @@
 Зламані варіанти: 15 кВт → KA67 у копії таблиці, корпус ширший на 4 %, двигун на 30 мм вище, отвір +15 %,
 двигун на 10 мм від фланця, тяга на 10 мм нижче дна, накладка на 20 мм від стінки, стійка крізь тягу в корпус, вироджена грань.
 
+Насадний редуктор Dodge TA6307H25 з пасовою передачею (shaft_mount_reducer, data/reducer_ta6307h.json), норії H5 і H6, з вершин:
+- rd_case: торцевий вид корпусу 20,55 × 25,23 in, вісь → верх 10,28 in, маточина прямого отвору A і B = дані ±5 мм;
+- rd_input: вхідний вал по Y (паралельно виходу), вісь у (1,78; -9,17) in від осі виходу ±2 мм, Ø 2-3/16 in, кінець 11,18 in ±5 мм;
+- rd_centers: міжосьова шківів у межах M1 762-863,6 мм (G1-85), лапи двигуна на плиті 0 ± 2 мм, хід плити 0-4,53 in;
+- rd_sheaves: осі шківів по Y, середні площини канавок ±2 мм, шків редуктора ≥ 157,48 мм (G1-28);
+- rd_guard: усі вершини шківів і пасів усередині кожуха (опуклий обрис XZ і межі по Y);
+- rd_arm: палець на корпусі в (6,11; -16,44) in ±5 мм, штанга 749,3-901,7 мм, під 90° ± 5° до радіуса пальця;
+- rd_anchor: кронштейн штанги на стійці 0 ± 2 мм, стійка на підлозі 0 ± 2 мм, палець крізь вухо кронштейна;
+- rd_clash: двигун (без вала) × корпус і кожух, кріплення × корпус, кожух × корпус і кріплення, штанга × корпус, кріплення, стійка (BVH);
+- rd_mesh: індекси, NaN, вироджені грані.
+Зламані варіанти: корпус вищий на 2 %, вхідний вал +6 мм убік, двигун +60 мм угору, шків двигуна +5 мм уздовж вала,
+кожух менший на 15 %, штанга 950 мм, стійка не доходить до підлоги 20 мм, швелер у корпусі, вироджена грань.
+
 Запуск:
     blender --background --python world/build/check_components.py
 Код виходу 1, якщо будь-який випадок провалено.
@@ -791,6 +804,182 @@ GM_VARIANTS = (
 )
 
 
+# ---------------------------------------------------------------- насадний редуктор Dodge TA6307H з пасовою передачею
+
+RD_TOL = 0.005
+RD_TOL_AXIS = 0.002
+RD_TOL_GAP = 0.002
+RD_ANGLE_TOL = 5.0          # градусів: штанга під 90° до лінії «вісь виходу → палець на корпусі» (G1-80)
+# Літерали, вписані тут окремо від коду кіта (мм, з креслення G1-80, прочитання C3): вхідний вал на 1,78 in праворуч
+# і 9,17 in нижче осі виходу; палець штанги на корпусі 6,11 in праворуч і 16,44 in нижче; кінець вхідного вала
+# 4,83 + 6,35 = 11,18 in від площини роз'єму.
+RD_INPUT_MM = (45.21, -232.92)
+RD_PIN_MM = (155.19, -417.58)
+RD_TIP_MM = 283.97
+RD_TRAVEL_MM = (0.0, 115.06)      # плита двигуна над швелером: 0 … 4,53 in понад мінімальні 2,09 in (G1-84)
+RD_GAP_MIN_MM = 53.09
+# Норії H5 і H6: оберти барабана з швидкості стрічки на Ø750 (noria_n100, 2,87 і 2,40 м/с), підлога верхнього майданчика
+# під віссю барабана (SITE.json + noria_n100: 1,285 і 1,385 м).
+RD_CASES = ((73.08, -1.285, "H5"), (61.12, -1.385, "H6"))
+
+
+def _rd_data():
+    return json.loads(comp.RD_DATA.read_text(encoding="utf-8"))
+
+
+def _rd_build(data, faults, rpm, floor_z):
+    return comp.shaft_mount_reducer(22.0, output_rpm=rpm, floor_z=floor_z, data=data, faults=faults)
+
+
+def _in_hull(pts, hull):
+    """Усі точки (x, z) всередині опуклого многокутника проти годинникової (межа включно, 0,1 мм)."""
+    h = np.asarray(hull, float)
+    nxt = np.roll(h, -1, axis=0)
+    cross = (nxt[None, :, 0] - h[None, :, 0]) * (pts[:, None, 1] - h[None, :, 1]) - \
+            (nxt[None, :, 1] - h[None, :, 1]) * (pts[:, None, 0] - h[None, :, 0])
+    lens = np.linalg.norm(nxt - h, axis=1)[None, :]
+    return (cross / lens >= -1e-4).all(axis=1)
+
+
+def evaluate_rd(data, faults=None, mutate=None):
+    """Список (rule_id, ok, label, info) для shaft_mount_reducer, H5 і H6. Геометрію міряємо з вершин, розміри — з JSON."""
+    faults = faults or None
+    t = data["ta6307h"]
+    mm = lambda *k: _fan_mm(t, *k)  # noqa: E731
+    bad = {k: [] for k in ("rd_case", "rd_input", "rd_centers", "rd_sheaves", "rd_guard", "rd_arm", "rd_anchor", "rd_clash", "rd_mesh")}
+    seen = {}
+    for rpm, floor_z, tag in RD_CASES:
+        item = _rd_build(data, faults, rpm, floor_z)
+        if mutate:
+            mutate(item)
+        p, sub = item["parts"], item["sub"]
+        # rd_case: торцевий вид 20,55 × 25.23 in, 10,28 in від осі до верху; маточина A і B прямого отвору
+        hv = _verts(sub["housing"])
+        hub = _verts(sub["hub"])
+        got = {"W": float(np.ptp(hv[:, 0])), "H": float(np.ptp(hv[:, 2])), "top": float(hv[:, 2].max()),
+               "A": float(np.ptp(hub[:, 1])), "B": 2.0 * float(np.hypot(hub[:, 0], hub[:, 2]).max())}
+        want = {"W": mm("housing_end_view_horizontal"), "H": mm("housing_end_view_vertical"), "top": mm("output_cl_to_top"),
+                "A": mm("straight_bore_length_A"), "B": mm("straight_bore_hub_od_B")}
+        bad["rd_case"] += [f"{tag} {k} {got[k] * 1000:.1f}≠{want[k] * 1000:.1f}" for k in got if abs(got[k] - want[k]) > RD_TOL]
+        seen.setdefault("case", ", ".join(f"{k} {got[k] * 1000:.1f}" for k in got))
+        # rd_input: вхідний вал паралельний виходу (по Y), вісь у (1,78; -9,17) in, Ø 2-3/16 in, кінець 11,18 in
+        iv = _verts(sub["input_rod"])
+        ix, iz = _mid(iv, 0), _mid(iv, 2)
+        along = float(np.ptp(iv[:, 1])) > 2.0 * float(np.ptp(iv[:, 0]))
+        d_in = float(np.ptp(iv[:, 0]))
+        tip = -float(iv[:, 1].min())
+        if (not along or abs(ix * 1000 - RD_INPUT_MM[0]) > RD_TOL_AXIS * 1000 or abs(iz * 1000 - RD_INPUT_MM[1]) > RD_TOL_AXIS * 1000
+                or abs(d_in - mm("input_shaft_diameter")) > RD_TOL_AXIS or abs(tip * 1000 - RD_TIP_MM) > RD_TOL * 1000):
+            bad["rd_input"].append(f"{tag}: вісь ({ix * 1000:.1f}, {iz * 1000:.1f}) по Y {along}, Ø {d_in * 1000:.1f}, кінець {tip * 1000:.1f}")
+        seen.setdefault("input", f"вісь ({ix * 1000:.1f}, {iz * 1000:.1f}) мм, від осі виходу {np.hypot(ix, iz) * 1000:.1f} мм, Ø {d_in * 1000:.1f}")
+        # rd_centers: міжосьова шківів у межах M1 (G1-85, 284T/286T), лапи двигуна на плиті, хід плити на тягах
+        rv, mv = _verts(sub["sheave_r"]), _verts(sub["sheave_m"])
+        C = float(np.hypot(_mid(rv, 0) - _mid(mv, 0), _mid(rv, 2) - _mid(mv, 2)))
+        m1 = [float(x) / 1000.0 for x in t["mount_286T_position_B"]["belt_centers_M1"]["v"]]
+        feet = _verts(item["motor_parts"]["feet"])
+        pl = _verts(sub["plate"])
+        foot_gap = float(feet[:, 2].min()) - float(pl[:, 2].max())
+        sup_top = float(_verts(sub["support"])[:, 2].max())
+        travel = (float(pl[:, 2].min()) - sup_top) * 1000 - RD_GAP_MIN_MM
+        if not m1[0] <= C <= m1[1] or abs(foot_gap) > RD_TOL_GAP or not RD_TRAVEL_MM[0] <= travel <= RD_TRAVEL_MM[1]:
+            bad["rd_centers"].append(f"{tag}: C {C * 1000:.1f} мм (M1 {m1[0] * 1000:.0f}-{m1[1] * 1000:.1f}), лапи {foot_gap * 1000:.2f} мм, хід {travel:.1f} мм")
+        seen.setdefault("centers", f"C {C * 1000:.1f} мм, лапи {foot_gap * 1000:.2f} мм, хід плити {travel:.1f} мм")
+        # rd_sheaves: осі обох шківів по Y (паралельні виходу), середні площини канавок збігаються, шків редуктора ≥ мін.
+        axes_y = all(float(np.ptp(v[:, 1])) < 0.5 * min(float(np.ptp(v[:, 0])), float(np.ptp(v[:, 2]))) for v in (rv, mv))
+        dy = abs(_mid(rv, 1) - _mid(mv, 1))
+        od_r = float(np.ptp(rv[:, 0]))
+        min_pd = _fan_mm(data, "selection", "min_sheave_pd")
+        if not axes_y or dy > RD_TOL_GAP or od_r < min_pd:
+            bad["rd_sheaves"].append(f"{tag}: осі по Y {axes_y}, Δ площин {dy * 1000:.2f} мм, Ø зовн. {od_r * 1000:.1f} / мін. {min_pd * 1000:.1f}")
+        seen.setdefault("sheaves", f"Δ площин {dy * 1000:.2f} мм, Ø шківів {od_r * 1000:.0f} / {float(np.ptp(mv[:, 0])) * 1000:.0f} мм")
+        # rd_guard: кожух закриває обидва шківи і паси (у площині XZ і по Y)
+        gv = _verts(sub["guard_body"])
+        hull = comp._hull2(gv[:, [0, 2]])
+        inner = np.vstack([rv, mv, _verts(p["belts"])])
+        inside = _in_hull(inner[:, [0, 2]], hull)
+        in_y = (inner[:, 1] >= gv[:, 1].min()) & (inner[:, 1] <= gv[:, 1].max())
+        out_n = int((~(inside & in_y)).sum())
+        if out_n:
+            bad["rd_guard"].append(f"{tag}: поза кожухом {out_n} вершин із {len(inner)}")
+        seen.setdefault("guard", f"поза кожухом {out_n} з {len(inner)} вершин")
+        # rd_arm: палець на корпусі в (6,11; -16,44) in, довжина штанги 29,50-35,50 in, кут 90° ± 5° до радіуса
+        c1, c2 = _verts(sub["pin_case"]), _verts(sub["pin_bracket"])
+        P1 = np.array([_mid(c1, 0), _mid(c1, 2)])
+        P2 = np.array([_mid(c2, 0), _mid(c2, 2)])
+        L = float(np.linalg.norm(P2 - P1))
+        cosang = float(np.dot(P2 - P1, P1) / (L * np.linalg.norm(P1)))
+        ang = float(np.degrees(np.arccos(np.clip(cosang, -1.0, 1.0))))
+        lo, hi = mm("torque_arm_length_min"), mm("torque_arm_length_max")
+        if (abs(P1[0] * 1000 - RD_PIN_MM[0]) > RD_TOL * 1000 or abs(P1[1] * 1000 - RD_PIN_MM[1]) > RD_TOL * 1000
+                or not lo <= L <= hi or abs(ang - 90.0) > RD_ANGLE_TOL):
+            bad["rd_arm"].append(f"{tag}: палець ({P1[0] * 1000:.1f}, {P1[1] * 1000:.1f}), L {L * 1000:.1f} ({lo * 1000:.1f}-{hi * 1000:.1f}), кут {ang:.1f}°")
+        seen.setdefault("arm", f"L {L * 1000:.1f} мм, кут {ang:.1f}°")
+        # rd_anchor: кронштейн лежить на стійці, стійка стоїть на підлозі, палець проходить крізь вухо кронштейна
+        bb, ped, lug = _verts(sub["bracket_base"]), _verts(sub["pedestal"]), _verts(sub["bracket_lug"])
+        g_top = float(bb[:, 2].min()) - float(ped[:, 2].max())
+        g_floor = float(ped[:, 2].min()) - floor_z
+        through = (lug[:, 0].min() < P2[0] < lug[:, 0].max() and lug[:, 2].min() < P2[1] < lug[:, 2].max()
+                   and c2[:, 1].min() <= lug[:, 1].min() and c2[:, 1].max() >= lug[:, 1].max())
+        if abs(g_top) > RD_TOL_GAP or abs(g_floor) > RD_TOL_GAP or not through:
+            bad["rd_anchor"].append(f"{tag}: кронштейн над стійкою {g_top * 1000:.2f} мм, стійка над підлогою {g_floor * 1000:.2f} мм, палець у вусі {through}")
+        seen.setdefault("anchor", f"кронштейн {g_top * 1000:.2f} мм над стійкою, стійка {g_floor * 1000:.2f} мм над підлогою")
+        # rd_clash: двигун (без вала), кожух, кріплення, штанга, стійка — без перетинів (BVH)
+        body = comp.c.merge_parts([v for k, v in item["motor_parts"].items() if k != "shaft"])
+        pairs = (("двигун", body, "корпус", p["case"]), ("двигун", body, "кожух", p["guard"]),
+                 ("кріплення", p["mount"], "корпус", p["case"]), ("кожух", p["guard"], "корпус", p["case"]),
+                 ("кожух", p["guard"], "кріплення", p["mount"]), ("штанга", sub["arm_body"], "корпус", p["case"]),
+                 ("штанга", sub["arm_body"], "кріплення", p["mount"]), ("штанга", sub["arm_body"], "стійка", p["stand"]))
+        bad["rd_clash"] += [f"{tag} {a}×{b}" for a, pa, b, pb in pairs if _bvh_pair(pa, pb)]
+        # rd_mesh
+        for name, part in p.items():
+            verts = _verts(part)
+            if not np.isfinite(verts).all():
+                bad["rd_mesh"].append(f"{tag} {name} NaN")
+            for face in _iter_faces(part[1]):
+                if face.size and (int(face.min()) < 0 or int(face.max()) >= len(verts)):
+                    bad["rd_mesh"].append(f"{tag} {name} індекс")
+                    break
+                if face.size and _face_area(verts, face) < DEGEN_M2:
+                    bad["rd_mesh"].append(f"{tag} {name} вироджена")
+                    break
+        seen.setdefault("faces", [])
+        seen["faces"].append(item["dims"]["faces"])
+    labels = {
+        "rd_case": ("корпус TA6307H: торцевий вид W × H, вісь → верх, маточина A і B", "допуск 5 мм; " + seen.get("case", "")),
+        "rd_input": ("вхідний вал паралельний виходу, вісь (1,78; -9,17) in, Ø 2-3/16 in, кінець 11,18 in", "допуск 2 / 5 мм; " + seen.get("input", "")),
+        "rd_centers": ("міжосьова пасової передачі в межах M1 762-863,6 мм, лапи на плиті, хід плити 0-4,53 in", seen.get("centers", "")),
+        "rd_sheaves": ("осі шківів паралельні, одна площина канавок, шків редуктора ≥ 157,5 мм", "допуск 2 мм; " + seen.get("sheaves", "")),
+        "rd_guard": ("кожух закриває обидва шківи і паси", seen.get("guard", "")),
+        "rd_arm": ("штанга TA6307RA 749,3-901,7 мм, під 90° до радіуса пальця", "допуск 5 мм / 5°; " + seen.get("arm", "")),
+        "rd_anchor": ("штанга кінцем на конструкції: кронштейн на стійці, стійка на підлозі", "допуск 2 мм; " + seen.get("anchor", "")),
+        "rd_clash": ("двигун, кожух, кріплення, штанга, стійка без перетинів", "BVH, 8 пар × H5/H6"),
+        "rd_mesh": ("сітка редуктора без вироджених граней", f"граней {seen.get('faces')}"),
+    }
+    return [(rid, not bad[rid], labels[rid][0], f"{labels[rid][1]}; {bad[rid][:4] or 'ok'}") for rid in bad]
+
+
+def _rd_degenerate(item):
+    verts, faces = item["parts"]["bolts"]
+    verts = np.asarray(verts, float).reshape(-1, 3)
+    n = len(verts)
+    verts = np.vstack([verts, verts[:1], verts[:1], verts[:1]])
+    blocks = faces if isinstance(faces, list) else [faces]
+    item["parts"]["bolts"] = (verts, list(blocks) + [np.array([[n, n + 1, n + 2]], np.int64)])
+
+
+RD_VARIANTS = (
+    ("rd_case", "корпус вищий на 2 %", {"case_h_scale": 1.02}, None),
+    ("rd_input", "вхідний вал зсунуто на 6 мм убік", {"input_dx": 0.006}, None),
+    ("rd_centers", "двигун на 60 мм вище: міжосьова за межею M1", {"motor_dz": 0.06}, None),
+    ("rd_sheaves", "шків двигуна зсунуто вздовж вала на 5 мм", {"sheave_dy": 0.005}, None),
+    ("rd_guard", "кожух менший на 15 %", {"guard_scale": 0.85}, None),
+    ("rd_arm", "штанга 950 мм, довша за TA6307RA", {"arm_len": 0.95}, None),
+    ("rd_anchor", "стійка на 20 мм не доходить до підлоги", {"stand_gap": 0.02}, None),
+    ("rd_clash", "швелер кріплення опущено на 30 мм у корпус", {"support_dz": -0.03}, None),
+    ("rd_mesh", "у болтах вироджена грань", None, _rd_degenerate),
+)
+
+
 def _failed(rows):
     return {rid for rid, ok, _label, _info in rows if not ok}
 
@@ -887,8 +1076,29 @@ def main():
         else:
             print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
 
+    rd_data = _rd_data()
+    rd_base = evaluate_rd(rd_data)
+    rd_fail = _failed(rd_base)
+    for rid, ok, label, info in rd_base:
+        ok_all &= ok
+        print(f"{'PASS' if ok else 'FAIL'}  {label}: {info}", flush=True)
+    rd_caught = 0
+    for rid, title, faults, mutate in RD_VARIANTS:
+        got_rows = evaluate_rd(rd_data, faults, mutate)
+        got = _failed(got_rows)
+        extra = got - rd_fail - {rid}
+        info = next(i for r, _ok, _l, i in got_rows if r == rid)
+        seen = rid in got and not extra
+        rd_caught += bool(seen)
+        ok_all &= seen
+        if seen:
+            print(f"EXPECTED FAIL {title} -> OK ({rid})", flush=True)
+        else:
+            print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
+
     print(f"CASES {atomic} base + {len(variants)} broken, caught {caught}/{len(variants)}", flush=True)
     print(f"GEARMOTOR {len(gm_base)} rules + {len(GM_VARIANTS)} broken, caught {gm_caught}/{len(GM_VARIANTS)}", flush=True)
+    print(f"REDUCER {len(rd_base)} rules + {len(RD_VARIANTS)} broken, caught {rd_caught}/{len(RD_VARIANTS)}", flush=True)
     print(f"FAN {len(fan_base)} rules + {len(FAN_VARIANTS)} broken, caught {fan_caught}/{len(FAN_VARIANTS)}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)
     sys.exit(0 if ok_all else 1)

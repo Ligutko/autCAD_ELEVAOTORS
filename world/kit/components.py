@@ -1540,3 +1540,512 @@ def shaft_gearmotor(kw, *, size=None, arm="down", wall_gap=None, wall_z=(-0.25, 
         "faces": sum(_count_faces(p[1]) for p in built.values()),
     }
     return {"parts": built, "dims": dims, "motor_parts": motor_parts, "sub": sub}
+
+
+# ======================================================================= shaft-mount reducer with a belt drive
+# Dodge Torque-Arm II TA6307H25 on the head pulley shaft (straight bore), TA6307MM belt-drive motor mount in
+# position B (motor above the reducer), IEC motor, V-belt sheaves under a guard, TA6307RA torque-arm rod down to a
+# stand on the platform. Numbers live in data/reducer_ta6307h.json (mm). Local frame: the output (hollow shaft)
+# axis is Y through the origin; y = 0 is the split plane of the two case halves; the input shaft sticks out to -Y
+# (outboard, catalogue G1-80 side view: input on the side away from the driven-shaft bearing), so the driven
+# equipment is on +Y; Z up. The end view of G1-80 looks from the input side, so its "right" is +X here.
+
+RD_DATA = Path(__file__).resolve().parent / "data" / "reducer_ta6307h.json"
+RD_PARTS = ("case", "bolts", "input_shaft", "mount", "sheaves", "belts", "guard", "torque_arm", "stand", "motor")
+IN = 0.0254
+# Read off the TorqueArmII.pdf drawings by the C3 agent (inches). The data file has the numbers, but some of its
+# "what is it" notes differ from this reading; the reading is given per item.
+RD_READ = {
+    # G1-80 end view: 1.78 is the horizontal distance between the output CL and the vertical line through the
+    # input-shaft centre (the data file files it as a turnbuckle segment). With 9.17 (output CL down to the centre
+    # of the 4-bolt input cover, i.e. the input shaft) it places the input shaft.
+    "input_dx": 1.78,
+    # G1-80 side view: 4.83 runs from the input boss face to the torque-arm rod axis, the rod axis is the split
+    # plane (4.83 + 5.41 = 10.24 = boss face .. outer hub end, 5.42 = split plane .. hub end); 6.35 runs from the
+    # input-shaft end to the boss face. So the boss face is 4.83 and the shaft end 4.83 + 6.35 = 11.18 out of the
+    # split plane. (The data file reads 4.83 / 6.35 as rod widths, and 5.35 as a shaft-to-shaft distance; on the
+    # drawing 5.35 is the shaft end .. hub end, an axial length: the input shaft is 9.17 below the output.)
+    "boss_face": 4.83,
+    "input_stick": 6.35,
+    # G1-80 end view: the torque-arm case pin is 6.11 right of and 16.44 below the output CL; the rod is drawn at
+    # 90 deg to the line from the output CL to that pin (the 90 deg mark next to 6.11).
+    "pin_dx": 6.11,
+    # G1-84 Position B: support channel 1.75 deep, motor plate at least 2.09 over it and 4.53 of travel on the
+    # threaded rods; mount post 2.50 thick; post outer face 10.42 from the input-shaft end (B + C = 1.59 + 8.83 =
+    # 5.91 + 4.51, G1-85), C = shaft end .. plate end, 4.51-8.83.
+    "support_depth": 1.75, "plate_gap": 2.09, "plate_travel": 4.53, "post_t": 2.50, "post_from_tip": 10.42,
+    "plate_end_C": (4.51, 8.83),
+    # G1-80 end view outline at 14.65 px/in (+-0.2 in): top flat +-4.3, upper corners down to +4.2 on the sides,
+    # sides down to -8.7, bottom flat +-6.6. Only 20.55 x 25.23 and 10.28 are lettered.
+    "top_flat": 4.3, "side_top": 4.2, "side_bot": -8.7, "bot_flat": 6.6,
+    # G1-80: the large round cover around the output is ~6.0 in radius on the end view (not lettered).
+    "cover_r": 6.0,
+}
+# EST, not lettered anywhere: case corner radius, flange lip, shell edge round, boss and cover sizes, bolt counts,
+# plate and bar thickness, rod and turnbuckle diameters, stand section, guard clearance and sheet.
+RD_CORNER = 0.040
+RD_LIP = 0.020           # split-flange lip left visible around the case shells
+RD_FLANGE_T = 0.008      # half thickness of the split flange
+RD_BOSS_R = 0.058        # input bearing boss radius
+RD_COVER_HALF = 0.055    # input cover: rounded square, half size
+RD_BOLTS = 18            # split-flange bolts round the outline
+RD_BAR_T = 0.019         # mount bars (flat), thickness across X
+RD_WEB_T = 0.0095        # support channel web, 3/8 in
+RD_PLATE_T = 0.0127      # motor plate, 1/2 in
+RD_ROD_R = 0.0095        # 3/4 in threaded rods of the plate
+RD_ARM_R = 0.016         # torque-arm rod, 1-1/4 in
+RD_TB_R = 0.026          # turnbuckle body
+RD_LUG_T = 0.025         # case lug (fulcrum) in the split plane
+RD_LUG_PIN_R = 0.0127    # 1 in case pin
+RD_BRK_W = 0.0762        # bracket base width across, 3 in
+RD_BRK_T = 0.0127        # bracket base thickness
+RD_BRK_LUG_T = 0.019     # bracket lug, 3/4 in
+RD_CHEEK = 0.012         # clevis cheek at the case end
+RD_STAND = 0.100         # stand post SHS 100 (judgment: no drawing of the support)
+RD_STAND_BASE = (0.22, 0.016)
+RD_STAND_CAP = (0.16, 0.012)
+RD_GUARD_CLEAR = 0.030   # guard inside clear of the sheave rims
+RD_GUARD_T = 0.003
+RD_GAP = 0.0005          # clearance left between parts that bear on each other (so BVH does not read contact)
+# V-belt drive: 3 x SPB (EST), ISO 4183 groove pitch e = 19, edge f = 12.5, top width ~16.5, depth ~17.5 (EST);
+# the reducer sheave pitch diameter 200 mm (EST, above the 157.48 minimum of G1-28); motor 1475 rpm (EST, 4-pole
+# 50 Hz at load); belt section 16 x 13 (SPB, EST).
+RD_GROOVES = 3
+RD_E, RD_F = 0.019, 0.0125
+RD_GROOVE_TOP, RD_GROOVE_DEPTH = 0.0165, 0.0175
+RD_SHEAVE_PD = 0.200
+RD_MOTOR_RPM = 1475.0
+RD_BELT = (0.016, 0.013)
+# EST axial layout of the belt plane: sheave centre 240 mm out of the split plane, motor shoulder 55 mm inside it.
+RD_BELT_S = 0.240
+RD_SHOULDER_S = 0.185
+
+
+def _rd_table(data):
+    if data is None:
+        data = json.loads(RD_DATA.read_text(encoding="utf-8"))
+    return data
+
+
+def _rv(node, *path):
+    for key in path:
+        node = node[key]
+    v = node["v"] if isinstance(node, dict) else node
+    return float(v) / 1000.0
+
+
+def _outward(p, q):
+    d = np.subtract(q, p)
+    n = np.array([d[1], -d[0]], float)
+    return n / np.linalg.norm(n)
+
+
+def _round_core(poly, radius):
+    """Corners of a convex counter-clockwise polygon moved in by `radius` along both edge normals."""
+    poly = np.asarray(poly, float)
+    n = len(poly)
+    core, normals = [], []
+    for i in range(n):
+        n0 = _outward(poly[i - 1], poly[i])
+        n1 = _outward(poly[i], poly[(i + 1) % n])
+        m = np.array([n0, n1])
+        b = np.array([poly[i] @ n0 - radius, poly[i] @ n1 - radius])
+        core.append(np.linalg.solve(m, b))
+        normals.append((n0, n1))
+    return np.array(core), normals
+
+
+def _round_ring(core, normals, d, k):
+    """Outline at distance d from the core polygon: straight edges plus corner arcs of radius d (k points each)."""
+    pts = []
+    for q, (n0, n1) in zip(core, normals):
+        a0, a1 = np.arctan2(n0[1], n0[0]), np.arctan2(n1[1], n1[0])
+        if a1 <= a0:
+            a1 += 2.0 * np.pi
+        for a in np.linspace(a0, a1, k):
+            pts.append(q + d * np.array([np.cos(a), np.sin(a)]))
+    return np.array(pts)
+
+
+def _loft_y(rings, ys, cx=0.0, cz=0.0):
+    """Closed solid through outlines (x, z) of equal length at the given y; flat n-gon caps at both ends."""
+    m = len(rings[0])
+    v = np.concatenate([np.column_stack([r[:, 0] + cx, np.full(m, y), r[:, 1] + cz]) for r, y in zip(rings, ys)])
+    faces = [c.grid_faces(len(rings), m, wrap_cols=True), np.arange(m)[::-1][None, :],
+             (np.arange(m) + (len(rings) - 1) * m)[None, :]]
+    return v, faces
+
+
+def _revolve_y(profile, cx, cy, cz, steps):
+    """Solid of revolution about a Y axis through (cx, cz): closed profile of (r, y) points, y relative to cy."""
+    prof = np.asarray(profile, float)
+    k = len(prof)
+    ang = np.linspace(0.0, 2.0 * np.pi, steps, endpoint=False)
+    v = np.array([[cx + r * np.cos(a), cy + y, cz + r * np.sin(a)] for a in ang for r, y in prof])
+    f = []
+    for i in range(steps):
+        i1 = (i + 1) % steps
+        for j in range(k):
+            j1 = (j + 1) % k
+            f.append([i * k + j, i * k + j1, i1 * k + j1, i1 * k + j])
+    return v, np.array(f, np.int64)
+
+
+def _sheave(pd, bore_r, cx, cy, cz, steps):
+    """V-belt sheave (RD_GROOVES grooves), centre plane at y = cy, axis along Y through (cx, cz)."""
+    w = 2.0 * RD_F + (RD_GROOVES - 1) * RD_E
+    r_o = pd / 2.0 + 0.0035                     # EST: rim 3.5 mm above the pitch line
+    r_b = r_o - RD_GROOVE_DEPTH
+    r_rim = r_b - 0.008
+    r_hub = max(bore_r * 1.8, bore_r + 0.018)
+    top, bot = RD_GROOVE_TOP / 2.0, RD_GROOVE_TOP / 2.0 - RD_GROOVE_DEPTH * np.tan(np.radians(19.0))
+    prof = [(r_o, -w / 2.0)]
+    for g in range(RD_GROOVES):
+        yc = -w / 2.0 + RD_F + g * RD_E
+        prof += [(r_o, yc - top), (r_b, yc - bot), (r_b, yc + bot), (r_o, yc + top)]
+    prof += [(r_o, w / 2.0)]
+    if r_rim - r_hub > 0.01:
+        prof += [(r_rim, w / 2.0), (r_rim, 0.011), (r_hub, 0.011), (r_hub, w / 2.0)]
+        prof += [(bore_r, w / 2.0), (bore_r, -w / 2.0), (r_hub, -w / 2.0), (r_hub, -0.011), (r_rim, -0.011), (r_rim, -w / 2.0)]
+    else:
+        prof += [(bore_r, w / 2.0), (bore_r, -w / 2.0)]
+    # the profile runs r_o side first, then inward: reverse so the solid is consistently wound
+    return _revolve_y(prof[::-1], cx, cy, cz, steps), r_o, w
+
+
+def _belt_loops(c1, r1, c2, r2, ys, steps):
+    """Closed V-belts round two pitch circles (x, z), one per y in ys: hull of the circles, section RD_BELT."""
+    ang = np.linspace(0.0, 2.0 * np.pi, steps, endpoint=False)
+    pts = [(c1[0] + r1 * np.cos(a), c1[1] + r1 * np.sin(a)) for a in ang]
+    pts += [(c2[0] + r2 * np.cos(a), c2[1] + r2 * np.sin(a)) for a in ang]
+    path = _hull2(pts)
+    k = len(path)
+    nrm = []
+    for i in range(k):
+        t = path[(i + 1) % k] - path[i - 1]
+        n = np.array([t[1], -t[0]])
+        nrm.append(n / np.linalg.norm(n))
+    nrm = np.array(nrm)
+    bw, bh = RD_BELT
+    out = []
+    for y in ys:
+        # section corners: (radial offset from the pitch line, y)
+        sec = [(0.0035, y - bw / 2.0), (0.0035, y + bw / 2.0), (-(bh - 0.0035), y + bw / 2.0 - 0.004), (-(bh - 0.0035), y - bw / 2.0 + 0.004)]
+        v = np.array([[p[0] + nr[0] * dr, yy, p[1] + nr[1] * dr] for p, nr in zip(path, nrm) for dr, yy in sec])
+        f = []
+        for i in range(k):
+            i1 = (i + 1) % k
+            for j in range(4):
+                j1 = (j + 1) % 4
+                f.append([i * 4 + j, i1 * 4 + j, i1 * 4 + j1, i * 4 + j1])
+        out.append((v, np.array(f, np.int64)))
+    return c.merge_parts(out), float(sum(np.linalg.norm(path[(i + 1) % k] - path[i]) for i in range(k)))
+
+
+def _flat_member(p0, p1, half_w, y0, y1):
+    """Plate along p0 -> p1 in the XZ plane, half width half_w across, from y0 to y1 (thickness along Y)."""
+    prof = np.array([(-half_w, y0), (half_w, y0), (half_w, y1), (-half_w, y1)])
+    return st.member(p0, p1, prof, up=(0.0, 1.0, 0.0))
+
+
+def rd_select(kw, output_rpm, data=None):
+    """G1-28 Class III row for the motor and the output speed; only the 30 HP (22 kW), 61-80 rpm row is in the data."""
+    table = _rd_table(data)
+    sel = table["selection"]
+    lo, hi = (float(x) for x in str(sel["output_rpm_band"]["v"]).split("-"))
+    hp = float(sel["motor_hp"]["v"])
+    if abs(kw / 0.7457 - hp) > 1.0 or not lo <= output_rpm <= hi:
+        raise ValueError(f"no TA6307H row in the data for {kw} kW at {output_rpm} rpm (have {hp:g} HP, {lo:g}-{hi:g} rpm)")
+    return sel["reducer"]["v"], float(sel["actual_ratio_h25"]["v"])
+
+
+def shaft_mount_reducer(kw=22.0, *, output_rpm, floor_z, centers=None, arm_len=None, bore=0.090, detail="full", data=None,
+                        motor_table=None, faults=None):
+    """Dodge TA6307H25 shaft-mount reducer with a belt drive (local frame in the comment above; metres).
+
+    output_rpm: driven-shaft speed (sets the motor sheave). floor_z: z of the floor the torque-arm stand stands on.
+    centers: belt centre distance (default: middle of the M1 range for a 284T/286T-size motor, G1-85).
+    arm_len: torque-arm rod pin to pin (default: middle of 29.50-35.50 in). bore: the driven shaft diameter (the
+    straight bore is made to order up to 3-15/16 in, G1-121). `data`, `motor_table`, `faults` inject the check's cases.
+    Returns {"parts", "dims", "motor_parts", "sub"}; "sub" holds the pieces the checks measure.
+    """
+    if detail not in ("full", "lod"):
+        raise ValueError("detail must be full or lod")
+    faults = faults or {}
+    table = _rd_table(data)
+    t = table["ta6307h"]
+    lod = detail == "lod"
+    n_ring = 24 if lod else 64
+    n_small = 8 if lod else 16
+    n_arc = 3 if lod else 8
+    reducer, ratio = rd_select(kw, output_rpm, table)
+    if bore / 2.0 > _rv(t, "output_bore_straight_max") / 2.0:
+        raise ValueError(f"shaft {bore * 1000:.0f} mm is over the straight-bore maximum")
+
+    # ---------------- case: two halves split at y = 0, rounded outline of the G1-80 end view
+    W, H = _rv(t, "housing_end_view_horizontal"), _rv(t, "housing_end_view_vertical")
+    top = _rv(t, "output_cl_to_top")
+    bot = top - H
+    H *= float(faults.get("case_h_scale", 1.0))
+    top, bot = top * float(faults.get("case_h_scale", 1.0)), bot * float(faults.get("case_h_scale", 1.0))
+    hw = W / 2.0                                    # EST: output centred across (14.65 px/in reading: 10.2 / 10.4 in)
+    tf, st_, sb, bf = (RD_READ[k] * IN for k in ("top_flat", "side_top", "side_bot", "bot_flat"))
+    poly = np.array([(-bf, bot), (bf, bot), (hw, sb), (hw, st_), (tf, top), (-tf, top), (-hw, st_), (-hw, sb)])
+    core, normals = _round_core(poly, RD_CORNER)
+    half = _rv(t, "housing_axial_inner") / 2.0      # 7.62 in: case faces at +-3.81 in
+    flange = _loft_y([_round_ring(core, normals, RD_CORNER, n_arc)] * 2, [-RD_FLANGE_T, RD_FLANGE_T])
+    shells = []
+    for sgn in (-1.0, 1.0):
+        ds = [RD_CORNER - RD_LIP, RD_CORNER - RD_LIP, RD_CORNER - RD_LIP - 0.006, RD_CORNER - RD_LIP - 0.016]
+        ys = [sgn * RD_FLANGE_T, sgn * (half - 0.012), sgn * (half - 0.004), sgn * half]
+        rings = [_round_ring(core, normals, d, n_arc) for d in ds]
+        if sgn < 0:
+            rings, ys = rings[::-1], ys[::-1]
+        shells.append(_loft_y(rings, ys))
+    housing = c.merge_parts([flange] + shells)
+
+    A_len, hub_od = _rv(t, "straight_bore_length_A"), _rv(t, "straight_bore_hub_od_B")
+    hub = _ring_y(-A_len / 2.0, A_len / 2.0, bore / 2.0, hub_od / 2.0, 0.0, 0.0, n_ring)
+    cov_r = RD_READ["cover_r"] * IN
+    covers = [_ring_y(-half - 0.006, -half + 0.001, hub_od / 2.0 + 0.002, cov_r, 0.0, 0.0, n_ring),
+              _ring_y(half - 0.001, half + 0.006, hub_od / 2.0 + 0.002, cov_r, 0.0, 0.0, n_ring)]
+
+    in_x = RD_READ["input_dx"] * IN + float(faults.get("input_dx", 0.0))
+    in_z = -_rv(t, "end_view_vertical_9_17")
+    in_r = _rv(t, "input_shaft_diameter") / 2.0
+    boss_face = -RD_READ["boss_face"] * IN
+    tip = boss_face - RD_READ["input_stick"] * IN
+    boss = _rod_y(boss_face + 0.006, -half + 0.001, RD_BOSS_R, in_x, in_z, n_ring)
+    sq = np.array([(-1, -1), (1, -1), (1, 1), (-1, 1)], float) * RD_COVER_HALF
+    qc, qn = _round_core(sq, 0.018)
+    cov4 = _loft_y([_round_ring(qc, qn, 0.018, n_arc)] * 2, [boss_face, boss_face + 0.006], in_x, in_z)
+    case_parts = [housing, hub, boss, cov4] + covers
+    # plugs: breather high on the -Y face, level plug at the side, magnetic drain at the bottom (G1-5, G1-132)
+    plugs = [(-0.15, 0.15, 0.014), (-0.20, -0.10, 0.011), (0.10, -0.33, 0.012)]
+    for px, pz, pr in plugs:
+        case_parts.append(_rod_y(-half - 0.018, -half + 0.001, pr, px, pz, n_small))
+    # torque-arm fulcrum lug on the case (split plane), pin at (6.11, -16.44) in
+    p1 = np.array([RD_READ["pin_dx"] * IN, -_rv(t, "output_cl_down_16_44")])
+    lug_r = 0.036
+    lug_out = _hull2([(0.05, bot + 0.03), (0.20, bot + 0.07)] +
+                     [(p1[0] + lug_r * np.cos(a), p1[1] + lug_r * np.sin(a)) for a in np.linspace(0, 2 * np.pi, n_ring, endpoint=False)])
+    lug = _swap_xy(_plate_x(lug_out, -RD_LUG_T / 2.0, RD_LUG_T / 2.0))
+    case_parts.append(lug)
+    case = c.merge_parts(case_parts)
+
+    # ---------------- bolts: split flange round the outline, round covers, input cover
+    bolts = []
+    ring_b = _round_ring(core, normals, RD_CORNER - RD_LIP / 2.0, 2)
+    per = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(np.vstack([ring_b, ring_b[:1]]), axis=0), axis=1))])
+    for k in range(RD_BOLTS):
+        s_at = per[-1] * (k + 0.5) / RD_BOLTS
+        i = int(np.searchsorted(per, s_at) - 1)
+        f = (s_at - per[i]) / (per[i + 1] - per[i])
+        q = ring_b[i] + f * (ring_b[(i + 1) % len(ring_b)] - ring_b[i])
+        for sg in (-1.0, 1.0):
+            seat = np.array([q[0], sg * RD_FLANGE_T, q[1]])
+            b = _bolt(seat, seat + (0.0, sg * 0.009, 0.0), 0.016, (0.0, 0.0, 1.0))
+            if b is not None:
+                bolts.append(b)
+    for sg in (-1.0, 1.0):
+        for k in range(8):
+            a = 2.0 * np.pi * (k + 0.5) / 8
+            seat = np.array([0.135 * np.cos(a), sg * (half + 0.006), 0.135 * np.sin(a)])
+            bolts.append(_bolt(seat, seat + (0.0, sg * 0.008, 0.0), 0.014, (0.0, 0.0, 1.0)))
+    for sx, sz in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        seat = np.array([in_x + sx * 0.040, boss_face, in_z + sz * 0.040])
+        bolts.append(_bolt(seat, seat + (0.0, -0.007, 0.0), 0.012, (0.0, 0.0, 1.0)))
+
+    # ---------------- input shaft (2-3/16 in) with its 1/2 x 1/2 key on top
+    key = table["ta6307h"]["input_shaft_key"]["v"]
+    kw_, kh = float(key["w"]) / 1000.0, float(key["h"]) / 1000.0
+    in_rod = _rod_y(tip, boss_face + 0.006, in_r, in_x, in_z, n_ring)
+    key_len = min(float(key["length"]) / 1000.0, boss_face - tip - 0.004)
+    in_key = c.box((in_x - kw_ / 2.0, tip + 0.004, in_z + in_r - kh / 2.0), (in_x + kw_ / 2.0, tip + 0.004 + key_len, in_z + in_r + kh / 2.0 - 0.001))
+    input_shaft = c.merge_parts([in_rod, in_key])
+
+    # ---------------- belt drive: centres, motor height, sheaves
+    m1 = [float(x) / 1000.0 for x in t["mount_286T_position_B"]["belt_centers_M1"]["v"]]
+    C = sum(m1) / 2.0 if centers is None else float(centers)
+    z_m = float(np.sqrt(C * C - in_x * in_x)) + in_z + float(faults.get("motor_dz", 0.0))
+    mot = iec_motor(kw, frames=motor_table, detail=detail)
+    mH = float(mot["dims"]["H"])
+    n_in = output_rpm * ratio
+    pd_r = RD_SHEAVE_PD
+    pd_m = pd_r * n_in / RD_MOTOR_RPM
+    min_pd = _rv(table, "selection", "min_sheave_pd")
+    if pd_r < min_pd:
+        raise ValueError("reducer sheave under the G1-28 minimum")
+    y_b = -RD_BELT_S
+    (sh_r, r_or, w_sh) = _sheave(pd_r, in_r, in_x, y_b, in_z, n_ring)
+    (sh_m, r_om, _) = _sheave(pd_m, float(mot["dims"]["D"]) / 2.0, 0.0, y_b + float(faults.get("sheave_dy", 0.0)), z_m, n_ring)
+    sheaves = c.merge_parts([sh_r, sh_m])
+    grooves = [y_b - w_sh / 2.0 + RD_F + g * RD_E for g in range(RD_GROOVES)]
+    belts, belt_len = _belt_loops((in_x, in_z), pd_r / 2.0, (0.0, z_m), pd_m / 2.0, grooves, 24 if lod else 72)
+
+    # ---------------- motor mount TA6307MM, position B: bars at the case sides, support channel, plate on rods
+    plate_w = _rv(t, "mount_plate_position_B", "width")
+    plate_l = _rv(t, "mount_plate_position_B", "side_plate_length")
+    rods_l = _rv(t, "mount_plate_position_B", "side_plate_inner")
+    z_sup = float(t["mount_plate_position_B"]["rows_from_output_cl"]["v"][0]) / 1000.0   # M1 row, 11.18 in
+    z_sup += float(faults.get("support_dz", 0.0))
+    s_end = tip + RD_READ["plate_end_C"][0] * IN       # plate end at the minimum C (closest to the belt plane)
+    y0p, y1p = s_end, s_end + plate_l
+    xo = plate_w / 2.0
+    xi = xo - RD_BAR_T
+    if xi <= hw:
+        raise ValueError("mount bars do not clear the case")
+    z_sup_bot = z_sup - RD_READ["support_depth"] * IN
+    z_plate_top = z_m - mH                                # motor feet on the plate
+    z_plate_bot = z_plate_top - RD_PLATE_T
+    z_plate_min = z_sup + RD_READ["plate_gap"] * IN
+    travel = z_plate_bot - z_plate_min
+    post0 = tip + RD_READ["post_from_tip"] * IN       # post outer face (toward the input side)
+    post1 = post0 + RD_READ["post_t"] * IN
+    mount = []
+    sub_support = []
+    for sx in (-1.0, 1.0):
+        xa, xb = sorted((sx * xi, sx * xo))
+        mount.append(c.box((xa, post0, bot - 0.04), (xb, post1, z_sup_bot)))                        # bar
+        mount.append(c.box((xa, y0p, z_sup_bot), (xb, y1p, z_sup - RD_WEB_T)))                       # channel flange
+        knee = [(post1, z_sup_bot), (post1 + 0.16, z_sup_bot), (post1, z_sup_bot - 0.15)]            # gusset under the channel
+        gv = np.array([[x, yy, zz] for x in (xa, xb) for yy, zz in knee])
+        mount.append((gv, [np.array([[0, 2, 1], [3, 4, 5]]), np.array([[0, 1, 4, 3], [1, 2, 5, 4], [2, 0, 3, 5]])]))
+        for zc in (st_ - 0.05, sb + 0.05):                                                              # clips to the flange
+            ca, cb = sorted((sx * (hw - 0.017), sx * (xi - RD_GAP)))
+            mount.append(c.box((ca, RD_FLANGE_T + RD_GAP, zc - 0.03), (cb, RD_FLANGE_T + 0.012, zc + 0.03)))
+    web = c.box((-xo, y0p, z_sup - RD_WEB_T), (xo, y1p, z_sup))
+    sub_support.append(web)
+    mount.append(web)
+    plate = c.box((-xo, y0p, z_plate_bot), (xo, y1p, z_plate_top))
+    mount.append(plate)
+    ry = ((plate_l - rods_l) / 2.0)
+    for sx in (-1.0, 1.0):
+        for yy in (y0p + ry, y1p - ry):
+            x = sx * (xo - 0.026)
+            mount.append(st.rod((x, yy, z_sup), (x, yy, z_plate_top + 0.04), RD_ROD_R, n_small))
+            for zz in (z_plate_bot - 0.016, z_plate_top):
+                mount.append(_bolt((x, yy, zz), (x, yy, zz + 0.016), 0.029, (1.0, 0.0, 0.0)))
+            mount.append(_bolt((x, yy, z_sup), (x, yy, z_sup + 0.016), 0.029, (1.0, 0.0, 0.0)))
+    mount = c.merge_parts([m for m in mount if m is not None])
+
+    # ---------------- motor on the plate: shaft to -Y into the belt plane, feet on the plate top
+    shoulder = float(np.asarray(mot["parts"]["endshield_de"][0])[:, 0].max())
+    s_sh = -RD_SHOULDER_S
+
+    def put_motor(piece):
+        v = np.asarray(piece[0], float).reshape(-1, 3)
+        out = np.column_stack([v[:, 1], s_sh - (v[:, 0] - shoulder), v[:, 2] + z_plate_top])
+        return out, piece[1]
+
+    motor_parts = {k: put_motor(p) for k, p in mot["parts"].items()}
+    motor = c.merge_parts(list(motor_parts.values()))
+
+    # ---------------- belt guard: hull of both rims + clearance, from just past the motor shoulder to past the shaft ends
+    gs = float(faults.get("guard_scale", 1.0))
+    ring_pts = []
+    for (gx, gz), rr in (((in_x, in_z), r_or), ((0.0, z_m), r_om)):
+        ring_pts += [(gx + (rr + RD_GUARD_CLEAR) * np.cos(a), gz + (rr + RD_GUARD_CLEAR) * np.sin(a))
+                     for a in np.linspace(0, 2 * np.pi, n_ring, endpoint=False)]
+    g_out = _hull2(ring_pts)
+    g_mid = g_out.mean(axis=0)
+    g_out = g_mid + (g_out - g_mid) * gs
+    g_back = s_sh - 0.006
+    shaft_end = min(tip, s_sh - float(mot["dims"]["E"]))
+    g_front = shaft_end - 0.010
+    guard_body = _swap_xy(_plate_x(g_out, g_front - RD_GUARD_T, g_back))
+    guard = [guard_body]
+    for gx, gz in ((-0.06, -0.20), (0.15, -0.20)):                      # straps to the case face
+        guard.append(c.box((gx - 0.02, g_back, gz - 0.003), (gx + 0.02, -half - 0.007 - RD_GAP, gz + 0.003)))
+    guard.append(c.box((0.09, g_back, z_plate_top - 0.03), (0.13, y0p - RD_GAP, z_plate_top)))   # bracket to the plate
+    guard = c.merge_parts(guard)
+
+    # ---------------- torque arm TA6307RA: at 90 deg to the output CL -> case pin line, down toward -X
+    a_min, a_max = _rv(t, "torque_arm_length_min"), _rv(t, "torque_arm_length_max")
+    L_arm = (a_min + a_max) / 2.0 if arm_len is None else float(arm_len)
+    L_arm = float(faults.get("arm_len", L_arm))
+    rad = p1 / np.linalg.norm(p1)
+    tv = np.array([rad[1], -rad[0]])
+    if tv[0] > 0:
+        tv = -tv
+    p2 = p1 + L_arm * tv
+    t3 = np.array([tv[0], 0.0, tv[1]])
+    P1, P2 = np.array([p1[0], 0.0, p1[1]]), np.array([p2[0], 0.0, p2[1]])
+    cw = _rv(t, "torque_arm_clevis_width") / 2.0
+    gap_c = RD_LUG_T / 2.0 + 0.001
+    arm = [_flat_member(P1 - 0.030 * t3, P1 + 0.075 * t3, 0.024, gap_c, gap_c + RD_CHEEK),          # clevis at the case lug
+           _flat_member(P1 - 0.030 * t3, P1 + 0.075 * t3, 0.024, -gap_c - RD_CHEEK, -gap_c)]
+    arm.append(_flat_member(P1 + 0.055 * t3, P1 + 0.080 * t3, 0.024, -gap_c - RD_CHEEK, gap_c + RD_CHEEK))
+    gb = RD_BRK_LUG_T / 2.0 + 0.001
+    arm.append(_flat_member(P2 - 0.075 * t3, P2 + 0.030 * t3, 0.021, gb, cw))
+    arm.append(_flat_member(P2 - 0.075 * t3, P2 + 0.030 * t3, 0.021, -cw, -gb))
+    arm.append(_flat_member(P2 - 0.080 * t3, P2 - 0.055 * t3, 0.021, -cw, cw))
+    mid = (P1 + P2) / 2.0
+    tb = 0.150                                                        # EST turnbuckle body length
+    arm.append(st.rod(P1 + 0.080 * t3, mid - 0.5 * tb * t3, RD_ARM_R, n_small))
+    arm.append(st.rod(mid + 0.5 * tb * t3, P2 - 0.080 * t3, RD_ARM_R, n_small))
+    hexr = np.array([(RD_TB_R * np.cos(a), RD_TB_R * np.sin(a)) for a in np.arange(6) * np.pi / 3])
+    arm.append(st.member(mid - 0.5 * tb * t3, mid + 0.5 * tb * t3, hexr, up=(0.0, 1.0, 0.0)))
+    for e in (-1.0, 1.0):
+        nut = mid + e * (0.5 * tb + 0.012) * t3
+        arm.append(st.member(nut - 0.011 * t3, nut + 0.011 * t3, hexr * 1.05, up=(0.0, 1.0, 0.0)))
+    arm_body = c.merge_parts(arm)
+    pin_case = _rod_y(-gap_c - RD_CHEEK - 0.012, gap_c + RD_CHEEK + 0.012, RD_LUG_PIN_R, p1[0], p1[1], n_small)
+    bolt_r = 0.5 * 5.0 / 8.0 * IN                                       # 5/8 in bracket bolt (G1-80)
+    pin_brk = _rod_y(-cw - 0.012, cw + 0.012, bolt_r, p2[0], p2[1], n_small)
+    torque_arm = c.merge_parts([arm_body, pin_case, pin_brk])
+
+    # ---------------- bracket (4.75 x 2.00 in, G1-80) on a stand post down to the floor
+    b_len, b_h = _rv(t, "torque_arm_bracket_length"), _rv(t, "torque_arm_bracket_height")
+    zb0 = p2[1] - b_h
+    brk_base = c.box((p2[0] - b_len / 2.0, -RD_BRK_W / 2.0, zb0), (p2[0] + b_len / 2.0, RD_BRK_W / 2.0, zb0 + RD_BRK_T))
+    lug_pts = [(p2[0] - 0.035, zb0 + RD_BRK_T), (p2[0] + 0.035, zb0 + RD_BRK_T)]
+    lug_pts += [(p2[0] + 0.020 * np.cos(a), p2[1] + 0.020 * np.sin(a)) for a in np.linspace(0, np.pi, n_small)]
+    brk_lug = _swap_xy(_plate_x(_hull2(lug_pts), -RD_BRK_LUG_T / 2.0, RD_BRK_LUG_T / 2.0))
+    cap_w, cap_t = RD_STAND_CAP
+    base_w, base_t = RD_STAND_BASE
+    z_floor = float(floor_z) + float(faults.get("stand_gap", 0.0))
+    if zb0 - cap_t - base_t - z_floor < 0.10:
+        raise ValueError(f"torque-arm bracket {zb0 - float(floor_z):.3f} m over the floor: no room for a stand")
+    post = st.member((p2[0], 0.0, z_floor + base_t), (p2[0], 0.0, zb0 - cap_t), st.shs(RD_STAND), up=(1.0, 0.0, 0.0))
+    cap = c.box((p2[0] - cap_w / 2.0, -cap_w / 2.0, zb0 - cap_t), (p2[0] + cap_w / 2.0, cap_w / 2.0, zb0 - RD_GAP))
+    base = c.box((p2[0] - base_w / 2.0, -base_w / 2.0, z_floor), (p2[0] + base_w / 2.0, base_w / 2.0, z_floor + base_t))
+    stand = [post, cap, base]
+    for sx in (-1.0, 1.0):
+        g = _gusset(p2[0] + sx * RD_STAND / 2.0, p2[0] + sx * (base_w / 2.0 - 0.01), -0.004, 0.004, z_floor + base_t, z_floor + base_t + 0.09)
+        gv = np.asarray(g[0], float).copy()
+        # right triangle: the peak goes onto the post face
+        gv[[2, 5], 0] = p2[0] + sx * RD_STAND / 2.0
+        stand.append((gv, g[1]))
+        for sy in (-1.0, 1.0):
+            seat = np.array([p2[0] + sx * (base_w / 2.0 - 0.03), sy * (base_w / 2.0 - 0.03), z_floor + base_t])
+            stand.append(_bolt(seat, seat + (0.0, 0.0, 0.012), 0.024, (1.0, 0.0, 0.0)))
+    for sx in (-1.0, 1.0):
+        seat = np.array([p2[0] + sx * (b_len / 2.0 - 0.016), 0.0, zb0 + RD_BRK_T])
+        stand.append(_bolt(seat, seat + (0.0, 0.0, 0.010), 0.024, (1.0, 0.0, 0.0)))
+    stand_all = c.merge_parts([brk_base, brk_lug] + [s for s in stand if s is not None])
+    pedestal = c.merge_parts([post, cap, base])
+
+    built = {"case": case, "bolts": c.merge_parts([b for b in bolts if b is not None]), "input_shaft": input_shaft,
+             "mount": mount, "sheaves": sheaves, "belts": belts, "guard": guard, "torque_arm": torque_arm,
+             "stand": stand_all, "motor": motor}
+    sub = {"housing": housing, "hub": hub, "input_rod": in_rod, "sheave_r": sh_r, "sheave_m": sh_m, "plate": plate,
+           "support": c.merge_parts(sub_support), "guard_body": guard_body, "arm_body": arm_body, "pin_case": pin_case,
+           "pin_bracket": pin_brk, "bracket_base": brk_base, "bracket_lug": brk_lug, "pedestal": pedestal}
+    bb_min = np.min([np.asarray(p[0]).min(axis=0) for p in built.values()], axis=0)
+    bb_max = np.max([np.asarray(p[0]).max(axis=0) for p in built.values()], axis=0)
+    out_rpm = RD_MOTOR_RPM * pd_m / pd_r / ratio
+    dims = {
+        "reducer": reducer, "ratio": ratio, "kw": float(kw), "motor_frame": mot["dims"]["frame"],
+        "output_rpm": float(output_rpm), "output_rpm_model": float(out_rpm), "input_rpm": float(n_in),
+        "sheave_pd": [pd_r, float(pd_m)], "belt_centers": float(C), "belt_plane_y": y_b, "belt_pitch_length": belt_len,
+        "belt_speed_m_s": float(np.pi * pd_m * RD_MOTOR_RPM / 60.0),
+        "input_axis": [float(in_x), float(in_z)], "input_tip_y": float(tip), "motor_axis": [0.0, float(z_m)],
+        "plate_travel": float(travel), "plate_travel_max": RD_READ["plate_travel"] * IN,
+        "pin_case": p1.tolist(), "pin_bracket": p2.tolist(), "arm_len": float(L_arm), "floor_z": float(floor_z),
+        "stand_height": float(zb0 - floor_z), "split_half": half, "hub_y": [-A_len / 2.0, A_len / 2.0],
+        "motor_y": [float(motor[0][:, 1].min()), float(motor[0][:, 1].max())],
+        "bbox": {"min": bb_min.tolist(), "max": bb_max.tolist()},
+        "faces": sum(_count_faces(p[1]) for p in built.values()),
+    }
+    return {"parts": built, "dims": dims, "motor_parts": motor_parts, "sub": sub}
