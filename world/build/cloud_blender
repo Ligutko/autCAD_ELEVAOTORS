@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Stand-in for `blender --background --python X [-- args]` where Blender is the pip module bpy (cloud sessions,
+# delegation/cloud/README.md). Usage: BLENDER=world/build/cloud_blender python world/build/check_all.py
+PY="${CLOUD_PY:-python3}"
+script=""
+rest=()
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --background|-b) shift ;;
+    --python) script="$2"; shift 2 ;;
+    --) shift; rest=("$@"); break ;;
+    *) shift ;;
+  esac
+done
+[ -z "$script" ] && { echo "cloud_blender: no --python script" >&2; exit 2; }
+exec "$PY" -c 'import sys, runpy, bpy; s = sys.argv[1]; sys.argv = [s] + sys.argv[2:]; runpy.run_path(s, run_name="__main__")' "$script" "${rest[@]}"

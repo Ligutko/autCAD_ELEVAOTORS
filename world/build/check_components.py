@@ -25,6 +25,7 @@ import json
 import sys
 from pathlib import Path
 
+import bpy  # noqa: F401  first: the pip bpy (cloud) registers mathutils on import
 import numpy as np
 from mathutils.bvhtree import BVHTree
 
