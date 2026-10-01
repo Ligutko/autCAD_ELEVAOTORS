@@ -1178,3 +1178,337 @@ def radial_fan(kw, size=None, hand="R", outlet_deg=0, *, detail="full", data=Non
         "faces": sum(_count_faces(p[1]) for p in built.values()),
     }
     return {"parts": built, "dims": dims, "motor_parts": motor_parts}
+
+
+# ====================================================================== shaft-mounted gearmotor
+#
+# SEW KA..T helical-bevel gear unit on a hollow shaft with a torque arm, IEC motor on the input flange.
+# Numbers live in data/gearmotor_ka.json (mm). Local frame: the output (hollow shaft) axis is Y through the
+# origin, the origin sits in the case mid plane; -Y is the driven side (the hollow shaft goes onto the conveyor
+# shaft from -Y, the dust cap closes +Y); the motor axis runs along +X at z = -DB, y = 0 (EST: input axis in the
+# mid plane); Z up; the case bottom (torque arm face) is z = -SA. The torque arm hangs down (A-side mounting: the
+# bushing toward -Y); its clevis bracket ends on the casing wall plane y = wall_y = -(EA + wall_gap).
+
+GM_DATA = Path(__file__).resolve().parent / "data" / "gearmotor_ka.json"
+GM_PARTS = ("case", "ribs", "covers", "hollow_shaft", "torque_arm", "support", "bearing", "bolts", "motor")
+# EST, not lettered anywhere: chamfer of the case front-top edge, side-rib proud, cover proud, clevis clear under the eye.
+GM_CHAMFER = 0.03
+GM_RIB_PROUD = 0.008
+GM_COVER_T = 0.006
+GM_EYE_CLEAR = 0.012
+GM_PAD_T = 0.012
+GM_PAD_MIN_H = 0.10
+GM_BUSH_OF_R = 0.72         # EST: rubber bushing seat radius in eye radii (SEW p.274 section shows a thick boss)
+GM_COVER_BOLTS = 8          # EST: Bonvario p.1 patterns show 7-8 holes round the bore
+
+
+def _gm_table(data):
+    if data is None:
+        data = json.loads(GM_DATA.read_text(encoding="utf-8"))
+    return data
+
+
+def _gv(node, *path):
+    for key in path:
+        node = node[key]
+    return float(node["v"]) / 1000.0
+
+
+def _swap_xy(piece):
+    """(x, y, z) -> (y, x, z): a part built along X turned onto Y. A swap is a mirror, so the faces are reversed."""
+    v = np.asarray(piece[0], float).reshape(-1, 3)[:, [1, 0, 2]]
+    blocks = piece[1] if isinstance(piece[1], list) else [piece[1]]
+    return v, [np.asarray(b)[:, ::-1] for b in blocks if len(b)]
+
+
+def _shift(piece, dx=0.0, dy=0.0, dz=0.0):
+    return np.asarray(piece[0], float).reshape(-1, 3) + (dx, dy, dz), piece[1]
+
+
+def _ring_y(y0, y1, r_in, r_out, cx, cz, steps):
+    """Thick ring around a Y axis through (cx, cz), from y0 to y1."""
+    v, f = _swap_xy(_ring_x(y0, y1, r_in, r_out, steps))
+    return v + (cx, 0.0, cz), f
+
+
+def _rod_y(y0, y1, radius, cx, cz, steps):
+    return st.rod((cx, y0, cz), (cx, y1, cz), radius, steps)
+
+
+def _hull2(pts):
+    """Convex hull, counter-clockwise (monotone chain)."""
+    pts = sorted({(round(float(p[0]), 9), round(float(p[1]), 9)) for p in pts})
+    if len(pts) < 3:
+        return np.array(pts)
+
+    def half(seq):
+        out = []
+        for p in seq:
+            while len(out) >= 2 and _cross2(out[-2], out[-1], p) <= 1e-15:
+                out.pop()
+            out.append(p)
+        return out
+
+    lo, hi = half(pts), half(pts[::-1])
+    return np.array(lo[:-1] + hi[:-1])
+
+
+def _case_profile(QB, top, SA, FK, A, steps):
+    """Side outline (x, z) of the helical housing: rear arc round the output axis (radius QB), flat top at `top`,
+    front wall at x = FK with a chamfer, bottom face z = -SA from FK - A to FK. Convex, counter-clockwise."""
+    S = np.array([FK - A, -SA])
+    t_top = np.pi - np.arcsin(min(top / QB, 1.0))
+    # the rear-lower line runs from the bottom corner S tangent to the arc: tangent point at ang(S) - acos(QB/|S|)
+    t_low = np.arctan2(S[1], S[0]) % (2.0 * np.pi) - np.arccos(min(QB / float(np.linalg.norm(S)), 1.0))
+    arc = np.linspace(t_top, t_low, steps)
+    pts = [(FK, -SA), (FK, top - GM_CHAMFER), (FK - GM_CHAMFER, top)]
+    pts += [(QB * np.cos(a), QB * np.sin(a)) for a in arc]
+    pts.append(tuple(S))
+    return _hull2(pts)
+
+
+def place_frame(parts, origin, ex, ey, up=(0.0, 0.0, 1.0)):
+    """Put local parts into the site: local X -> ex, local Y -> ey, local Z -> `up` made square to both.
+    When (ex, ey, up) is left-handed the mesh is mirrored and its faces are reversed. Returns {name: (verts, faces)}."""
+    ex = np.asarray(ex, float) / np.linalg.norm(ex)
+    ey = np.asarray(ey, float)
+    ey = ey - ex * float(np.dot(ey, ex))
+    ey /= np.linalg.norm(ey)
+    ez = np.asarray(up, float)
+    ez = ez - ex * float(np.dot(ez, ex)) - ey * float(np.dot(ez, ey))
+    ez /= np.linalg.norm(ez)
+    m = np.column_stack([ex, ey, ez])
+    flip = np.linalg.det(m) < 0
+    out = {}
+    for name, (v, f) in parts.items():
+        v = np.asarray(v, float).reshape(-1, 3) @ m.T + np.asarray(origin, float)
+        blocks = f if isinstance(f, list) else [f]
+        if flip:
+            blocks = [np.asarray(b)[:, ::-1] for b in blocks if len(b)]
+        out[name] = (v, blocks)
+    return out
+
+
+def gm_size(kw, data=None):
+    """KA size and its data row for a motor rating (nearest tabulated kW)."""
+    table = _gm_table(data)
+    key = _std_key(kw, table["kw_to_size"])
+    name = table["kw_to_size"][key]["size"]
+    return name, table["sizes"][name]
+
+
+def shaft_gearmotor(kw, *, size=None, wall_gap=None, wall_z=(-0.25, 0.25), detail="full", data=None,
+                    motor_table=None, faults=None):
+    """Shaft-mounted helical-bevel gearmotor KA..T: case, covers, ribs, hollow shaft with dust cap, torque arm with
+    its rubber-bushed eye, clevis bracket to the casing wall, flange bearing and shaft stub on the wall, IEC motor
+    (B5 flange, no feet). Local frame in the comment above; metres.
+
+    `wall_gap`: casing wall to the inner hub end (default data est.wall_gap). `wall_z`: (low, high) z of that wall
+    in the local frame; the clevis pad overlaps it from below. `data`, `motor_table`, `faults` inject the check's
+    broken cases. Returns {"parts", "dims", "motor_parts", "sub"}; "sub" holds the pieces the checks measure.
+    """
+    if detail not in ("full", "lod"):
+        raise ValueError("detail must be full or lod")
+    faults = faults or {}
+    table = _gm_table(data)
+    if size is None:
+        size, row = gm_size(kw, table)
+    else:
+        row = table["sizes"][size]
+    est = table["est"]
+    lod = detail == "lod"
+    n_ring = 24 if lod else 64
+    n_small = 8 if lod else 16
+    n_arc = 10 if lod else 28
+
+    A, B, DB = _gv(row, "A"), _gv(row, "B"), _gv(row, "DB")
+    B *= float(faults.get("case_w_scale", 1.0))
+    EA, FE, FH, FJ, FK = _gv(row, "EA"), _gv(row, "FE"), _gv(row, "FH"), _gv(row, "FJ"), _gv(row, "FK")
+    QB, L2, SA, H = _gv(row, "QB"), _gv(row, "L2"), _gv(row, "SA"), _gv(row, "H")
+    in_r = _gv(row, "input_d") / 2.0
+    cover_bc = _gv(row, "cover_bolt_circle") / 2.0
+    U = _gv(row, "U") * float(faults.get("bore_scale", 1.0))
+    UF = _gv(row, "UF")
+    bolt_d = _gv(row, "MC_d")
+    arm = row["arm"]
+    BA, FC, G, O, R = _gv(arm, "BA"), _gv(arm, "FC"), _gv(arm, "G"), _gv(arm, "O"), _gv(arm, "R")
+    FN, FU, FV = _gv(arm, "FN"), _gv(arm, "FU"), _gv(arm, "FV")
+    alpha = np.radians(float(arm["alpha"]["v"]))
+    top = H - SA
+    flange_t = _gv(est, "input_flange_t")
+    wall_gap = _gv(est, "wall_gap") if wall_gap is None else float(wall_gap)
+    wall_y = -(EA + wall_gap)
+    cheek_t = _gv(est, "cheek_t")
+    gap = _gv(est, "clevis_gap")
+    pad_over = _gv(est, "pad_over")
+    rib_t = _gv(est, "rib_t")
+    web_t = float(est["web_t"]["v"]) * FV
+
+    # ---------------- case: helical housing (round rear = the cylinder round the output), bevel chamber, input flange
+    prof = _case_profile(QB, top, SA, FK, A, n_arc)
+    housing = st.member((0.0, -B / 2.0, 0.0), (0.0, B / 2.0, 0.0), prof, up=(0.0, 0.0, 1.0))
+    r0 = 0.95 * min(B / 2.0, top + DB, SA - DB)
+    r1 = 0.85 * in_r
+    x_cone0, x_cone1 = FK - 0.01, L2 - flange_t
+    cone = _frustum_x(x_cone0, x_cone1, r0, r1, -DB, n_ring)
+    flange = _ring_x(x_cone1, L2, 0.0005, in_r, n_ring)
+    case = c.merge_parts([housing, cone, _shift(flange, dz=-DB)])
+
+    # ---------------- ribs: two vertical ribs per side face, a lip round the bottom face
+    ribs = []
+    cov_r = cover_bc + 0.018
+    span = FK - cov_r - 2.0 * rib_t
+    for xr in (cov_r + rib_t + 0.15 * span, cov_r + rib_t + 0.85 * span):
+        z_hi = top - 0.01 if xr < FK - GM_CHAMFER else top - GM_CHAMFER - 0.01
+        for s in (-1.0, 1.0):
+            y_in, y_out = s * B / 2.0, s * (B / 2.0 + GM_RIB_PROUD)
+            ribs.append(c.box((xr - rib_t / 2.0, min(y_in, y_out), -SA + 0.012), (xr + rib_t / 2.0, max(y_in, y_out), z_hi)))
+    ribs.append(c.box((FK - A - 0.004, -B / 2.0 - 0.004, -SA), (FK + 0.004, B / 2.0 + 0.004, -SA + 0.012)))
+    ribs = c.merge_parts(ribs)
+
+    # ---------------- covers: output bearing covers with bolts, intermediate covers, dust cap, breather
+    covers = []
+    xi, zi = 0.3 * FK, -0.6 * SA
+    ri = min(0.21 * SA, float(np.hypot(xi, zi)) - cov_r - 0.005)
+    bolts = []
+    for s in (-1.0, 1.0):
+        y0, y1 = s * B / 2.0, s * (B / 2.0 + GM_COVER_T)
+        covers.append(_ring_y(min(y0, y1), max(y0, y1), UF / 2.0 + 0.003, cov_r, 0.0, 0.0, n_ring))
+        if ri > 0.02:
+            covers.append(_ring_y(min(y0, y1), max(y0, y1), 0.0005, ri, xi, zi, n_ring))
+        across = max(0.010, 0.75 * bolt_d)
+        for k in range(GM_COVER_BOLTS):
+            a = 2.0 * np.pi * (k + 0.5) / GM_COVER_BOLTS
+            px, pz = cover_bc * np.cos(a), cover_bc * np.sin(a)
+            seat = np.array([px, y1, pz])
+            bolts.append(_bolt(seat, seat + (0.0, s * 0.5 * across, 0.0), across, (0.0, 0.0, 1.0)))
+    cap = _ring_y(EA, EA + 0.008, 0.0005, UF / 2.0 + 0.003, 0.0, 0.0, n_ring)
+    covers.append(cap)
+    covers.append(_rod_y(EA + 0.008, EA + 0.014, 0.35 * U, 0.0, 0.0, n_small))
+    covers.append(st.rod((0.6 * FK, 0.0, top), (0.6 * FK, 0.0, top + 0.022), 0.012, n_small))
+    covers = c.merge_parts(covers)
+
+    # ---------------- hollow shaft (bore U, hub UF, length 2 EA)
+    hollow = _ring_y(-EA, EA, U / 2.0, UF / 2.0, 0.0, 0.0, n_ring)
+
+    # ---------------- torque arm: flange under the bottom face, web down to the eye, eye boss, rubber bushing
+    arm_dz = float(faults.get("arm_dz", 0.0))
+    eye = np.array([FC, -O + arm_dz])
+    y_c = -EA + BA + FV / 2.0
+    holes = [(FK - A + FH + dx, sy * FE / 2.0) for dx in (0.0, FJ) for sy in (-1.0, 1.0)]
+    drop = (O - SA - G)
+    half_w = drop / np.tan(alpha) + R / np.sin(alpha)
+    px0 = max(FK - A, min(FC - half_w, holes[0][0] - 1.5 * bolt_d))
+    px1 = min(FK, max(FC + half_w, holes[-1][0] + 1.5 * bolt_d))
+    py = min(B / 2.0, FE / 2.0 + 1.5 * bolt_d)
+    z_plate = -SA + arm_dz
+    plate = c.box((px0, -py, z_plate - G), (px1, py, z_plate))
+    r_b = GM_BUSH_OF_R * R
+    circ = [(R * np.cos(a), R * np.sin(a)) for a in np.linspace(0.0, 2.0 * np.pi, n_ring, endpoint=False)]
+    w_top = O - SA - G
+    outline = _hull2(circ + [(-half_w, w_top), (half_w, w_top)])
+    web = _plate_x(outline, y_c - web_t / 2.0, y_c + web_t / 2.0, r_b, n_ring)
+    web = _swap_xy(web)
+    web = _shift(web, eye[0], 0.0, eye[1])
+    boss = _ring_y(y_c - FN / 2.0, y_c + FN / 2.0, r_b, R, eye[0], eye[1], n_ring)
+    bush = _ring_y(y_c - FV / 2.0, y_c + FV / 2.0, FU / 2.0, r_b - 0.0005, eye[0], eye[1], n_ring)
+    torque_arm = c.merge_parts([plate, web, boss, bush])
+    for hx, hy in holes:
+        seat = np.array([hx, hy, -SA - G])
+        bolts.extend(_fan_bolt(seat, seat + (0.0, 0.0, G + 1.5 * bolt_d), 1.5 * bolt_d, bolt_d / 2.0, None, n_small))
+
+    # ---------------- clevis bracket ("opora"): cheeks round the bushing, base, wall pad, gusset, pin
+    cy_in, cy_out = FV / 2.0 + gap, FV / 2.0 + gap + cheek_t
+    cw = 1.1 * R
+    z_base = eye[1] - R - GM_EYE_CLEAR
+    cheeks = [c.box((eye[0] - cw, y_c - cy_out, z_base), (eye[0] + cw, y_c - cy_in, eye[1] + R)),
+              c.box((eye[0] - cw, y_c + cy_in, z_base), (eye[0] + cw, y_c + cy_out, eye[1] + R))]
+    pad_y = wall_y + float(faults.get("wall_dy", 0.0))
+    base = c.box((eye[0] - cw, pad_y + GM_PAD_T, z_base - cheek_t), (eye[0] + cw, y_c + cy_out, z_base))
+    pad_top = max(z_base + GM_PAD_MIN_H, wall_z[0] + pad_over)
+    pad_top = min(pad_top, wall_z[1])
+    pw = 1.5 * R
+    pad = c.box((eye[0] - pw, pad_y, z_base - cheek_t), (eye[0] + pw, pad_y + GM_PAD_T, pad_top))
+    support = [base, pad] + cheeks
+    g_y0, g_y1 = pad_y + GM_PAD_T, y_c - cy_out
+    if g_y1 - g_y0 > 0.02:
+        g_h = min(pad_top - z_base, g_y1 - g_y0)
+        gv = np.array([[eye[0] - cheek_t / 2.0, g_y0, z_base], [eye[0] - cheek_t / 2.0, g_y1, z_base],
+                       [eye[0] - cheek_t / 2.0, g_y0, z_base + g_h],
+                       [eye[0] + cheek_t / 2.0, g_y0, z_base], [eye[0] + cheek_t / 2.0, g_y1, z_base],
+                       [eye[0] + cheek_t / 2.0, g_y0, z_base + g_h]])
+        support.append((gv, [np.array([[0, 2, 1], [3, 4, 5]]), np.array([[0, 1, 4, 3], [1, 2, 5, 4], [2, 0, 3, 5]])]))
+    if faults.get("support_clash"):
+        # broken case: a strut from the clevis base straight up into the gear case
+        support.append(st.member((eye[0], y_c, z_base), (eye[0], y_c, -0.3 * SA), st.shs(0.03)))
+    body = c.merge_parts(support)
+    pin_len = cy_out + 0.6 * FU
+    pin = _rod_y(y_c - pin_len, y_c + pin_len, FU / 2.0 - 0.0005, eye[0], eye[1], n_small)
+    nut_a = 1.6 * FU
+    pin_nuts = [_bolt((eye[0], y_c + s * cy_out, eye[1]), (eye[0], y_c + s * (cy_out + 0.8 * FU), eye[1]), nut_a, (0.0, 0.0, 1.0))
+                for s in (-1.0, 1.0)]
+    pad_bolt_z = 0.5 * (max(z_base, wall_z[0]) + pad_top)
+    pad_bolts = []
+    for sx in (-1.0, 1.0):
+        seat = np.array([eye[0] + sx * 0.9 * R, pad_y + GM_PAD_T, pad_bolt_z])
+        pad_bolts.extend(_fan_bolt(seat, seat - (0.0, GM_PAD_T + 0.01, 0.0), 0.018, 0.006, None, n_small))
+    support_all = c.merge_parts([body, pin] + [p for p in pin_nuts if p is not None] + pad_bolts)
+
+    # ---------------- flange bearing on the wall and the conveyor shaft stub
+    bs = 2.2 * U + 0.06
+    bearing = c.merge_parts([
+        c.box((-bs / 2.0, wall_y, -bs / 2.0), (bs / 2.0, wall_y + 0.012, bs / 2.0)),
+        _ring_y(wall_y + 0.012, wall_y + max(0.03, wall_gap - 0.02), U / 2.0 + 0.002, 1.1 * U, 0.0, 0.0, n_ring),
+        _rod_y(wall_y - 0.01, EA - 0.004, U / 2.0 - 0.0005, 0.0, 0.0, n_ring),
+    ])
+    for sx in (-1.0, 1.0):
+        for sz in (-1.0, 1.0):
+            seat = np.array([sx * (bs / 2.0 - 0.018), wall_y + 0.012, sz * (bs / 2.0 - 0.018)])
+            bolts.extend(_fan_bolt(seat, seat - (0.0, 0.012, 0.0), 0.017, 0.006, None, n_small))
+
+    # ---------------- motor: IEC frame for the kW, feet and shaft dropped (shaft is inside the case), B5 flange
+    mot = iec_motor(kw, frames=motor_table, detail=detail)
+    frame = mot["dims"]["frame"]
+    fl = table["motor_flange"][frame]
+    LA, M_, P_, S_ = (_gv(fl, k) for k in ("LA", "M", "P", "S"))
+    n_holes = int(fl["holes"]["v"])
+    mH = float(mot["dims"]["H"])
+    shoulder = float(np.asarray(mot["parts"]["endshield_de"][0])[:, 0].max())
+    seal_r = max(float(mot["dims"]["D"]) / 2.0 * 1.65, 0.008)
+    flange = [_ring_x(shoulder - LA, shoulder, seal_r + 0.001, P_ / 2.0, n_ring)]
+    flange[0] = (flange[0][0] + (0.0, 0.0, mH), flange[0][1])
+    for k in range(n_holes):
+        a = np.pi / 4.0 + 2.0 * np.pi * k / n_holes
+        cc = np.array([0.0, M_ / 2.0 * np.cos(a), mH + M_ / 2.0 * np.sin(a)])
+        flange.append(_bolt(cc + (shoulder - LA - 0.45 * S_, 0.0, 0.0), cc + (shoulder - LA, 0.0, 0.0), 1.5 * S_, (0.0, 0.0, 1.0)))
+    m_parts = {k: v for k, v in mot["parts"].items() if k not in ("feet", "shaft")}
+    m_parts["flange"] = c.merge_parts([p for p in flange if p is not None])
+    x0 = L2 + shoulder + float(faults.get("motor_dx", 0.0))
+    dz = -DB - mH + float(faults.get("motor_dz", 0.0))
+
+    def put_motor(piece):
+        v = np.asarray(piece[0], float).reshape(-1, 3).copy()
+        v[:, 0] = x0 - v[:, 0]
+        v[:, 1] = -v[:, 1]
+        v[:, 2] += dz
+        return v, piece[1]
+
+    motor_parts = {k: put_motor(p) for k, p in m_parts.items()}
+    motor = c.merge_parts(list(motor_parts.values()))
+
+    bolt_parts = [b for b in bolts if b is not None]
+    bolts_m = c.merge_parts(bolt_parts)
+    built = {"case": case, "ribs": ribs, "covers": covers, "hollow_shaft": hollow, "torque_arm": torque_arm,
+             "support": support_all, "bearing": bearing, "bolts": bolts_m, "motor": motor}
+    bb_min = np.min([np.asarray(p[0]).min(axis=0) for p in built.values()], axis=0)
+    bb_max = np.max([np.asarray(p[0]).max(axis=0) for p in built.values()], axis=0)
+    dims = {
+        "size": size, "kw": float(kw), "motor_frame": frame, "flange": fl["flange"],
+        "out_axis": [0.0, 0.0], "motor_axis": [0.0, -DB], "flange_x": L2, "eye": [float(eye[0]), float(eye[1])],
+        "eye_y": y_c, "wall_y": wall_y, "wall_z": [float(wall_z[0]), float(wall_z[1])], "pad_top": pad_top,
+        "z_base": z_base - cheek_t, "holes": holes, "hub_y": [-EA, EA],
+        "bbox": {"min": bb_min.tolist(), "max": bb_max.tolist()},
+        "faces": sum(_count_faces(p[1]) for p in built.values()),
+    }
+    sub = {"plate": plate, "eye_boss": boss, "pin": pin, "pad": pad, "support_body": body, "flange": motor_parts["flange"]}
+    return {"parts": built, "dims": dims, "motor_parts": motor_parts, "sub": sub}
