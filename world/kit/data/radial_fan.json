@@ -1,0 +1,82 @@
+{
+  "units": "mm",
+  "machine": "Radial medium-pressure fan VR 280-46 No.5 (ВР 280-46 №5), execution 1: housing on a frame, impeller on the motor shaft. Right rotation, housing position Pr 0 deg (outlet up).",
+  "sources": {
+    "pasport": "Ventinform MSK, Pasport VR 280-46, research/design/components/sources/VR-280-46-pasport.pdf",
+    "catalogue": "Ventinform, Katalog produkcii VR 280-46, research/design/components/sources/vr_280-46.pdf, p.7",
+    "extract": "research/design/components/sources/VR-280-46_no5_extract.md"
+  },
+  "size": {"v": 5, "src": "pasport p.4 table 1, row VR 280-46-5", "basis": "sourced", "note": "Size No.5 chosen by the task brief."},
+  "execution": {"v": 1, "src": "pasport p.4 fig.1 and table 1", "basis": "sourced", "note": "Frame mounted, direct drive on the motor shaft."},
+  "wheel_d": {"v": 500, "src": "pasport p.3 sec.1.2.1: the number is given per GOST 10616-90", "basis": "analog", "note": "The impeller diameter is not printed in the pasport. GOST 10616-90 numbers fans by the impeller diameter in dm, so No.5 is 500 mm. Same reading as the brief (~500)."},
+  "housing": {
+    "A": {"v": 324, "src": "pasport p.4 table 1 (A), fig.1", "basis": "sourced", "note": "Outlet neck width; the housing axial width is taken equal to it (EST, no separate number)."},
+    "axial_width": {"v": 324, "src": "pasport p.4 table 1 (A)", "basis": "judgment", "note": "EST: the pasport gives no housing width along the shaft. Set equal to the neck A."},
+    "B": {"v": 908, "src": "pasport p.5 table Pr 0, row 5", "basis": "sourced", "note": "Overall width across the axis for Pr 0 deg, outlet flange included."},
+    "b": {"v": 379, "src": "pasport p.5 table Pr 0, row 5", "basis": "sourced", "note": "Housing reach on the side opposite to the outlet at Pr 0 deg (the right side of the sketch)."},
+    "H": {"v": 340, "src": "pasport p.5 table Pr 0, row 5", "basis": "sourced", "note": "Outlet flange plane above the shaft axis at Pr 0 deg."},
+    "r90": {"v": 379, "src": "pasport p.5 table Pr 0, b", "basis": "sourced", "note": "Spiral radius 90 deg from the tongue (right side)."},
+    "r180": {"v": 440, "src": "pasport p.5 table Pr 90, b (the same radius seen after the 90 deg turn)", "basis": "sourced", "note": "Spiral radius 180 deg from the tongue (bottom). Pr 90 b=440 and Pr 270 b=440 agree."},
+    "r270": {"v": 500, "src": "pasport p.5: (B - b) = 529 at Pr 0 minus (A1 - A)/2 = 29", "basis": "analog", "note": "Spiral radius where it enters the neck (left side). 529 is the outlet flange edge, the neck wall is 29 mm inside it. The steps 379 -> 440 -> 500 are 61 and 60 mm per 90 deg, i.e. close to an Archimedean spiral (the fit in components._fit_spiral gives r = 315 + 0.683*theta(deg) mm for the extents); this is the only reading under which the three numbers are almost linear."},
+    "positions": {
+      "v": {
+        "0": {"B": 908, "b": 379, "H": 340},
+        "45": {"B": 819, "b": 348, "H": 614},
+        "90": {"B": 780, "b": 440, "H": 529},
+        "135": {"B": 1023, "b": 410, "H": 471},
+        "270": {"B": 780, "b": 440, "H": 379},
+        "315": {"B": 1023, "b": 410, "H": 348}
+      },
+      "src": "pasport p.5, tables of housing positions, row VR 280-46-5", "basis": "sourced",
+      "note": "Only these six positions exist for right rotation, execution 1. 180 and 225 deg (outlet down) are not offered."
+    },
+    "sheet_t": {"v": 3, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Housing sheet thickness EST 3 mm."}
+  },
+  "inlet": {
+    "D": {"v": 502, "src": "pasport p.4 table 1 (D), fig.1 view A", "basis": "sourced", "note": "Inlet pipe outer diameter, read as the circle with the flange holes."},
+    "D1": {"v": 537, "src": "pasport p.4 table 1 (D1), fig.1 view A", "basis": "sourced", "note": "Inlet flange outer diameter."},
+    "n": {"v": 8, "src": "pasport p.4 table 1 (n)", "basis": "sourced", "note": "Flange holes."},
+    "d": {"v": 8, "src": "pasport p.4 table 1 (d)", "basis": "sourced", "note": "Flange hole diameter."},
+    "l": {"v": 252, "src": "pasport p.4 table 1 (l), fig.1", "basis": "sourced", "note": "Inlet flange face from the base plane (the mid plane of the housing)."},
+    "bolt_circle": {"v": 519.5, "src": "pasport p.4 (D, D1)", "basis": "judgment", "note": "EST: the middle between D and D1; the pasport gives no pitch circle."},
+    "throat_d": {"v": 460, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Nozzle bore EST 0.92 of the impeller; the housing hole is 460 mm."},
+    "flange_t": {"v": 6, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Flange thickness EST."}
+  },
+  "outlet": {
+    "A1": {"v": 382, "src": "pasport p.4 table 1 (A1)", "basis": "sourced", "note": "Outlet flange width in the plane of the wheel."},
+    "A2": {"v": 381.5, "src": "pasport p.4 table 1 (A2)", "basis": "sourced", "note": "Outlet flange width along the shaft."},
+    "a1": {"v": 350, "src": "pasport p.4 table 1 (a1)", "basis": "sourced", "note": "Hole pitch across the plane of the wheel."},
+    "a2": {"v": 350, "src": "pasport p.4 table 1 (a2)", "basis": "sourced", "note": "Hole pitch along the shaft."},
+    "n1": {"v": 4, "src": "pasport p.4 table 1 (n1)", "basis": "sourced", "note": "Holes at the corners."},
+    "d1": {"v": 10, "src": "pasport p.4 table 1 (d1)", "basis": "sourced", "note": "Hole diameter."},
+    "flange_t": {"v": 6, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Flange thickness EST."}
+  },
+  "frame": {
+    "h": {"v": 650, "src": "pasport p.4 table 1 (h), fig.1", "basis": "sourced", "note": "Shaft axis above the frame base."},
+    "C": {"v": 505, "src": "pasport p.4 table 1 (C), fig.1 hole scheme", "basis": "sourced", "note": "Mounting hole rectangle from the base plane to its far edge (motor side)."},
+    "C1": {"v": 410, "src": "pasport p.4 table 1 (C1)", "basis": "sourced", "note": "Mounting hole rectangle width across the shaft."},
+    "C2": {"v": 600, "src": "pasport p.4 table 1 (C2)", "basis": "sourced", "note": "Mounting hole rectangle length along the shaft."},
+    "d2": {"v": 14, "src": "pasport p.4 table 1 (d2)", "basis": "sourced", "note": "Mounting hole diameter."},
+    "n2": {"v": 4, "src": "pasport p.4 table 1 (n2)", "basis": "sourced", "note": "Mounting holes."},
+    "rail": {"v": [100, 50, 5, 7.5], "src": "none", "basis": "judgment", "note": "NOT_FOUND. Rail channel h, b, tw, tf in mm, EST (UPN 100 class)."},
+    "post": {"v": 60, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Post and cradle SHS size, EST."},
+    "plate_t": {"v": 20, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Motor base plate thickness, EST."}
+  },
+  "length": {"v": 1028, "src": "pasport p.4 table 1 (L), fig.1", "basis": "sourced", "note": "Inlet flange face to the motor fan-cover tip. The tabulated 4-pole motor in iec_motor is shorter than the 6-pole AIR132M6, so the motor is placed to keep this length."},
+  "motor": {
+    "kw": {"v": 7.5, "src": "pasport p.7 table 3 and catalogue p.7, row No.5, 960 rpm", "basis": "sourced", "note": "Installed power. Passed to iec_motor(kw); the frame is picked there by kW, not by the pasport string."},
+    "rpm": {"v": 960, "src": "pasport p.7 table 3, catalogue p.7", "basis": "sourced", "note": "The brief says 3000 rpm; the pasport and the catalogue list no 3000 rpm for No.5 (960 and 1450 only). 960 rpm with 7.5 kW is the row that matches the brief's 7.5 kW."},
+    "type": {"v": "AIR132M6", "src": "pasport p.7 table 3", "basis": "sourced", "note": "Information only. iec_motor tabulates 4-pole frames, so the drawn motor is its 7.5 kW frame."},
+    "mass_kg": {"v": 176, "src": "pasport p.7 table 3, catalogue p.7", "basis": "sourced", "note": "Whole unit with the motor."},
+    "isolators": {"v": "DO-40 x5", "src": "pasport p.7 table 3", "basis": "sourced", "note": "Not drawn."}
+  },
+  "wheel": {
+    "blades": {"v": 12, "src": "none", "basis": "judgment", "note": "NOT_FOUND. The pasport does not give the blade count; backward-curved blades in the family name 'ВР 280-46' are an analog reading. EST 12."},
+    "width": {"v": 150, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Blade width along the shaft, EST."},
+    "hub_d": {"v": 120, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Hub diameter, EST."}
+  },
+  "stool": {
+    "outer_d": {"v": 240, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Tube between the housing back wall and the motor flange, EST."}
+  },
+  "not_found": ["housing axial width (EST = A)", "impeller diameter (GOST number only)", "sheet and flange thicknesses", "blade count, width, angle", "frame section sizes", "bearing/stool size", "3000 rpm variant of size 5"]
+}

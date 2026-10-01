@@ -702,3 +702,479 @@ def _eyebolt(x, crown, scale, n_seg):
         if seg is not None:
             parts.append(seg)
     return c.merge_parts(parts)
+
+
+# ====================================================================== radial dust fan
+#
+# VR 280-46 No.5, execution 1 (Ventinform pasport). Numbers live in data/radial_fan.json (mm).
+# Local frame: wheel axis = +X, the inlet looks to -X, the motor sits on +X, x=0 is the housing
+# mid plane (the pasport "base plane"), frame underside z=0, axis at z=h. Right rotation Pr means
+# the wheel turns clockwise seen from the motor side (from +X); the housing grows clockwise and the
+# outlet leaves on the -Y side going up (outlet_deg=0). Other positions turn the housing clockwise.
+
+FAN_DATA = Path(__file__).resolve().parent / "data" / "radial_fan.json"
+FAN_POSITIONS = (0, 45, 90, 135, 270, 315)
+FAN_PARTS = ("volute", "inlet", "outlet", "frame", "motor", "bolts", "wheel", "stool")
+FAN_SIZE = 5
+
+
+def _fan_table(data):
+    if data is None:
+        data = json.loads(FAN_DATA.read_text(encoding="utf-8"))
+    return data
+
+
+def _fv(table, *path):
+    node = table
+    for key in path:
+        node = node[key]
+    return float(node["v"]) / 1000.0
+
+
+def _spiral_r(theta_deg, r0, k, dip=0.0):
+    """Archimedean housing radius r0 + k*theta at the angle theta (deg, clockwise from the top)."""
+    th = np.asarray(theta_deg, float)
+    r = r0 + k * th
+    if dip:
+        bump = np.where((th > 105.0) & (th < 122.0), np.sin(np.pi * (th - 105.0) / 17.0) ** 2, 0.0)
+        r = r - dip * bump
+    return r
+
+
+def _fit_spiral(right, bottom, end):
+    """r0, k of r = r0 + k*theta so the housing reaches `right` (m) sideways, `bottom` down and `end` at 270 deg.
+
+    The pasport b and the housing-position tables are reaches (extents), not radii at fixed angles, so the
+    three numbers are matched as extents by a two-parameter least squares.
+    """
+    th = np.linspace(0.0, 270.0, 2701)
+    s, cth = np.sin(np.radians(th)), np.cos(np.radians(th))
+
+    def extents(p):
+        r = p[0] + p[1] * th
+        return np.array([np.max(r * s), np.max(-r * cth), r[-1]])
+
+    want = np.array([right, bottom, end])
+    p = np.array([end - 270.0 * (end - right) / 180.0, (end - right) / 180.0])
+    for _ in range(12):
+        f = extents(p) - want
+        jac = np.column_stack([(extents(p + [1e-6, 0]) - extents(p)) / 1e-6, (extents(p + [0, 1e-6]) - extents(p)) / 1e-6])
+        p = p - np.linalg.lstsq(jac, f, rcond=None)[0]
+    return float(p[0]), float(p[1])
+
+
+def _yz_rot(yz, deg):
+    """Clockwise turn seen from +X (y right, z up)."""
+    a = np.radians(deg)
+    ca, sa = np.cos(a), np.sin(a)
+    yz = np.asarray(yz, float)
+    return np.column_stack([yz[:, 0] * ca + yz[:, 1] * sa, -yz[:, 0] * sa + yz[:, 1] * ca])
+
+
+def _cross2(o, a, b):
+    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+
+
+def _seg_hit(p, q, a, b):
+    d1, d2 = _cross2(p, q, a), _cross2(p, q, b)
+    d3, d4 = _cross2(a, b, p), _cross2(a, b, q)
+    return d1 * d2 < -1e-18 and d3 * d4 < -1e-18
+
+
+def _in_tri(p, a, b, c):
+    return _cross2(a, b, p) >= -1e-15 and _cross2(b, c, p) >= -1e-15 and _cross2(c, a, p) >= -1e-15
+
+
+def _earclip(pts):
+    """Triangles (i, j, k) of a counter-clockwise polygon; duplicated bridge vertices are allowed."""
+    pts = [tuple(p) for p in pts]
+    idx = list(range(len(pts)))
+    tris = []
+    guard = 0
+    while len(idx) > 3 and guard < 4 * len(pts) ** 2:
+        guard += 1
+        m = len(idx)
+        cut = None
+        for k in range(m):
+            i0, i1, i2 = idx[k - 1], idx[k], idx[(k + 1) % m]
+            a, b, d = pts[i0], pts[i1], pts[i2]
+            if _cross2(a, b, d) <= 1e-14:
+                continue
+            if all(j in (i0, i1, i2) or pts[j] in (a, b, d) or not _in_tri(pts[j], a, b, d) for j in idx):
+                cut = k
+                tris.append((i0, i1, i2))
+                break
+        if cut is None:
+            flat = [abs(_cross2(pts[idx[k - 1]], pts[idx[k]], pts[idx[(k + 1) % m]])) for k in range(m)]
+            cut = int(np.argmin(flat))
+        del idx[cut]
+    if len(idx) == 3 and _cross2(pts[idx[0]], pts[idx[1]], pts[idx[2]]) > 1e-14:
+        tris.append(tuple(idx))
+    return tris
+
+
+def _bridge(outer, hole):
+    """Join a clockwise hole to a counter-clockwise outline by a zero-width slit."""
+    outer = [tuple(p) for p in outer]
+    hole = [tuple(p) for p in hole]
+    m = max(range(len(hole)), key=lambda i: hole[i][0])
+    order = sorted(range(len(outer)), key=lambda j: (outer[j][0] - hole[m][0]) ** 2 + (outer[j][1] - hole[m][1]) ** 2)
+    for j in order:
+        ok = True
+        for i in range(len(outer)):
+            if j in (i, (i + 1) % len(outer)):
+                continue
+            if _seg_hit(hole[m], outer[j], outer[i], outer[(i + 1) % len(outer)]):
+                ok = False
+                break
+        if ok:
+            break
+    ring = hole[m:] + hole[:m] + [hole[m]]
+    return outer[:j + 1] + ring + [outer[j]] + outer[j + 1:]
+
+
+def _plate_x(outline, x0, x1, hole_r=0.0, hole_steps=48):
+    """Slab with the outline (y, z) and an optional round hole around the axis, between x0 and x1."""
+    outline = np.asarray(outline, float)
+    if _poly_area(outline) < 0:
+        outline = outline[::-1]
+    loops = [outline]
+    merged = [tuple(p) for p in outline]
+    if hole_r > 0:
+        a = np.linspace(0.0, -2.0 * np.pi, hole_steps, endpoint=False)
+        hole = np.column_stack([hole_r * np.cos(a), hole_r * np.sin(a)])
+        loops.append(hole)
+        merged = _bridge(outline, hole)
+    tris = _earclip(merged)
+    n = len(merged)
+    m = np.asarray(merged, float)
+    v = [np.column_stack([np.full(n, x0), m]), np.column_stack([np.full(n, x1), m])]
+    f_top = np.array([[a + n, b + n, d + n] for a, b, d in tris], np.int64)
+    f_bot = np.array([[d, b, a] for a, b, d in tris], np.int64)
+    parts = [(np.concatenate(v), [f_top, f_bot])]
+    for loop in loops:
+        k = len(loop)
+        ring = np.concatenate([np.column_stack([np.full(k, x0), loop]), np.column_stack([np.full(k, x1), loop])])
+        parts.append((ring, c.grid_faces(2, k, wrap_cols=True)))
+    return c.merge_parts(parts)
+
+
+def _poly_area(p):
+    p = np.asarray(p, float)
+    return 0.5 * float(np.sum(p[:, 0] * np.roll(p[:, 1], -1) - np.roll(p[:, 0], -1) * p[:, 1]))
+
+
+def _sweep_yz(path, x0, x1, t, sign):
+    """Strip x0..x1 along an open (y, z) path, thickness t to the right of travel (sign=+1) or the left (-1)."""
+    path = np.asarray(path, float)
+    d = np.gradient(path, axis=0)
+    d /= np.linalg.norm(d, axis=1)[:, None]
+    n = np.column_stack([d[:, 1], -d[:, 0]]) * sign
+    q = path + n * t
+    k = len(path)
+    ring = np.stack([
+        np.column_stack([np.full(k, x0), path]), np.column_stack([np.full(k, x1), path]),
+        np.column_stack([np.full(k, x1), q]), np.column_stack([np.full(k, x0), q]),
+    ], axis=1).reshape(-1, 3)
+    faces = [c.grid_faces(k, 4, wrap_cols=True), np.array([[3, 2, 1, 0]]), np.array([[4 * (k - 1) + i for i in range(4)]])]
+    return ring, faces
+
+
+def _shell_x(x0, x1, r0, r1, t, steps):
+    """Thin conical/cylindrical shell (outer radius r0 at x0 and r1 at x1, wall t), open ends closed by rings."""
+    ang = np.linspace(0.0, 2.0 * np.pi, steps, endpoint=False)
+
+    def ring(x, r):
+        return np.column_stack([np.full(steps, x), r * np.cos(ang), r * np.sin(ang)])
+
+    v = np.concatenate([ring(x0, r0), ring(x1, r1), ring(x0, r0 - t), ring(x1, r1 - t)])
+    f_out = c.grid_faces(2, steps, wrap_cols=True)
+    f_in = c.grid_faces(2, steps, wrap_cols=True, offset=2 * steps)[:, ::-1]
+    cap0 = np.array([[i, (i + 1) % steps, 2 * steps + (i + 1) % steps, 2 * steps + i] for i in range(steps)])
+    cap1 = np.array([[steps + (i + 1) % steps, steps + i, 3 * steps + i, 3 * steps + (i + 1) % steps] for i in range(steps)])
+    return v, [f_out, f_in, cap0, cap1]
+
+
+def _ring_x(x0, x1, r_in, r_out, steps):
+    return _shell_x(x0, x1, r_out, r_out, r_out - r_in, steps)
+
+
+def _fan_bolt(seat, tip, across, shank_r, nut_gap, steps):
+    """Hex bolt: the head ends at `seat`, the shank runs to `tip`, a hex nut sits `nut_gap` past the seat (None: no nut)."""
+    seat, tip = np.asarray(seat, float), np.asarray(tip, float)
+    unit = (tip - seat) / float(np.linalg.norm(tip - seat))
+    up = (0.0, 0.0, 1.0) if abs(unit[2]) < 0.9 else (1.0, 0.0, 0.0)
+    head_h = 0.55 * across
+    parts = [_bolt(seat - unit * head_h, seat, across, up), _rod(seat - unit * head_h * 0.5, tip, shank_r, steps)]
+    if nut_gap is not None:
+        parts.append(_bolt(seat + unit * nut_gap, seat + unit * (nut_gap + 0.8 * across), across, up))
+    return [p for p in parts if p is not None]
+
+
+def _fan_outline(table, faults):
+    """Housing outline for hand R, outlet 0, in (y, z) about the axis: spiral law and neck lines."""
+    A, A1, B, b, H = (_fv(table, "housing", "A"), _fv(table, "outlet", "A1"), _fv(table, "housing", "B"),
+                      _fv(table, "housing", "b"), _fv(table, "housing", "H"))
+    r0, k = _fit_spiral(_fv(table, "housing", "r90"), _fv(table, "housing", "r180"), _fv(table, "housing", "r270"))
+    flange_t = _fv(table, "outlet", "flange_t")
+    y_lo = -(B - b)
+    y_c = y_lo + A1 / 2.0
+    y_in = y_c + A / 2.0
+    dip = float(faults.get("spiral_dip", 0.0))
+    scale = float(faults.get("housing_scale", 1.0))
+    # Tongue: where the spiral meets the inner neck wall.
+    lo, hi = -80.0, -10.0
+    for _ in range(60):
+        mid = 0.5 * (lo + hi)
+        f = float(_spiral_r(mid, r0, k)) * np.sin(np.radians(mid)) - y_in
+        lo, hi = (mid, hi) if f < 0 else (lo, mid)
+    return {"r0": r0, "k": k, "dip": dip, "scale": scale, "theta_t": 0.5 * (lo + hi), "y_lo": y_lo, "y_c": y_c,
+            "y_in": y_in, "z_neck": H - flange_t, "H": H, "A": A, "A1": A1,
+            "A2": _fv(table, "outlet", "A2"), "flange_t": flange_t}
+
+
+def _mirror_y(verts, faces):
+    v = np.asarray(verts, float).copy()
+    v[:, 1] = -v[:, 1]
+    blocks = faces if isinstance(faces, list) else [faces]
+    return v, [np.asarray(f)[:, ::-1] for f in blocks if len(f)]
+
+
+def radial_fan(kw, size=None, hand="R", outlet_deg=0, *, detail="full", data=None, motor_table=None, faults=None):
+    """Radial dust fan VR 280-46 No.5, execution 1: housing, nozzle, outlet, frame, IEC motor on one shaft.
+
+    Returns {"parts": {name: (verts, faces)}, "dims": {...}, "motor_parts": {...}}; metres, local frame in the comment above.
+    `data`, `motor_table` and `faults` inject the check's broken cases.
+    """
+    if size not in (None, FAN_SIZE):
+        raise ValueError("only size %d is tabulated" % FAN_SIZE)
+    if hand not in ("R", "L"):
+        raise ValueError("hand must be R or L")
+    if outlet_deg not in FAN_POSITIONS:
+        raise ValueError("outlet_deg must be one of %s" % (FAN_POSITIONS,))
+    if detail not in ("full", "lod"):
+        raise ValueError("detail must be full or lod")
+    faults = faults or {}
+    table = _fan_table(data)
+    lod = detail == "lod"
+    n_arc = 40 if lod else 120
+    n_ring = 24 if lod else 64
+    n_small = 8 if lod else 16
+
+    axis_z = _fv(table, "frame", "h")
+    w = _fv(table, "housing", "axial_width") * float(faults.get("housing_w_scale", 1.0))
+    t = _fv(table, "housing", "sheet_t")
+    wheel_r = _fv(table, "wheel_d") / 2.0
+    inlet_od, inlet_flange_od = _fv(table, "inlet", "D"), _fv(table, "inlet", "D1")
+    inlet_l = _fv(table, "inlet", "l")
+    inlet_t = _fv(table, "inlet", "flange_t")
+    throat_r = _fv(table, "inlet", "throat_d") / 2.0
+    total_len = _fv(table, "length")
+    o = _fan_outline(table, faults)
+    sc = o["scale"]
+    mirror = hand == "L"
+
+    def place(verts, faces, rot=True):
+        v = np.asarray(verts, float).reshape(-1, 3).copy()
+        if rot and outlet_deg:
+            v[:, 1:] = _yz_rot(v[:, 1:], outlet_deg)
+        blocks = faces
+        if mirror:
+            v[:, 1] = -v[:, 1]
+            blocks = [np.asarray(f)[:, ::-1] for f in (faces if isinstance(faces, list) else [faces])]
+        v[:, 2] += axis_z
+        return v, blocks
+
+    def finish(piece, rot=True):
+        return place(piece[0], piece[1], rot)
+
+    # ---------------- housing: spiral band, side plates, neck walls, flange
+    th = np.linspace(o["theta_t"], 270.0, n_arc)
+    rr = _spiral_r(th, o["r0"], o["k"], o["dip"]) * sc
+    spiral = np.column_stack([rr * np.sin(np.radians(th)), rr * np.cos(np.radians(th))])
+    z_neck = o["z_neck"]
+    y_end = float(spiral[-1, 0])
+    outer_wall = np.array([[y_end, 0.0], [y_end, z_neck]])
+    inner_wall = np.array([spiral[0], [spiral[0, 0], z_neck]])
+
+    band = _sweep_yz(spiral, -w / 2.0, w / 2.0, t, +1)
+    outline = np.vstack([spiral, [[y_end, z_neck], [spiral[0, 0], z_neck]]])
+    front = _plate_x(outline, -w / 2.0, -w / 2.0 + t, throat_r, n_ring)
+    back_hole = _fv(table, "stool", "outer_d") / 2.0 - 0.005
+    back = _plate_x(outline, w / 2.0 - t, w / 2.0, back_hole, n_ring)
+    volute = c.merge_parts([finish(band), finish(front), finish(back)])
+
+    # ---------------- outlet: neck walls and flange ring
+    neck_w = _sweep_yz(outer_wall, -w / 2.0, w / 2.0, t, +1)
+    neck_n = _sweep_yz(inner_wall, -w / 2.0, w / 2.0, t, -1)
+    fl_t = o["flange_t"]
+    fscale = float(faults.get("outlet_flange_scale", 1.0))
+    y0f, y1f = o["y_lo"], o["y_lo"] + o["A1"] * fscale
+    xf = o["A2"] / 2.0 * fscale
+    ring_in_y = (y_end, spiral[0, 0])
+    xin = w / 2.0
+    z0f, z1f = o["H"] - fl_t, o["H"]
+    bars = [
+        c.box((-xf, y0f, z0f), (xf, ring_in_y[0], z1f)),
+        c.box((-xf, ring_in_y[1], z0f), (xf, y1f, z1f)),
+        c.box((-xf, ring_in_y[0], z0f), (-xin, ring_in_y[1], z1f)),
+        c.box((xin, ring_in_y[0], z0f), (xf, ring_in_y[1], z1f)),
+    ]
+    outlet = c.merge_parts([finish(neck_w), finish(neck_n)] + [finish(bx) for bx in bars])
+
+    # ---------------- inlet: flange ring, pipe, cone to the housing hole
+    x_face = -inlet_l
+    tube_r = inlet_od / 2.0
+    cone_x0 = -w / 2.0 - 0.028
+    inlet = c.merge_parts([
+        _ring_x(x_face, x_face + inlet_t, tube_r - 0.003, inlet_flange_od / 2.0 * float(faults.get("inlet_flange_scale", 1.0)), n_ring),
+        _shell_x(x_face + inlet_t, cone_x0, tube_r, tube_r, 0.003, n_ring),
+        _shell_x(cone_x0, -w / 2.0, tube_r, throat_r, 0.003, n_ring),
+    ])
+    inlet = (inlet[0] + [0.0, 0.0, axis_z], inlet[1])
+
+    # ---------------- motor on the same shaft (IEC motor flipped end for end: shaft toward -X)
+    mot = iec_motor(kw, frames=motor_table, detail=detail)
+    cover_reach = -float(np.asarray(mot["parts"]["fan_cover"][0])[:, 0].min())
+    x0_motor = total_len - inlet_l - cover_reach + float(faults.get("motor_dx", 0.0))
+    motor_dz = float(faults.get("motor_dz", 0.0))
+    h_motor = float(mot["dims"]["H"])
+
+    def put_motor(piece):
+        v = np.asarray(piece[0], float).reshape(-1, 3).copy()
+        v[:, 0] = x0_motor - v[:, 0]
+        v[:, 1] = -v[:, 1]
+        v[:, 2] += axis_z - h_motor + motor_dz
+        return v, piece[1]
+
+    motor_parts = {k: put_motor(p) for k, p in mot["parts"].items()}
+    motor = c.merge_parts(list(motor_parts.values()))
+    shaft_tip = float(motor_parts["shaft"][0][:, 0].min())
+    shield_face = float(motor_parts["endshield_de"][0][:, 0].min())
+    feet_v = motor_parts["feet"][0]
+    foot_x0, foot_x1 = float(feet_v[:, 0].min()), float(feet_v[:, 0].max())
+    foot_z = float(feet_v[:, 2].min())
+
+    # ---------------- wheel and shaft extension
+    width = _fv(table, "wheel", "width")
+    hub_r = _fv(table, "wheel", "hub_d") / 2.0
+    blades_n = int(round(float(table["wheel"]["blades"]["v"])))
+    xb1 = width / 2.0
+    xb0 = -width / 2.0
+    wheel_parts = [
+        _tube(xb1, xb1 + 0.004, wheel_r, 0.0, n_ring),
+        _tube(xb1 - 0.01, xb1 + 0.06, hub_r, 0.0, n_ring),
+        _shell_x(xb0 - 0.03, xb0, throat_r - 0.016, wheel_r, 0.003, n_ring),
+    ]
+    r_in_b = 0.62 * wheel_r
+    for i in range(blades_n):
+        phi = 2.0 * np.pi * i / blades_n
+        a = np.array([r_in_b * np.cos(phi), r_in_b * np.sin(phi)])
+        phi2 = phi - np.radians(32.0)
+        bpt = np.array([wheel_r * 0.985 * np.cos(phi2), wheel_r * 0.985 * np.sin(phi2)])
+        d = bpt - a
+        nrm = np.array([-d[1], d[0]]) / np.linalg.norm(d) * 0.0015
+        yz = np.array([a - nrm, bpt - nrm, bpt + nrm, a + nrm])
+        wheel_parts.append(_along_x(xb0, xb1, yz, 0.0))
+    shaft_ext = _rod((shaft_tip + 0.002, 0.0, 0.0), (xb1 + 0.05, 0.0, 0.0), float(mot["dims"]["D"]) / 2.0, n_small)
+    wheel_parts.append(shaft_ext)
+    wheel = c.merge_parts(wheel_parts)
+    wheel = (wheel[0] + [0.0, 0.0, axis_z], wheel[1])
+
+    # ---------------- stool between the housing back wall and the motor shield
+    stool_r = _fv(table, "stool", "outer_d") / 2.0
+    stool = c.merge_parts([
+        _ring_x(w / 2.0, shield_face, stool_r - 0.005, stool_r, n_ring),
+        _ring_x(w / 2.0, w / 2.0 + 0.008, stool_r, stool_r + 0.03, n_ring),
+        _ring_x(shield_face - 0.008, shield_face, stool_r, stool_r + 0.03, n_ring),
+    ])
+    stool = (stool[0] + [0.0, 0.0, axis_z], stool[1])
+
+    # ---------------- frame: rails, cross members, motor base, cradle under the housing
+    C_, C1, C2 = _fv(table, "frame", "C"), _fv(table, "frame", "C1"), _fv(table, "frame", "C2")
+    rail_h, rail_b, rail_tw, rail_tf = (float(x) / 1000.0 for x in table["frame"]["rail"]["v"])
+    post = _fv(table, "frame", "post")
+    plate_t = _fv(table, "frame", "plate_t")
+    x_r0 = -(C2 - C_) - 0.04
+    x_r1 = max(C_, foot_x1) + 0.04
+    # Webs inboard, flanges outboard: the anchor holes (C1 apart) sit in the open bottom flanges.
+    y_rail = C1 / 2.0 - rail_b / 2.0
+    chan = st.channel(rail_h, rail_b, rail_tw, rail_tf)
+    frame_parts = [
+        st.member((x_r0, y_rail, rail_h / 2.0), (x_r1, y_rail, rail_h / 2.0), chan, roll=np.pi),
+        st.member((x_r0, -y_rail, rail_h / 2.0), (x_r1, -y_rail, rail_h / 2.0), chan),
+    ]
+    cross_x = [x_r0 + 0.05, 0.5 * (foot_x0 + foot_x1) - 0.12, 0.5 * (foot_x0 + foot_x1) + 0.12, x_r1 - 0.05]
+    for xc in cross_x:
+        frame_parts.append(st.member((xc, -y_rail, post / 2.0), (xc, y_rail, post / 2.0), st.shs(post)))
+    plate_z1 = foot_z + float(faults.get("plate_dz", 0.0))
+    plate = c.box((foot_x0 - 0.04, -0.17, plate_z1 - plate_t), (foot_x1 + 0.04, 0.17, plate_z1))
+    frame_parts.append(plate)
+    for xc in (cross_x[1], cross_x[2]):
+        for yc in (-0.14, 0.14):
+            frame_parts.append(st.member((xc, yc, post / 2.0), (xc, yc, plate_z1 - plate_t + 0.002), st.shs(post)))
+    # cradle strips follow the lower spiral contour, posts stand on the rails and carry them
+    shell_xy = _yz_rot(spiral, outlet_deg) if outlet_deg else spiral.copy()
+    if mirror:
+        shell_xy[:, 0] = -shell_xy[:, 0]
+    shell_xy[:, 1] += axis_z
+    low = shell_xy[(np.abs(shell_xy[:, 0]) <= 0.2) & (shell_xy[:, 1] < axis_z - 0.1)]
+    low = low[np.argsort(low[:, 0])]
+    if len(low) >= 3:
+        y_posts = (low[0, 0] + 0.03, low[-1, 0] - 0.03) if low[-1, 0] - low[0, 0] > 0.12 else (float(low[:, 0].mean()),)
+        for cx in (-0.09, 0.09):
+            frame_parts.append(_sweep_yz(low, cx - 0.025, cx + 0.025, 0.012, +1))
+            for yp in y_posts:
+                zs = float(np.interp(yp, low[:, 0], low[:, 1])) - 0.012 + 0.006
+                frame_parts.append(st.member((cx, yp, rail_h - 0.004), (cx, yp, zs), st.shs(post)))
+    if faults.get("frame_clash"):
+        # broken case: a post straight through the outlet neck
+        yc_n = -(o["y_c"]) if mirror else o["y_c"]
+        px = _yz_rot(np.array([[o["y_c"], o["H"] - 0.1]]), outlet_deg)[0]
+        py = -px[0] if mirror else px[0]
+        frame_parts.append(st.member((0.0, py, 0.0), (0.0, py, axis_z + px[1]), st.shs(0.05)))
+    frame = c.merge_parts(frame_parts)
+
+    # ---------------- bolts: outlet flange corners, inlet flange circle, anchor bolts
+    bolt_parts = []
+    d1 = _fv(table, "outlet", "d1")
+    pitch1, pitch2 = _fv(table, "outlet", "a1"), _fv(table, "outlet", "a2")
+    across1 = 1.7 * d1
+    for sy in (-0.5, 0.5):
+        for sx in (-0.5, 0.5):
+            hy, hx = o["y_c"] + sy * pitch1, sx * pitch2
+            for piece in _fan_bolt((hx, hy, o["H"]), (hx, hy, o["H"] - fl_t - 0.012), across1, d1 / 2.0, fl_t, n_small):
+                bolt_parts.append(finish(piece))
+    n_in = int(table["inlet"]["n"]["v"])
+    d_in = _fv(table, "inlet", "d")
+    r_bc = _fv(table, "inlet", "bolt_circle") / 2.0
+    for i in range(n_in):
+        ang = 2.0 * np.pi * (i + 0.5) / n_in
+        hy, hz = r_bc * np.cos(ang), axis_z + r_bc * np.sin(ang)
+        for piece in _fan_bolt((x_face, hy, hz), (x_face + inlet_t + 0.012, hy, hz), 1.7 * d_in, d_in / 2.0, inlet_t, n_small):
+            bolt_parts.append((piece[0], piece[1]))
+    d2 = _fv(table, "frame", "d2")
+    for xa in (-(C2 - C_), C_):
+        for ya in (-C1 / 2.0, C1 / 2.0):
+            for piece in _fan_bolt((xa, ya, rail_tf), (xa, ya, 0.0), 1.7 * d2, d2 / 2.0, None, n_small):
+                bolt_parts.append((piece[0], piece[1]))
+    bolts = c.merge_parts(bolt_parts)
+
+    built = {"volute": volute, "inlet": inlet, "outlet": outlet, "frame": frame, "motor": motor,
+             "bolts": bolts, "wheel": wheel, "stool": stool}
+    bb_min = np.min([np.asarray(p[0]).min(axis=0) for p in built.values()], axis=0)
+    bb_max = np.max([np.asarray(p[0]).max(axis=0) for p in built.values()], axis=0)
+    flange_top = np.asarray(outlet[0], float)
+    flange_top = flange_top[flange_top[:, 2] >= flange_top[:, 2].max() - 1e-9]
+    dims = {
+        "outlet": {"y": 0.5 * float(flange_top[:, 1].max() + flange_top[:, 1].min()), "z": float(flange_top[:, 2].max()),
+                   "neck": o["A"], "flange_y": float(flange_top[:, 1].max() - flange_top[:, 1].min()),
+                   "flange_x": float(flange_top[:, 0].max() - flange_top[:, 0].min())},
+        "size": FAN_SIZE, "hand": hand, "outlet_deg": outlet_deg, "kw": float(kw),
+        "motor_frame": mot["dims"]["frame"], "axis_z": axis_z, "wheel_d": 2.0 * wheel_r,
+        "housing_w": w, "inlet_face_x": x_face, "length": float(np.asarray(motor[0])[:, 0].max()) - x_face,
+        "foot_z": foot_z, "motor_x0": x0_motor, "mass_kg": float(table["motor"]["mass_kg"]["v"]),
+        "bbox": {"min": bb_min.tolist(), "max": bb_max.tolist()},
+        "faces": sum(_count_faces(p[1]) for p in built.values()),
+    }
+    return {"parts": built, "dims": dims, "motor_parts": motor_parts}

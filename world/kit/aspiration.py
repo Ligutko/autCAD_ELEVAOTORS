@@ -26,6 +26,7 @@ import math
 import numpy as np
 
 from . import common as c
+from . import components as comp
 from . import steel as st
 
 BIN_GATE_Z = 3.8        # judgment: dust trailer under the gate
@@ -33,7 +34,10 @@ HOPPER_H = 2.0          # judgment: hopper 3.0 -> 0.4 m, ~57 deg
 BIN_H = 2.5             # judgment: bin prism height
 FILTER_D, FILTER_H = 1.7, 3.5   # judgment: RCIE ~21-24 m2 class
 FILTER_BASE = 0.8               # judgment: rotary valve and cone under the filter body
-FAN_BOX = (1.0, 0.8, 1.1)       # judgment: radial dust fan ~6000 m3/h, 7.5 kW
+FAN_KW = 7.5                    # ВР 280-46 №5, 960 rpm: radial dust fan, pasport table 3 (world/kit/data/radial_fan.json)
+FAN_AIR_Z = 5.1                 # judgment: clean-air duct runs over the filter top at this height above the bin roof
+FAN_DUCT_R = 0.251              # inlet pipe OD 502 (pasport table 1, D)
+FAN_STACK_H = 2.2               # judgment: stack above the outlet flange
 RISE_OFFSET = 0.35              # riser to the filter runs this far outside the bin frame
 LEG_CLEAR = 0.10                # boot duct keeps this gap to the leg casings
 DAMPER_FROM_END = 0.35          # damper on each branch, this far before the collector
@@ -54,12 +58,15 @@ def side_towards(b, y):
 
 
 def unit_points(b, towards_y):
-    """Filter axis, fan position and filter inlet (on the side facing the riser), site frame."""
+    """Filter axis, fan position and filter inlet (on the side facing the riser), site frame.
+
+    The fan point is the wheel axis at the housing mid plane, on the roof (frame underside): the shaft runs along Y,
+    the inlet looks to -Y, the outlet goes up on the east side (clear of the ladder exit and the roof rail)."""
     cx, cy = b["center"]
     zt = bin_top_z()
     s = side_towards(b, towards_y)
     filt = np.array([cx - 0.5, cy, zt])
-    fan = np.array([cx + 0.9, cy, zt])
+    fan = np.array([cx + 0.85, cy - 0.25, zt])
     inlet = filt + [0, s * FILTER_D / 2, FILTER_BASE + FILTER_H * 0.5]
     return filt, fan, inlet
 
@@ -146,18 +153,52 @@ def build_bin(b, riser_y, max_flight=6.0):
             "bin_rest": c.merge_parts(rest) if rest else None, "bin_rails": c.merge_parts(rails), "bin_toes": c.merge_parts(toes)}
 
 
+def _duct_path(points, radius, bevel, steps=24):
+    """Round duct along a polyline with chamfered corners (two 45-degree-ish cuts per corner)."""
+    pts = [np.asarray(p, float) for p in points]
+    path = [pts[0]]
+    for i in range(1, len(pts) - 1):
+        d_in = pts[i] - pts[i - 1]
+        d_out = pts[i + 1] - pts[i]
+        b_in = min(bevel, 0.45 * np.linalg.norm(d_in))
+        b_out = min(bevel, 0.45 * np.linalg.norm(d_out))
+        path.append(pts[i] - d_in / np.linalg.norm(d_in) * b_in)
+        path.append(pts[i] + d_out / np.linalg.norm(d_out) * b_out)
+    path.append(pts[-1])
+    return [st.rod(path[i], path[i + 1], radius, steps) for i in range(len(path) - 1)]
+
+
 def build_unit(b, riser_y):
-    """RCIE filter with rotary valve into the bin, radial fan with motor and stack."""
+    """RCIE filter with rotary valve into the bin, radial fan (VR 280-46 No.5, comp.radial_fan) with motor and stack."""
     filt, fan, _ = unit_points(b, riser_y)
-    parts = {"filter": [], "fan": [], "fan_motor": []}
+    parts = {"filter": [], "fan": [], "fan_frame": [], "fan_motor": []}
     parts["filter"].append(st.rod(filt + [0, 0, FILTER_BASE], filt + [0, 0, FILTER_BASE + FILTER_H], FILTER_D / 2, 32))
     parts["filter"].append(st.rod(filt + [0, 0, 0.05], filt + [0, 0, FILTER_BASE], 0.25, 16))        # cone -> valve
     parts["filter"].append(st.rod(filt + [0, 0, FILTER_BASE + FILTER_H], filt + [0, 0, FILTER_BASE + FILTER_H + 0.4], 0.3, 16))
-    fx, fy, fz = FAN_BOX
-    parts["fan"].append(c.box(tuple(fan - [fx / 2, fy / 2, 0.0]), tuple(fan + [fx / 2, fy / 2, fz])))
-    parts["fan"].append(st.rod(fan + [0, 0, fz], fan + [0, 0, fz + 2.2], 0.22, 20))           # stack
-    parts["fan"].append(st.member(filt + [0, 0, FILTER_BASE + FILTER_H + 0.4], fan + [0, 0, fz * 0.7], st.shs(0.30)))
-    parts["fan_motor"].append(st.rod(fan + [fx / 2, 0, 0.45], fan + [fx / 2 + 0.55, 0, 0.45], 0.16, 20))
+
+    # Fan: shaft along site +Y (the local frame turned +90 deg about Z), inlet toward -Y, outlet up on the east side.
+    unit = comp.radial_fan(FAN_KW)
+    place = lambda v: c.transform(np.asarray(v, float), rot_z=math.pi / 2, offset=tuple(fan))      # noqa: E731
+    for name, key in (("volute", "fan"), ("inlet", "fan"), ("outlet", "fan"), ("stool", "fan"), ("wheel", "fan"),
+                      ("frame", "fan_frame"), ("bolts", "fan_frame"), ("motor", "fan_motor")):
+        v, f = unit["parts"][name]
+        parts[key].append((place(v), f))
+    d = unit["dims"]
+    axis_z = d["axis_z"]
+    # clean air: filter top -> over the filter -> east -> south of the fan -> down -> into the inlet flange
+    y_face = fan[1] + d["inlet_face_x"]
+    y_leg = y_face - 0.40
+    top = filt + [0, 0, FILTER_BASE + FILTER_H + 0.4]
+    route = [top, [top[0], top[1], fan[2] + FAN_AIR_Z], [fan[0], filt[1], fan[2] + FAN_AIR_Z],
+             [fan[0], y_leg, fan[2] + FAN_AIR_Z], [fan[0], y_leg, fan[2] + axis_z], [fan[0], y_face - 0.008, fan[2] + axis_z]]
+    parts["fan"].extend(_duct_path(route, FAN_DUCT_R, 0.30))
+    parts["fan"].append(st.rod([fan[0], y_face - 0.008, fan[2] + axis_z], [fan[0], y_face, fan[2] + axis_z], 0.2685, 32))   # counter flange
+    # stack on the outlet flange: square duct on the neck, counter flange on the flange (local y -> site -X, local x -> site +Y)
+    out = d["outlet"]
+    out_x, z_flange = fan[0] - out["y"], fan[2] + out["z"]
+    parts["fan"].append(st.member([out_x, fan[1], z_flange], [out_x, fan[1], z_flange + FAN_STACK_H], st.shs(out["neck"])))
+    parts["fan"].append(c.box((out_x - out["flange_y"] / 2, fan[1] - out["flange_x"] / 2, z_flange),
+                              (out_x + out["flange_y"] / 2, fan[1] + out["flange_x"] / 2, z_flange + 0.008)))
     return {k: c.merge_parts(v) for k, v in parts.items()}
 
 
@@ -409,7 +450,7 @@ def build(site, tower, tun, systems=None, collection=None, materials=None):
     look = {"bin_frame": (galv, False), "bin_shell": (galv_old, False), "bin_gate": (red, False),
             "ladder": (galv, False), "ladder_rungs": (galv, "quads"), "bin_rest": (grating, False),
             "bin_rails": (yellow, "quads"), "bin_toes": (yellow, False), "filter": (filt, "quads"),
-            "fan": (fan_paint, False), "fan_motor": (motor, "quads"), "ducts": (galv, "quads"),
+            "fan": (fan_paint, False), "fan_frame": (dark, False), "fan_motor": (motor, "quads"), "ducts": (galv, "quads"),
             "dampers": (dark, "quads")}
     a = site["aspiration"]
     bins = {b["id"]: b for b in a["dust_bins"]}

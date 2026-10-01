@@ -15,6 +15,19 @@
 (б) вал коротший за E на 20 %; (в) лапи на +5 мм; (г) коробка на +0,3 м;
 (д) A і B поміняні місцями; (е) монотонність таблиці зламана.
 
+Радіальний вентилятор ВР 280-46 №5 (radial_fan, data/radial_fan.json), міряємо з вершин, не з dims:
+- fan_body: B, b, низ корпусу, верх фланця H, ширина вздовж вала = дані ±5 мм; B усіх шести положень корпусу;
+- fan_inlet: фланець D1, труба D, виступ фланця l від серединної площини = дані ±5 мм;
+- fan_outlet: фланець A1 × A2, горловина A, крок отворів a1 = дані ±5 мм;
+- fan_spiral: радіус спіралі не спадає з кутом від язика;
+- fan_axis: вісь вала двигуна збігається з віссю колеса ±2 мм;
+- fan_stand: зазор лапи двигуна над рамою 0 ± 2 мм;
+- fan_clash: вихідний патрубок не перетинає раму в усіх шести положеннях, обидві руки;
+- fan_len: довжина L (фланець входу → кришка двигуна) = дані ±5 мм;
+- fan_mesh: індекси, NaN, вироджені грані в усіх частинах.
+Зламані варіанти вентилятора: спіраль зі спадним радіусом, мотор на 30 мм вище осі, лапа на 10 мм над рамою,
+рама крізь патрубок, фланці входу і виходу +4/5 %, корпус ширший на 4 %, мотор зсунуто на 50 мм, вироджена грань.
+
 Запуск:
     blender --background --python world/build/check_components.py
 Код виходу 1, якщо будь-який випадок провалено.
@@ -378,6 +391,221 @@ def evaluate(table, faults=None):
     return rows
 
 
+# ---------------------------------------------------------------- радіальний вентилятор
+
+FAN_TOL = 0.005
+FAN_TOL_AXIS = 0.002
+FAN_TOL_GAP = 0.002
+FAN_KW = 7.5
+
+
+def _fan_data():
+    return json.loads(comp.FAN_DATA.read_text(encoding="utf-8"))
+
+
+def _fan_mm(data, *path):
+    node = data
+    for key in path:
+        node = node[key]
+    return float(node["v"]) / 1000.0
+
+
+def _fan_build(data, faults, deg=0, hand="R"):
+    return comp.radial_fan(FAN_KW, outlet_deg=deg, hand=hand, data=data, faults=faults)
+
+
+def _fan_cat(item, names):
+    return np.vstack([_verts(item["parts"][n]) for n in names])
+
+
+def _spiral_points(item, data):
+    """Вершини переднього краю спіралі (x = мін. корпусу, поза отвором і шийкою): (кут, радіус) від язика."""
+    v = _verts(item["parts"]["volute"])
+    axis = _fan_mm(data, "frame", "h")
+    z_neck = _fan_mm(data, "housing", "H") - _fan_mm(data, "outlet", "flange_t")
+    x0 = float(v[:, 0].min())
+    edge = v[np.abs(v[:, 0] - x0) < 1e-9]
+    y, z = edge[:, 1], edge[:, 2] - axis
+    r = np.hypot(y, z)
+    keep = (r > 1.2 * _fan_mm(data, "inlet", "throat_d") / 2.0) & (z < z_neck - 1e-4)
+    ang = np.degrees(np.arctan2(y[keep], z[keep]))
+    ang = np.where(ang < -60.0, ang + 360.0, ang)
+    # Язик лежить на ≈ -33° (y = -176 мм за даними); від нього спіраль росте. Точки шийки лишаються лівіше -30°.
+    late = ang >= -30.0
+    ang, y, z, keep_r = ang[late], y[keep][late], z[keep][late], r[keep][late]
+    # Кромка має два сліди (зовнішній і внутрішній бік листа), тому беремо найбільший радіус у смузі 4° (крок точок 2,5°).
+    bins = np.floor(ang / 4.0).astype(int)
+    out_a, out_r = [], []
+    for b in sorted(set(bins.tolist())):
+        sel = bins == b
+        out_a.append(float(ang[sel].max()))
+        out_r.append(float(keep_r[sel].max()))
+    return np.array(out_a), np.array(out_r)
+
+
+def _bvh_pair(a, b):
+    ba, bb = _bvh(a), _bvh(b)
+    return ba is not None and bb is not None and bool(ba.overlap(bb))
+
+
+def evaluate_fan(data, faults=None, mutate=None):
+    """Список (rule_id, ok, label, info) для radial_fan. Геометрію міряємо з вершин, розміри — з JSON."""
+    faults = faults or None
+    rows = []
+    item = _fan_build(data, faults)
+    if mutate:
+        mutate(item)
+    parts = item["parts"]
+    axis = _fan_mm(data, "frame", "h")
+    ref_x = lambda v: 0.5 * (float(v[:, 0].min()) + float(v[:, 0].max()))  # noqa: E731
+
+    # fan_body
+    body = _fan_cat(item, ("volute", "outlet"))
+    vol = _verts(parts["volute"])
+    got = {
+        "B": float(body[:, 1].max() - body[:, 1].min()),
+        "b": float(body[:, 1].max()),
+        "низ": float(axis - body[:, 2].min()),
+        "H": float(body[:, 2].max() - axis),
+        "ширина": float(vol[:, 0].max() - vol[:, 0].min()),
+    }
+    want = {"B": _fan_mm(data, "housing", "B"), "b": _fan_mm(data, "housing", "b"),
+            "низ": _fan_mm(data, "housing", "r180"), "H": _fan_mm(data, "housing", "H"),
+            "ширина": _fan_mm(data, "housing", "axial_width")}
+    bad = [f"{k} {got[k] * 1000:.1f}≠{want[k] * 1000:.1f}" for k in got if abs(got[k] - want[k]) > FAN_TOL]
+    pos_bad = []
+    for deg_s, row in data["housing"]["positions"]["v"].items():
+        for hand in ("R", "L"):
+            other = _fan_build(data, faults, int(deg_s), hand)
+            ov = _fan_cat(other, ("volute", "outlet"))
+            width = float(ov[:, 1].max() - ov[:, 1].min())
+            if abs(width - row["B"] / 1000.0) > FAN_TOL:
+                pos_bad.append(f"{deg_s}{hand} {width * 1000:.0f}≠{row['B']}")
+    rows.append(("fan_body", not bad and not pos_bad, "корпус вентилятора B, b, низ, H, ширина",
+                 f"допуск 5 мм; 0°: " + ", ".join(f"{k} {got[k] * 1000:.1f}" for k in got) + f"; B шести положень {pos_bad or 'ok'}; {bad}"))
+
+    # fan_inlet
+    inl = _verts(parts["inlet"])
+    mid = ref_x(vol)
+    face = float(mid - inl[:, 0].min())
+    rad = np.hypot(inl[:, 1], inl[:, 2] - axis)
+    flange_od = 2.0 * float(rad.max())
+    tube = (inl[:, 0] > inl[:, 0].min() + 0.012) & (inl[:, 0] < mid - 0.185)
+    pipe_od = 2.0 * float(rad[tube].max())
+    want_in = (_fan_mm(data, "inlet", "D1"), _fan_mm(data, "inlet", "D"), _fan_mm(data, "inlet", "l"))
+    ok = (abs(flange_od - want_in[0]) <= FAN_TOL and abs(pipe_od - want_in[1]) <= FAN_TOL
+          and abs(face - want_in[2]) <= FAN_TOL)
+    rows.append(("fan_inlet", ok, "вхідний патрубок D1, D, виступ l",
+                 f"допуск 5 мм; D1 {flange_od * 1000:.1f}/{want_in[0] * 1000:.0f}, D {pipe_od * 1000:.1f}/{want_in[1] * 1000:.0f}, "
+                 f"l {face * 1000:.1f}/{want_in[2] * 1000:.0f}"))
+
+    # fan_outlet
+    out = _verts(parts["outlet"])
+    top = out[out[:, 2] > out[:, 2].max() - 1e-4]
+    fl_y, fl_x = float(top[:, 1].max() - top[:, 1].min()), float(top[:, 0].max() - top[:, 0].min())
+    z_neck = axis + _fan_mm(data, "housing", "H") - _fan_mm(data, "outlet", "flange_t")
+    neck = out[(np.abs(out[:, 2] - z_neck) < 1e-6) & (np.abs(out[:, 0]) <= 0.5 * got["ширина"] + 1e-6)]
+    neck_w = float(neck[:, 1].max() - neck[:, 1].min()) if len(neck) else float("nan")
+    bolts = _verts(parts["bolts"])
+    heads = bolts[bolts[:, 2] > axis + _fan_mm(data, "housing", "H") + 0.004]
+    y_mid = 0.5 * (float(top[:, 1].max()) + float(top[:, 1].min()))
+    left, right = heads[heads[:, 1] < y_mid], heads[heads[:, 1] >= y_mid]
+    pitch = (float(right[:, 1].mean() - left[:, 1].mean()) if len(left) and len(right) else float("nan"))
+    want_out = (_fan_mm(data, "outlet", "A1"), _fan_mm(data, "outlet", "A2"), _fan_mm(data, "housing", "A"),
+                _fan_mm(data, "outlet", "a1"))
+    got_out = (fl_y, fl_x, neck_w, pitch)
+    ok = all(abs(g - w_) <= FAN_TOL for g, w_ in zip(got_out, want_out))
+    rows.append(("fan_outlet", ok, "вихідний патрубок A1 × A2, A, крок a1",
+                 "допуск 5 мм; " + ", ".join(f"{n} {g * 1000:.1f}/{w_ * 1000:.1f}" for n, g, w_ in zip(("A1", "A2", "A", "a1"), got_out, want_out))))
+
+    # fan_spiral
+    ang, r = _spiral_points(item, data)
+    drops = [f"{a0:.0f}°→{a1:.0f}°: {r0 * 1000:.0f}→{r1 * 1000:.0f}" for a0, a1, r0, r1 in zip(ang, ang[1:], r, r[1:])
+             if r1 < r0 - 1e-6]
+    rows.append(("fan_spiral", len(ang) >= 20 and not drops, "радіус спіралі росте з кутом",
+                 f"{len(ang)} смуг по 4°, {ang.min():.0f}°…{ang.max():.0f}°, r {r.min() * 1000:.0f}…{r.max() * 1000:.0f} мм; {drops[:3] or 'не спадає'}"))
+
+    # fan_axis
+    mshaft = item["motor_parts"]["shaft"][0]
+    m_z, _ = _shaft_hd(np.asarray(mshaft, float))
+    m_y = 0.5 * (float(mshaft[:, 1].max()) + float(mshaft[:, 1].min()))
+    wv = _verts(parts["wheel"])
+    w_y = 0.5 * (float(wv[:, 1].max()) + float(wv[:, 1].min()))
+    w_z = 0.5 * (float(wv[:, 2].max()) + float(wv[:, 2].min()))
+    dy, dz = abs(m_y - w_y), abs(m_z - w_z)
+    rows.append(("fan_axis", dy <= FAN_TOL_AXIS and dz <= FAN_TOL_AXIS, "вісь двигуна = вісь колеса",
+                 f"допуск 2 мм; Δy {dy * 1000:.2f}, Δz {dz * 1000:.2f} мм (колесо z {w_z * 1000:.1f}, вал {m_z * 1000:.1f})"))
+
+    # fan_stand
+    feet = np.asarray(item["motor_parts"]["feet"][0], float)
+    fz = float(feet[:, 2].min())
+    fr = _verts(parts["frame"])
+    near = fr[(fr[:, 0] >= feet[:, 0].min() - 0.06) & (fr[:, 0] <= feet[:, 0].max() + 0.06)
+              & (np.abs(fr[:, 1]) <= 0.2) & (fr[:, 2] <= fz + 0.05)]
+    top_z = float(near[:, 2].max()) if len(near) else float("nan")
+    deck = near[np.abs(near[:, 2] - top_z) < 1e-6] if len(near) else near
+    covers = (len(deck) > 0 and float(deck[:, 0].min()) <= float(feet[:, 0].min()) and float(deck[:, 0].max()) >= float(feet[:, 0].max())
+              and float(np.abs(deck[:, 1]).max()) >= float(np.abs(feet[:, 1]).max()))
+    gap = fz - top_z
+    rows.append(("fan_stand", abs(gap) <= FAN_TOL_GAP and covers, "двигун стоїть на рамі",
+                 f"допуск 2 мм; зазор {gap * 1000:.2f} мм, плита перекриває лапи: {covers}"))
+
+    # fan_clash: усі шість положень, обидві руки
+    clash = []
+    for deg in comp.FAN_POSITIONS:
+        for hand in ("R", "L"):
+            other = item if (deg == 0 and hand == "R") else _fan_build(data, faults, deg, hand)
+            if _bvh_pair(other["parts"]["outlet"], other["parts"]["frame"]):
+                clash.append(f"{deg}{hand}")
+    rows.append(("fan_clash", not clash, "вихідний патрубок не перетинає раму", f"12 положень; перетин: {clash or 'немає'}"))
+
+    # fan_len
+    mt = _verts(parts["motor"])
+    length = float(mt[:, 0].max() - inl[:, 0].min())
+    want_len = _fan_mm(data, "length")
+    rows.append(("fan_len", abs(length - want_len) <= FAN_TOL, "довжина L",
+                 f"допуск 5 мм; {length * 1000:.1f}/{want_len * 1000:.0f} мм"))
+
+    # fan_mesh
+    bad_idx, bad_num, bad_deg = [], [], []
+    for name, part in parts.items():
+        verts = _verts(part)
+        if not np.isfinite(verts).all():
+            bad_num.append(name)
+        for face in _iter_faces(part[1]):
+            if face.size and (int(face.min()) < 0 or int(face.max()) >= len(verts)):
+                bad_idx.append(name)
+                break
+            if face.size and _face_area(verts, face) < DEGEN_M2:
+                bad_deg.append(name)
+                break
+    rows.append(("fan_mesh", not (bad_idx or bad_num or bad_deg), "сітка вентилятора без вироджених граней",
+                 f"{item['dims']['faces']} граней; індекси {bad_idx or 'ok'}, NaN {bad_num or 'ok'}, вироджені {bad_deg or 'ok'}"))
+    return rows
+
+
+def _degenerate_bolt(item):
+    verts, faces = item["parts"]["bolts"]
+    verts = np.asarray(verts, float).reshape(-1, 3)
+    n = len(verts)
+    verts = np.vstack([verts, verts[:1], verts[:1], verts[:1]])
+    blocks = faces if isinstance(faces, list) else [faces]
+    item["parts"]["bolts"] = (verts, list(blocks) + [np.array([[n, n + 1, n + 2]], np.int64)])
+
+
+FAN_VARIANTS = (
+    ("fan_spiral", "спіраль з радіусом, що спадає на ділянці 105…122°", {"spiral_dip": 0.04}, None),
+    ("fan_axis", "двигун і його стійка на 30 мм вище осі колеса", {"motor_dz": 0.03}, None),
+    ("fan_stand", "плита під двигуном на 10 мм нижче лап", {"plate_dz": -0.01}, None),
+    ("fan_clash", "стійка рами крізь вихідний патрубок", {"frame_clash": True}, None),
+    ("fan_inlet", "фланець входу більший на 4 %", {"inlet_flange_scale": 1.04}, None),
+    ("fan_outlet", "фланець виходу більший на 5 %", {"outlet_flange_scale": 1.05}, None),
+    ("fan_body", "корпус ширший вздовж вала на 4 %", {"housing_w_scale": 1.04}, None),
+    ("fan_len", "двигун зсунуто вздовж вала на 50 мм", {"motor_dx": 0.05}, None),
+    ("fan_mesh", "у болтах вироджена грань", None, _degenerate_bolt),
+)
+
+
 def _failed(rows):
     return {rid for rid, ok, _label, _info in rows if not ok}
 
@@ -430,7 +658,28 @@ def main():
         else:
             print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
 
+    fan_data = _fan_data()
+    fan_base = evaluate_fan(fan_data)
+    fan_fail = _failed(fan_base)
+    for rid, ok, label, info in fan_base:
+        ok_all &= ok
+        print(f"{'PASS' if ok else 'FAIL'}  {label}: {info}", flush=True)
+    fan_caught = 0
+    for rid, title, faults, mutate in FAN_VARIANTS:
+        got_rows = evaluate_fan(fan_data, faults, mutate)
+        got = _failed(got_rows)
+        extra = got - fan_fail - {rid}
+        info = next(i for r, _ok, _l, i in got_rows if r == rid)
+        seen = rid in got and not extra
+        fan_caught += bool(seen)
+        ok_all &= seen
+        if seen:
+            print(f"EXPECTED FAIL {title} -> OK ({rid})", flush=True)
+        else:
+            print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
+
     print(f"CASES {atomic} base + {len(variants)} broken, caught {caught}/{len(variants)}", flush=True)
+    print(f"FAN {len(fan_base)} rules + {len(FAN_VARIANTS)} broken, caught {fan_caught}/{len(FAN_VARIANTS)}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)
     sys.exit(0 if ok_all else 1)
 
