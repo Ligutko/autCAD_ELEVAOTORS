@@ -31,6 +31,20 @@ def _frame(p0, p1):
     return p0, d, s, length
 
 
+_KW = None
+
+
+def conveyor_kw(cid):
+    """Motor kW of a conveyor from the SITE equipment registry (None when it is not listed)."""
+    global _KW
+    if _KW is None:
+        import json
+        from pathlib import Path
+        site = json.loads((Path(__file__).resolve().parents[1] / "site" / "SITE.json").read_text(encoding="utf-8"))
+        _KW = {i["id"]: i["kw"] for i in site["equipment"]["items"] if i.get("kind") == "motor"}
+    return _KW.get(cid)
+
+
 def conveyor(tail, head, width, height, drive_side=1.0, kw=None):
     """Chain conveyor casing between the tail and head pulley axes (x, y, z of the axis).
 
@@ -119,7 +133,7 @@ def silo_row_gallery(g, line):
     # to -X (T8, T12 had it hanging past the deck edge, outside the rail, until 2026-09-30)
     walk = 1.0 if g.get("walkway_side", "+Y") == "+Y" else -1.0
     conv = conveyor((line["tail_x"], y, axis_z), (line["head_x"], y, axis_z), w, h,
-                    drive_side=walk * math.copysign(1.0, line["head_x"] - line["tail_x"]))
+                    drive_side=walk * math.copysign(1.0, line["head_x"] - line["tail_x"]), kw=conveyor_kw(line["id"]))
     for dx in line["drops_x"]:                                      # drop gate on the casing and spout to the roof spout
         gates.append(c.box((dx - 0.25, y - w / 2 - 0.06, cz0 - 0.18), (dx + 0.25, y + w / 2 + 0.06, cz0)))
         gates.append(c.box((dx + 0.25, y - 0.07, cz0 - 0.15), (dx + 0.6, y + 0.07, cz0 - 0.03)))
@@ -172,7 +186,7 @@ def bridge(b, by_conveyor=False):
         # C2 (2026-10-01): conveyor() puts drive_side +1 on cross(Z, run) = -X for a run to +Y, so T14 and T10 had their
         # drives on the inner side; the KA gearmotor there cut the T11 casing and the T7 flanges. Outer side for all.
         side *= math.copysign(1.0, tail[1] - head[1])
-        convs.append(conveyor(tail, head, w, h, drive_side=side))
+        convs.append(conveyor(tail, head, w, h, drive_side=side, kw=conveyor_kw(cv["id"])))
     merged = {"heavy": c.merge_parts(heavy), "light": c.merge_parts(light), "deck": c.merge_parts(deck),
               "rails": c.merge_parts(rails), "toes": c.merge_parts(toes)}
     for key in ("casing", "flanges", "drive", "motor"):
