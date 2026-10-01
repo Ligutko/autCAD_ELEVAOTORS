@@ -1,0 +1,123 @@
+{
+  "units": "mm",
+  "machine": "Shaft-mounted helical-bevel gearmotor SEW-EURODRIVE KA..T (hollow shaft, torque arm), 4-pole IEC motor on the input flange. Drive of the chain conveyors U13-TCS-320 (galleries, bridges) and of the belt conveyors U13-TL-50K (tunnels).",
+  "sources": {
+    "sew": "SEW-EURODRIVE, VARIGEAR Variable Speed Drives, Product Catalog 2002 (9PD0008), research/design/components/sources/SEW_9PD0008_KA_dimensions.pdf. PDF page = printed page + 1.",
+    "sew_case_ka37_67": "SEW PDF p.261 (printed 260), K-Series Dimensions, 1. Shaft Mounted: Gearcase and Output Shaft tables, rows KA37-KA67",
+    "sew_case_ka77_107": "SEW PDF p.263 (printed 262), the same tables, rows KA77-KA107, drawing (side view, bottom view 'Torque Arm Mounting Surface', output hollowshaft)",
+    "sew_arm": "SEW PDF p.274 (printed 273), 9. Torque Arm Arrangement, rows KA37T..KA157T",
+    "sew_select": "SEW PDF p.142-147 (printed 141-146), VARIGEAR with Helical-Bevel Gear Units, selection rows by motor HP and output speed",
+    "bonvario": "Bonvario B-KA..37/T~107/T Mounting dimensions, research/design/components/sources/Bonvario_B-KA_torque_arm.pdf, p.1 drawing and p.2 table (same letters as SEW under other names; gives H, L2, N, Q and the arm angle alpha that SEW does not print)",
+    "weg_flange": "WEG, W22 European Market, cod. 50025712 rev.25, research/design/components/sources/WEG_W22_european_market.pdf, p.60 'Flange Mounted Motors, FF Flange'",
+    "skandia": "Skandia Elevator KTIF top conveyor, research/design/components/sources/Skandia_KTIF_pds.pdf, p.1-2",
+    "cimbria": "Cimbria RM chain conveyor data sheet 2024, research/design/components/sources/Cimbria_RM_datasheet.pdf, p.1-2",
+    "lubnymash": "research/lubnymash_equipment.md section 2 (TCS-320: chain M-112 pitch 100, 0.6-0.75 m/s, shaft-mounted gearmotor on the side of the drive section)"
+  },
+  "selection": {
+    "chain_speed": {"v": "0.6-0.75 m/s", "src": "lubnymash_equipment.md sec.2, catalogue p.18 (rec_508ff88e)", "basis": "sourced", "note": "TCS-320 chain speed."},
+    "sprocket_rpm": {"v": 48, "src": "Skandia KTIF p.2 table, column 30/33 100 t/h: speed 47-50 rpm, chain 0.63-0.67 m/s, sprocket 8 teeth, pitch 100 mm", "basis": "analog", "note": "Same capacity (100 t/h), same chain pitch (100 mm) as the TCS-320; the TCS sprocket is NOT_FOUND. 8 teeth x 100 mm gives a pitch diameter 261 mm, 0.65 m/s -> 47.5 rpm."},
+    "torque_nm": {"v": {"11": 2190, "15": 2980, "18.5": 3680}, "src": "T = 9550 P / n with n = 48 rpm", "basis": "judgment", "note": "Output torque at the sprocket shaft for the three motor ratings in SITE.json (T7..T15)."},
+    "why_ka97": {"v": "KA97", "src": "SEW PDF p.145-146 (printed 144-145): 20 HP (15 kW) DV160L4 rows use K87 up to i = 79.34 (47 rpm, 22100 lb-in = 2497 Nm) and K97 from i = 86.52; 25 HP (18.5 kW) DV180M4 rows use K87 up to i = 63.00 (59 rpm) and K97 from i = 70.54 (53 rpm, 24300 lb-in = 2745 Nm)", "basis": "judgment", "note": "At ~48 rpm the catalogue already moves 15 and 18.5 kW to K97; K87 tops out near 2500-2600 Nm in these rows, below the 2980-3680 Nm needed. One size for 11-18.5 kW (brief): KA97. For 11 kW KA87 would do; KA97 is kept for one spare-parts size."},
+    "why_ka67": {"v": "KA67", "src": "SEW PDF p.142 (printed 141): 7.5 HP (5.5 kW) DV132S4 rows start with K67 at i = 7.28 and move to K77 only at i = 73.99 (51 rpm)", "basis": "judgment", "note": "Tunnel belt conveyor U13-TL-50K, 5.5 kW (SITE.json T9, T13, T16), belt 2.4 m/s on the EST 400 mm pulley -> 115 rpm, 457 Nm. Outside the brief's 11-18.5 kW range; a KA97 on a 5.5 kW belt drive would be a wrong picture, so the second row comes from the same pages."}
+  },
+  "kw_to_size": {
+    "5.5": {"size": "KA67", "src": "selection.why_ka67", "basis": "judgment"},
+    "11": {"size": "KA97", "src": "selection.why_ka97", "basis": "judgment"},
+    "15": {"size": "KA97", "src": "selection.why_ka97", "basis": "judgment"},
+    "18.5": {"size": "KA97", "src": "selection.why_ka97", "basis": "judgment"}
+  },
+  "sizes": {
+    "KA97": {
+      "A": {"v": 298, "src": "SEW PDF p.263 Gearcase, KA97", "basis": "sourced", "note": "Length of the bottom (torque arm) face along the input direction; it ends FK past the output axis (drawing p.263 side view). Bonvario f = 298."},
+      "B": {"v": 226, "src": "SEW PDF p.263, KA97", "basis": "sourced", "note": "Gearcase width along the output shaft (bottom view). Bonvario e = 226."},
+      "DB": {"v": 32.3, "src": "SEW PDF p.263, KA97; Bonvario p.2 N = 32.3", "basis": "sourced", "note": "Input (motor) axis below the output axis (Bonvario p.1: N drawn from the output axis down to the motor centre line)."},
+      "EA": {"v": 150, "src": "SEW PDF p.263 Output Shaft, KA97 (EH = 300 = 2 EA)", "basis": "sourced", "note": "Hollow shaft half length from the case mid plane."},
+      "FE": {"v": 160, "src": "SEW PDF p.263, KA97; Bonvario a = 160", "basis": "sourced", "note": "Torque arm hole rows apart, across (along the output shaft)."},
+      "FH": {"v": 83, "src": "SEW PDF p.263, KA97; Bonvario b = 83", "basis": "sourced", "note": "First hole row from the rear end of the bottom face. Reading: with this origin the arm eye FC sits under the middle of the hole pattern for every size (KA37..KA107 within 6-12 mm); measured from the output axis the far row would fall outside the bottom face."},
+      "FJ": {"v": 165, "src": "SEW PDF p.263, KA97; Bonvario c = 165", "basis": "sourced", "note": "Hole row pitch along the input direction."},
+      "FK": {"v": 190, "src": "SEW PDF p.263, KA97; Bonvario g = 190", "basis": "sourced", "note": "Output axis to the input end of the bottom face."},
+      "MC_d": {"v": 20, "src": "SEW PDF p.263 MC = M20 x 36; p.274 retaining bolts 4 x M20 x 50-8.8", "basis": "sourced", "note": "Torque arm bolts."},
+      "Q": {"v": 435, "src": "SEW PDF p.263, KA97; Bonvario L1 = 435", "basis": "sourced", "note": "Gearcase length from the rear end to the input flange face."},
+      "QB": {"v": 158, "src": "SEW PDF p.263, KA97", "basis": "sourced", "note": "Rear end of the case behind the output axis."},
+      "L2": {"v": 277, "src": "Bonvario p.2 L2 = 277 (= Q - QB)", "basis": "sourced", "note": "Output axis to the input flange face."},
+      "SA": {"v": 265, "src": "SEW PDF p.263 and p.274, KA97; Bonvario h = h1 = 265", "basis": "sourced", "note": "Output axis above the bottom face."},
+      "H": {"v": 414, "src": "Bonvario p.2 H = 414", "basis": "sourced", "note": "Overall case height; the top is H - SA = 149 above the output axis. SEW does not print it."},
+      "input_d": {"v": 300, "src": "Bonvario p.2 Q = 300", "basis": "sourced", "note": "Read as the diameter of the round input end where the motor sits (Bonvario p.1, drawn across the motor end and centred on the motor axis). The motor flange P = 350 overhangs it."},
+      "cover_bolt_circle": {"v": 220, "src": "Bonvario p.1, B-KA..97 pattern, d 220", "basis": "sourced", "note": "Threaded holes round the output bore on both side faces; used for the bearing cover bolts."},
+      "EH": {"v": 300, "src": "SEW PDF p.263, KA97", "basis": "sourced", "note": "Hollow shaft length."},
+      "U": {"v": 70, "src": "SEW PDF p.263 (U* = 70 mm); Bonvario d1 = 70H7", "basis": "sourced", "note": "Hollow shaft bore."},
+      "UF": {"v": 95, "src": "SEW PDF p.263, KA97; Bonvario d2 = 95", "basis": "sourced", "note": "Hollow shaft hub outer diameter at the ends."},
+      "arm": {
+        "BA": {"v": 40, "src": "SEW PDF p.274, KA97T; Bonvario g2 = 40", "basis": "sourced", "note": "A-side mounting: the bushing end face this far in from the A-side hub end."},
+        "FC": {"v": 70, "src": "SEW PDF p.274, KA97T; Bonvario g1 = 70", "basis": "sourced", "note": "Eye centre from the output axis toward the input."},
+        "G": {"v": 17, "src": "SEW PDF p.274, KA97T; Bonvario h2 = 17", "basis": "sourced", "note": "Arm flange thickness under the bottom face."},
+        "O": {"v": 350, "src": "SEW PDF p.274, KA97T; Bonvario h3 = 350", "basis": "sourced", "note": "Eye centre below the output axis."},
+        "R": {"v": 41, "src": "SEW PDF p.274, KA97T; Bonvario r = 41", "basis": "sourced", "note": "Eye boss radius."},
+        "FN": {"v": 92, "src": "SEW PDF p.274, KA97T; Bonvario l7 = 92", "basis": "sourced", "note": "Eye boss length."},
+        "FU": {"v": 25, "src": "SEW PDF p.274, KA97T; Bonvario d3 = 25", "basis": "sourced", "note": "Rubber bushing bore = pin diameter."},
+        "FV": {"v": 100, "src": "SEW PDF p.274, KA97T; Bonvario l8 = 100", "basis": "sourced", "note": "Rubber bushing length (sleeve), clevis gap."},
+        "alpha": {"v": 50, "src": "Bonvario p.2 alpha = 50 deg", "basis": "sourced", "note": "Degrees, not mm. Read as the slope of the arm sides to the horizontal, tangent to the eye (Bonvario p.1 side view)."}
+      }
+    },
+    "KA67": {
+      "A": {"v": 182, "src": "SEW PDF p.261 Gearcase, KA67; Bonvario f = 182", "basis": "sourced", "note": "See KA97."},
+      "B": {"v": 130, "src": "SEW PDF p.261, KA67; Bonvario e = 130", "basis": "sourced", "note": ""},
+      "DB": {"v": 20, "src": "SEW PDF p.261, KA67; Bonvario N = 20", "basis": "sourced", "note": ""},
+      "EA": {"v": 90, "src": "SEW PDF p.261 Output Shaft, KA67 (EH = 180)", "basis": "sourced", "note": ""},
+      "FE": {"v": 88, "src": "SEW PDF p.261, KA67; Bonvario a = 88", "basis": "sourced", "note": ""},
+      "FH": {"v": 42, "src": "SEW PDF p.261, KA67; Bonvario b = 42", "basis": "sourced", "note": "From the rear end of the bottom face (see KA97)."},
+      "FJ": {"v": 110, "src": "SEW PDF p.261, KA67; Bonvario c = 110", "basis": "sourced", "note": ""},
+      "FK": {"v": 125, "src": "SEW PDF p.261, KA67; Bonvario g = 125", "basis": "sourced", "note": ""},
+      "MC_d": {"v": 12, "src": "SEW PDF p.261 MC = M12 x 25; p.274 4 x M12 x 35-8.8", "basis": "sourced", "note": ""},
+      "Q": {"v": 273, "src": "SEW PDF p.261, KA67", "basis": "sourced", "note": "Bonvario L1 = 274 (1 mm conflict); SEW kept, it agrees with QB + L2 = 94 + 179."},
+      "QB": {"v": 94, "src": "SEW PDF p.261, KA67", "basis": "sourced", "note": ""},
+      "L2": {"v": 179, "src": "Bonvario p.2 L2 = 179", "basis": "sourced", "note": ""},
+      "SA": {"v": 140, "src": "SEW PDF p.261 and p.274, KA67; Bonvario h = 140", "basis": "sourced", "note": ""},
+      "H": {"v": 226, "src": "Bonvario p.2 H = 226", "basis": "sourced", "note": "Top 86 above the output axis."},
+      "input_d": {"v": 160, "src": "Bonvario p.2 Q = 160", "basis": "sourced", "note": "See KA97. The 132S motor flange P = 300 overhangs it."},
+      "cover_bolt_circle": {"v": 125, "src": "Bonvario p.1, B-KA..57 / B-KA..67 pattern, d 125", "basis": "sourced", "note": ""},
+      "EH": {"v": 180, "src": "SEW PDF p.261, KA67", "basis": "sourced", "note": ""},
+      "U": {"v": 40, "src": "SEW PDF p.261; Bonvario d1 = 40H7", "basis": "sourced", "note": ""},
+      "UF": {"v": 55, "src": "SEW PDF p.261; Bonvario d2 = 55", "basis": "sourced", "note": ""},
+      "arm": {
+        "BA": {"v": 25, "src": "SEW PDF p.274, KA67T", "basis": "sourced", "note": ""},
+        "FC": {"v": 45, "src": "SEW PDF p.274, KA67T", "basis": "sourced", "note": ""},
+        "G": {"v": 13, "src": "SEW PDF p.274, KA67T", "basis": "sourced", "note": ""},
+        "O": {"v": 200, "src": "SEW PDF p.274, KA67T", "basis": "sourced", "note": ""},
+        "R": {"v": 29, "src": "SEW PDF p.274, KA67T", "basis": "sourced", "note": ""},
+        "FN": {"v": 54, "src": "SEW PDF p.274, KA67T", "basis": "sourced", "note": ""},
+        "FU": {"v": 16.4, "src": "SEW PDF p.274, KA67T", "basis": "sourced", "note": ""},
+        "FV": {"v": 60, "src": "SEW PDF p.274, KA67T", "basis": "sourced", "note": ""},
+        "alpha": {"v": 55, "src": "Bonvario p.2 alpha = 55 deg", "basis": "sourced", "note": "Degrees."}
+      }
+    }
+  },
+  "motor_flange": {
+    "132S": {"flange": "FF-265", "LA": {"v": 12, "src": "WEG p.60 FF table, frame 132", "basis": "sourced"}, "M": {"v": 265, "src": "WEG p.60", "basis": "sourced"}, "N": {"v": 230, "src": "WEG p.60", "basis": "sourced"}, "P": {"v": 300, "src": "WEG p.60", "basis": "sourced"}, "S": {"v": 15, "src": "WEG p.60", "basis": "sourced"}, "T": {"v": 4, "src": "WEG p.60", "basis": "sourced"}, "holes": {"v": 4, "src": "WEG p.60, alpha 45 deg", "basis": "sourced"}},
+    "160M": {"flange": "FF-300", "LA": {"v": 18, "src": "WEG p.60 FF table, frames 160/180", "basis": "sourced"}, "M": {"v": 300, "src": "WEG p.60", "basis": "sourced"}, "N": {"v": 250, "src": "WEG p.60", "basis": "sourced"}, "P": {"v": 350, "src": "WEG p.60", "basis": "sourced"}, "S": {"v": 19, "src": "WEG p.60", "basis": "sourced"}, "T": {"v": 5, "src": "WEG p.60", "basis": "sourced"}, "holes": {"v": 4, "src": "WEG p.60, alpha 45 deg", "basis": "sourced"}},
+    "160L": {"flange": "FF-300", "LA": {"v": 18, "src": "WEG p.60", "basis": "sourced"}, "M": {"v": 300, "src": "WEG p.60", "basis": "sourced"}, "N": {"v": 250, "src": "WEG p.60", "basis": "sourced"}, "P": {"v": 350, "src": "WEG p.60", "basis": "sourced"}, "S": {"v": 19, "src": "WEG p.60", "basis": "sourced"}, "T": {"v": 5, "src": "WEG p.60", "basis": "sourced"}, "holes": {"v": 4, "src": "WEG p.60", "basis": "sourced"}},
+    "180M": {"flange": "FF-300", "LA": {"v": 18, "src": "WEG p.60", "basis": "sourced"}, "M": {"v": 300, "src": "WEG p.60", "basis": "sourced"}, "N": {"v": 250, "src": "WEG p.60", "basis": "sourced"}, "P": {"v": 350, "src": "WEG p.60", "basis": "sourced"}, "S": {"v": 19, "src": "WEG p.60", "basis": "sourced"}, "T": {"v": 5, "src": "WEG p.60", "basis": "sourced"}, "holes": {"v": 4, "src": "WEG p.60", "basis": "sourced"}}
+  },
+  "mounting": {
+    "side": {"v": "walkway side of the head (drive) section, on the head sprocket shaft", "src": "Cimbria RM p.1 'Gearmotor mounted on right or left hand side as specified', 'Parallel shaft helical gearmotor, hollow shaft'; Skandia KTIF p.1 'Direct-mounted gearbox motor with support frame', p.2 plan: drive on the side of the head section; lubnymash_equipment.md sec.2: shaft-mounted gearmotor on the side of the drive section", "basis": "sourced", "note": "Side is free in the sources; the walkway side is the brief's choice (service access)."},
+    "motor_direction": {"v": "along the casing, toward the tail", "src": "none", "basis": "judgment", "note": "Cimbria and Skandia use parallel-shaft units (motor parallel to the sprocket shaft, sticking out sideways). A KA bevel unit puts the motor at 90 deg to the shaft, so it lies along the casing; toward the tail keeps it off the tower / head end. NOT_FOUND in the sources for a KA."},
+    "torque_arm": {"v": "down, A-side mounting (bushing on the casing side), clevis bracket bolted to the casing side under its bottom edge", "src": "SEW PDF p.274 A-side mounting; Skandia KTIF p.1-2 support frame under the drive", "basis": "judgment", "note": "The counter bracket (clevis, pad, bolts) is not in any source: EST."}
+  },
+  "est": {
+    "wall_gap": {"v": 100, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Casing side wall to the inner hub end: flange bearing (EST 80 deep) plus 20 clear."},
+    "input_flange_t": {"v": 20, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Thickness of the round input end flange of the case."},
+    "web_t": {"v": 0.25, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Arm web thickness as a fraction of FV."},
+    "cheek_t": {"v": 10, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Clevis cheek plate thickness."},
+    "clevis_gap": {"v": 3, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Cheek inner face to the bushing end."},
+    "pad_over": {"v": 80, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Clevis wall pad overlaps the casing side this much above its bottom edge."},
+    "rib_t": {"v": 10, "src": "none", "basis": "judgment", "note": "NOT_FOUND. Housing rib thickness; ribs stand 8 mm proud."}
+  },
+  "not_found": [
+    "TCS-320 sprocket teeth and pitch diameter (Skandia 8 x 100 mm used as the analog)",
+    "KA input axis position across the case width (taken in the mid plane)",
+    "Case top outline (only the overall height H), intermediate bearing cover position and size",
+    "Wall thicknesses, ribs, input flange thickness",
+    "Clevis / counter bracket of the torque arm and the flange bearing on the casing",
+    "A direct-motor (DR/DV) KA dimension sheet: the SEW catalogue in the repo is the VARIGEAR one; the IEC B5 motor flange is put on the case input face (WEG FF flange)"
+  ]
+}
