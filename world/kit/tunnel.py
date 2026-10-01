@@ -267,6 +267,9 @@ def build_conveyor(site, t, inlet):
 GATE_GROUPS = {"body": "body", "flanges": "body", "bolts": "body", "blade": "body", "frame": "body", "screw": "body", "shaft": "body",
                "motor": "motor", "gearbox": "motor", "handwheel": "handwheels", "pinion": "handwheels",
                "indicator": "handwheels", "switches": "dark", "rack": "dark"}
+# the electric gate's blade is an object of its own per opening (<T>_GATE_<nn>_BLADE): live.py slides it with the
+# simulator's gate "pos"; the hand-set ТЗР blade under it stays in "body"
+TZA_GROUPS = dict(GATE_GROUPS, blade="blade")
 
 
 def walkway_side(site, t):
@@ -287,9 +290,10 @@ def gate_stack_parts(site, t):
     for x, s in _gate_positions(site, t):
         mm = int(round(s * 1000))
         groups = {}
-        for res, top in ((gk.gate_tza(mm, 0.0, side), sz["tza"][0]), (gk.gate_tzr(mm, 0.0, side), sz["tzr"][0])):
+        for res, top, grp in ((gk.gate_tza(mm, 0.0, side), sz["tza"][0], TZA_GROUPS),
+                              (gk.gate_tzr(mm, 0.0, side), sz["tzr"][0], GATE_GROUPS)):
             for name, (v, f) in res["parts"].items():
-                groups.setdefault(GATE_GROUPS[name], []).append((np.asarray(v, float) + (x, y, top), f))
+                groups.setdefault(grp[name], []).append((np.asarray(v, float) + (x, y, top), f))
         out.append((x, s, {k: c.merge_parts(v) for k, v in groups.items()}))
     return out
 
@@ -435,7 +439,7 @@ def build(site, t, collection=None, materials=None, roof_holes=()):
     stacks = build_gate_stacks(site, t)
     add("sleeves", stacks["sleeves"], galv)
     add("spouts", stacks["spouts"], galv)
-    look_g = {"body": galv, "motor": motor, "handwheels": red, "dark": dark}
+    look_g = {"body": galv, "blade": galv, "motor": motor, "handwheels": red, "dark": dark}
     for i, (_, _, groups) in enumerate(gate_stack_parts(site, t)):          # one object per group and opening: live.py
         for k, data in groups.items():
             add(f"gate_{i:02d}_{k}", data, look_g[k], smooth="quads" if k in ("motor", "handwheels") else False)

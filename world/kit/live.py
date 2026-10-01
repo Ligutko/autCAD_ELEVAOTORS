@@ -13,10 +13,13 @@
                             hidden until grain moves there; owners the kits give no path for are reported
   grain_heaps(scene, site)  per silo a level body and the repose cone, sized from the mass
   trees_merge(scene)        the 55 k tree instances as a few merged low-poly meshes (viewport speed)
+  blade_moves(scene, site, by_gate)  the electric gate blades of the tunnels (<T>_GATE_<nn>_BLADE): rest place and
+                            full travel vector of each, from the gate kit (gates.gate_tza at open 0 and 1)
   Live.apply(state)         the state contract (world/sim/STATE_SCHEMA.json) onto the objects, only what changed
   Live.motion               the grain packets along the flow lines (live_motion.py), drawn as a viewport overlay
 
-The real gate plate is inside its casing, so an open gate is shown by the colour of its body, not by motion.
+An open gate is shown by the colour of its body; the blade of a tunnel ТЗА also slides with the gate "pos" (0 closed,
+1 in the pocket), moved only when "pos" changed. The splitter and gallery gates have no blade of their own: colour only.
 Colours follow the panel: running = amber (the route colour of 7C), starting / stopping = light blue,
 trip / fault = red (alarm colour, research R7), open gate = amber.
 """
@@ -85,7 +88,7 @@ def gate_points(site):
     The centres are where the kits put each loose part of a gate (the offsets below are the kits' own sizes, so
     a kit change shows up as unassigned parts in check_live):
       tunnel   the opening centre (x, row) only: tunnel.build makes one object per group and opening
-               (<T>_GATE_<nn>_BODY / _MOTOR / _HANDWHEELS / _DARK), assigned by plan distance (TUNNEL_GATE_D);
+               (<T>_GATE_<nn>_BODY / _BLADE / _MOTOR / _HANDWHEELS / _DARK), assigned by plan distance (TUNNEL_GATE_D);
                the opening under the silo centre is <silo>.c, the others <silo>.s (SITE silo_gates);
       splitter distribution.build: the gate box on the branch, the housing at +0.425 in x, the motor at
                (+0.52, +0.17); the gate is the one of the edge whose spout starts at that branch (SITE distribution);
@@ -226,6 +229,36 @@ def split_gates(scene, site):
                 loose.append((o.name, d))
         count[f"{t['id']}_GATE_*"] = (len(objs), len(objs))
     return by_gate, loose, count
+
+
+def blade_moves(scene, site, by_gate):
+    """{gate id: [(blade object, rest location, full travel vector)]} for the tunnel ТЗА blades (tunnel.build:
+    <T>_GATE_<nn>_BLADE, the opening nn of tun._gate_positions). The travel is the kit's own: the shift of the blade
+    centre of gates.gate_tza between open 0 and open 1 (direction and stroke); tunnel.gate_stack_parts only translates
+    the kit frame into the site frame, and the tunnel objects have no parent, so the vector is the location shift."""
+    from . import gates as gk
+    kit = {}
+    out = {}
+    names = {o.name: gid for gid, objs in by_gate.items() for o in objs}
+    for t in site.get("tunnels", []):
+        side = tun.walkway_side(site, t)
+        for i, (_, s) in enumerate(tun._gate_positions(site, t)):
+            o = scene.objects.get(f"{t['id']}_GATE_{i:02d}_BLADE")
+            if o is None or o.name not in names:
+                continue
+            mm = int(round(s * 1000))
+            if (mm, side) not in kit:
+                c0, c1 = (np.asarray(gk.gate_tza(mm, f, side)["parts"]["blade"][0], float).mean(axis=0) for f in (0.0, 1.0))
+                kit[(mm, side)] = Vector(c1 - c0)
+            out.setdefault(names[o.name], []).append((o, o.location.copy(), kit[(mm, side)]))
+    return out
+
+
+def set_blades(blades, pos):
+    """Slide the blades of one gate to `pos` (0 closed .. 1 open). Returns how many objects moved."""
+    for o, rest, travel in blades:
+        o.location = rest + travel * pos
+    return len(blades)
 
 
 def split_old_silos(scene, site):
@@ -550,6 +583,7 @@ def trees_merge(scene, ratio=0.06, chunks=16):
 # ------------------------------------------------------------------ state -> scene
 
 NEVER = object()          # "not applied yet": differs from every state, also from None (= off)
+BLADE_DIGITS = 3          # gate "pos" rounded to 0.001 of the stroke (< 0.5 mm of a 0.37-0.42 m ТЗА travel) before a blade moves
 
 
 def motor_key(m, v, trip):
@@ -571,6 +605,7 @@ class Live:
         self.scene, self.site, self.rho = scene, site, rho
         bpy.context.view_layer.update()               # once: matrix_world of objects moved by .location (the towers)
         self.gates, self.gate_loose, self.gate_count = split_gates(scene, site)
+        self.blades = blade_moves(scene, site, self.gates)
         self.old_silo_count = split_old_silos(scene, site)
         self.nodes = object_map(scene, site)
         from . import live_motion as mo
@@ -601,6 +636,11 @@ class Live:
             if self.last.get(("g", gid), NEVER) != key:
                 k += set_glow(self.gates.get(gid, []), key)
                 self.last[("g", gid)] = key
+            if gid in self.blades:
+                p = round(v["pos"], BLADE_DIGITS)
+                if self.last.get(("b", gid), NEVER) != p:
+                    k += set_blades(self.blades[gid], p)
+                    self.last[("b", gid)] = p
         dk = "run" if st["dryer"]["state"] == "run" else None
         if self.last.get(("d",), NEVER) != dk:
             k += set_glow(self.objs("DRYER"), dk)

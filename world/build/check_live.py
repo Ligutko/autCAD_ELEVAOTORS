@@ -5,6 +5,8 @@
 Builds the site once (quick), adds the live layer (kit/live.py) and checks it against numbers taken here
 independently of it: SITE positions, the process graph, the heap volume of the mass, the derived geometry.
 Every rule is a function of its inputs, so each broken variant feeds a broken input without a rebuild.
+Gate blades (C4): the ТЗА blade of every tunnel opening, moved by Live.apply from the gate "pos", against the bore
+square of SITE and the blade the gate kit draws at that open fraction; what one pos change adds to apply().
 Motion (kit/live_motion.py, phase 8 minimum): the grain packets are checked as the frames of a 30 Hz redraw show them —
 speed of the pattern against the source of each mover, which owners move for which state, the vertices against the
 paths, the cost of one step. The viewport drawing itself needs a window: build/live_probe.py and
@@ -76,8 +78,8 @@ def r_nodes(node_map):
                 f"({', '.join(lv.NO_BODY)}); only the two scales share the scale decks")
 
 
-PARTS_PER = {"tunnel": 4, "dist": 3, "gallery": 2}   # objects per opening / branch / drop, as the kits build them:
-                                                    # tunnel: BODY + MOTOR + HANDWHEELS + DARK groups (ТЗА over ТЗР);
+PARTS_PER = {"tunnel": 5, "dist": 3, "gallery": 2}   # objects per opening / branch / drop, as the kits build them:
+                                                    # tunnel: BODY + BLADE + MOTOR + HANDWHEELS + DARK groups (ТЗА over ТЗР);
                                                     # splitter: gate + housing + motor; gallery: gate + housing
 
 
@@ -112,7 +114,7 @@ def r_gates(scene, site, by_gate, loose, count):
     unmod = sorted(set(G.gates()) - set(expect))
     ok = not counts and not loose and not lost and not wrong
     return ok, (f"parts {list(counts.items())[:4]} loose {loose[:3]} lost {lost} wrong {wrong[:3]}" if not ok else
-                f"{len(by_gate)} gates cut out whole ({sum(got.values())} parts = 4 groups per tunnel opening, 3 per splitter branch, "
+                f"{len(by_gate)} gates cut out whole ({sum(got.values())} parts = 5 groups per tunnel opening, 3 per splitter branch, "
                 f"2 per gallery drop; vertices kept); silo gates under their silos; {len(unmod)} gates of the graph have no "
                 f"body in the model: {', '.join(unmod)}")
 
@@ -138,6 +140,119 @@ def r_glow(live, scene):
     ok = got == want and not after and len(want) > 3
     return ok, (f"H5 run + 6.6 open: {len(got)} objects glow, expected {len(want)}; extra {sorted(got - want)[:3]}, "
                 f"missing {sorted(want - got)[:3]}; after stop {len(after)} glow")
+
+
+# ------------------------------------------------------------------ the ТЗА blades of the tunnels
+
+def blade_openings(scene, site):
+    """{blade object name: (bore x0, x1, y0, y1, kit, pocket end)}: the bore square from SITE (tunnel row, gate
+    positions and sizes), not from live.py; kit(pos) = the 3D box (x0, x1, y0, y1, z0, z1) of the blade gates.gate_tza
+    draws at open fraction pos, set where tunnel.gate_stack_parts sets the gate (opening x, row y, SITE stack_z of the
+    ТЗА); the pocket end = the -X end of the kit's ТЗА body (the pocket end wall)."""
+    from kit import gates as gk
+    out = {}
+    z = site["silo_gates"]["stack_z"]["tza"][0]
+    for t in site.get("tunnels", []):
+        y = t["row_y"]
+        side = lv.tun.walkway_side(site, t)
+        for i, (x, s) in enumerate(lv.tun._gate_positions(site, t)):
+            name = f"{t['id']}_GATE_{i:02d}_BLADE"
+            if name not in scene.objects:
+                continue
+            mm = int(round(s * 1000))
+
+            def kit(pos, mm=mm, side=side, x=x, y=y):
+                v = np.asarray(gk.gate_tza(mm, pos, side)["parts"]["blade"][0], float) + (x, y, z)
+                return tuple(float(q) for k in range(3) for q in (v[:, k].min(), v[:, k].max()))
+            pocket_end = x + float(np.asarray(gk.gate_tza(mm, 0.0, side)["parts"]["body"][0])[:, 0].min())
+            out[name] = (x - s / 2, x + s / 2, y - s / 2, y + s / 2, kit, pocket_end)
+    return out
+
+
+def world_box(o):
+    mw = o.matrix_world
+    vs = [mw @ v.co for v in o.data.vertices]
+    return tuple(f(getattr(v, a) for v in vs) for a in "xyz" for f in (min, max))
+
+
+def gate_state(base, gid, pos):
+    st = json.loads(json.dumps(base))
+    st["gates"][gid] = {"state": "closed" if pos <= 0 else ("open" if pos >= 1 else "opening"), "pos": pos}
+    return st
+
+
+def r_blades(live, scene, site, tol=0.001):
+    """Every tunnel gate with a ТЗА blade, set alone through Live.apply: pos 0 -> the blade covers the bore whole;
+    pos 1 -> the bore is free; pos 0.5 -> it covers half of the bore (±2 %); at every pos the blade is where the gate
+    kit draws it at that open fraction (±1 mm in 3D: direction and stroke of gates.py). A repeated state moves nothing;
+    a pos change of one gate moves only that gate's blades."""
+    opening = blade_openings(scene, site)
+    base = Plant().state()
+    live.last.clear()
+    live.apply(base)
+    bad, n_bl, over = [], 0, 0.0
+    gids = sorted(g for g in live.gates if any(o.name in opening for o in live.gates[g]))
+    for gid in gids:
+        blades = [o for o in live.gates[gid] if o.name in opening]
+        n_bl += len(blades)
+        for pos in (0.0, 1.0, 0.5):
+            live.apply(gate_state(base, gid, pos))
+            bpy.context.view_layer.update()
+            for o in blades:
+                x0, x1, y0, y1, kit, pocket_end = opening[o.name]
+                box = world_box(o)
+                bx0, bx1, by0, by1 = box[:4]
+                cover = max(0.0, min(bx1, x1) - max(bx0, x0)) / (x1 - x0)
+                off = max(abs(p - q) for p, q in zip(box, kit(pos)))
+                if off > tol:
+                    bad.append((gid, o.name, f"pos {pos}: {off * 1000:.0f} mm off the kit blade"))
+                if pos == 0.0 and not (bx0 <= x0 + tol and bx1 >= x1 - tol and by0 <= y0 + tol and by1 >= y1 - tol):
+                    bad.append((gid, o.name, "pos 0: bore not covered", round(cover, 3)))
+                if pos == 1.0:
+                    over = max(over, pocket_end - bx0)
+                    if cover > tol / (x1 - x0):
+                        bad.append((gid, o.name, "pos 1: bore not free", round(cover, 3)))
+                if pos == 0.5 and abs(cover - 0.5) > 0.02:
+                    bad.append((gid, o.name, "pos 0.5: not half", round(cover, 3)))
+        live.apply(gate_state(base, gid, 0.0))
+    gid = gids[0] if gids else None
+    k_same = k_one = None
+    if gid:
+        live.apply(gate_state(base, gid, 0.3))
+        k_same = live.apply(gate_state(base, gid, 0.3))
+        k_one = live.apply(gate_state(base, gid, 0.4))
+        live.apply(gate_state(base, gid, 0.0))
+        want_one = sum(o.name in opening for o in live.gates[gid])
+        if k_same != 0 or k_one != want_one:
+            bad.append((gid, "touched", k_same, k_one, "expected 0 and", want_one))
+    ok = not bad and len(gids) >= 2 and n_bl > 10
+    finding = (f"; FINDING: at open 1 the kit's blade reaches {over * 1000:.0f} mm past the pocket end wall (gates.py "
+               f"gate_tza: pocket end -w - travel + 0.03, blade end -s/2 - 0.01 - travel)" if over > tol else "")
+    return ok, (bad[:4] if bad else f"{len(gids)} gates, {n_bl} ТЗА blades: pos 0 covers the bore, 1 frees it, 0.5 covers half, "
+                f"each where the kit draws it (≤ 1 mm); repeated state touches {k_same}, a pos change of {gid} touches {k_one} "
+                f"(its blades)" + finding)
+
+
+def r_blade_cost(live, budget_ms=1.0, n=300):
+    """What one gate's pos change adds to apply(): the same state applied again vs a state that moves one gate (the
+    gate with the most blades: a side-opening gate of a silo moves all its openings)."""
+    gid = max(sorted(live.blades), key=lambda g: len(live.blades[g]))
+    base = Plant().state()
+    live.last.clear()
+    live.apply(base)
+    same, moved = [], []
+    for k in range(n):
+        st = gate_state(base, gid, 0.25 + 0.5 * (k % 2))
+        t = time.perf_counter()
+        live.apply(st)
+        moved.append(time.perf_counter() - t)
+        t = time.perf_counter()
+        live.apply(st)
+        same.append(time.perf_counter() - t)
+    live.apply(base)
+    add = 1000 * (sorted(moved)[n // 2] - sorted(same)[n // 2])
+    return add < budget_ms, (f"gate {gid} ({len(live.blades[gid])} blades): apply {1000 * sorted(moved)[n // 2]:.3f} ms with the move, "
+                             f"{1000 * sorted(same)[n // 2]:.3f} ms without (medians of {n}); a pos change adds {add:.3f} ms (≤ {budget_ms})")
 
 
 def visible_flows(live):
@@ -414,6 +529,8 @@ def main():
         ("every node has its objects or a reason", lambda: r_nodes(live.nodes)),
         ("gates cut out whole, each under its silo / on its branch", lambda: r_gates(scene, site, live.gates, live.gate_loose, live.gate_count)),
         ("exactly the running and open glow", lambda: r_glow(live, scene)),
+        ("ТЗА blades follow the gate pos: 0 covers the bore, 1 frees it, 0.5 half", lambda: r_blades(live, scene, site)),
+        ("one gate's pos change is cheap", lambda: r_blade_cost(live)),
         ("flow tubes exactly where grain moves", lambda: r_flow(live)),
         ("heap volume = mass / density", lambda: r_heap(live)),
         ("state updates are cheap", lambda: r_speed(live)),
@@ -549,6 +666,32 @@ def main():
     slow.points = slow_points
     variant("6 ms extra per animation step", lambda: r_motion_cost(live, motion=slow))
     live.motion.set_active(())
+
+    # ---- ТЗА blades: a wrong travel, a scene that moves every blade on every state, a slow move
+    real_blades = live.blades
+    for name, k in (("blades slide the opposite way (+X, out of the pocket side)", -1.0), ("blades slide a double stroke", 2.0)):
+        live.blades = {g: [(o, r, t * k) for o, r, t in bl] for g, bl in real_blades.items()}
+        variant(name, lambda: r_blades(live, scene, site))
+    live.blades = real_blades
+
+    def apply_moves_all(st):                             # forgets "only what changed": every blade moves on every state
+        n = orig_apply(st)
+        for gid, bl in live.blades.items():
+            n += lv.set_blades(bl, st["gates"].get(gid, {}).get("pos", 0.0))
+        return n
+    live.apply = apply_moves_all
+    variant("every blade moved on every state", lambda: r_blades(live, scene, site))
+    live.apply = orig_apply
+    real_set = lv.set_blades
+
+    def slow_set(bl, pos):
+        time.sleep(0.002)
+        return real_set(bl, pos)
+    lv.set_blades = slow_set
+    variant("2 ms extra per blade move", lambda: r_blade_cost(live))
+    lv.set_blades = real_set
+    live.last.clear()
+    live.apply(Plant().state())
 
     print("RESULT", "ALL PASS" if ok_all and ok_v else "FAILED", flush=True)
     sys.exit(0 if ok_all and ok_v else 1)
