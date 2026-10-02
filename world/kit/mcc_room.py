@@ -299,7 +299,7 @@ def shell(L):
     lining = [c.box((rx0, ry0, g), (rx0 + li, hy0, g + h)), c.box((rx0, hy1, g), (rx0 + li, ry1, g + h)),
               c.box((rx0, hy0, g), (rx0 + li, hy1, hz0)), c.box((rx0, hy0, hz1), (rx0 + li, hy1, g + h)),
               c.box((rx0 + li, ry0, g), (rx1 - li, ry0 + li, g + h)), c.box((rx0 + li, ry1 - li, g), (rx1 - li, ry1, g + h)),
-              ] + _slab((rx1 - li, ry0, g), (rx1, ry1, g + h), "y", _bus_holes(g, DUCT_Z)["p0"])
+              ] + _slab((rx1 - li, ry0, g), (rx1, ry1, g + h), "y", _bus_holes(g, float((L.get("trafo_faults") or {}).get("duct_z", DUCT_Z)), lanes(L.get("trafo_faults")))["p0"])
     parts = {"mcc_walls": ("concrete", False, c.merge_parts(walls)),
             "mcc_lining": ("white", False, c.merge_parts(lining)),
             "mcc_floor": ("dark", False, c.box((rx0, ry0, g - 0.1), (rx1, ry1, g))),
@@ -439,7 +439,7 @@ DOOR_H = 2.4           # site_plan door height
 RAIL_H = 0.08          # EST: [8 channel rails laid on the floor along the roll-out path
 RAIL_B = 0.05          # EST: channel flange width
 TGAP = 0.0005          # parts that bear on each other keep 0.5 mm (BVH reads no contact)
-LANES = (30.30, 30.58)   # EST: bus lane (y) of the LV bus duct of chamber T1 / T2: both land on the incoming cabinet ШВ-1
+LANES = (30.32, 30.58)   # EST: bus lane (y) of the LV bus duct of chamber T1 / T2: both land on the incoming cabinet ШВ-1
 DUCT_W, DUCT_H = 0.20, 0.16   # EST: LV bus duct (about 1000 A, enclosed)
 DUCT_Z = 2.35          # EST: bus duct bottom over the floor (over the ШВ-1 top 2.1 and over the transformer)
 JUNC = (0.30, 0.55, 0.14)  # EST: junction box over the LV bushings (x, y, z)
@@ -503,24 +503,29 @@ def chamber_geom(L, faults=None):
             "doors_h": DOOR_H, "ceiling": g + h - CEIL, "iy": iy, "vents": vents, "rx1": rx1}
 
 
-def _bus_holes(g, duct_z):
+def lanes(faults=None):
+    """Bus lanes (y) of the two ducts; a transformer moved by a broken case takes its lane along (the bus follows it)."""
+    f = faults or {}
+    return tuple(LANES[k] + float(f.get(f"lane{k + 1}_dy", 0.0)) + float(f.get(f"y{k + 1}_dy", 0.0)) for k in range(2))
+
+
+def _bus_holes(g, duct_z, lanes_=LANES):
     """Openings of the bus ducts in the partitions: {"p0": [(y0, y1, z0, z1)], "q": [...]}; the duct of T2 also crosses the chamber partition."""
-    out = {"p0": [], "q": []}
-    for k, lane in enumerate(LANES):
-        hole = (lane - DUCT_W / 2 - OPEN_GAP, lane + DUCT_W / 2 + OPEN_GAP, g + duct_z - OPEN_GAP, g + duct_z + DUCT_H + OPEN_GAP)
-        out["p0"].append(hole)
-        if k == 1:
-            out["q"].append(hole)
-    return out
+    z = (g + duct_z - OPEN_GAP, g + duct_z + DUCT_H + OPEN_GAP)
+    one = lambda lane: (lane - DUCT_W / 2 - OPEN_GAP, lane + DUCT_W / 2 + OPEN_GAP, z[0], z[1])      # noqa: E731
+    lo, hi = min(lanes_), max(lanes_)
+    # both ducts leave through one opening of the MCC partition (the packing between them is fire-stop mass); T2 also crosses the chamber partition
+    return {"p0": [(lo - DUCT_W / 2 - OPEN_GAP, hi + DUCT_W / 2 + OPEN_GAP, z[0], z[1])], "q": [one(lanes_[1])]}
 
 
 def chamber_shell(L, faults=None):
     """Chamber walls (partitions, outer walls with the door and louvre openings), floor and ceiling: {part: (material, smooth, (v, f))}."""
+    faults = faults if faults is not None else L.get("trafo_faults")
     G = chamber_geom(L, faults)
     g, h = G["g"], G["h"]
     x0, y0, x1, y1 = G["block"]
     rx1 = G["rx1"]
-    holes = _bus_holes(g, float((faults or {}).get("duct_z", DUCT_Z)))
+    holes = _bus_holes(g, float((faults or {}).get("duct_z", DUCT_Z)), lanes(faults))
     walls = _slab((rx1, G["iy"][0], g), (rx1 + WALL, G["iy"][1], g + h), "y", holes["p0"])
     walls += _slab((G["xq"][0], G["iy"][0], g), (G["xq"][1], G["iy"][1], g + h), "y", holes["q"])
     walls.append(c.box((x1 - WALL, G["iy"][0], g), (x1, G["iy"][1], g + h)))
@@ -551,8 +556,8 @@ def vent_required(loss_w, h_c):
 
 def trafo_layout(site, L=None, faults=None):
     """Numbers of the two chambers: transformer placement, rails, bus, earth, vents (site frame). `faults` feed the check's broken cases."""
-    f = faults or {}
     L = L or layout(site)
+    f = (faults if faults is not None else L.get("trafo_faults")) or {}
     G = chamber_geom(L, f)
     g = L["g"]
     t = tf.oil_transformer(630, f)
@@ -562,15 +567,15 @@ def trafo_layout(site, L=None, faults=None):
     cw, ch_, cd, plinth = L["cabinet"]
     chambers = []
     for k, name in enumerate(("T1", "T2")):
-        lane = LANES[k] + float(f.get(f"lane{k + 1}_dy", 0.0))
+        lane = lanes(f)[k]
         xa, xb = G["doors"][name]
         cx = 0.5 * (xa + xb) + float(f.get(f"x{k + 1}_dx", 0.0))
-        cy = lane + lv_mean + float(f.get(f"y{k + 1}_dy", 0.0))   # world y = cy - local x: the LV group centre lands on the lane
+        cy = lane + lv_mean                                        # world y = cy - local x: the LV group centre lands on the lane
         rail_top = g + RAIL_H + float(f.get("rail_dz", 0.0))
         chambers.append({"name": name, "inner": G["inner"][name], "door": G["doors"][name], "c": (cx, cy), "z0": g + RAIL_H + TGAP,
                          "rail_top": rail_top, "lane": lane, "lv_x": cx + d["lv_row_y"],
                          "rail_x": (cx - d["cat"]["A1"] / 2, cx + d["cat"]["A1"] / 2),
-                         "rail_y": (G["inner"][name][1], cy + d["cat"]["L"] / 2 - 0.15)})
+                         "rail_y": (G["inner"][name][1] + 0.001, cy + d["cat"]["L"] / 2 - 0.15)})
     o = cab["origin"]
     body = place(np.array([[0.0, 0.0, 0.0], [cw, cd, plinth + ch_]]), cab["rot"], o)
     return {"g": g, "trafo": t, "chambers": chambers, "geom": G, "cab": cab, "cab_top": g + plinth + ch_,
@@ -595,7 +600,7 @@ def _slat(x0, x1, y_face, z, outward):
     prof = np.array([(0.0, 0.0), (0.07, -0.05), (0.07, -0.046), (0.0, 0.004)])      # u -> -Y for a member along +X
     if outward > 0:
         prof = prof * np.array([-1.0, 1.0])
-    return st.member((x0, y_face, z), (x1, y_face, z), prof)
+    return st.member((x0, y_face + outward * TGAP, z), (x1, y_face + outward * TGAP, z), prof)
 
 
 def chamber_parts(site, T):
@@ -613,16 +618,17 @@ def chamber_parts(site, T):
         out["ktp_tr_" + name] = (tf.MATERIALS[name], False, c.merge_parts(items))
     iy1 = G["iy"][1]
     x_a, x_b = G["inner"]["T1"][0], G["inner"]["T2"][2]
-    h_rail = RAIL_H - TGAP
-    prof = st.channel(h_rail, RAIL_B, 0.005, 0.007)
+    # (rail height per chamber: the rails stand on the floor, their top is the chamber's rail_top)
     z_d0 = g + T["duct_z"]
     cb = T["cab_box"]
-    drop = (cb[0] + 0.35, cb[0] + 0.55)                              # drop duct x range inside the ШВ-1 body, clear of its stack light
-    rails, bus, collar, earth, louv, frame = [], [], [], [], [], []
+    drop = (cb[0] + 0.41, cb[0] + 0.59)                              # drop duct x range inside the ШВ-1 body, behind its stack light (base plate to x 23.995)
+    rails, bus, collar, earth, straps, louv, frame = [], [], [], [], [], [], []
     for ch in T["chambers"]:
         cx, cy = ch["c"]
+        h_rail = ch["rail_top"] - g - TGAP
+        prof = st.channel(h_rail, RAIL_B, 0.005, min(0.007, h_rail / 3))
         for rx in ch["rail_x"]:
-            zc = ch["rail_top"] - h_rail / 2.0
+            zc = g + TGAP + h_rail / 2.0
             rails.append(st.member((rx - RAIL_B / 2, ch["rail_y"][0], zc), (rx - RAIL_B / 2, ch["rail_y"][1], zc), prof))
         z_top = ch["z0"] + max(p[2] for p in d["lv"])                # LV stud tops
         z_jb = z_top + JUNC_UP
@@ -630,28 +636,30 @@ def chamber_parts(site, T):
         bus.append(c.box((lv_x - JUNC[0] / 2 - 0.02, lane - JUNC[1] / 2, z_jb), (lv_x + JUNC[0] / 2 - 0.02, lane + JUNC[1] / 2, z_jb + JUNC[2])))
         for p in d["lv"]:
             wx, wy = cx + p[1], cy - p[0]
-            bus.append(st.member((wx, wy, z_top - 0.005), (wx, wy, z_jb + 0.01), st.flat(0.06, 0.008)))
+            bus.append(st.member((wx, wy, z_top + TGAP), (wx, wy, z_jb + 0.01), st.flat(0.06, 0.008)))
         xr = lv_x - 0.05
         bus.append(c.box((xr - DUCT_W / 2, lane - DUCT_W / 2, z_jb + JUNC[2] - 0.01), (xr + DUCT_W / 2, lane + DUCT_W / 2, z_d0 + DUCT_H)))   # riser
         bus.append(c.box((drop[0], lane - DUCT_W / 2, z_d0), (xr + DUCT_W / 2, lane + DUCT_W / 2, z_d0 + DUCT_H)))                            # horizontal
         bus.append(c.box((drop[0], lane - DUCT_W / 2, T["cab_top"] + TGAP + T["drop_dz"]), (drop[1], lane + DUCT_W / 2, z_d0 + 0.01)))        # drop on ШВ-1
         # earth: strap from the lug on the tank base to the earth bus on the north wall
         lug = _world(np.array([[d["earth_pt"][0], d["earth_pt"][1], d["earth_pt"][2]]]), ch)[0]
-        earth.append(st.rod((lug[0], lug[1], lug[2]), (lug[0], iy1 - EARTH_FLAT[1] / 2 - T["earth_dy"], g + EARTH_Z), 0.006, 8))
-    earth.append(st.member((x_a, iy1 - EARTH_FLAT[1] / 2 - 0.0005, g + EARTH_Z), (x_b, iy1 - EARTH_FLAT[1] / 2 - 0.0005, g + EARTH_Z),
-                           st.flat(EARTH_FLAT[0], EARTH_FLAT[1]), up=(1.0, 0.0, 0.0)))
+        straps.append(st.rod((lug[0], lug[1], lug[2]), (lug[0], iy1 - 0.008 - T["earth_dy"], g + EARTH_Z), 0.006, 8))
+    for nm in ("T1", "T2"):                                          # one earth bus per chamber (the partition stays closed), bonded outside
+        xa_, xb_ = G["inner"][nm][0], G["inner"][nm][2]
+        earth.append(st.member((xa_ + 0.001, iy1 - EARTH_FLAT[1] / 2 - 0.0005, g + EARTH_Z), (xb_ - 0.001, iy1 - EARTH_FLAT[1] / 2 - 0.0005, g + EARTH_Z),
+                               st.flat(EARTH_FLAT[1], EARTH_FLAT[0]), up=(1.0, 0.0, 0.0)))
     # collars (fire stop, 4.2.108) on both faces of each partition opening; the MCC side stands on the lining
-    holes = _bus_holes(g, T["duct_z"])
+    holes = _bus_holes(g, T["duct_z"], tuple(ch["lane"] for ch in T["chambers"]))
     for (a, b, za, zb) in holes["p0"]:
-        collar += _ring(G["p0"][1], a, b, za, zb, COLLAR_W, COLLAR_T) + _ring(G["p0"][0] - LINING - COLLAR_T, a, b, za, zb, COLLAR_W, COLLAR_T)
+        collar += _ring(G["p0"][1] + TGAP, a, b, za, zb, COLLAR_W, COLLAR_T) + _ring(G["p0"][0] - LINING - COLLAR_T - TGAP, a, b, za, zb, COLLAR_W, COLLAR_T)
     for (a, b, za, zb) in holes["q"]:
-        collar += _ring(G["xq"][1], a, b, za, zb, COLLAR_W, COLLAR_T) + _ring(G["xq"][0] - COLLAR_T, a, b, za, zb, COLLAR_W, COLLAR_T)
+        collar += _ring(G["xq"][1] + TGAP, a, b, za, zb, COLLAR_W, COLLAR_T) + _ring(G["xq"][0] - COLLAR_T - TGAP, a, b, za, zb, COLLAR_W, COLLAR_T)
     # louvres: a frame on the outer face and hoods sloping down and out (rain); the mesh behind is data (MESH_MM)
     for v in G["vents"]:
         z0, z1 = g + v["z0"], g + v["z1"]
         south = v["wall"] == "south"
         y_face = G["block"][1] if south else G["block"][3]
-        ya, yb = (y_face - 0.02, y_face) if south else (y_face, y_face + 0.02)
+        ya, yb = (y_face - 0.02 - TGAP, y_face - TGAP) if south else (y_face + TGAP, y_face + 0.02 + TGAP)
         frame += [c.box((v["x0"] - 0.03, ya, z0 - 0.03), (v["x1"] + 0.03, yb, z0)), c.box((v["x0"] - 0.03, ya, z1), (v["x1"] + 0.03, yb, z1 + 0.03)),
                   c.box((v["x0"] - 0.03, ya, z0), (v["x0"], yb, z1)), c.box((v["x1"], ya, z0), (v["x1"] + 0.03, yb, z1))]
         n = max(2, int(round((z1 - z0) / 0.10)))
@@ -661,6 +669,7 @@ def chamber_parts(site, T):
     out["ktp_bus"] = ("galv", False, c.merge_parts(bus))
     out["ktp_collars"] = ("white", False, c.merge_parts(collar))
     out["ktp_earth"] = ("yellow", False, c.merge_parts(earth))
+    out["ktp_straps"] = ("yellow", False, c.merge_parts(straps))
     out["ktp_louvres"] = ("galv", False, c.merge_parts(louv + frame))
     if T["stray"]:
         ch = T["chambers"][0]

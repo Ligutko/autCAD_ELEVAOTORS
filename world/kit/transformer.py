@@ -86,7 +86,8 @@ def oil_transformer(kva=630, faults=None):
     parts["fins"] = c.merge_parts(fins)
 
     # ---------------- bushings: HV (10 kV) at +b, LV (0.4 kV) at -b1
-    hv_x = (-d["A2"], 0.0, d["A2"])
+    a2 = float(f.get("a2", d["A2"]))                             # broken variant: HV phases closer together
+    hv_x = (-a2, 0.0, a2)
     hv_y = d["b"]
     hv_h = float(f.get("hv_h", 0.0))                          # broken variant: HV porcelain taller
     hv_porc, hv_metal, hv_top = [], [], []
