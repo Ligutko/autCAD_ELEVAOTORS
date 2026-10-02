@@ -45,6 +45,7 @@ def materials():
         "white": c.mat_painted("SITE_WALL_WHITE", (0.82, 0.82, 0.80), 0.6, grime=0.05),
         "screen": c.mat_painted("SITE_SCREEN", (0.02, 0.03, 0.05), 0.08, grime=0.0),
         "lamp": c.mat_painted("SITE_LAMP", (0.95, 0.95, 0.92), 0.3, grime=0.0),
+        "ral7035": c.mat_painted("SITE_CABINET_RAL7035", (0.60, 0.63, 0.60), 0.45, grime=0.03),   # Rittal VX25 light grey
         "road": c.mat_concrete_yard("SITE_ROAD", tint=(0.36, 0.35, 0.33)),   # concrete B25 drives (rec_6360894e), tyre-worn
     }
 
@@ -144,6 +145,8 @@ def assemble(quick=False):
         scene.collection.children.link(col)
         for k, (mat, smooth, (v, f)) in spl.build(site).items():
             c.mesh_from_arrays(f"SITE_PLAN_{k.upper()}", v, f, m[mat], smooth=smooth, collection=col)
+        from kit import mcc_room as mcc                     # C6: MCC room lamps and cabinet plate texts
+        mcc.add_scene_extras(site, col, m)
 
     asp_measure = {}
     if "aspiration" in site:
@@ -274,6 +277,7 @@ def main():
         "site_bridge.png": c.camera("CAM_BRIDGE", (9, 12.7, 17), (0, 12.7, 24.5), lens=24),
         "site_aspiration_81.png": c.camera("CAM_ASP_81", (-15.5, 50.5, 4.5), (-26.5, 36.8, 7.5), lens=22),
         "site_aspiration_82.png": c.camera("CAM_ASP_82", (8.5, -21.0, 3.5), (-0.3, -6.0, 7.0), lens=22),
+        "site_mcc.png": c.camera("CAM_MCC", (22.25, 26.75, c.ground_z() + 1.6), (22.0, 31.6, c.ground_z() + 1.1), lens=16),
     }
     scene.camera = cams["site_drone.png"]
     if "--no-render" in sys.argv:
@@ -282,10 +286,13 @@ def main():
         print("saved", path, "build", build_s, "s", flush=True)
         return
     only = [a.split("=", 1)[1] for a in sys.argv if a.startswith("--only=")]
+    exposure = scene.view_settings.exposure
+    indoors = {"site_mcc.png": 2.0}                         # lit by ~300 lx lamps only: the camera opens up 2 stops
     for name, cam in cams.items():
         if only and name not in only:
             continue
         t = time.time()
+        scene.view_settings.exposure = exposure + indoors.get(name, 0.0)
         c.render(scene, cam, OUT / name)
         print("rendered", name, round(time.time() - t, 1), "s", flush=True)
     if only:
