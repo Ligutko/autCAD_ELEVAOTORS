@@ -144,25 +144,67 @@ def sweep_height_at(r):
     return SWEEP["shield_h_m"] + 0.02
 
 
-def build_sweep():
-    """Sweep auger parked on the floor: tube, helical flight, back shield, centre drive housing
-    over the gate, intermediate support and a tractor drive wheel near the wall (SITE `sweep`)."""
+# ---- sweep centre drive and tractor on real parts (C7a). Everything not in SITE `sweep` is EST (research/silo_equipment.md §3).
+# Centre drive: a stationary vertical stack on the rotation axis inside the housing: IEC motor (shaft down) -> coupling ->
+# helical reducer -> coupling -> bevel box on the slewing ring (turns with the arm) -> shaft along the arm to the auger tube.
+# Tractor: wheel behind the back shield (axle along the arm, the wheel rolls round the silo), cheek plates on a bracket plate
+# bolted to the shield, worm reducer on the axle, IEC motor on a shelf, counterweight plates outside a cheek plate.
+DRIVE_BASE_Z = 0.03          # EST: base plate on the gate frame (frame top 0.02)
+DRIVE_SKIRT_Z = 0.40         # EST: cover panels start above the turning hub
+DRIVE_POST = 0.060           # EST: SHS 60 corner posts
+DRIVE_PANEL_T = 0.003        # EST: sheet
+DRIVE_MOTOR_Z = 0.95         # EST: motor drive-end shoulder, coupling under it
+TRACTOR_N = -0.42            # EST: wheel centre behind the shield (shield back face at -0.19)
+TRACTOR_WHEEL_W = 0.10       # EST: tyre width along the arm
+TRACTOR_LUGS = 24            # EST: tread blocks round the tyre
+TRACTOR_GAP = 0.0005         # parts that bear on each other keep 0.5 mm, so BVH does not read contact
+SWEEP_PART_KEYS = ("arm", "flight", "mid_wheel", "drive_frame", "drive_cover", "drive_hub", "drive_gear", "drive_motor",
+                   "drive_bracket", "tractor_wheel", "tractor_frame", "tractor_motor", "tractor_shelf", "tractor_weights")
+
+
+def _sw_axes():
     ang = math.radians(SWEEP_ANGLE)
     d = np.array([math.cos(ang), math.sin(ang), 0.0])
-    n = np.array([-d[1], d[0], 0.0])
+    return d, np.array([-d[1], d[0], 0.0])
+
+
+def _wall_axis(d):
+    """Axis-aligned wall of the drive housing nearest to the direction away from the arm: (sx, sy)."""
+    cands = ((1, 0), (-1, 0), (0, 1), (0, -1))
+    return max(cands, key=lambda s: -(s[0] * d[0] + s[1] * d[1]))
+
+
+def _iec(kw, detail):
+    from . import components as comp
+    return comp.iec_motor(kw, detail=detail)
+
+
+def _rect(u, v):
+    """Profile rectangle u0..u1 x v0..v1 for st.member."""
+    return np.array([(u[0], v[0]), (u[1], v[0]), (u[1], v[1]), (u[0], v[1])])
+
+
+def build_sweep_parts(detail="lod", faults=None):
+    """The sweep as named (verts, faces) parts (SWEEP_PART_KEYS, plus the per-part motor dicts), silo frame, parked at
+    SWEEP_ANGLE. The auger tube, flight, back shield and the intermediate wheel are the original geometry (they define
+    sweep_height_at); the centre drive and the tractor are real parts. `faults` inject the check's broken cases:
+    drive_motor_dx (m), drive_motor_kw, tractor_motor_dz (m), tractor_n (m), wheel_scale, counterweights (int)."""
+    faults = faults or {}
+    d, n = _sw_axes()
+    up = np.array([0.0, 0.0, 1.0])
     z = SWEEP_R + SWEEP["floor_gap_m"]
-    steel_parts, flight, rubber = [], [], []
-    steel_parts.append(st.rod(d * 0.5 + [0, 0, z], d * SWEEP_LEN + [0, 0, z], 0.06, 20))           # core tube
-    # helical flight: pitch = diameter, thickness 6 mm
+    out = {}
+    lod = detail == "lod"
+    # ------------------------------------------------ auger arm (original geometry)
+    arm, flight, rubber = [], [], []
+    arm.append(st.rod(d * 0.5 + [0, 0, z], d * SWEEP_LEN + [0, 0, z], 0.06, 20))
     turns = int((SWEEP_LEN - 0.6) / (2 * SWEEP_R))
     k = 24
     tt = np.linspace(0, turns * 2 * math.pi, turns * k)
     s = 0.6 + (tt / (2 * math.pi)) * 2 * SWEEP_R
-    inner, outer = 0.06, SWEEP_R
     rows = []
-    for rr in (inner, outer):
-        rows.append(d[None, :] * s[:, None] + n[None, :] * (rr * np.cos(tt))[:, None]
-                    + np.array([0, 0, 1.0])[None, :] * (z + rr * np.sin(tt))[:, None])
+    for rr in (0.06, SWEEP_R):
+        rows.append(d[None, :] * s[:, None] + n[None, :] * (rr * np.cos(tt))[:, None] + up[None, :] * (z + rr * np.sin(tt))[:, None])
     v = np.concatenate([rows[0], rows[1], rows[0] + d * 0.006, rows[1] + d * 0.006])
     m = len(tt)
     faces = []
@@ -170,32 +212,189 @@ def build_sweep():
         for a0, a1 in ((0, m), (2 * m, 3 * m), (0, 2 * m), (m, 3 * m)):
             faces.append((a0 + i, a0 + i + 1, a1 + i + 1, a1 + i))
     flight.append((v, np.array(faces)))
-    # back shield (angle plate behind the flight, SITE shield_h_m)
     shield_h = SWEEP["shield_h_m"]
-    steel_parts.append(st.member(d * 0.6 - n * (SWEEP_R + 0.03) + [0, 0, 0.02],
-                                 d * SWEEP_LEN - n * (SWEEP_R + 0.03) + [0, 0, 0.02],
-                                 np.array([(-0.003, 0.0), (0.003, 0.0), (0.003, shield_h), (-0.003, shield_h)])))
-    # centre drive housing over the gate (SITE sweep.drive: w x h, 18.5 kW)
-    drive = SWEEP["drive"]
-    hw = drive["w_m"] / 2
-    steel_parts.append(c.box((-hw, -hw, 0.0), (hw, hw, drive["h_m"])))
-    # intermediate support wheel (EST: spacing judgment, no separate motor)
+    arm.append(st.member(d * 0.6 - n * (SWEEP_R + 0.03) + [0, 0, 0.02], d * SWEEP_LEN - n * (SWEEP_R + 0.03) + [0, 0, 0.02],
+                         np.array([(-0.003, 0.0), (0.003, 0.0), (0.003, shield_h), (-0.003, shield_h)])))
     p_mid = d * (SWEEP_LEN * 0.4)
     rr_mid = 0.18
     rubber.append(st.rod(p_mid - n * 0.07 + [0, 0, rr_mid], p_mid + n * 0.07 + [0, 0, rr_mid], rr_mid, 32))
-    steel_parts.append(c.box(tuple(p_mid - n * 0.12 + [-0.05, 0, rr_mid]), tuple(p_mid + n * 0.12 + [0.05, 0, rr_mid + 0.20])))
-    # tractor at SITE tractor.at_frac of the length: own motor, drive wheel, counterweights
-    tractor = SWEEP["tractor"]
-    p = d * (tractor["at_frac"] * SWEEP_LEN)
-    rw = tractor["wheel_d_m"] / 2
-    rubber.append(st.rod(p - n * 0.07 + [0, 0, rw], p + n * 0.07 + [0, 0, rw], rw, 32))
-    steel_parts.append(c.box(tuple(p - n * 0.12 + [-0.05, 0, rw]), tuple(p + n * 0.12 + [0.05, 0, rw + 0.25])))
-    steel_parts.append(st.rod(p + n * 0.15 + [0, 0, rw + 0.30], p + n * 0.75 + [0, 0, rw + 0.30], 0.13, 24))  # tractor motor
-    for k in range(tractor["counterweights"]):
-        off = (k - (tractor["counterweights"] - 1) / 2) * 0.25
-        steel_parts.append(c.box(tuple(p - n * 0.20 + d * off + [-0.06, -0.06, -0.02]),
-                                 tuple(p - n * 0.20 + d * off + [0.06, 0.06, 0.20])))
-    return c.merge_parts(steel_parts), c.merge_parts(flight), c.merge_parts(rubber)
+    arm.append(c.box(tuple(p_mid - n * 0.12 + [-0.05, 0, rr_mid]), tuple(p_mid + n * 0.12 + [0.05, 0, rr_mid + 0.20])))
+    out["arm"] = c.merge_parts(arm)
+    out["flight"] = c.merge_parts(flight)
+    out["mid_wheel"] = c.merge_parts(rubber)
+
+    # ------------------------------------------------ centre drive: housing
+    drive = SWEEP["drive"]
+    hw, hh = drive["w_m"] / 2, drive["h_m"]
+    kw = float(faults.get("drive_motor_kw", drive["kw"]))
+    b = DRIVE_POST / 2
+    t = DRIVE_PANEL_T
+    frame, cover = [], []
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            frame.append(c.box((sx * (hw - b) - b, sy * (hw - b) - b, 0.0), (sx * (hw - b) + b, sy * (hw - b) + b, hh - 0.06)))
+    for z0, z1 in ((0.0, 0.08), (hh - 0.14, hh - 0.06)):                  # base ring and top frame between the posts
+        for p0_, p1_ in (((-hw, -hw, z0), (hw, -hw + 0.012, z1)), ((-hw, hw - 0.012, z0), (hw, hw, z1)),
+                         ((-hw, -hw, z0), (-hw + 0.012, hw, z1)), ((hw - 0.012, -hw, z0), (hw, hw, z1))):
+            frame.append(c.box(p0_, p1_))
+    frame.append(c.box((-0.31, -0.31, DRIVE_BASE_Z - 0.01), (0.31, 0.31, DRIVE_BASE_Z)))   # base plate under the slewing ring
+    pz0, pz1 = DRIVE_SKIRT_Z, hh - 0.14
+    wall_s = _wall_axis(d)
+
+    def wall_box(sx, sy, z0, z1):
+        """Panel of sheet t on the wall (sx, sy) between the posts."""
+        lo, hi = -hw + 2 * b, hw - 2 * b
+        if sx:
+            x0, x1 = (sx * hw - t, sx * hw) if sx > 0 else (sx * hw, sx * hw + t)
+            return c.box((x0, lo, z0), (x1, hi, z1))
+        y0, y1 = (sy * hw - t, sy * hw) if sy > 0 else (sy * hw, sy * hw + t)
+        return c.box((lo, y0, z0), (hi, y1, z1))
+
+    for sx, sy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+        if (sx, sy) == wall_s:                                            # louvre panel for the motor, slats with gaps
+            span = pz1 - pz0 - 0.08
+            for k_ in range(9):
+                cover.append(wall_box(sx, sy, pz0 + 0.04 + k_ * span / 9, pz0 + 0.04 + k_ * span / 9 + 0.07))
+        else:
+            cover.append(wall_box(sx, sy, pz0, pz1))
+    for k_ in (0, 1):                                                     # two removable lids with a handle and bolt rows
+        y0 = -hw + 0.02 + k_ * (hw - 0.01)
+        y1 = y0 + hw - 0.03
+        cover.append(c.box((-hw + 0.02, y0, hh - 0.06), (hw - 0.02, y1, hh - 0.056)))
+        ym = (y0 + y1) / 2
+        cover.append(c.box((-0.12, ym - 0.012, hh - 0.056), (0.12, ym + 0.012, hh - 0.04)))
+        for bx in np.linspace(-hw + 0.06, hw - 0.06, 5):
+            for by in (y0 + 0.02, y1 - 0.02):
+                cover.append(st.rod((bx, by, hh - 0.056), (bx, by, hh - 0.050), 0.007, 6))
+    out["drive_frame"] = c.merge_parts(frame)
+    out["drive_cover"] = c.merge_parts(cover)
+
+    # ------------------------------------------------ centre drive: slewing ring + bevel box (turn with the arm)
+    zb0, zb1 = 0.08, 0.34
+    hub = [st.rod((0, 0, DRIVE_BASE_Z), (0, 0, zb0), 0.30, 40 if not lod else 20),
+           st.member(np.array([0, 0, zb0]), np.array([0, 0, zb1]), _rect((-0.17, 0.17), (-0.17, 0.17)), up=tuple(d)),
+           st.rod(d * 0.17 + [0, 0, z], d * 0.50 + [0, 0, z], 0.04, 16),
+           st.rod(d * 0.46 + [0, 0, z], d * 0.50 + [0, 0, z], 0.09, 20)]
+    out["drive_hub"] = c.merge_parts(hub)
+    # ------------------------------------------------ centre drive: helical reducer on the axis, couplings, feet on a cross frame
+    gear = [st.rod((0, 0, 0.42), (0, 0, 0.76), 0.15, 32 if not lod else 16),
+            c.box((-0.17, -0.17, 0.76), (0.17, 0.17, 0.78)),
+            st.rod((0, 0, zb1), (0, 0, 0.42), 0.035, 12),                 # output shaft down to the bevel box
+            st.rod((0, 0, 0.35), (0, 0, 0.405), 0.060, 16),               # lower coupling
+            st.rod((0, 0, 0.78), (0, 0, 0.83), 0.024, 12),                # input shaft up
+            st.rod((0, 0, 0.80), (0, 0, DRIVE_MOTOR_Z - 0.02), 0.055, 16)]   # upper coupling under the motor shoulder
+    for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        gear.append(st.member(np.array([sx * 0.12, sy * 0.12, 0.41]), np.array([sx * (hw - 2 * b + 0.001), sy * (hw - 2 * b + 0.001), 0.41]),
+                              _rect((-0.02, 0.02), (-0.01, 0.01))))
+    out["drive_gear"] = c.merge_parts(gear)
+
+    # ------------------------------------------------ centre drive: motor, shaft down, feet toward the wall behind the arm
+    item = _iec(kw, detail)
+    mp = item["parts"]
+    H = float(item["dims"]["H"])
+    shoulder = float(np.asarray(mp["endshield_de"][0])[:, 0].max())
+    e = np.array([wall_s[0], wall_s[1], 0.0], float)
+    s_ = np.array([-e[1], e[0], 0.0])
+    mdx = float(faults.get("drive_motor_dx", 0.0))
+
+    def m_fn(v):
+        x, y, zl = v[:, 0] - shoulder, v[:, 1], v[:, 2] - H
+        # motor shaft +X -> world -Z; lateral y -> s_; crown (z - H) -> -e (feet toward +e)
+        pos = y[:, None] * s_[None, :] - zl[:, None] * e[None, :] + mdx * s_[None, :]
+        return np.column_stack([pos[:, 0], pos[:, 1], DRIVE_MOTOR_Z - x])
+
+    motor = {k_: (m_fn(np.asarray(p[0], float).reshape(-1, 3)), p[1]) for k_, p in mp.items()}
+    out["dims"] = {"drive_frame": item["dims"]["frame"], "drive_kw": kw, "drive_motor_len": float(item["dims"]["L"])}
+    out["drive_motor"] = c.merge_parts(list(motor.values()))
+    out["drive_motor_parts"] = motor
+    fv = np.asarray(motor["feet"][0], float)
+    t_pl = 0.012
+    off = H + TRACTOR_GAP
+    q0, q1 = float(fv[:, 2].min()) - 0.02, float(fv[:, 2].max()) + 0.02
+    half_w = float(np.ptp(fv @ s_)) / 2.0 + 0.02
+    br = [st.member(e * off + [0, 0, q0], e * off + [0, 0, q1], _rect((-half_w, half_w), (0.0, t_pl)), up=tuple(e))]
+    wall_in = hw - t - 0.002
+    for zr in (q0 + 0.05, q1 - 0.05):
+        br.append(st.member(e * (wall_in - 0.012) - s_ * (hw - 2 * b) + [0, 0, zr], e * (wall_in - 0.012) + s_ * (hw - 2 * b) + [0, 0, zr],
+                            _rect((-0.006, 0.006), (-0.04, 0.04)), up=(0.0, 0.0, 1.0)))
+        for sgn in (-1, 1):
+            xs = s_ * sgn * (half_w - 0.03)
+            br.append(st.member(e * (off + t_pl - 0.001) + xs + [0, 0, zr], e * (wall_in - 0.001) + xs + [0, 0, zr],
+                                _rect((-0.012, 0.012), (-0.04, 0.04)), up=(0.0, 0.0, 1.0)))
+    out["drive_bracket"] = c.merge_parts(br)
+
+    # ------------------------------------------------ tractor
+    tr = SWEEP["tractor"]
+    p0 = d * (tr["at_frac"] * SWEEP_LEN)
+    rw = tr["wheel_d_m"] / 2 * float(faults.get("wheel_scale", 1.0))
+    n_c = float(faults.get("tractor_n", TRACTOR_N))
+    c0 = p0 + n * n_c + [0, 0, rw]
+    hwid = TRACTOR_WHEEL_W / 2
+    n_lug = 12 if lod else TRACTOR_LUGS
+    parts = [st.rod(c0 - d * hwid, c0 + d * hwid, rw - 0.013, 24 if lod else 48)]
+    for k_ in range(n_lug):
+        a = 2 * math.pi * k_ / n_lug
+        rad = n * math.cos(a) + up * math.sin(a)
+        parts.append(st.member(c0 + rad * (rw - 0.014), c0 + rad * rw, _rect((-0.014, 0.014), (-0.045, 0.045)), up=tuple(d)))
+    out["tractor_wheel"] = c.merge_parts(parts)
+
+    cw = 0.07 + TRACTOR_GAP                                               # cheek plates stand outside the tyre sides
+    n_att = -(SWEEP_R + 0.03 + 0.003 + TRACTOR_GAP)                       # bracket plate on the back of the shield
+    steel = [st.rod(c0 - d * 0.0655, c0 + d * 0.0655, 0.045, 16),         # hub between the cheeks
+             st.rod(c0 - d * 0.055, c0 + d * 0.055, 0.12, 24),            # rim disc
+             st.rod(c0 - d * 0.0755, c0 + d * 0.19, 0.025, 12)]           # axle through both cheeks to the reducer
+    for sgn in (-1, 1):
+        a0 = p0 + d * sgn * cw
+        steel.append(st.member(a0 + n * (n_att - 0.009) + [0, 0, 0.05], a0 + n * (n_c - rw - 0.02) + [0, 0, 0.05],
+                               _rect((-0.005, 0.005), (0.0, 0.45)), up=tuple(up)))
+    steel.append(st.member(p0 + n * (n_att - 0.010) + [0, 0, 0.05], p0 + n * n_att + [0, 0, 0.05],
+                           _rect((-0.14, 0.14), (0.0, 0.47)), up=tuple(up)))
+    d_r = 0.19
+    gear_c = p0 + d * d_r + n * n_c
+    steel.append(st.member(gear_c + [0, 0, 0.08], gear_c + [0, 0, 0.40], _rect((-0.09, 0.09), (-0.08, 0.08)), up=tuple(d)))   # worm box
+    steel.append(st.rod(gear_c - n * (0.12 - TRACTOR_GAP) + [0, 0, 0.32], gear_c - n * 0.09 + [0, 0, 0.32], 0.09, 20))                       # adapter ring
+    out["tractor_frame"] = c.merge_parts(steel)
+
+    mk = _iec(tr["kw"], detail)
+    mH = float(mk["dims"]["H"])
+    m_sh = float(np.asarray(mk["parts"]["endshield_de"][0])[:, 0].max())
+    mdz = float(faults.get("tractor_motor_dz", 0.0))
+    n_sh = n_c - 0.12
+    gz = 0.32
+
+    def t_fn(v):
+        x, y, zl = v[:, 0] - m_sh, v[:, 1], v[:, 2]
+        pos = gear_c[None, :] + n[None, :] * (n_sh - n_c + x)[:, None] - d[None, :] * y[:, None]
+        pos[:, 2] = gz - mH + zl + mdz
+        return pos
+
+    tm = {k_: (t_fn(np.asarray(p[0], float).reshape(-1, 3)), p[1]) for k_, p in mk["parts"].items()}
+    out["dims"].update({"tractor_frame": mk["dims"]["frame"], "tractor_kw": float(tr["kw"])})
+    out["tractor_motor"] = c.merge_parts(list(tm.values()))
+    out["tractor_motor_parts"] = tm
+    sole = float(np.asarray(tm["feet"][0])[:, 2].min()) - mdz
+    z_sh0 = sole - 0.012 - TRACTOR_GAP
+    shelf = [st.member(gear_c + n * (n_sh - n_c - 0.32) + [0, 0, z_sh0], gear_c + n * (0.001 - 0.09) + [0, 0, z_sh0],
+                       _rect((-0.10, 0.10), (0.0, 0.012)), up=tuple(up)),
+             st.member(gear_c + n * (n_sh - n_c - 0.31) + [0, 0, 0.0], gear_c + n * (n_sh - n_c - 0.30) + [0, 0, 0.0],
+                       _rect((-0.10, 0.10), (0.0, z_sh0 + 0.001)), up=tuple(up))]
+    out["tractor_shelf"] = c.merge_parts(shelf)
+    ncw = int(faults.get("counterweights", tr["counterweights"]))
+    cws = []
+    for k_ in range(ncw):
+        a0 = p0 - d * (cw + 0.005 + TRACTOR_GAP + k_ * (0.050 + TRACTOR_GAP))
+        cws.append(st.member(a0 + n * (n_c - 0.13) + [0, 0, 0.27], a0 + n * (n_c + 0.13) + [0, 0, 0.27],
+                             _rect((-0.050, 0.0), (0.0, 0.22)), up=tuple(up)))
+    out["tractor_weights"] = c.merge_parts(cws) if cws else None
+    return out
+
+
+def build_sweep():
+    """(steel, flight, rubber) merged, as before; build() uses build_sweep_parts for materials."""
+    p = build_sweep_parts()
+    steel = [p[k] for k in ("arm", "drive_frame", "drive_cover", "drive_hub", "drive_gear", "drive_bracket", "drive_motor",
+                            "tractor_frame", "tractor_motor", "tractor_shelf", "tractor_weights") if p.get(k) is not None]
+    return c.merge_parts(steel), p["flight"], c.merge_parts([p["mid_wheel"], p["tractor_wheel"]])
 
 
 # ================================================================== roof structure, cables, sensors
@@ -316,11 +515,10 @@ def build_hatch_and_ladder():
 
 
 def build_roof_openings_inside():
-    """From inside: dark discs where the vents, hatches and service holes pierce the sheet, and the
-    roof fan motors hanging under their vents (SITE `silo_roof.fans.motor_below_roof`).
-    Returns (holes, motors)."""
-    holes, motors = [], []
-    mot = silo.roof_spec()["fans"]["motor_below_roof"]
+    """From inside: dark discs where the vents, hatches and service holes pierce the sheet. The roof fan
+    motors that hang under their vents are built with the fans (silo_msvu220.build_roof_vents, component
+    components.duct_axial_fan), not here."""
+    holes = []
     for o in silo.roof_openings():
         if o["kind"] == "level_sensor":
             continue
@@ -334,11 +532,7 @@ def build_roof_openings_inside():
             v = np.array([[*(p + s * o["w"] / 2 * t + q * o["l"] / 2 * u), roof_underside_z(o["r"] + q * o["l"] / 2) - 0.004]
                           for s, q in ((-1, -1), (1, -1), (1, 1), (-1, 1))])
             holes.append((v, np.array([(0, 1, 2, 3)])))
-        if o["kind"] == "fan_vent":
-            zt = roof_underside_z(o["r"]) - 0.05
-            motors.append(c.cylinder(mot["d_m"] / 2, zt - mot["l_m"], zt, steps=20, center=(o["x"], o["y"])))
-            motors.append(c.cylinder(o["w"] / 2 + 0.01, zt - 0.02, zt + 0.05, steps=32, center=(o["x"], o["y"]), capped=False))
-    return c.merge_parts(holes), c.merge_parts(motors)
+    return c.merge_parts(holes)
 
 
 # ================================================================== grain
@@ -442,7 +636,7 @@ def mat_perforated(name="PERFORATED"):
 
 # ================================================================== assembly
 
-def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, sensor_step=SENSOR_STEP, cut=None):
+def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, sensor_step=SENSOR_STEP, cut=None, detail="lod"):
     import bpy
 
     m = {
@@ -455,6 +649,8 @@ def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, 
         "sensor": c.mat_painted("THERMO_SENSOR", (0.55, 0.57, 0.6), 0.35, grime=0.1),
         "auger": c.mat_painted("SWEEP_PAINT", (0.62, 0.64, 0.66), 0.4, grime=0.4),
         "rubber": c.mat_rubber("SWEEP_TYRE"),
+        "gear": c.mat_painted("SWEEP_GEARBOX", (0.10, 0.30, 0.18), 0.4, grime=0.2),
+        "dark_steel": c.mat_painted("SWEEP_DARK_STEEL", (0.14, 0.14, 0.15), 0.5, grime=0.2),
         "motor": c.mat_painted("SWEEP_MOTOR", (0.05, 0.16, 0.35), 0.35),
         "grain": mat_grain(),
         "yellow": c.mat_painted("LEVEL_SENSOR", (0.9, 0.7, 0.05), 0.4, grime=0.1),
@@ -482,10 +678,13 @@ def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, 
     add("gate_frames", gframes, "galv")
     add("gate_gratings", gratings, "grating")
     labels.append(("Засувка вивантаження 400×400 (над тунелем)", (0.0, 0.0, 0.02)))
-    s_steel, s_flight, s_rubber = build_sweep()
-    add("sweep", s_steel, "auger", "quads")
-    add("sweep_flight", s_flight, "auger", True)
-    add("sweep_wheels", s_rubber, "rubber", "quads")
+    sw = build_sweep_parts(detail=detail)
+    for key, mat, sm in (("arm", "auger", "quads"), ("flight", "auger", True), ("mid_wheel", "rubber", "quads"),
+                         ("drive_frame", "galv", False), ("drive_cover", "galv", False), ("drive_hub", "gear", "quads"),
+                         ("drive_gear", "gear", "quads"), ("drive_motor", "motor", "quads"), ("drive_bracket", "dark_steel", False),
+                         ("tractor_wheel", "rubber", "quads"), ("tractor_frame", "gear", "quads"), ("tractor_motor", "motor", "quads"),
+                         ("tractor_shelf", "dark_steel", False), ("tractor_weights", "dark_steel", False)):
+        add("sweep_" + key, sw[key], mat, sm)
     ang = math.radians(SWEEP_ANGLE)
     labels.append((f"Зачисний шнек (до стіни {SWEEP_LEN:.1f} м)", (5.0 * math.cos(ang), 5.0 * math.sin(ang), 0.35)))
     rafters, rings = build_roof_structure()
@@ -505,9 +704,7 @@ def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, 
     add("hatch_frame", hframe, "galv")
     add("inside_ladder", ladder, "galv", "quads")
     labels.append(("Люк даху 610×700", tuple(hatch)))
-    r_holes, r_motors = build_roof_openings_inside()
-    add("roof_holes", r_holes, "dark")
-    add("roof_fan_motors", r_motors, "motor", "quads")
+    add("roof_holes", build_roof_openings_inside(), "dark")
     fan = next(o for o in silo.roof_openings() if o["kind"] == "fan_vent")
     labels.append(("Даховий вентилятор 0.25 кВт у провітрювачі", (fan["x"], fan["y"], roof_underside_z(fan["r"]) - 0.4)))
     add("grain", build_grain(fill, draw), "grain", True)
