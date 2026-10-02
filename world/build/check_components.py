@@ -55,6 +55,17 @@
 Зламані варіанти: корпус вищий на 2 %, вхідний вал +6 мм убік, двигун +60 мм угору, шків двигуна +5 мм уздовж вала,
 кожух менший на 15 %, штанга 950 мм, стійка не доходить до підлоги 20 мм, швелер у корпусі, вироджена грань.
 
+Осьовий вентилятор сушарки STRAHL FR (axial_fan, GCS с.4: осьовий, ротор Ø1000, прямий привід, напрямні під ротором
+тримають двигун), 22 кВт (A12) і 11 кВт (A13), з вершин:
+- af_rotor: коло кінців лопатей Ø1000 ± 5 мм;
+- af_gap: зазор кінця лопаті до обичайки (апофема кільця обичайки мінус радіус лопаті) > 0,5 мм — FAIL (фізична межа:
+  торкання); поза 1,5–10 мм (0,15–1 % D, власна рекомендація, EST) — WARN;
+- af_clash: ротор × напрямні, кронштейн, двигун без вала, обичайка, трубка; напрямні, кронштейн, трубка × двигун (BVH);
+- af_axis: вал двигуна і маточина співвісні ±2 мм, вал уздовж осі;
+- af_mesh: індекси, NaN, вироджені грані.
+Зламані варіанти: вентилятор під Ø1012, зазор 0,25 мм, напрямні на 100 мм вище (у лопатях), двигун на 10 мм убік,
+вироджена грань.
+
 Запуск:
     blender --background --python world/build/check_components.py
 Код виходу 1, якщо будь-який випадок провалено.
@@ -980,6 +991,112 @@ RD_VARIANTS = (
 )
 
 
+# Осьовий вентилятор сушарки STRAHL FR (axial_fan): A12 22 кВт і A13 11 кВт, обидва Ø1000 (GCS с.4, «вентилятори … Ø1000»).
+AF_D = 1.000                # ротор Ø1000 мм, GCS с.4 (research/design/dryer/strahl_fr_anatomy.md §2)
+AF_TOL_D = 0.005            # ±5 мм, бриф C5
+AF_GAP_MIN = 0.0005         # FAIL: зазор кінця лопаті ≤ 0,5 мм — лопать чіпляє обичайку від биття й теплового росту (фізична межа)
+AF_GAP_BAND = (0.0015, 0.010)  # WARN: власна рекомендація 0,15–1 % D (EST за підручниками вентиляторів), не норма
+AF_TOL_AXIS = 0.002
+AF_CASES = ((22.0, "A12"), (11.0, "A13"))
+
+
+def _af_build(faults, kw):
+    return comp.axial_fan(AF_D, kw, faults=faults)
+
+
+def evaluate_af(faults=None, mutate=None):
+    """Список (rule_id, ok, label, info) для axial_fan, 22 і 11 кВт. Усе міряємо з вершин, не з dims."""
+    faults = faults or None
+    bad = {k: [] for k in ("af_rotor", "af_gap", "af_clash", "af_axis", "af_mesh")}
+    seen, warn = {}, []
+    for kw, tag in AF_CASES:
+        item = _af_build(faults, kw)
+        if mutate:
+            mutate(item)
+        p, sub = item["parts"], item["sub"]
+        # af_rotor: діаметр кола кінців лопатей (вершини лопатей), = 1000 ± 5 мм
+        bl = _verts(sub["blades"])
+        d_tip = 2.0 * float(np.hypot(bl[:, 0], bl[:, 1]).max())
+        if abs(d_tip - AF_D) > AF_TOL_D:
+            bad["af_rotor"].append(f"{tag} Ø{d_tip * 1000:.1f}")
+        seen.setdefault("rotor", [])
+        seen["rotor"].append(f"{tag} Ø{d_tip * 1000:.1f}")
+        # af_gap: внутрішня апофема обичайки (мін. радіус вершин × cos(π/n) кільця) мінус радіус кінців лопатей
+        sv = _verts(p["shroud"])
+        rr = np.hypot(sv[:, 0], sv[:, 1])
+        r_min = float(rr.min())
+        ring = sv[np.abs(rr - r_min) < 1e-7]
+        n_seg = max(3, len(np.unique(np.round(np.arctan2(ring[:, 1], ring[:, 0]), 6))))
+        gap = r_min * float(np.cos(np.pi / n_seg)) - d_tip / 2.0
+        if gap <= AF_GAP_MIN:
+            bad["af_gap"].append(f"{tag} {gap * 1000:.2f} мм")
+        if not AF_GAP_BAND[0] <= gap <= AF_GAP_BAND[1]:
+            warn.append(f"{tag} {gap * 1000:.2f} мм поза {AF_GAP_BAND[0] * 1000:.1f}–{AF_GAP_BAND[1] * 1000:.0f} мм")
+        seen.setdefault("gap", [])
+        seen["gap"].append(f"{tag} {gap * 1000:.2f} мм")
+        # af_clash: ротор × напрямні, кронштейн, двигун (без вала: вал у маточині), обичайка, трубка; напрямні й кронштейн × двигун
+        body = comp.c.merge_parts([v for k, v in item["motor_parts"].items() if k != "shaft"])
+        pairs = (("ротор", p["rotor"], "напрямні", p["vanes"]), ("ротор", p["rotor"], "кронштейн", p["bracket"]),
+                 ("ротор", p["rotor"], "двигун", body), ("ротор", p["rotor"], "обичайка", p["shroud"]),
+                 ("ротор", p["rotor"], "трубка", p["cooling"]), ("напрямні", p["vanes"], "двигун", body),
+                 ("кронштейн", p["bracket"], "двигун", body), ("трубка", p["cooling"], "двигун", body))
+        bad["af_clash"] += [f"{tag} {a}×{b}" for a, pa, b, pb in pairs if _bvh_pair(pa, pb)]
+        # af_axis: вал двигуна на осі ротора: центр вала (бокові крайні вершини, низ + D/2 — шпонка зверху) і вісь маточини
+        shv = _verts(item["motor_parts"]["shaft"])
+        sx = _mid(shv, 0)
+        sy = float(shv[:, 1].min()) + 0.5 * float(np.ptp(shv[:, 0]))
+        along = float(np.ptp(shv[:, 2])) > 2.0 * float(np.ptp(shv[:, 0]))
+        hv = _verts(sub["hub"])
+        hx, hy = _mid(hv, 0), _mid(hv, 1)
+        off = float(np.hypot(sx - hx, sy - hy))
+        if off > AF_TOL_AXIS or not along or float(np.hypot(hx, hy)) > AF_TOL_AXIS:
+            bad["af_axis"].append(f"{tag}: вал ({sx * 1000:.1f}, {sy * 1000:.1f}) мм, маточина ({hx * 1000:.1f}, {hy * 1000:.1f}), уздовж Z {along}")
+        seen.setdefault("axis", f"зміщення вала від осі маточини {off * 1000:.2f} мм")
+        # af_mesh
+        for name, part in p.items():
+            verts = _verts(part)
+            if not np.isfinite(verts).all():
+                bad["af_mesh"].append(f"{tag} {name} NaN")
+            for face in _iter_faces(part[1]):
+                if face.size and (int(face.min()) < 0 or int(face.max()) >= len(verts)):
+                    bad["af_mesh"].append(f"{tag} {name} індекс")
+                    break
+                if face.size and _face_area(verts, face) < DEGEN_M2:
+                    bad["af_mesh"].append(f"{tag} {name} вироджена")
+                    break
+        seen.setdefault("faces", [])
+        seen["faces"].append(item["dims"]["faces"])
+    labels = {
+        "af_rotor": ("ротор осьового вентилятора Ø1000 (GCS с.4), кінці лопатей", "допуск 5 мм; " + ", ".join(seen.get("rotor", []))),
+        "af_gap": ("зазор кінця лопаті до обичайки > 0,5 мм (без торкання)", ", ".join(seen.get("gap", []))),
+        "af_clash": ("лопаті не перетинають напрямні, кронштейн, двигун, обичайку; напрямні й кронштейн — двигун", "BVH, 8 пар × A12/A13"),
+        "af_axis": ("двигун на осі ротора (вал і маточина співвісні)", "допуск 2 мм; " + seen.get("axis", "")),
+        "af_mesh": ("сітка осьового вентилятора без вироджених граней", f"граней {seen.get('faces')}"),
+    }
+    rows = [(rid, not bad[rid], labels[rid][0], f"{labels[rid][1]}; {bad[rid][:4] or 'ok'}") for rid in bad]
+    if warn:
+        rows.append(("af_gap_warn", True, "зазор кінця лопаті поза 0,15–1 % D (власна рекомендація)", "WARN " + "; ".join(warn)))
+    return rows
+
+
+def _af_degenerate(item):
+    verts, faces = item["parts"]["bracket"]
+    verts = np.asarray(verts, float).reshape(-1, 3)
+    n = len(verts)
+    verts = np.vstack([verts, verts[:1], verts[:1], verts[:1]])
+    blocks = faces if isinstance(faces, list) else [faces]
+    item["parts"]["bracket"] = (verts, list(blocks) + [np.array([[n, n + 1, n + 2]], np.int64)])
+
+
+AF_VARIANTS = (
+    ("af_rotor", "вентилятор зібраний під ротор Ø1012", {"rotor_d_err": 0.012}, None),
+    ("af_gap", "обичайка з зазором 0,25 мм до лопатей", {"tip_gap": 0.00025}, None),
+    ("af_clash", "напрямні підняті на 100 мм у лопаті", {"vanes_dz": 0.10}, None),
+    ("af_axis", "двигун зсунутий на 10 мм від осі ротора", {"motor_dx": 0.010}, None),
+    ("af_mesh", "у кронштейні вироджена грань", None, _af_degenerate),
+)
+
+
 def _failed(rows):
     return {rid for rid, ok, _label, _info in rows if not ok}
 
@@ -1096,7 +1213,27 @@ def main():
         else:
             print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
 
+    af_base = evaluate_af()
+    af_fail = _failed(af_base)
+    for rid, ok, label, info in af_base:
+        ok_all &= ok
+        print(f"{'PASS' if ok else 'FAIL'}  {label}: {info}", flush=True)
+    af_caught = 0
+    for rid, title, faults, mutate in AF_VARIANTS:
+        got_rows = evaluate_af(faults, mutate)
+        got = _failed(got_rows)
+        extra = got - af_fail - {rid}
+        info = next(i for r, _ok, _l, i in got_rows if r == rid)
+        seen = rid in got and not extra
+        af_caught += bool(seen)
+        ok_all &= seen
+        if seen:
+            print(f"EXPECTED FAIL {title} -> OK ({rid})", flush=True)
+        else:
+            print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
+
     print(f"CASES {atomic} base + {len(variants)} broken, caught {caught}/{len(variants)}", flush=True)
+    print(f"AXIAL FAN {len([r for r in af_base if r[0] != 'af_gap_warn'])} rules + {len(AF_VARIANTS)} broken, caught {af_caught}/{len(AF_VARIANTS)}", flush=True)
     print(f"GEARMOTOR {len(gm_base)} rules + {len(GM_VARIANTS)} broken, caught {gm_caught}/{len(GM_VARIANTS)}", flush=True)
     print(f"REDUCER {len(rd_base)} rules + {len(RD_VARIANTS)} broken, caught {rd_caught}/{len(RD_VARIANTS)}", flush=True)
     print(f"FAN {len(fan_base)} rules + {len(FAN_VARIANTS)} broken, caught {fan_caught}/{len(FAN_VARIANTS)}", flush=True)
