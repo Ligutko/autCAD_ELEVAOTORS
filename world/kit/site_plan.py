@@ -275,8 +275,7 @@ def build_buildings(site=None):
                                                                          g + sp["apk"]["h"] + 0.15)))
     k = sp["gate"]["kpp"]
     block(k["x"], k["y"], k["h"])
-    t = sp["ktp"]
-    block(t["x"], t["y"], t["h"])
+    t = sp["ktp"]                                                     # shell, MCC room and roof: kit/mcc_room.py
     for dx in (2.0, 5.0, 8.0):                                        # transformer and switchgear doors on the long side
         doors.append(c.box((t["x"][0] + dx, t["y"][0] - 0.03, g), (t["x"][0] + dx + 1.2, t["y"][0], g + 2.4)))
     ph = sp["fire_tanks"]["pump_house"]
@@ -299,6 +298,8 @@ def build_buildings(site=None):
             "building_doors": ("dark", False, c.merge_parts(doors)), "barriers": ("red", False, c.merge_parts(barr)),
             "sampler": ("yellow", False, c.merge_parts(sam))}
     out.update(opr.build(site))
+    from . import mcc_room as mcc
+    out.update(mcc.build(site))
     return out
 
 
