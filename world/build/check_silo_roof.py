@@ -12,7 +12,14 @@ Service holes: one per thermometry cable, near its head.
 Wall doors: between stiffener flanges, inside one sheet tier; in the site frame the door leaf zone and
 the steps cut nothing (real meshes, Blender BVH overlap), the free strip in front is a WARN.
 
-Broken variants that must fail: too few vents, vents not on sector centres, roof hatch on the ladder,
+Roof fans on the real component (components.duct_axial_fan, built from the SITE dicts, measured from vertices): impeller
+Ø = SITE and in the research range 350-450 mm; tip gap to the casing throat > 0.5 mm (FAIL; WARN outside 0.25-1.5 % D, EST);
+motor and bracket under the roof underside and clear of sheet, ribs, rafters and purlins (BVH); finger guard free area
+>= 50 % (FAIL; WARN < 70 %, EST; rays along the axis); 0.25 kW = IEC 71, Ø140 and housing 200 mm as SITE; the motor against
+the grain at full fill is a FINDING.
+
+Broken variants that must fail: roof fan impeller does not fit the casing, motor 1.1 kW, impeller Ø300, fan raised 0.25 m,
+solid guard plate; too few vents, vents not on sector centres, roof hatch on the ladder,
 door on a stiffener, door behind the outside ladder, roof ribs off the stiffeners.
 
 Run:
@@ -140,6 +147,129 @@ def roof_checks(roof, hatches, eq, rib_phase=None):
     return out
 
 
+# ---- roof fan on a real component (C7a): geometry of the fans built from the (patched) SITE dicts, silo frame.
+FAN_D_RANGE = (0.35, 0.45)    # research §4: impeller ≈ 400 mm (350-450), rec_894d3a4a
+FAN_KW = 0.25                 # sourced: 0.25 kW (rec_d26b642f)
+FAN_FRAME = "71"              # 0.25 kW -> IEC 71 (iec_motor_frames.json: WEG W22 p.46), literal
+FAN_TOL_D = 0.005             # impeller Ø ± 5 mm
+FAN_GAP_MIN = 0.0005          # FAIL: tip gap <= 0.5 mm, a touching blade (physical limit)
+FAN_GAP_BAND = (0.001, 0.006)  # WARN: 0.25-1.5 % D, own recommendation (EST)
+FAN_OPEN_FAIL = 0.5           # FAIL: free area of the finger guard < 50 % (a solid plate is 0)
+FAN_OPEN_WARN = 0.7           # WARN: own recommendation (EST)
+FAN_MOTOR_D_TOL = 0.05        # motor Ø within 5 % of SITE motor_below_roof.d_m
+FAN_MOTOR_L_TOL = 0.01        # motor housing length within 10 mm of SITE motor_below_roof.l_m
+FAN_BURY_CLEAR = 0.3          # judgment: grain surface kept this far under the motor nose (FINDING only)
+_ROOF_BVH = None
+
+
+def _roof_bvh():
+    """BVH of the unbroken roof sheet with ribs, and of the rafters and purlins, silo frame (cached)."""
+    global _ROOF_BVH
+    if _ROOF_BVH is None:
+        sheet, _ = silo.build_roof()
+        raf, rings = si.build_roof_structure()
+        _ROOF_BVH = (ca._bvh(sheet), ca._bvh(raf), ca._bvh(rings))
+    return _ROOF_BVH
+
+
+def open_fraction(grille, r_max, step=0.01):
+    """Share of rays along -Z through the circle r_max (about the guard axis) that miss the guard wires (BVH ray_cast)."""
+    from mathutils import Vector
+    v = np.asarray(grille[0], float).reshape(-1, 3)
+    cx, cy = 0.5 * (v[:, 0].min() + v[:, 0].max()), 0.5 * (v[:, 1].min() + v[:, 1].max())
+    tree = ca._bvh(grille)
+    zt = float(v[:, 2].max()) + 0.05
+    hit = tot = 0
+    for dx in np.arange(-r_max, r_max + 1e-9, step):
+        for dy in np.arange(-r_max, r_max + 1e-9, step):
+            if dx * dx + dy * dy > r_max * r_max:
+                continue
+            tot += 1
+            if tree.ray_cast(Vector((cx + dx, cy + dy, zt)), Vector((0.0, 0.0, -1.0)))[0] is not None:
+                hit += 1
+    return 1.0 - hit / max(tot, 1)
+
+
+def fan_checks(roof, hatches, eq, faults=None, fan_dz=0.0):
+    """Roof fans built from `roof` (SITE silo_roof dict, may be patched): impeller Ø, tip gap, motor under the roof,
+    finger guard, power and frame. Each fan is built on its own, measured from the vertices."""
+    out = []
+    ops = silo.roof_openings(roof, hatches, eq)
+    fans = [o for o in ops if o["kind"] == "fan_vent"]
+    f, v = roof["fans"], roof["vents"]
+    rn = v["hole_d_m"] / 2
+    rows = {k: [] for k in ("dia", "gap", "under", "grille", "power")}
+    info = {k: [] for k in rows}
+    warn = []
+    sheet, raf, rings = _roof_bvh()
+    for o in fans:
+        try:
+            _, fan = silo.build_roof_vents([o], spec=roof, detail="lod", faults=faults, fan_dz=fan_dz)
+        except ValueError as e:                                    # the impeller does not fit the casing
+            rows["gap"].append(f"{o['id']}: {e}")
+            continue
+        cx, cy = o["x"], o["y"]
+        imp = np.asarray(fan["impeller"][0], float).reshape(-1, 3)
+        r_tip = float(np.hypot(imp[:, 0] - cx, imp[:, 1] - cy).max())
+        d_tip = 2 * r_tip
+        info["dia"].append(f"{o['id']} Ø{d_tip * 1000:.1f}")
+        if abs(d_tip - f["impeller_d_m"]) > FAN_TOL_D or not FAN_D_RANGE[0] <= f["impeller_d_m"] <= FAN_D_RANGE[1]:
+            rows["dia"].append(f"{o['id']} Ø{d_tip * 1000:.1f} vs SITE {f['impeller_d_m'] * 1000:.0f}, research {FAN_D_RANGE[0] * 1000:.0f}-{FAN_D_RANGE[1] * 1000:.0f}")
+        cas = np.asarray(fan["casing"][0], float).reshape(-1, 3)
+        rr = np.hypot(cas[:, 0] - cx, cas[:, 1] - cy)
+        r_min = float(rr.min())
+        ring = cas[np.abs(rr - r_min) < 1e-7]
+        n_seg = max(3, len(np.unique(np.round(np.arctan2(ring[:, 1] - cy, ring[:, 0] - cx), 6))))
+        gap = r_min * float(np.cos(np.pi / n_seg)) - r_tip
+        info["gap"].append(f"{o['id']} {gap * 1000:.2f} mm")
+        if gap <= FAN_GAP_MIN:
+            rows["gap"].append(f"{o['id']} {gap * 1000:.2f} mm")
+        if not FAN_GAP_BAND[0] <= gap <= FAN_GAP_BAND[1]:
+            warn.append(f"{o['id']} gap {gap * 1000:.2f} mm outside {FAN_GAP_BAND[0] * 1000:.0f}-{FAN_GAP_BAND[1] * 1000:.0f} mm")
+        # motor and bracket: under the roof sheet (axis underside) and clear of sheet, ribs, rafters, purlins (BVH)
+        mb = c.merge_parts([fan["motor"], fan["bracket"]])
+        z_top = float(np.asarray(mb[0], float)[:, 2].max())
+        z_under = si.roof_underside_z(o["r"])
+        hits = [n for n, t in (("roof sheet", sheet), ("rafters", raf), ("purlins", rings)) if t is not None and ca._bvh(mb).overlap(t)]
+        info["under"].append(f"{o['id']} top {z_top:.3f} vs sheet underside {z_under:.3f}")
+        if z_top > z_under or hits:
+            rows["under"].append(f"{o['id']} top {z_top:.3f} > underside {z_under:.3f}" if z_top > z_under else f"{o['id']} touches {hits}")
+        opn = open_fraction(fan["grille"], rn - 0.01)
+        info["grille"].append(f"{o['id']} free {opn:.0%}")
+        if opn < FAN_OPEN_FAIL:
+            rows["grille"].append(f"{o['id']} free {opn:.0%}")
+        elif opn < FAN_OPEN_WARN:
+            warn.append(f"{o['id']} guard free {opn:.0%} < {FAN_OPEN_WARN:.0%}")
+        dm = fan["dims"]
+        info["power"].append(f"{o['id']} {f['kw']} kW frame {dm['motor_frame']} Ø{dm['motor_dia'] * 1000:.0f} housing {dm['motor_housing_len'] * 1000:.0f} mm")
+        if (abs(f["kw"] - FAN_KW) > 1e-9 or dm["motor_frame"] != FAN_FRAME
+                or abs(dm["motor_dia"] - f["motor_below_roof"]["d_m"]) > FAN_MOTOR_D_TOL * f["motor_below_roof"]["d_m"]
+                or abs(dm["motor_housing_len"] - f["motor_below_roof"]["l_m"]) > FAN_MOTOR_L_TOL):
+            rows["power"].append(f"{o['id']} {f['kw']} kW frame {dm['motor_frame']} Ø{dm['motor_dia'] * 1000:.0f} housing {dm['motor_housing_len'] * 1000:.0f} mm")
+    out.append(("roof fan impeller Ø = SITE and inside the research range 350-450 mm (from vertices)", not rows["dia"],
+                f"tolerance 5 mm; {info['dia']}; {rows['dia'] or 'ok'}"))
+    out.append(("roof fan tip gap to the casing throat > 0.5 mm (no touching)", not rows["gap"], f"{info['gap']}; {rows['gap'] or 'ok'}"))
+    out.append(("roof fan motor under the roof and clear of sheet, ribs, rafters, purlins (BVH)", not rows["under"],
+                f"{info['under']}; {rows['under'] or 'ok'}"))
+    out.append((f"roof fan finger guard free area >= {FAN_OPEN_FAIL:.0%} (rays along the axis)", not rows["grille"], f"{info['grille']}; {rows['grille'] or 'ok'}"))
+    out.append((f"roof fan {FAN_KW} kW = IEC {FAN_FRAME}, Ø and housing length as SITE motor_below_roof", not rows["power"],
+                f"{info['power']}; {rows['power'] or 'ok'}"))
+    out.append((f"roof fans in the model = SPEC {SPEC_ROOF_FANS}", len(fans) == SPEC_ROOF_FANS, f"{len(fans)} fan vents"))
+    out.append(("roof fan tip gap / guard free area in the recommended band (WARN, EST)", True,
+                ("WARN: " + "; ".join(warn)) if warn else "in the band"))
+    if fans and not rows["gap"]:
+        o = fans[0]
+        h = fan["dims"]
+        z_nose = silo.roof_fan_shoulder_z(o["r"], rn) + h["z_nose"]
+        z_heap = silo.WALL_TOP + (si.R_IN - o["r"]) * math.tan(si.REPOSE)
+        h_max = z_nose - FAN_BURY_CLEAR - (si.R_IN - o["r"]) * math.tan(si.REPOSE)
+        out.append(("roof fan motor and the grain: FINDING, not a model error", True,
+                    f"at fill to the wall top (peak 27 deg) the heap at r {o['r']} m stands {z_heap:.2f} m, the motor nose hangs at {z_nose:.2f} m: "
+                    f"{'submerged by ' + format(z_heap - z_nose, '.2f') + ' m' if z_heap > z_nose else 'clear'}; to keep {FAN_BURY_CLEAR} m under the nose, "
+                    f"the grain at the wall must stay below {h_max:.2f} m ({h_max / silo.WALL_TOP:.0%} of the wall height)"))
+    return out
+
+
 def door_checks(hatches):
     out = []
     flange = max(abs(s) for _, s in silo.OMEGA)
@@ -203,8 +333,9 @@ SITE = json.loads((ROOT / "site" / "SITE.json").read_text(encoding="utf-8"))
 HATCH_CLEAR = SITE["silo_hatches"]["door_front_clear_m"]
 
 
-def checks(site, rib_phase=None):
-    return roof_checks(site["silo_roof"], site["silo_hatches"], site["silo_equipment"], rib_phase) + door_checks(site["silo_hatches"])
+def checks(site, rib_phase=None, fan_faults=None, fan_dz=0.0):
+    return (roof_checks(site["silo_roof"], site["silo_hatches"], site["silo_equipment"], rib_phase) + door_checks(site["silo_hatches"])
+            + fan_checks(site["silo_roof"], site["silo_hatches"], site["silo_equipment"], fan_faults, fan_dz))
 
 
 def main():
@@ -229,14 +360,28 @@ def main():
     def door_behind_ladder(s):
         s["silo_hatches"]["wall_doors"][0]["angle_deg"] = 265.5      # mid-sector, 0.43 m from the caged ladder axis
 
+    def fan_tight(s):
+        s["silo_roof"]["vents"]["hole_d_m"] = 0.4114           # impeller 0.400 + 5 mm tip gap no longer fits the 3 mm sheet casing
+
+    def fan_big_motor(s):
+        s["silo_roof"]["fans"]["kw"] = 1.1                       # IEC 90S instead of the 0.25 kW IEC 71
+
+    def fan_small_impeller(s):
+        s["silo_roof"]["fans"]["impeller_d_m"] = 0.30            # below the research range 350-450 mm
+
     variants = [("too few vents: 12 + 4", few_vents, None), ("vents not on sector centres", off_sector, None),
                 ("roof hatch on the roof ladder", hatch_on_ladder, None), ("door on a stiffener", door_on_stiffener, None),
-                ("door behind the outside caged ladder", door_behind_ladder, None), ("roof ribs half a sector off the stiffeners (old kit)", None, 0.0)]
-    for name, patch, phase in variants:
+                ("door behind the outside caged ladder", door_behind_ladder, None), ("roof ribs half a sector off the stiffeners (old kit)", None, 0.0),
+                ("roof fan impeller does not fit the casing throat", fan_tight, None),
+                ("roof fan motor 1.1 kW (IEC 90S) instead of 0.25 kW", fan_big_motor, None),
+                ("roof fan impeller Ø300, below the research range", fan_small_impeller, None),
+                ("roof fan raised 0.25 m: motor above the roof underside", None, None, {"fan_dz": 0.25}),
+                ("roof fan guard is a solid plate", None, None, {"fan_faults": {"grille": "plate"}})]
+    for name, patch, phase, *extra in variants:
         bad = copy.deepcopy(SITE)
         if patch:
             patch(bad)
-        failed = [n for n, ok, _ in checks(bad, phase) if not ok]
+        failed = [n for n, ok, _ in checks(bad, phase, **(extra[0] if extra else {})) if not ok]
         ok_all &= bool(failed)
         print(f"{'PASS' if failed else 'FAIL'}  broken variant must be rejected — {name}: failed {failed}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)

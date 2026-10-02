@@ -2097,7 +2097,8 @@ def duct_axial_fan(d_impeller, kw, *, hole_d, top, blades=DF_BLADES, detail="ful
 
     `hole_d`: roof hole Ø = casing outer Ø. `top`: casing top above the shoulder plane (m). `faults` inject the check's broken
     cases: impeller_d_err (m), tip_gap (m), rotor_dz (m, impeller + hub moved on the shaft), motor_dx (m), plate_dy (m,
-    foot plate moved off the feet), blades (int), grille ("plate": solid disc instead of wires).
+    foot plate moved off the feet), blades (int), no_twist (every section at the tip angle), grille ("plate": solid disc
+    instead of wires).
     Returns {"parts", "dims", "motor_parts", "sub"}; metres.
     """
     if detail not in ("full", "lod"):
@@ -2156,7 +2157,8 @@ def duct_axial_fan(d_impeller, kw, *, hole_d, top, blades=DF_BLADES, detail="ful
             s = (r - radii[0]) / (radii[-1] - radii[0])
             chord = c_root + (DF_CHORD[1] - c_root) * s
             ratio = DF_THICK[0] + (DF_THICK[1] - DF_THICK[0]) * s
-            beta = _blade_angle(max(r, r_h), r_tip, np.radians(DF_STAGGER_TIP))
+            beta = (np.radians(DF_STAGGER_TIP) if faults.get("no_twist")
+                    else _blade_angle(max(r, r_h), r_tip, np.radians(DF_STAGGER_TIP)))
             loops.append(_blade_loop(r, th0, a_b, chord, beta, ratio, DF_CAMBER, m_foil))
         blade_meshes.append(_foil_mesh(loops))
     bz = np.concatenate([np.asarray(b[0])[:, 2] for b in blade_meshes])

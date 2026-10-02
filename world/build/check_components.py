@@ -1097,6 +1097,199 @@ AF_VARIANTS = (
 )
 
 
+# Осьовий канальний вентилятор даху силоса (duct_axial_fan, C7a): Ø крильчатки 0,40 (SITE silo_roof.fans, rec_894d3a4a),
+# двигун 0,25 кВт = IEC 71, отвір даху Ø420. Усе міряємо з вершин, не з dims.
+DF_D = 0.400                # крильчатка Ø400 мм, діапазон досліджень 350-450 (rec_894d3a4a)
+DF_HOLE = 0.420             # отвір провітрювача Ø420 (rec_adae99ea)
+DF_TOP = 0.595              # корпус над площиною плеча двигуна, як у silo_msvu220.build_roof_vents
+DF_TOL_D = 0.005            # ±5 мм
+DF_GAP_MIN = 0.0005         # FAIL: зазор кінця лопаті ≤ 0,5 мм (фізична межа: торкання)
+DF_GAP_BAND = (0.001, 0.006)  # WARN: 0,25-1,5 % D, власна рекомендація (EST)
+DF_TWIST_MIN = 8.0          # градусів закрутки лопаті корінь - кінець (бриф: «із закруткою»)
+DF_BLADES_MIN = 4
+DF_FRAME = "71"             # 0,25 кВт -> IEC 71, літерал (WEG W22 с.46)
+DF_MOTOR_D = 0.140          # SITE motor_below_roof.d_m, допуск 5 %
+DF_MOTOR_L = 0.200          # SITE motor_below_roof.l_m, довжина корпусу (без кожуха вентилятора і вала), ±10 мм
+DF_OPEN_FAIL = 0.5          # FAIL: вільна площа решітки < 50 % (суцільна плита - 0)
+DF_OPEN_WARN = 0.7          # WARN: власна рекомендація (EST)
+DF_FOOT_GAP = (0.0, 0.002)  # лапа на плиті: зазор 0-2 мм
+
+
+def _df_build(faults=None, kw=0.25, hole_d=DF_HOLE):
+    return comp.duct_axial_fan(DF_D, kw, hole_d=hole_d, top=DF_TOP, faults=faults)
+
+
+def open_fraction(grille, r_max, step=0.006):
+    """Частка променів уздовж Z крізь коло r_max, що не зачепили решітку (BVH ray_cast зверху вниз)."""
+    from mathutils import Vector
+    tree = _bvh(grille)
+    zt = float(_verts(grille)[:, 2].max()) + 0.05
+    g = np.arange(-r_max, r_max + 1e-9, step)
+    hit = tot = 0
+    for x in g:
+        for y in g:
+            if x * x + y * y > r_max * r_max:
+                continue
+            tot += 1
+            if tree.ray_cast(Vector((x, y, zt)), Vector((0.0, 0.0, -1.0)))[0] is not None:
+                hit += 1
+    return 1.0 - hit / max(tot, 1)
+
+
+def blade_clusters(verts, r_tip):
+    """Кути (град) кінців лопатей: кластери вершин на колі кінців, розрив > 3°."""
+    sel = verts[np.abs(np.hypot(verts[:, 0], verts[:, 1]) - r_tip) < 1e-6]
+    ang = np.sort(np.degrees(np.arctan2(sel[:, 1], sel[:, 0])) % 360.0)
+    if len(ang) == 0:
+        return []
+    cl = [[ang[0]]]
+    for a in ang[1:]:
+        if a - cl[-1][-1] > 3.0:
+            cl.append([a])
+        else:
+            cl[-1].append(a)
+    if len(cl) > 1 and cl[0][0] + 360.0 - cl[-1][-1] <= 3.0:
+        cl[0] = cl.pop() + cl[0]
+    return cl
+
+
+def blade_twist(verts, r_tip):
+    """Закрутка першої лопаті: кут хорди (у розгортці s = r·θ, z) на корені і на кінці, різниця в градусах."""
+    rr = np.hypot(verts[:, 0], verts[:, 1])
+    ang = np.degrees(np.arctan2(verts[:, 1], verts[:, 0])) % 360.0
+    cl = blade_clusters(verts, r_tip)
+    a0 = float(np.degrees(np.arctan2(np.mean(np.sin(np.radians(cl[0]))), np.mean(np.cos(np.radians(cl[0]))))) % 360.0)
+    r_root = float(rr.min())
+    out = []
+    for r in (r_root, r_tip):
+        m = (np.abs(rr - r) < 1e-6) & (np.abs((ang - a0 + 180.0) % 360.0 - 180.0) < 180.0 / len(cl) - 0.5)
+        pts = np.column_stack([r * np.radians((ang[m] - a0 + 180.0) % 360.0 - 180.0), verts[m][:, 2]])
+        pts = pts - pts.mean(axis=0)
+        w, vec = np.linalg.eigh(pts.T @ pts)
+        v = vec[:, int(np.argmax(w))]
+        out.append(float(np.degrees(np.arctan2(v[1], v[0]))) % 180.0)
+    d = abs(out[0] - out[1])
+    return min(d, 180.0 - d), out
+
+
+def evaluate_df(faults=None, mutate=None, kw=0.25, hole_d=DF_HOLE):
+    """Список (rule_id, ok, label, info) для duct_axial_fan 0,25 кВт."""
+    bad = {k: [] for k in ("df_rotor", "df_blades", "df_twist", "df_gap", "df_clash", "df_axis", "df_foot", "df_grille", "df_motor", "df_mesh")}
+    item = _df_build(faults, kw, hole_d)
+    if mutate:
+        mutate(item)
+    p, sub = item["parts"], item["sub"]
+    seen = {}
+    bl = _verts(sub["blades"])
+    d_tip = 2.0 * float(np.hypot(bl[:, 0], bl[:, 1]).max())
+    if abs(d_tip - DF_D) > DF_TOL_D:
+        bad["df_rotor"].append(f"Ø{d_tip * 1000:.1f}")
+    seen["rotor"] = f"Ø{d_tip * 1000:.1f} мм"
+    cl = blade_clusters(bl, d_tip / 2.0)
+    if len(cl) < DF_BLADES_MIN:
+        bad["df_blades"].append(f"{len(cl)} лопатей")
+    seen["blades"] = f"{len(cl)} лопатей"
+    tw, ang = blade_twist(bl, d_tip / 2.0)
+    if tw < DF_TWIST_MIN:
+        bad["df_twist"].append(f"закрутка {tw:.1f}°")
+    seen["twist"] = f"закрутка {tw:.1f}° (корінь {ang[0]:.0f}°, кінець {ang[1]:.0f}°)"
+    tv = _verts(sub["throat"])
+    rr = np.hypot(tv[:, 0], tv[:, 1])
+    r_min = float(rr.min())
+    ring = tv[np.abs(rr - r_min) < 1e-7]
+    n_seg = max(3, len(np.unique(np.round(np.arctan2(ring[:, 1], ring[:, 0]), 6))))
+    gap = r_min * float(np.cos(np.pi / n_seg)) - d_tip / 2.0
+    warn = None
+    if gap <= DF_GAP_MIN:
+        bad["df_gap"].append(f"{gap * 1000:.2f} мм")
+    if not DF_GAP_BAND[0] <= gap <= DF_GAP_BAND[1]:
+        warn = f"зазор {gap * 1000:.2f} мм поза {DF_GAP_BAND[0] * 1000:.0f}–{DF_GAP_BAND[1] * 1000:.0f} мм"
+    seen["gap"] = f"{gap * 1000:.2f} мм"
+    body = comp.c.merge_parts([v for k, v in item["motor_parts"].items() if k != "shaft"])
+    pairs = (("крильчатка", p["impeller"], "корпус", p["casing"]), ("крильчатка", p["impeller"], "решітка", p["grille"]),
+             ("крильчатка", p["impeller"], "кронштейн", p["bracket"]), ("крильчатка", p["impeller"], "двигун", body),
+             ("двигун", body, "корпус", p["casing"]), ("двигун", body, "решітка", p["grille"]), ("кронштейн", p["bracket"], "двигун", body))
+    bad["df_clash"] += [f"{a}×{b}" for a, pa, b, pb in pairs if _bvh_pair(pa, pb)]
+    shv = _verts(item["motor_parts"]["shaft"])
+    sx = _mid(shv, 0)
+    sy = float(shv[:, 1].min()) + 0.5 * float(np.ptp(shv[:, 0]))     # шпонка зрізає верх: вісь від низу + D/2
+    hv = _verts(sub["hub"])
+    hx, hy = _mid(hv, 0), _mid(hv, 1)
+    off = float(np.hypot(sx - hx, sy - hy))
+    if off > AF_TOL_AXIS or float(np.hypot(hx, hy)) > AF_TOL_AXIS:
+        bad["df_axis"].append(f"вал ({sx * 1000:.1f}, {sy * 1000:.1f}) мм, маточина ({hx * 1000:.1f}, {hy * 1000:.1f})")
+    seen["axis"] = f"зміщення вала від осі маточини {off * 1000:.2f} мм"
+    fz = _verts(item["motor_parts"]["feet"])[:, 1].min()
+    plate = _verts(sub["plate"])
+    foot = float(fz - plate[:, 1].max())
+    if not DF_FOOT_GAP[0] - 1e-9 <= foot <= DF_FOOT_GAP[1]:
+        bad["df_foot"].append(f"зазор {foot * 1000:.2f} мм")
+    seen["foot"] = f"{foot * 1000:.2f} мм"
+    cv = _verts(p["casing"])
+    opn = open_fraction(p["grille"], float(np.hypot(cv[:, 0], cv[:, 1]).min()) - 0.002)
+    if opn < DF_OPEN_FAIL:
+        bad["df_grille"].append(f"вільно {opn:.0%}")
+    seen["open"] = f"вільно {opn:.0%}"
+    mf = item["dims"]["motor_frame"]
+    m_d = float(np.ptp(_verts(item["motor_parts"]["fan_cover"])[:, 0]))
+    m_l = float(np.ptp(_verts(item["motor_parts"]["body"])[:, 2]))
+    if mf != DF_FRAME or abs(m_d - DF_MOTOR_D) > 0.05 * DF_MOTOR_D or abs(m_l - DF_MOTOR_L) > 0.01:
+        bad["df_motor"].append(f"{mf}, Ø{m_d * 1000:.0f}, корпус {m_l * 1000:.0f} мм")
+    seen["motor"] = f"рама {mf}, Ø{m_d * 1000:.0f} мм, корпус {m_l * 1000:.0f} мм"
+    for name, part in p.items():
+        verts = _verts(part)
+        if not np.isfinite(verts).all():
+            bad["df_mesh"].append(f"{name} NaN")
+        for face in _iter_faces(part[1]):
+            if face.size and (int(face.min()) < 0 or int(face.max()) >= len(verts)):
+                bad["df_mesh"].append(f"{name} індекс")
+                break
+            if face.size and _face_area(verts, face) < DEGEN_M2:
+                bad["df_mesh"].append(f"{name} вироджена")
+                break
+    labels = {
+        "df_rotor": ("крильчатка даху Ø400 (SITE, дослідження 350-450), кінці лопатей", "допуск 5 мм; " + seen["rotor"]),
+        "df_blades": (f"лопатей не менше {DF_BLADES_MIN}", seen["blades"]),
+        "df_twist": (f"лопать із закруткою не менше {DF_TWIST_MIN:.0f}° (корінь - кінець)", seen["twist"]),
+        "df_gap": ("зазор кінця лопаті до горловини > 0,5 мм (без торкання)", seen["gap"]),
+        "df_clash": ("крильчатка не перетинає корпус, решітку, кронштейн, двигун; двигун - корпус, решітку", "BVH, 7 пар"),
+        "df_axis": ("вал двигуна і маточина співвісні", "допуск 2 мм; " + seen["axis"]),
+        "df_foot": ("лапи двигуна на плиті кронштейна (зазор 0-2 мм)", seen["foot"]),
+        "df_grille": (f"решітка не суцільна: вільна площа не менше {DF_OPEN_FAIL:.0%}", seen["open"] + " (промені уздовж осі)"),
+        "df_motor": ("двигун 0,25 кВт = IEC 71, Ø140 ± 5 %, корпус 200 ± 10 мм", seen["motor"]),
+        "df_mesh": ("сітка вентилятора без вироджених граней", f"граней {item['dims']['faces']}"),
+    }
+    rows = [(rid, not bad[rid], labels[rid][0], f"{labels[rid][1]}; {bad[rid][:4] or 'ok'}") for rid in bad]
+    if warn:
+        rows.append(("df_gap_warn", True, "зазор кінця лопаті поза 0,25–1,5 % D (власна рекомендація)", "WARN " + warn))
+    if opn < DF_OPEN_WARN:
+        rows.append(("df_open_warn", True, "решітка вільна менш ніж на 70 % (власна рекомендація)", f"WARN {opn:.0%}"))
+    return rows
+
+
+def _df_degenerate(item):
+    verts, faces = item["parts"]["grille"]
+    verts = np.asarray(verts, float).reshape(-1, 3)
+    n = len(verts)
+    verts = np.vstack([verts, verts[:1], verts[:1], verts[:1]])
+    blocks = faces if isinstance(faces, list) else [faces]
+    item["parts"]["grille"] = (verts, list(blocks) + [np.array([[n, n + 1, n + 2]], np.int64)])
+
+
+DF_VARIANTS = (
+    ("df_rotor", "вентилятор під крильчатку Ø388", {"impeller_d_err": -0.012}, None, {}),
+    ("df_blades", "три лопаті замість шести", {"blades": 3}, None, {}),
+    ("df_twist", "лопаті без закрутки (кут кінця на всьому розмаху)", {"no_twist": True}, None, {}),
+    ("df_gap", "горловина з зазором 0,2 мм до лопатей", {"tip_gap": 0.0002}, None, {}),
+    ("df_clash", "крильчатка на 20 мм нижче, маточина на торці двигуна", {"rotor_dz": -0.020}, None, {}),
+    ("df_axis", "двигун зсунутий на 10 мм від осі", {"motor_dx": 0.010}, None, {}),
+    ("df_foot", "плита кронштейна на 10 мм від лап", {"plate_dy": -0.010}, None, {}),
+    ("df_grille", "суцільна плита замість решітки", {"grille": "plate"}, None, {}),
+    ("df_motor", "двигун 1,1 кВт (90S) замість 0,25", None, None, {"kw": 1.1}),
+    ("df_mesh", "у решітці вироджена грань", None, _df_degenerate, {}),
+)
+
+
 def _failed(rows):
     return {rid for rid, ok, _label, _info in rows if not ok}
 
@@ -1232,7 +1425,27 @@ def main():
         else:
             print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
 
+    df_base = evaluate_df()
+    df_fail = _failed(df_base)
+    for rid, ok, label, info in df_base:
+        ok_all &= ok
+        print(f"{'PASS' if ok else 'FAIL'}  {label}: {info}", flush=True)
+    df_caught = 0
+    for rid, title, faults, mutate, extra_kw in DF_VARIANTS:
+        got_rows = evaluate_df(faults, mutate, **extra_kw)
+        got = _failed(got_rows)
+        extra = got - df_fail - {rid}
+        info = next(i for r, _ok, _l, i in got_rows if r == rid)
+        seen = rid in got and not extra
+        df_caught += bool(seen)
+        ok_all &= seen
+        if seen:
+            print(f"EXPECTED FAIL {title} -> OK ({rid})", flush=True)
+        else:
+            print(f"FAIL  EXPECTED FAIL {title} -> rules={sorted(got)} extra={sorted(extra)} detail={info}", flush=True)
+
     print(f"CASES {atomic} base + {len(variants)} broken, caught {caught}/{len(variants)}", flush=True)
+    print(f"ROOF DUCT FAN {len([r for r in df_base if r[0] not in ('df_gap_warn', 'df_open_warn')])} rules + {len(DF_VARIANTS)} broken, caught {df_caught}/{len(DF_VARIANTS)}", flush=True)
     print(f"AXIAL FAN {len([r for r in af_base if r[0] != 'af_gap_warn'])} rules + {len(AF_VARIANTS)} broken, caught {af_caught}/{len(AF_VARIANTS)}", flush=True)
     print(f"GEARMOTOR {len(gm_base)} rules + {len(GM_VARIANTS)} broken, caught {gm_caught}/{len(GM_VARIANTS)}", flush=True)
     print(f"REDUCER {len(rd_base)} rules + {len(RD_VARIANTS)} broken, caught {rd_caught}/{len(RD_VARIANTS)}", flush=True)

@@ -284,7 +284,7 @@ def build_sweep_parts(detail="lod", faults=None):
             st.rod((0, 0, 0.78), (0, 0, 0.83), 0.024, 12),                # input shaft up
             st.rod((0, 0, 0.80), (0, 0, DRIVE_MOTOR_Z - 0.02), 0.055, 16)]   # upper coupling under the motor shoulder
     for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
-        gear.append(st.member(np.array([sx * 0.12, sy * 0.12, 0.41]), np.array([sx * (hw - 2 * b), sy * (hw - 2 * b), 0.41]),
+        gear.append(st.member(np.array([sx * 0.12, sy * 0.12, 0.41]), np.array([sx * (hw - 2 * b + 0.001), sy * (hw - 2 * b + 0.001), 0.41]),
                               _rect((-0.02, 0.02), (-0.01, 0.01))))
     out["drive_gear"] = c.merge_parts(gear)
 
@@ -300,10 +300,11 @@ def build_sweep_parts(detail="lod", faults=None):
     def m_fn(v):
         x, y, zl = v[:, 0] - shoulder, v[:, 1], v[:, 2] - H
         # motor shaft +X -> world -Z; lateral y -> s_; crown (z - H) -> -e (feet toward +e)
-        pos = y[:, None] * s_[None, :] - zl[:, None] * e[None, :]
-        return np.column_stack([pos[:, 0] + mdx, pos[:, 1], DRIVE_MOTOR_Z - x])
+        pos = y[:, None] * s_[None, :] - zl[:, None] * e[None, :] + mdx * s_[None, :]
+        return np.column_stack([pos[:, 0], pos[:, 1], DRIVE_MOTOR_Z - x])
 
     motor = {k_: (m_fn(np.asarray(p[0], float).reshape(-1, 3)), p[1]) for k_, p in mp.items()}
+    out["dims"] = {"drive_frame": item["dims"]["frame"], "drive_kw": kw, "drive_motor_len": float(item["dims"]["L"])}
     out["drive_motor"] = c.merge_parts(list(motor.values()))
     out["drive_motor_parts"] = motor
     fv = np.asarray(motor["feet"][0], float)
@@ -315,7 +316,7 @@ def build_sweep_parts(detail="lod", faults=None):
     wall_in = hw - t - 0.002
     for zr in (q0 + 0.05, q1 - 0.05):
         br.append(st.member(e * (wall_in - 0.012) - s_ * (hw - 2 * b) + [0, 0, zr], e * (wall_in - 0.012) + s_ * (hw - 2 * b) + [0, 0, zr],
-                            _rect((-0.04, 0.04), (0.0, 0.012)), up=(0.0, 0.0, 1.0)))
+                            _rect((-0.006, 0.006), (-0.04, 0.04)), up=(0.0, 0.0, 1.0)))
         for sgn in (-1, 1):
             xs = s_ * sgn * (half_w - 0.03)
             br.append(st.member(e * (off + t_pl - 0.001) + xs + [0, 0, zr], e * (wall_in - 0.001) + xs + [0, 0, zr],
@@ -351,7 +352,7 @@ def build_sweep_parts(detail="lod", faults=None):
     d_r = 0.19
     gear_c = p0 + d * d_r + n * n_c
     steel.append(st.member(gear_c + [0, 0, 0.08], gear_c + [0, 0, 0.40], _rect((-0.09, 0.09), (-0.08, 0.08)), up=tuple(d)))   # worm box
-    steel.append(st.rod(gear_c - n * 0.12 + [0, 0, 0.32], gear_c - n * 0.09 + [0, 0, 0.32], 0.09, 20))                       # adapter ring
+    steel.append(st.rod(gear_c - n * (0.12 - TRACTOR_GAP) + [0, 0, 0.32], gear_c - n * 0.09 + [0, 0, 0.32], 0.09, 20))                       # adapter ring
     out["tractor_frame"] = c.merge_parts(steel)
 
     mk = _iec(tr["kw"], detail)
@@ -368,6 +369,7 @@ def build_sweep_parts(detail="lod", faults=None):
         return pos
 
     tm = {k_: (t_fn(np.asarray(p[0], float).reshape(-1, 3)), p[1]) for k_, p in mk["parts"].items()}
+    out["dims"].update({"tractor_frame": mk["dims"]["frame"], "tractor_kw": float(tr["kw"])})
     out["tractor_motor"] = c.merge_parts(list(tm.values()))
     out["tractor_motor_parts"] = tm
     sole = float(np.asarray(tm["feet"][0])[:, 2].min()) - mdz

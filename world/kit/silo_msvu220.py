@@ -616,10 +616,11 @@ def build_roof_vents(openings=None, spec=None, detail="lod", faults=None, fan_dz
     """Vents with hoods (SITE `silo_roof.vents`): neck through the sheet, open skirt, cone cap.
     Fan vents carry the duct axial fan (components.duct_axial_fan: Ø impeller, 0.25 kW motor under the roof, finger guard,
     casing through the sheet). `faults` / `fan_dz` inject the check's broken cases.
-    Returns (vents, fan parts {casing, impeller, grille, bracket, motor}) as merged (verts, faces)."""
+    Returns (vents, fan parts {casing, impeller, grille, bracket, motor} as merged (verts, faces), plus "dims")."""
     rs = spec or roof_spec()
     v_, f_ = rs["vents"], rs["fans"]
     vents, fans = [], {k: [] for k in ("casing", "impeller", "grille", "bracket", "motor")}
+    dims = None
     rn, rh = v_["hole_d_m"] / 2, v_["hood_d_m"] / 2
     drop = rn * math.tan(ROOF_SLOPE) + 0.03                  # the neck reaches below the sloped sheet
     for o in openings or roof_openings():
@@ -638,12 +639,15 @@ def build_roof_vents(openings=None, spec=None, detail="lod", faults=None, fan_dz
             z_sh = z_nom + fan_dz
             item = _roof_fan(f_["impeller_d_m"], f_["kw"], v_["hole_d_m"], zc + f_["housing_h_m"] - z_nom,
                              detail, tuple(sorted((faults or {}).items())))
+            dims = item["dims"]
             for k, part in item["parts"].items():
                 verts = c.transform(np.asarray(part[0], float).reshape(-1, 3), math.radians(o["deg"]), (o["x"], o["y"], z_sh))
                 fans[k].append((verts, part[1]))
             vents.append(c.cylinder(rh, top - 0.16, top - 0.06, steps=40, center=xy, capped=False))
             vents.append(_cone(rh, 0.04, top - 0.06, top, xy, steps=40))
-    return c.merge_parts(vents), {k: (c.merge_parts(v) if v else None) for k, v in fans.items()}
+    out = {k: (c.merge_parts(v) if v else None) for k, v in fans.items()}
+    out["dims"] = dims                                       # duct_axial_fan dims of the (identical) fans, None without a fan
+    return c.merge_parts(vents), out
 
 
 def build_roof_hatches(openings=None):
