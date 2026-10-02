@@ -25,6 +25,17 @@ C5 (discharge A24, fans A12 / A13, measured on the meshes; FAIL):
 C5 broken variants (through `faults`, each must fail its own rule only): trays 60 mm longer into the drive bay,
 guides 80 mm higher through the flap pivots, trays 30 mm narrower, roof fan lifted 1.5 m out of its casing.
 
+C7b (wet-silo fans on components.radial_fan, FAIL unless said; measured on the meshes build_wet_fans gives):
+  one fan per wet silo (designed.wet_bins), 7.5 kW as the VR 280-46 No.5 pasport row (p.7 table 3), none in the register;
+  the fan stands on its pad inside the pad outline, frame feet on the pad top;
+  the duct meets the fan mouth and its end flange is on the silo wall (0..10 mm);
+  the duct runs over the plinth ledge (sheet >= 0.10 m over the plinth top: the trestle beam fits) and enters in the lowest
+  band (axis <= 0.6 m over the floor, EST);
+  no clashes of the fans with the plinths, walls, pads, tower, T5 and each other (BVH).
+WARN: air flow of the pasport working zone under 10 m3/h per tonne of wet grain (EST).
+C7b broken variants (through `faults`, each must fail its own rule only): last wet silo without a fan, fan 0.45 m off the pad,
+duct 0.15 m short of the wall, fan and duct on a 0.6 m higher pad, pad 0.45 m toward the silo (into the plinth).
+
 Broken variants that must fail: T5 0.25 m higher (the +22.0 girt), T3 0.2 m lower (the +19.4 girt), trestle
 at x -13.4 (in the plinth of silo «2»), dryer centre at x 10.2 (out of building «4»), T5 on y 54.2 (drops
 off the silo centres), column 1.2 m thick, fan unit 0.9 m.
@@ -56,6 +67,7 @@ NEW = ["t5_casing", "t5_deck", "t5_truss", "t5_trestle_legs", "t5_trestle_braces
        "dryer_ladder", "dryer_enclosure", "dryer_enclosure_roof", "dryer_platform", "wet_fans", "t5_ladder", "t5_landing",
        "dryer_fan_top_shroud", "dryer_fan_top_rotor", "dryer_fan_top_motor", "dryer_fan_top_cooling",
        "dryer_fan_low_shroud", "dryer_fan_low_rotor", "dryer_fan_low_motor", "dryer_fan_low_cooling",
+       "wet_fan_housing", "wet_fan_frame", "wet_fan_duct", "wet_fan_flex", "wet_fan_stand", "wet_fan_pads",
        "dryer_discharge_frame", "dryer_flaps", "dryer_flap_rods", "dryer_cylinder", "dryer_hopper_dry", "dryer_screw",
        "dryer_screw_gear", "dryer_screw_gearmotor"]
 OLD = ["frame", "bracing", "decks", "noria_legs", "noria_heads", "noria_drives", "noria_boots", "old_silo_walls",
@@ -79,7 +91,10 @@ TOUCH = {("t3_casing", "t3_bridge_deck"), ("t5_casing", "t5_deck"), ("t3_bridge_
          # the gearmotor flange is bolted to its case; the torque-arm pad bolts go through the trough end plate
          ("dryer_fan_top_rotor", "dryer_fan_top_motor"), ("dryer_fan_low_rotor", "dryer_fan_low_motor"),
          ("dryer_fans", "dryer_fan_top_cooling"), ("dryer_chambers", "dryer_fan_low_cooling"),
-         ("dryer_screw_gear", "dryer_screw_gearmotor"), ("dryer_hopper_dry", "dryer_screw_gear")}
+         ("dryer_screw_gear", "dryer_screw_gearmotor"), ("dryer_hopper_dry", "dryer_screw_gear"),
+         # C7b: the wet fan assembly: frame on its pad, housing on the frame, motor on the stool / frame, flange pairs, trestle under the duct
+         ("wet_fan_housing", "wet_fans"), ("wet_fan_housing", "wet_fan_frame"), ("wet_fans", "wet_fan_frame"),
+         ("wet_fan_duct", "wet_fan_flex"), ("wet_fan_duct", "wet_fan_housing"), ("wet_fan_stand", "wet_fan_duct")}
 
 
 def _bvh(data):
@@ -210,6 +225,114 @@ C5_VARIANTS = (
 )
 
 
+WF_COUNT = "wet silos: one fan each, 7.5 kW VR 280-46 No.5 (pasport p.7 table 3), none in the register (documented choice)"
+WF_PAD = "wet fan on its pad: housing, frame and motor inside the pad outline, frame feet on the pad top"
+WF_WALL = "wet fan duct: meets the fan mouth, end flange on the silo wall (0..10 mm)"
+WF_LEVEL = "wet fan duct over the plinth ledge (sheet >= 0.10 m over the plinth top) and in the lowest band (axis <= 0.6 m over the floor)"
+WF_CLASH = "wet fans: no clashes with plinths, walls, pads, tower, T5 and each other (BVH)"
+WF_AIR = "wet fan air flow >= 10 m3/h per tonne of wet grain (pasport working zone, EST)"
+WF_SHEET_TOP = 0.6                    # EST: the duct axis within the lowest wall course
+WF_BEAM_FIT = 0.10                    # trestle beam SHS 60 + 40 mm under the duct sheet
+
+
+def _near(v, cx, cy, hx, hy):
+    v = np.asarray(v, float)
+    return v[(np.abs(v[:, 0] - cx) <= hx) & (np.abs(v[:, 1] - cy) <= hy)]
+
+
+def wf_checks(site, faults=None):
+    """C7b wet-silo fans (drying.wet_fan_geom / build_wet_fans), measured on the meshes."""
+    from kit import components as comp
+    out = []
+    g = dr.wet_fan_geom(site, faults)
+    parts = dr.build_wet_fans(site, faults)
+    wet = site["designed"]["wet_bins"]
+    reg = [it["id"] for it in site["equipment"]["items"]
+           if it.get("kind") == "motor" and any(it["id"].startswith(sid + ".") or it["id"] == sid for sid in wet["silos"])]
+    kw_table = float(comp._fan_table(None)["motor"]["kw"]["v"])
+    pas = dr.WET_FAN_PASPORT
+    ids = [s["id"] for s in g["silos"]]
+    ok = sorted(ids) == sorted(wet["silos"]) and not reg and g["kw"] == pas["kw"] == g["fan"]["dims"]["kw"] == kw_table
+    out.append((WF_COUNT, ok, f"fans at {ids} for wet silos {wet['silos']}, register motors for them {reg or 'none'}, "
+                              f"{g['kw']} kW vs pasport {pas['kw']} / table {kw_table}"))
+
+    pad = parts["wet_fan_pads"][2]
+    bad_pad, bad_rest = [], []
+    for s in g["silos"]:
+        px0, py0, px1, py1, _, top = s["pad"]
+        ptop = float(_near(pad[0], 0.5 * (px0 + px1), 0.5 * (py0 + py1), 0.75, 0.65)[:, 2].max())
+        zmins = []
+        for key in ("wet_fan_housing", "wet_fan_frame", "wet_fans"):
+            v = _near(parts[key][2][0], s["origin"][0], s["origin"][1], 1.2, 1.2)
+            inside = v[:, 0].min() >= px0 and v[:, 0].max() <= px1 and v[:, 1].min() >= py0 and v[:, 1].max() <= py1
+            if not inside:
+                bad_pad.append(f"{s['id']} {key} x {v[:, 0].min():.2f}-{v[:, 0].max():.2f} y {v[:, 1].min():.2f}-{v[:, 1].max():.2f} "
+                               f"out of x {px0:.2f}-{px1:.2f} y {py0:.2f}-{py1:.2f}")
+            zmins.append(float(v[:, 2].min()))
+        if abs(min(zmins) - ptop) > 0.002:
+            bad_rest.append(f"{s['id']} frame feet z {min(zmins):.4f} vs pad top {ptop:.4f}")
+    out.append((WF_PAD, not bad_pad and not bad_rest, f"{bad_pad + bad_rest or 'inside, feet on the top'}"))
+
+    duct = parts["wet_fan_duct"][2][0]
+    bad_w, bad_l, notes_w, notes_l = [], [], [], []
+    for s in g["silos"]:
+        v = _near(duct, s["origin"][0], s["mouth_y"] - 0.9, 0.6, 1.0)
+        v = v[v[:, 1] < s["mouth_y"] + 0.001]
+        w_duct = float(np.asarray(g["fan"]["parts"]["outlet"][0])[:, 0].max() - np.asarray(g["fan"]["parts"]["outlet"][0])[:, 0].min())
+        y_lo, y_hi = float(v[:, 1].min()), float(v[:, 1].max())
+        gap = y_lo - s["wall_y"]
+        xc, zc = 0.5 * (float(v[:, 0].min()) + float(v[:, 0].max())), 0.5 * (float(v[:, 2].min()) + float(v[:, 2].max()))
+        out_v = np.asarray(g["fan"]["parts"]["outlet"][0], float)
+        fx = s["origin"][0] + 0.5 * (out_v[:, 0].min() + out_v[:, 0].max())
+        fz = s["origin"][2] + 0.5 * (out_v[:, 2].min() + out_v[:, 2].max())
+        if not (0.0 <= gap <= 0.01) or abs(xc - fx) > 0.005 or abs(zc - fz) > 0.005 or abs(y_hi - (s["mouth_y"] - dr.WET_FL_GAP)) > 0.001:
+            bad_w.append(f"{s['id']} end gap {gap * 1000:.0f} mm, axis dx {1000 * (xc - fx):.1f} dz {1000 * (zc - fz):.1f} mm, "
+                         f"mouth gap {1000 * (s['mouth_y'] - y_hi):.1f} mm (gasket {1000 * dr.WET_FL_GAP:.0f})")
+        notes_w.append(f"{s['id']} end gap {gap * 1000:.1f} mm")
+        sheet = v[np.abs(v[:, 0] - xc) <= w_duct / 2 + 0.001]                         # the sheet corners, not the flange plates
+        z_sheet = float(sheet[:, 2].min()) if len(sheet) else float("nan")
+        over = z_sheet - s["floor_z"]
+        axis = zc - s["floor_z"]
+        if not (over >= WF_BEAM_FIT and axis <= WF_SHEET_TOP):
+            bad_l.append(f"{s['id']} sheet {over:.3f} m over the plinth top, axis {axis:.2f} m")
+        notes_l.append(f"{s['id']} sheet +{over:.3f}, axis +{axis:.2f}")
+    out.append((WF_WALL, not bad_w, f"{bad_w or notes_w}"))
+    out.append((WF_LEVEL, not bad_l, f"{bad_l or notes_l}"))
+
+    trees = {k: _bvh(parts[k][2]) for k in parts}
+    rparts = rc.build(site["receiving"], site)
+    skip = [n for n in NEW if n.startswith("wet_fan") or n == "wet_fans"]
+    others = {k: _bvh(rparts[k][2]) for k in OLD + [n for n in NEW if n not in skip] if k in rparts}
+    clashes = []
+    keys = list(parts)
+    for i, a in enumerate(keys):
+        for b in keys[i + 1:]:
+            if (a, b) in TOUCH or (b, a) in TOUCH:
+                continue
+            if trees[a].overlap(trees[b]):
+                clashes.append(f"{a} x {b}")
+        for b, tb in others.items():
+            if trees[a].overlap(tb):
+                clashes.append(f"{a} x {b}")
+    out.append((WF_CLASH, not clashes, f"{clashes[:6] or 'none'}"))
+
+    t_wet = wet["volume_m3_each"] * wet["bulk_t_m3"]
+    per_t = pas["q_th_m3h"][0] / t_wet
+    out.append((WF_AIR + ": WARN" if per_t < 10.0 else WF_AIR, True,
+                f"{per_t:.1f} m3/h per tonne at the low end of the working zone ({pas['q_th_m3h'][0]:.0f} m3/h / {t_wet:.0f} t), "
+                f"{pas['q_th_m3h'][1] / t_wet:.1f} at the high end"))
+    return out
+
+
+WF_VARIANTS = (
+    (WF_COUNT, "the last wet silo without a fan", {"skip_last": True}),
+    (WF_PAD, "fan 0.45 m off the pad (east)", {"dx": 0.45}),
+    (WF_WALL, "duct 0.15 m short of the silo wall", {"duct_dy": 0.15}),
+    (WF_LEVEL, "fan and duct on a 0.6 m higher pad (axis over the lowest band)", {"pad_dz": 0.6}),
+    (WF_CLASH, "pad 0.45 m toward the silo (into the plinth)", {"dy": -0.45}),
+)
+
+
 def checks(site):
     out = []
     r, g, d = site["receiving"], dr.geom(site), site["designed"]["dryer"]
@@ -249,6 +372,7 @@ def checks(site):
 
     out += section_checks(site, d)
     out += c5_checks(site)
+    out += wf_checks(site)
 
     t4 = next(cv for cv in r["conveyors"] if cv["id"] == "T4")
     p0, p1 = sp["dryer->T4"]
@@ -327,6 +451,12 @@ def run(site):
     for rule, name, faults in C5_VARIANTS:
         failed = {n for n, ok, _ in c5_checks(site, faults) if not ok}
         good = rule in failed and not (failed - base_c5 - {rule})
+        ok_all &= good
+        print(f"{'PASS' if good else 'FAIL'}  broken variant must be rejected — {name}: failed {sorted(failed)}", flush=True)
+    base_wf = {n for n, ok, _ in wf_checks(site) if not ok}
+    for rule, name, faults in WF_VARIANTS:
+        failed = {n for n, ok, _ in wf_checks(site, faults) if not ok}
+        good = rule in failed and not (failed - base_wf - {rule})
         ok_all &= good
         print(f"{'PASS' if good else 'FAIL'}  broken variant must be rejected — {name}: failed {sorted(failed)}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)
