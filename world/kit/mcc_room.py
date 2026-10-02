@@ -150,8 +150,10 @@ def place(v, rot, origin):
     return np.column_stack([xy, v[:, 2] + origin[2]])
 
 
-def layout(site, assign=None):
-    """Room, rows, cabinets (with their groups and plates), tray boxes, lamps, door (site frame)."""
+def layout(site, assign=None, shift=None):
+    """Room, rows, cabinets (with their groups and plates), tray boxes, lamps, door (site frame).
+    assign: motor cabinets as group_motors returns them (default: the rule); shift: {row id: dx} moves a row across
+    the aisle (the check's broken variants)."""
     g = c.ground_z()
     t = site["designed"]["site_plan"]["ktp"]
     ct = site["designed"]["site_plan"]["cable_trestle"]
@@ -180,6 +182,9 @@ def layout(site, assign=None):
             ox = room[2] - LINING - BACK - cd
             origins = [(ox, ya + length - k * pitch, g) for k in range(count)]
             front = room[2] - LINING - BACK - cd
+        dx = (shift or {}).get(rid, 0.0)
+        origins = [(o[0] + dx, o[1], o[2]) for o in origins]
+        front += dx
         rows.append({"id": rid, "rot": rot, "n": count, "y": (ya, ya + length), "front": front,
                      "face": 1.0 if rid == "W" else -1.0, "origins": origins})
     k = 0
@@ -214,7 +219,7 @@ def layout(site, assign=None):
     return {"g": g, "block": (x0, y0, x1, y1, h), "room": room, "ceiling": g + h - CEIL, "cabinet": (cw, ch, cd, plinth),
             "rows": rows, "cabinets": cabs, "tray": tray, "trestle": (ex, ey, zt), "lamps": lamps, "lamp_z": g + h - CEIL - 0.001,
             "doors": [{"wall": "south", "x": DOOR[:2], "h": DOOR[2], "outer": True}],
-            "column_on": 0, "est": EST}
+            "column_on": 0, "column_dz": 0.0, "est": EST}
 
 
 EST = ["стіна 0,25 м; МСС 4,25 м від західного торця, перегородка 0,25 м",
@@ -268,7 +273,7 @@ def signal_parts(L):
     cb = L["cabinets"][L["column_on"]]
     cw, ch, cd, plinth = L["cabinet"]
     col = ctl.signal_column()
-    off = np.array([cw / 2, cd / 2 - 0.05, plinth + ch])
+    off = np.array([cw / 2, cd / 2 - 0.05, plinth + ch + L.get("column_dz", 0.0)])
     return {k: (place(np.asarray(v, float) + off, cb["rot"], cb["origin"]), f) for k, (v, f) in col["parts"].items()}
 
 
