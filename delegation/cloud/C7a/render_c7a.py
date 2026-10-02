@@ -1,6 +1,6 @@
 """C7a frames (Cycles, 960x540): silo roof fan in section, sweep centre drive in section, sweep tractor.
 
-    blender --background --python delegation/cloud/C7a/render_c7a.py -- roof_fan|sweep_drive|tractor OUT.png [gpu]
+    blender --background --python delegation/cloud/C7a/render_c7a.py -- roof_fan|roof_fan_close|sweep_drive|tractor OUT.png [gpu]
 
 roof_fan    - silo exterior (kit.silo_msvu220.build, detail full), cut by a vertical plane through the axis of a roof fan:
               casing, impeller, finger guard, motor and foot plate under the roof;
@@ -55,7 +55,9 @@ def ground(z, half=60.0):
     g.data.materials.append(c.mat_ground())
 
 
-if what == "roof_fan":
+if what in ("roof_fan", "roof_fan_close"):
+    _orig = silo.build_roof_vents
+    silo.build_roof_vents = lambda ops, **kw: _orig(ops, detail="full", **kw)       # full detail for the frame
     fan = next(o for o in silo.roof_openings() if o["kind"] == "fan_vent")
     th = math.radians(fan["deg"])
     radial = np.array([math.cos(th), math.sin(th)])
@@ -64,7 +66,10 @@ if what == "roof_fan":
     ground(-0.5)
     zc = silo.roof_z(fan["r"])
     tgt = np.array([fan["x"], fan["y"], zc - 0.05])
-    cam = c.camera("CAM", tuple(tgt + np.array([*(nrm * 3.2 - radial * 0.8), 0.9])), tuple(tgt + [0, 0, 0.12]), lens=38)
+    if what == "roof_fan":
+        cam = c.camera("CAM", tuple(tgt + np.array([*(nrm * 3.2 - radial * 0.8), 0.9])), tuple(tgt + [0, 0, 0.12]), lens=38)
+    else:                                                                            # impeller, throat and motor close up
+        cam = c.camera("CAM", tuple(tgt + np.array([*(nrm * 1.0 - radial * 0.25), 0.55])), tuple(tgt + [0, 0, -0.1]), lens=45)
     light("L1", tuple(tgt + np.array([*(nrm * 0.9), -0.2])), 40, 0.15)
 elif what == "sweep_drive":
     si.build(fill=0.0, cut=(0.0, 1.0), detail="full")
