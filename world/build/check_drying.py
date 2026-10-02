@@ -17,6 +17,14 @@ Dryer body (GCS p.2 section): zones along the long side, column volume >= catalo
 over the Ø1000 rotor on the exhaust chamber, burner louvres at the hot chamber bottom, T3 bridge posts on the
 column roof, guard rails 1.1 m.
 
+C5 (discharge A24, fans A12 / A13, measured on the meshes; FAIL):
+  the flaps stay inside the base contour (base side walls, column faces) and the trays between the frame end walls;
+  the cylinder and the guides do not touch the flaps or the dry-grain screw (BVH);
+  every closed flap is under its neck and reaches past both neck edges by gap / tan(25°) (wheat repose, physical);
+  the A12 rotor is inside the roof casing (radius and height band), the A13 rotor inside the exhaust chamber.
+C5 broken variants (through `faults`, each must fail its own rule only): trays 60 mm longer into the drive bay,
+guides 80 mm higher through the flap pivots, trays 30 mm narrower, roof fan lifted 1.5 m out of its casing.
+
 Broken variants that must fail: T5 0.25 m higher (the +22.0 girt), T3 0.2 m lower (the +19.4 girt), trestle
 at x -13.4 (in the plinth of silo «2»), dryer centre at x 10.2 (out of building «4»), T5 on y 54.2 (drops
 off the silo centres), column 1.2 m thick, fan unit 0.9 m.
@@ -134,6 +142,74 @@ def section_checks(site, d):
     return out
 
 
+C5_FLAPS_IN = "discharge flaps inside the base contour (base side walls, column faces) and the trays between the frame end walls"
+C5_CLEAR = "discharge cylinder and guides clear of the flaps and the dry-grain screw (BVH)"
+C5_COVER = "closed flap covers its channel: tray past both neck edges by gap / tan(repose 25°), under the neck"
+C5_ROTOR = "fan rotors inside their casings: A12 in the roof casing, A13 in the exhaust chamber"
+
+
+def _hit(a, b):
+    return bool(_bvh(a).overlap(_bvh(b)))
+
+
+def c5_checks(site, faults=None):
+    """C5 (discharge A24, fans A12 / A13), measured on the meshes build_dryer gives; `faults` reach the builders."""
+    out = []
+    parts = dr.build_dryer(site, faults)
+    dis = dr.discharge(site, faults)
+    sub = dis["sub"]
+    bx0, bx1, ca, cb = sub["base_inner"]
+    xa, xb = sub["x_frame"]
+    fv = np.asarray(parts["dryer_flaps"][2][0], float)
+    tv = np.concatenate([np.asarray(t[0], float) for t in sub["trays"]])
+    in_base = bx0 <= fv[:, 0].min() and fv[:, 0].max() <= bx1 and ca <= fv[:, 1].min() and fv[:, 1].max() <= cb
+    in_frame = xa <= tv[:, 0].min() and tv[:, 0].max() <= xb
+    out.append((C5_FLAPS_IN, in_base and in_frame,
+                f"flaps x {fv[:, 0].min():.3f}-{fv[:, 0].max():.3f} in {bx0:.3f}-{bx1:.3f}, y {fv[:, 1].min():.3f}-{fv[:, 1].max():.3f} "
+                f"in {ca:.3f}-{cb:.3f}; trays x {tv[:, 0].min():.3f}-{tv[:, 0].max():.3f} in the frame {xa:.3f}-{xb:.3f}"))
+    cyl, rods = parts["dryer_cylinder"][2], parts["dryer_flap_rods"][2]
+    flaps, screw = parts["dryer_flaps"][2], parts["dryer_screw"][2]
+    hits = [f"{a} x {b}" for a, pa in (("cylinder", cyl), ("guides", rods)) for b, pb in (("flaps", flaps), ("screw", screw)) if _hit(pa, pb)]
+    out.append((C5_CLEAR, not hits, f"{hits or 'no contact'}"))
+    tan_r = math.tan(math.radians(dr.REPOSE_DEG))
+    bad, worst = [], 9.0
+    if len(sub["trays"]) != len(sub["necks"]):
+        bad.append(f"{len(sub['trays'])} trays for {len(sub['necks'])} channels")
+    for i, (tray, (n0, n1, nz)) in enumerate(zip(sub["trays"], sub["necks"])):
+        t = np.asarray(tray[0], float)
+        under = float(t[:, 2].max()) < nz                                  # lips included
+        gap = nz - float(np.sort(np.unique(np.round(t[:, 2], 6)))[1])     # neck bottom -> tray floor top (lips stand higher)
+        over = min(n0 - float(t[:, 1].min()), float(t[:, 1].max()) - n1) - gap / tan_r
+        worst = min(worst, over)
+        if not under or over < 0.0:
+            bad.append(f"channel {i + 1}: overlap margin {over * 1000:.1f} mm, under the neck {under}")
+    out.append((C5_COVER, not bad, f"{len(sub['necks'])} channels, worst margin {worst * 1000:.1f} mm over gap/tan25°; {bad[:3] or 'ok'}"))
+    s = dr.section(site)
+    z = s["z"]
+    side = site["designed"]["dryer"]["section"]["fan_unit_m"]["side"]
+    cx, cy = dr.fan_top_centre(site)
+    rt = np.asarray(parts["dryer_fan_top_rotor"][2][0], float)
+    r_out = float(np.hypot(rt[:, 0] - cx, rt[:, 1] - cy).max())
+    top_ok = r_out < side / 2 and z["fan_louvre_top"] <= rt[:, 2].min() and rt[:, 2].max() <= z["fan_casing_top"]
+    x0, y0, x1, y1 = dr.dryer_rect(site)
+    ea, eb = s["exhaust"]
+    rl = np.asarray(parts["dryer_fan_low_rotor"][2][0], float)
+    low_ok = x0 < rl[:, 0].min() and rl[:, 0].max() < x1 and ea < rl[:, 1].min() and rl[:, 1].max() < eb and \
+        0.0 < rl[:, 2].min() and rl[:, 2].max() < z["chamber_roof"]
+    out.append((C5_ROTOR, top_ok and low_ok,
+                f"A12 tip circle {2 * r_out:.3f} m in the Ø{side:.2f} casing, z {rt[:, 2].min():.2f}-{rt[:, 2].max():.2f} in "
+                f"{z['fan_louvre_top']}-{z['fan_casing_top']}; A13 in the exhaust chamber {low_ok}"))
+    return out
+
+
+C5_VARIANTS = (
+    (C5_FLAPS_IN, "flap trays 60 mm longer at -X, out of the frame into the drive bay", {"tray_dx0": -0.06}),
+    (C5_CLEAR, "guides and their pins 80 mm higher, through the flap pivots", {"rods_dz": 0.08}),
+    (C5_COVER, "trays 30 mm narrower on the pivot side", {"tray_w": -0.03}),
+    (C5_ROTOR, "roof fan lifted 1.5 m out of its casing", {"top_fan_dz": 1.5}),
+)
+
+
 def checks(site):
     out = []
     r, g, d = site["receiving"], dr.geom(site), site["designed"]["dryer"]
@@ -172,6 +248,7 @@ def checks(site):
                 ok5 and all(drops) and head_ok, f"top {dr.conv_top('T5', site):.2f} vs {t5_end}, drops {drops}, head {g['T5']['x'][1]} vs last drop {last}"))
 
     out += section_checks(site, d)
+    out += c5_checks(site)
 
     t4 = next(cv for cv in r["conveyors"] if cv["id"] == "T4")
     p0, p1 = sp["dryer->T4"]
@@ -245,6 +322,13 @@ def run(site):
         failed = [n for n, ok, _ in checks(bad) if not ok]
         ok_all &= bool(failed)
         print(f"{'PASS' if failed else 'FAIL'}  broken variant must be rejected — {name}: failed {failed}", flush=True)
+    # C5 broken variants go in through `faults` of the dryer builders and must fail their own rule and nothing else
+    base_c5 = {n for n, ok, _ in c5_checks(site) if not ok}
+    for rule, name, faults in C5_VARIANTS:
+        failed = {n for n, ok, _ in c5_checks(site, faults) if not ok}
+        good = rule in failed and not (failed - base_c5 - {rule})
+        ok_all &= good
+        print(f"{'PASS' if good else 'FAIL'}  broken variant must be rejected — {name}: failed {sorted(failed)}", flush=True)
     print("RESULT", "ALL PASS" if ok_all else "FAILED", flush=True)
     sys.exit(0 if ok_all else 1)
 
