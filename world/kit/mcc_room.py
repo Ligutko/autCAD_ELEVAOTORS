@@ -405,7 +405,7 @@ def add_scene_extras(site, collection, materials):
         cu.body = cb["label"]
         if font:
             cu.font = font
-        cu.size = 0.018
+        cu.size = 0.026
         cu.align_x, cu.align_y = "CENTER", "CENTER"
         cu.space_line = 1.05
         cu.materials.append(ink)
