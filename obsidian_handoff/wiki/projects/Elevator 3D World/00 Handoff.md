@@ -1,13 +1,21 @@
 ---
 type: handoff
-updated: 2026-09-28
+updated: 2026-10-02
 repo: ligutko/autcad_elevaotors
 branch: master
 tags: [handoff, start-here]
 ---
 # 00 Handoff — для наступного агента
 
-Повернутись: [[Elevator 3D World MOC]] · Експертиза: [[08 Expertise 2026-09-24..26]], [[09 Expertise 2026-09-26..27]], [[10 Expertise 2026-09-27 phase 3]], [[11 Expertise 2026-09-27 phase 4]], [[12 Expertise 2026-09-27 phase 7A]], [[13 Expertise 2026-09-27 phase 7B]], [[14 Expertise 2026-09-27 phase 5]], [[15 Expertise 2026-09-28 phase W1]], [[16 Expertise 2026-09-28 phase 7C]]
+Повернутись: [[Elevator 3D World MOC]] · Експертиза: [[08 Expertise 2026-09-24..26]], [[09 Expertise 2026-09-26..27]], [[10 Expertise 2026-09-27 phase 3]], [[11 Expertise 2026-09-27 phase 4]], [[12 Expertise 2026-09-27 phase 7A]], [[13 Expertise 2026-09-27 phase 7B]], [[14 Expertise 2026-09-27 phase 5]], [[15 Expertise 2026-09-28 phase W1]], [[16 Expertise 2026-09-28 phase 7C]], [[17 Expertise 2026-09-29 control center]], [[18 Expertise 2026-10-02 hero detail and agents]]
+
+## ПОТОЧНИЙ трек з 2026-09-29: деталізація «героїв» + локальні агенти (стан 2026-10-02, check_all 29/29)
+Деталізуємо місця, де стоїть відвідувач (`HERO_DETAIL_SPEC.md`, таблиця стану в розділі 1). Зроблено: ваги, справжня фура DAF + Schmitz і розвантаження в яму, редуктор Dodge на норіях, SEW KA на конвеєрах, полотна засувок за симулятором, аварійні пости, вентилятори й вивантаження сушарки, щитова МСС. Повний підсумок, знахідки для проєктувальника, що лишилось і як делегувати — [[18 Expertise 2026-10-02 hero detail and agents]]; уроки — [[05 Lessons and Pitfalls]], розділ «Деталізація й агенти».
+- Робота: бриф `delegation/cloud/C<N>_*.md` → локальний агент у worktree → перевірка кадрів і чисел → злиття, `check_all`, push.
+- Наступне: C7 «голі фігури в тлі» (дахові вентилятори силосів, зачисні шнеки, вентилятори вологих силосів, трансформатори).
+- Подивитись у Blender: `--background ... site.py -- --no-render`, потім відкрити `world/out/site/site.blend`; тунель — `k4_tunnel.py -- --no-render`.
+
+**Стартовий запит:** див. розділ 7 у [[18 Expertise 2026-10-02 hero detail and agents]].
 
 ## Новий трек з 2026-09-29: центр керування (Ціль 1 брифу `NEXT_PHASE_BRIEF.md`)
 Симулятор процесу + веб-пульт + жива сцена Blender. Специфікація — `CONTROL_CENTER_SPEC.md` (затверджено людиною), підсумок і знахідки — [[17 Expertise 2026-09-29 control center]], уроки — [[05 Lessons and Pitfalls]] (розділ «Центр керування»).
@@ -99,7 +107,7 @@ tags: [handoff, start-here]
 - Кожне число має джерело (`PDF p.N`, `LUB`, `STD`, `research`, `rec_…`, `EST`, `judgment`).
 - Кожен вузол має `check_*.py` зі зламаним варіантом, який мусить впасти **саме на новому правилі**.
 - Пороги: норма → FAIL, власна рекомендація → WARN, фізичне обмеження → FINDING із цифрами. Допуск не послаблювати, щоб пройти.
-- Перед комітом — `check_all`, 17/17.
+- Перед комітом — `check_all`, усі N/N (на 2026-10-02 — 29/29).
 - Кадри дивитися очима.
 - SITE.json правити лише точковою заміною унікального фрагмента, звіряючи ключі з `git show HEAD:world/site/SITE.json`.
 - Картки лише `unverified`: ніколи `cited`, не створювати `FACTS.json`. Сторонні ключі в завантаженому HTML вичищати, значення `.env` не друкувати.

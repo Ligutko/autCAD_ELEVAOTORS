@@ -9,6 +9,8 @@
 >
 > **Центр керування (з 2026-09-29):** симулятор процесу, веб-пульт і жива сцена — `CONTROL_CENTER_SPEC.md`, код `world/sim/`, `world/panel/`, `world/kit/live.py`; підсумок — `17 Expertise 2026-09-29 control center.md` у тій самій вікі-папці.
 >
+> **Деталізація «героїв» і локальні агенти (поточне, з 2026-10-02):** стан і таблиця — `HERO_DETAIL_SPEC.md`; підсумок, знахідки, що лишилось, як делегувати агентам у worktree і стартовий запит — `18 Expertise 2026-10-02 hero detail and agents.md` у тій самій вікі-папці; брифи агентів — `delegation/cloud/C<N>_*.md`.
+>
 > Розділи нижче про AutoCAD описують попередній 2D-етап; його `config_*.json` для 3D не використовувати.
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
