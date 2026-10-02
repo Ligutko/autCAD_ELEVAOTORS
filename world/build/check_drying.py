@@ -45,7 +45,11 @@ TOL = 0.03
 NEW = ["t5_casing", "t5_deck", "t5_truss", "t5_trestle_legs", "t5_trestle_braces", "t5_trestle_feet", "t3_casing",
        "t3_bridge_deck", "t3_bridge_frame", "t3_drive", "t5_drive", "dryer_column", "dryer_chambers", "dryer_hopper", "dryer_fans",
        "dryer_screw_motor", "dryer_gas", "dryer_louvres", "dryer_doors",
-       "dryer_ladder", "dryer_enclosure", "dryer_enclosure_roof", "dryer_platform", "wet_fans", "t5_ladder", "t5_landing"]
+       "dryer_ladder", "dryer_enclosure", "dryer_enclosure_roof", "dryer_platform", "wet_fans", "t5_ladder", "t5_landing",
+       "dryer_fan_top_shroud", "dryer_fan_top_rotor", "dryer_fan_top_motor", "dryer_fan_top_cooling",
+       "dryer_fan_low_shroud", "dryer_fan_low_rotor", "dryer_fan_low_motor", "dryer_fan_low_cooling",
+       "dryer_discharge_frame", "dryer_flaps", "dryer_flap_rods", "dryer_cylinder", "dryer_hopper_dry", "dryer_screw",
+       "dryer_screw_gear", "dryer_screw_gearmotor"]
 OLD = ["frame", "bracing", "decks", "noria_legs", "noria_heads", "noria_drives", "noria_boots", "old_silo_walls",
        "old_silo_roofs", "old_silo_plinths", "conveyors", "ct_room", "ct_columns", "ct_floor", "shed_columns", "shed_roof"]
 # pairs that touch by design: the casing on its own deck / bridge, the column in its own enclosure roof opening
@@ -62,7 +66,12 @@ TOUCH = {("t3_casing", "t3_bridge_deck"), ("t5_casing", "t5_deck"), ("t3_bridge_
          ("t3_bridge_frame", "dryer_hopper"), ("t3_drive", "t3_casing"), ("t5_drive", "t5_casing"),
          ("dryer_ladder", "dryer_column"),
          ("dryer_enclosure", "dryer_enclosure_roof"), ("t5_ladder", "t5_landing"), ("t5_landing", "t5_deck"),
-         ("t5_landing", "t5_truss"), ("t5_ladder", "t5_trestle_braces"), ("t5_landing", "t5_trestle_braces")}
+         ("t5_landing", "t5_truss"), ("t5_ladder", "t5_trestle_braces"), ("t5_landing", "t5_trestle_braces"),
+         # C5: the motor shaft sits in the rotor hub; the cooling tubes go out through the louvre-box / chamber wall;
+         # the gearmotor flange is bolted to its case; the torque-arm pad bolts go through the trough end plate
+         ("dryer_fan_top_rotor", "dryer_fan_top_motor"), ("dryer_fan_low_rotor", "dryer_fan_low_motor"),
+         ("dryer_fans", "dryer_fan_top_cooling"), ("dryer_chambers", "dryer_fan_low_cooling"),
+         ("dryer_screw_gear", "dryer_screw_gearmotor"), ("dryer_hopper_dry", "dryer_screw_gear")}
 
 
 def _bvh(data):

@@ -102,7 +102,7 @@ else:
     x0, y0, x1, y1 = dr.dryer_rect(site)
     cxm = (x0 + x1) / 2
     if what == "fan_top":
-        fy = dr.fan_top_centre(site)
+        _, fy = dr.fan_top_centre(site)
         keep = ("dryer_fans", "dryer_fan_top_shroud", "dryer_fan_top_rotor", "dryer_fan_top_motor", "dryer_fan_top_cooling",
                 "dryer_chambers", "dryer_platform", "dryer_rails", "dryer_toes", "dryer_column", "dryer_hopper")
         for k in keep:
@@ -128,16 +128,25 @@ else:
         cam = c.camera("CAM", (x0 - 2.2, yb + 0.6, 2.3), (cxm, ya + 0.9, 0.85), lens=26)
     else:   # discharge
         ca, cb = s["column"]
+        ys = dr.screw_outlet(site)[1]
         for k, (mat, smooth, p) in parts.items():
             if not k.startswith(("dryer_column", "dryer_discharge", "dryer_flap", "dryer_cylinder", "dryer_hopper_dry",
-                                 "dryer_screw", "dryer_pad")):
+                                 "dryer_screw", "dryer_pad", "dryer_chambers")) or k == "dryer_screw_motor":
                 continue
-            if k in ("dryer_column", "dryer_hopper_dry"):
-                p = cut(p, (-1.0, 0.0), (x0 + 0.08, 0.0))
+            if k == "dryer_column":                    # the +X base wall and the column above +2.6 go
+                v, f = cut(p, (1.0, 0.0), (x1 - 0.06, 0.0))
+                p = (v, f)
+            if k == "dryer_chambers":                  # only the exhaust-chamber wall behind, as a backdrop
+                p = cut(p, (0.0, -1.0), (0.0, cb + 0.3))
+            if k == "dryer_hopper_dry":                # the south half of the hopper and trough: the screw shows
+                p = cut(p, (0.0, -1.0), (0.0, ys))
             add(k, p, mat, smooth="quads" if smooth else False)
-        ym = (ca + cb) / 2
-        light("L1", (x0 - 0.6, ca + 0.3, 2.6), 260)
-        light("L2", (x0 + 1.2, cb - 0.2, 1.2), 140)
-        light("L3", (x1 - 0.2, ca + 0.2, 1.4), 120)
-        cam = c.camera("CAM", (x0 - 1.15, ca - 0.25, 2.55), (cxm + 0.35, ym, 1.45), lens=24)
+        light("L1", (x1 + 0.8, ca - 0.4, 2.4), 260)
+        light("L2", (x1 - 0.6, ca + 0.3, 1.0), 120)
+        light("L3", (x1 + 0.4, cb - 0.3, 1.2), 90)
+        if len(args) > 3:                               # camera override for framing: x y z tx ty tz lens
+            q = [float(a) for a in args[3].split(",")]
+            cam = c.camera("CAM", tuple(q[:3]), tuple(q[3:6]), lens=q[6])
+        else:
+            cam = c.camera("CAM", (x1 + 0.62, ca + 0.02, 1.28), (x1 - 0.45, ca + 0.80, 1.62), lens=18)
 c.render(scene, cam, out)
