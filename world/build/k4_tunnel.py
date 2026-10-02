@@ -2,6 +2,7 @@
 
 Run:
     blender --background --python world/build/k4_tunnel.py [-- --quick]
+    blender --background --python world/build/k4_tunnel.py -- --no-render   # saves out/k4_tunnel/k4_tunnel.blend to open
 """
 
 import json
@@ -79,6 +80,11 @@ def main():
     }
     (OUT / "measure.json").write_text(json.dumps({"build_seconds": build_s, "tunnels": measures, "aspiration": asp_measure},
                                                  ensure_ascii=False, indent=2), encoding="utf-8")
+    if "--no-render" in sys.argv:
+        scene.camera = cams["k4_tunnel_walk.png"]
+        bpy.ops.wm.save_as_mainfile(filepath=str(OUT / "k4_tunnel.blend"), compress=True)
+        print("saved", OUT / "k4_tunnel.blend", "build", build_s, "s", flush=True)
+        return
     for name, cam in cams.items():
         t = time.time()
         c.render(scene, cam, OUT / name)
