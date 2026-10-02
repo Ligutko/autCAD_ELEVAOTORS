@@ -597,13 +597,29 @@ def build_fans(fan_r=None, angles=None):
             c.merge_parts(pads), c.merge_parts(dark))
 
 
-def build_roof_vents(openings=None):
+MOTOR_ROOF_CLEAR = 0.01      # EST: motor drive-end shoulder under the lowest point of the roof underside
+
+
+def roof_fan_shoulder_z(r, hole_r):
+    """Height of the roof fan motor drive-end shoulder: under the lowest point of the roof underside inside the hole
+    (downhill edge of the Ø hole on the 30 deg roof), minus a clearance. Silo frame."""
+    return roof_z(r) - ROOF_T - 0.01 - hole_r * math.tan(ROOF_SLOPE) - MOTOR_ROOF_CLEAR
+
+
+@functools.lru_cache(maxsize=8)
+def _roof_fan(d_impeller, kw, hole_d, top, detail, faults):
+    from . import components as comp
+    return comp.duct_axial_fan(d_impeller, kw, hole_d=hole_d, top=top, detail=detail, faults=dict(faults) or None)
+
+
+def build_roof_vents(openings=None, spec=None, detail="lod", faults=None, fan_dz=0.0):
     """Vents with hoods (SITE `silo_roof.vents`): neck through the sheet, open skirt, cone cap.
-    Fan vents: taller housing with a guard ring (axial fan inside, motor under the roof).
-    Returns (vents, fan housings)."""
-    v_ = roof_spec()["vents"]
-    f_ = roof_spec()["fans"]
-    vents, fans = [], []
+    Fan vents carry the duct axial fan (components.duct_axial_fan: Ø impeller, 0.25 kW motor under the roof, finger guard,
+    casing through the sheet). `faults` / `fan_dz` inject the check's broken cases.
+    Returns (vents, fan parts {casing, impeller, grille, bracket, motor}) as merged (verts, faces)."""
+    rs = spec or roof_spec()
+    v_, f_ = rs["vents"], rs["fans"]
+    vents, fans = [], {k: [] for k in ("casing", "impeller", "grille", "bracket", "motor")}
     rn, rh = v_["hole_d_m"] / 2, v_["hood_d_m"] / 2
     drop = rn * math.tan(ROOF_SLOPE) + 0.03                  # the neck reaches below the sloped sheet
     for o in openings or roof_openings():
@@ -618,11 +634,16 @@ def build_roof_vents(openings=None):
             vents.append(_cone(rh, 0.04, top - 0.06, top, xy, steps=40))
         else:
             top = zc + f_["housing_h_m"] + 0.12
-            fans.append(c.cylinder(rn + 0.02, zc - drop, zc + f_["housing_h_m"], steps=40, center=xy))
-            fans.append(c.cylinder(rn + 0.05, zc + f_["housing_h_m"] - 0.03, zc + f_["housing_h_m"], steps=40, center=xy))
+            z_nom = roof_fan_shoulder_z(o["r"], rn)
+            z_sh = z_nom + fan_dz
+            item = _roof_fan(f_["impeller_d_m"], f_["kw"], v_["hole_d_m"], zc + f_["housing_h_m"] - z_nom,
+                             detail, tuple(sorted((faults or {}).items())))
+            for k, part in item["parts"].items():
+                verts = c.transform(np.asarray(part[0], float).reshape(-1, 3), math.radians(o["deg"]), (o["x"], o["y"], z_sh))
+                fans[k].append((verts, part[1]))
             vents.append(c.cylinder(rh, top - 0.16, top - 0.06, steps=40, center=xy, capped=False))
             vents.append(_cone(rh, 0.04, top - 0.06, top, xy, steps=40))
-    return c.merge_parts(vents), c.merge_parts(fans)
+    return c.merge_parts(vents), {k: (c.merge_parts(v) if v else None) for k, v in fans.items()}
 
 
 def build_roof_hatches(openings=None):
@@ -701,9 +722,13 @@ def build(collection=None, materials=None, cut=None, band=None, state=None, with
     objs["fan_duct"] = mk("SILO_FAN_DUCT", vd, fd, m["galv"], collection=collection)
     objs["fan_pad"] = mk("SILO_FAN_PAD", vpad, fpad, m["concrete"], collection=collection)
     ops = roof_openings()
-    (v, f), (vfan, ffan) = build_roof_vents(ops)
+    (v, f), fan = build_roof_vents(ops)
     objs["vents"] = mk("SILO_ROOF_VENTS", v, f, m["galv"], smooth="quads", collection=collection)
-    objs["roof_fans"] = mk("SILO_ROOF_FANS", vfan, ffan, m["fan_paint"], smooth="quads", collection=collection)
+    for key, name, mat in (("casing", "SILO_ROOF_FANS", "fan_paint"), ("impeller", "SILO_ROOF_FAN_IMPELLER", "galv"),
+                           ("grille", "SILO_ROOF_FAN_GUARD", "dark"), ("bracket", "SILO_ROOF_FAN_BRACKET", "dark"),
+                           ("motor", "SILO_ROOF_FAN_MOTOR", "paint_motor")):
+        if fan[key] is not None:
+            objs["roof_fans" if key == "casing" else f"roof_fan_{key}"] = mk(name, *fan[key], m[mat], smooth="quads", collection=collection)
     (vc, fc), (vl, fl) = build_roof_hatches(ops)
     objs["roof_hatch_curbs"] = mk("SILO_ROOF_HATCH_CURBS", vc, fc, m["galv"], collection=collection)
     objs["roof_hatch_lids"] = mk("SILO_ROOF_HATCH_LIDS", vl, fl, m["galv_old"], collection=collection)

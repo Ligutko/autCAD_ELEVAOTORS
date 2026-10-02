@@ -2051,6 +2051,189 @@ def shaft_mount_reducer(kw=22.0, *, output_rpm, floor_z, centers=None, arm_len=N
     return {"parts": built, "dims": dims, "motor_parts": motor_parts, "sub": sub}
 
 
+# ====================================================================== duct axial fan, motor under the roof (C7a)
+#
+# Silo roof fan (SITE silo_roof.fans; research/silo_equipment.md §4): an axial fan in the throat of a roof vent, Ø0.40
+# impeller, 0.25 kW, the motor below the roof (analog Symaga HCDF-40, rec_98965c19). Sourced: axial type, impeller
+# ≈ 400 mm, 0.25 kW, motor Ø140 × 200 below the roof. The motor frame is the IEC 71 of iec_motor(0.25) (AC 141 ≈ Ø140,
+# housing 200 mm), shaft up, its feet bolted to a plate that two ribs weld to the casing. Every other number is EST.
+#
+# Local frame: axis +Z = flow (out of the silo), origin on the axis in the plane of the motor drive-end shoulder, the
+# shaft points +Z into the hub, the motor feet face -Y. The casing hangs below the origin around the motor and rises
+# to `top`; its outer radius is the roof hole radius.
+
+DF_BLADES = 6              # EST: 5-8 blades on a Ø0.4 duct fan
+DF_STAGGER_TIP = 22.0      # EST: blade angle to the rotation plane at the tip, deg
+DF_CHORD = (0.070, 0.062)  # EST: blade chord at the root / tip, m
+DF_THICK = (0.09, 0.06)    # EST: thickness / chord, root / tip
+DF_CAMBER = 0.05           # EST: camber / chord
+DF_HUB_R = 0.070           # EST: hub = motor fin radius, hub / tip diameter ratio 0.35
+DF_HUB_LEN = 0.070         # EST: hub axial length, covers the shaft end (E = 30 mm) with 40 mm to spare
+DF_TIP_GAP = 0.005         # EST: tip clearance 5 mm = 1.25 % D (small fans 0.5-2 % D)
+DF_SHEET = 0.003           # EST: casing sheet
+DF_THROAT_H = 0.030        # EST: throat ring half height beyond the blade section
+DF_PLATE_T = 0.008         # EST: motor foot plate
+DF_RIB_T = 0.010           # EST: rib between plate and casing
+DF_WIRE_R = 0.0015         # EST: grille wire Ø3
+DF_GRILLE_PITCH = 0.025    # EST: grille ring pitch 25 mm
+DF_SPOKES = 12             # EST
+DF_FLANGE_W = 0.045        # EST: top flange ring width
+DF_GAP = 0.0005            # parts that bear on each other keep 0.5 mm, so BVH does not read contact
+
+
+def _torus_z(radius, z, tube_r, n_seg, n_tube):
+    """Closed wire ring in the XY plane at height z: n_tube-sided section of radius tube_r along a circle."""
+    a = np.linspace(0.0, 2.0 * np.pi, n_seg + 1)
+    b = np.linspace(0.0, 2.0 * np.pi, n_tube, endpoint=False)
+    rr = radius + tube_r * np.cos(b)
+    zz = z + tube_r * np.sin(b)
+    rows = [np.column_stack([rr * np.cos(a_), rr * np.sin(a_), zz]) for a_ in a]
+    return np.concatenate(rows), c.grid_faces(n_seg + 1, n_tube, wrap_cols=True)
+
+
+def duct_axial_fan(d_impeller, kw, *, hole_d, top, blades=DF_BLADES, detail="full", motor_table=None, faults=None):
+    """Axial duct fan for a roof vent: casing (shell, rolled lip, throat ring, top flange), impeller (hub, twisted cambered
+    blades), finger guard (concentric wire rings + spokes), IEC motor `iec_motor(kw)` shaft up, foot plate on two ribs.
+
+    `hole_d`: roof hole Ø = casing outer Ø. `top`: casing top above the shoulder plane (m). `faults` inject the check's broken
+    cases: impeller_d_err (m), tip_gap (m), rotor_dz (m, impeller + hub moved on the shaft), motor_dx (m), plate_dy (m,
+    foot plate moved off the feet), blades (int), grille ("plate": solid disc instead of wires).
+    Returns {"parts", "dims", "motor_parts", "sub"}; metres.
+    """
+    if detail not in ("full", "lod"):
+        raise ValueError("detail must be full or lod")
+    faults = faults or {}
+    lod = detail == "lod"
+    n_ring = 40 if lod else 120
+    n_hub = 16 if lod else 40
+    n_small = 6 if lod else 10
+    m_foil = 7 if lod else 14
+    n_st = 4 if lod else 8
+    n_wire = 28 if lod else 72
+    blades = int(faults.get("blades", blades))
+
+    d = float(d_impeller) + float(faults.get("impeller_d_err", 0.0))
+    r_tip = d / 2.0
+    gap = float(faults.get("tip_gap", DF_TIP_GAP))
+    r_casing = float(hole_d) / 2.0
+    t = DF_SHEET
+    r_in = r_casing - t
+    r_throat = r_tip + gap
+    if r_throat > r_in:
+        raise ValueError("impeller Ø%.3f does not fit the Ø%.3f casing" % (d, hole_d))
+
+    # ---------------- motor, shaft up the axis; motor-local x is axial (NDE housing face at 0)
+    mot = iec_motor(kw, frames=motor_table, detail=detail)
+    mp = mot["parts"]
+    H = float(mot["dims"]["H"])
+    shoulder = float(np.asarray(mp["endshield_de"][0])[:, 0].max())
+    tip = float(np.asarray(mp["shaft"][0])[:, 0].max())
+    cowl = float(np.asarray(mp["fan_cover"][0])[:, 0].min())
+    fv = np.asarray(mp["feet"][0], float)
+    mdx = float(faults.get("motor_dx", 0.0))
+
+    def put_motor(piece):
+        v = np.asarray(piece[0], float).reshape(-1, 3)
+        return np.column_stack([v[:, 1] + mdx, v[:, 2] - H, v[:, 0] - shoulder]), piece[1]
+
+    motor_parts = {k: put_motor(p) for k, p in mp.items()}
+    z_nose = cowl - shoulder                              # motor fan-cowl nose, negative
+
+    # ---------------- impeller on the shaft end; blades centred on the hub, the whole rotor can slide for the broken case
+    rdz = float(faults.get("rotor_dz", 0.0))
+    a_h0 = 0.006 + rdz
+    a_h1 = a_h0 + DF_HUB_LEN
+    a_b = 0.5 * (a_h0 + a_h1)
+    r_h = DF_HUB_R
+    beta_root = _blade_angle(r_h, r_tip, np.radians(DF_STAGGER_TIP))
+    c_root = min(DF_CHORD[0], (a_h1 - a_h0 - 0.016) / np.sin(beta_root))
+    radii = np.linspace(r_h - 0.003, r_tip, n_st)
+    blade_meshes = []
+    for k in range(blades):
+        th0 = -2.0 * np.pi * k / blades
+        loops = []
+        for r in radii:
+            s = (r - radii[0]) / (radii[-1] - radii[0])
+            chord = c_root + (DF_CHORD[1] - c_root) * s
+            ratio = DF_THICK[0] + (DF_THICK[1] - DF_THICK[0]) * s
+            beta = _blade_angle(max(r, r_h), r_tip, np.radians(DF_STAGGER_TIP))
+            loops.append(_blade_loop(r, th0, a_b, chord, beta, ratio, DF_CAMBER, m_foil))
+        blade_meshes.append(_foil_mesh(loops))
+    bz = np.concatenate([np.asarray(b[0])[:, 2] for b in blade_meshes])
+    b_lo, b_hi = float(bz.min()), float(bz.max())
+    fair = 0.5 * r_h
+    hub_p = [
+        _x_to_z(_tube(a_h0, a_h1, r_h, 0.0, n_hub)),
+        _x_to_z(_disk_x(a_h0, 0.0, r_h, n_hub)),
+        _x_to_z(_frustum_x(a_h1, a_h1 + fair, r_h, 0.010, 0.0, n_hub)),
+        _x_to_z(_disk_x(a_h1 + fair, 0.0, 0.010, n_hub)),
+    ]
+    impeller = c.merge_parts(hub_p + blade_meshes)
+
+    # ---------------- casing: sheet shell, rolled lip under the motor, throat ring at the blades, top flange
+    z_bot = z_nose - 0.020
+    z_top = float(top)
+    thr0, thr1 = b_lo - DF_THROAT_H, b_hi + DF_THROAT_H
+    casing = c.merge_parts([
+        _x_to_z(_shell_x(z_bot, z_top, r_casing, r_casing, t, n_ring)),
+        _x_to_z(_shell_x(z_bot - 0.025, z_bot, r_casing + 0.020, r_casing, t, n_ring)),
+        _x_to_z(_ring_x(thr0, thr1, r_throat, r_in + 0.0005, n_ring)),
+        _x_to_z(_ring_x(z_top - 0.008, z_top, r_in + 0.0005, r_casing + DF_FLANGE_W, n_ring)),
+    ])
+
+    # ---------------- finger guard on the top flange: concentric wire rings and spokes (or a solid plate, broken case)
+    z_g = z_top + DF_WIRE_R
+    if faults.get("grille") == "plate":
+        grille = _x_to_z(_disk_x(z_g, 0.0, r_in, n_ring))
+    else:
+        parts = []
+        k_rings = int(np.floor((r_in - r_h) / DF_GRILLE_PITCH))
+        for i in range(1, k_rings + 1):
+            parts.append(_torus_z(r_h + i * DF_GRILLE_PITCH if i < k_rings else r_in - DF_WIRE_R, z_g, DF_WIRE_R, n_wire, 6))
+        for k in range(DF_SPOKES):
+            a = 2.0 * np.pi * k / DF_SPOKES
+            parts.append(st.rod((0.01 * np.cos(a), 0.01 * np.sin(a), z_g), ((r_in - DF_WIRE_R) * np.cos(a), (r_in - DF_WIRE_R) * np.sin(a), z_g),
+                                DF_WIRE_R, n_small))
+        parts.append(_x_to_z(_disk_x(z_g, 0.0, 0.012, n_small * 2)))
+        grille = c.merge_parts(parts)
+
+    # ---------------- foot plate behind the feet, two ribs back to the casing wall
+    px = max(abs(float(fv[:, 1].min())), abs(float(fv[:, 1].max()))) + 0.010
+    fz = np.concatenate([np.asarray(motor_parts["feet"][0])[:, 2]])
+    pz0, pz1 = float(fz.min()) - 0.015, float(fz.max()) + 0.015
+    py1 = -H - DF_GAP + float(faults.get("plate_dy", 0.0))
+    py0 = py1 - DF_PLATE_T
+    plate = c.box((-px, py0, pz0), (px, py1, pz1))
+    br = [plate]
+    for sx in (-1.0, 1.0):
+        xr = sx * (px - 0.012)
+        y_wall = -float(np.sqrt(r_in ** 2 - xr ** 2))
+        br.append(c.box((xr - DF_RIB_T / 2.0, y_wall - 0.002, pz0), (xr + DF_RIB_T / 2.0, py0 + 0.001, pz1)))
+    bracket = c.merge_parts(br)
+    motor = c.merge_parts(list(motor_parts.values()))
+    built = {"casing": casing, "impeller": impeller, "grille": grille, "bracket": bracket, "motor": motor}
+    sub = {"blades": c.merge_parts(blade_meshes), "hub": c.merge_parts(hub_p), "plate": plate,
+           "throat": _x_to_z(_ring_x(thr0, thr1, r_throat, r_in + 0.0005, n_ring))}
+
+    all_v = np.concatenate([np.asarray(p[0]).reshape(-1, 3) for p in built.values()])
+    lo, hi = _bbox(all_v)
+    part_dims = {}
+    for name, (verts, faces) in built.items():
+        p0, p1 = _bbox(verts)
+        part_dims[name] = {"min": p0.tolist(), "max": p1.tolist(), "faces": _count_faces(faces)}
+    dims = {
+        "d_impeller": float(d_impeller), "kw": float(kw), "motor_frame": mot["dims"]["frame"], "blades": int(blades),
+        "tip_gap": gap, "r_tip": r_tip, "r_casing": r_casing, "r_throat": r_throat, "hub_r": r_h,
+        "stagger_deg": [float(np.degrees(beta_root)), DF_STAGGER_TIP], "chord": [float(c_root), DF_CHORD[1]],
+        "z_blades": [b_lo, b_hi], "z_hub": [a_h0, a_h1 + fair], "z_shoulder": 0.0, "z_nose": z_nose,
+        "z_casing": [z_bot - 0.025, z_top], "z_grille": z_g, "motor_housing_len": float(np.asarray(mp["body"][0])[:, 0].max()),
+        "motor_dia": 2.0 * float(mot["dims"]["parts"]["fan_cover"]["max"][1]),
+        "bbox": {"min": lo.tolist(), "max": hi.tolist()},
+        "faces": sum(_count_faces(p[1]) for p in built.values()), "parts": part_dims,
+    }
+    return {"parts": built, "dims": dims, "motor_parts": motor_parts, "sub": sub}
+
+
 # ====================================================================== axial fan, motor in the air stream
 #
 # STRAHL FR dryer fans after GCS «Опис конструкції» p.4-5 (research/design/dryer/strahl_fr_anatomy.md §2): axial

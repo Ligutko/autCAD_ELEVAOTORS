@@ -316,11 +316,10 @@ def build_hatch_and_ladder():
 
 
 def build_roof_openings_inside():
-    """From inside: dark discs where the vents, hatches and service holes pierce the sheet, and the
-    roof fan motors hanging under their vents (SITE `silo_roof.fans.motor_below_roof`).
-    Returns (holes, motors)."""
-    holes, motors = [], []
-    mot = silo.roof_spec()["fans"]["motor_below_roof"]
+    """From inside: dark discs where the vents, hatches and service holes pierce the sheet. The roof fan
+    motors that hang under their vents are built with the fans (silo_msvu220.build_roof_vents, component
+    components.duct_axial_fan), not here."""
+    holes = []
     for o in silo.roof_openings():
         if o["kind"] == "level_sensor":
             continue
@@ -334,11 +333,7 @@ def build_roof_openings_inside():
             v = np.array([[*(p + s * o["w"] / 2 * t + q * o["l"] / 2 * u), roof_underside_z(o["r"] + q * o["l"] / 2) - 0.004]
                           for s, q in ((-1, -1), (1, -1), (1, 1), (-1, 1))])
             holes.append((v, np.array([(0, 1, 2, 3)])))
-        if o["kind"] == "fan_vent":
-            zt = roof_underside_z(o["r"]) - 0.05
-            motors.append(c.cylinder(mot["d_m"] / 2, zt - mot["l_m"], zt, steps=20, center=(o["x"], o["y"])))
-            motors.append(c.cylinder(o["w"] / 2 + 0.01, zt - 0.02, zt + 0.05, steps=32, center=(o["x"], o["y"]), capped=False))
-    return c.merge_parts(holes), c.merge_parts(motors)
+    return c.merge_parts(holes)
 
 
 # ================================================================== grain
@@ -505,9 +500,7 @@ def build(collection=None, fill=0.3, draw=False, cable_positions_override=None, 
     add("hatch_frame", hframe, "galv")
     add("inside_ladder", ladder, "galv", "quads")
     labels.append(("Люк даху 610×700", tuple(hatch)))
-    r_holes, r_motors = build_roof_openings_inside()
-    add("roof_holes", r_holes, "dark")
-    add("roof_fan_motors", r_motors, "motor", "quads")
+    add("roof_holes", build_roof_openings_inside(), "dark")
     fan = next(o for o in silo.roof_openings() if o["kind"] == "fan_vent")
     labels.append(("Даховий вентилятор 0.25 кВт у провітрювачі", (fan["x"], fan["y"], roof_underside_z(fan["r"]) - 0.4)))
     add("grain", build_grain(fill, draw), "grain", True)
