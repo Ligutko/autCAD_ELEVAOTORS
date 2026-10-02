@@ -2049,3 +2049,257 @@ def shaft_mount_reducer(kw=22.0, *, output_rpm, floor_z, centers=None, arm_len=N
         "faces": sum(_count_faces(p[1]) for p in built.values()),
     }
     return {"parts": built, "dims": dims, "motor_parts": motor_parts, "sub": sub}
+
+
+# ====================================================================== axial fan, motor in the air stream
+#
+# STRAHL FR dryer fans after GCS «Опис конструкції» p.4-5 (research/design/dryer/strahl_fr_anatomy.md §2): axial
+# fans, steel rotor Ø1000 mm straight on the motor shaft (direct drive, no transmission), a row of guide vanes under
+# the rotor that carries the motor and matches the blade direction, the motor sits in the air stream and is cooled by
+# a tube of outside air (GCS p.5). Sourced: axial type, Ø1000, direct drive, vanes under the rotor carrying the motor,
+# cooling tube, the kW of each fan (22 / 11, PDF p.1). Every other number below is EST.
+#
+# Local frame: axis +Z = flow direction (inlet below, vanes, then the rotor), origin on the axis in the shroud inlet
+# plane (z=0; the inlet bell flares below it). The motor shaft points +Z into the rotor hub, the motor feet face -Y
+# and bolt to a bracket plate that two ribs tie to the vane hub ring; the cooling tube leaves the motor fan cowl
+# along +X. The rotor turns toward -theta (clockwise seen from the outlet); the vanes pre-swirl against it.
+
+AF_PARTS = ("shroud", "rotor", "vanes", "bracket", "motor", "cooling")
+AF_BLADES = 8              # EST: blade count not given (adjustable-pitch axial fans of this size carry 6-12)
+AF_VANES = 7               # EST: vane count not given; odd and prime to the blade count (no blade-pass coincidence)
+AF_STAGGER_TIP = 22.0      # EST: blade angle to the rotation plane at the tip, deg (dealer FR sheets: variable pitch)
+AF_CHORD = (0.14, 0.16)    # EST: blade chord at the root / tip, m (root shortened to fit the hub when needed)
+AF_THICK = (0.08, 0.05)    # EST: blade thickness / chord at the root / tip (NACA 4-digit thickness law)
+AF_CAMBER = 0.04           # EST: blade camber / chord
+AF_HUB_OF_D = 0.35         # EST: hub-to-tip diameter ratio
+AF_TIP_GAP = 0.004         # EST: blade tip clearance 4 mm = 0.4 % D (fan texts give 0.1-1 % D)
+AF_SHEET = 0.004           # EST: shroud, vane and ring sheet
+AF_PLATE_T = 0.012         # EST: motor bracket plate
+AF_VANE_H = 0.12           # EST: vane axial length
+AF_VANE_GAP = 0.04         # EST: axial gap vanes -> blades
+AF_VANE_TURN = 18.0        # EST: vane exit angle off the axis, deg
+AF_INLET = 0.08            # EST: shroud inlet plane under the vanes
+AF_OUTLET = 0.08           # EST: shroud past the blades
+AF_BELL = (0.06, 0.06)     # EST: inlet bell depth and flare
+AF_COOL_R = 0.035          # EST: cooling tube Ø70 (GCS p.5 names the tube, no size)
+AF_GAP = 0.0005            # parts that bear on each other keep 0.5 mm (as RD_GAP), so BVH does not read contact
+
+
+def _x_to_z(piece):
+    """Turn a piece built along +X (axis through y=z=0) to the +Z axis: (x, y, z) -> (y, z, x), right-handed."""
+    v = np.asarray(piece[0], float).reshape(-1, 3)
+    return v[:, [1, 2, 0]].copy(), piece[1]
+
+
+def _foil_mesh(loops):
+    """Closed section loops (upper LE->TE, then lower TE->LE, 2m points each) stacked root -> tip, with end caps."""
+    loops = [np.asarray(lp, float) for lp in loops]
+    n, k = len(loops), len(loops[0])
+    m = k // 2
+    verts = np.concatenate(loops)
+    side = c.grid_faces(n, k, wrap_cols=True)
+    cap = np.array([[i, i + 1, k - 2 - i, k - 1 - i] for i in range(m - 1)], np.int64)
+    return verts, [side, cap[:, ::-1], cap + (n - 1) * k]
+
+
+def _naca_half(xi, ratio, chord, t_min):
+    y = 5.0 * ratio * (0.2969 * np.sqrt(xi) - 0.1260 * xi - 0.3516 * xi ** 2 + 0.2843 * xi ** 3 - 0.1015 * xi ** 4)
+    return np.maximum(y * chord, t_min / 2.0)
+
+
+def _blade_loop(r, theta0, a_mid, chord, beta, ratio, camber, m):
+    """One blade section on the cylinder of radius r: chord at `beta` to the rotation plane, leading edge upstream on
+    the side the blade moves to (-theta), camber bulging to the suction side. Returns a (2m, 3) loop."""
+    xi = 0.5 * (1.0 - np.cos(np.linspace(0.0, np.pi, m)))
+    half = _naca_half(xi, ratio, chord, 0.0015)
+    eta_c = camber * chord * 4.0 * xi * (1.0 - xi)
+    d = np.array([np.cos(beta), np.sin(beta)])             # (s, a) along the chord, LE -> TE
+    nrm = np.array([-np.sin(beta), np.cos(beta)])          # chord normal, pressure side
+    u = (xi - 0.5) * chord
+
+    def side(sign):
+        eta = -eta_c + sign * half
+        return u[:, None] * d[None, :] + eta[:, None] * nrm[None, :]
+    sa = np.vstack([side(1.0), side(-1.0)[::-1]])
+    th = theta0 + sa[:, 0] / r
+    return np.column_stack([r * np.cos(th), r * np.sin(th), a_mid + sa[:, 1]])
+
+
+def _vane_loop(r, theta0, a0, a1, turn, t, m):
+    """Guide vane section: axial at the inlet, turned `turn` toward +theta (against the rotor) at the outlet, sheet t."""
+    u = np.linspace(0.0, 1.0, m)
+    h = a1 - a0
+    s = 0.5 * h * np.tan(turn) * u ** 2
+    a = a0 + h * u
+    ds = h * np.tan(turn) * u
+    nrm = np.column_stack([np.full(m, h), -ds])
+    nrm /= np.linalg.norm(nrm, axis=1)[:, None]
+    up = np.column_stack([s, a]) + nrm * t / 2.0
+    lo = np.column_stack([s, a]) - nrm * t / 2.0
+    sa = np.vstack([up, lo[::-1]])
+    th = theta0 + sa[:, 0] / r
+    return np.column_stack([r * np.cos(th), r * np.sin(th), sa[:, 1]])
+
+
+def _blade_angle(r, r_tip, beta_tip):
+    """Blade angle to the rotation plane: tan(beta) * r = const (axial inflow, free vortex), EST law."""
+    return float(np.arctan(np.tan(beta_tip) * r_tip / r))
+
+
+def axial_fan(d_rotor, kw, *, blades=AF_BLADES, vanes=AF_VANES, tip_gap=AF_TIP_GAP, cool_reach=None, deck_r=None,
+              detail="full", motor_table=None, faults=None):
+    """Axial fan with the motor in the air stream (STRAHL FR, GCS p.4): shroud with inlet bell and outlet flange,
+    rotor (hub, tail fairing, twisted cambered blades), guide vanes under the rotor on a hub ring, motor bracket plate
+    on two ribs to that ring, IEC B3 motor iec_motor(kw) on the axis, cooling tube from the motor cowl out along +X.
+
+    `cool_reach`: the cooling-tube end along +X from the axis (default 0.15 m past the shroud). `deck_r`: outer radius
+    of a mounting deck ring in the inlet plane (None: no deck). `faults` inject the check's broken cases: rotor_d_err
+    (m, the whole fan built for a wrong diameter), tip_gap (m), vanes_dz (m), motor_dx (m).
+    Returns {"parts", "dims", "motor_parts", "sub"}; metres, local frame in the comment above.
+    """
+    if detail not in ("full", "lod"):
+        raise ValueError("detail must be full or lod")
+    faults = faults or {}
+    lod = detail == "lod"
+    n_ring = 32 if lod else 128
+    n_hub = 16 if lod else 48
+    n_small = 8 if lod else 20
+    m_foil = 7 if lod else 16
+    n_st = 4 if lod else 9
+
+    d = float(d_rotor) + float(faults.get("rotor_d_err", 0.0))
+    r_tip = d / 2.0
+    gap = float(faults.get("tip_gap", tip_gap))
+    r_sh = r_tip + gap
+    t = AF_SHEET
+    r_h = AF_HUB_OF_D * r_tip
+
+    # ---------------- motor, shaft up the axis; motor-local x is the axial coordinate (NDE housing face at x=0)
+    mot = iec_motor(kw, frames=motor_table, detail=detail)
+    mp = mot["parts"]
+    H = float(mot["dims"]["H"])
+    shoulder = float(np.asarray(mp["endshield_de"][0])[:, 0].max())
+    tip = float(np.asarray(mp["shaft"][0])[:, 0].max())
+    cowl = float(np.asarray(mp["fan_cover"][0])[:, 0].min())
+    fv = np.asarray(mp["feet"][0], float)
+
+    # ---------------- rotor: hub over the shaft end, blades centred on the hub (axial a: NDE housing face at 0)
+    a_h0, a_h1 = shoulder + 0.006, tip + 0.010
+    a_b = 0.5 * (a_h0 + a_h1)
+    beta_root = _blade_angle(r_h, r_tip, np.radians(AF_STAGGER_TIP))
+    c_root = min(AF_CHORD[0], (a_h1 - a_h0 - 0.016) / np.sin(beta_root))
+    radii = np.linspace(r_h - 0.003, r_tip, n_st)
+    blade_meshes = []
+    for k in range(blades):
+        th0 = -2.0 * np.pi * k / blades
+        loops = []
+        for r in radii:
+            s = (r - radii[0]) / (radii[-1] - radii[0])
+            chord = c_root + (AF_CHORD[1] - c_root) * s
+            ratio = AF_THICK[0] + (AF_THICK[1] - AF_THICK[0]) * s
+            beta = _blade_angle(max(r, r_h), r_tip, np.radians(AF_STAGGER_TIP))
+            loops.append(_blade_loop(r, th0, a_b, chord, beta, ratio, AF_CAMBER, m_foil))
+        blade_meshes.append(_foil_mesh(loops))
+    bz = np.concatenate([np.asarray(b[0])[:, 2] for b in blade_meshes])
+    b_lo, b_hi = float(bz.min()), float(bz.max())
+
+    # ---------------- vanes under the blades; the shroud inlet plane AF_INLET under the vanes is the local origin
+    shift = -(b_lo - AF_VANE_GAP - AF_VANE_H - AF_INLET)        # z_local = a + shift
+    a_v1 = b_lo - AF_VANE_GAP + float(faults.get("vanes_dz", 0.0))
+    a_v0 = a_v1 - AF_VANE_H
+
+    # bracket plate behind the feet (the feet face -Y, their sole at Y = -H) and the hub ring that carries it
+    fx0, fx1 = float(fv[:, 0].min()), float(fv[:, 0].max())
+    px = max(abs(float(fv[:, 1].min())), abs(float(fv[:, 1].max()))) + 0.010
+    pz0, pz1 = fx0 - 0.015, fx1 + 0.015
+    py1 = -H - AF_GAP
+    py0 = py1 - AF_PLATE_T
+    a_r0, a_r1 = min(a_v0, pz1 - 0.10), a_v1
+    mdx = float(faults.get("motor_dx", 0.0))
+
+    def z(a):
+        return a + shift
+
+    def put_motor(piece):
+        v = np.asarray(piece[0], float).reshape(-1, 3)
+        return np.column_stack([v[:, 1] + mdx, v[:, 2] - H, v[:, 0] + shift]), piece[1]
+
+    motor_parts = {k: put_motor(p) for k, p in mp.items()}
+    body = np.concatenate([np.asarray(v[0]) for k, v in motor_parts.items() if k != "shaft"])
+    band = body[(body[:, 2] >= z(a_r0) - 0.005) & (body[:, 2] <= z(a_r1) + 0.005)]
+    reach = float(np.hypot(band[:, 0] - mdx, band[:, 1]).max()) if len(band) else 0.0
+    r_ring = max(reach, float(np.hypot(px, py0))) + 0.010
+    if r_ring + t > r_sh - 0.05:
+        raise ValueError("motor too large for the hub ring inside a Ø%.3f shroud" % d)
+
+    # ---------------- shroud: cylinder, inlet bell, outlet flange, optional deck ring in the inlet plane
+    z_top = z(b_hi) + AF_OUTLET
+    shroud_p = [
+        _x_to_z(_shell_x(0.0, z_top, r_sh + t, r_sh + t, t, n_ring)),
+        _x_to_z(_shell_x(-AF_BELL[0], 0.0, r_sh + t + AF_BELL[1], r_sh + t, t, n_ring)),
+        _x_to_z(_ring_x(z_top - 0.008, z_top, r_sh + t - 0.0005, r_sh + 0.045, n_ring)),
+    ]
+    if deck_r is not None:
+        shroud_p.append(_x_to_z(_ring_x(0.0, 0.006, r_sh + t - 0.0005, float(deck_r), n_ring)))
+    shroud = c.merge_parts(shroud_p)
+
+    # ---------------- rotor: hub, tail fairing (downstream; the motor body is the nose upstream), blades
+    fair = 0.7 * r_h
+    rotor_p = [
+        _x_to_z(_tube(z(a_h0), z(a_h1), r_h, 0.0, n_hub)),
+        _x_to_z(_disk_x(z(a_h0), 0.0, r_h, n_hub)),
+        _x_to_z(_frustum_x(z(a_h1), z(a_h1) + fair, r_h, 0.012, 0.0, n_hub)),
+        _x_to_z(_disk_x(z(a_h1) + fair, 0.0, 0.012, n_hub)),
+    ]
+    blades_placed = [(np.asarray(v, float) + [0.0, 0.0, shift], f) for v, f in blade_meshes]
+    rotor = c.merge_parts(rotor_p + blades_placed)
+
+    # ---------------- vanes on the hub ring, welded 1 mm into the shroud wall
+    vane_p = [_x_to_z(_shell_x(z(a_r0), z(a_r1), r_ring + t, r_ring + t, t, n_ring))]
+    v_radii = np.linspace(r_ring + t - 0.001, r_sh + 0.001, 3 if lod else 5)
+    for k in range(vanes):
+        th0 = 2.0 * np.pi * (k + 0.5) / vanes
+        vane_p.append(_foil_mesh([_vane_loop(r, th0, z(a_v0), z(a_v1), np.radians(AF_VANE_TURN), t, m_foil) for r in v_radii]))
+    vanes_m = c.merge_parts(vane_p)
+
+    # ---------------- motor bracket: plate behind the feet, two ribs back to the hub ring
+    plate = c.box((-px, py0, z(pz0)), (px, py1, z(pz1)))
+    br = [plate]
+    rz0, rz1 = max(z(pz0), z(a_r0)), z(pz1)
+    for sx in (-1.0, 1.0):
+        xr = sx * (px - 0.012)
+        y_ring = -float(np.sqrt(r_ring ** 2 - xr ** 2))
+        br.append(c.box((xr - 0.005, y_ring - 0.002, rz0), (xr + 0.005, py0 + 0.001, rz1)))
+    bracket = c.merge_parts(br)
+
+    # ---------------- cooling tube: bell under the motor fan cowl, down, then out along +X to outside air
+    a_c = z(cowl) - 0.006
+    fin_r = float(mot["dims"]["parts"]["fan_cover"]["max"][1])
+    reach_x = float(cool_reach) if cool_reach is not None else r_sh + 0.15
+    z_e = a_c - 0.06 - 1.5 * AF_COOL_R
+    cool = c.merge_parts([
+        _x_to_z(_shell_x(a_c - 0.06, a_c, AF_COOL_R + 0.003, 0.92 * fin_r, 0.003, n_hub)),
+        st.rod((0.0, 0.0, a_c - 0.059), (0.0, 0.0, z_e - AF_COOL_R), AF_COOL_R, n_small),
+        st.rod((-AF_COOL_R, 0.0, z_e), (reach_x, 0.0, z_e), AF_COOL_R, n_small),
+        _shift(_ring_x(reach_x - 0.012, reach_x, AF_COOL_R - 0.002, AF_COOL_R + 0.02, n_small), dz=z_e),
+    ])
+    motor = c.merge_parts(list(motor_parts.values()))
+    built = {"shroud": shroud, "rotor": rotor, "vanes": vanes_m, "bracket": bracket, "motor": motor, "cooling": cool}
+    sub = {"blades": c.merge_parts(blades_placed), "hub": c.merge_parts(rotor_p), "plate": plate, "vane_ring": vane_p[0]}
+
+    all_v = np.concatenate([np.asarray(p[0]).reshape(-1, 3) for p in built.values()])
+    lo, hi = _bbox(all_v)
+    part_dims = {}
+    for name, (verts, faces) in built.items():
+        p0, p1 = _bbox(verts)
+        part_dims[name] = {"min": p0.tolist(), "max": p1.tolist(), "faces": _count_faces(faces)}
+    dims = {
+        "d_rotor": float(d_rotor), "kw": float(kw), "motor_frame": mot["dims"]["frame"], "blades": int(blades),
+        "vanes": int(vanes), "tip_gap": gap, "r_tip": r_tip, "r_shroud": r_sh, "hub_r": r_h, "ring_r": r_ring,
+        "stagger_deg": [float(np.degrees(beta_root)), AF_STAGGER_TIP], "chord": [float(c_root), AF_CHORD[1]],
+        "z_blades": [z(b_lo), z(b_hi)], "z_vanes": [z(a_v0), z(a_v1)], "z_hub": [z(a_h0), z(a_h1) + fair],
+        "z_outlet": z_top, "z_motor": [z(cowl), z(tip)], "cool_end": [reach_x, 0.0, z_e],
+        "bbox": {"min": lo.tolist(), "max": hi.tolist()},
+        "faces": sum(_count_faces(p[1]) for p in built.values()), "parts": part_dims,
+    }
+    return {"parts": built, "dims": dims, "motor_parts": motor_parts, "sub": sub}
