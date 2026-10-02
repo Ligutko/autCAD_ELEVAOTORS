@@ -46,6 +46,8 @@ def materials():
         "screen": c.mat_painted("SITE_SCREEN", (0.02, 0.03, 0.05), 0.08, grime=0.0),
         "lamp": c.mat_painted("SITE_LAMP", (0.95, 0.95, 0.92), 0.3, grime=0.0),
         "ral7035": c.mat_painted("SITE_CABINET_RAL7035", (0.60, 0.63, 0.60), 0.45, grime=0.03),   # Rittal VX25 light grey
+        "trafo": c.mat_painted("SITE_TRAFO_GREY", (0.42, 0.46, 0.44), 0.45, grime=0.1),            # C7b: TMG tank paint
+        "porcelain": c.mat_painted("SITE_PORCELAIN_BROWN", (0.30, 0.15, 0.07), 0.12, grime=0.0),    # glazed bushing porcelain
         "road": c.mat_concrete_yard("SITE_ROAD", tint=(0.36, 0.35, 0.33)),   # concrete B25 drives (rec_6360894e), tyre-worn
     }
 

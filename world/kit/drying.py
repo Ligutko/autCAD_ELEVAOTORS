@@ -807,21 +807,94 @@ def build_t5(site=None):
 
 
 WET_FAN_OFFSET = 0.9                  # fan pad centre beyond the plinth (judgment)
+WET_FAN_KW = 7.5                      # radial fan VR 280-46 No.5 (components.radial_fan), the type of the aspiration units (judgment, see wet_fan_geom)
+WET_FAN_DX = -0.2                     # fan origin beside the silo axis: the 1.04 m long fan then stays on the 1.4 m pad (judgment)
+WET_FAN_PAD_H = 0.45                  # pad top = silo floor level: the discharge duct clears the plinth edge (judgment)
+WET_DUCT_T = 0.003                    # duct sheet (EST)
+WET_FL_GAP = 0.010                    # gasket between the fan flange and the duct counter flange (the frame cradle strips stand 5 mm proud of it)
+WET_FLEX = 0.20                       # flexible joint between the fan flange and the duct (EST)
+WET_FAN_PASPORT = {"kw": 7.5, "rpm": 960, "q_th_m3h": (5000.0, 14150.0), "p_pa": (860.0, 1120.0)}   # VR 280-46 No.5, pasport p.7 table 3
 
 
-def build_wet_fans(site=None):
-    """One aeration fan per wet silo (ВНТП п. 7.11: wet grain kept with active ventilation), on the north
-    side (+Y): the south side is the truck lane under Ш1 (site plan), a pad by the plinth (judgment)."""
+def wet_fan_geom(site=None, faults=None):
+    """Numbers of the wet-silo fans, site frame. One fan per wet silo (ВНТП п. 7.11: wet grain kept with active ventilation).
+
+    The fan is NOT in the equipment register (SITE equipment.items has no motor of OS2 / OS3, the drawing shows none), so the type
+    is a documented choice: components.radial_fan(7.5), VR 280-46 No.5, the aeration / dust unit of the project with real dimensions
+    (pasport table, motor frame from IEC 60072) instead of inventing a scroll. The aeration fans of the new silos (11 kW, EST scroll)
+    are bigger: the wet bins are 661 m3 against 6381 m3. Air flow and pressure of a No.5 at 7.5 kW are EST (~ 11 m3/h per tonne:
+    below the usual 20-100 m3/h per tonne of active ventilation - a FINDING for the designer, not adjusted here).
+    Outlet turned to -Y (hand R, outlet 270 deg): the mouth looks at the silo, the duct runs radially over the plinth ledge into the wall.
+    """
+    from . import components as comp
     site = site or _site()
+    f = faults or {}
     gz = c.ground_z()
-    fans, pads = [], []
-    for s in site["receiving"]["old_silos"]:
-        x, y = s["x"], s["y"] + s["plinth_r"] + WET_FAN_OFFSET
-        pads.append(c.box((x - 0.7, y - 0.6, gz), (x + 0.7, y + 0.6, gz + 0.15)))
-        fans.append(c.cylinder(0.45, gz + 0.15, gz + 1.0, steps=24, center=(x, y)))
-        fans.append(st.member((x, y - 0.3, gz + 0.6), (x, s["y"] + s["plinth_r"] + 0.005, gz + 0.6),
-                              np.array([(-0.2, -0.2), (0.2, -0.2), (0.2, 0.2), (-0.2, 0.2)])))
-    return {"wet_fans": ("motor", False, c.merge_parts(fans)), "wet_fan_pads": ("concrete", False, c.merge_parts(pads))}
+    fan = comp.radial_fan(WET_FAN_KW, hand="R", outlet_deg=270)
+    top = gz + WET_FAN_PAD_H + float(f.get("pad_dz", 0.0))
+    out = []
+    silos = site["receiving"]["old_silos"]
+    for s in (silos[:-1] if f.get("skip_last") else silos):
+        cx, cy = s["x"], s["y"] + s["plinth_r"] + WET_FAN_OFFSET + float(f.get("dy", 0.0))
+        org = np.array([cx + WET_FAN_DX + float(f.get("dx", 0.0)), cy, top + GAP])           # frame stands on the pad, 0.5 mm clear
+        lat = org[0] - s["x"]                                                               # duct axis beside the silo axis
+        y_wall = s["y"] + math.sqrt(s["wall_r"] ** 2 - lat ** 2)                            # wall surface on the duct axis
+        mouth = org[1] + float(np.asarray(fan["parts"]["outlet"][0])[:, 1].min())
+        w_out = float(np.asarray(fan["parts"]["outlet"][0])[:, 0].max() - np.asarray(fan["parts"]["outlet"][0])[:, 0].min())
+        lat_min = max(0.0, abs(lat) - (w_out / 2 + 0.05))                                   # the flat flange touches the cylinder where it is nearest the silo axis
+        contact = s["y"] + math.sqrt(s["wall_r"] ** 2 - lat_min ** 2)
+        out.append({"id": s["id"], "silo": (s["x"], s["y"]), "origin": org, "pad": (cx - 0.7, cy - 0.6, cx + 0.7, cy + 0.6, gz, top),
+                    "mouth_y": float(mouth), "wall_y": float(y_wall), "contact_y": float(contact), "lat": float(lat), "wall_r": s["wall_r"], "plinth_r": s["plinth_r"],
+                    "floor_z": s["floor_z"], "duct_z": (float(top + np.asarray(fan["parts"]["outlet"][0])[:, 2].min()),
+                                                        float(top + np.asarray(fan["parts"]["outlet"][0])[:, 2].max())),
+                    "duct_w": float(np.asarray(fan["parts"]["outlet"][0])[:, 0].max() - np.asarray(fan["parts"]["outlet"][0])[:, 0].min())})
+    return {"fan": fan, "silos": out, "kw": WET_FAN_KW}
+
+
+def build_wet_fans(site=None, faults=None):
+    """Wet-silo aeration fans on components.radial_fan: scroll, wheel, motor, frame with anchor bolts on a pad, flexible joint,
+    sheet-metal duct over the plinth ledge on a trestle, flange on the silo wall."""
+    site = site or _site()
+    g = wet_fan_geom(site, faults)
+    fan = g["fan"]
+    names = {"housing": ("volute", "inlet", "outlet", "wheel", "stool"), "frame": ("frame", "bolts"), "motor": ("motor",)}
+    housing, frame, motor, duct, flex, pads, stand = [], [], [], [], [], [], []
+    for s in g["silos"]:
+        o = s["origin"]
+        for key, bucket in (("housing", housing), ("frame", frame), ("motor", motor)):
+            for nm in names[key]:
+                v, f = fan["parts"][nm]
+                bucket.append((np.asarray(v, float) + o, f))
+        x0, ym, z0, z1 = o[0], s["mouth_y"] - WET_FL_GAP, s["duct_z"][0], s["duct_z"][1]
+        zc, w = 0.5 * (z0 + z1), s["duct_w"]
+        h, t = w / 2, WET_DUCT_T
+        px0, py0, px1, py1, pz0, pz1 = s["pad"]
+        pads.append(c.box((px0, py0, pz0), (px1, py1, pz1)))
+        # flange pair and flexible joint at the fan mouth, then the duct to the wall
+        ff = 0.012
+        flex_end = ym - ff - WET_FLEX
+        duct.append(c.box((x0 - h - 0.04, ym - ff, z0 - 0.04), (x0 + h + 0.04, ym, z1 + 0.04)))             # fan-side counter flange
+        for k in range(4):                                                                                  # bellows ribs
+            yb = ym - ff - WET_FLEX * (k + 0.5) / 4
+            flex.append(c.box((x0 - h - 0.012, yb - 0.012, z0 - 0.012), (x0 + h + 0.012, yb + 0.012, z1 + 0.012)))
+        flex.append(c.box((x0 - h + 0.002, flex_end, z0 + 0.002), (x0 + h - 0.002, ym - ff, z1 - 0.002)))   # core of the flexible joint
+        duct.append(c.box((x0 - h - 0.04, flex_end - ff, z0 - 0.04), (x0 + h + 0.04, flex_end, z1 + 0.04)))  # duct flange
+        y_end = s["contact_y"] + 0.0005 + float((faults or {}).get("duct_dy", 0.0))                       # the flange stands on the wall
+        ya, yb2 = y_end + 0.012, flex_end - ff
+        for (a, b2) in (((x0 - h, ya, z0), (x0 + h, yb2, z0 + t)), ((x0 - h, ya, z1 - t), (x0 + h, yb2, z1)),
+                        ((x0 - h, ya, z0 + t), (x0 - h + t, yb2, z1 - t)), ((x0 + h - t, ya, z0 + t), (x0 + h, yb2, z1 - t))):
+            duct.append(c.box(a, b2))
+        duct.append(c.box((x0 - h - 0.05, y_end, z0 - 0.05), (x0 + h + 0.05, y_end + 0.012, z1 + 0.05)))   # wall flange
+        # trestle under the duct on the plinth ledge (0.5 mm over the plinth top)
+        r_leg = s["wall_r"] + 0.45
+        yl = s["silo"][1] + r_leg
+        for dx in (-h + 0.02, h - 0.02):
+            stand.append(st.member((x0 + dx, yl, s["floor_z"] + GAP), (x0 + dx, yl, z0 - 0.04), st.SHS_60))
+        stand.append(st.member((x0 - h - 0.05, yl, z0 - 0.04 - 0.03), (x0 + h + 0.05, yl, z0 - 0.04 - 0.03), st.SHS_60))
+    return {"wet_fan_housing": ("galv", False, c.merge_parts(housing)), "wet_fan_frame": ("dark", False, c.merge_parts(frame)),
+            "wet_fans": ("motor", False, c.merge_parts(motor)), "wet_fan_duct": ("galv_old", False, c.merge_parts(duct)),
+            "wet_fan_flex": ("dark", False, c.merge_parts(flex)), "wet_fan_stand": ("galv", False, c.merge_parts(stand)),
+            "wet_fan_pads": ("concrete", False, c.merge_parts(pads))}
 
 
 def build(site=None):
